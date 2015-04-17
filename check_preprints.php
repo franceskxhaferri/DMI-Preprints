@@ -123,6 +123,7 @@
                         }
                         $z = 0;
                         $lunghezza = $i;
+                        $basedir2 = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . "arXiv/pdf/";
                         if (isset($_POST['bottoni5'])) {
                             if ($i == 0) {
                                 echo "<center>NO PREPRINTS!</center>";
@@ -138,6 +139,7 @@
                         if (isset($_POST['bottoni6'])) {
                             for ($j = 0; $j < $lunghezza; $j++) {
                                 $percorso = $base . $array[$j];
+                                $percorso2 = $basedir2 . $array[$j];
                                 $delete = $_POST[$j];
                                 if ($delete == "checked") {
                                     $z++;
@@ -148,6 +150,7 @@
                                                     if ($file == $array[$j]) {
                                                         #cancello file...
                                                         unlink($percorso);
+                                                        unlink($percorso2);
                                                         #cancello riga database...
                                                         remove_preprints($array[$j]);
                                                     }

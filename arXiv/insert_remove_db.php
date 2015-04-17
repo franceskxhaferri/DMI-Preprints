@@ -46,17 +46,16 @@ function update_preprints($array) {
     #connessione al database...
     $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
     mysql_select_db($db_monte, $db_connection);
-    $sql = 
-    "UPDATE
+    $sql = "UPDATE
     	PREPRINTS 
     SET
      titolo= '" . $array[1] . "', 
-     data_pubblicazione='" . $array[2]. "',
-     autori='" . $array[3]  . "',
+     data_pubblicazione='" . $array[2] . "',
+     autori='" . $array[3] . "',
      referenze='" . $array[4] . "',
      commenti='" . $array[5] . "',
      categoria='" . $array[6] . "',
-     abstract='" . $array[7]  . "',
+     abstract='" . $array[7] . "',
      checked='1'
     WHERE 
      id_pubblicazione='" . $array[0] . "'";
@@ -77,6 +76,7 @@ function insert_pdf() {
     $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
     mysql_select_db($db_monte, $db_connection);
     $type = "document/pdf"; // impostato il tipo per un'pdf
+    $copia = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . "arXiv/pdf/";
     $basedir = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . "arXiv/pdf_downloads/"; // � la directory da dove prelevare in automatico tutti i file in esso contenuti
     if ($handle = opendir($basedir)) {
         $i = 0;
@@ -88,10 +88,11 @@ function insert_pdf() {
                 $lunghezza = strlen($file);
                 $id = substr($id, 0, $lunghezza - 4);
                 $var2 = addslashes($var2);
-                $sql = "UPDATE PREPRINTS SET Bin_data= '" . $var2 . "', Filename= '" . $file . "', Filesize='" . filesize($basedir . $file) . "', Filetype='" . $type . "', checked='1' WHERE id_pubblicazione='" . $id . "'";
+                $sql = "UPDATE PREPRINTS SET Bin_data='" . $var2 . "', Filename='" . $file . "', Filesize='" . filesize($basedir . $file) . "', Filetype='" . $type . "', checked='1' WHERE id_pubblicazione='" . $id . "'";
                 $query = mysql_query($sql) or die(mysql_error());
                 fclose($var);
                 $i++;
+                copy($basedir . $file, $copia . $file);
                 unlink($basedir . $file);
             }
         }
@@ -113,6 +114,7 @@ function insert_one_pdf($id, $type) {
     #connessione al database...
     $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
     mysql_select_db($db_monte, $db_connection);
+    $copia = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . "arXiv/pdf/";
     $basedir = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . "arXiv/upload/"; // � la directory da dove prelevare in automatico tutti i file in esso contenuti
     if ($handle = opendir($basedir)) {
         $i = 0;
@@ -126,6 +128,7 @@ function insert_one_pdf($id, $type) {
                 $query = mysql_query($sql) or die(mysql_error());
                 fclose($var);
                 $i++;
+                copy($basedir . $file, $copia . $file);
                 unlink($basedir . $file);
             }
         }
@@ -165,10 +168,10 @@ function version_preprint($id1) {
     $db_monte = "dmipreprints"; #nome del database
     $username_db = "root"; #l'username
     $password_db = "1234"; #password
+    $basedir = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . "arXiv/pdf/";
     #connessione al database...
     $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
     mysql_select_db($db_monte, $db_connection);
-    mysql_query("set names 'utf8'");
     #elaborazione dell'id...
     $lunghezza = strlen($id1);
     $id = substr($id1, 0, $lunghezza - 1);
@@ -183,12 +186,15 @@ function version_preprint($id1) {
             #archiviazione preprints precedenti...
             $sql2 = "INSERT INTO PREPRINTS_ARCHIVIATI SELECT * FROM PREPRINTS WHERE id_pubblicazione='" . $id . $i . "' ON DUPLICATE KEY UPDATE id_pubblicazione = VALUES(id_pubblicazione)";
             #controllo se la copia è avvenuta, in caso positivo la cancello...
-            if (!$query = mysql_query($sql2)) {
+            if (!$query2 = mysql_query($sql2)) {
                 die(mysql_error());
             } else {
+            	$query = mysql_query($sql) or die(mysql_error());
+            	$row = mysql_fetch_array($query);
+                unlink($basedir . $row['Filename']);
                 #rimozione da preprints...
                 $sql2 = "DELETE FROM PREPRINTS WHERE id_pubblicazione='" . $id . $i . "'";
-                $query = mysql_query($sql2) or die(mysql_error());
+                $query2 = mysql_query($sql2) or die(mysql_error());
             }
         }
     }
@@ -197,3 +203,6 @@ function version_preprint($id1) {
 }
 
 ?>
+
+
+

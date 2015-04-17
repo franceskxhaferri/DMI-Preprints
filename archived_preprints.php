@@ -27,7 +27,7 @@
             webshims.setOptions('forms-ext', {types: 'date'});
             webshims.polyfill('forms forms-ext');
         </script>
-        
+
         <script type="text/x-mathjax-config">
             MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
         </script>
@@ -72,37 +72,37 @@
                 </div>
                 <div id="div_menu_ricerca" class="contenitore"><center><br/><h2>ARCHIVED PREPRINTS</h2></center>
                 </div><center>
-                    <table>
-                        <tr><form name="f1" action="view_preprints.php" method="POST">
+                <table>
+                    <tr><form name="f1" action="view_preprints.php" method="POST">
                         <td align="right">Go to current preprints&nbsp&nbsp&nbsp</td>
-                            <td><input type="submit" name="bottoni7" value="Back" id="bottone_keyword" class="bottoni"/></td>
-                        </form></tr>
-                        <tr><form name="f2" action="archived_preprints.php" method="POST">
+                        <td><input type="submit" name="bottoni7" value="Back" id="bottone_keyword" class="bottoni"/></td>
+                    </form></tr>
+                    <tr><form name="f2" action="archived_preprints.php" method="POST">
                         <td align="right">Delete all archived preprints from database&nbsp&nbsp&nbsp</td>
-                            <td><input type="submit" name="bottoni8" value="Delete" id="bottone_keyword" class="bottoni"/></td>
-                        </form></tr>
-                    </table>
-                </center>
+                        <td><input type="submit" name="bottoni8" value="Delete" id="bottone_keyword" class="bottoni"/></td>
+                    </form></tr>
+                </table>
+            </center>
             <?php
             if (sessioneavviata() == True) {
                 echo "<br/><br/><center>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTION CAN'T BE USED IN THIS MOMENT!</center><br/>";
             } else {
-            		echo "<br/><center><a href='javascript:FinePagina()'>&#8595; end of page</a></center>";
+                echo "<br/><center><a href='javascript:FinePagina()'>&#8595; end of page</a></center>";
                 ?>
                 <form name="f2" action="view_preprints.php" method="POST">
                     <center><div><br/><br/><br/><h2>preprints list</h2><hr><br/>                       
-                            
-                            
-                </form>
+
+
+                            </form>
                             <?php
                             $i = leggipreprintarchiviati();
-                            if(isset($_POST['bottoni8'])){
-                            	if($i==0){
-                            		echo "NO PREPRINTS!";
-                            	}else{
-		                    	cancellapreprint();
-		                    	echo '<META HTTP-EQUIV="Refresh" Content="2; URL=./archived_preprints.php">';
-                            	}
+                            if (isset($_POST['bottoni8'])) {
+                                if ($i == 0) {
+                                    echo "NO PREPRINTS!";
+                                } else {
+                                    cancellapreprint();
+                                    echo '<META HTTP-EQUIV="Refresh" Content="2; URL=./archived_preprints.php">';
+                                }
                             }
                             echo "<center><a href='javascript:window.scrollTo(0,0)'>&#8593; top of page</a></center><br/>";
                         }
