@@ -159,8 +159,6 @@
                             $info[3] = $_POST['author'];
                             $info[6] = $_POST['category'];
                             $info[7] = $_POST['abstract'];
-                            #richiamo della funzione per il versionamento dei preprints
-                            version_preprint($info[0]);
                             #richiamo della funzione per inserire le info del preprint all'interno del database
                             update_preprints($info);
                             $check = $_POST['check'];

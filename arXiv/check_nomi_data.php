@@ -96,13 +96,13 @@ function filtropreprint($nome) {
     $i = 0;
     while ($row = mysql_fetch_array($result)) {
         $i++;
-        echo "<div style='width:850px;'><h1>" . $i . ".<br/><br/> Id pubblicazione:</h1><br/>" . $row['id_pubblicazione'] . "<br/><br/><br/>";
-        echo "<h1>Titolo:</h1><br/>" . stripslashes($row['titolo']) . "<br/><br/><br/>";
-        echo "<h1>Data di pubblicazione:</h1><br/>" . stripslashes($row['data_pubblicazione']) . "<br/><br/><br/>";
-        echo "<h1>Autori:</h1><br/>" . stripslashes($row['autori']) . "<br/><br/><br/>";
-        echo "<h1>Referenze:</h1><br/>" . stripslashes($row['referenze']) . "<br/><br/><br/>";
-        echo "<h1>Commenti:</h1><br/>" . stripslashes($row['commenti']) . "<br/><br/><br/>";
-        echo "<h1>Categoria:</h1><br/>" . stripslashes($row['categoria']) . "<br/><br/><br/>";
+        echo "<div style='width:850px;'><h1>" . $i . ".<br/><br/>Id of pubblication:</h1><br/>" . $row['id_pubblicazione'] . "<br/><br/><br/>";
+        echo "<h1>Title:</h1><br/>" . stripslashes($row['titolo']) . "<br/><br/><br/>";
+        echo "<h1>Date of pubblication:</h1><br/>" . stripslashes($row['data_pubblicazione']) . "<br/><br/><br/>";
+        echo "<h1>Authors:</h1><br/>" . stripslashes($row['autori']) . "<br/><br/><br/>";
+        echo "<h1>Journal reference:</h1><br/>" . stripslashes($row['referenze']) . "<br/><br/><br/>";
+        echo "<h1>Comments:</h1><br/>" . stripslashes($row['commenti']) . "<br/><br/><br/>";
+        echo "<h1>Category:</h1><br/>" . stripslashes($row['categoria']) . "<br/><br/><br/>";
         echo "<h1>Abstract:</h1><br/>" . stripslashes($row['abstract']) . "<br/><br/><br/>";
         echo "<a href=./arXiv/pdf/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>PDF</a><br/>";
         echo "</div><br/><hr><br/>";
@@ -127,13 +127,13 @@ function leggipreprintarchiviati() {
     $i = 0;
     while ($row = mysql_fetch_array($result)) {
         $i++;
-        echo "<div style='width:850px;'><h1>" . $i . ".<br/><br/> Id pubblicazione:</h1><br/>" . $row['id_pubblicazione'] . "<br/><br/><br/>";
-        echo "<h1>Titolo:</h1><br/>" . stripslashes($row['titolo']) . "<br/><br/><br/>";
-        echo "<h1>Data di pubblicazione:</h1><br/>" . stripslashes($row['data_pubblicazione']) . "<br/><br/><br/>";
-        echo "<h1>Autori:</h1><br/>" . stripslashes($row['autori']) . "<br/><br/><br/>";
-        echo "<h1>Referenze:</h1><br/>" . stripslashes($row['referenze']) . "<br/><br/><br/>";
-        echo "<h1>Commenti:</h1><br/>" . stripslashes($row['commenti']) . "<br/><br/><br/>";
-        echo "<h1>Categoria:</h1><br/>" . stripslashes($row['categoria']) . "<br/><br/><br/>";
+        echo "<div style='width:850px;'><h1>" . $i . ".<br/><br/>Id of pubblication:</h1><br/>" . $row['id_pubblicazione'] . "<br/><br/><br/>";
+        echo "<h1>Title:</h1><br/>" . stripslashes($row['titolo']) . "<br/><br/><br/>";
+        echo "<h1>Date of pubblication:</h1><br/>" . stripslashes($row['data_pubblicazione']) . "<br/><br/><br/>";
+        echo "<h1>Authors:</h1><br/>" . stripslashes($row['autori']) . "<br/><br/><br/>";
+        echo "<h1>Journal reference:</h1><br/>" . stripslashes($row['referenze']) . "<br/><br/><br/>";
+        echo "<h1>Comments:</h1><br/>" . stripslashes($row['commenti']) . "<br/><br/><br/>";
+        echo "<h1>Category:</h1><br/>" . stripslashes($row['categoria']) . "<br/><br/><br/>";
         echo "<h1>Abstract:</h1><br/>" . stripslashes($row['abstract']);
         echo "</div><br/><hr><br/>";
     }

@@ -111,11 +111,15 @@ function insert_one_pdf($id, $type) {
     $db_monte = "dmipreprints"; //nome del database
     $username_db = "root"; //l'username
     $password_db = "1234"; // password
+    $copia = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . "arXiv/pdf/";
+    $basedir = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . "arXiv/upload/"; // � la directory da dove prelevare in automatico tutti i file in esso contenuti
     #connessione al database...
     $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
     mysql_select_db($db_monte, $db_connection);
-    $copia = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . "arXiv/pdf/";
-    $basedir = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . "arXiv/upload/"; // � la directory da dove prelevare in automatico tutti i file in esso contenuti
+    $sql2 = "SELECT * FROM PREPRINTS WHERE id_pubblicazione='" . $id . "'";
+    $query2 = mysql_query($sql2) or die(mysql_error());
+    $row = mysql_fetch_array($query2);
+    unlink($copia . $row['Filename']);
     if ($handle = opendir($basedir)) {
         $i = 0;
         while ((false !== ($file = readdir($handle)))) {
