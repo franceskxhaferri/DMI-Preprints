@@ -103,8 +103,8 @@ function filtropreprint($nome) {
         echo "<h1>Referenze:</h1><br/>" . stripslashes($row['referenze']) . "<br/><br/><br/>";
         echo "<h1>Commenti:</h1><br/>" . stripslashes($row['commenti']) . "<br/><br/><br/>";
         echo "<h1>Categoria:</h1><br/>" . stripslashes($row['categoria']) . "<br/><br/><br/>";
-        echo "<h1>Abstract:</h1><br/>" . stripslashes($row['abstract']). "<br/><br/><br/>";
-        echo "<a href=./arXiv/pdf/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" .$row['id_pubblicazione'] . "'>PDF</a><br/>";
+        echo "<h1>Abstract:</h1><br/>" . stripslashes($row['abstract']) . "<br/><br/><br/>";
+        echo "<a href=./arXiv/pdf/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>PDF</a><br/>";
         echo "</div><br/><hr><br/>";
     }
     echo "TOTALS OF ELEMENTS: " . $i . "<br/><br/><br/>";

@@ -189,8 +189,8 @@ function version_preprint($id1) {
             if (!$query2 = mysql_query($sql2)) {
                 die(mysql_error());
             } else {
-            	$query = mysql_query($sql) or die(mysql_error());
-            	$row = mysql_fetch_array($query);
+                $query = mysql_query($sql) or die(mysql_error());
+                $row = mysql_fetch_array($query);
                 unlink($basedir . $row['Filename']);
                 #rimozione da preprints...
                 $sql2 = "DELETE FROM PREPRINTS WHERE id_pubblicazione='" . $id . $i . "'";
@@ -201,7 +201,6 @@ function version_preprint($id1) {
     #chiusura connessione al database
     mysql_close($db_connection);
 }
-
 ?>
 
 
