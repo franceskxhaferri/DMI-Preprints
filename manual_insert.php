@@ -69,23 +69,23 @@
             } else {
                 ?>
                 <form name="f2" action="manual_insert.php" method="POST" enctype="multipart/form-data">
-                    <center><div><br/><br/><br/><h2>preprint informations</h2><h1>field with "*" are required</h1><br/><br>                       
+                    <center><div><br/><br/><br/><h2>preprint informations</h2><h1>field with "*" are required</h1><br/><br>
                             *id of pubblication<br/><br/>
-                            <textarea style="width:300px; height:16px" name="id" id="textbox" class="textbox" placeholder="example of id: 0000.0000v1" autofocus></textarea><br/><br/><br/>
+                            <textarea style="width:700px; height:16px" name="id" id="textbox" class="textbox" placeholder="example of id: 0000.0000v1" autofocus></textarea><br/><br/><br/>
                             *data of pubblication<br/><br/>
-                            <textarea style="width:300px; height:16px" name="date" id="textbox" class="textbox" placeholder="example of data: 2011-12-30T10:37:35Z"></textarea><br/><br/><br/>
+                            <textarea style="width:700px; height:16px" name="date" id="textbox" class="textbox" placeholder="example of data: 2011-12-30T10:37:35Z"></textarea><br/><br/><br/>
                             *preprint title<br/><br/>
-                            <textarea style="width:500px; height:16px" name="title" id="textbox" class="textbox" placeholder="example of title: The geometric..."></textarea><br/><br/><br/>
+                            <textarea style="width:700px; height:16px" name="title" id="textbox" class="textbox" placeholder="example of title: The geometric..."></textarea><br/><br/><br/>
                             *authors name<br/><br/>
-                            <textarea style="width:500px; height:16px" name="author" id="textbox" class="textbox" placeholder="example of author: Mario Rossi, Luca..."></textarea><br/><br/><br/>
+                            <textarea style="width:700px; height:16px" name="author" id="textbox" class="textbox" placeholder="example of author: Mario Rossi, Luca..."></textarea><br/><br/><br/>
                             journal reference<br/><br/>
-                            <textarea style="width:500px; height:16px" name="journal" id="textbox" class="textbox" placeholder="example of Journal: Numer. Linear Algebra..."></textarea><br/><br/><br/>
+                            <textarea style="width:700px; height:16px" name="journal" id="textbox" class="textbox" placeholder="example of Journal: Numer. Linear Algebra..."></textarea><br/><br/><br/>
                             comments<br/><br/>
-                            <textarea style="width:500px; height:16px" name="comments" id="textbox" class="textbox" placeholder="example of comments: 10 pages..."></textarea><br/><br/><br/>
+                            <textarea style="width:700px; height:16px" name="comments" id="textbox" class="textbox" placeholder="example of comments: 10 pages..."></textarea><br/><br/><br/>
                             *arXiv category<br/><br/>
-                            <textarea style="width:500px; height:16px" name="category" id="textbox" class="textbox" placeholder="example of category: math.NA..."></textarea><br/><br/><br/>
+                            <textarea style="width:700px; height:16px" name="category" id="textbox" class="textbox" placeholder="example of category: math.NA..."></textarea><br/><br/><br/>
                             *abstract<br/><br/>
-                            <textarea style="width:500px; height:300px" name="abstract" id="textbox" class="textbox" placeholder="example of abstract: The geometric..."></textarea><br/><br/><br/>
+                            <textarea style="width:700px; height:300px" name="abstract" id="textbox" class="textbox" placeholder="example of abstract: The geometric..."></textarea><br/><br/><br/>
                             *PDF or other document file<br/>
                             <input type="hidden" name="MAX_FILE_SIZE" value="10000000"><br/>
                             <input type="file" name="fileToUpload" id="fileToUpload"><br/><br/><br/>

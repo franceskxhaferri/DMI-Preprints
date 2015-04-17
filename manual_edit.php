@@ -58,25 +58,24 @@
                 <div id="div_menu_ricerca" class="contenitore"><center><br/><h2>manual editing</h2></center>
                 </div><center>
                     <table>
-                        <tr><form name="f1" action="arXiv_panel.php" method="POST"><td align="right">Go to arXiv panel&nbsp&nbsp&nbsp</td>
+                        <tr><form name="f1" action="arXiv_panel.php" method="POST"><td align="right" style='width:150px; height:16px'>Go to arXiv panel&nbsp&nbsp&nbsp</td>
                             <td><input type="submit" name="bottoni7" value="Back" id="bottone_keyword" class="bottoni"/></td>
-                        </form></tr>
-                        <tr><td colspan="2" align="center"><br/><a href="./view_preprints.php" onclick='window.open(this.href);return false'>View Inserted preprints</a></td></tr>
-                    </table>
+                        </tr>
+                        <tr><td colspan="2" align="center" style="width:150px;"><br/><a href="./view_preprints.php" onclick='window.open(this.href);return false' title="Go to preprints list">View from inserted preprints</a></td></tr>
+                    </form></table>
                 </center><br/><br/>
             <?php
             if (sessioneavviata() == True) {
                 echo "<br/><br/><center>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTION CAN'T BE USED IN THIS MOMENT!</center><br/>";
             } else {
-            	echo " <center><div><form name='f2' action='manual_edit.php' method='POST'>
-            		Insert id of pubblication you want edit<br/><br/>
-         	       <textarea style='width:300px; height:16px' name='id' id='textbox' class='textbox' placeholder='example of id: 0000.0000v1' autofocus></textarea><br/>
+            	echo " <center><div><form name='f2' action='manual_edit.php' method='POST'>Insert id of pubblication you want edit<br/><br/><input type='text' style='width:300px; height:16px' name='id' id='textbox' class='textbox' placeholder='example of id: 0000.0000v1' autofocus/><br/>
                        <br/><input type='submit' name='bottoni8' value='Get' id='bottone_keyword' class='bottoni'/><br/>
                        </form></div></center>
                        ";
                        $var=False;
                        if(isset($_POST['bottoni8']) or isset($_POST['bottoni9'])){
                        		$id = $_POST['id'];
+                       		$id = trim($id);
                        		if(empty($id)){
                        			echo "<center><br/><br/>INSERT ID!</center>";
                        		}else{
@@ -91,23 +90,23 @@
 if($var==True){
 echo "
                 <form name='f1' action='manual_edit.php' method='POST' enctype='multipart/form-data'>
-                    <center><div><br/><br/><br/><h2>preprint informations</h2><h1>field with '*' are required</h1><br/><br>                       
+                    <center><div><br/><br/><br/><h2>preprint informations</h2><h1>field with '*' are required</h1><br/><br>
 			    id of pubblication (not editable)<br/><br/>
-                            <textarea readonly style='width:500px; height:16px' name='id' id='textbox' class='textbox' placeholder='example of id: 0000.0000v1'>".$ris[0]."</textarea><br/><br/><br/>
-                            *preprint title<br/><br/>
-                            <textarea style='width:500px; height:16px' name='title' id='textbox' class='textbox' placeholder='example of title: The geometric...' autofocus>".$ris[1]."</textarea><br/><br/><br/>
+                            <textarea readonly style='width:700px; height:16px' name='id' id='textbox' class='textbox' placeholder='example of id: 0000.0000v1'>".$ris[0]."</textarea><br/><br/><br/>
                             data of pubblication (not editable)<br/><br/>
-                            <textarea readonly style='width:500px; height:16px' name='data' id='textbox' class='textbox' placeholder='example of data: 2011-12-30T10:37:35Z'>".$ris[2]."</textarea><br/><br/><br/>
-                            *authors name<br/><br/>
-                            <textarea style='width:500px; height:16px' name='author' id='textbox' class='textbox' placeholder='example of author: Mario Rossi, Luca...'>".$ris[3]."</textarea><br/><br/><br/>
+                            <textarea readonly style='width:700px; height:16px' name='data' id='textbox' class='textbox' placeholder='example of data: 2011-12-30T10:37:35Z'>".$ris[2]."</textarea><br/><br/><br/>
+                            *preprint title<br/><br/>
+                            <textarea style='width:700px; height:16px' name='title' id='textbox' class='textbox' placeholder='example of title: The geometric...' autofocus>".$ris[1]."</textarea><br/><br/><br/>
                             journal reference<br/><br/>
-                            <textarea style='width:500px; height:16px' name='journal' id='textbox' class='textbox' placeholder='example of Journal: Numer. Linear Algebra...'>".$ris[4]."</textarea><br/><br/><br/>
+                            <textarea style='width:700px; height:16px' name='journal' id='textbox' class='textbox' placeholder='example of Journal: Numer. Linear Algebra...'>".$ris[4]."</textarea><br/><br/><br/>
                             comments<br/><br/>
-                            <textarea style='width:500px; height:16px' name='comments' id='textbox' class='textbox' placeholder='example of comments: 10 pages...'>".$ris[5]."</textarea><br/><br/><br/>
+                            <textarea style='width:700px; height:16px' name='comments' id='textbox' class='textbox' placeholder='example of comments: 10 pages...'>".$ris[5]."</textarea><br/><br/><br/>
                             *arXiv category<br/><br/>
-                            <textarea style='width:500px; height:16px' name='category' id='textbox' class='textbox' placeholder='example of category: math.NA...'>".$ris[6]."</textarea><br/><br/><br/>
+                            <textarea style='width:700px; height:16px' name='category' id='textbox' class='textbox' placeholder='example of category: math.NA...'>".$ris[6]."</textarea><br/><br/><br/>
+                            *authors name<br/><br/>
+                            <textarea style='width:700px; height:50px' name='author' id='textbox' class='textbox' placeholder='example of author: Mario Rossi, Luca...'>".$ris[3]."</textarea><br/><br/><br/>
                             *abstract<br/><br/>
-                            <textarea style='width:500px; height:300px' name='abstract' id='textbox' class='textbox' placeholder='example of abstract: The geometric...'>".$ris[7]."</textarea><br/><br/><br/>
+                            <textarea style='width:700px; height:300px' name='abstract' id='textbox' class='textbox' placeholder='example of abstract: The geometric...'>".$ris[7]."</textarea><br/><br/><br/>
                             PDF or other document file <input type='checkbox' name='check' value='checked'/><br/>
                             <input type='hidden' name='MAX_FILE_SIZE' value='10000000'><br/>
                             <input type='file' name='fileToUpload' id='fileToUpload'><br/><br/><br/>

@@ -7,19 +7,19 @@
                     <label for="uid">Title</label>
                 </li>
                 <li style="margin-top: 10px">
-                    <textarea style="width:500px; height:16px" type="text" class="textbox" name="titolo" required autofocus></textarea>
+                    <textarea style="width:650px; height:16px" type="text" class="textbox" name="titolo" required autofocus></textarea>
                 </li>
                 <li style="margin-top: 10px">
                     <label for="uid">Authors</label>
                 </li>
                 <li style="margin-top: 10px">
-                    <textarea style="width:500px; height:16px" type="text" class="textbox" name="collaboratori" required></textarea>
+                    <textarea style="width:650px; height:16px" type="text" class="textbox" name="collaboratori" required></textarea>
                 </li>
                 <li style="margin-top: 10px">
                     <label for="abstract">Abstract</label>
                 </li>
                 <li style="margin-top: 10px">
-                    <textarea style="width:500px; height:300px" maxlength="1000" name="abstract" class="textbox" required></textarea>
+                    <textarea style="width:650px; height:300px" maxlength="1000" name="abstract" class="textbox" required></textarea>
                 </li><br/>
                 <li  style="text-align: right">
                     <input type="hidden" name="MAX_FILE_SIZE" value="10000000" />

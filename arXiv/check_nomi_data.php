@@ -103,7 +103,7 @@ function filtropreprint($nome) {
         echo "<h1>Commenti:</h1><br/>".stripslashes($row['commenti'])."<br/><br/><br/>";
         echo "<h1>Categoria:</h1><br/>".stripslashes($row['categoria'])."<br/><br/><br/>";
         echo "<h1>Abstract:</h1><br/>".stripslashes($row['abstract']);
-	echo "</div><hr><br/>";
+	echo "</div><br/><hr><br/>";
     }
     echo "TOTALS OF ELEMENTS: ".$i."<br/><br/><br/>";
     mysql_close($db_connection);
@@ -133,7 +133,7 @@ function leggipreprintarchiviati() {
         echo "<h1>Commenti:</h1><br/>".stripslashes($row['commenti'])."<br/><br/><br/>";
         echo "<h1>Categoria:</h1><br/>".stripslashes($row['categoria'])."<br/><br/><br/>";
         echo "<h1>Abstract:</h1><br/>".stripslashes($row['abstract']);
-	echo "</div><hr><br/>";
+	echo "</div><br/><hr><br/>";
     }
     echo "TOTALS OF ELEMENTS: ".$i."<br/><br/><br/>";
     mysql_close($db_connection);
