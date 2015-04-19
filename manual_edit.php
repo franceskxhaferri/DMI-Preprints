@@ -60,8 +60,8 @@
                     <tr><form name="f1" action="arXiv_panel.php" method="POST"><td align="right" style='width:150px; height:16px'>Go to arXiv panel&nbsp&nbsp&nbsp</td>
                         <td><input type="submit" name="bottoni7" value="Back" id="bottone_keyword" class="bottoni"/></td>
                         </tr>
-                        <tr><td colspan="2" align="center"><br/><a href="./view_preprints.php" onclick='window.open(this.href);
-                                        return false' title="Go to preprints list">View from inserted preprints</a></td></tr>
+                        <tr><td colspan="2" align="center"><br/><br/><a style="color:#5d93a2;" href="./view_preprints.php?p=1" onclick='window.open(this.href);
+                                return false' title="Go to preprints list">View from inserted preprints</a></td></tr>
                     </form></table>
             </center><br/><br/>
             <?php
@@ -113,9 +113,10 @@
                             <input type='submit' name='bottoni9' value='Remove preprint' id='bottone_keyword' class='bottoni'/>
                             &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                             &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                             <input type='submit' name='bottoni10' value='Edit complete' id='bottone_keyword' class='bottoni'/>
-                            <br/><br/><br/>
-                            </form>";
+                            </form><br/><br/><br/><br/>";
                     $target_dir = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . "arXiv/upload/";
                     $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
                     if (isset($_POST['bottoni9'])) {

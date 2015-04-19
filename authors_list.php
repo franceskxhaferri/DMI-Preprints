@@ -77,17 +77,17 @@
 
                             <form name="f2" action="authors_list.php" method="POST"><tr><td align="right">Add author to list or search by name&nbsp&nbsp&nbsp</td><td><input type="submit" name="bottoni8" value="Insert / Search" id="bottone_keyword" class="bottoni"></td><td align="center">&nbsp&nbsp&nbsp&nbsp<input type="checkbox" name="insert" value="1" checked/></td></tr>
                                 <tr align="center"><td colspan="3"><br/><textarea style="width:100%; height:16px" name="txt1" id="textbox" class="textbox" placeholder="Author name(Use ' , ' to insert/search more authors)" autofocus></textarea></td></tr></form>
-                                                                                                    
-                                                                                                </table></center>
-                                                                                        </div>
-                                                                                        <div>
+                                                                                                            
+                                                                                                        </table></center>
+                                                                                                </div>
+                                                                                                <div>
                     <?php
                     #importo file per utilizzare funzioni...
                     include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/check_nomi_data.php');
                     if (sessioneavviata() == True) {
                         echo "<center>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE LIST CAN'T BE CHANGED IN THIS MOMENT!</center><br/>";
                     } else {
-                        echo "<center><a href='javascript:FinePagina()'>&#8595; end of page</a></center><br/>";
+                        echo "<center><a style='text-decoration: none;' href='javascript:FinePagina()'>&#8595; end of page</a></center><br/>";
                         if (isset($_POST['bottoni8'])) {
                             #controllo del campo testo vuoto
                             if (empty($_POST['txt1'])) {
@@ -143,7 +143,7 @@
                                 echo '<META HTTP-EQUIV="Refresh" Content="2; URL=./authors_list.php">';
                             }
                         }
-                        echo "<center><a href='javascript:window.scrollTo(0,0)'>&#8593; top of page</a></center><br/>";
+                        echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'>&#8593; top of page</a></center><br/>";
                     }
                 } else {
                     echo "<center><br/>ACCESS DENIED!</center>";

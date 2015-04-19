@@ -76,7 +76,8 @@
                     </div>
                 </div>
                 <div id="div_menu_ricerca" class="contenitore"><center><br/><h2>APPROVED PREPRINTS</h2></center>
-                    <?php if ($_SESSION['logged_type'] === "user") {
+                    <?php
+                    if ($_SESSION['logged_type'] === "user") {
                         echo "<h1>in this section are the preprints downloaded and controlled by arxiv.org</h1>";
                     }
                     ?>
@@ -86,25 +87,27 @@
                         <td align="right"><?php echo $t ?>&nbsp&nbsp&nbsp</td>
                         <td colspan="2"><input type="submit" name="bottoni1" value="Back" id="bottone_keyword" class="bottoni"/></td>
                     </form></tr>
-                    <tr><form name="f2" action="archived_preprints.php" method="POST">
+                    <tr><form name="f2" action="archived_preprints.php?p=1" method="POST">
                         <td align="right">View archived preprints&nbsp&nbsp&nbsp</td>
                         <td colspan="2"><input type="submit" name="bottoni2" value="Archived preprints" id="bottone_keyword" class="bottoni"/></td>
                     </form></tr>
-                    <?php if ($_SESSION['logged_type'] === "mod") {
+                    <?php
+                    if ($_SESSION['logged_type'] === "mod") {
                         echo "<tr><form name='f3' action='manual_edit.php' method='POST'>
                         <td align='right'>Manual editing for inserted preprint&nbsp&nbsp&nbsp</td>
                         <td colspan='2'><input type='submit' name='bottoni2' value='Edit section' id='bottone_keyword' class='bottoni'/></td>
                     </form></tr>";
                     }
                     ?>
-                    <tr><form name="f4" action="view_preprints.php" method="POST">
+                    <tr><form name="f4" action="view_preprints.php" method="GET">
                         <td align="right">Filter by:
-                            <label><input type="radio" name="filtro" value="author" checked>Author</label>
-                            <label><input type="radio" name="filtro" value="category">Category</label>
-                            <label><input type="radio" name="filtro" value="year">Year
+                            <label><input type="radio" name="f" value="author" checked>Author</label>
+                            <label><input type="radio" name="f" value="category">Category</label>
+                            <label><input type="radio" name="f" value="year">Year
                                 &nbsp&nbsp&nbsp</label></td>
-                        <td><input type="submit" name="bottoni9" value="Apply" id="bottone_keyword" class="bottoni"/></td>
-                        <td><input type="text" style="width:150px; height:16px" name="txt1" id="textbox" class="textbox" placeholder="Author name or part, etc." autofocus></textarea></td>
+                        <td><input type="submit" name="s" value="Apply" id="bottone_keyword" class="bottoni"/></td>
+                        <td><input type="text" style="width:150px; height:16px" name="r" id="textbox" class="textbox" placeholder="Author name or part, etc." autofocus>
+                            <input type="text" name="p" value="1"hidden></td>
                     </form></tr>
                 </table>
             </center>
@@ -112,35 +115,22 @@
             if (sessioneavviata() == True) {
                 echo "<br/><br/><center>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTION CAN'T BE USED IN THIS MOMENT!</center><br/>";
             } else {
-                echo "<br/><center><a href='javascript:FinePagina()'>&#8595; end of page</a></center>";
-                ?>
-                <form name="f2" action="view_preprints.php" method="POST">
-                    <center><div><br/><br/><br/><h2>preprints list</h2><hr><br/>                              
-                            </form>
-                            <?php
-                            if (isset($_POST['bottoni9'])) {
-                                $nome = $_POST['txt1'];
-                                $a = $_POST['filtro'];
-                                $i = filtropreprint($nome, $a);
-                                if ($i == 0) {
-                                    echo "NO PREPRINTS!";
-                                }
-                            } else {
-                                $i = filtropreprint("", "author");
-                                if ($i == 0) {
-                                    echo "NO PREPRINTS!";
-                                }
-                            }
-                            echo "<center><a href='javascript:window.scrollTo(0,0)'>&#8593; top of page</a></center><br/>";
-                        }
-                    } else {
-                        echo "<center><br/>ACCESS DENIED!</center>";
-                        echo '<META HTTP-EQUIV="Refresh" Content="2; URL=./reserved.php">';
-                    }
+                echo "<br/><br/><center><a style='text-decoration: none;' href='javascript:FinePagina()'>&#8595; end of page</a></center><center><div><br/><br/><h2>preprints list</h2><hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'><br/>";
+                if (isset($_POST['s'])) {
+                    filtropreprint();
                 } else {
-                    echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
+                    filtropreprint();
+                    echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'>&#8593; top of page</a></center><br/>";
                 }
-                ?>
-            </div></center>
-    </body>
+            }
+        } else {
+            echo "<center><br/>ACCESS DENIED!</center>";
+            echo '<META HTTP-EQUIV="Refresh" Content="2; URL=./reserved.php">';
+        }
+    } else {
+        echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
+    }
+    ?>
+</div></center>
+</body>
 </html>

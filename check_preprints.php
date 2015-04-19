@@ -88,7 +88,7 @@
                     if (sessioneavviata() == True) {
                         echo "<center>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE LIST CAN'T BE CHANGED IN THIS MOMENT!</center><br/>";
                     } else {
-                        echo "<br/><center><a href='javascript:FinePagina()'>&#8595; end of page</a></center>";
+                        echo "<br/><center><a style='text-decoration: none;' href='javascript:FinePagina()'>&#8595; end of page</a></center>";
                         #leggere cartella...
                         #base link
                         $base = "./arXiv/pdf_downloads/";
@@ -170,7 +170,7 @@
                                 echo '<META HTTP-EQUIV="Refresh" Content="2; URL=./check_preprints.php">';
                             }
                         }
-                        echo "<center><a href='javascript:window.scrollTo(0,0)'>&#8593; top of page</a></center><br/>";
+                        echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'>&#8593; top of page</a></center><br/>";
                         if ($i == 0) {
                             echo "<center>NO PREPRINTS!</center>";
                         }

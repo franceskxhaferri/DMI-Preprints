@@ -73,14 +73,15 @@
                 <div id="div_menu_ricerca" class="contenitore"><center><br/><h2>ARCHIVED PREPRINTS</h2></center>
                 </div><center>
                 <table>
-                    <tr><form name="f1" action="view_preprints.php" method="POST">
+                    <tr><form name="f1" action="view_preprints.php?p=1" method="POST">
                         <td align="right">Go to current preprints&nbsp&nbsp&nbsp</td>
                         <td><input type="submit" name="bottoni7" value="Back" id="bottone_keyword" class="bottoni"/></td>
                     </form></tr>
-                    <?php if ($_SESSION['logged_type'] === "mod") {
-                        echo "<tr><form name='f2' action='archived_preprints.php' method='POST'>
+                    <?php
+                    if ($_SESSION['logged_type'] === "mod") {
+                        echo "<tr><form name='f2' action='archived_preprints.php' method='GET'>
                         <td align='right'>Delete all archived preprints from database&nbsp&nbsp&nbsp</td>
-                        <td><input type='submit' name='bottoni8' value='Remove all' id='bottone_keyword' class='bottoni'/></td>
+                        <td><input type='submit' name='c' value='Remove all' id='bottone_keyword' class='bottoni'/></td>
                     </form></tr>";
                     }
                     ?>
@@ -90,29 +91,22 @@
             if (sessioneavviata() == True) {
                 echo "<br/><br/><center>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTION CAN'T BE USED IN THIS MOMENT!</center><br/>";
             } else {
-                echo "<br/><center><a href='javascript:FinePagina()'>&#8595; end of page</a></center>";
-                ?>
-                <center><div><br/><br/><br/><h2>preprints list</h2><hr><br/>                       
-                        <?php
-                        $i = leggipreprintarchiviati();
-                        if (isset($_POST['bottoni8'])) {
-                            if ($i == 0) {
-                                echo "NO PREPRINTS!";
-                            } else {
-                                cancellapreprint();
-                                echo '<META HTTP-EQUIV="Refresh" Content="2; URL=./archived_preprints.php">';
-                            }
-                        }
-                        echo "<center><a href='javascript:window.scrollTo(0,0)'>&#8593; top of page</a></center><br/>";
-                    }
+                echo "<br/><br/><center><a style='text-decoration: none;' href='javascript:FinePagina()'>&#8595; end of page</a></center><center><div><br/><br/><h2>preprints list</h2><hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'><br/>  ";
+                if (isset($_GET['c'])) {
+                    leggipreprintarchiviati();
                 } else {
-                    echo "<center><br/>ACCESS DENIED!</center>";
-                    echo '<META HTTP-EQUIV="Refresh" Content="2; URL=./reserved.php">';
+                    leggipreprintarchiviati();
+                    echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'>&#8593; top of page</a></center><br/>";
                 }
-            } else {
-                echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
             }
-            ?>
-        </div></center>
+        } else {
+            echo "<center><br/>ACCESS DENIED!</center>";
+            echo '<META HTTP-EQUIV="Refresh" Content="2; URL=./reserved.php">';
+        }
+    } else {
+        echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
+    }
+    ?>
+</div></center>
 </body>
 </html>

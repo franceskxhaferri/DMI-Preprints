@@ -52,13 +52,13 @@
                         </div>
                     </div>
                 </div>
-                <div id="div_menu_ricerca" class="contenitore"><center><br/><h2>ARXIV PANEL</h2></center><a href="" title="Guide">Help</a><br/><br/><br/>
+                <div id="div_menu_ricerca" class="contenitore"><center><br/><h2>ARXIV PANEL</h2></center><a style="color:#5d93a2;" href="" title="Guide">Help</a><br/><br/><br/>
                     <center><table>
                             <tr><form name="f1" action="reserved.php" method="POST">
                                 <td align="right" style="width:350px;">Go to reserved area&nbsp&nbsp&nbsp</td>
                                 <td style="width:350px;"><input type="submit" name="bottoni4" value="Back" id="bottone_keyword" class="bottoni"></td>
                             </form></tr>
-                            <tr><form name="f2" action="view_preprints.php" method="POST">
+                            <tr><form name="f2" action="view_preprints.php?p=1" method="POST">
                                 <td align="right" style="width:350px;">Preprints checked and inserted on database&nbsp&nbsp&nbsp</td>
                                 <td style="width:350px;"><input type="submit" name="bottoni3" value="Approved preprints" id="bottone_keyword" class="bottoni"></td>
                             </form></tr>
@@ -108,7 +108,7 @@
                                     chiudisessione();
                                     echo "<center>NO AUTHORS INSIDE LIST!<br/><br/></center>";
                                 } else {
-                                    echo "<center><a href='javascript:FinePagina()'>&#8595;end of page</a></center><br/>AUTHORS UPDATE:<br/>";
+                                    echo "<center><a style='text-decoration: none;' href='javascript:FinePagina()'>&#8595;end of page</a></center><br/>AUTHORS UPDATE:<br/>";
                                     #inizializzo variabile per contare preprints scaricati...
                                     for ($i = 0; $i < $nl; $i++) {
                                         $nomi = $array[$i];
@@ -147,7 +147,7 @@
                                     chiudisessione();
                                     echo "<center>NO AUTHORS INSIDE LIST!<br/><br/></center>";
                                 } else {
-                                    echo "<center><a href='javascript:FinePagina()'>&#8595;end of page</a></center><br/>AUTHORS UPDATE:<br/>";
+                                    echo "<center><a style='text-decoration: none;' href='javascript:FinePagina()'>&#8595;end of page</a></center><br/>AUTHORS UPDATE:<br/>";
                                     #inizializzo variabile per contare preprints scaricati...
                                     for ($i = 0; $i < $nl; $i++) {
                                         #inserisco un nome alla volta nella variabile $nomi
@@ -182,7 +182,7 @@
                         echo " LAST UPDATE: " . $data;
                     }
                     if ((isset($_POST['bottoni']) or isset($_POST['bottoni3']))and ( $nl != 0)) {
-                        echo "<br/><br/><center><a href='javascript:window.scrollTo(0,0)'>&#8593; top of page</a></center>";
+                        echo "<br/><br/><center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'>&#8593; top of page</a></center>";
                     }
                 } else {
                     echo "<center><br/>ACCESS DENIED!</center>";

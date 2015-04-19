@@ -82,7 +82,7 @@ function nomiprec($nome) {
 
 # funzione filtro lettura preprint
 
-function filtropreprint($nome, $a) {
+function filtropreprint() {
     $copia = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . "arXiv/pdf/";
     #definizione parametri di connessione al database
     $hostname_db = "localhost";
@@ -91,19 +91,35 @@ function filtropreprint($nome, $a) {
     $password_db = "1234"; // password
     $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
     mysql_select_db($db_monte, $db_connection);
-    if ($a == "author") {
-        $sql = "SELECT * FROM PREPRINTS WHERE autori LIKE '%" . $nome . "%' AND checked='1'";
+    $risperpag = 5;
+    $p = $_GET['p'];
+    $limit = $risperpag * $p - $risperpag;
+    if ($_GET['f'] == "author") {
+        $querytotale = mysql_query("SELECT * FROM PREPRINTS WHERE autori LIKE '%" . $_GET['r'] . "%' AND checked='1'");
+        $ristot = mysql_num_rows($querytotale);
+        $npag = ceil($ristot / $risperpag);
+        $sql = "SELECT * FROM PREPRINTS WHERE autori LIKE '%" . $_GET['r'] . "%' AND checked='1' LIMIT " . $limit . "," . $risperpag . "";
+        $result = mysql_query($sql) or die(mysql_error());
+    } else if ($_GET['f'] == "category") {
+        $querytotale = mysql_query("SELECT * FROM PREPRINTS WHERE categoria LIKE '%" . $_GET['r'] . "%' AND checked='1'");
+        $ristot = mysql_num_rows($querytotale);
+        $npag = ceil($ristot / $risperpag);
+        $sql = "SELECT * FROM PREPRINTS WHERE categoria LIKE '%" . $_GET['r'] . "%' AND checked='1'";
+        $result = mysql_query($sql) or die(mysql_error());
+    } else if ($_GET['f'] == "year") {
+        $querytotale = mysql_query("SELECT * FROM PREPRINTS WHERE data_pubblicazione LIKE '%" . $_GET['r'] . "%' AND checked='1'");
+        $ristot = mysql_num_rows($querytotale);
+        $npag = ceil($ristot / $risperpag);
+        $sql = "SELECT * FROM PREPRINTS WHERE data_pubblicazione LIKE '%" . $_GET['r'] . "%' AND checked='1'";
+        $result = mysql_query($sql) or die(mysql_error());
+    } else {
+        $querytotale = mysql_query("SELECT * FROM PREPRINTS WHERE autori LIKE '%" . $_GET['r'] . "%' AND checked='1'");
+        $ristot = mysql_num_rows($querytotale);
+        $npag = ceil($ristot / $risperpag);
+        $sql = "SELECT * FROM PREPRINTS WHERE autori LIKE '%" . $_GET['r'] . "%' AND checked='1' LIMIT " . $limit . "," . $risperpag . "";
         $result = mysql_query($sql) or die(mysql_error());
     }
-    if ($a == "category") {
-        $sql = "SELECT * FROM PREPRINTS WHERE categoria LIKE '%" . $nome . "%' AND checked='1'";
-        $result = mysql_query($sql) or die(mysql_error());
-    }
-    if ($a == "year") {
-        $sql = "SELECT * FROM PREPRINTS WHERE data_pubblicazione LIKE '%" . $nome . "%' AND checked='1'";
-        $result = mysql_query($sql) or die(mysql_error());
-    }
-    $i = 0;
+    $i = $limit;
     while ($row = mysql_fetch_array($result)) {
         $i++;
         echo "<div style='width:850px;'><h1>" . $i . ".<br/><br/>Id of pubblication:</h1><br/>" . $row['id_pubblicazione'] . "<br/><br/><br/>";
@@ -114,17 +130,28 @@ function filtropreprint($nome, $a) {
         echo "<h1>Comments:</h1><br/>" . stripslashes($row['commenti']) . "<br/><br/><br/>";
         echo "<h1>Category:</h1><br/>" . stripslashes($row['categoria']) . "<br/><br/><br/>";
         echo "<h1>Abstract:</h1><br/>" . stripslashes($row['abstract']) . "<br/><br/><br/>";
-        echo "<a href=./arXiv/pdf/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>PDF</a><br/>";
-        echo "</div><br/><hr><br/>";
+        echo "<a style='color:#5d93a2;' href=./arXiv/pdf/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>PDF</a><br/>";
+        echo "</div><br/><hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'><br/>";
     }
-    echo "ELEMENTS: " . $i . "<br/><br/><br/>";
+    if ($ristot != 0) {
+        if ($p != 1) {
+            echo '<a style="color:#5d93a2; text-decoration: none;" href="view_preprints.php?p=' . ($p - 1) . '&r=' . $_GET['r'] . '"> &#8656 </a>';
+        }
+        echo "&nbsp&nbsp&nbsp&nbsp" . $p . "&nbsp&nbsp&nbsp&nbsp";
+        if ($p != $npag) {
+            echo '<a style="color:#5d93a2; text-decoration: none;" href="view_preprints.php?p=' . ($p + 1) . '&r=' . $_GET['r'] . '"> &#8658 </a>';
+        }
+    }
+    echo "<br/><br/><br/>";
+    echo "RESULTS: " . $limit . " - " . $p * "5" . "
+    <br/><br/>TOTAL OF ELEMENTS: " . $ristot . "<br/><br/><br/>";
     mysql_close($db_connection);
-    return $i;
 }
 
 #funzione lettura preprint archiviati
 
 function leggipreprintarchiviati() {
+    $copia = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . "arXiv/pdf/";
     #definizione parametri di connessione al database
     $hostname_db = "localhost";
     $db_monte = "dmipreprints"; //nome del database
@@ -132,24 +159,51 @@ function leggipreprintarchiviati() {
     $password_db = "1234"; // password
     $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
     mysql_select_db($db_monte, $db_connection);
-    $sql = "SELECT * FROM PREPRINTS_ARCHIVIATI WHERE checked='1'";
-    $result = mysql_query($sql) or die(mysql_error());
-    $i = 0;
-    while ($row = mysql_fetch_array($result)) {
-        $i++;
-        echo "<div style='width:850px;'><h1>" . $i . ".<br/><br/>Id of pubblication:</h1><br/>" . $row['id_pubblicazione'] . "<br/><br/><br/>";
-        echo "<h1>Title:</h1><br/>" . stripslashes($row['titolo']) . "<br/><br/><br/>";
-        echo "<h1>Date of pubblication:</h1><br/>" . stripslashes($row['data_pubblicazione']) . "<br/><br/><br/>";
-        echo "<h1>Author/s:</h1><br/>" . stripslashes($row['autori']) . "<br/><br/><br/>";
-        echo "<h1>Journal reference:</h1><br/>" . stripslashes($row['referenze']) . "<br/><br/><br/>";
-        echo "<h1>Comments:</h1><br/>" . stripslashes($row['commenti']) . "<br/><br/><br/>";
-        echo "<h1>Category:</h1><br/>" . stripslashes($row['categoria']) . "<br/><br/><br/>";
-        echo "<h1>Abstract:</h1><br/>" . stripslashes($row['abstract']);
-        echo "</div><br/><hr><br/>";
+    $risperpag = 5;
+    $p = $_GET['p'];
+    $limit = $risperpag * $p - $risperpag;
+    $querytotale = mysql_query("SELECT * FROM PREPRINTS_ARCHIVIATI WHERE checked='1'");
+    $ristot = mysql_num_rows($querytotale);
+    if ($_GET['c'] != "Remove all") {
+        $npag = ceil($ristot / $risperpag);
+        $sql = "SELECT * FROM PREPRINTS_ARCHIVIATI WHERE checked='1' LIMIT " . $limit . "," . $risperpag . "";
+        $result = mysql_query($sql) or die(mysql_error());
+        $i = $limit;
+        while ($row = mysql_fetch_array($result)) {
+            $i++;
+            echo "<div style='width:850px;'><h1>" . $i . ".<br/><br/>Id of pubblication:</h1><br/>" . $row['id_pubblicazione'] . "<br/><br/><br/>";
+            echo "<h1>Title:</h1><br/>" . stripslashes($row['titolo']) . "<br/><br/><br/>";
+            echo "<h1>Date of pubblication:</h1><br/>" . stripslashes($row['data_pubblicazione']) . "<br/><br/><br/>";
+            echo "<h1>Author/s:</h1><br/>" . stripslashes($row['autori']) . "<br/><br/><br/>";
+            echo "<h1>Journal reference:</h1><br/>" . stripslashes($row['referenze']) . "<br/><br/><br/>";
+            echo "<h1>Comments:</h1><br/>" . stripslashes($row['commenti']) . "<br/><br/><br/>";
+            echo "<h1>Category:</h1><br/>" . stripslashes($row['categoria']) . "<br/><br/><br/>";
+            echo "<h1>Abstract:</h1><br/>" . stripslashes($row['abstract']) . "<br/><br/><br/>";
+            echo "</div><br/><hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'><br/>";
+        }
+        if ($ristot != 0) {
+            if ($p != 1) {
+                echo '<a style="color:#5d93a2; text-decoration: none;" href="archived_preprints.php?p=' . ($p - 1) . '&r=' . $_GET['r'] . '"> &#8656 </a>';
+            }
+            echo "&nbsp&nbsp&nbsp&nbsp" . $p . "&nbsp&nbsp&nbsp&nbsp";
+            if ($p != $npag) {
+                echo '<a style="color:#5d93a2; text-decoration: none;" href="archived_preprints.php?p=' . ($p + 1) . '&r=' . $_GET['r'] . '"> &#8658 </a>';
+            }
+        }
+    } else {
+        if ($ristot != 0) {
+            cancellapreprint();
+            echo '<META HTTP-EQUIV="Refresh" Content="2; URL=./archived_preprints.php?p=1">';
+        } else {
+            $limit = 0;
+            echo "NO PREPRINTS!";
+        }
     }
-    echo "ELEMENTS: " . $i . "<br/><br/><br/>";
+    echo "<br/><br/><br/>";
+    echo "RESULTS: " . $limit . " - " . $p * "5" . "
+    <br/><br/>TOTAL OF ELEMENTS: " . $ristot . "<br/><br/><br/>";
     mysql_close($db_connection);
-    return $i;
+    return $ristot;
 }
 
 # funzione cancellazione preprint
