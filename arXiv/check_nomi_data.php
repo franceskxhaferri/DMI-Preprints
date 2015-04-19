@@ -143,7 +143,8 @@ function filtropreprint() {
         }
     }
     echo "<br/><br/><br/>";
-    echo "RESULTS: " . $limit . " - " . $p * "5" . "
+    $x=$limit+1;
+    echo "RESULTS: " . $x . " - " . $p * "5" . "
     <br/><br/>TOTAL OF ELEMENTS: " . $ristot . "<br/><br/><br/>";
     mysql_close($db_connection);
 }
@@ -200,7 +201,8 @@ function leggipreprintarchiviati() {
         }
     }
     echo "<br/><br/><br/>";
-    echo "RESULTS: " . $limit . " - " . $p * "5" . "
+    $x=$limit+1;
+    echo "RESULTS: " . $x . " - " . $p * "5" . "
     <br/><br/>TOTAL OF ELEMENTS: " . $ristot . "<br/><br/><br/>";
     mysql_close($db_connection);
     return $ristot;

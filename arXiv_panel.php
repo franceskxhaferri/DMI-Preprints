@@ -60,7 +60,7 @@
                             </form></tr>
                             <tr><form name="f2" action="view_preprints.php?p=1" method="POST">
                                 <td align="right" style="width:350px;">Preprints checked and inserted on database&nbsp&nbsp&nbsp</td>
-                                <td style="width:350px;"><input type="submit" name="bottoni3" value="Approved preprints" id="bottone_keyword" class="bottoni"></td>
+                                <td style="width:350px;"><input type="submit" name="bottoni3" value="Approved section" id="bottone_keyword" class="bottoni"></td>
                             </form></tr>
                             <tr><form name="f3" action="authors_list.php" method="POST">
                                 <td align="right" style="width:350px;">List of authors that will be searched on arXiv&nbsp&nbsp&nbsp</td>
