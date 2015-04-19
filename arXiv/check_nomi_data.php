@@ -82,7 +82,7 @@ function nomiprec($nome) {
 
 # funzione filtro lettura preprint
 
-function filtropreprint($nome) {
+function filtropreprint($nome, $a) {
     $copia = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . "arXiv/pdf/";
     #definizione parametri di connessione al database
     $hostname_db = "localhost";
@@ -91,15 +91,25 @@ function filtropreprint($nome) {
     $password_db = "1234"; // password
     $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
     mysql_select_db($db_monte, $db_connection);
-    $sql = "SELECT * FROM PREPRINTS WHERE autori LIKE '%" . $nome . "%' AND checked='1'";
-    $result = mysql_query($sql) or die(mysql_error());
+    if ($a == "author") {
+        $sql = "SELECT * FROM PREPRINTS WHERE autori LIKE '%" . $nome . "%' AND checked='1'";
+        $result = mysql_query($sql) or die(mysql_error());
+    }
+    if ($a == "category") {
+        $sql = "SELECT * FROM PREPRINTS WHERE categoria LIKE '%" . $nome . "%' AND checked='1'";
+        $result = mysql_query($sql) or die(mysql_error());
+    }
+    if ($a == "year") {
+        $sql = "SELECT * FROM PREPRINTS WHERE data_pubblicazione LIKE '%" . $nome . "%' AND checked='1'";
+        $result = mysql_query($sql) or die(mysql_error());
+    }
     $i = 0;
     while ($row = mysql_fetch_array($result)) {
         $i++;
         echo "<div style='width:850px;'><h1>" . $i . ".<br/><br/>Id of pubblication:</h1><br/>" . $row['id_pubblicazione'] . "<br/><br/><br/>";
         echo "<h1>Title:</h1><br/>" . stripslashes($row['titolo']) . "<br/><br/><br/>";
         echo "<h1>Date of pubblication:</h1><br/>" . stripslashes($row['data_pubblicazione']) . "<br/><br/><br/>";
-        echo "<h1>Authors:</h1><br/>" . stripslashes($row['autori']) . "<br/><br/><br/>";
+        echo "<h1>Author/s:</h1><br/>" . stripslashes($row['autori']) . "<br/><br/><br/>";
         echo "<h1>Journal reference:</h1><br/>" . stripslashes($row['referenze']) . "<br/><br/><br/>";
         echo "<h1>Comments:</h1><br/>" . stripslashes($row['commenti']) . "<br/><br/><br/>";
         echo "<h1>Category:</h1><br/>" . stripslashes($row['categoria']) . "<br/><br/><br/>";
@@ -107,7 +117,7 @@ function filtropreprint($nome) {
         echo "<a href=./arXiv/pdf/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>PDF</a><br/>";
         echo "</div><br/><hr><br/>";
     }
-    echo "TOTALS OF ELEMENTS: " . $i . "<br/><br/><br/>";
+    echo "ELEMENTS: " . $i . "<br/><br/><br/>";
     mysql_close($db_connection);
     return $i;
 }
@@ -130,19 +140,34 @@ function leggipreprintarchiviati() {
         echo "<div style='width:850px;'><h1>" . $i . ".<br/><br/>Id of pubblication:</h1><br/>" . $row['id_pubblicazione'] . "<br/><br/><br/>";
         echo "<h1>Title:</h1><br/>" . stripslashes($row['titolo']) . "<br/><br/><br/>";
         echo "<h1>Date of pubblication:</h1><br/>" . stripslashes($row['data_pubblicazione']) . "<br/><br/><br/>";
-        echo "<h1>Authors:</h1><br/>" . stripslashes($row['autori']) . "<br/><br/><br/>";
+        echo "<h1>Author/s:</h1><br/>" . stripslashes($row['autori']) . "<br/><br/><br/>";
         echo "<h1>Journal reference:</h1><br/>" . stripslashes($row['referenze']) . "<br/><br/><br/>";
         echo "<h1>Comments:</h1><br/>" . stripslashes($row['commenti']) . "<br/><br/><br/>";
         echo "<h1>Category:</h1><br/>" . stripslashes($row['categoria']) . "<br/><br/><br/>";
         echo "<h1>Abstract:</h1><br/>" . stripslashes($row['abstract']);
         echo "</div><br/><hr><br/>";
     }
-    echo "TOTALS OF ELEMENTS: " . $i . "<br/><br/><br/>";
+    echo "ELEMENTS: " . $i . "<br/><br/><br/>";
     mysql_close($db_connection);
     return $i;
 }
 
-# funzione lettura preprint
+# funzione cancellazione preprint
+
+function cancellaselected($id) {
+    #definizione parametri di connessione al database
+    $hostname_db = "localhost";
+    $db_monte = "dmipreprints"; //nome del database
+    $username_db = "root"; //l'username
+    $password_db = "1234"; // password
+    $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
+    mysql_select_db($db_monte, $db_connection);
+    $sql = "DELETE FROM PREPRINTS WHERE id_pubblicazione='" . $id . "'";
+    $result = mysql_query($sql) or die(mysql_error());
+    mysql_close($db_connection);
+}
+
+# funzione cancellazione preprint archiviati
 
 function cancellapreprint() {
     #definizione parametri di connessione al database

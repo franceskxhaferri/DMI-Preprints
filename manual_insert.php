@@ -89,7 +89,7 @@
                             *PDF or other document file<br/>
                             <input type="hidden" name="MAX_FILE_SIZE" value="10000000"><br/>
                             <input type="file" name="fileToUpload" id="fileToUpload"><br/><br/><br/>
-                            <input type="submit" name="bottoni8" value="Insert" id="bottone_keyword" class="bottoni"/><br/><br/><br/>
+                            <input type="submit" name="bottoni8" value="Insert preprint" id="bottone_keyword" class="bottoni"/><br/><br/><br/>
                             </form>
                             <?php
                             $target_dir = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . "arXiv/upload/";

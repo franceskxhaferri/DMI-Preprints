@@ -50,7 +50,6 @@
                                         <a href="reserved.php" class="current-page-item">Reserved Area</a>
                                     </nav>
                                 </header>
-
                             </div>
                         </div>
                     </div>
@@ -61,20 +60,20 @@
                     <tr><form name="f1" action="arXiv_panel.php" method="POST"><td align="right" style='width:150px; height:16px'>Go to arXiv panel&nbsp&nbsp&nbsp</td>
                         <td><input type="submit" name="bottoni7" value="Back" id="bottone_keyword" class="bottoni"/></td>
                         </tr>
-                        <tr><td colspan="2" align="center" style="width:150px;"><br/><a href="./view_preprints.php" onclick='window.open(this.href);
+                        <tr><td colspan="2" align="center"><br/><a href="./view_preprints.php" onclick='window.open(this.href);
                                         return false' title="Go to preprints list">View from inserted preprints</a></td></tr>
                     </form></table>
             </center><br/><br/>
             <?php
             if (sessioneavviata() == True) {
-                echo "<br/><br/><center>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTION CAN'T BE USED IN THIS MOMENT!</center><br/>";
+                echo "<br/><br/>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTION CAN'T BE USED IN THIS MOMENT!</center><br/>";
             } else {
-                echo " <center><div><form name='f2' action='manual_edit.php' method='POST'>Insert id of pubblication you want edit<br/><br/><input type='text' style='width:300px; height:16px' name='id' id='textbox' class='textbox' placeholder='example of id: 0000.0000v1' autofocus/><br/>
-                       <br/><input type='submit' name='bottoni8' value='Get' id='bottone_keyword' class='bottoni'/><br/>
-                       </form></div></center>
+                echo " <center><div><form name='f2' action='manual_edit.php' method='POST'>Insert id of pubblication you want edit<br/><br/><input type='text' style='width:250px; height:16px' name='id' id='textbox' class='textbox' placeholder='example of id: 0000.0000v1' autofocus/><br/>
+                       <br/><input type='submit' name='bottoni8' value='Get preprint' id='bottone_keyword' class='bottoni'/><br/>
+                       </form></div>
                        ";
                 $var = False;
-                if (isset($_POST['bottoni8']) or isset($_POST['bottoni9'])) {
+                if (isset($_POST['bottoni8']) or isset($_POST['bottoni9']) or isset($_POST['bottoni10'])) {
                     $id = $_POST['id'];
                     $id = trim($id);
                     if (empty($id)) {
@@ -111,12 +110,22 @@
                             PDF or other document file <input type='checkbox' name='check' value='checked'/><br/>
                             <input type='hidden' name='MAX_FILE_SIZE' value='10000000'><br/>
                             <input type='file' name='fileToUpload' id='fileToUpload'><br/><br/><br/>
-                            <input type='submit' name='bottoni9' value='Complete' id='bottone_keyword' class='bottoni'/>
+                            <input type='submit' name='bottoni9' value='Remove preprint' id='bottone_keyword' class='bottoni'/>
+                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                            <input type='submit' name='bottoni10' value='Edit complete' id='bottone_keyword' class='bottoni'/>
                             <br/><br/><br/>
                             </form>";
                     $target_dir = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . "arXiv/upload/";
                     $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
                     if (isset($_POST['bottoni9'])) {
+                        $id1 = $_POST['id'];
+                        delete_pdf($id1);
+                        cancellaselected($id1);
+                        echo "PREPRINT " . $info[0] . " REMOVED CORRECTLY!<br/><br/>";
+                        echo '<META HTTP-EQUIV="Refresh" Content="3; URL=./manual_edit.php">';
+                    }
+                    if (isset($_POST['bottoni10'])) {
                         $i = 8;
                         if (empty($_POST['id'])) {
                             echo "INSERT ID!<br/><br/>";
@@ -179,7 +188,7 @@
             }
         } else {
             echo "<center><br/>ACCESS DENIED!</center>";
-            echo '<META HTTP-EQUIV="Refresh" Content="2; URL=./reserved.php">';
+            echo '<META HTTP-EQUIV="Refresh" Content="3; URL=./reserved.php">';
         }
     } else {
         echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';

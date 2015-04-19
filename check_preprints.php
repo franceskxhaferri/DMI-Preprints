@@ -116,7 +116,7 @@
                                         $y++;
                                     }
                                 }
-                                echo "</table></center><center><br/><input type='submit' name='bottoni6' value='Delete' id='bottone_keyword' class='bottoni'></center></form><br/>";
+                                echo "</table></center><center><br/><input type='submit' name='bottoni6' value='Remove selected' id='bottone_keyword' class='bottoni'></center></form><br/>";
                                 #Chiudo la lettura della directory.
                                 closedir($directory_handle);
                             }

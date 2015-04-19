@@ -51,8 +51,14 @@
         include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/insert_remove_db.php');
         sec_session_start();
         if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] < 86400)) {
-            if ($_SESSION['logged_type'] === "mod") {
-                //sessione moderatore
+            if ($_SESSION['logged_type'] === "mod" or $_SESSION['logged_type'] === "user") {
+                if ($_SESSION['logged_type'] === "mod") {
+                    $t = "Go to arXiv panel";
+                    $rit = "arXiv_panel.php";
+                } else {
+                    $t = "Go to reserved area";
+                    $rit = "reserved.php";
+                }
                 ?>
                 <div id="header-wrapper">
                     <div class="container">
@@ -65,30 +71,40 @@
                                         <a href="reserved.php" class="current-page-item">Reserved Area</a>
                                     </nav>
                                 </header>
-
                             </div>
                         </div>
                     </div>
                 </div>
-                <div id="div_menu_ricerca" class="contenitore"><center><br/><h2>INSERTED PREPRINTS</h2></center>
+                <div id="div_menu_ricerca" class="contenitore"><center><br/><h2>APPROVED PREPRINTS</h2></center>
+                    <?php if ($_SESSION['logged_type'] === "user") {
+                        echo "<h1>in this section are the preprints downloaded and controlled by arxiv.org</h1>";
+                    }
+                    ?>
                 </div><center>
                 <table>
-                    <tr><form name="f1" action="arXiv_panel.php" method="POST">
-                        <td align="right">Go to arXiv panel&nbsp&nbsp&nbsp</td>
+                    <tr><form name="f1" action="<?php echo $rit ?>" method="POST">
+                        <td align="right"><?php echo $t ?>&nbsp&nbsp&nbsp</td>
                         <td colspan="2"><input type="submit" name="bottoni1" value="Back" id="bottone_keyword" class="bottoni"/></td>
-                    </form></tr>
-                    <tr><form name="f3" action="manual_edit.php" method="POST">
-                        <td align="right">Manual editing for inserted preprint&nbsp&nbsp&nbsp</td>
-                        <td colspan="2"><input type="submit" name="bottoni2" value="View" id="bottone_keyword" class="bottoni"/></td>
                     </form></tr>
                     <tr><form name="f2" action="archived_preprints.php" method="POST">
                         <td align="right">View archived preprints&nbsp&nbsp&nbsp</td>
-                        <td colspan="2"><input type="submit" name="bottoni2" value="View" id="bottone_keyword" class="bottoni"/></td>
+                        <td colspan="2"><input type="submit" name="bottoni2" value="Archived preprints" id="bottone_keyword" class="bottoni"/></td>
                     </form></tr>
+                    <?php if ($_SESSION['logged_type'] === "mod") {
+                        echo "<tr><form name='f3' action='manual_edit.php' method='POST'>
+                        <td align='right'>Manual editing for inserted preprint&nbsp&nbsp&nbsp</td>
+                        <td colspan='2'><input type='submit' name='bottoni2' value='Edit section' id='bottone_keyword' class='bottoni'/></td>
+                    </form></tr>";
+                    }
+                    ?>
                     <tr><form name="f4" action="view_preprints.php" method="POST">
-                        <td align="right">Filter by name&nbsp&nbsp&nbsp</td>
+                        <td align="right">Filter by:
+                            <label><input type="radio" name="filtro" value="author" checked>Author</label>
+                            <label><input type="radio" name="filtro" value="category">Category</label>
+                            <label><input type="radio" name="filtro" value="year">Year
+                                &nbsp&nbsp&nbsp</label></td>
                         <td><input type="submit" name="bottoni9" value="Apply" id="bottone_keyword" class="bottoni"/></td>
-                        <td><input type="text" style="width:150px; height:16px" name="txt1" id="textbox" class="textbox" placeholder="Author name or part" autofocus></textarea></td>
+                        <td><input type="text" style="width:150px; height:16px" name="txt1" id="textbox" class="textbox" placeholder="Author name or part, etc." autofocus></textarea></td>
                     </form></tr>
                 </table>
             </center>
@@ -104,12 +120,13 @@
                             <?php
                             if (isset($_POST['bottoni9'])) {
                                 $nome = $_POST['txt1'];
-                                $i = filtropreprint($nome);
+                                $a = $_POST['filtro'];
+                                $i = filtropreprint($nome, $a);
                                 if ($i == 0) {
                                     echo "NO PREPRINTS!";
                                 }
                             } else {
-                                $i = filtropreprint("");
+                                $i = filtropreprint("", "author");
                                 if ($i == 0) {
                                     echo "NO PREPRINTS!";
                                 }

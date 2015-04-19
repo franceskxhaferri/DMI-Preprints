@@ -51,7 +51,7 @@
         include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/insert_remove_db.php');
         sec_session_start();
         if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] < 86400)) {
-            if ($_SESSION['logged_type'] === "mod") {
+            if ($_SESSION['logged_type'] === "mod" or $_SESSION['logged_type'] === "user") {
                 //sessione moderatore
                 ?>
                 <div id="header-wrapper">
@@ -77,10 +77,13 @@
                         <td align="right">Go to current preprints&nbsp&nbsp&nbsp</td>
                         <td><input type="submit" name="bottoni7" value="Back" id="bottone_keyword" class="bottoni"/></td>
                     </form></tr>
-                    <tr><form name="f2" action="archived_preprints.php" method="POST">
-                        <td align="right">Delete all archived preprints from database&nbsp&nbsp&nbsp</td>
-                        <td><input type="submit" name="bottoni8" value="Delete" id="bottone_keyword" class="bottoni"/></td>
-                    </form></tr>
+                    <?php if ($_SESSION['logged_type'] === "mod") {
+                        echo "<tr><form name='f2' action='archived_preprints.php' method='POST'>
+                        <td align='right'>Delete all archived preprints from database&nbsp&nbsp&nbsp</td>
+                        <td><input type='submit' name='bottoni8' value='Remove all' id='bottone_keyword' class='bottoni'/></td>
+                    </form></tr>";
+                    }
+                    ?>
                 </table>
             </center>
             <?php
@@ -89,31 +92,27 @@
             } else {
                 echo "<br/><center><a href='javascript:FinePagina()'>&#8595; end of page</a></center>";
                 ?>
-                <form name="f2" action="view_preprints.php" method="POST">
-                    <center><div><br/><br/><br/><h2>preprints list</h2><hr><br/>                       
-
-
-                            </form>
-                            <?php
-                            $i = leggipreprintarchiviati();
-                            if (isset($_POST['bottoni8'])) {
-                                if ($i == 0) {
-                                    echo "NO PREPRINTS!";
-                                } else {
-                                    cancellapreprint();
-                                    echo '<META HTTP-EQUIV="Refresh" Content="2; URL=./archived_preprints.php">';
-                                }
+                <center><div><br/><br/><br/><h2>preprints list</h2><hr><br/>                       
+                        <?php
+                        $i = leggipreprintarchiviati();
+                        if (isset($_POST['bottoni8'])) {
+                            if ($i == 0) {
+                                echo "NO PREPRINTS!";
+                            } else {
+                                cancellapreprint();
+                                echo '<META HTTP-EQUIV="Refresh" Content="2; URL=./archived_preprints.php">';
                             }
-                            echo "<center><a href='javascript:window.scrollTo(0,0)'>&#8593; top of page</a></center><br/>";
                         }
-                    } else {
-                        echo "<center><br/>ACCESS DENIED!</center>";
-                        echo '<META HTTP-EQUIV="Refresh" Content="2; URL=./reserved.php">';
+                        echo "<center><a href='javascript:window.scrollTo(0,0)'>&#8593; top of page</a></center><br/>";
                     }
                 } else {
-                    echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
+                    echo "<center><br/>ACCESS DENIED!</center>";
+                    echo '<META HTTP-EQUIV="Refresh" Content="2; URL=./reserved.php">';
                 }
-                ?>
-            </div></center>
-    </body>
+            } else {
+                echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
+            }
+            ?>
+        </div></center>
+</body>
 </html>

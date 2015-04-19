@@ -103,6 +103,27 @@ function insert_pdf() {
     mysql_close($db_connection);
 }
 
+#funzione che cancella il pdf caricato all'interno della cartella
+
+function delete_pdf($id) {
+    #definizione parametri di connessione al database
+    $hostname_db = "localhost";
+    $db_monte = "dmipreprints"; //nome del database
+    $username_db = "root"; //l'username
+    $password_db = "1234"; // password
+    $copia = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . "arXiv/pdf/";
+    $basedir = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . "arXiv/upload/"; // � la directory da dove prelevare in automatico tutti i file in esso contenuti
+    #connessione al database...
+    $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
+    mysql_select_db($db_monte, $db_connection);
+    $sql = "SELECT * FROM PREPRINTS WHERE id_pubblicazione='" . $id . "'";
+    $query = mysql_query($sql) or die(mysql_error());
+    $row = mysql_fetch_array($query);
+    unlink($copia . $row['Filename']);
+    #chiusura connessione al database
+    mysql_close($db_connection);
+}
+
 #funzione che inserisce il pdf caricato all'interno dei database
 
 function insert_one_pdf($id, $type) {

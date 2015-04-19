@@ -77,10 +77,10 @@
 
                             <form name="f2" action="authors_list.php" method="POST"><tr><td align="right">Add author to list or search by name&nbsp&nbsp&nbsp</td><td><input type="submit" name="bottoni8" value="Insert / Search" id="bottone_keyword" class="bottoni"></td><td align="center">&nbsp&nbsp&nbsp&nbsp<input type="checkbox" name="insert" value="1" checked/></td></tr>
                                 <tr align="center"><td colspan="3"><br/><textarea style="width:100%; height:16px" name="txt1" id="textbox" class="textbox" placeholder="Author name(Use ' , ' to insert/search more authors)" autofocus></textarea></td></tr></form>
-                                                                                            
-                                                                                        </table></center>
-                                                                                </div>
-                                                                                <div>
+                                                                                                    
+                                                                                                </table></center>
+                                                                                        </div>
+                                                                                        <div>
                     <?php
                     #importo file per utilizzare funzioni...
                     include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/check_nomi_data.php');
@@ -111,7 +111,7 @@
                             echo "<tr colspan='2'><td><input type='checkbox' name='" . $i . "' value='checked' /><label for='" . $i . "'>$y.&nbsp&nbsp&nbsp" . $nomi[$i] . "</label></td></tr>";
                             $y++;
                         }
-                        echo "</table></center><br/><center><input type='submit' name='bottoni9' value='Delete' id='bottone_keyword' class='bottoni'></center></form><br/>";
+                        echo "</table></center><br/><center><input type='submit' name='bottoni9' value='Remove author/s' id='bottone_keyword' class='bottoni'></center></form><br/>";
                         if ($lunghezza == 0) {
                             aggiornanomi();
                             echo "<center>NO AUTHORS INSIDE LIST!</center><br/>";

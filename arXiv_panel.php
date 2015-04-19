@@ -60,32 +60,32 @@
                             </form></tr>
                             <tr><form name="f2" action="view_preprints.php" method="POST">
                                 <td align="right" style="width:350px;">Preprints checked and inserted on database&nbsp&nbsp&nbsp</td>
-                                <td style="width:350px;"><input type="submit" name="bottoni3" value="View" id="bottone_keyword" class="bottoni"></td>
+                                <td style="width:350px;"><input type="submit" name="bottoni3" value="Approved preprints" id="bottone_keyword" class="bottoni"></td>
                             </form></tr>
                             <tr><form name="f3" action="authors_list.php" method="POST">
-                                <td align="right" style="width:350px;">List of authors&nbsp&nbsp&nbsp</td>
-                                <td style="width:350px;"><input type="submit" name="bottoni2" value="View" id="bottone_keyword" class="bottoni"></td>
+                                <td align="right" style="width:350px;">List of authors that will be searched on arXiv&nbsp&nbsp&nbsp</td>
+                                <td style="width:350px;"><input type="submit" name="bottoni2" value="Authors section" id="bottone_keyword" class="bottoni"></td>
                             </form></tr>
                             <tr><form name="f4" action="manual_insert.php" method="POST">
                                 <td align="right" style="width:350px;">Insert manually one preprint&nbsp&nbsp&nbsp</td>
-                                <td style="width:350px;"><input type="submit" name="bottoni3" value="View" id="bottone_keyword" class="bottoni"></td>
+                                <td style="width:350px;"><input type="submit" name="bottoni3" value="Insert section" id="bottone_keyword" class="bottoni"></td>
                             </form></tr>
                             <tr><form name="f5" action="manual_edit.php" method="POST">
                                 <td align="right" style="width:350px;">Manual editing for inserted preprint&nbsp&nbsp&nbsp</td>
-                                <td style="width:350px;"><input type="submit" name="bottoni3" value="View" id="bottone_keyword" class="bottoni"></td>
+                                <td style="width:350px;"><input type="submit" name="bottoni3" value="Edit section" id="bottone_keyword" class="bottoni"></td>
                             </form></tr>
                             <tr><form name="f6" action="check_preprints.php" method="POST">
                                 <td align="right" style="width:350px;">
                                     Controls the preprints recently downloaded&nbsp&nbsp&nbsp</td>
-                                <td style="width:350px;"><input type="submit" name="bottoni1" value="View" id="bottone_keyword" class="bottoni"></td>
+                                <td style="width:350px;"><input type="submit" name="bottoni1" value="Check section" id="bottone_keyword" class="bottoni"></td>
                             </form></tr>
                             <tr><form name="f7" action="arXiv_panel.php" method="POST">
                                 <td align="right" style="width:350px;">Refresh from arXiv for new preprints&nbsp&nbsp&nbsp</td>
-                                <td style="width:350px;"><input type="submit" name="bottoni" value="Update" id="bottone_keyword" class="bottoni"></td>
+                                <td style="width:350px;"><input type="submit" name="bottoni" value="Update from arXiv" id="bottone_keyword" class="bottoni"></td>
                             </form></tr>
                             <tr><form name="f8" action="arXiv_panel.php" method="POST">
                                 <td align="right" style="width:450px;">Download all from arXiv, this overwrites data and take several time!&nbsp&nbsp&nbsp</td>
-                                <td style="width:450px;"><input type="submit" name="bottoni3" value="Download" id="bottone_keyword" class="bottoni"></td>
+                                <td style="width:450px;"><input type="submit" name="bottoni3" value="Download from arXiv" id="bottone_keyword" class="bottoni"></td>
                             </form></tr>
                         </table></center><br/><br/>
                     <?php
@@ -175,7 +175,7 @@
                         echo 'SERVER OFFLINE OR ARVIX IS DOWN!<br/><br/>';
                     }
                     if (sessioneavviata() == True) {
-                        echo "WARNING ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTIONS 'MANUALLY INSERT', 'PREPRINTS CHECK' AND 'AUTHORS LIST' HAS BEEN BLOCKED!";
+                        echo "WARNING ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTIONS HAS BEEN BLOCKED!";
                     } else {
                         #memorizzo in $data dell'ultimo aggiornamento e la visualizzo
                         $data = datastring();
