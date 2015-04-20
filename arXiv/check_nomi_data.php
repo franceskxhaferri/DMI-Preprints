@@ -122,30 +122,49 @@ function filtropreprint() {
     $i = $limit;
     while ($row = mysql_fetch_array($result)) {
         $i++;
-        echo "<div style='width:850px;'><h1>" . $i . ".<br/><br/>Id of pubblication:</h1><br/>" . $row['id_pubblicazione'] . "<br/><br/><br/>";
-        echo "<h1>Title:</h1><br/>" . stripslashes($row['titolo']) . "<br/><br/><br/>";
-        echo "<h1>Date of pubblication:</h1><br/>" . stripslashes($row['data_pubblicazione']) . "<br/><br/><br/>";
-        echo "<h1>Author/s:</h1><br/>" . stripslashes($row['autori']) . "<br/><br/><br/>";
-        echo "<h1>Journal reference:</h1><br/>" . stripslashes($row['referenze']) . "<br/><br/><br/>";
-        echo "<h1>Comments:</h1><br/>" . stripslashes($row['commenti']) . "<br/><br/><br/>";
-        echo "<h1>Category:</h1><br/>" . stripslashes($row['categoria']) . "<br/><br/><br/>";
-        echo "<h1>Abstract:</h1><br/>" . stripslashes($row['abstract']) . "<br/><br/><br/>";
-        echo "<a style='color:#5d93a2;' href=./arXiv/pdf/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>PDF</a><br/>";
+        echo "<div style='width:85%;'><h1>" . $i . ".<br/><br/>Id of pubblication:</h1><br/>" . $row['id_pubblicazione'] . "<br/><br/><br/>";
+        echo "<p><h1>Title:</h1><br/>" . stripslashes($row['titolo']) . "</p><br/>";
+        echo "<p><h1>Date of pubblication:</h1><br/>" . stripslashes($row['data_pubblicazione']) . "</p><br/>";
+        echo "<p><h1>Author/s:</h1><br/>" . stripslashes($row['autori']) . "</p><br/>";
+        echo "<p><h1>Journal reference:</h1><br/>" . stripslashes($row['referenze']) . "</p><br/>";
+        echo "<p><h1>Comments:</h1><br/>" . stripslashes($row['commenti']) . "</p><br/>";
+        echo "<p><h1>Category:</h1><br/>" . stripslashes($row['categoria']) . "</p><br/>";
+        echo "<p><h1>Abstract:</h1><br/>" . stripslashes($row['abstract']) . "</p><br/>";
+        echo "<a style='color:#007897;' href=./arXiv/pdf/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>PDF</a><br/>";
         echo "</div><br/><hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'><br/>";
     }
     if ($ristot != 0) {
         if ($p != 1) {
-            echo '<a style="color:#5d93a2; text-decoration: none;" href="view_preprints.php?p=' . ($p - 1) . '&r=' . $_GET['r'] . '"> &#8656 </a>';
+            $t1 = $p - 1;
+            $t2 = $p - 2;
+            $t3 = $p - 3;
+            echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=1&r=' . $_GET['r'] . '"> &#8656 </a>';
+            if ($p >= 3 && $t3 > 0) {
+                echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p - 3) . '&r=' . $_GET['r'] . '"> ' . " " . $t3 . " " . ' </a>';
+            }
+            if ($p >= 2 && $t2 > 0) {
+                echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p - 2) . '&r=' . $_GET['r'] . '"> ' . " " . $t2 . " " . ' </a>';
+            }
+            echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p - 1) . '&r=' . $_GET['r'] . '"> ' . " " . $t1 . " " . ' </a>';
         }
-        echo "&nbsp&nbsp&nbsp&nbsp" . $p . "&nbsp&nbsp&nbsp&nbsp";
+        echo " " . $p . " ";
         if ($p != $npag) {
-            echo '<a style="color:#5d93a2; text-decoration: none;" href="view_preprints.php?p=' . ($p + 1) . '&r=' . $_GET['r'] . '"> &#8658 </a>';
+            $t4 = $p + 1;
+            $t5 = $p + 2;
+            $t6 = $p + 3;
+            echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p + 1) . '&r=' . $_GET['r'] . '"> ' . " " . $t4 . " " . ' </a>';
+            if ($p < $npag && $t5 <= $npag) {
+                echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p + 2) . '&r=' . $_GET['r'] . '"> ' . " " . $t5 . " " . ' </a>';
+            }
+            if ($p < $npag && $t6 <= $npag) {
+                echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p + 3) . '&r=' . $_GET['r'] . '"> ' . " " . $t6 . " " . ' </a>';
+            }
+            echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . $npag . '&r=' . $_GET['r'] . '"> &#8658 </a>';
         }
     }
     echo "<br/><br/><br/>";
-    $x=$limit+1;
-    echo "RESULTS: " . $x . " - " . $p * "5" . "
-    <br/><br/>TOTAL OF ELEMENTS: " . $ristot . "<br/><br/><br/>";
+    $x = $limit + 1;
+    echo "RESULTS FROM " . $x . " TO " . ($p * 5) . "<br/>--<br/>TOTAL OF ELEMENTS: " . $ristot . "<br/><br/><br/>";
     mysql_close($db_connection);
 }
 
@@ -172,23 +191,43 @@ function leggipreprintarchiviati() {
         $i = $limit;
         while ($row = mysql_fetch_array($result)) {
             $i++;
-            echo "<div style='width:850px;'><h1>" . $i . ".<br/><br/>Id of pubblication:</h1><br/>" . $row['id_pubblicazione'] . "<br/><br/><br/>";
-            echo "<h1>Title:</h1><br/>" . stripslashes($row['titolo']) . "<br/><br/><br/>";
-            echo "<h1>Date of pubblication:</h1><br/>" . stripslashes($row['data_pubblicazione']) . "<br/><br/><br/>";
-            echo "<h1>Author/s:</h1><br/>" . stripslashes($row['autori']) . "<br/><br/><br/>";
-            echo "<h1>Journal reference:</h1><br/>" . stripslashes($row['referenze']) . "<br/><br/><br/>";
-            echo "<h1>Comments:</h1><br/>" . stripslashes($row['commenti']) . "<br/><br/><br/>";
-            echo "<h1>Category:</h1><br/>" . stripslashes($row['categoria']) . "<br/><br/><br/>";
-            echo "<h1>Abstract:</h1><br/>" . stripslashes($row['abstract']) . "<br/><br/><br/>";
+            echo "<div style='width:85%;'><h1>" . $i . ".<br/><br/>Id of pubblication:</h1><br/>" . $row['id_pubblicazione'] . "<br/><br/><br/>";
+            echo "<p><h1>Title:</h1><br/>" . stripslashes($row['titolo']) . "</p><br/>";
+            echo "<p><h1>Date of pubblication:</h1><br/>" . stripslashes($row['data_pubblicazione']) . "</p><br/>";
+            echo "<p><h1>Author/s:</h1><br/>" . stripslashes($row['autori']) . "</p><br/>";
+            echo "<p><h1>Journal reference:</h1><br/>" . stripslashes($row['referenze']) . "</p><br/>";
+            echo "<p><h1>Comments:</h1><br/>" . stripslashes($row['commenti']) . "</p><br/>";
+            echo "<p><h1>Category:</h1><br/>" . stripslashes($row['categoria']) . "</p><br/>";
+            echo "<p><h1>Abstract:</h1><br/>" . stripslashes($row['abstract']) . "</p><br/>";
             echo "</div><br/><hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'><br/>";
         }
         if ($ristot != 0) {
             if ($p != 1) {
-                echo '<a style="color:#5d93a2; text-decoration: none;" href="archived_preprints.php?p=' . ($p - 1) . '&r=' . $_GET['r'] . '"> &#8656 </a>';
+                $t1 = $p - 1;
+                $t2 = $p - 2;
+                $t3 = $p - 3;
+                echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=1&r=' . $_GET['r'] . '"> &#8656 </a>';
+                if ($p >= 3 && $t3 > 0) {
+                    echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p - 3) . '&r=' . $_GET['r'] . '"> ' . " " . $t3 . " " . ' </a>';
+                }
+                if ($p >= 2 && $t2 > 0) {
+                    echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p - 2) . '&r=' . $_GET['r'] . '"> ' . " " . $t2 . " " . ' </a>';
+                }
+                echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p - 1) . '&r=' . $_GET['r'] . '"> ' . " " . $t1 . " " . ' </a>';
             }
-            echo "&nbsp&nbsp&nbsp&nbsp" . $p . "&nbsp&nbsp&nbsp&nbsp";
+            echo " " . $p . " ";
             if ($p != $npag) {
-                echo '<a style="color:#5d93a2; text-decoration: none;" href="archived_preprints.php?p=' . ($p + 1) . '&r=' . $_GET['r'] . '"> &#8658 </a>';
+                $t4 = $p + 1;
+                $t5 = $p + 2;
+                $t6 = $p + 3;
+                echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p + 1) . '&r=' . $_GET['r'] . '"> ' . " " . $t4 . " " . ' </a>';
+                if ($p < $npag && $t5 <= $npag) {
+                    echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p + 2) . '&r=' . $_GET['r'] . '"> ' . " " . $t5 . " " . ' </a>';
+                }
+                if ($p < $npag && $t6 <= $npag) {
+                    echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p + 3) . '&r=' . $_GET['r'] . '"> ' . " " . $t6 . " " . ' </a>';
+                }
+                echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . $npag . '&r=' . $_GET['r'] . '"> &#8658 </a>';
             }
         }
     } else {
@@ -201,9 +240,8 @@ function leggipreprintarchiviati() {
         }
     }
     echo "<br/><br/><br/>";
-    $x=$limit+1;
-    echo "RESULTS: " . $x . " - " . $p * "5" . "
-    <br/><br/>TOTAL OF ELEMENTS: " . $ristot . "<br/><br/><br/>";
+    $x = $limit + 1;
+    echo "RESULTS FROM " . $x . " TO " . ($p * 5) . "<br/>--<br/>TOTAL OF ELEMENTS: " . $ristot . "<br/><br/><br/>";
     mysql_close($db_connection);
     return $ristot;
 }

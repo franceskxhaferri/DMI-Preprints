@@ -12,9 +12,9 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'search/main_tabella
     print_r(" Tipo di accesso: ");
     print_r($_SESSION['logged_type']);
     ?>
-    <form name="f1" action="arXiv_panel.php" method="POST">
         <br/>
-        <button onclick="logout()" id="button_logout" class="bottoni" style="color: red;">logout</button><br/>
+    <button onclick="logout()" id="button_logout" class="bottoni" style="color: red;">logout</button><br/>
+    <form name="f1" action="arXiv_panel.php" method="POST">
         <input type="submit" name="botton" value="arXiv panel" id="bottone_keyword" class="bottoni">
     </form>
 </div>

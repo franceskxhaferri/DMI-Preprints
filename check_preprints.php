@@ -73,11 +73,11 @@
                 <div id="div_menu_ricerca" class="contenitore"><center><br/><h2>CHECK PREPRINTS</h2></center>
                     <center><table>
                             <tr><td  align="right" style="width:300px;">Go to arXiv panel&nbsp&nbsp&nbsp</td>
-                            <form name="f1" action="arXiv_panel.php" method="POST">
+                            <form name="f1" action="arXiv_panel.php" method="GET">
                                 <td style="width:280px;"><input type="submit" name="bottoni4" value="Back" id="bottone_keyword" class="bottoni"></td>
                             </form></tr>
                             <tr><td  align="right" style="width:300px;">Insert all current preprints into database&nbsp&nbsp&nbsp<br/></td>
-                            <form name="f2" action="check_preprints.php" method="POST">
+                            <form name="f2" action="check_preprints.php" method="GET">
                                 <td style="width:280px;"><input type="submit" name="bottoni5" value="Insert all" id="bottone_keyword" class="bottoni"></td>
                             </form></tr></table></center>
                 </div>
@@ -94,7 +94,7 @@
                         $base = "./arXiv/pdf_downloads/";
                         #Imposto la directory da leggere
                         $directory = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . "arXiv/pdf_downloads/";
-                        echo "<form name='f3' action='check_preprints.php' id='f1' method='POST'><center><br/><h2>PREPRINTS LIST</h2><br/><table>";
+                        echo "<form name='f3' action='check_preprints.php' id='f1' method='GET'><center><br/><h2>PREPRINTS LIST</h2><br/><table>";
                         #Apriamo una directory e leggiamone il contenuto.
                         if (is_dir($directory)) {
                             #Apro l'oggetto directory
@@ -124,7 +124,7 @@
                         $z = 0;
                         $lunghezza = $i;
                         $basedir2 = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . "arXiv/pdf/";
-                        if (isset($_POST['bottoni5'])) {
+                        if (isset($_GET['bottoni5'])) {
                             if ($i == 0) {
                                 echo "<center>NO PREPRINTS!</center>";
                             } else {
@@ -136,11 +136,11 @@
                             }
                         }
                         #eliminazione pdf...
-                        if (isset($_POST['bottoni6'])) {
+                        if (isset($_GET['bottoni6'])) {
                             for ($j = 0; $j < $lunghezza; $j++) {
                                 $percorso = $base . $array[$j];
                                 $percorso2 = $basedir2 . $array[$j];
-                                $delete = $_POST[$j];
+                                $delete = $_GET[$j];
                                 if ($delete == "checked") {
                                     $z++;
                                     if (is_dir($directory)) {

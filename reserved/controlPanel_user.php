@@ -11,11 +11,11 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'search/main_tabella
     print_r(" Tipo di accesso: ");
     print_r($_SESSION['logged_type']);
     ?>
-    <form name="f2" action="view_preprints.php?p=1" method="POST">
-	    <br/>
-	    <button onclick="logout()" id="button_logout" class="bottoni" style="color: red;">logout</button><br/>
+	<br/>
+	<button onclick="logout()" id="button_logout" class="bottoni" style="color: red;">logout</button><br/>
+	<form name="f2" action="view_preprints.php?p=1" method="POST">
 	    <input type="submit" name="bottoni2" value="arXiv approved preprints" id="bottone_keyword" class="bottoni"/>
-    </form>
+    	</form>
 </div>
 <div style="float: right">
     <br/>

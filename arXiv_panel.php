@@ -52,7 +52,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="div_menu_ricerca" class="contenitore"><center><br/><h2>ARXIV PANEL</h2></center><a style="color:#5d93a2;" href="" title="Guide">Help</a><br/><br/><br/>
+                <div id="div_menu_ricerca" class="contenitore"><center><br/><h2>ARXIV PANEL</h2></center><a style="color:#007897;" href="" title="Guide">Help</a><br/><br/><br/>
                     <center><table>
                             <tr><form name="f1" action="reserved.php" method="POST">
                                 <td align="right" style="width:350px;">Go to reserved area&nbsp&nbsp&nbsp</td>
@@ -84,8 +84,8 @@
                                 <td style="width:350px;"><input type="submit" name="bottoni" value="Update from arXiv" id="bottone_keyword" class="bottoni"></td>
                             </form></tr>
                             <tr><form name="f8" action="arXiv_panel.php" method="POST">
-                                <td align="right" style="width:450px;">Download all from arXiv, this overwrites data and take several time!&nbsp&nbsp&nbsp</td>
-                                <td style="width:450px;"><input type="submit" name="bottoni3" value="Download from arXiv" id="bottone_keyword" class="bottoni"></td>
+                                <td align="right" style="width:500px;">Download all from arXiv, this overwrites data and take several time!&nbsp&nbsp&nbsp</td>
+                                <td style="width:500px;"><input type="submit" name="bottoni3" value="Download from arXiv" id="bottone_keyword" class="bottoni"></td>
                             </form></tr>
                         </table></center><br/><br/>
                     <?php

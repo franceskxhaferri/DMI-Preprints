@@ -60,7 +60,7 @@
                     <tr><form name="f1" action="arXiv_panel.php" method="POST"><td align="right" style='width:150px; height:16px'>Go to arXiv panel&nbsp&nbsp&nbsp</td>
                         <td><input type="submit" name="bottoni7" value="Back" id="bottone_keyword" class="bottoni"/></td>
                         </tr>
-                        <tr><td colspan="2" align="center"><br/><br/><a style="color:#5d93a2;" href="./view_preprints.php?p=1" onclick='window.open(this.href);
+                        <tr><td colspan="2" align="center"><br/><br/><a style="color:#007897;" href="./view_preprints.php?p=1" onclick='window.open(this.href);
                                 return false' title="Go to preprints list">View from inserted preprints</a></td></tr>
                     </form></table>
             </center><br/><br/>
