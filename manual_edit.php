@@ -77,20 +77,20 @@
                     $id = $_POST['id'];
                     $id = trim($id);
                     if (empty($id)) {
-                        echo "<center><br/><br/>INSERT ID!</center>";
+                        echo "<center><br/>INSERT ID!</center>";
                     } else {
                         $ris = cercapreprint($id);
                         if ($ris[0] == $id) {
                             $var = True;
                         } else {
-                            echo "<center><br/><br/>ID INCORRECT!</center>";
+                            echo "<center><br/>ID INCORRECT!</center>";
                         }
                     }
                 }
                 if ($var == True) {
                     echo "
                 <form name='f1' action='manual_edit.php' method='POST' enctype='multipart/form-data'>
-                    <center><div><br/><br/><br/><h2>preprint informations</h2><h1>field with '*' are required</h1><br/><br>
+                    <center><div><br/><br/><h2>preprint informations</h2><h1>field with '*' are required</h1><br/><br>
 			    id of pubblication (not editable)<br/><br/>
                             <textarea readonly style='width:800px; height:16px' name='id' id='textbox' class='textbox' placeholder='example of id: 0000.0000v1'>" . $ris[0] . "</textarea><br/><br/><br/>
                             data of pubblication (not editable)<br/><br/>
@@ -111,6 +111,7 @@
                             <input type='hidden' name='MAX_FILE_SIZE' value='10000000'><br/>
                             <input type='file' name='fileToUpload' id='fileToUpload'><br/><br/><br/>
                             <input type='submit' name='bottoni9' value='Remove preprint' id='bottone_keyword' class='bottoni'/>
+                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                             &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                             &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                             &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp

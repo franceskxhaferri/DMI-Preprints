@@ -72,10 +72,8 @@
                 <br/><div><center><br/><h2>AUTHOR LIST</h2></center>
                     <center><table>
                             <tr><form name="f1" action="arXiv_panel.php" method="POST"><td align="right">Go to arXiv panel&nbsp&nbsp&nbsp</td>
-                                <td><input type="submit" name="bottoni7" value="Back" id="bottone_keyword" class="bottoni"></td><td><label for="insert">&nbsp&nbsp&nbsp&nbspInsert?</label></td></form></tr>
-
-
-                            <form name="f2" action="authors_list.php" method="POST"><tr><td align="right">Add author to list or search by name&nbsp&nbsp&nbsp</td><td><input type="submit" name="bottoni8" value="Insert / Search" id="bottone_keyword" class="bottoni"></td><td align="center">&nbsp&nbsp&nbsp&nbsp<input type="checkbox" name="insert" value="1" checked/></td></tr>
+                                <td colspan="2"><input type="submit" name="bottoni7" value="Back" id="bottone_keyword" class="bottoni"></td></form></tr>
+                            <form name="f2" action="authors_list.php" method="POST"><tr><td align="right">Add author to list or search by name&nbsp&nbsp&nbsp</td><td><input type="submit" name="bottoni8" value="Insert / Search" id="bottone_keyword" class="bottoni"></td><td align="center"><label>&nbsp&nbsp&nbsp&nbspInsert?<input type="checkbox" name="insert" value="1" checked/></label></td></tr>
                                 <tr align="center"><td colspan="3"><br/><textarea style="width:100%; height:16px" name="txt1" id="textbox" class="textbox" placeholder="Author name(Use ' , ' to insert/search more authors)" autofocus></textarea></td></tr></form>
                                                                                                                                                                             
                                                                                                                                                                         </table></center>
@@ -87,7 +85,7 @@
                     if (sessioneavviata() == True) {
                         echo "<center>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE LIST CAN'T BE CHANGED IN THIS MOMENT!</center><br/>";
                     } else {
-                        echo "<center><a style='text-decoration: none;' href='javascript:FinePagina()'>&#8595; end of page</a></center><br/>";
+                        echo "<br/><center><a style='text-decoration: none;' href='javascript:FinePagina()'>&#8595; end of page</a></center><br/>";
                         if (isset($_POST['bottoni8'])) {
                             #controllo del campo testo vuoto
                             if (empty($_POST['txt1'])) {
@@ -108,7 +106,7 @@
                         #creazione della tabella html dei file all'interno di pdf_downloads
                         $y = 1;
                         for ($i = 0; $i < $lunghezza; $i++) {
-                            echo "<tr colspan='2'><td><input type='checkbox' name='" . $i . "' value='checked' /><label for='" . $i . "'>$y.&nbsp&nbsp&nbsp" . $nomi[$i] . "</label></td></tr>";
+                            echo "<tr colspan='2'><td><label><input type='checkbox' name='" . $i . "' value='checked'/>$y.&nbsp&nbsp&nbsp" . $nomi[$i] . "</label></td></tr>";
                             $y++;
                         }
                         echo "</table></center><br/><center><input type='submit' name='bottoni9' value='Remove author/s' id='bottone_keyword' class='bottoni'></center></form><br/>";

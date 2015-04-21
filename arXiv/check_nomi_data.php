@@ -337,7 +337,7 @@ function leggipreprintarchiviati() {
             echo '<META HTTP-EQUIV="Refresh" Content="2; URL=./archived_preprints.php?p=1">';
         } else {
             $limit = 0;
-            echo "NO PREPRINTS!";
+            echo "NO PREPRINTS!<br/><br/>";
         }
     }
     $x = $limit + 1;

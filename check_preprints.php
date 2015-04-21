@@ -109,7 +109,7 @@
                                     #o dagli elementi . e .. lo visualizzo a schermo
                                     if ((!is_dir($file)) & ($file != ".") & ($file != "..")) {
                                         $array[$i] = $file;
-                                        echo "<tr colspan='2'><td><input type='checkbox' name='" . $i . "' value='checked'/><label for='" . $i . "'>$y.&nbsp&nbsp&nbsp<a href=" . $base . $file . " onclick='window.open(this.href);return false' title='" . $file . "'>" . $file . "</a></label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>";
+                                        echo "<tr colspan='2'><td><label><input type='checkbox' name='" . $i . "' value='checked'/>$y.&nbsp&nbsp&nbsp<a href=" . $base . $file . " onclick='window.open(this.href);return false' title='" . $file . "'>" . $file . "</a></label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>";
                                         $dat = date("Y-m-d H:i", filemtime($base . $file));
                                         echo "<td>&nbsp&nbsp&nbsp$dat</td></tr>";
                                         $i++;
@@ -126,7 +126,7 @@
                         $basedir2 = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . "arXiv/pdf/";
                         if (isset($_GET['bottoni5'])) {
                             if ($i == 0) {
-                                echo "<center>NO PREPRINTS!</center>";
+                                echo "<center>NO PREPRINTS!<br/><br/></center>";
                             } else {
                                 #richiamo funzione per inserire i pdf all'interno del database
                                 insert_pdf();
@@ -163,7 +163,7 @@
                                 }
                             }
                             if ($z == 0) {
-                                echo "<center>NOTHING SELECTED!<br/></center>";
+                                echo "<center>NOTHING SELECTED!<br/><br/></center>";
                             } else {
                                 echo "<center>" . $z . " SELECTED PREPRINTS REMOVED! PAGE WILL BEEN UPDATED BETWEEN 2 SECONDS!</center><br/><br/>";
                                 #aggiorno la pagina dopo 2 secondi
@@ -172,7 +172,7 @@
                         }
                         echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'>&#8593; top of page</a></center><br/>";
                         if ($i == 0) {
-                            echo "<center>NO PREPRINTS!</center>";
+                            echo "<center>NO PREPRINTS!<br/></center>";
                         }
                     }
                 } else {
