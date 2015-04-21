@@ -134,17 +134,23 @@
                     if (preprintscaricati($arcid1) == False) {
                         $array[0] = $arcid; #ARXIV ID
                         $titolo = str_replace("<br />", "", $titolo);
+                        $titolo = str_replace("\n", "", $titolo);
                         $array[1] = $titolo; #TITOLO
                         $array[2] = $datapubbstring; #DATA PUBBLICAZIONE
                         $author_string = str_replace("<br />", ", ", $author_string);
+                        $author_string = str_replace("\n", "", $author_string);
                         $array[3] = $author_string; #AUTORI
                         $journal_ref = str_replace("<br />", "", $journal_ref);
+                        $journal_ref = str_replace("\n", "", $journal_ref);
                         $array[4] = $journal_ref; #REFERENZE GIORNALISTICHE
                         $comments = str_replace("<br />", "", $comments);
+                        $comments = str_replace("\n", "", $comments);
                         $array[5] = $comments; #COMMENTI
                         $primary_category = str_replace("<br />", "", $primary_category);
+                        $primary_category = str_replace("\n", "", $primary_category);
                         $array[6] = $primary_category; #CATEGORIA
                         $descrizione = str_replace("<br />", "", $descrizione);
+                        $descrizione = str_replace("\n", "", $descrizione);
                         $array[7] = $descrizione; #ABSTRACT
                         #richiamo della funzione per inserire le info del preprint all'interno del database
                         insert_preprints($array);

@@ -4,7 +4,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'mysql/db_update.php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'search/main_tabella.php';
 ?>
 
-<div style="float: left">
+<div style="float: right">
     <?php
     print_r(" Login: ");
     print_r($_SESSION['nome']);
@@ -17,9 +17,6 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'search/main_tabella
     <form name="f1" action="arXiv_panel.php" method="POST">
         <input type="submit" name="botton" value="arXiv panel" id="bottone_keyword" class="bottoni">
     </form>
-</div>
-<div style="float: right">
-    <br/><br/>
 </div>
 <script>
     $(document).ready(function () {

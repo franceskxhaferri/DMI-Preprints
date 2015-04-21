@@ -3,7 +3,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'mysql/db_select.php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'search/main_tabella.php';
 ?>
 
-<div style="float: left">
+<div style="float: right">
     <?php
     print_r(" Login: ");
     print_r($_SESSION['nome']);
@@ -17,10 +17,6 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'search/main_tabella
 	    <input type="submit" name="bottoni2" value="arXiv approved preprints" id="bottone_keyword" class="bottoni"/>
     	</form>
 </div>
-<div style="float: right">
-    <br/>
-</div>
-
 <script>
     $(document).ready(function() {
         $("button").click(function(event) {

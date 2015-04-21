@@ -69,7 +69,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="div_menu_ricerca" class="contenitore"><center><br/><h2>AUTHOR LIST</h2></center>
+                <br/><div><center><br/><h2>AUTHOR LIST</h2></center>
                     <center><table>
                             <tr><form name="f1" action="arXiv_panel.php" method="POST"><td align="right">Go to arXiv panel&nbsp&nbsp&nbsp</td>
                                 <td><input type="submit" name="bottoni7" value="Back" id="bottone_keyword" class="bottoni"></td><td><label for="insert">&nbsp&nbsp&nbsp&nbspInsert?</label></td></form></tr>
@@ -77,10 +77,10 @@
 
                             <form name="f2" action="authors_list.php" method="POST"><tr><td align="right">Add author to list or search by name&nbsp&nbsp&nbsp</td><td><input type="submit" name="bottoni8" value="Insert / Search" id="bottone_keyword" class="bottoni"></td><td align="center">&nbsp&nbsp&nbsp&nbsp<input type="checkbox" name="insert" value="1" checked/></td></tr>
                                 <tr align="center"><td colspan="3"><br/><textarea style="width:100%; height:16px" name="txt1" id="textbox" class="textbox" placeholder="Author name(Use ' , ' to insert/search more authors)" autofocus></textarea></td></tr></form>
-                                                                                                                                    
-                                                                                                                                </table></center>
-                                                                                                                        </div>
-                                                                                                                        <div>
+                                                                                                                                                                            
+                                                                                                                                                                        </table></center>
+                                                                                                                                                                </div>
+                                                                                                                                                                <div>
                     <?php
                     #importo file per utilizzare funzioni...
                     include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/check_nomi_data.php');

@@ -52,7 +52,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="div_menu_ricerca" class="contenitore"><center><br/><h2>ARXIV PANEL</h2></center><a style="color:#007897;" href="" title="Guide">Help</a><br/><br/><br/>
+                <br/><div align="center"><center><br/><h2>ARXIV PANEL</h2></center><a style="color:#007897;" href="" title="Guide">Help</a><br/><br/>
                     <center><table>
                             <tr><form name="f1" action="reserved.php" method="POST">
                                 <td align="right" style="width:350px;">Go to reserved area&nbsp&nbsp&nbsp</td>
@@ -87,7 +87,7 @@
                                 <td align="right" style="width:500px;">Download all from arXiv, this overwrites data and take several time!&nbsp&nbsp&nbsp</td>
                                 <td style="width:500px;"><input type="submit" name="bottoni3" value="Download from arXiv" id="bottone_keyword" class="bottoni"></td>
                             </form></tr>
-                        </table></center><br/><br/>
+                        </table></center><br/>
                     <?php
                     include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/arXiv_parsing.php');
                     include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/check_nomi_data.php');
@@ -182,7 +182,7 @@
                         echo " LAST UPDATE: " . $data;
                     }
                     if ((isset($_POST['bottoni']) or isset($_POST['bottoni3']))and ( $nl != 0)) {
-                        echo "<br/><br/><center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'>&#8593; top of page</a></center>";
+                        echo "<br/><br/><center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'>&#8593; top of page</a></center><br/>";
                     }
                 } else {
                     echo "<center><br/>ACCESS DENIED!</center>";

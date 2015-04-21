@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generato il: Apr 10, 2015 alle 13:48
--- Versione del server: 5.5.41-0ubuntu0.14.04.1
--- Versione PHP: 5.5.9-1ubuntu4.7
+-- Generato il: Apr 21, 2015 alle 23:04
+-- Versione del server: 5.5.43-0ubuntu0.14.04.1
+-- Versione PHP: 5.5.9-1ubuntu4.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `DATA_ULTIMO_LANCIO` (
 --
 
 INSERT INTO `DATA_ULTIMO_LANCIO` (`data`) VALUES
-('2015-04-10 13:47');
+('2015-04-21 22:54');
 
 -- --------------------------------------------------------
 
@@ -140,7 +140,7 @@ CREATE TABLE IF NOT EXISTS `sessione_data` (
 --
 
 INSERT INTO `sessione_data` (`data`) VALUES
-('20150410');
+('20150421');
 
 -- --------------------------------------------------------
 

@@ -65,12 +65,11 @@
                                         <a href="reserved.php" class="current-page-item">Reserved Area</a>
                                     </nav>
                                 </header>
-
                             </div>
                         </div>
                     </div>
                 </div>
-                <div id="div_menu_ricerca" class="contenitore"><center><br/><h2>ARCHIVED PREPRINTS</h2></center>
+                <div><center><br/><br/><h2>ARCHIVED PREPRINTS</h2></center>
                 </div><center>
                 <table>
                     <tr><form name="f1" action="view_preprints.php?p=1" method="POST">
@@ -91,7 +90,7 @@
             if (sessioneavviata() == True) {
                 echo "<br/><br/><center>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTION CAN'T BE USED IN THIS MOMENT!</center><br/>";
             } else {
-                echo "<br/><br/><center><a style='text-decoration: none;' href='javascript:FinePagina()'>&#8595; end of page</a></center><center><div><br/><br/><h2>preprints list</h2><hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'><br/>  ";
+                echo "<br/><center><a style='text-decoration: none;' href='javascript:FinePagina()'>&#8595; end of page</a></center><center><div><br/><br/><h2>preprints list</h2>";
                 if (isset($_GET['c'])) {
                     leggipreprintarchiviati();
                 } else {

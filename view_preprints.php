@@ -75,7 +75,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="div_menu_ricerca" class="contenitore"><center><br/><h2>APPROVED PREPRINTS</h2></center>
+                <div><center><br/><br/><h2>APPROVED PREPRINTS</h2></center>
                     <?php
                     if ($_SESSION['logged_type'] === "user") {
                         echo "<h1>in this section are the preprints downloaded and controlled by arxiv.org</h1>";
@@ -95,16 +95,15 @@
                     if ($_SESSION['logged_type'] === "mod") {
                         echo "<tr><form name='f3' action='manual_edit.php' method='POST'>
                         <td align='right'>Manual editing for inserted preprint&nbsp&nbsp&nbsp</td>
-                        <td colspan='2'><input type='submit' name='bottoni2' value='Edit section' id='bottone_keyword' class='bottoni'/></td>
-                    </form></tr>";
+                        <td colspan='2'><input type='submit' name='bottoni2' value='Edit section' id='bottone_keyword' class='bottoni'/></td></form></tr>";
                     }
                     ?>
                     <tr><form name="f4" action="view_preprints.php" method="GET">
                         <td align="right">Filter by:
                             <label><input type="radio" name="f" value="author" checked>Author</label>
                             <label><input type="radio" name="f" value="category">Category</label>
-                            <label><input type="radio" name="f" value="year">Year
-                                &nbsp&nbsp&nbsp</label></td>
+                            <label><input type="radio" name="f" value="year">Year</label>
+                            <label><input type="radio" name="f" value="id">ID&nbsp&nbsp&nbsp</label></td>
                         <td><input type="submit" name="s" value="Apply" id="bottone_keyword" class="bottoni"/></td>
                         <td><input type="text" style="width:150px; height:16px" name="r" id="textbox" class="textbox" placeholder="Author name or part, etc." autofocus>
                             <input type="text" name="p" value="1"hidden></td>
@@ -115,14 +114,11 @@
             if (sessioneavviata() == True) {
                 echo "<br/><br/><center>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTION CAN'T BE USED IN THIS MOMENT!</center><br/>";
             } else {
-                echo "<br/><br/><center><a style='text-decoration: none;' href='javascript:FinePagina()'>&#8595; end of page</a></center><center><div><br/><br/><h2>preprints list</h2>";
+                echo "<br/><center><a style='text-decoration: none;' href='javascript:FinePagina()'>&#8595; end of page</a></center><center><div><br/>";
                 if (isset($_GET['s'])) {
-                    $f = strtoupper($_GET['f']);
-                    echo "SEARCH RESULTS FOR " . $f . ": " . $_GET['r'] . "<br/><br/><hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'><br/>";
                     filtropreprint();
                     echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'>&#8593; top of page</a></center><br/>";
                 } else {
-                    echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'><br/>";
                     filtropreprint();
                     echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'>&#8593; top of page</a></center><br/>";
                 }

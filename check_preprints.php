@@ -70,7 +70,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="div_menu_ricerca" class="contenitore"><center><br/><h2>CHECK PREPRINTS</h2></center>
+                <div><center><br/><br/><h2>CHECK PREPRINTS</h2></center>
                     <center><table>
                             <tr><td  align="right" style="width:300px;">Go to arXiv panel&nbsp&nbsp&nbsp</td>
                             <form name="f1" action="arXiv_panel.php" method="GET">
@@ -80,7 +80,7 @@
                             <form name="f2" action="check_preprints.php" method="GET">
                                 <td style="width:280px;"><input type="submit" name="bottoni5" value="Insert all" id="bottone_keyword" class="bottoni"></td>
                             </form></tr></table></center>
-                </div>
+                </div><br/>
                 <div>
                     <?php
                     include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/insert_remove_db.php');
@@ -88,7 +88,7 @@
                     if (sessioneavviata() == True) {
                         echo "<center>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE LIST CAN'T BE CHANGED IN THIS MOMENT!</center><br/>";
                     } else {
-                        echo "<br/><center><a style='text-decoration: none;' href='javascript:FinePagina()'>&#8595; end of page</a></center>";
+                        echo "<center><a style='text-decoration: none;' href='javascript:FinePagina()'>&#8595; end of page</a></center>";
                         #leggere cartella...
                         #base link
                         $base = "./arXiv/pdf_downloads/";
