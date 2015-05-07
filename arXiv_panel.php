@@ -146,8 +146,9 @@
                                     $dc1 = true;
                                 }
                             } else {
+                            	echo '<script type="text/javascript">alert("UPDATE SESSION IS ALREADY STARTED FROM OTHER ADMIN!");</script>';
+                            	$risul=true;
                             	#sessione già avviata
-                                echo "UPDATE SESSION IS ALREADY STARTED FROM OTHER ADMIN!<br/>";
                             }
                         }
                     }
@@ -187,15 +188,20 @@
                                     $dc2 = true;
                                 }
                             } else {
-                                echo "DOWNLOAD SESSION IS ALREADY STARTED FROM OTHER ADMIN!<br/>";
+                            	echo '<script type="text/javascript">alert("DOWNLOAD SESSION IS ALREADY STARTED FROM OTHER ADMIN!");</script>';
+                            	$risul=true;
                             }
                         }
                     }
                     #server arxiv down o server interno non connesso
                     if (!$sock = @fsockopen('www.arxiv.org', 80, $num, $error, 5)) {
+                    	echo '<script type="text/javascript">alert("INTERNAL SERVER OFFLINE OR ARVIX IS DOWN IN THIS MOMENT!");</script>';
                         echo 'INTERNAL SERVER OFFLINE OR ARVIX IS DOWN IN THIS MOMENT!<br/><br/>';
                     }
                     if (sessioneavviata() == True) {
+                    	if($risul!=true){
+                    		echo '<script type="text/javascript">alert("WARNING ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTIONS HAS BEEN BLOCKED!");</script>';
+                    	}
                         echo "WARNING ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTIONS HAS BEEN BLOCKED!";
                     } else {
                         #memorizzo in $data ultimo aggiornamento e la visualizzo

@@ -123,10 +123,6 @@
                 </table>
             </center>
             <?php
-            #controllo di altre sessioni attive
-            if (sessioneavviata() == True) {
-                echo "<br/><br/><center>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTION CAN'T BE USED IN THIS MOMENT!</center><br/>";
-            } else {
                 echo "<br/><center><a style='text-decoration: none;' href='javascript:FinePagina()'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8595;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><center><div><br/>";
                 if (isset($_GET['s'])) {
                     #funzione lettura e filtro preprint
@@ -137,7 +133,6 @@
                     filtropreprint();
                     echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><br/>";
                 }
-            }
         } else {
             echo '<script type="text/javascript">alert("ACCESS DENIED!");</script>';
             echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
