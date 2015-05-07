@@ -1,9 +1,22 @@
+<html>
+<head>
+<script type="text/javascript">
+		function confirmLogout()
+		{
+		   if(confirm("Exit?")){
+		   	logout();
+		   }else{
+		   	return true;
+		   }
+		}
+</script>
+</head>
+</body>
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'mysql/db_select.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'mysql/db_update.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'search/main_tabella.php';
 ?>
-
 <div style="float: right">
     <?php
     print_r(" Login: ");
@@ -13,7 +26,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'search/main_tabella
     print_r($_SESSION['logged_type']);
     ?>
         <br/>
-    <button onclick="logout()" id="button_logout" class="bottoni" style="color: red;">logout</button><br/>
+    <button onclick="return confirmLogout()" id="button_logout" class="bottoni" style="color: red;">logout</button><br/>
     <form name="f1" action="arXiv_panel.php" method="POST">
         <input type="submit" name="botton" value="arXiv panel" id="bottone_keyword" class="bottoni">
     </form>
@@ -64,3 +77,5 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'search/main_tabella
 <div id="cont_feedback">
 
 </div>
+</body>
+</html>

@@ -44,7 +44,11 @@
                 var h = window.screen.height;
                 window.scrollTo(w * h, w * h)
             }
-        </script>
+	function confirmDelete()
+	{
+	   return confirm("Are you sure?");
+	}
+</script>
     </head>
     <body>
         <?php
@@ -73,28 +77,23 @@
                     <center><table>
                             <tr><form name="f1" action="arXiv_panel.php" method="POST"><td align="right">Go to arXiv panel&nbsp&nbsp&nbsp</td>
                                 <td colspan="2"><input type="submit" name="bottoni7" value="Back" id="bottone_keyword" class="bottoni"></td></form></tr>
-                            <form name="f2" action="authors_list.php" method="POST"><tr><td align="right">Add author to list or search by name&nbsp&nbsp&nbsp</td><td><input type="submit" name="bottoni8" value="Insert / Search" id="bottone_keyword" class="bottoni"></td><td align="center"><label>&nbsp&nbsp&nbsp&nbspInsert?<input type="checkbox" name="insert" value="1" checked/></label></td></tr>
-                                <tr align="center"><td colspan="3"><br/><textarea style="width:100%; height:16px" name="txt1" id="textbox" class="textbox" placeholder="Author name(Use ' , ' to insert/search more authors)" autofocus></textarea></td></tr></form>
-                                                                                                                                                                            
-                                                                                                                                                                        </table></center>
+                            <form name="f2" action="authors_list.php" method="POST"><tr><td align="right">Add author to list or search by name&nbsp&nbsp&nbsp</td><td><input type="submit" name="bottoni8" value="Insert / Search" id="bottone_keyword" class="bottoni"></td><td><input type="search" autocomplete = "off" required name="txt1" id="textbox" class="textbox" placeholder="name1, name2, name..." autofocus></td><td align="center"><label>&nbsp&nbsp&nbsp&nbspInsert?<input type="checkbox" name="insert" value="1" checked/></label></td></tr>
+                                <tr align="center"></tr></form>                                                                                                                                        </table></center>
                                                                                                                                                                 </div>
                                                                                                                                                                 <div>
                     <?php
                     #importo file per utilizzare funzioni...
                     include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/check_nomi_data.php');
                     if (sessioneavviata() == True) {
-                        echo "<center>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE LIST CAN'T BE CHANGED IN THIS MOMENT!</center><br/>";
+                        echo "<center><br/><br/>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE LIST CAN'T BE CHANGED IN THIS MOMENT!</center><br/>";
                     } else {
-                        echo "<br/><center><a style='text-decoration: none;' href='javascript:FinePagina()'>&#8595; end of page</a></center><br/>";
+                    	echo "<center><br/><a style='text-decoration: none;' href='javascript:FinePagina()'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8595; &nbsp&nbsp&nbsp&nbsp&nbsp</a></center>";
+                    	echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
                         if (isset($_POST['bottoni8'])) {
-                            #controllo del campo testo vuoto
-                            if (empty($_POST['txt1'])) {
-                                echo "<center>FIELD NAME EMPTY!<br/><br/></center>";
-                            } else {
-                                $name = $_POST['txt1'];
-                                $insert = $_POST['insert'];
-                                aggiungiutente($name, $insert);
-                            }
+		                $name = $_POST['txt1'];
+		                $insert = $_POST['insert'];
+		                #funzione inserimento nuovi autori
+		                aggiungiutente($name, $insert);
                         }
                         #visualizzo lista utenti...	
                         $nomi = legginomi();
@@ -109,15 +108,16 @@
                             echo "<tr colspan='2'><td><label><input type='checkbox' name='" . $i . "' value='checked'/>$y.&nbsp&nbsp&nbsp" . $nomi[$i] . "</label></td></tr>";
                             $y++;
                         }
-                        echo "</table></center><br/><center><input type='submit' name='bottoni9' value='Remove author/s' id='bottone_keyword' class='bottoni'></center></form><br/>";
+                        echo "</table></center><br/><center><input type='submit' name='bottoni9' value='Remove author/s' id='bottone_keyword' class='bottoni' onclick='return confirmDelete()'></center></form><br/>";
                         if ($lunghezza == 0) {
+                            #richiamo funzione per corretto update successivo
                             aggiornanomi();
-                            echo "<center>NO AUTHORS INSIDE LIST!</center><br/>";
+                            echo '<script type="text/javascript">alert("No author inside list!");</script>';
                         }
                         if (isset($_POST['bottoni9'])) {
                             $k = 0;
                             $z = 0;
-                            #conto lunghezza array nomi
+                            #lunghezza array nomi
                             $lunghezza = count($nomi);
                             for ($j = 0; $j < $lunghezza; $j++) {
                                 $delete = $_POST[$j];
@@ -130,22 +130,23 @@
                                     $z++;
                                 }
                             }
-                            #scrivo i nomi sul file nomi.txt
+                            #scrittura dei nomi sul database
                             scrivinomi($array);
-                            #inserisco i nomi eliminati all'interno di una stringa per poi visualizzarla
+                            #inserisco i nomi eliminati all'interno di una stringa per poi visualizzarla all'utente
                             $nomieliminati = implode(", ", $array2);
                             if ($nomieliminati == "") {
-                                echo "<center>NO AUTHOR SELECTED!</center><br/>";
+                            	echo '<script type="text/javascript">alert("No author selected!");</script>';
                             } else {
-                                echo "<br/><center>&#171; " . $nomieliminati . " &#187; DELETED FROM LIST! PAGE WILL BEEN UPDATED BETWEEN 2 SECONDS!</center><br/><br/><br/>";
-                                echo '<META HTTP-EQUIV="Refresh" Content="2; URL=./authors_list.php">';
+                            	echo '<script type="text/javascript">alert("'.$nomieliminati.' deleted from list!");</script>';
+                                echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./authors_list.php">';
                             }
                         }
-                        echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'>&#8593; top of page</a></center><br/>";
+                        echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
+                        echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center>";
                     }
                 } else {
-                    echo "<center><br/>ACCESS DENIED!</center>";
-                    echo '<META HTTP-EQUIV="Refresh" Content="2; URL=./reserved.php">';
+                    echo '<script type="text/javascript">alert("ACCESS DENIED!");</script>';
+                    echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
                 }
             } else {
                 echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';

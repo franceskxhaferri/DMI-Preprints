@@ -59,6 +59,13 @@
                     $t = "Go to reserved area";
                     $rit = "reserved.php";
                 }
+                if($_GET['w'] != "0"){
+                    $view = 0;
+                    $upview = 1;
+                }else{
+                    $view = 1;
+                    $upview = 0;
+                }
                 ?>
                 <div id="header-wrapper">
                     <div class="container">
@@ -78,7 +85,7 @@
                 <div><center><br/><br/><h2>APPROVED PREPRINTS</h2></center>
                     <?php
                     if ($_SESSION['logged_type'] === "user") {
-                        echo "<h1>in this section are the preprints downloaded and controlled by arxiv.org</h1>";
+                        echo "<h1><center>in this section are the preprints downloaded and controlled by arxiv.org</center></h1><br/>";
                     }
                     ?>
                 </div><center>
@@ -88,7 +95,7 @@
                         <td colspan="2"><input type="submit" name="bottoni1" value="Back" id="bottone_keyword" class="bottoni"/></td>
                     </form></tr>
                     <tr><form name="f2" action="archived_preprints.php?p=1" method="POST">
-                        <td align="right">View archived preprints&nbsp&nbsp&nbsp</td>
+                        <td align="right">Archived preprint, contains old publications&nbsp&nbsp&nbsp</td>
                         <td colspan="2"><input type="submit" name="bottoni2" value="Archived preprints" id="bottone_keyword" class="bottoni"/></td>
                     </form></tr>
                     <?php
@@ -98,34 +105,42 @@
                         <td colspan='2'><input type='submit' name='bottoni2' value='Edit section' id='bottone_keyword' class='bottoni'/></td></form></tr>";
                     }
                     ?>
+                    <tr><form name="f5" action="view_preprints.php?p=1&w=<?php echo $view; ?>" method="POST">
+                        <td align="right">Enable/Disable on page view&nbsp&nbsp&nbsp</td>
+                        <td colspan="2"><input type="submit" name="w" value="Enable/Disable" id="bottone_keyword" class="bottoni"/></td>
+                    </form></tr>
                     <tr><form name="f4" action="view_preprints.php" method="GET">
+                    	<input type="text" name="p" value="1" hidden>
+                    	<input type="text" name="w" value="<?php echo $upview;?>" hidden>
                         <td align="right">Filter by:
                             <label><input type="radio" name="f" value="author" checked>Author</label>
                             <label><input type="radio" name="f" value="category">Category</label>
                             <label><input type="radio" name="f" value="year">Year</label>
                             <label><input type="radio" name="f" value="id">ID&nbsp&nbsp&nbsp</label></td>
                         <td><input type="submit" name="s" value="Apply" id="bottone_keyword" class="bottoni"/></td>
-                        <td><input type="text" style="width:150px; height:16px" name="r" id="textbox" class="textbox" placeholder="Author name or part, etc." autofocus>
-                            <input type="text" name="p" value="1"hidden></td>
+                        <td><input type="search" autocomplete = "off" style="width:160px; height:16px" name="r" id="textbox" class="textbox" placeholder="Author name or part, etc."></td>
                     </form></tr>
                 </table>
             </center>
             <?php
+            #controllo di altre sessioni attive
             if (sessioneavviata() == True) {
                 echo "<br/><br/><center>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTION CAN'T BE USED IN THIS MOMENT!</center><br/>";
             } else {
-                echo "<br/><center><a style='text-decoration: none;' href='javascript:FinePagina()'>&#8595; end of page</a></center><center><div><br/>";
+                echo "<br/><center><a style='text-decoration: none;' href='javascript:FinePagina()'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8595;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><center><div><br/>";
                 if (isset($_GET['s'])) {
+                    #funzione lettura e filtro preprint
                     filtropreprint();
-                    echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'>&#8593; top of page</a></center><br/>";
+                    echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'>&nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><br/>";
                 } else {
+                    #funzione lettura e filtro preprint
                     filtropreprint();
-                    echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'>&#8593; top of page</a></center><br/>";
+                    echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><br/>";
                 }
             }
         } else {
-            echo "<center><br/>ACCESS DENIED!</center>";
-            echo '<META HTTP-EQUIV="Refresh" Content="2; URL=./reserved.php">';
+            echo '<script type="text/javascript">alert("ACCESS DENIED!");</script>';
+            echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
         }
     } else {
         echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';

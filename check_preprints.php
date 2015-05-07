@@ -45,6 +45,16 @@
                 window.scrollTo(w * h, w * h)
             }
         </script>
+        <script type='text/javascript'>
+function confirmDelete()
+{
+   return confirm("Are you sure?");
+}
+function confirmInsert()
+{
+   return confirm("Insert all current preprint?");
+}
+</script>
     </head>
     <body>
         <?php
@@ -78,7 +88,7 @@
                             </form></tr>
                             <tr><td  align="right" style="width:300px;">Insert all current preprints into database&nbsp&nbsp&nbsp<br/></td>
                             <form name="f2" action="check_preprints.php" method="GET">
-                                <td style="width:280px;"><input type="submit" name="bottoni5" value="Insert all" id="bottone_keyword" class="bottoni"></td>
+                                <td style="width:280px;"><input type="submit" name="bottoni5" value="Insert all" id="bottone_keyword" class="bottoni" onclick='return confirmInsert()'></td>
                             </form></tr></table></center>
                 </div><br/>
                 <div>
@@ -86,9 +96,10 @@
                     include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/insert_remove_db.php');
                     include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/arXiv_parsing.php');
                     if (sessioneavviata() == True) {
-                        echo "<center>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE LIST CAN'T BE CHANGED IN THIS MOMENT!</center><br/>";
+                        echo "<center><br/>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE LIST CAN'T BE CHANGED IN THIS MOMENT!</center><br/>";
                     } else {
-                        echo "<center><a style='text-decoration: none;' href='javascript:FinePagina()'>&#8595; end of page</a></center>";
+                    	echo "<center><a style='text-decoration: none;' href='javascript:FinePagina()'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8595;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center>";
+                        echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
                         #leggere cartella...
                         #base link
                         $base = "./arXiv/pdf_downloads/";
@@ -110,13 +121,14 @@
                                     if ((!is_dir($file)) & ($file != ".") & ($file != "..")) {
                                         $array[$i] = $file;
                                         echo "<tr colspan='2'><td><label><input type='checkbox' name='" . $i . "' value='checked'/>$y.&nbsp&nbsp&nbsp<a href=" . $base . $file . " onclick='window.open(this.href);return false' title='" . $file . "'>" . $file . "</a></label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>";
+                                        #recupero data creazione file
                                         $dat = date("Y-m-d H:i", filemtime($base . $file));
                                         echo "<td>&nbsp&nbsp&nbsp$dat</td></tr>";
                                         $i++;
                                         $y++;
                                     }
                                 }
-                                echo "</table></center><center><br/><input type='submit' name='bottoni6' value='Remove selected' id='bottone_keyword' class='bottoni'></center></form><br/>";
+                                echo "</table></center><center><br/><input type='submit' name='bottoni6' value='Remove selected' id='bottone_keyword' class='bottoni' onclick='return confirmDelete()'></center></form><br/>";
                                 #Chiudo la lettura della directory.
                                 closedir($directory_handle);
                             }
@@ -125,17 +137,18 @@
                         $lunghezza = $i;
                         $basedir2 = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . "arXiv/pdf/";
                         if (isset($_GET['bottoni5'])) {
+                            #controllo di eventuali preprint da inserire
                             if ($i == 0) {
-                                echo "<center>NO PREPRINTS!<br/><br/></center>";
+                                echo '<script type="text/javascript">alert("No preprint to insert!");</script>';
                             } else {
                                 #richiamo funzione per inserire i pdf all'interno del database
                                 insert_pdf();
-                                echo "<center>HAVE BEEN INCLUEDED " . $i . " PREPRINTS INTO DATABASE!</center><br/>";
                                 #aggiorno la pagina dopo 2 secondi
-                                echo '<META HTTP-EQUIV="Refresh" Content="2; URL=./check_preprints.php">';
+                                echo '<script type="text/javascript">alert("Have been included '.$i.' preprint into database!");</script>';
+                                echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./check_preprints.php">';
                             }
                         }
-                        #eliminazione pdf...
+                        #eliminazione pdf lettura cartella e ...
                         if (isset($_GET['bottoni6'])) {
                             for ($j = 0; $j < $lunghezza; $j++) {
                                 $percorso = $base . $array[$j];
@@ -162,22 +175,25 @@
                                     }
                                 }
                             }
+                            #controllo se sono stati selezionati preprint da rimuovere
                             if ($z == 0) {
-                                echo "<center>NOTHING SELECTED!<br/><br/></center>";
+                                echo '<script type="text/javascript">alert("No preprint selected!");</script>';
                             } else {
-                                echo "<center>" . $z . " SELECTED PREPRINTS REMOVED! PAGE WILL BEEN UPDATED BETWEEN 2 SECONDS!</center><br/><br/>";
-                                #aggiorno la pagina dopo 2 secondi
-                                echo '<META HTTP-EQUIV="Refresh" Content="2; URL=./check_preprints.php">';
+                                echo '<script type="text/javascript">alert("' . $z . ' selected preprint removed!");</script>';
+                                #aggiorno la pagina dopo 0 secondi
+                                echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./check_preprints.php">';
                             }
                         }
-                        echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'>&#8593; top of page</a></center><br/>";
+                        echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
+                        echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><br/>";
+                        #avviso per utente di nessun preprint
                         if ($i == 0) {
-                            echo "<center>NO PREPRINTS!<br/></center>";
+                            echo '<script type="text/javascript">alert("No new preprint to check!");</script>';
                         }
                     }
                 } else {
-                    echo "<center><br/>ACCESS DENIED!</center>";
-                    echo '<META HTTP-EQUIV="Refresh" Content="2; URL=./reserved.php">';
+                    echo '<script type="text/javascript">alert("ACCESS DENIED!");</script>';
+                    echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
                 }
             } else {
                 echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';

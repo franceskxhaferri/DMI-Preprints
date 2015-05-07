@@ -41,7 +41,11 @@
                 var h = window.screen.height;
                 window.scrollTo(w * h, w * h)
             }
-        </script>
+		function confirmDelete()
+		{
+		   return confirm("Remove all archived preprint?");
+		}
+	</script>
     </head>
     <body>
         <?php
@@ -52,7 +56,13 @@
         sec_session_start();
         if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] < 86400)) {
             if ($_SESSION['logged_type'] === "mod" or $_SESSION['logged_type'] === "user") {
-                //sessione moderatore
+                if ($_SESSION['logged_type'] === "mod") {
+                    $t = "Go to arXiv panel";
+                    $rit = "arXiv_panel.php";
+                } else {
+                    $t = "Go to reserved area";
+                    $rit = "reserved.php";
+                }
                 ?>
                 <div id="header-wrapper">
                     <div class="container">
@@ -72,15 +82,15 @@
                 <div><center><br/><br/><h2>ARCHIVED PREPRINTS</h2></center>
                 </div><center>
                 <table>
-                    <tr><form name="f1" action="view_preprints.php?p=1" method="POST">
-                        <td align="right">Go to current preprints&nbsp&nbsp&nbsp</td>
+                    <tr><form name="f1" action="<?php echo $rit ?>" method="POST">
+                        <td align="right"><?php echo $t ?>&nbsp&nbsp&nbsp</td>
                         <td><input type="submit" name="bottoni7" value="Back" id="bottone_keyword" class="bottoni"/></td>
                     </form></tr>
                     <?php
                     if ($_SESSION['logged_type'] === "mod") {
                         echo "<tr><form name='f2' action='archived_preprints.php' method='GET'>
                         <td align='right'>Delete all archived preprints from database&nbsp&nbsp&nbsp</td>
-                        <td><input type='submit' name='c' value='Remove all' id='bottone_keyword' class='bottoni'/></td>
+                        <td><input type='submit' name='c' value='Remove all' id='bottone_keyword' class='bottoni' onclick='return confirmDelete()'/></td>
                     </form></tr>";
                     }
                     ?>
@@ -90,17 +100,19 @@
             if (sessioneavviata() == True) {
                 echo "<br/><br/><center>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTION CAN'T BE USED IN THIS MOMENT!</center><br/>";
             } else {
-                echo "<br/><center><a style='text-decoration: none;' href='javascript:FinePagina()'>&#8595; end of page</a></center><center><div><br/><br/><h2>preprints list</h2>";
+                echo "<br/><center><a style='text-decoration: none;' href='javascript:FinePagina()'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8595;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><center><div><br/><br/><h2>preprints list</h2>";
                 if (isset($_GET['c'])) {
+                    #funzione gestione preprint archiviati
                     leggipreprintarchiviati();
                 } else {
+                    #funzione gestione preprint archiviati
                     leggipreprintarchiviati();
-                    echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'>&#8593; top of page</a></center><br/>";
+                    echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><br/>";
                 }
             }
         } else {
-            echo "<center><br/>ACCESS DENIED!</center>";
-            echo '<META HTTP-EQUIV="Refresh" Content="2; URL=./reserved.php">';
+            echo '<script type="text/javascript">alert("ACCESS DENIED!");</script>';
+            echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
         }
     } else {
         echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';

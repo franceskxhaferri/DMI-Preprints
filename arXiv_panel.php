@@ -27,6 +27,10 @@
                 var h = window.screen.height;
                 window.scrollTo(w * h, w * h)
             }
+		function confirmDownload()
+		{
+		   return confirm("Warning! this overwrite the existent data and will take more time, continue?");
+		}          
         </script>	
     </head>
     <body>
@@ -36,6 +40,16 @@
         if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] < 86400)) {
             if ($_SESSION['logged_type'] === "mod") {
                 //sessione moderatore
+                    #rilevazione del browser in uso
+		    $agent = $_SERVER['HTTP_USER_AGENT'];
+		    if(strlen(strstr($agent,"Firefox")) > 0 ){
+			$browser = 'Firefox';
+		    }
+		    if(strlen($browser)>0){
+		    	$view=0;
+		    }else{
+		    	$view=1;
+		    }
                 ?>
                 <div id="header-wrapper">
                     <div class="container">
@@ -58,9 +72,13 @@
                                 <td align="right" style="width:350px;">Go to reserved area&nbsp&nbsp&nbsp</td>
                                 <td style="width:350px;"><input type="submit" name="bottoni4" value="Back" id="bottone_keyword" class="bottoni"></td>
                             </form></tr>
-                            <tr><form name="f2" action="view_preprints.php?p=1" method="POST">
+                            <tr><form name="f2" action="view_preprints.php?p=1&w=<?php echo $view;?>" method="POST">
                                 <td align="right" style="width:350px;">Preprints checked and inserted on database&nbsp&nbsp&nbsp</td>
                                 <td style="width:350px;"><input type="submit" name="bottoni3" value="Approved section" id="bottone_keyword" class="bottoni"></td>
+                            </form></tr>
+                            <tr><form name="f2" action="archived_preprints.php?p=1" method="POST">
+                                <td align="right" style="width:350px;">Archived preprint, contains old publications&nbsp&nbsp&nbsp</td>
+                                <td style="width:350px;"><input type="submit" name="bottoni3" value="Archived section" id="bottone_keyword" class="bottoni"></td>
                             </form></tr>
                             <tr><form name="f3" action="authors_list.php" method="POST">
                                 <td align="right" style="width:350px;">List of authors that will be searched on arXiv&nbsp&nbsp&nbsp</td>
@@ -85,9 +103,9 @@
                             </form></tr>
                             <tr><form name="f8" action="arXiv_panel.php" method="POST">
                                 <td align="right" style="width:500px;">Download all from arXiv, this overwrites data and take several time!&nbsp&nbsp&nbsp</td>
-                                <td style="width:500px;"><input type="submit" name="bottoni3" value="Download from arXiv" id="bottone_keyword" class="bottoni"></td>
+                                <td style="width:500px;"><input type="submit" name="bottoni3" value="Download from arXiv" id="bottone_keyword" class="bottoni" onclick='return confirmDownload()'></td>
                             </form></tr>
-                        </table></center><br/>
+                        </table></center><br/><a style='text-decoration: none;' href='javascript:FinePagina()'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8595;&nbsp&nbsp&nbsp&nbsp&nbsp </a><br/><hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
                     <?php
                     include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/arXiv_parsing.php');
                     include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/check_nomi_data.php');
@@ -106,9 +124,8 @@
                                 $nl = count($array);
                                 if ($nl == 0) {
                                     chiudisessione();
-                                    echo "<center>NO AUTHORS INSIDE LIST!<br/><br/></center>";
+                                    echo '<script type="text/javascript">alert("No authors inside list!");</script>';
                                 } else {
-                                    echo "<center><a style='text-decoration: none;' href='javascript:FinePagina()'>&#8595;end of page</a></center><br/>AUTHORS UPDATE:<br/>";
                                     #inizializzo variabile per contare preprints scaricati...
                                     for ($i = 0; $i < $nl; $i++) {
                                         $nomi = $array[$i];
@@ -125,10 +142,12 @@
                                     azzerapreprint();
                                     #chiudo la sessione di download
                                     chiudisessione();
-                                    echo "<br/>ALL AUTHORS UPDATES COMPLETE! " . "NEW PREPRINTS DOWNLOADED &#8658; " . $j . "<br/>";
+                                    echo "<br/>PREPRINT DOWNLOADED: " . $j . "<br/><br/>";
+                                    $dc1 = true;
                                 }
                             } else {
-                                echo "UPDATE SESSION IS ALREADY STARTED FROM OTHER USER!<br/>";
+                            	#sessione già avviata
+                                echo "UPDATE SESSION IS ALREADY STARTED FROM OTHER ADMIN!<br/>";
                             }
                         }
                     }
@@ -145,9 +164,9 @@
                                 $nl = count($array);
                                 if ($nl == 0) {
                                     chiudisessione();
-                                    echo "<center>NO AUTHORS INSIDE LIST!<br/><br/></center>";
+                                    #nessun autore
+                                    echo '<script type="text/javascript">alert("No authors inside list!");</script>';
                                 } else {
-                                    echo "<center><a style='text-decoration: none;' href='javascript:FinePagina()'>&#8595;end of page</a></center><br/>AUTHORS UPDATE:<br/>";
                                     #inizializzo variabile per contare preprints scaricati...
                                     for ($i = 0; $i < $nl; $i++) {
                                         #inserisco un nome alla volta nella variabile $nomi
@@ -164,35 +183,48 @@
                                     azzerapreprint();
                                     #chiudo la sessione di download
                                     chiudisessione();
-                                    echo "<br/>ALL AUTHORS DOWNLOADS COMPLETE! " . "PREPRINTS DOWNLOADED &#8658; " . $j . "<br/>";
+                                    echo "<br/>PREPRINT DOWNLOADED: " . $j . "<br/><br/>";
+                                    $dc2 = true;
                                 }
                             } else {
-                                echo "DOWNLOAD SESSION IS ALREADY STARTED FROM OTHER USER!<br/>";
+                                echo "DOWNLOAD SESSION IS ALREADY STARTED FROM OTHER ADMIN!<br/>";
                             }
                         }
                     }
+                    #server arxiv down o server interno non connesso
                     if (!$sock = @fsockopen('www.arxiv.org', 80, $num, $error, 5)) {
-                        echo 'SERVER OFFLINE OR ARVIX IS DOWN!<br/><br/>';
+                        echo 'INTERNAL SERVER OFFLINE OR ARVIX IS DOWN IN THIS MOMENT!<br/><br/>';
                     }
                     if (sessioneavviata() == True) {
                         echo "WARNING ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTIONS HAS BEEN BLOCKED!";
                     } else {
-                        #memorizzo in $data dell'ultimo aggiornamento e la visualizzo
+                        #memorizzo in $data ultimo aggiornamento e la visualizzo
                         $data = datastring();
                         echo " LAST UPDATE: " . $data;
+                        #update o download completato correttamente
+                        if ($dc1 == true){
+			    	echo '<script type="text/javascript">alert("Update complete!");</script>';
+			    }
+		    	if ($dc2 == true){
+		    		echo '<script type="text/javascript">alert("Download complete!");</script>';
+		    	}
                     }
-                    if ((isset($_POST['bottoni']) or isset($_POST['bottoni3']))and ( $nl != 0)) {
-                        echo "<br/><br/><center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'>&#8593; top of page</a></center><br/>";
-                    }
+                    echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
                 } else {
-                    echo "<center><br/>ACCESS DENIED!</center>";
-                    echo '<META HTTP-EQUIV="Refresh" Content="2; URL=./reserved.php">';
+                    #credenziali non mod
+                    echo '<script type="text/javascript">alert("ACCESS DENIED!");</script>';
+                    echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
                 }
             } else {
                 echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
             }
+            
             ?>
+            <center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center>
+            <?php
+            
+            ?>
+            <br/>
         </div>
-
     </body>
 </html>

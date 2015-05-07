@@ -27,6 +27,12 @@
             webshims.setOptions('forms-ext', {types: 'date'});
             webshims.polyfill('forms forms-ext');
         </script>
+	<script type='text/javascript'>
+		function confirmInsert()
+		{
+		   return confirm("All data are correct?");
+		}
+	</script>
     </head>
     <body>
         <?php
@@ -62,106 +68,67 @@
                             <td><input type="submit" name="bottoni7" value="Back" id="bottone_keyword" class="bottoni"/></td>
                         </tr>
                     </table>
-                </form></center>
+                </form></center><hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
             <?php
             if (sessioneavviata() == True) {
                 echo "<br/><br/><center>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTION CAN'T BE USED IN THIS MOMENT!</center><br/>";
             } else {
                 ?>
                 <form name="f2" action="manual_insert.php" method="POST" enctype="multipart/form-data">
-                    <center><div><br/><br/><h2>preprint informations</h2><h1>field with "*" are required</h1><br/><br>
+                    <center><div><br/><h2>preprint informations</h2><h1>field with "*" are required</h1><br/><br>
                             *id of pubblication<br/><br/>
-                            <textarea style="width:800px; height:16px" name="id" id="textbox" class="textbox" placeholder="example of id: 0000.0000v1" autofocus></textarea><br/><br/><br/>
+                            <textarea style="width:800px; height:16px" name="id" id="textbox" class="textbox" required placeholder="example of id: 0000.0000v1" autofocus></textarea><br/><br/><br/>
                             *data of pubblication<br/><br/>
-                            <textarea style="width:800px; height:16px" name="date" id="textbox" class="textbox" placeholder="example of data: 2011-12-30T10:37:35Z"></textarea><br/><br/><br/>
+                            <textarea style="width:800px; height:16px" name="date" id="textbox" class="textbox" required placeholder="example of data: 2011-12-30T10:37:35Z"></textarea><br/><br/><br/>
                             *preprint title<br/><br/>
-                            <textarea style="width:800px; height:16px" name="title" id="textbox" class="textbox" placeholder="example of title: The geometric..."></textarea><br/><br/><br/>
+                            <textarea style="width:800px; height:16px" name="title" id="textbox" class="textbox" required placeholder="example of title: The geometric..."></textarea><br/><br/><br/>
                             *authors name<br/><br/>
-                            <textarea style="width:800px; height:16px" name="author" id="textbox" class="textbox" placeholder="example of author: Mario Rossi, Luca..."></textarea><br/><br/><br/>
+                            <textarea style="width:800px; height:16px" name="author" id="textbox" class="textbox" required placeholder="example of author: Mario Rossi, Luca..."></textarea><br/><br/><br/>
                             journal reference<br/><br/>
                             <textarea style="width:800px; height:16px" name="journal" id="textbox" class="textbox" placeholder="example of Journal: Numer. Linear Algebra..."></textarea><br/><br/><br/>
                             comments<br/><br/>
                             <textarea style="width:800px; height:16px" name="comments" id="textbox" class="textbox" placeholder="example of comments: 10 pages..."></textarea><br/><br/><br/>
                             *arXiv category<br/><br/>
-                            <textarea style="width:800px; height:16px" name="category" id="textbox" class="textbox" placeholder="example of category: math.NA..."></textarea><br/><br/><br/>
+                            <textarea style="width:800px; height:16px" name="category" id="textbox" class="textbox" required placeholder="example of category: math.NA..."></textarea><br/><br/><br/>
                             *abstract<br/><br/>
-                            <textarea style="width:800px; height:300px" name="abstract" id="textbox" class="textbox" placeholder="example of abstract: The geometric..."></textarea><br/><br/><br/>
+                            <textarea style="width:800px; height:300px" name="abstract" id="textbox" class="textbox" required placeholder="example of abstract: The geometric..."></textarea><br/><br/><br/>
                             *PDF or other document file<br/>
                             <input type="hidden" name="MAX_FILE_SIZE" value="10000000"><br/>
-                            <input type="file" name="fileToUpload" id="fileToUpload"><br/><br/><br/><br/>
-                            <input type="submit" name="bottoni8" value="Insert preprint" id="bottone_keyword" class="bottoni"/><br/><br/><br/><br/></form>
+                            <input type="file" required name="fileToUpload" id="fileToUpload"><br/><br/>
+                            <input type="submit" name="bottoni8" value="Insert preprint" id="bottone_keyword" class="bottoni" onclick="return confirmInsert()"/><br/><br/></form>
                             <?php
                             $target_dir = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . "arXiv/upload/";
                             $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
                             if (isset($_POST['bottoni8'])) {
-                                $i = 8;
-                                if (empty($_POST['id'])) {
-                                    echo "INSERT ID!<br/><br/>";
-                                    $i--;
-                                }
-                                if (empty($_POST['title'])) {
-                                    echo "INSERT TITLE!<br/><br/>";
-                                    $i--;
-                                }
-                                if (empty($_POST['date'])) {
-                                    echo "INSERT DATE!<br/><br/>";
-                                    $i--;
-                                }
-                                if (empty($_POST['author'])) {
-                                    echo "INSERT AUTHOR!<br/><br/>";
-                                    $i--;
-                                }
-                                if (empty($_POST['journal'])) {
-                                    $info[4] = "No journal ref";
-                                } else {
-                                    $info[4] = $_POST['journal'];
-                                }
-                                if (empty($_POST['comments'])) {
-                                    $info[5] = "No journal ref";
-                                } else {
-                                    $info[5] = $_POST['comments'];
-                                }
-                                if (empty($_POST['category'])) {
-                                    echo "INSERT CATEGORY!<br/><br/>";
-                                    $i--;
-                                }
-                                if (empty($_POST['abstract'])) {
-                                    echo "INSERT ABSTRACT!<br/><br/>";
-                                    $i--;
-                                }
-                                if ($_FILES['fileToUpload']['size'] > 0) {
-                                    if ($i == 8) {
-                                        $info[0] = $_POST['id'];
-                                        $info[1] = $_POST['title'];
-                                        $info[2] = $_POST['date'];
-                                        $info[3] = $_POST['author'];
-                                        $info[6] = $_POST['category'];
-                                        $info[7] = $_POST['abstract'];
-                                        #richiamo della funzione per il versionamento dei preprints
-                                        version_preprint($info[0]);
-                                        #richiamo della funzione per inserire le info del preprint all'interno del database
-                                        insert_preprints($info);
-                                        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                                            $fileType = $_FILES["fileToUpload"]["type"];
-                                            insert_one_pdf($info[0], $fileType);
-                                            echo "PREPRINT " . $info[0] . " INSERTED CORRECTLY!<br/><br/>";
-                                        } else {
-                                            echo "SORRY, THERE WAS AN ERROR UPLOADING YOUR FILE!<br/><br/>";
-                                        }
-                                    }
-                                } else {
-                                    echo "FILE IS REQUIRED!<br/><br/>";
-                                }
+		                        $info[0] = $_POST['id'];
+		                        $info[1] = $_POST['title'];
+		                        $info[2] = $_POST['date'];
+		                        $info[3] = $_POST['author'];
+		                        $info[6] = $_POST['category'];
+		                        $info[7] = $_POST['abstract'];
+		                        #richiamo della funzione per il versionamento dei preprints
+		                        version_preprint($info[0]);
+		                        #richiamo della funzione per inserire le info del preprint all'interno del database
+		                        insert_preprints($info);
+		                        #upload del file selezionato
+		                        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+		                            $fileType = $_FILES["fileToUpload"]["type"];
+		                            #inserimento file nel database
+		                            insert_one_pdf($info[0], $fileType);
+		                            echo '<script type="text/javascript">alert("Preprint '.$info[0].' inserted correctly!");</script>';
+		                        } else {
+		                            echo '<script type="text/javascript">alert("Sorry, there was an error uploading your file!");</script>';
+		                        }
                             }
                         }
                     } else {
-                        echo "<center><br/>ACCESS DENIED!</center>";
-                        echo '<META HTTP-EQUIV="Refresh" Content="2; URL=./reserved.php">';
+                        echo '<script type="text/javascript">alert("ACCESS DENIED!");</script>';
+                        echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
                     }
                 } else {
                     echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
                 }
                 ?>
-            </div><br/><br/></center>
+            <hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;"></div><br/><br/></center>
     </body>
 </html>

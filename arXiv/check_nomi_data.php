@@ -80,10 +80,15 @@ function nomiprec($nome) {
     }
 }
 
-# funzione filtro lettura preprint
+# funzione filtro e lettura dei preprint
 
 function filtropreprint() {
-    echo "<br/><h2>preprint list</h2>";
+    #rilevazione del browser in uso
+    $agent = $_SERVER['HTTP_USER_AGENT'];
+    if(strlen(strstr($agent,"Firefox")) > 0 ){
+        $browser = 'Firefox';
+    }
+    echo "<h2>preprint list</h2>";
     echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
     $copia = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . "arXiv/pdf/";
     #definizione parametri di connessione al database
@@ -93,9 +98,13 @@ function filtropreprint() {
     $password_db = "1234"; // password
     $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
     mysql_select_db($db_monte, $db_connection);
+    #risultati visualizzati per pagina
     $risperpag = 5;
+    #recupero pagina
     $p = $_GET['p'];
+    #limite risultati
     $limit = $risperpag * $p - $risperpag;
+    #controllo se filtro é autori
     if ($_GET['f'] == "author") {
         $querytotale = mysql_query("SELECT * FROM PREPRINTS WHERE autori LIKE '%" . $_GET['r'] . "%' AND checked='1'");
         $ristot = mysql_num_rows($querytotale);
@@ -109,6 +118,7 @@ function filtropreprint() {
         $npag = ceil($ristot / $risperpag);
         $sql = "SELECT * FROM PREPRINTS WHERE autori LIKE '%" . $_GET['r'] . "%' AND checked='1' LIMIT " . $limit . "," . $risperpag . "";
         $result = mysql_query($sql) or die(mysql_error());
+    #controllo se filtro é categoria
     } else if ($_GET['f'] == "category") {
         $querytotale = mysql_query("SELECT * FROM PREPRINTS WHERE categoria LIKE '%" . $_GET['r'] . "%' AND checked='1'");
         $ristot = mysql_num_rows($querytotale);
@@ -122,6 +132,7 @@ function filtropreprint() {
         $npag = ceil($ristot / $risperpag);
         $sql = "SELECT * FROM PREPRINTS WHERE categoria LIKE '%" . $_GET['r'] . "%' AND checked='1' LIMIT " . $limit . "," . $risperpag . "";
         $result = mysql_query($sql) or die(mysql_error());
+    #controllo se filtro é anno
     } else if ($_GET['f'] == "year") {
         $querytotale = mysql_query("SELECT * FROM PREPRINTS WHERE data_pubblicazione LIKE '%" . $_GET['r'] . "%' AND checked='1'");
         $ristot = mysql_num_rows($querytotale);
@@ -135,6 +146,7 @@ function filtropreprint() {
         $npag = ceil($ristot / $risperpag);
         $sql = "SELECT * FROM PREPRINTS WHERE data_pubblicazione LIKE '%" . $_GET['r'] . "%' AND checked='1' LIMIT " . $limit . "," . $risperpag . "";
         $result = mysql_query($sql) or die(mysql_error());
+    #controllo se filtro é id
     } else if ($_GET['f'] == "id") {
         $querytotale = mysql_query("SELECT * FROM PREPRINTS WHERE id_pubblicazione='" . $_GET['r'] . "' AND checked='1'");
         $ristot = mysql_num_rows($querytotale);
@@ -157,40 +169,43 @@ function filtropreprint() {
         $result = mysql_query($sql) or die(mysql_error());
     }
     echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
+    #impostazione della paginazione dei risultati
     if ($ristot != 0) {
         if ($p != 1) {
             $t1 = $p - 1;
             $t2 = $p - 2;
             $t3 = $p - 3;
-            echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=1&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '"> &#8656 </a>';
+            echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=1&w='.$_GET['w'].'&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '"> &#8656 </a>';
             if ($p >= 3 && $t3 > 0) {
-                echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p - 3) . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '"> ' . " " . $t3 . " " . ' </a>';
+                echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p - 3) . '&w='.$_GET['w'].'&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '"> ' . " " . $t3 . " " . ' </a>';
             }
             if ($p >= 2 && $t2 > 0) {
-                echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p - 2) . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '"> ' . " " . $t2 . " " . ' </a>';
+                echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p - 2) . '&w='.$_GET['w'].'&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '"> ' . " " . $t2 . " " . ' </a>';
             }
-            echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p - 1) . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '"> ' . " " . $t1 . " " . ' </a>';
+            echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p - 1) . '&w='.$_GET['w'].'&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '"> ' . " " . $t1 . " " . ' </a>';
         }
         echo " " . $p . " ";
         if ($p != $npag) {
             $t4 = $p + 1;
             $t5 = $p + 2;
             $t6 = $p + 3;
-            echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p + 1) . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '"> ' . " " . $t4 . " " . ' </a>';
+            echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p + 1) . '&w='.$_GET['w'].'&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '"> ' . " " . $t4 . " " . ' </a>';
             if ($p < $npag && $t5 <= $npag) {
-                echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p + 2) . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '"> ' . " " . $t5 . " " . ' </a>';
+                echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p + 2) . '&w='.$_GET['w'].'&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '"> ' . " " . $t5 . " " . ' </a>';
             }
             if ($p < $npag && $t6 <= $npag) {
-                echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p + 3) . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '"> ' . " " . $t6 . " " . ' </a>';
+                echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p + 3) . '&w='.$_GET['w'].'&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '"> ' . " " . $t6 . " " . ' </a>';
             }
-            echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . $npag . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '"> &#8658 </a>';
+            echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . $npag . '&w='.$_GET['w'].'&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '"> &#8658 </a>';
         }
         echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
     }
     $i = $limit;
+    #recupero e visualizzazione dei campi della ricerca effettuata
     while ($row = mysql_fetch_array($result)) {
+    	echo "<div style='width:850px;'>";
         $i++;
-        echo "<div style='width:85%;'><h1>" . $i . ".<br/><br/>Id of pubblication:</h1><br/>" . $row['id_pubblicazione'] . "<br/><br/><br/>";
+        echo "<h1>" . $i . ".<br/><br/>Id of pubblication:</h1><br/>" . $row['id_pubblicazione'] . "<br/><br/><br/>";
         echo "<p><h1>Title:</h1><br/>" . stripslashes($row['titolo']) . "</p><br/>";
         echo "<p><h1>Date of pubblication:</h1><br/>" . stripslashes($row['data_pubblicazione']) . "</p><br/>";
         echo "<p><h1>Author/s:</h1><br/>" . stripslashes($row['autori']) . "</p><br/>";
@@ -198,36 +213,49 @@ function filtropreprint() {
         echo "<p><h1>Comments:</h1><br/>" . stripslashes($row['commenti']) . "</p><br/>";
         echo "<p><h1>Category:</h1><br/>" . stripslashes($row['categoria']) . "</p><br/>";
         echo "<p><h1>Abstract:</h1><br/>" . stripslashes($row['abstract']) . "</p><br/>";
-        echo "<a style='color:#007897;' href=./arXiv/pdf/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>PDF</a><br/>";
-        echo "</div><br/><hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
+        $na = $row['Filename'];
+        $na = substr($na, -3, 3);
+        #controllo se il file é un pdf
+	if($na != "pdf" or $_GET['w'] == "0"){
+		if($_GET['w'] == "0"){
+			echo "<h1>document:</h1><a style='color:#007897;' href=./arXiv/pdf/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>LINK</a><br/>(On page view is disabled)<br/><br/>";
+		}else{
+			echo "<h1>document:</h1><a style='color:#007897;' href=./arXiv/pdf/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>LINK</a><br/>(On page view disabled for this file)<br/><br/>";
+		}
+	}else{
+		#visualizzazione integrata del pdf
+		echo "<h1>pdf:</h1><embed style='display: block; border: 1px; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;' width='100%' height='600px' src='./arXiv/pdf/" . $row['Filename'] . "'>";
+	}
+        echo "</div><hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
     }
+    #impostazioni della navigazione per pagine
     if ($ristot != 0) {
         if ($p != 1) {
             $t1 = $p - 1;
             $t2 = $p - 2;
             $t3 = $p - 3;
-            echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=1&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '"> &#8656 </a>';
+            echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=1&w='.$_GET['w'].'&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '"> &#8656 </a>';
             if ($p >= 3 && $t3 > 0) {
-                echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p - 3) . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '"> ' . " " . $t3 . " " . ' </a>';
+                echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p - 3) . '&w='.$_GET['w'].'&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '"> ' . " " . $t3 . " " . ' </a>';
             }
             if ($p >= 2 && $t2 > 0) {
-                echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p - 2) . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '"> ' . " " . $t2 . " " . ' </a>';
+                echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p - 2) . '&w='.$_GET['w'].'&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '"> ' . " " . $t2 . " " . ' </a>';
             }
-            echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p - 1) . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '"> ' . " " . $t1 . " " . ' </a>';
+            echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p - 1) . '&w='.$_GET['w'].'&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '"> ' . " " . $t1 . " " . ' </a>';
         }
         echo " " . $p . " ";
         if ($p != $npag) {
             $t4 = $p + 1;
             $t5 = $p + 2;
             $t6 = $p + 3;
-            echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p + 1) . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '"> ' . " " . $t4 . " " . ' </a>';
-            if ($p < $npag && $t5 < $npag) {
-                echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p + 2) . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '"> ' . " " . $t5 . " " . ' </a>';
+            echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p + 1) . '&w='.$_GET['w'].'&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '"> ' . " " . $t4 . " " . ' </a>';
+            if ($p < $npag && $t5 <= $npag) {
+                echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p + 2) . '&w='.$_GET['w'].'&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '"> ' . " " . $t5 . " " . ' </a>';
             }
-            if ($p < $npag && $t6 < $npag) {
-                echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p + 3) . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '"> ' . " " . $t6 . " " . ' </a>';
+            if ($p < $npag && $t6 <= $npag) {
+                echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p + 3) . '&w='.$_GET['w'].'&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '"> ' . " " . $t6 . " " . ' </a>';
             }
-            echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . $npag . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '"> &#8658 </a>';
+            echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . $npag . '&w='.$_GET['w'].'&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '"> &#8658 </a>';
         }
         echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
     }
@@ -236,7 +264,7 @@ function filtropreprint() {
     mysql_close($db_connection);
 }
 
-#funzione lettura preprint archiviati
+#funzione lettura dei preprint archiviati
 
 function leggipreprintarchiviati() {
     $copia = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . "arXiv/pdf/";
@@ -255,6 +283,7 @@ function leggipreprintarchiviati() {
     echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
     echo "PREPRINT ARCHIVED: " . $ristot . "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
     $npag = ceil($ristot / $risperpag);
+    #impostazione della navigazione per pagine
     if ($ristot != 0) {
         if ($p != 1) {
             $t1 = $p - 1;
@@ -285,10 +314,12 @@ function leggipreprintarchiviati() {
         }
         echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
     }
+    #verifica se i preprint devono essere rimossi definitivamente
     if ($_GET['c'] != "Remove all") {
         $sql = "SELECT * FROM PREPRINTS_ARCHIVIATI WHERE checked='1' LIMIT " . $limit . "," . $risperpag . "";
         $result = mysql_query($sql) or die(mysql_error());
         $i = $limit;
+        #recupero info e visualizzazione
         while ($row = mysql_fetch_array($result)) {
             $i++;
             echo "<div style='width:85%;'><p><h1>" . $i . ".<br/><br/>Id of pubblication:</h1><br/>" . $row['id_pubblicazione'] . "</p><br/>";
@@ -301,11 +332,9 @@ function leggipreprintarchiviati() {
             echo "<p><h1>Abstract:</h1><br/>" . stripslashes($row['abstract']) . "</p>";
             echo "</div><hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
         }
+        #visualizzazione della navigazione per pagine
         if ($ristot != 0) {
             if ($p != 1) {
-                $t1 = $p - 1;
-                $t2 = $p - 2;
-                $t3 = $p - 3;
                 echo '<a style="color:#007897; text-decoration: none;" href="archived_preprints.php?p=1&r=' . $_GET['r'] . '"> &#8656 </a>';
                 if ($p >= 3 && $t3 > 0) {
                     echo '<a style="color:#007897; text-decoration: none;" href="archived_preprints.php?p=' . ($p - 3) . '&r=' . $_GET['r'] . '"> ' . " " . $t3 . " " . ' </a>';
@@ -317,9 +346,6 @@ function leggipreprintarchiviati() {
             }
             echo " " . $p . " ";
             if ($p != $npag) {
-                $t4 = $p + 1;
-                $t5 = $p + 2;
-                $t6 = $p + 3;
                 echo '<a style="color:#007897; text-decoration: none;" href="archived_preprints.php?p=' . ($p + 1) . '&r=' . $_GET['r'] . '"> ' . " " . $t4 . " " . ' </a>';
                 if ($p < $npag && $t5 <= $npag) {
                     echo '<a style="color:#007897; text-decoration: none;" href="archived_preprints.php?p=' . ($p + 2) . '&r=' . $_GET['r'] . '"> ' . " " . $t5 . " " . ' </a>';
@@ -332,12 +358,14 @@ function leggipreprintarchiviati() {
             echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
         }
     } else {
+    	#controllo di preprint da rimuovere
         if ($ristot != 0) {
             cancellapreprint();
-            echo '<META HTTP-EQUIV="Refresh" Content="2; URL=./archived_preprints.php?p=1">';
+            echo '<script type="text/javascript">alert("Preprints deleted from database!");</script>';
+            echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./archived_preprints.php?p=1">';
         } else {
             $limit = 0;
-            echo "NO PREPRINTS!<br/><br/>";
+            echo '<script type="text/javascript">alert("No archived preprint!");</script>';
         }
     }
     $x = $limit + 1;
@@ -432,10 +460,9 @@ function azzerapreprint() {
     mysql_close($db_connection);
 }
 
-#funzione che cerca se il nome è presente
+#funzione che cerca se il preprint se è presente
 
 function cercapreprint($id) {
-    #cerca se il nome se era stato gia cercato...
     $id = trim($id);
     #definizione parametri di connessione al database
     $hostname_db = "localhost";
@@ -566,7 +593,7 @@ function aggiungiutente($nome, $a) {
     #leggo i nuovi nomi e li inserisco in array...
     $array = legginomi();
     while (strpos($nome, "  ") !== FALSE) {
-        echo "<center>NAME NOT VALID! DETECTED CONSECUTIVE SPACE INSIDE FIELD NAME!</center><br/>";
+        echo '<script type="text/javascript">alert("NAME NOT VALID! DETECTED CONSECUTIVE SPACE INSIDE FIELD NAME!");</script>';
         return;
     }
     $array2 = explode(",", $nome);
@@ -582,17 +609,17 @@ function aggiungiutente($nome, $a) {
         $ris = cercanome($temp);
         if ($ris == False) {
             if ($a == 1) {
-                echo "<center>&#171; " . $temp . " &#187; INSERTED!</center><br/>";
                 #aggiorno i nomi se ci sono nomi da aggiungere...
                 scrivinomi($array);
+                echo '<script type="text/javascript">alert("' . $temp . ' inserted!");</script>';
             } else {
-                echo "<center>&#171; " . $temp . " &#187; NOT FOUND!</center><br/>";
+                echo '<script type="text/javascript">alert("' . $temp . ' not found!");</script>';
             }
         } else {
             if ($a == 1) {
-                echo "<center>&#171; " . $temp . " &#187; EXISTS!</center><br/>";
+                echo '<script type="text/javascript">alert("' . $temp . ' exists!");</script>';
             } else {
-                echo "<center>&#171; " . $temp . " &#187; FOUND!</center><br/>";
+                echo '<script type="text/javascript">alert("' . $temp . ' found!");</script>';
             }
         }
     }

@@ -54,7 +54,7 @@
             $data = $last_updated[0]['data'] . EOL . EOL;
             $totalResults = $feed->get_feed_tags($opensearch_ns, 'totalResults');
             #risultati recuperati per la query
-            print("<br/>SEARCH RESULTS FOR " . $nome . " &#8658; " . $totalResults[0]['data'] . EOL);
+            print("RESULTS FOR " . $nome . ": " . $totalResults[0]['data'] . EOL);
             $startIndex = $feed->get_feed_tags($opensearch_ns, 'startIndex');
             $itemsPerPage = $feed->get_feed_tags($opensearch_ns, 'itemsPerPage');
             $i = 1;
