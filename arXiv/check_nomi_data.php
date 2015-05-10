@@ -163,7 +163,7 @@ function filtropreprint() {
     } else {
         $querytotale = mysql_query("SELECT * FROM PREPRINTS WHERE autori LIKE '%" . $_GET['r'] . "%' AND checked='1'");
         $ristot = mysql_num_rows($querytotale);
-        echo "PREPRINT APPROVED: " . $ristot;
+        echo "PREPRINTS APPROVED: " . $ristot;
         $npag = ceil($ristot / $risperpag);
         $sql = "SELECT * FROM PREPRINTS WHERE autori LIKE '%" . $_GET['r'] . "%' AND checked='1' LIMIT " . $limit . "," . $risperpag . "";
         $result = mysql_query($sql) or die(mysql_error());
@@ -281,7 +281,7 @@ function leggipreprintarchiviati() {
     $querytotale = mysql_query("SELECT * FROM PREPRINTS_ARCHIVIATI WHERE checked='1'");
     $ristot = mysql_num_rows($querytotale);
     echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
-    echo "PREPRINT ARCHIVED: " . $ristot . "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
+    echo "PREPRINTS ARCHIVED: " . $ristot . "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
     $npag = ceil($ristot / $risperpag);
     #impostazione della navigazione per pagine
     if ($ristot != 0) {

@@ -63,6 +63,28 @@
         include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/check_nomi_data.php');
         include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/insert_remove_db.php');
         sec_session_start();
+	if ($_SESSION['logged_type'] === "mod") {
+		$nav = "<tr><form name='f2' action='archived_preprints.php' method='GET'>
+		<td align='right'>Delete all archived preprints from database&nbsp&nbsp&nbsp</td>
+		<td><input type='submit' name='c' value='Remove all' id='bottone_keyword' class='bottoni' onclick='return confirmDelete()'/></td>
+		</form></tr>";
+		$nav2= "<header id='header'>
+                                    <h1><a href='#' id='logo'>DMI Preprints</a></h1>
+                                    <nav id='nav'>
+                                        <a href='main.php'>preprint search</a>
+                                        <a href='reserved.php' class='current-page-item'>Reserved Area</a>
+                                    </nav>
+                                </header>";
+	}else{
+		$nav = "";
+		$nav2= "<header id='header'>
+                                    <h1><a href='#' id='logo'>DMI Preprints</a></h1>
+                                    <nav id='nav'>
+                                        <a href='main.php' class='current-page-item'>preprint search</a>
+                                        <a href='reserved.php'>Reserved Area</a>
+                                    </nav>
+                                </header>";
+	}
 	$t = "Go to approved preprints";
 	$rit = "view_preprints.php?p=1&w=".$view;
                 ?>
@@ -70,13 +92,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="12u">
-                                <header id="header">
-                                    <h1><a href="#" id="logo">DMI Preprints</a></h1>
-                                    <nav id="nav">
-                                        <a href="main.php">preprint search</a>
-                                        <a href="reserved.php" class="current-page-item">Reserved Area</a>
-                                    </nav>
-                                </header>
+                                <?php echo $nav2;?>
                             </div>
                         </div>
                     </div>
@@ -89,12 +105,7 @@
                         <td><input type="submit" name="bottoni7" value="Back" id="bottone_keyword" class="bottoni"/></td>
                     </form></tr>
                     <?php
-                    if ($_SESSION['logged_type'] === "mod") {
-                        echo "<tr><form name='f2' action='archived_preprints.php' method='GET'>
-                        <td align='right'>Delete all archived preprints from database&nbsp&nbsp&nbsp</td>
-                        <td><input type='submit' name='c' value='Remove all' id='bottone_keyword' class='bottoni' onclick='return confirmDelete()'/></td>
-                    </form></tr>";
-                    }
+                        echo $nav;
                     ?>
                 </table>
             </center>

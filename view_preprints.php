@@ -52,12 +52,33 @@
                 if ($_SESSION['logged_type'] === "mod") {
                     $t = "Go to arXiv panel";
                     $rit = "arXiv_panel.php";
+                    $nav = "<header id='header'>
+                                    <h1><a href='#' id='logo'>DMI Preprints</a></h1>
+                                    <nav id='nav'>
+                                        <a href='main.php'>preprint search</a>
+                                        <a href='reserved.php' class='current-page-item'>Reserved Area</a>
+                                    </nav>
+                                </header>";
                 } else if ($_SESSION['logged_type'] === "user") {
                     $t = "Go to reserved area";
                     $rit = "reserved.php";
+                    $nav = "<header id='header'>
+                                    <h1><a href='#' id='logo'>DMI Preprints</a></h1>
+                                    <nav id='nav'>
+                                        <a href='main.php' class='current-page-item'>preprint search</a>
+                                        <a href='reserved.php'>Reserved Area</a>
+                                    </nav>
+                                </header>";
                 } else {
                     $t = "Go to homepage";
                     $rit = "main.php";
+                    $nav = "<header id='header'>
+                                    <h1><a href='#' id='logo'>DMI Preprints</a></h1>
+                                    <nav id='nav'>
+                                        <a href='main.php' class='current-page-item'>preprint search</a>
+                                        <a href='reserved.php'>Reserved Area</a>
+                                    </nav>
+                                </header>";
                 }
                 if($_GET['w'] != "0"){
                     $view = 0;
@@ -71,13 +92,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="12u">
-                                <header id="header">
-                                    <h1><a href="#" id="logo">DMI Preprints</a></h1>
-                                    <nav id="nav">
-                                        <a href="main.php">preprint search</a>
-                                        <a href="reserved.php" class="current-page-item">Reserved Area</a>
-                                    </nav>
-                                </header>
+                                <?php echo $nav;?>
                             </div>
                         </div>
                     </div>

@@ -84,7 +84,7 @@
                                 <td style="width:350px;"><input type="submit" name="bottoni2" value="Authors section" id="bottone_keyword" class="bottoni"></td>
                             </form></tr>
                             <tr><form name="f4" action="manual_insert.php" method="POST">
-                                <td align="right" style="width:350px;">Insert manually one preprints&nbsp&nbsp&nbsp</td>
+                                <td align="right" style="width:350px;">Insert manually one preprint&nbsp&nbsp&nbsp</td>
                                 <td style="width:350px;"><input type="submit" name="bottoni3" value="Insert section" id="bottone_keyword" class="bottoni"></td>
                             </form></tr>
                             <tr><form name="f5" action="manual_edit.php" method="POST">
