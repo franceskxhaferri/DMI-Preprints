@@ -17,7 +17,6 @@
         <link rel="stylesheet" type="text/css" href="css/controlli.css">
         <script src="js/targetweb-modal-overlay.js"></script>
         <link href='css/targetweb-modal-overlay.css' rel='stylesheet' type='text/css'>
-        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
         <!--[if lte IE 9]><link rel="stylesheet" href="css/ie9.css" /><![endif]-->
         <!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
         <script src="http://cdn.jsdelivr.net/webshim/1.12.4/extras/modernizr-custom.js"></script>
@@ -31,6 +30,10 @@
 		function confirmInsert()
 		{
 		   return confirm("All data are correct?");
+		}
+		function confirmExit()
+		{
+		   return confirm("All unsaved information will be lost, continue?");
 		}
 	</script>
     </head>
@@ -65,7 +68,7 @@
                 </div><center><form name="f1" action="arXiv_panel.php" method="POST">
                     <table>
                         <tr><td align="right">Go to arXiv panel&nbsp&nbsp&nbsp</td>
-                            <td><input type="submit" name="bottoni7" value="Back" id="bottone_keyword" class="bottoni"/></td>
+                            <td><input type="submit" name="bottoni7" value="Back" id="bottone_keyword" class="bottoni" onclick="return confirmExit()"/></td>
                         </tr>
                     </table>
                 </form></center><hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
@@ -75,7 +78,7 @@
             } else {
                 ?>
                 <form name="f2" action="manual_insert.php" method="POST" enctype="multipart/form-data">
-                    <center><div><br/><h2>preprint informations</h2><h1>field with "*" are required</h1><br/><br>
+                    <center><div><br/><h2>preprint informations</h2><h1>field with "*" are required</h1><br/><input type="reset" name="reset" value="Reset"><br/><br/>
                             *id of pubblication<br/><br/>
                             <textarea style="width:800px; height:16px" name="id" id="textbox" class="textbox" required placeholder="example of id: 0000.0000v1" autofocus></textarea><br/><br/><br/>
                             *data of pubblication<br/><br/>
@@ -95,9 +98,10 @@
                             *PDF or other document file<br/>
                             <input type="hidden" name="MAX_FILE_SIZE" value="10000000"><br/>
                             <input type="file" required name="fileToUpload" id="fileToUpload"><br/><br/>
-                            <input type="submit" name="bottoni8" value="Insert preprint" id="bottone_keyword" class="bottoni" onclick="return confirmInsert()"/><br/><br/></form>
+                            <input type="submit" name="bottoni8" value="Insert preprint" id="bottone_keyword" class="bottoni" onclick="return confirmInsert()"/><br/><br/>
+                            </form>
                             <?php
-                            $target_dir = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . "arXiv/upload/";
+                            $target_dir = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints' . "/upload/";
                             $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
                             if (isset($_POST['bottoni8'])) {
 		                        $info[0] = $_POST['id'];

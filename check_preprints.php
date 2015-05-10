@@ -17,7 +17,6 @@
         <link rel="stylesheet" type="text/css" href="css/controlli.css">
         <script src="js/targetweb-modal-overlay.js"></script>
         <link href='css/targetweb-modal-overlay.css' rel='stylesheet' type='text/css'>
-        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
         <!--[if lte IE 9]><link rel="stylesheet" href="css/ie9.css" /><![endif]-->
         <!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
         <script type="text/javascript">
@@ -46,15 +45,15 @@
             }
         </script>
         <script type='text/javascript'>
-function confirmDelete()
-{
-   return confirm("Are you sure?");
-}
-function confirmInsert()
-{
-   return confirm("Insert all current preprint?");
-}
-</script>
+		function confirmDelete()
+		{
+		   return confirm("Remove selected preprints?");
+		}
+		function confirmInsert()
+		{
+		   return confirm("Insert selected preprints?");
+		}
+	</script>
     </head>
     <body>
         <?php
@@ -85,10 +84,6 @@ function confirmInsert()
                             <tr><td  align="right" style="width:300px;">Go to arXiv panel&nbsp&nbsp&nbsp</td>
                             <form name="f1" action="arXiv_panel.php" method="GET">
                                 <td style="width:280px;"><input type="submit" name="bottoni4" value="Back" id="bottone_keyword" class="bottoni"></td>
-                            </form></tr>
-                            <tr><td  align="right" style="width:300px;">Insert all current preprints into database&nbsp&nbsp&nbsp<br/></td>
-                            <form name="f2" action="check_preprints.php" method="GET">
-                                <td style="width:280px;"><input type="submit" name="bottoni5" value="Insert all" id="bottone_keyword" class="bottoni" onclick='return confirmInsert()'></td>
                             </form></tr></table></center>
                 </div><br/>
                 <div>
@@ -102,17 +97,16 @@ function confirmInsert()
                         echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
                         #leggere cartella...
                         #base link
-                        $base = "./arXiv/pdf_downloads/";
+                        $base = "./pdf_downloads/";
                         #Imposto la directory da leggere
-                        $directory = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . "arXiv/pdf_downloads/";
+                        $directory = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints' . "/pdf_downloads/";
                         echo "<form name='f3' action='check_preprints.php' id='f1' method='GET'><center><br/><h2>PREPRINTS LIST</h2><br/><table>";
                         #Apriamo una directory e leggiamone il contenuto.
                         if (is_dir($directory)) {
                             #Apro l'oggetto directory
                             if ($directory_handle = opendir($directory)) {
                                 #Scorro l'oggetto fino a quando non è termnato cioè false
-                                echo "<tr colspan='2'><td>Select all &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspName<br/>/ Select</td><td>&nbsp&nbsp&nbsp&nbsp&nbsptime of creation</td></tr>
-                            <tr colspan='3'><td><input type='checkbox' name='checkall' onclick='checkedAll(f1);'/></td></tr>";
+                                echo "<tr><td><input type='checkbox' name='checkall' onclick='checkedAll(f1);'/></td><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNAME:</td><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspCREATED:</td></tr>";
                                 $i = 0;
                                 $y = 1;
                                 while (($file = readdir($directory_handle)) !== false) {
@@ -120,7 +114,7 @@ function confirmInsert()
                                     #o dagli elementi . e .. lo visualizzo a schermo
                                     if ((!is_dir($file)) & ($file != ".") & ($file != "..")) {
                                         $array[$i] = $file;
-                                        echo "<tr colspan='2'><td><label><input type='checkbox' name='" . $i . "' value='checked'/>$y.&nbsp&nbsp&nbsp<a href=" . $base . $file . " onclick='window.open(this.href);return false' title='" . $file . "'>" . $file . "</a></label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>";
+                                        echo "<tr><td colspan='2'><label><input type='checkbox' name='" . $i . "' value='checked'/>$y.&nbsp&nbsp&nbsp<a href=" . $base . $file . " onclick='window.open(this.href);return false' title='" . $file . "'>" . $file . "</a></label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>";
                                         #recupero data creazione file
                                         $dat = date("Y-m-d H:i", filemtime($base . $file));
                                         echo "<td>&nbsp&nbsp&nbsp$dat</td></tr>";
@@ -128,27 +122,15 @@ function confirmInsert()
                                         $y++;
                                     }
                                 }
-                                echo "</table></center><center><br/><input type='submit' name='bottoni6' value='Remove selected' id='bottone_keyword' class='bottoni' onclick='return confirmDelete()'></center></form><br/>";
+                                echo "</table></center><center><br/><input type='submit' name='bottoni6' value='Remove selected' id='bottone_keyword' class='bottoni' onclick='return confirmDelete()'><input type='submit' name='bottoni7' value='Insert selected' id='bottone_keyword' class='bottoni' onclick='return confirmInsert()'></center></form><br/>";
                                 #Chiudo la lettura della directory.
                                 closedir($directory_handle);
                             }
                         }
                         $z = 0;
                         $lunghezza = $i;
-                        $basedir2 = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . "arXiv/pdf/";
-                        if (isset($_GET['bottoni5'])) {
-                            #controllo di eventuali preprint da inserire
-                            if ($i == 0) {
-                                echo '<script type="text/javascript">alert("No preprint to insert!");</script>';
-                            } else {
-                                #richiamo funzione per inserire i pdf all'interno del database
-                                insert_pdf();
-                                #aggiorno la pagina dopo 2 secondi
-                                echo '<script type="text/javascript">alert("Have been included '.$i.' preprint into database!");</script>';
-                                echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./check_preprints.php">';
-                            }
-                        }
-                        #eliminazione pdf lettura cartella e ...
+                        $basedir2 = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints' . "/pdf/";
+                        #eliminazione pdf, lettura cartella e ...
                         if (isset($_GET['bottoni6'])) {
                             for ($j = 0; $j < $lunghezza; $j++) {
                                 $percorso = $base . $array[$j];
@@ -177,18 +159,54 @@ function confirmInsert()
                             }
                             #controllo se sono stati selezionati preprint da rimuovere
                             if ($z == 0) {
-                                echo '<script type="text/javascript">alert("No preprint selected!");</script>';
+                                echo '<script type="text/javascript">alert("No preprints selected!");</script>';
                             } else {
-                                echo '<script type="text/javascript">alert("' . $z . ' selected preprint removed!");</script>';
+                                echo '<script type="text/javascript">alert("' . $z . ' preprints removed correctly!");</script>';
                                 #aggiorno la pagina dopo 0 secondi
                                 echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./check_preprints.php">';
                             }
                         }
+                        #inserimento pdf, lettura cartella e ...
+                        if (isset($_GET['bottoni7'])) {
+                            for ($j = 0; $j < $lunghezza; $j++) {
+                                $percorso = $base . $array[$j];
+                                $percorso2 = $basedir2 . $array[$j];
+                                $delete = $_GET[$j];
+                                if ($delete == "checked") {
+                                    $z++;
+                                    if (is_dir($directory)) {
+                                        if ($directory_handle = opendir($directory)) {
+                                            while (($file = readdir($directory_handle)) !== false) {
+                                                if ((!is_dir($file)) & ($file != ".") & ($file != "..")) {
+                                                    if ($file == $array[$j]) {
+                                                    	$idd = substr($file, 0, -4);
+                                                        #inserimento file nel database
+		                            		insert_one_pdf2($idd);
+                                                    }
+                                                }
+                                            }
+                                            #Chiudo la lettura della directory.
+                                            closedir($directory_handle);
+                                        }
+                                    }
+                                }
+                            }
+                            #controllo se sono stati selezionati preprint da rimuovere
+                            if ($z == 0) {
+                                echo '<script type="text/javascript">alert("No preprints selected!");</script>';
+                            } else {
+                                echo '<script type="text/javascript">alert("' . $z . ' preprints inserted correctly!");</script>';
+                                #aggiorno la pagina dopo 0 secondi
+                                echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./check_preprints.php">';
+                            }
+                        }
+                        
+                        
                         echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
                         echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><br/>";
                         #avviso per utente di nessun preprint
                         if ($i == 0) {
-                            echo '<script type="text/javascript">alert("No new preprint to check!");</script>';
+                            echo '<script type="text/javascript">alert("No preprints to be checked!");</script>';
                         }
                     }
                 } else {

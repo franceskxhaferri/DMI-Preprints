@@ -83,7 +83,7 @@
                         $pdf = $link['attribs']['']['href'] . ".pdf";
                         #download pdf...
                         $arcid1 = str_replace("/", "-", $arcid);
-                        $percorso = "./arXiv/pdf_downloads/" . $arcid1 . ".pdf";
+                        $percorso = "./pdf_downloads/" . $arcid1 . ".pdf";
                         #controllo della data...
                         $datapubb = trim($datapubbstring);
                         $datapubb = substr($datapubb, 0, 10);

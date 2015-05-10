@@ -90,7 +90,7 @@ function filtropreprint() {
     }
     echo "<h2>preprint list</h2>";
     echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
-    $copia = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . "arXiv/pdf/";
+    $copia = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints' . "/pdf/";
     #definizione parametri di connessione al database
     $hostname_db = "localhost";
     $db_monte = "dmipreprints"; //nome del database
@@ -109,7 +109,7 @@ function filtropreprint() {
         $querytotale = mysql_query("SELECT * FROM PREPRINTS WHERE autori LIKE '%" . $_GET['r'] . "%' AND checked='1'");
         $ristot = mysql_num_rows($querytotale);
         if ($ristot != 0) {
-            echo "RESULTS FOR " . strtoupper($_GET['f']) . " '" . ($_GET['r']) . "' &#8658 " . $ristot . "";
+            echo "RESULTS FOR " . strtoupper($_GET['f']) . " '" . ($_GET['r']) . "': " . $ristot . "";
         } else {
             echo "SEARCHED " . strtoupper($_GET['f']) . " '" . ($_GET['r']) . "' NOT FOUND!";
             echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
@@ -123,7 +123,7 @@ function filtropreprint() {
         $querytotale = mysql_query("SELECT * FROM PREPRINTS WHERE categoria LIKE '%" . $_GET['r'] . "%' AND checked='1'");
         $ristot = mysql_num_rows($querytotale);
         if ($ristot != 0) {
-            echo "RESULTS FOR " . strtoupper($_GET['f']) . " '" . ($_GET['r']) . "' &#8658 " . $ristot . "";
+            echo "RESULTS FOR " . strtoupper($_GET['f']) . " '" . ($_GET['r']) . "': " . $ristot . "";
         } else {
             echo "SEARCHED " . strtoupper($_GET['f']) . " '" . ($_GET['r']) . "' NOT FOUND!";
             echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
@@ -137,7 +137,7 @@ function filtropreprint() {
         $querytotale = mysql_query("SELECT * FROM PREPRINTS WHERE data_pubblicazione LIKE '%" . $_GET['r'] . "%' AND checked='1'");
         $ristot = mysql_num_rows($querytotale);
         if ($ristot != 0) {
-            echo "RESULTS FOR " . strtoupper($_GET['f']) . " '" . ($_GET['r']) . "' &#8658 " . $ristot . "";
+            echo "RESULTS FOR " . strtoupper($_GET['f']) . " '" . ($_GET['r']) . "': " . $ristot . "";
         } else {
             echo "SEARCHED " . strtoupper($_GET['f']) . " '" . ($_GET['r']) . "' NOT FOUND!";
             echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
@@ -218,13 +218,13 @@ function filtropreprint() {
         #controllo se il file é un pdf
 	if($na != "pdf" or $_GET['w'] == "0"){
 		if($_GET['w'] == "0"){
-			echo "<h1>document:</h1><a style='color:#007897;' href=./arXiv/pdf/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>LINK</a><br/>(On page view is disabled)<br/><br/>";
+			echo "<h1>document:</h1><br/><a style='color:#007897;' href=./pdf/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>LINK</a><br/>(On page view is disabled)";
 		}else{
-			echo "<h1>document:</h1><a style='color:#007897;' href=./arXiv/pdf/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>LINK</a><br/>(On page view disabled for this file)<br/><br/>";
+			echo "<h1>document:</h1><a style='color:#007897;' href=./pdf/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>LINK</a><br/>(On page view disabled for this file)";
 		}
 	}else{
 		#visualizzazione integrata del pdf
-		echo "<h1>pdf:</h1><embed style='display: block; border: 1px; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;' width='100%' height='600px' src='./arXiv/pdf/" . $row['Filename'] . "'>";
+		echo "<h1>pdf:</h1><embed style='display: block; border: 1px; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;' width='100%' height='600px' src='./pdf/" . $row['Filename'] . "'>";
 	}
         echo "</div><hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
     }

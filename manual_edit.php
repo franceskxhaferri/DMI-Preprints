@@ -17,7 +17,6 @@
         <link rel="stylesheet" type="text/css" href="css/controlli.css">
         <script src="js/targetweb-modal-overlay.js"></script>
         <link href='css/targetweb-modal-overlay.css' rel='stylesheet' type='text/css'>
-        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
         <!--[if lte IE 9]><link rel="stylesheet" href="css/ie9.css" /><![endif]-->
         <!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
         <script src="http://cdn.jsdelivr.net/webshim/1.12.4/extras/modernizr-custom.js"></script>
@@ -79,7 +78,7 @@ function confirmInsert()
                 </div><center>
                 <table>
                     <tr><form name="f1" action="arXiv_panel.php" method="POST"><td align="right" style='width:150px; height:16px'>Go to arXiv panel&nbsp&nbsp&nbsp</td>
-                        <td><input type="submit" name="bottoni7" value="Back" id="bottone_keyword" class="bottoni"/></td>
+                        <td><input type="submit" name="bottoni7" value="Back" id="bottone_keyword" class="bottoni" onclick="return confirmExit()"/></td>
                         </tr>
                         <tr><td colspan="2" align="center"><br/><a style="color:#007897;" href="./view_preprints.php?p=1&w=<?php echo $view;?>" onclick='window.open(this.href); return false' title="Go to preprints list">View from inserted preprints</a></tr>
                     </form></table>
@@ -89,7 +88,7 @@ function confirmInsert()
                 echo "<br/><center>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTION CAN'T BE USED IN THIS MOMENT!</center><br/>";
             } else {
             	echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
-                echo " <center><div><form name='f2' action='manual_edit.php' method='POST'>Insert ID of pubblication you want edit<br/><br/><input type='search' autocomplete = 'off' style='width:250px; height:16px' name='id' id='textbox' required='' class='textbox' placeholder='example of id: 0000.0000v1' autofocus/><br/>
+                echo " <center><div><form name='f2' action='manual_edit.php' method='POST'>Insert id of pubblication you want edit<br/><br/><input type='search' autocomplete = 'off' style='width:250px; height:16px' name='id' id='textbox' required='' class='textbox' placeholder='example of id: 0000.0000v1' autofocus/><br/>
                        <br/><input type='submit' name='bottoni8' value='Get preprint' id='bottone_keyword' class='bottoni'/><br/>
                        </form></div>
                        ";
@@ -109,9 +108,14 @@ function confirmInsert()
                         }
                 }
                 if ($var == True) {
-                    echo "
+                    echo "<script type='text/javascript'>
+				function confirmExit()
+				{
+				   return confirm('All unsaved changes will be lost, continue?');
+				}
+			</script>
                 <form name='f1' action='manual_edit.php' method='POST' enctype='multipart/form-data'>
-                    <center><div><br/><h2>preprint informations</h2><h1>field with '*' are required</h1><br/><br>
+                    <center><div><br/><h2>preprint informations</h2><h1>field with '*' are required</h1><br/><input type='reset' name='reset' value='Reset'><br/><br/>
 			    id of pubblication (not editable)<br/><br/>
                             <textarea readonly style='width:800px; height:16px' name='id' id='textbox' class='textbox' placeholder='example of id: 0000.0000v1'>" . $ris[0] . "</textarea><br/><br/><br/>
                             data of pubblication (not editable)<br/><br/>
@@ -131,10 +135,10 @@ function confirmInsert()
                             PDF / other document file <br/>
                             <input type='hidden' name='MAX_FILE_SIZE' value='10000000'><br/>
                             <input type='file' name='fileToUpload' id='fileToUpload'><br/><br/><br/>
-                            <div style='float:left; width:500px;'><input type='submit' name='bottoni9' value='Remove preprint' id='bottone_keyword' class='bottoni' onclick='return confirmDelete()'/></div>
-                            <div style='float:right; width:500px;'><input type='submit' name='bottoni10' value='Edit complete' id='bottone_keyword' class='bottoni' onclick='return confirmInsert()'/></div><br/><br/>
+                            <div style='float:left; width:600px;'><input type='submit' name='bottoni9' value='Remove preprint' id='bottone_keyword' class='bottoni' onclick='return confirmDelete()'/></div>
+                            <div style='float:right; width:600px;'><input type='submit' name='bottoni10' value='Edit complete' id='bottone_keyword' class='bottoni' onclick='return confirmInsert()'/></div><br/><br/>
                             </form>";
-                    $target_dir = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . "arXiv/upload/";
+                    $target_dir = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints' . "/upload/";
                     $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
                     if (isset($_POST['bottoni9'])) {
                         $id1 = $_POST['id'];

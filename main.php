@@ -17,7 +17,6 @@
         <link rel="stylesheet" type="text/css" href="css/controlli.css">
         <script src="js/targetweb-modal-overlay.js"></script>
         <link href='css/targetweb-modal-overlay.css' rel='stylesheet' type='text/css'>
-        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
         <!--[if lte IE 9]><link rel="stylesheet" href="css/ie9.css" /><![endif]-->
         <!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
 
@@ -30,7 +29,16 @@
 
     </head>
     <body>
-
+    <?php #rilevazione del browser in uso
+		    $agent = $_SERVER['HTTP_USER_AGENT'];
+		    if(strlen(strstr($agent,"Firefox")) > 0 ){
+			$browser = 'Firefox';
+		    }
+		    if(strlen($browser)>0){
+		    	$view=0;
+		    }else{
+		    	$view=1;
+		    }?>
         <script>
             function vistaAnno() {
                 $("#contenitore_dinamico").load("search/main_year.php", function() {
@@ -44,6 +52,10 @@
                     MathJax.Hub.Typeset();
                 });
             }
+            
+		function arXiv() {
+		    window.location.assign("view_preprints.php?p=1&w=<?php echo $view;?>")
+		}
 
             function visAbstract(id_paper) {
                 $("#contenuto_titolo_print").load("search/printTitlePrinter.php", {id: id_paper});
@@ -64,7 +76,6 @@
                                 <a href="reserved.php">Reserved Area</a>
                             </nav>
                         </header>
-
                     </div>
                 </div>
             </div>
@@ -79,12 +90,13 @@
                         <td>
                             <button id="bottone_keyword" class="bottoni" onclick="vistaKeyword()">search by keyword</button>
                         </td>
+                        <td>
+                            <button id="bottone_keyword" class="bottoni" onclick="arXiv()">arXiv preprints</button>
+                        </td>
                     </tr>
                 </table>
             </div>
-
         </div>
-
         <div id="contenitore_dinamico" class="contenitore">
         </div>
         <div id="modal1" class="trg-overlay hide small">
@@ -95,10 +107,7 @@
             </div>
             <a class="close-overlay">&#215;</a>
         </div>
-
         <footer>
-
         </footer>
-
     </body>
 </html>

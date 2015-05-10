@@ -17,7 +17,6 @@
         <link rel="stylesheet" type="text/css" href="css/controlli.css">
         <script src="js/targetweb-modal-overlay.js"></script>
         <link href='css/targetweb-modal-overlay.css' rel='stylesheet' type='text/css'>
-        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
         <!--[if lte IE 9]><link rel="stylesheet" href="css/ie9.css" /><![endif]-->
         <!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
         <script type="text/javascript">
@@ -46,7 +45,7 @@
             }
 	function confirmDelete()
 	{
-	   return confirm("Are you sure?");
+	   return confirm("Remove author/s?");
 	}
 </script>
     </head>
@@ -73,7 +72,7 @@
                         </div>
                     </div>
                 </div>
-                <br/><div><center><br/><h2>AUTHOR LIST</h2></center>
+                <br/><div><center><br/><h2>AUTHORS LIST</h2></center>
                     <center><table>
                             <tr><form name="f1" action="arXiv_panel.php" method="POST"><td align="right">Go to arXiv panel&nbsp&nbsp&nbsp</td>
                                 <td colspan="2"><input type="submit" name="bottoni7" value="Back" id="bottone_keyword" class="bottoni"></td></form></tr>
@@ -99,13 +98,12 @@
                         $nomi = legginomi();
                         #conto lunghezza array
                         $lunghezza = count($nomi);
-                        echo "<form name='f4' action='authors_list.php' id='f1' method='POST'><center><br/><h2>EDIT LIST</h2><table><br/>";
-                        echo "<tr><td>Select all <br/>/ Select</td><td>Name</td></tr>
-                    <tr colspan='2'><td><input type='checkbox' name='checkall' onclick='checkedAll(f1);'/></td></tr>";
+                        echo "<form name='f4' action='authors_list.php' id='f1' method='POST'><center><br/><h2>LIST</h2><table>";
+                        echo "<tr><td><input type='checkbox' name='checkall' onclick='checkedAll(f1);'/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNAME:</td></tr>";
                         #creazione della tabella html dei file all'interno di pdf_downloads
                         $y = 1;
                         for ($i = 0; $i < $lunghezza; $i++) {
-                            echo "<tr colspan='2'><td><label><input type='checkbox' name='" . $i . "' value='checked'/>$y.&nbsp&nbsp&nbsp" . $nomi[$i] . "</label></td></tr>";
+                            echo "<tr><td><label><input type='checkbox' name='" . $i . "' value='checked'/>$y.&nbsp&nbsp&nbsp" . $nomi[$i] . "</label></td></tr>";
                             $y++;
                         }
                         echo "</table></center><br/><center><input type='submit' name='bottoni9' value='Remove author/s' id='bottone_keyword' class='bottoni' onclick='return confirmDelete()'></center></form><br/>";

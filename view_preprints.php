@@ -17,7 +17,6 @@
         <link rel="stylesheet" type="text/css" href="css/controlli.css">
         <script src="js/targetweb-modal-overlay.js"></script>
         <link href='css/targetweb-modal-overlay.css' rel='stylesheet' type='text/css'>
-        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
         <!--[if lte IE 9]><link rel="stylesheet" href="css/ie9.css" /><![endif]-->
         <!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
         <script src="http://cdn.jsdelivr.net/webshim/1.12.4/extras/modernizr-custom.js"></script>
@@ -50,14 +49,15 @@
         include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/check_nomi_data.php');
         include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/insert_remove_db.php');
         sec_session_start();
-        if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] < 86400)) {
-            if ($_SESSION['logged_type'] === "mod" or $_SESSION['logged_type'] === "user") {
                 if ($_SESSION['logged_type'] === "mod") {
                     $t = "Go to arXiv panel";
                     $rit = "arXiv_panel.php";
-                } else {
+                } else if ($_SESSION['logged_type'] === "user") {
                     $t = "Go to reserved area";
                     $rit = "reserved.php";
+                } else {
+                    $t = "Go to homepage";
+                    $rit = "main.php";
                 }
                 if($_GET['w'] != "0"){
                     $view = 0;
@@ -84,8 +84,8 @@
                 </div>
                 <div><center><br/><br/><h2>APPROVED PREPRINTS</h2></center>
                     <?php
-                    if ($_SESSION['logged_type'] === "user") {
-                        echo "<h1><center>in this section are the preprints downloaded and controlled by arxiv.org</center></h1><br/>";
+                    if ($_SESSION['logged_type'] != "mod") {
+                        echo "<h1><center>in this section are the preprints that have been published by the authors of the department on arxiv.org</center></h1><br/>";
                     }
                     ?>
                 </div><center>
@@ -95,18 +95,18 @@
                         <td colspan="2"><input type="submit" name="bottoni1" value="Back" id="bottone_keyword" class="bottoni"/></td>
                     </form></tr>
                     <tr><form name="f2" action="archived_preprints.php?p=1" method="POST">
-                        <td align="right">Archived preprint, contains old publications&nbsp&nbsp&nbsp</td>
+                        <td align="right">Archived preprints, contains old publications&nbsp&nbsp&nbsp</td>
                         <td colspan="2"><input type="submit" name="bottoni2" value="Archived preprints" id="bottone_keyword" class="bottoni"/></td>
                     </form></tr>
                     <?php
                     if ($_SESSION['logged_type'] === "mod") {
                         echo "<tr><form name='f3' action='manual_edit.php' method='POST'>
-                        <td align='right'>Manual editing for inserted preprint&nbsp&nbsp&nbsp</td>
+                        <td align='right'>Manual editing for inserted preprints&nbsp&nbsp&nbsp</td>
                         <td colspan='2'><input type='submit' name='bottoni2' value='Edit section' id='bottone_keyword' class='bottoni'/></td></form></tr>";
                     }
                     ?>
                     <tr><form name="f5" action="view_preprints.php?p=1&w=<?php echo $view; ?>" method="POST">
-                        <td align="right">Enable/Disable on page view&nbsp&nbsp&nbsp</td>
+                        <td align="right">Enable/Disable on page view(recommended Google Chrome)&nbsp&nbsp&nbsp</td>
                         <td colspan="2"><input type="submit" name="w" value="Enable/Disable" id="bottone_keyword" class="bottoni"/></td>
                     </form></tr>
                     <tr><form name="f4" action="view_preprints.php" method="GET">
@@ -133,13 +133,7 @@
                     filtropreprint();
                     echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><br/>";
                 }
-        } else {
-            echo '<script type="text/javascript">alert("ACCESS DENIED!");</script>';
-            echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
-        }
-    } else {
-        echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
-    }
+
     ?>
 </div></center>
 </body>

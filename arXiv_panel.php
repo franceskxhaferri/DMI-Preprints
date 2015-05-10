@@ -17,7 +17,6 @@
         <link rel="stylesheet" type="text/css" href="css/controlli.css">
         <script src="js/targetweb-modal-overlay.js"></script>
         <link href='css/targetweb-modal-overlay.css' rel='stylesheet' type='text/css'>
-        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
         <!--[if lte IE 9]><link rel="stylesheet" href="css/ie9.css" /><![endif]-->
         <!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
         <script type="text/javascript">
@@ -77,7 +76,7 @@
                                 <td style="width:350px;"><input type="submit" name="bottoni3" value="Approved section" id="bottone_keyword" class="bottoni"></td>
                             </form></tr>
                             <tr><form name="f2" action="archived_preprints.php?p=1" method="POST">
-                                <td align="right" style="width:350px;">Archived preprint, contains old publications&nbsp&nbsp&nbsp</td>
+                                <td align="right" style="width:350px;">Archived preprints, contains old publications&nbsp&nbsp&nbsp</td>
                                 <td style="width:350px;"><input type="submit" name="bottoni3" value="Archived section" id="bottone_keyword" class="bottoni"></td>
                             </form></tr>
                             <tr><form name="f3" action="authors_list.php" method="POST">
@@ -85,11 +84,11 @@
                                 <td style="width:350px;"><input type="submit" name="bottoni2" value="Authors section" id="bottone_keyword" class="bottoni"></td>
                             </form></tr>
                             <tr><form name="f4" action="manual_insert.php" method="POST">
-                                <td align="right" style="width:350px;">Insert manually one preprint&nbsp&nbsp&nbsp</td>
+                                <td align="right" style="width:350px;">Insert manually one preprints&nbsp&nbsp&nbsp</td>
                                 <td style="width:350px;"><input type="submit" name="bottoni3" value="Insert section" id="bottone_keyword" class="bottoni"></td>
                             </form></tr>
                             <tr><form name="f5" action="manual_edit.php" method="POST">
-                                <td align="right" style="width:350px;">Manual editing for inserted preprint&nbsp&nbsp&nbsp</td>
+                                <td align="right" style="width:350px;">Manual editing for inserted preprints&nbsp&nbsp&nbsp</td>
                                 <td style="width:350px;"><input type="submit" name="bottoni3" value="Edit section" id="bottone_keyword" class="bottoni"></td>
                             </form></tr>
                             <tr><form name="f6" action="check_preprints.php" method="POST">
@@ -142,7 +141,7 @@
                                     azzerapreprint();
                                     #chiudo la sessione di download
                                     chiudisessione();
-                                    echo "<br/>PREPRINT DOWNLOADED: " . $j . "<br/><br/>";
+                                    echo "<br/>PREPRINTS DOWNLOADED: " . $j . "<br/><br/>";
                                     $dc1 = true;
                                 }
                             } else {
@@ -184,7 +183,7 @@
                                     azzerapreprint();
                                     #chiudo la sessione di download
                                     chiudisessione();
-                                    echo "<br/>PREPRINT DOWNLOADED: " . $j . "<br/><br/>";
+                                    echo "<br/>PREPRINTS DOWNLOADED: " . $j . "<br/><br/>";
                                     $dc2 = true;
                                 }
                             } else {

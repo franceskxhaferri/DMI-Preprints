@@ -17,7 +17,6 @@
         <link rel="stylesheet" type="text/css" href="css/controlli.css">
         <script src="js/targetweb-modal-overlay.js"></script>
         <link href='css/targetweb-modal-overlay.css' rel='stylesheet' type='text/css'>
-        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
         <!--[if lte IE 9]><link rel="stylesheet" href="css/ie9.css" /><![endif]-->
         <!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
         <script src="http://cdn.jsdelivr.net/webshim/1.12.4/extras/modernizr-custom.js"></script>
@@ -43,26 +42,29 @@
             }
 		function confirmDelete()
 		{
-		   return confirm("Remove all archived preprint?");
+		   return confirm("Remove all archived preprints?");
 		}
 	</script>
     </head>
     <body>
         <?php
+        #rilevazione del browser in uso
+		    $agent = $_SERVER['HTTP_USER_AGENT'];
+		    if(strlen(strstr($agent,"Firefox")) > 0 ){
+			$browser = 'Firefox';
+		    }
+		    if(strlen($browser)>0){
+		    	$view=0;
+		    }else{
+		    	$view=1;
+		    }
         #importo file per utilizzare funzioni...
         require_once $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'authorization/sec_sess.php';
         include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/check_nomi_data.php');
         include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/insert_remove_db.php');
         sec_session_start();
-        if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] < 86400)) {
-            if ($_SESSION['logged_type'] === "mod" or $_SESSION['logged_type'] === "user") {
-                if ($_SESSION['logged_type'] === "mod") {
-                    $t = "Go to arXiv panel";
-                    $rit = "arXiv_panel.php";
-                } else {
-                    $t = "Go to reserved area";
-                    $rit = "reserved.php";
-                }
+	$t = "Go to approved preprints";
+	$rit = "view_preprints.php?p=1&w=".$view;
                 ?>
                 <div id="header-wrapper">
                     <div class="container">
@@ -110,13 +112,6 @@
                     echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><br/>";
                 }
             }
-        } else {
-            echo '<script type="text/javascript">alert("ACCESS DENIED!");</script>';
-            echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
-        }
-    } else {
-        echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
-    }
     ?>
 </div></center>
 </body>

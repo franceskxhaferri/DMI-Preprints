@@ -76,8 +76,8 @@ function insert_pdf() {
     $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
     mysql_select_db($db_monte, $db_connection);
     $type = "document/pdf"; // impostato il tipo per un'pdf
-    $copia = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . "arXiv/pdf/";
-    $basedir = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . "arXiv/pdf_downloads/"; // � la directory da dove prelevare in automatico tutti i file in esso contenuti
+    $copia = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints' . "/pdf/";
+    $basedir = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints' . "/pdf_downloads/"; // � la directory da dove prelevare in automatico tutti i file in esso contenuti
     if ($handle = opendir($basedir)) {
         $i = 0;
         while ((false !== ($file = readdir($handle)))) {
@@ -111,8 +111,8 @@ function delete_pdf($id) {
     $db_monte = "dmipreprints"; //nome del database
     $username_db = "root"; //l'username
     $password_db = "1234"; // password
-    $copia = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . "arXiv/pdf/";
-    $basedir = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . "arXiv/upload/"; // � la directory da dove prelevare in automatico tutti i file in esso contenuti
+    $copia = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints' . "/pdf/";
+    $basedir = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints' . "/upload/"; // � la directory da dove prelevare in automatico tutti i file in esso contenuti
     #connessione al database...
     $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
     mysql_select_db($db_monte, $db_connection);
@@ -120,6 +120,51 @@ function delete_pdf($id) {
     $query = mysql_query($sql) or die(mysql_error());
     $row = mysql_fetch_array($query);
     unlink($copia . $row['Filename']);
+    #chiusura connessione al database
+    mysql_close($db_connection);
+}
+
+#funzione che inserisce il pdf selezionato all'interno dei database
+
+function insert_one_pdf2($id) {
+    #definizione parametri di connessione al database
+    $hostname_db = "localhost";
+    $db_monte = "dmipreprints"; //nome del database
+    $username_db = "root"; //l'username
+    $password_db = "1234"; // password
+    $type = "pdf/document";
+    $copia = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints' . "/pdf/";
+    $basedir = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints' . "/pdf_downloads/"; // � la directory da dove prelevare in automatico tutti i file in esso contenuti
+    #connessione al database...
+    $id = str_replace("-", "/", $id);
+    $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
+    mysql_select_db($db_monte, $db_connection);
+    $sql2 = "SELECT * FROM PREPRINTS WHERE id_pubblicazione='" . $id . "'";
+    $query2 = mysql_query($sql2) or die(mysql_error());
+    $row = mysql_fetch_array($query2);
+    if ($handle = opendir($basedir)) {
+        $i = 0;
+        while ((false !== ($file = readdir($handle)))) {
+            if ($file != '.' && $file != '..') {
+            	$idd = substr($file, 0, -4);
+            	$idd = str_replace("-", "/", $idd);
+            	if($row['id_pubblicazione'] == $idd){
+		        $var = fopen($basedir . $file, 'r');
+		        $var2 = fread($var, filesize($basedir . $file));
+		        $lunghezza = strlen($file);
+		        $var2 = addslashes($var2);
+		        $sql = "UPDATE PREPRINTS SET Bin_data= '" . $var2 . "', Filename= '" . $file . "', Filesize='" . filesize($basedir . $file) . "', Filetype='" . $type . "', checked='1' WHERE id_pubblicazione='" . $id . "'";
+		        $query = mysql_query($sql) or die(mysql_error());
+		        fclose($var);
+		        $i++;
+		        copy($basedir . $file, $copia . $file);
+		        unlink($basedir . $file);
+                }
+            }
+        }
+        #chiusura della directory...
+        closedir($handle);
+    }
     #chiusura connessione al database
     mysql_close($db_connection);
 }
@@ -132,8 +177,8 @@ function insert_one_pdf($id, $type) {
     $db_monte = "dmipreprints"; //nome del database
     $username_db = "root"; //l'username
     $password_db = "1234"; // password
-    $copia = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . "arXiv/pdf/";
-    $basedir = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . "arXiv/upload/"; // � la directory da dove prelevare in automatico tutti i file in esso contenuti
+    $copia = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints' . "/pdf/";
+    $basedir = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints' . "/upload/"; // � la directory da dove prelevare in automatico tutti i file in esso contenuti
     #connessione al database...
     $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
     mysql_select_db($db_monte, $db_connection);
@@ -193,7 +238,7 @@ function version_preprint($id1) {
     $db_monte = "dmipreprints"; #nome del database
     $username_db = "root"; #l'username
     $password_db = "1234"; #password
-    $basedir = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . "arXiv/pdf/";
+    $basedir = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints' . "/pdf/";
     #connessione al database...
     $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
     mysql_select_db($db_monte, $db_connection);
