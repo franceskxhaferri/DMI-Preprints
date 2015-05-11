@@ -13,9 +13,9 @@
 	*,*:before,*:after{-moz-box-sizing:content-box;-webkit-box-sizing:content-box;-o-box-sizing:content-box;-ms-box-sizing:content-box;box-sizing:content-box}
 
 	body {
-		font-size: 10pt;
+		font-size: 11pt;
 		background-color: #e3e9dc;
-		font-family: sans-serif;
+		font-family: Helvetica, Arial, sans-serif;
 		color: #5B5B5B;
 		line-height: 1.2em;
 	}

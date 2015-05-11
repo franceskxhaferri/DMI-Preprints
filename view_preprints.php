@@ -87,6 +87,12 @@
                     $view = 1;
                     $upview = 0;
                 }
+                if ($_SESSION['logged_type'] != "mod") {
+                        $str1 = "<h1><center>in this section are the preprints that have been published by the authors of the department on arxiv.org</center></h1><br/>";
+                        $str2 = "ARXIV PREPRINTS";
+                }else{
+                	$str2 = "APPROVED PREPRINTS";
+                }
                 ?>
                 <div id="header-wrapper">
                     <div class="container">
@@ -97,25 +103,25 @@
                         </div>
                     </div>
                 </div>
-                <div><center><br/><br/><h2>APPROVED PREPRINTS</h2></center>
+                <div><center><br/><br/><h2><?php echo $str2; ?></h2></center>
                     <?php
-                    if ($_SESSION['logged_type'] != "mod") {
-                        echo "<h1><center>in this section are the preprints that have been published by the authors of the department on arxiv.org</center></h1><br/>";
-                    }
+                    	echo $str1;
                     ?>
                 </div><center>
                 <table>
-                    <tr><form name="f1" action="<?php echo $rit ?>" method="POST">
+                    <tr><form name="f1" action="<?php echo $rit ?>" method="GET">
                         <td align="right"><?php echo $t ?>&nbsp&nbsp&nbsp</td>
-                        <td colspan="2"><input type="submit" name="bottoni1" value="Back" id="bottone_keyword" class="bottoni"/></td>
+                        <td colspan="2"><input type="submit" name="b1" value="Back" id="bottone_keyword" class="bottoni"/></td>
                     </form></tr>
-                    <tr><form name="f2" action="archived_preprints.php?p=1" method="POST">
+                    <tr><form name="f2" action="archived_preprints.php" method="GET">
+                    <input type="text" name="p" value="1" checked hidden/>
                         <td align="right">Archived preprints, contains old publications&nbsp&nbsp&nbsp</td>
-                        <td colspan="2"><input type="submit" name="bottoni2" value="Archived preprints" id="bottone_keyword" class="bottoni"/></td>
+                        <td colspan="2"><input type="submit" name="b2" value="Archived preprints" id="bottone_keyword" class="bottoni"/></td>
                     </form></tr>
+                    <tr style="height:30px;"><td align="center" colspan="3"><br/><h1>Advanced settings/search</h1></td></tr>
                     <tr><form name="f5" action="view_preprints.php?p=1&w=<?php echo $view; ?>" method="POST">
                         <td align="right">Enable/Disable on page view&nbsp&nbsp&nbsp</td>
-                        <td colspan="2"><input type="submit" name="w" value="Enable/Disable" id="bottone_keyword" class="bottoni"/></td>
+                        <td colspan="2"><input type="submit" name="w" value="Enable/Disable"/></td>
                     </form></tr>
                     <tr><form name="f4" action="view_preprints.php" method="GET">
                     	<input type="text" name="p" value="1" hidden>
@@ -125,8 +131,8 @@
                             <label><input type="radio" name="f" value="category">Category</label>
                             <label><input type="radio" name="f" value="year">Year</label>
                             <label><input type="radio" name="f" value="id">ID&nbsp&nbsp&nbsp</label></td>
-                        <td><input type="submit" name="s" value="Apply" id="bottone_keyword" class="bottoni"/></td>
-                        <td><input type="search" autocomplete = "off" style="width:160px; height:16px" name="r" id="textbox" class="textbox" placeholder="Author name or part, etc."></td>
+                        <td><input type="search" autocomplete = "off" style="width:175px;" name="r" placeholder="Author name or part, etc."></td>
+                        <td><input type="submit" name="s" value="Apply"/></td>
                     </form></tr>
                 </table>
             <?php

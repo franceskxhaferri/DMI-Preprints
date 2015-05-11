@@ -74,9 +74,9 @@
                 </div>
                 <br/><div><center><br/><h2>AUTHORS LIST</h2></center>
                     <center><table>
-                            <tr><form name="f1" action="arXiv_panel.php" method="POST"><td align="right">Go to arXiv panel&nbsp&nbsp&nbsp</td>
-                                <td colspan="2"><input type="submit" name="bottoni7" value="Back" id="bottone_keyword" class="bottoni"></td></form></tr>
-                            <form name="f2" action="authors_list.php" method="POST"><tr><td align="right">Add author to list or search by name&nbsp&nbsp&nbsp</td><td><input type="submit" name="bottoni8" value="Insert / Search" id="bottone_keyword" class="bottoni"></td><td><input type="search" autocomplete = "off" required name="txt1" id="textbox" class="textbox" placeholder="name1, name2, name..." autofocus></td><td align="center"><label>&nbsp&nbsp&nbsp&nbspInsert?<input type="checkbox" name="insert" value="1" checked/></label></td></tr>
+                            <tr><form name="f1" action="arXiv_panel.php" method="GET"><td align="right">Go to arXiv panel&nbsp&nbsp&nbsp</td>
+                                <td colspan="2"><input type="submit" name="b1" value="Back" id="bottone_keyword" class="bottoni"></td></form></tr>
+                            <form name="f2" action="authors_list.php" method="POST"><tr><td align="right">Add author to list or search by name&nbsp&nbsp&nbsp</td><td><input type="submit" name="b2" value="Insert / Search" id="bottone_keyword" class="bottoni"></td><td><input type="search" autocomplete = "off" required name="txt1" id="textbox" class="textbox" placeholder="name1, name2, name..." autofocus></td><td align="center"><label>&nbsp&nbsp&nbsp&nbspInsert?<input type="checkbox" name="insert" value="1" checked/></label></td></tr>
                                 <tr align="center"></tr></form>                                                                                                                                        </table></center>
                                                                                                                                                                 </div>
                                                                                                                                                                 <div>
@@ -88,7 +88,7 @@
                     } else {
                     	echo "<center><br/><a style='text-decoration: none;' href='javascript:FinePagina()'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8595; &nbsp&nbsp&nbsp&nbsp&nbsp</a></center>";
                     	echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
-                        if (isset($_POST['bottoni8'])) {
+                        if (isset($_POST['b2'])) {
 		                $name = $_POST['txt1'];
 		                $insert = $_POST['insert'];
 		                #funzione inserimento nuovi autori
@@ -106,13 +106,13 @@
                             echo "<tr><td><label><input type='checkbox' name='" . $i . "' value='checked'/>$y.&nbsp&nbsp&nbsp" . $nomi[$i] . "</label></td></tr>";
                             $y++;
                         }
-                        echo "</table></center><br/><center><input type='submit' name='bottoni9' value='Remove author/s' id='bottone_keyword' class='bottoni' onclick='return confirmDelete()'></center></form><br/>";
+                        echo "</table></center><br/><center><input type='submit' name='b3' value='Remove author/s' id='bottone_keyword' class='bottoni' onclick='return confirmDelete()'></center></form><br/>";
                         if ($lunghezza == 0) {
                             #richiamo funzione per corretto update successivo
                             aggiornanomi();
                             echo '<script type="text/javascript">alert("No author inside list!");</script>';
                         }
-                        if (isset($_POST['bottoni9'])) {
+                        if (isset($_POST['b3'])) {
                             $k = 0;
                             $z = 0;
                             #lunghezza array nomi

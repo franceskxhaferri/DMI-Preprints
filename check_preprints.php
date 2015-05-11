@@ -83,7 +83,7 @@
                     <center><table>
                             <tr><td  align="right" style="width:300px;">Go to arXiv panel&nbsp&nbsp&nbsp</td>
                             <form name="f1" action="arXiv_panel.php" method="GET">
-                                <td style="width:280px;"><input type="submit" name="bottoni4" value="Back" id="bottone_keyword" class="bottoni"></td>
+                                <td style="width:280px;"><input type="submit" name="b1" value="Back" id="bottone_keyword" class="bottoni"></td>
                             </form></tr></table></center>
                 </div><br/>
                 <div>

@@ -87,7 +87,7 @@
                                     </nav>
                                 </header>";
                 $t = "Go to approved preprints";
-		$rit = "view_preprints.php?p=1&w=".$view;
+		$rit = "view_preprints.php";
 	}
                 ?>
                 <div id="header-wrapper">
@@ -102,9 +102,10 @@
                 <div><center><br/><br/><h2>ARCHIVED PREPRINTS</h2></center>
                 </div><center>
                 <table>
-                    <tr><form name="f1" action="<?php echo $rit ?>" method="POST">
+                    <tr><form name="f1" action="<?php echo $rit ?>" method="GET">
                         <td align="right"><?php echo $t ?>&nbsp&nbsp&nbsp</td>
-                        <td><input type="submit" name="bottoni7" value="Back" id="bottone_keyword" class="bottoni"/></td>
+                        <td><input type="submit" name="b2" value="Back" id="bottone_keyword" class="bottoni"/></td>
+                        <input type="text" name="p" value="1" checked hidden/><input type="text" name="w" value="<?php echo $view;?>" checked hidden/>
                     </form></tr>
                     <?php
                         echo $nav;

@@ -67,48 +67,50 @@
                 </div>
                 <br/><div align="center"><center><br/><h2>ARXIV PANEL</h2></center><a style="color:#007897;" href="" title="Guide">Help</a><br/><br/>
                     <center><table>
-                            <tr><form name="f1" action="reserved.php" method="POST">
+                            <tr><form name="f1" action="reserved.php" method="GET">
                                 <td align="right" style="width:350px;">Go to reserved area&nbsp&nbsp&nbsp</td>
-                                <td style="width:350px;"><input type="submit" name="bottoni4" value="Back" id="bottone_keyword" class="bottoni"/></td>
+                                <td style="width:350px;"><input type="submit" name="b1" value="Back" id="bottone_keyword" class="bottoni"/></td>
                             </form></tr>
-                            <tr><form name="f2" action="view_preprints.php?p=1&w=<?php echo $view;?>" method="POST">
+                            <tr><form name="f2" action="view_preprints.php" method="GET">
+                            	<input type="text" name="p" value="1" checked hidden/><input type="text" name="w" value="<?php echo $view;?>" checked hidden/>
                                 <td align="right" style="width:350px;">Preprints checked and inserted on database&nbsp&nbsp&nbsp</td>
-                                <td style="width:350px;"><input type="submit" name="bottoni3" value="Approved section" id="bottone_keyword" class="bottoni"/></td>
+                                <td style="width:350px;"><input type="submit" name="b2" value="Approved section" id="bottone_keyword" class="bottoni"/></td>
                             </form></tr>
-                            <tr><form name="f2" action="archived_preprints.php?p=1" method="POST">
+                            <tr><form name="f3" action="archived_preprints.php" method="GET">
+                            <input type="text" name="p" value="1" checked hidden/>
                                 <td align="right" style="width:350px;">Archived preprints, contains old publications&nbsp&nbsp&nbsp</td>
-                                <td style="width:350px;"><input type="submit" name="bottoni3" value="Archived section" id="bottone_keyword" class="bottoni"/></td>
+                                <td style="width:350px;"><input type="submit" name="b3" value="Archived section" id="bottone_keyword" class="bottoni"/></td>
                             </form></tr>
-                            <tr><form name="f3" action="authors_list.php" method="POST">
+                            <tr><form name="f4" action="authors_list.php" method="GET">
                                 <td align="right" style="width:350px;">List of authors that will be searched on arXiv&nbsp&nbsp&nbsp</td>
-                                <td style="width:350px;"><input type="submit" name="bottoni2" value="Authors section" id="bottone_keyword" class="bottoni"/></td>
+                                <td style="width:350px;"><input type="submit" name="b4" value="Authors section" id="bottone_keyword" class="bottoni"/></td>
                             </form></tr>
-                            <tr><form name="f4" action="manual_insert.php" method="POST">
+                            <tr><form name="f5" action="manual_insert.php" method="GET">
                                 <td align="right" style="width:350px;">Insert manually one preprint&nbsp&nbsp&nbsp</td>
-                                <td style="width:350px;"><input type="submit" name="bottoni3" value="Insert section" id="bottone_keyword" class="bottoni"/></td>
+                                <td style="width:350px;"><input type="submit" name="b5" value="Insert section" id="bottone_keyword" class="bottoni"/></td>
                             </form></tr>
-                            <tr><form name="f5" action="manual_edit.php" method="POST">
+                            <tr><form name="f6" action="manual_edit.php" method="GET">
                                 <td align="right" style="width:350px;">Manual editing for inserted preprints&nbsp&nbsp&nbsp</td>
-                                <td style="width:350px;"><input type="submit" name="bottoni3" value="Edit section" id="bottone_keyword" class="bottoni"/></td>
+                                <td style="width:350px;"><input type="submit" name="b6" value="Edit section" id="bottone_keyword" class="bottoni"/></td>
                             </form></tr>
-                            <tr><form name="f6" action="check_preprints.php" method="POST">
+                            <tr><form name="f7" action="check_preprints.php" method="GET">
                                 <td align="right" style="width:350px;">
                                     Controls the preprints recently downloaded&nbsp&nbsp&nbsp</td>
-                                <td style="width:350px;"><input type="submit" name="bottoni1" value="Check section" id="bottone_keyword" class="bottoni"/></td>
-                            </form></tr>
-                            <tr><form name="f7" action="arXiv_panel.php" method="POST">
-                                <td align="right" style="width:350px;">Refresh from arXiv for new preprints&nbsp&nbsp&nbsp</td>
-                                <td style="width:350px;"><input type="submit" name="bottoni" value="Update from arXiv" id="bottone_keyword" class="bottoni"/></td>
+                                <td style="width:350px;"><input type="submit" name="b7" value="Check section" id="bottone_keyword" class="bottoni"/></td>
                             </form></tr>
                             <tr><form name="f8" action="arXiv_panel.php" method="POST">
+                                <td align="right" style="width:350px;">Refresh from arXiv for new preprints&nbsp&nbsp&nbsp</td>
+                                <td style="width:350px;"><input type="submit" name="b8" value="Update from arXiv" id="bottone_keyword" class="bottoni"/></td>
+                            </form></tr>
+                            <tr><form name="f9" action="arXiv_panel.php" method="POST">
                                 <td align="right" style="width:500px;">Download all from arXiv, this overwrites all data!&nbsp&nbsp&nbsp</td>
-                                <td style="width:500px;"><input type="submit" name="bottoni3" value="Download from arXiv" id="bottone_keyword" class="bottoni" onclick='return confirmDownload()'/></td>
+                                <td style="width:500px;"><input type="submit" name="b9" value="Download from arXiv" id="bottone_keyword" class="bottoni" onclick='return confirmDownload()'/></td>
                             </form></tr>
                         </table></center><br/><a style='text-decoration: none;' href='javascript:FinePagina()'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8595;&nbsp&nbsp&nbsp&nbsp&nbsp </a><br/><hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
                     <?php
                     include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/arXiv_parsing.php');
                     include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/check_nomi_data.php');
-                    if (isset($_POST['bottoni'])) {
+                    if (isset($_POST['b8'])) {
                         if ($sock = @fsockopen('www.arxiv.org', 80, $num, $error, 5)) {
                             if (sessioneavviata() == False) {
                                 #avvio della sessione
@@ -151,7 +153,7 @@
                             }
                         }
                     }
-                    if (isset($_POST['bottoni3'])) {
+                    if (isset($_POST['b9'])) {
                         if ($sock = @fsockopen('www.arxiv.org', 80, $num, $error, 5)) {
                             if (sessioneavviata() == False) {
                                 #avvio della sessione

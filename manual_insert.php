@@ -65,10 +65,10 @@
                     </div>
                 </div>
                 <div><center><br/><br/><h2>manual insertion</h2></center>
-                </div><center><form name="f1" action="arXiv_panel.php" method="POST">
+                </div><center><form name="f1" action="arXiv_panel.php" method="GET">
                     <table>
                         <tr><td align="right">Go to arXiv panel&nbsp&nbsp&nbsp</td>
-                            <td><input type="submit" name="bottoni7" value="Back" id="bottone_keyword" class="bottoni" onclick="return confirmExit()"/></td>
+                            <td><input type="submit" name="b1" value="Back" id="bottone_keyword" class="bottoni" onclick="return confirmExit()"/></td>
                         </tr>
                     </table>
                 </form></center><hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
@@ -80,21 +80,21 @@
                 <form name="f2" action="manual_insert.php" method="POST" enctype="multipart/form-data">
                     <center><div><br/><h2>preprint informations</h2><h1>field with "*" are required</h1><br/><input type="reset" name="reset" value="Reset"><br/><br/>
                             *id of pubblication<br/><br/>
-                            <textarea style="width:800px; height:16px" name="id" id="textbox" class="textbox" required placeholder="example of id: 0000.0000v1" autofocus></textarea><br/><br/><br/>
+                            <textarea style="width:65%; height:16px" name="id" id="textbox" class="textbox" required placeholder="example of id: 0000.0000v1" autofocus></textarea><br/><br/><br/>
                             *data of pubblication<br/><br/>
-                            <textarea style="width:800px; height:16px" name="date" id="textbox" class="textbox" required placeholder="example of data: 2011-12-30T10:37:35Z"></textarea><br/><br/><br/>
+                            <textarea style="width:65%; height:16px" name="date" id="textbox" class="textbox" required placeholder="example of data: 2011-12-30T10:37:35Z"></textarea><br/><br/><br/>
                             *preprint title<br/><br/>
-                            <textarea style="width:800px; height:16px" name="title" id="textbox" class="textbox" required placeholder="example of title: The geometric..."></textarea><br/><br/><br/>
+                            <textarea style="width:65%; height:16px" name="title" id="textbox" class="textbox" required placeholder="example of title: The geometric..."></textarea><br/><br/><br/>
                             *authors name<br/><br/>
-                            <textarea style="width:800px; height:16px" name="author" id="textbox" class="textbox" required placeholder="example of author: Mario Rossi, Luca..."></textarea><br/><br/><br/>
+                            <textarea style="width:65%; height:16px" name="author" id="textbox" class="textbox" required placeholder="example of author: Mario Rossi, Luca..."></textarea><br/><br/><br/>
                             journal reference<br/><br/>
-                            <textarea style="width:800px; height:16px" name="journal" id="textbox" class="textbox" placeholder="example of Journal: Numer. Linear Algebra..."></textarea><br/><br/><br/>
+                            <textarea style="width:65%; height:16px" name="journal" id="textbox" class="textbox" placeholder="example of Journal: Numer. Linear Algebra..."></textarea><br/><br/><br/>
                             comments<br/><br/>
-                            <textarea style="width:800px; height:16px" name="comments" id="textbox" class="textbox" placeholder="example of comments: 10 pages..."></textarea><br/><br/><br/>
+                            <textarea style="width:65%; height:16px" name="comments" id="textbox" class="textbox" placeholder="example of comments: 10 pages..."></textarea><br/><br/><br/>
                             *arXiv category<br/><br/>
-                            <textarea style="width:800px; height:16px" name="category" id="textbox" class="textbox" required placeholder="example of category: math.NA..."></textarea><br/><br/><br/>
+                            <textarea style="width:65%; height:16px" name="category" id="textbox" class="textbox" required placeholder="example of category: math.NA..."></textarea><br/><br/><br/>
                             *abstract<br/><br/>
-                            <textarea style="width:800px; height:300px" name="abstract" id="textbox" class="textbox" required placeholder="example of abstract: The geometric..."></textarea><br/><br/><br/>
+                            <textarea style="width:65%; height:300px" name="abstract" id="textbox" class="textbox" required placeholder="example of abstract: The geometric..."></textarea><br/><br/><br/>
                             *PDF or other document file<br/>
                             <input type="hidden" name="MAX_FILE_SIZE" value="10000000"><br/>
                             <input type="file" required name="fileToUpload" id="fileToUpload"><br/><br/>

@@ -37,7 +37,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'search/main_tabella
     ?>
 	<br/>
 	<button onclick="return confirmLogout()" id="button_logout" class="bottoni" style="color: red;">logout</button><br/>
-	<form name="f2" action="view_preprints.php?p=1&w=<?php echo $view;?>" method="POST">
+	<form name="f2" action="view_preprints.php" method="GET">
+		<input type="checkbox" name="p" value="1" checked hidden/><input type="checkbox" name="w" value="<?php echo $view;?>" checked hidden/>
 	    <input type="submit" name="bottoni2" value="arXiv approved preprints" id="bottone_keyword" class="bottoni"/>
     	</form>
 </div>
