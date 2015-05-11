@@ -113,15 +113,8 @@
                         <td align="right">Archived preprints, contains old publications&nbsp&nbsp&nbsp</td>
                         <td colspan="2"><input type="submit" name="bottoni2" value="Archived preprints" id="bottone_keyword" class="bottoni"/></td>
                     </form></tr>
-                    <?php
-                    if ($_SESSION['logged_type'] === "mod") {
-                        echo "<tr><form name='f3' action='manual_edit.php' method='POST'>
-                        <td align='right'>Manual editing for inserted preprints&nbsp&nbsp&nbsp</td>
-                        <td colspan='2'><input type='submit' name='bottoni2' value='Edit section' id='bottone_keyword' class='bottoni'/></td></form></tr>";
-                    }
-                    ?>
                     <tr><form name="f5" action="view_preprints.php?p=1&w=<?php echo $view; ?>" method="POST">
-                        <td align="right">Enable/Disable on page view(recommended Google Chrome)&nbsp&nbsp&nbsp</td>
+                        <td align="right">Enable/Disable on page view&nbsp&nbsp&nbsp</td>
                         <td colspan="2"><input type="submit" name="w" value="Enable/Disable" id="bottone_keyword" class="bottoni"/></td>
                     </form></tr>
                     <tr><form name="f4" action="view_preprints.php" method="GET">
@@ -136,9 +129,8 @@
                         <td><input type="search" autocomplete = "off" style="width:160px; height:16px" name="r" id="textbox" class="textbox" placeholder="Author name or part, etc."></td>
                     </form></tr>
                 </table>
-            </center>
             <?php
-                echo "<br/><center><a style='text-decoration: none;' href='javascript:FinePagina()'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8595;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><center><div><br/>";
+                echo "<br/><center><a style='text-decoration: none;' href='javascript:FinePagina()'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8595;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><center><br/>";
                 if (isset($_GET['s'])) {
                     #funzione lettura e filtro preprint
                     filtropreprint();
@@ -148,8 +140,7 @@
                     filtropreprint();
                     echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><br/>";
                 }
-
     ?>
-</div></center>
+</div>
 </body>
 </html>

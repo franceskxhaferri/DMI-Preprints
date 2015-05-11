@@ -80,22 +80,28 @@ function confirmInsert()
                     <tr><form name="f1" action="arXiv_panel.php" method="POST"><td align="right" style='width:150px; height:16px'>Go to arXiv panel&nbsp&nbsp&nbsp</td>
                         <td><input type="submit" name="bottoni7" value="Back" id="bottone_keyword" class="bottoni" onclick="return confirmExit()"/></td>
                         </tr>
-                        <tr><td colspan="2" align="center"><br/><a style="color:#007897;" href="./view_preprints.php?p=1&w=<?php echo $view;?>" onclick='window.open(this.href); return false' title="Go to preprints list">View from inserted preprints</a></tr>
                     </form></table>
             </center>
             <?php
             if (sessioneavviata() == True) {
                 echo "<br/><center>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTION CAN'T BE USED IN THIS MOMENT!</center><br/>";
             } else {
-            	echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
-                echo " <center><div><form name='f2' action='manual_edit.php' method='POST'>Insert id of pubblication you want edit<br/><br/><input type='search' autocomplete = 'off' style='width:250px; height:16px' name='id' id='textbox' required='' class='textbox' placeholder='example of id: 0000.0000v1' autofocus/><br/>
-                       <br/><input type='submit' name='bottoni8' value='Get preprint' id='bottone_keyword' class='bottoni'/><br/>
-                       </form></div>
-                       ";
-                $var = False;
+            	if (!isset($_GET['id'])){
+		    	echo "<center><br/><a style='color:#007897;' href='./view_preprints.php?p=1&w=<?php echo $view;?>' onclick='window.open(this.href); return false' title='Go to preprints list'>View from inserted preprints</a></center>";
+		    	echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
+		        echo " <center><div><form name='f2' action='manual_edit.php' method='POST'>Insert id of pubblication you want edit<br/><br/><input type='search' autocomplete = 'off' style='width:250px; height:16px' name='id' id='textbox' required='' class='textbox' placeholder='example of id: 0000.0000v1' autofocus/><br/>
+		               <br/><input type='submit' name='bottoni8' value='Get preprint' id='bottone_keyword' class='bottoni'/><br/>
+		               </form></div>
+		               ";
+		        $var = False;
+                }
                 echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
-                if (isset($_POST['bottoni8']) or isset($_POST['bottoni9']) or isset($_POST['bottoni10'])) {
-                    $id = $_POST['id'];
+                if (isset($_POST['bottoni8']) or isset($_POST['bottoni9']) or isset($_POST['bottoni10']) or isset($_GET['id'])) {
+                    if (empty($_POST['id'])){
+                    	$id = $_GET['id'];
+                    }else{
+                    	$id = $_POST['id'];
+                    }
                     #adattamento stringa
                     $id = trim($id);
                     	#funzione per recupero informazioni dell'preprint
@@ -149,6 +155,16 @@ function confirmInsert()
                         echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./manual_edit.php">';
                     }
                     if (isset($_POST['bottoni10'])) {
+                    	    if(empty($_POST['journal'])){
+                            	$info[4] = "No journal ref";	
+                            }else{
+                            	$info[4] = $_POST['journal'];
+                            }
+                            if(empty($_POST['comments'])){
+                            	$info[5] = "No journal ref";	
+                            }else{
+                            	$info[5] = $_POST['comments'];
+                            }
                             $info[0] = $_POST['id'];
                             $info[1] = $_POST['title'];
                             $info[2] = $_POST['data'];

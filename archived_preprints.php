@@ -75,6 +75,8 @@
                                         <a href='reserved.php' class='current-page-item'>Reserved Area</a>
                                     </nav>
                                 </header>";
+                $t = "Go to arXiv panel";
+		$rit = "arXiv_panel.php";
 	}else{
 		$nav = "";
 		$nav2= "<header id='header'>
@@ -84,9 +86,9 @@
                                         <a href='reserved.php'>Reserved Area</a>
                                     </nav>
                                 </header>";
+                $t = "Go to approved preprints";
+		$rit = "view_preprints.php?p=1&w=".$view;
 	}
-	$t = "Go to approved preprints";
-	$rit = "view_preprints.php?p=1&w=".$view;
                 ?>
                 <div id="header-wrapper">
                     <div class="container">

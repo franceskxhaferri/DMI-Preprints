@@ -104,6 +104,16 @@
                             $target_dir = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints' . "/upload/";
                             $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
                             if (isset($_POST['bottoni8'])) {
+                            		if(empty($_POST['journal'])){
+                            			$info[4] = "No journal ref";	
+                            		}else{
+                            			$info[4] = $_POST['journal'];
+                            		}
+                            		if(empty($_POST['comments'])){
+                            			$info[5] = "No journal ref";	
+                            		}else{
+                            			$info[5] = $_POST['comments'];
+                            		}
 		                        $info[0] = $_POST['id'];
 		                        $info[1] = $_POST['title'];
 		                        $info[2] = $_POST['date'];
