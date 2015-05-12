@@ -143,24 +143,24 @@
                         echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center>";
                     }
                 } else {
-		        #importo file per utilizzare funzioni...
-		        include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/check_nomi_data.php');
-		        #visualizzo lista utenti...	
-		        $nomi = legginomi();
-		        #conto lunghezza array
-		        $lunghezza = count($nomi);
-		        echo "<form name='f4' action='authors_list.php' id='f1' method='POST'><center><br/><h2>List of authors searched on arXiv.org</h2><table>";
-		        echo "<tr><td align='center'><font color='#007897'>NAME:</color></td></tr>";
-		        #creazione della tabella html dei file all'interno di pdf_downloads
-		        $y = 1;
-		        for ($i = 0; $i < $lunghezza; $i++) {
-		            echo "<tr><td><label>$y.&nbsp&nbsp&nbsp" . $nomi[$i] . "</label></td></tr>";
-		            $y++;
-		        }
-		        echo "</table></center></form>";
-		}
+                    #importo file per utilizzare funzioni...
+                    include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/check_nomi_data.php');
+                    #visualizzo lista utenti...	
+                    $nomi = legginomi();
+                    #conto lunghezza array
+                    $lunghezza = count($nomi);
+                    echo "<form name='f4' action='authors_list.php' id='f1' method='POST'><center><br/><h2>List of authors searched on arXiv.org</h2><table>";
+                    echo "<tr><td align='center'><font color='#007897'>NAME:</color></td></tr>";
+                    #creazione della tabella html dei file all'interno di pdf_downloads
+                    $y = 1;
+                    for ($i = 0; $i < $lunghezza; $i++) {
+                        echo "<tr><td><label>$y.&nbsp&nbsp&nbsp" . $nomi[$i] . "</label></td></tr>";
+                        $y++;
+                    }
+                    echo "</table></center></form>";
+                }
             } else {
-            	#importo file per utilizzare funzioni...
+                #importo file per utilizzare funzioni...
                 include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/check_nomi_data.php');
                 #visualizzo lista utenti...	
                 $nomi = legginomi();

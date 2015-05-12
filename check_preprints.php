@@ -35,16 +35,12 @@
                     aa.elements[i].checked = checked;
                 }
             }
-        </script>
-        <script type="text/javascript">
             function FinePagina()
             {
                 var w = window.screen.width;
                 var h = window.screen.height;
                 window.scrollTo(w * h, w * h)
             }
-        </script>
-        <script type='text/javascript'>
             function confirmDelete()
             {
                 return confirm("Remove selected preprints?");
