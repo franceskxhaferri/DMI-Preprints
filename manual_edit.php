@@ -26,17 +26,17 @@
             webshims.setOptions('forms-ext', {types: 'date'});
             webshims.polyfill('forms forms-ext');
         </script>
-<script type='text/javascript'>
-function confirmDelete()
-{
-   return confirm("Delete this preprint?");
-}
-function confirmInsert()
-{
-   return confirm("Update preprint information?");
-}
-</script>
-        
+        <script type='text/javascript'>
+            function confirmDelete()
+            {
+                return confirm("Delete this preprint?");
+            }
+            function confirmInsert()
+            {
+                return confirm("Update preprint information?");
+            }
+        </script>
+
     </head>
     <body>
         <?php
@@ -49,15 +49,15 @@ function confirmInsert()
             if ($_SESSION['logged_type'] === "mod") {
                 //sessione moderatore
                 #rilevazione del browser in uso
-		    $agent = $_SERVER['HTTP_USER_AGENT'];
-		    if(strlen(strstr($agent,"Firefox")) > 0 ){
-			$browser = 'Firefox';
-		    }
-		    if(strlen($browser)>0){
-		    	$view=0;
-		    }else{
-		    	$view=1;
-		    }
+                $agent = $_SERVER['HTTP_USER_AGENT'];
+                if (strlen(strstr($agent, "Firefox")) > 0) {
+                    $browser = 'Firefox';
+                }
+                if (strlen($browser) > 0) {
+                    $view = 0;
+                } else {
+                    $view = 1;
+                }
                 ?>
                 <div id="header-wrapper">
                     <div class="container">
@@ -86,32 +86,32 @@ function confirmInsert()
             if (sessioneavviata() == True) {
                 echo "<br/><center>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTION CAN'T BE USED IN THIS MOMENT!</center><br/>";
             } else {
-            	if (!isset($_GET['id'])){
-		    	echo "<center><br/><a style='color:#007897;' href='./view_preprints.php?p=1&w=<?php echo $view;?>' onclick='window.open(this.href); return false' title='Go to preprints list'>View from inserted preprints</a></center>";
-		    	echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
-		        echo " <center><div><form name='f2' action='manual_edit.php' method='POST'>Insert id of pubblication you want edit<br/><br/><input type='search' autocomplete = 'off' style='width:250px; height:16px' name='id' id='textbox' required='' class='textbox' placeholder='example of id: 0000.0000v1' autofocus/><br/>
+                if (!isset($_GET['id'])) {
+                    echo "<center><br/><a style='color:#007897;' href='./view_preprints.php?p=1&w=<?php echo $view;?>' onclick='window.open(this.href); return false' title='Go to preprints list'>View from inserted preprints</a></center>";
+                    echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
+                    echo " <center><div><form name='f2' action='manual_edit.php' method='POST'>Insert id of pubblication you want edit<br/><br/><input type='search' autocomplete = 'off' style='width:250px; height:16px' name='id' id='textbox' required='' class='textbox' placeholder='example of id: 0000.0000v1' autofocus/><br/>
 		               <br/><input type='submit' name='bottoni8' value='Get preprint' id='bottone_keyword' class='bottoni'/><br/>
 		               </form></div>
 		               ";
-		        $var = False;
+                    $var = False;
                 }
                 echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
                 if (isset($_POST['bottoni8']) or isset($_POST['bottoni9']) or isset($_POST['bottoni10']) or isset($_GET['id'])) {
-                    if (empty($_POST['id'])){
-                    	$id = $_GET['id'];
-                    }else{
-                    	$id = $_POST['id'];
+                    if (empty($_POST['id'])) {
+                        $id = $_GET['id'];
+                    } else {
+                        $id = $_POST['id'];
                     }
                     #adattamento stringa
                     $id = trim($id);
-                    	#funzione per recupero informazioni dell'preprint
-                        $ris = cercapreprint($id);
-                        if ($ris[0] == $id) {
-                            #sblocco altri campi
-                            $var = True;
-                        } else {
-                            echo '<script type="text/javascript">alert("ID incorrect!");</script>';
-                        }
+                    #funzione per recupero informazioni dell'preprint
+                    $ris = cercapreprint($id);
+                    if ($ris[0] == $id) {
+                        #sblocco altri campi
+                        $var = True;
+                    } else {
+                        echo '<script type="text/javascript">alert("ID incorrect!");</script>';
+                    }
                 }
                 if ($var == True) {
                     echo "<script type='text/javascript'>
@@ -151,45 +151,45 @@ function confirmInsert()
                         #eliminazione dell'preprint selezionato
                         delete_pdf($id1);
                         cancellaselected($id1);
-                        echo '<script type="text/javascript">alert("Preprint '.$info[0].' removed correctly!");</script>';
+                        echo '<script type="text/javascript">alert("Preprint ' . $info[0] . ' removed correctly!");</script>';
                         echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./manual_edit.php">';
                     }
                     if (isset($_POST['bottoni10'])) {
-                    	    if(empty($_POST['journal'])){
-                            	$info[4] = "No journal ref";	
-                            }else{
-                            	$info[4] = $_POST['journal'];
-                            }
-                            if(empty($_POST['comments'])){
-                            	$info[5] = "No journal ref";	
-                            }else{
-                            	$info[5] = $_POST['comments'];
-                            }
-                            $info[0] = $_POST['id'];
-                            $info[1] = $_POST['title'];
-                            $info[2] = $_POST['data'];
-                            $info[3] = $_POST['author'];
-                            $info[6] = $_POST['category'];
-                            $info[7] = $_POST['abstract'];
-                            #richiamo della funzione per inserire le info del preprint all'interno del database
-                            update_preprints($info);
-                            $check = $_POST['check'];
-                            #controllo se ci sono file da caricare
-                            if ($_FILES["fileToUpload"]["size"]>0) {
-                            	#caricamento del file scelto
-                                if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                                    $fileType = $_FILES["fileToUpload"]["type"];
-                                    #inserimento nel database del file
-                                    insert_one_pdf($info[0], $fileType);
-                                    echo '<script type="text/javascript">alert("Preprint '.$info[0].' updated correctly!");</script>';
-                                    echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./manual_edit.php">';
-                                } else {
-                                    echo '<script type="text/javascript">alert("Error, file not uploaded!");</script>';
-                                }
-                            } else {
-                                echo '<script type="text/javascript">alert("Preprint '.$info[0].' updated correctly!");</script>';
+                        if (empty($_POST['journal'])) {
+                            $info[4] = "No journal ref";
+                        } else {
+                            $info[4] = $_POST['journal'];
+                        }
+                        if (empty($_POST['comments'])) {
+                            $info[5] = "No journal ref";
+                        } else {
+                            $info[5] = $_POST['comments'];
+                        }
+                        $info[0] = $_POST['id'];
+                        $info[1] = $_POST['title'];
+                        $info[2] = $_POST['data'];
+                        $info[3] = $_POST['author'];
+                        $info[6] = $_POST['category'];
+                        $info[7] = $_POST['abstract'];
+                        #richiamo della funzione per inserire le info del preprint all'interno del database
+                        update_preprints($info);
+                        $check = $_POST['check'];
+                        #controllo se ci sono file da caricare
+                        if ($_FILES["fileToUpload"]["size"] > 0) {
+                            #caricamento del file scelto
+                            if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+                                $fileType = $_FILES["fileToUpload"]["type"];
+                                #inserimento nel database del file
+                                insert_one_pdf($info[0], $fileType);
+                                echo '<script type="text/javascript">alert("Preprint ' . $info[0] . ' updated correctly!");</script>';
                                 echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./manual_edit.php">';
+                            } else {
+                                echo '<script type="text/javascript">alert("Error, file not uploaded!");</script>';
                             }
+                        } else {
+                            echo '<script type="text/javascript">alert("Preprint ' . $info[0] . ' updated correctly!");</script>';
+                            echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./manual_edit.php">';
+                        }
                     }
                     echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
                 }

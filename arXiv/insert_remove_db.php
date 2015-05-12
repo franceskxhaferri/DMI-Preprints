@@ -146,19 +146,19 @@ function insert_one_pdf2($id) {
         $i = 0;
         while ((false !== ($file = readdir($handle)))) {
             if ($file != '.' && $file != '..') {
-            	$idd = substr($file, 0, -4);
-            	$idd = str_replace("-", "/", $idd);
-            	if($row['id_pubblicazione'] == $idd){
-		        $var = fopen($basedir . $file, 'r');
-		        $var2 = fread($var, filesize($basedir . $file));
-		        $lunghezza = strlen($file);
-		        $var2 = addslashes($var2);
-		        $sql = "UPDATE PREPRINTS SET Bin_data= '" . $var2 . "', Filename= '" . $file . "', Filesize='" . filesize($basedir . $file) . "', Filetype='" . $type . "', checked='1' WHERE id_pubblicazione='" . $id . "'";
-		        $query = mysql_query($sql) or die(mysql_error());
-		        fclose($var);
-		        $i++;
-		        copy($basedir . $file, $copia . $file);
-		        unlink($basedir . $file);
+                $idd = substr($file, 0, -4);
+                $idd = str_replace("-", "/", $idd);
+                if ($row['id_pubblicazione'] == $idd) {
+                    $var = fopen($basedir . $file, 'r');
+                    $var2 = fread($var, filesize($basedir . $file));
+                    $lunghezza = strlen($file);
+                    $var2 = addslashes($var2);
+                    $sql = "UPDATE PREPRINTS SET Bin_data= '" . $var2 . "', Filename= '" . $file . "', Filesize='" . filesize($basedir . $file) . "', Filetype='" . $type . "', checked='1' WHERE id_pubblicazione='" . $id . "'";
+                    $query = mysql_query($sql) or die(mysql_error());
+                    fclose($var);
+                    $i++;
+                    copy($basedir . $file, $copia . $file);
+                    unlink($basedir . $file);
                 }
             }
         }

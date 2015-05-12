@@ -45,15 +45,15 @@
             }
         </script>
         <script type='text/javascript'>
-		function confirmDelete()
-		{
-		   return confirm("Remove selected preprints?");
-		}
-		function confirmInsert()
-		{
-		   return confirm("Insert selected preprints?");
-		}
-	</script>
+            function confirmDelete()
+            {
+                return confirm("Remove selected preprints?");
+            }
+            function confirmInsert()
+            {
+                return confirm("Insert selected preprints?");
+            }
+        </script>
     </head>
     <body>
         <?php
@@ -93,14 +93,14 @@
                     if (sessioneavviata() == True) {
                         echo "<center><br/>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE LIST CAN'T BE CHANGED IN THIS MOMENT!</center><br/>";
                     } else {
-                    	echo "<center><a style='text-decoration: none;' href='javascript:FinePagina()'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8595;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center>";
+                        echo "<center><a style='text-decoration: none;' href='javascript:FinePagina()'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8595;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center>";
                         echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
                         #leggere cartella...
                         #base link
                         $base = "./pdf_downloads/";
                         #Imposto la directory da leggere
                         $directory = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints' . "/pdf_downloads/";
-                        echo "<form name='f3' action='check_preprints.php' id='f1' method='GET'><center><br/><h2>PREPRINTS LIST</h2><br/><table>";
+                        echo "<form name='f3' action='check_preprints.php' id='f1' method='GET'><center><table>";
                         #Apriamo una directory e leggiamone il contenuto.
                         if (is_dir($directory)) {
                             #Apro l'oggetto directory
@@ -122,7 +122,7 @@
                                         $y++;
                                     }
                                 }
-                                echo "</table></center><center><br/><input type='submit' name='bottoni6' value='Remove selected' id='bottone_keyword' class='bottoni' onclick='return confirmDelete()'><input type='submit' name='bottoni7' value='Insert selected' id='bottone_keyword' class='bottoni' onclick='return confirmInsert()'></center></form><br/>";
+                                echo "</table></center><center><br/><input type='submit' name='b2' value='Remove' id='bottone_keyword' class='bottoni' onclick='return confirmDelete()'><input type='submit' name='b3' value='Insert' id='bottone_keyword' class='bottoni' onclick='return confirmInsert()'></center></form>";
                                 #Chiudo la lettura della directory.
                                 closedir($directory_handle);
                             }
@@ -131,7 +131,7 @@
                         $lunghezza = $i;
                         $basedir2 = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints' . "/pdf/";
                         #eliminazione pdf, lettura cartella e ...
-                        if (isset($_GET['bottoni6'])) {
+                        if (isset($_GET['b2'])) {
                             for ($j = 0; $j < $lunghezza; $j++) {
                                 $percorso = $base . $array[$j];
                                 $percorso2 = $basedir2 . $array[$j];
@@ -167,7 +167,7 @@
                             }
                         }
                         #inserimento pdf, lettura cartella e ...
-                        if (isset($_GET['bottoni7'])) {
+                        if (isset($_GET['b3'])) {
                             for ($j = 0; $j < $lunghezza; $j++) {
                                 $percorso = $base . $array[$j];
                                 $percorso2 = $basedir2 . $array[$j];
@@ -179,9 +179,9 @@
                                             while (($file = readdir($directory_handle)) !== false) {
                                                 if ((!is_dir($file)) & ($file != ".") & ($file != "..")) {
                                                     if ($file == $array[$j]) {
-                                                    	$idd = substr($file, 0, -4);
+                                                        $idd = substr($file, 0, -4);
                                                         #inserimento file nel database
-		                            		insert_one_pdf2($idd);
+                                                        insert_one_pdf2($idd);
                                                     }
                                                 }
                                             }
@@ -200,8 +200,8 @@
                                 echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./check_preprints.php">';
                             }
                         }
-                        
-                        
+
+
                         echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
                         echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><br/>";
                         #avviso per utente di nessun preprint

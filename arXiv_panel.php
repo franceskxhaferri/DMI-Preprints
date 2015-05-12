@@ -26,10 +26,10 @@
                 var h = window.screen.height;
                 window.scrollTo(w * h, w * h)
             }
-		function confirmDownload()
-		{
-		   return confirm("Warning! this overwrite the existent data and will take more time, continue?");
-		}          
+            function confirmDownload()
+            {
+                return confirm("Warning! this overwrite the existent data and will take more time, continue?");
+            }
         </script>	
     </head>
     <body>
@@ -39,16 +39,16 @@
         if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] < 86400)) {
             if ($_SESSION['logged_type'] === "mod") {
                 //sessione moderatore
-                    #rilevazione del browser in uso
-		    $agent = $_SERVER['HTTP_USER_AGENT'];
-		    if(strlen(strstr($agent,"Firefox")) > 0 ){
-			$browser = 'Firefox';
-		    }
-		    if(strlen($browser)>0){
-		    	$view=0;
-		    }else{
-		    	$view=1;
-		    }
+                #rilevazione del browser in uso
+                $agent = $_SERVER['HTTP_USER_AGENT'];
+                if (strlen(strstr($agent, "Firefox")) > 0) {
+                    $browser = 'Firefox';
+                }
+                if (strlen($browser) > 0) {
+                    $view = 0;
+                } else {
+                    $view = 1;
+                }
                 ?>
                 <div id="header-wrapper">
                     <div class="container">
@@ -72,12 +72,12 @@
                                 <td style="width:350px;"><input type="submit" name="b1" value="Back" id="bottone_keyword" class="bottoni"/></td>
                             </form></tr>
                             <tr><form name="f2" action="view_preprints.php" method="GET">
-                            	<input type="text" name="p" value="1" checked hidden/><input type="text" name="w" value="<?php echo $view;?>" checked hidden/>
+                                <input type="text" name="p" value="1" checked hidden/><input type="text" name="w" value="<?php echo $view; ?>" checked hidden/>
                                 <td align="right" style="width:350px;">Preprints checked and inserted on database&nbsp&nbsp&nbsp</td>
                                 <td style="width:350px;"><input type="submit" name="b2" value="Approved section" id="bottone_keyword" class="bottoni"/></td>
                             </form></tr>
                             <tr><form name="f3" action="archived_preprints.php" method="GET">
-                            <input type="text" name="p" value="1" checked hidden/>
+                                <input type="text" name="p" value="1" checked hidden/>
                                 <td align="right" style="width:350px;">Archived preprints, contains old publications&nbsp&nbsp&nbsp</td>
                                 <td style="width:350px;"><input type="submit" name="b3" value="Archived section" id="bottone_keyword" class="bottoni"/></td>
                             </form></tr>
@@ -147,9 +147,9 @@
                                     $dc1 = true;
                                 }
                             } else {
-                            	echo '<script type="text/javascript">alert("UPDATE SESSION IS ALREADY STARTED FROM OTHER ADMIN!");</script>';
-                            	$risul=true;
-                            	#sessione già avviata
+                                echo '<script type="text/javascript">alert("UPDATE SESSION IS ALREADY STARTED FROM OTHER ADMIN!");</script>';
+                                $risul = true;
+                                #sessione già avviata
                             }
                         }
                     }
@@ -189,32 +189,32 @@
                                     $dc2 = true;
                                 }
                             } else {
-                            	echo '<script type="text/javascript">alert("DOWNLOAD SESSION IS ALREADY STARTED FROM OTHER ADMIN!");</script>';
-                            	$risul=true;
+                                echo '<script type="text/javascript">alert("DOWNLOAD SESSION IS ALREADY STARTED FROM OTHER ADMIN!");</script>';
+                                $risul = true;
                             }
                         }
                     }
                     #server arxiv down o server interno non connesso
                     if (!$sock = @fsockopen('www.arxiv.org', 80, $num, $error, 5)) {
-                    	echo '<script type="text/javascript">alert("INTERNAL SERVER OFFLINE OR ARVIX IS DOWN IN THIS MOMENT!");</script>';
+                        echo '<script type="text/javascript">alert("INTERNAL SERVER OFFLINE OR ARVIX IS DOWN IN THIS MOMENT!");</script>';
                         echo 'INTERNAL SERVER OFFLINE OR ARVIX IS DOWN IN THIS MOMENT!<br/><br/>';
                     }
                     if (sessioneavviata() == True) {
-                    	if($risul!=true){
-                    		echo '<script type="text/javascript">alert("WARNING ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTIONS HAS BEEN BLOCKED!");</script>';
-                    	}
+                        if ($risul != true) {
+                            echo '<script type="text/javascript">alert("WARNING ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTIONS HAS BEEN BLOCKED!");</script>';
+                        }
                         echo "WARNING ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTIONS HAS BEEN BLOCKED!";
                     } else {
                         #memorizzo in $data ultimo aggiornamento e la visualizzo
                         $data = datastring();
                         echo " LAST UPDATE: " . $data;
                         #update o download completato correttamente
-                        if ($dc1 == true){
-			    	echo '<script type="text/javascript">alert("Update complete!");</script>';
-			    }
-		    	if ($dc2 == true){
-		    		echo '<script type="text/javascript">alert("Download complete!");</script>';
-		    	}
+                        if ($dc1 == true) {
+                            echo '<script type="text/javascript">alert("Update complete!");</script>';
+                        }
+                        if ($dc2 == true) {
+                            echo '<script type="text/javascript">alert("Download complete!");</script>';
+                        }
                     }
                     echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
                 } else {
@@ -225,12 +225,10 @@
             } else {
                 echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
             }
-            
             ?>
             <center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center>
-            <?php
-            
-            ?>
+                <?php
+                ?>
             <br/>
         </div>
     </body>

@@ -29,37 +29,39 @@
 
     </head>
     <body>
-    <?php #rilevazione del browser in uso
-		    $agent = $_SERVER['HTTP_USER_AGENT'];
-		    if(strlen(strstr($agent,"Firefox")) > 0 ){
-			$browser = 'Firefox';
-		    }
-		    if(strlen($browser)>0){
-		    	$view=0;
-		    }else{
-		    	$view=1;
-		    }?>
+        <?php
+        #rilevazione del browser in uso
+        $agent = $_SERVER['HTTP_USER_AGENT'];
+        if (strlen(strstr($agent, "Firefox")) > 0) {
+            $browser = 'Firefox';
+        }
+        if (strlen($browser) > 0) {
+            $view = 0;
+        } else {
+            $view = 1;
+        }
+        ?>
         <script>
             function vistaAnno() {
-                $("#contenitore_dinamico").load("search/main_year.php", function() {
+                $("#contenitore_dinamico").load("search/main_year.php", function () {
                     MathJax.Hub.Typeset();
                 });
 
             }
 
             function vistaKeyword() {
-                $("#contenitore_dinamico").load("search/main_keyword.php", function() {
+                $("#contenitore_dinamico").load("search/main_keyword.php", function () {
                     MathJax.Hub.Typeset();
                 });
             }
-            
-		function arXiv() {
-		    window.location.assign("view_preprints.php?p=1&w=<?php echo $view;?>")
-		}
+
+            function arXiv() {
+                window.location.assign("view_preprints.php?p=1&w=<?php echo $view; ?>")
+            }
 
             function visAbstract(id_paper) {
                 $("#contenuto_titolo_print").load("search/printTitlePrinter.php", {id: id_paper});
-                $("#contenuto_abstract").load("search/abstractPrinter.php", {id: id_paper}, function() {
+                $("#contenuto_abstract").load("search/abstractPrinter.php", {id: id_paper}, function () {
                     MathJax.Hub.Typeset();
                     TrgModalOverlayLoader("modal1");
                 });
@@ -91,7 +93,7 @@
                             <button id="bottone_keyword" class="bottoni" onclick="vistaKeyword()">search by keyword</button>
                         </td>
                         <td>
-                            <button id="bottone_keyword" class="bottoni" onclick="arXiv()">arXiv preprints</button>
+                            <button id="bottone_keyword" class="bottoni" onclick="arXiv()">preprints from arXiv</button>
                         </td>
                     </tr>
                 </table>
