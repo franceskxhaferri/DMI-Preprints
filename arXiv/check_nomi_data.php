@@ -117,18 +117,44 @@ function searchpreprint() {
         $order = "id_pubblicazione ASC";
         $orstr = "increasing ID";
     }
+    $cat = 0;
     #verifica parametri ricerca
-    if ($_GET['t'] == "1") {
-        $query = $query . "SELECT * FROM PREPRINTS WHERE titolo LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION ";
-    }
-    if ($_GET['a'] == "1") {
-        $query = $query . "SELECT * FROM PREPRINTS WHERE abstract LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION ";
-    }
-    if ($_GET['c'] == "1") {
-        $query = $query . "SELECT * FROM PREPRINTS WHERE commenti LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION ";
-    }
-    if ($_GET['j'] == "1") {
-        $query = $query . "SELECT * FROM PREPRINTS WHERE referenze LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION ";
+    if ($_GET['all'] != "1") {
+        if ($_GET['h'] == "1") {
+            $query = $query . "SELECT * FROM PREPRINTS WHERE autori LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION ";
+            $cat++;
+        }
+        if ($_GET['t'] == "1") {
+            $query = $query . "SELECT * FROM PREPRINTS WHERE titolo LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION ";
+            $cat++;
+        }
+        if ($_GET['a'] == "1") {
+            $query = $query . "SELECT * FROM PREPRINTS WHERE abstract LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION ";
+            $cat++;
+        }
+        if ($_GET['y'] == "1") {
+            $query = $query . "SELECT * FROM PREPRINTS WHERE categoria LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION ";
+            $cat++;
+        }
+        if ($_GET['c'] == "1") {
+            $query = $query . "SELECT * FROM PREPRINTS WHERE commenti LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION ";
+            $cat++;
+        }
+        if ($_GET['j'] == "1") {
+            $query = $query . "SELECT * FROM PREPRINTS WHERE referenze LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION ";
+            $cat++;
+        }
+    } else {
+        $query = " 
+    	SELECT * FROM PREPRINTS WHERE id_pubblicazione LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
+    	SELECT * FROM PREPRINTS WHERE titolo LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
+    	SELECT * FROM PREPRINTS WHERE data_pubblicazione LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
+    	SELECT * FROM PREPRINTS WHERE autori LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
+    	SELECT * FROM PREPRINTS WHERE referenze LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
+    	SELECT * FROM PREPRINTS WHERE commenti LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
+    	SELECT * FROM PREPRINTS WHERE categoria LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
+    	SELECT * FROM PREPRINTS WHERE abstract LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION ";
+        $cat = "ALL RECORD";
     }
     $l = strlen($query);
     $query = substr($query, 0, -7);
@@ -150,7 +176,7 @@ function searchpreprint() {
     #query di ricerca
     $querytotale = mysql_query($query);
     $ristot = mysql_num_rows($querytotale);
-    echo "TEXT FINDED ON " . $ristot . " PREPRINTS (results ordered by $orstr)";
+    echo $ristot . " RESULTS FINDED ON " . $cat . " SECTION FOR: '" . $_GET['r'] . "' (results ordered by $orstr)";
     $npag = ceil($ristot / $risperpag);
     $query = $query . " ORDER BY " . $order . " LIMIT " . $limit . "," . $risperpag . "";
     $result = mysql_query($query) or die(mysql_error());

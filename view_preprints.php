@@ -121,15 +121,9 @@
             <tr style="height:30px;"><td align="center" colspan="3"><br/><h1>Advanced settings results</h1></td></tr>
             <tr><form name="f5" action="view_preprints.php?p=1&w=<?php echo $view; ?>" method="POST">
                 <td align="right">Enable/Disable on page view&nbsp&nbsp&nbsp</td>
-                <td colspan="2"><input type="submit" name="w" value="Enable/Disable"/></td>
+                <td colspan="2"><input type="submit" style="width:100px;" name="w" value="Enable/Disable"/></td>
             </form></tr>
             <form name="f4" action="view_preprints.php" method="GET">
-                <tr><td colspan="3" align="center">Search on:
-                        <label><input type="checkbox" name="t" value="1">Title</label>
-                        <label><input type="checkbox" name="a" value="1">Abstract</label>
-                        <label><input type="checkbox" name="c" value="1">Comments</label>
-                        <label><input type="checkbox" name="j" value="1">Journal</label>
-                    </td></tr>
                 <tr><input type="text" name="p" value="1" hidden>
                 <input type="text" name="w" value="<?php echo $upview; ?>" hidden>
                 <td align="right">Filter by:
@@ -138,7 +132,16 @@
                     <label><input type="radio" name="f" value="year">Year</label>
                     <label><input type="radio" name="f" value="id">ID&nbsp&nbsp&nbsp</label></td>
                 <td><input type="search" autocomplete = "off" style="width:175px;" name="r" placeholder="Author name or part, etc."></td>
-                <td><input type="submit" name="s" value="Apply"/></td></tr>
+                <td align="left"><input type="submit" style="width:100px;" name="s" value="Apply/Search"/></td></tr>
+                <tr><td colspan="3" align="center">Search on:
+                        <label><input type="checkbox" name="all" value="1">Record</label>
+                        <label><input type="checkbox" name="h" value="1">Authors</label>
+                        <label><input type="checkbox" name="t" value="1">Title</label>
+                        <label><input type="checkbox" name="a" value="1">Abstract</label>
+                        <label><input type="checkbox" name="y" value="1">Category</label>
+                        <label><input type="checkbox" name="c" value="1">Comments</label>
+                        <label><input type="checkbox" name="j" value="1">Journal-ref</label>
+                    </td></tr>
                 <tr><td colspan="3" align="center">Order by:
                         <label><input type="radio" name="o" value="dated" checked>Date(D)</label>
                         <label><input type="radio" name="o" value="datec">Date(I)</label>
@@ -152,7 +155,7 @@
         <?php
         echo "<br/><center><a style='text-decoration: none;' href='javascript:FinePagina()'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8595;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><center>";
         if (isset($_GET['s'])) {
-            if ($_GET['t'] == 1 or $_GET['a'] == 1 or $_GET['c'] == 1 or $_GET['j'] == 1) {
+            if ($_GET['t'] == 1 or $_GET['a'] == 1 or $_GET['c'] == 1 or $_GET['j'] == 1 or $_GET['h'] == 1 or $_GET['y'] == 1 or $_GET['all'] == 1) {
                 searchpreprint();
                 echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'>&nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><br/>";
             } else {
@@ -161,7 +164,7 @@
                 echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'>&nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><br/>";
             }
         } else {
-            if ($_GET['t'] == 1 or $_GET['a'] == 1 or $_GET['c'] == 1 or $_GET['j'] == 1) {
+            if ($_GET['t'] == 1 or $_GET['a'] == 1 or $_GET['c'] == 1 or $_GET['j'] == 1 or $_GET['h'] == 1 or $_GET['y'] == 1 or $_GET['all'] == 1) {
                 searchpreprint();
                 echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'>&nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><br/>";
             } else {
