@@ -39,16 +39,6 @@
         if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] < 86400)) {
             if ($_SESSION['logged_type'] === "mod") {
                 //sessione moderatore
-                #rilevazione del browser in uso
-                $agent = $_SERVER['HTTP_USER_AGENT'];
-                if (strlen(strstr($agent, "Firefox")) > 0) {
-                    $browser = 'Firefox';
-                }
-                if (strlen($browser) > 0) {
-                    $view = 0;
-                } else {
-                    $view = 1;
-                }
                 ?>
                 <div id="header-wrapper">
                     <div class="container">
@@ -58,7 +48,8 @@
                                     <h1><a href="#" id="logo">DMI Preprints</a></h1>
                                     <nav id="nav">
                                         <a href="main.php">preprint search</a>
-                                        <a href="reserved.php" class="current-page-item">Reserved Area</a>
+                                        <a href="view_preprints.php?p=1&w=0">arXiv publications</a>
+                                        <a href="reserved.php" class="current-page-item" class="current-page-item">Reserved Area</a>
                                     </nav>
                                 </header>
                             </div>
@@ -72,7 +63,7 @@
                                 <td style="width:350px;"><input type="submit" name="b1" value="Back" id="bottone_keyword" class="bottoni"/></td>
                             </form></tr>
                             <tr><form name="f2" action="view_preprints.php" method="GET">
-                                <input type="text" name="p" value="1" checked hidden/><input type="text" name="w" value="<?php echo $view; ?>" checked hidden/>
+                                <input type="text" name="p" value="1" checked hidden/><input type="text" name="w" value="0" checked hidden/>
                                 <td align="right" style="width:350px;">Preprints checked and inserted on database&nbsp&nbsp&nbsp</td>
                                 <td style="width:350px;"><input type="submit" name="b2" value="Approved section" id="bottone_keyword" class="bottoni"/></td>
                             </form></tr>

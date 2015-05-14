@@ -68,6 +68,7 @@
                                     <h1><a href="#" id="logo">DMI Preprints</a></h1>
                                     <nav id="nav">
                                         <a href="main.php">preprint search</a>
+                                        <a href='view_preprints.php?p=1&w=0'>arXiv publications</a>
                                         <a href="reserved.php" class="current-page-item">Reserved Area</a>
                                     </nav>
                                 </header>
@@ -118,7 +119,7 @@
                                         $y++;
                                     }
                                 }
-                                echo "</table></center><center><br/><input type='submit' name='b2' value='Remove' id='bottone_keyword' class='bottoni' onclick='return confirmDelete()'><input type='submit' name='b3' value='Insert' id='bottone_keyword' class='bottoni' onclick='return confirmInsert()'></center></form>";
+                                echo "</table></center><center><br/><input type='submit' name='b2' value='Remove' style='width:50px;' id='bottone_keyword' class='bottoni' onclick='return confirmDelete()'><input type='submit' name='b3' value='Insert' style='width:50px;' id='bottone_keyword' class='bottoni' onclick='return confirmInsert()'></center></form>";
                                 #Chiudo la lettura della directory.
                                 closedir($directory_handle);
                             }

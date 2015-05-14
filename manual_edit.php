@@ -48,16 +48,6 @@
         if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] < 86400)) {
             if ($_SESSION['logged_type'] === "mod") {
                 //sessione moderatore
-                #rilevazione del browser in uso
-                $agent = $_SERVER['HTTP_USER_AGENT'];
-                if (strlen(strstr($agent, "Firefox")) > 0) {
-                    $browser = 'Firefox';
-                }
-                if (strlen($browser) > 0) {
-                    $view = 0;
-                } else {
-                    $view = 1;
-                }
                 ?>
                 <div id="header-wrapper">
                     <div class="container">
@@ -67,6 +57,7 @@
                                     <h1><a href="#" id="logo">DMI Preprints</a></h1>
                                     <nav id="nav">
                                         <a href="main.php">preprint search</a>
+                                        <a href='view_preprints.php?p=1&w=0'>arXiv publications</a>
                                         <a href="reserved.php" class="current-page-item">Reserved Area</a>
                                     </nav>
                                 </header>
@@ -78,7 +69,7 @@
                 </div><center>
                 <table>
                     <tr><form name="f1" action="arXiv_panel.php" method="GET"><td align="right" style='width:150px; height:16px'>Go to arXiv panel&nbsp&nbsp&nbsp</td>
-                        <td><input type="submit" name="b1" value="Back" id="bottone_keyword" class="bottoni" onclick="return confirmExit()"/></td>
+                        <td><input type="submit" name="b1" value="Back" id='bottone_keyword' class='bottoni' onclick="return confirmExit()"/></td>
                         </tr>
                     </form></table>
             </center>
@@ -87,10 +78,9 @@
                 echo "<br/><center>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTION CAN'T BE USED IN THIS MOMENT!</center><br/>";
             } else {
                 if (!isset($_GET['id'])) {
-                    echo "<center><br/><a style='color:#007897;' href='./view_preprints.php?p=1&w=<?php echo $view;?>' onclick='window.open(this.href); return false' title='Go to preprints list'>View from inserted preprints</a></center>";
+                    echo "<center><br/><a style='color:#007897;' href='./view_preprints.php?p=1&w=0' onclick='window.open(this.href); return false' title='Go to preprints list'>View from inserted preprints</a></center>";
                     echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
-                    echo " <center><div><form name='f2' action='manual_edit.php' method='POST'>Insert id of pubblication you want edit<br/><br/><input type='search' autocomplete = 'off' style='width:250px; height:16px' name='id' id='textbox' required='' class='textbox' placeholder='example of id: 0000.0000v1' autofocus/><br/>
-		               <br/><input type='submit' name='bottoni8' value='Get preprint' id='bottone_keyword' class='bottoni'/><br/>
+                    echo " <center><div><form name='f2' action='manual_edit.php' method='POST'>Insert id of pubblication: <input type='search' autocomplete = 'off' style='width:175px;' name='id' id='textbox' required class='textbox' placeholder='example of id: 0000.0000v1' autofocus/><input type='submit' name='bottoni8' value='Get preprint' style='width:70px;' id='bottone_keyword' class='bottoni'/><br/>
 		               </form></div>
 		               ";
                     $var = False;
@@ -121,7 +111,7 @@
 				}
 			</script>
                 <form name='f1' action='manual_edit.php' method='POST' enctype='multipart/form-data'>
-                    <center><div><br/><h2>preprint informations</h2><h1>field with '*' are required</h1><br/><input type='reset' name='reset' value='Reset'><br/><br/>
+                    <center><div><br/><h2>preprint informations</h2><h1>field with '*' are required</h1><br/><input type='reset' name='reset' value='Reset' style='width:40px;' id='bottone_keyword' class='bottoni'><br/><br/>
 			    id of pubblication (not editable)<br/><br/>
                             <textarea readonly style='width:65%; height:16px' name='id' id='textbox' class='textbox' placeholder='example of id: 0000.0000v1'>" . $ris[0] . "</textarea><br/><br/><br/>
                             data of pubblication (not editable)<br/><br/>
@@ -141,8 +131,8 @@
                             PDF / other document file <br/>
                             <input type='hidden' name='MAX_FILE_SIZE' value='10000000'><br/>
                             <input type='file' name='fileToUpload' id='fileToUpload'><br/><br/><br/>
-                            <div style='float:left; width:600px;'><input type='submit' name='bottoni9' value='Remove preprint' id='bottone_keyword' class='bottoni' onclick='return confirmDelete()'/></div>
-                            <div style='float:right; width:600px;'><input type='submit' name='bottoni10' value='Edit complete' id='bottone_keyword' class='bottoni' onclick='return confirmInsert()'/></div><br/><br/>
+                            <div style='float:left; width:600px;'><input type='submit' name='bottoni9' value='Remove' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmDelete()'/></div>
+                            <div style='float:right; width:600px;'><input type='submit' name='bottoni10' value='Complete' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmInsert()'/></div><br/><br/>
                             </form>";
                     $target_dir = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints' . "/upload/";
                     $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);

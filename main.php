@@ -29,18 +29,6 @@
 
     </head>
     <body>
-        <?php
-        #rilevazione del browser in uso
-        $agent = $_SERVER['HTTP_USER_AGENT'];
-        if (strlen(strstr($agent, "Firefox")) > 0) {
-            $browser = 'Firefox';
-        }
-        if (strlen($browser) > 0) {
-            $view = 0;
-        } else {
-            $view = 1;
-        }
-        ?>
         <script>
             function vistaAnno() {
                 $("#contenitore_dinamico").load("search/main_year.php", function () {
@@ -53,10 +41,6 @@
                 $("#contenitore_dinamico").load("search/main_keyword.php", function () {
                     MathJax.Hub.Typeset();
                 });
-            }
-
-            function arXiv() {
-                window.location.assign("view_preprints.php?p=1&w=<?php echo $view; ?>")
             }
 
             function visAbstract(id_paper) {
@@ -75,6 +59,7 @@
                             <h1><a href="#" id="logo">DMI Preprints</a></h1>
                             <nav id="nav">
                                 <a href="main.php" class="current-page-item">preprint search</a>
+                                <a href="view_preprints.php?p=1&w=0">arXiv publications</a>
                                 <a href="reserved.php">Reserved Area</a>
                             </nav>
                         </header>
@@ -91,9 +76,6 @@
                         </td>
                         <td>
                             <button id="bottone_keyword" class="bottoni" onclick="vistaKeyword()">search by keyword</button>
-                        </td>
-                        <td>
-                            <button id="bottone_keyword" class="bottoni" onclick="arXiv()">preprints from arXiv</button>
                         </td>
                     </tr>
                 </table>

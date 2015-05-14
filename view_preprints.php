@@ -44,6 +44,13 @@
     </head>
     <body>
         <?php
+        if ($_GET['w'] != "0") {
+            $view = 0;
+            $upview = 1;
+        } else {
+            $view = 1;
+            $upview = 0;
+        }
         #importo file per utilizzare funzioni...
         require_once $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'authorization/sec_sess.php';
         include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/check_nomi_data.php');
@@ -56,6 +63,7 @@
                                     <h1><a href='#' id='logo'>DMI Preprints</a></h1>
                                     <nav id='nav'>
                                         <a href='main.php'>preprint search</a>
+                                        <a href='view_preprints.php?p=1&w=0'>arXiv publications</a>
                                         <a href='reserved.php' class='current-page-item'>Reserved Area</a>
                                     </nav>
                                 </header>";
@@ -65,7 +73,8 @@
             $nav = "<header id='header'>
                                     <h1><a href='#' id='logo'>DMI Preprints</a></h1>
                                     <nav id='nav'>
-                                        <a href='main.php' class='current-page-item'>preprint search</a>
+                                        <a href='main.php'>preprint search</a>
+                                        <a href='view_preprints.php?p=1&w=0' class='current-page-item'>arXiv publications</a>
                                         <a href='reserved.php'>Reserved Area</a>
                                     </nav>
                                 </header>";
@@ -75,17 +84,11 @@
             $nav = "<header id='header'>
                                     <h1><a href='#' id='logo'>DMI Preprints</a></h1>
                                     <nav id='nav'>
-                                        <a href='main.php' class='current-page-item'>preprint search</a>
+                                        <a href='main.php'>preprint search</a>
+                                        <a href='view_preprints.php?p=1&w=0' class='current-page-item'>arXiv publications</a>
                                         <a href='reserved.php'>Reserved Area</a>
                                     </nav>
                                 </header>";
-        }
-        if ($_GET['w'] != "0") {
-            $view = 0;
-            $upview = 1;
-        } else {
-            $view = 1;
-            $upview = 0;
         }
         if ($_SESSION['logged_type'] != "mod") {
             $str1 = "<h1><center>in this section are the preprints that have been published by the <a style='color:#007897;' href='./authors_list.php' onclick='window.open(this.href); return false'>authors</a> of the department on arxiv.org</center></h1><br/>";
@@ -109,19 +112,21 @@
             ?>
         </div><center>
         <table>
-            <tr><form name="f1" action="<?php echo $rit ?>" method="GET">
-                <td align="right"><?php echo $t ?>&nbsp&nbsp&nbsp</td>
-                <td colspan="2"><input type="submit" name="b1" value="Back" id="bottone_keyword" class="bottoni"/></td>
-            </form></tr>
+        <?php if ($_SESSION['logged_type'] === "mod"){
+		echo "<tr><form name='f1' action='$rit' method='GET'>
+		        <td align='right'>$t&nbsp&nbsp&nbsp</td>
+		        <td colspan='2'><input type='submit' name='b1' value='Back' id='bottone_keyword' class='bottoni'/></td>
+		    </form></tr>";
+        }?>
             <tr><form name="f2" action="archived_preprints.php" method="GET">
                 <input type="text" name="p" value="1" checked hidden/>
                 <td align="right">Archived preprints, contains old publications&nbsp&nbsp&nbsp</td>
                 <td colspan="2"><input type="submit" name="b2" value="Archived preprints" id="bottone_keyword" class="bottoni"/></td>
             </form></tr>
-            <tr style="height:30px;"><td align="center" colspan="3"><br/><h1>Advanced settings results</h1></td></tr>
+            <tr style="height:30px;"><td align="center" colspan="3"><br/><h1>Advanced settings results</h1><br/></td></tr>
             <tr><form name="f5" action="view_preprints.php?p=1&w=<?php echo $view; ?>" method="POST">
                 <td align="right">Enable/Disable on page view&nbsp&nbsp&nbsp</td>
-                <td colspan="2"><input type="submit" style="width:100px;" name="w" value="Enable/Disable"/></td>
+                <td colspan="2"><input type="submit" style="width:100px;" name="w" value="Enable/Disable" id="bottone_keyword" class="bottoni"/></td>
             </form></tr>
             <form name="f4" action="view_preprints.php" method="GET">
                 <tr><input type="text" name="p" value="1" hidden>
@@ -131,8 +136,8 @@
                     <label><input type="radio" name="f" value="category">Category</label>
                     <label><input type="radio" name="f" value="year">Year</label>
                     <label><input type="radio" name="f" value="id">ID&nbsp&nbsp&nbsp</label></td>
-                <td><input type="search" autocomplete = "off" style="width:175px;" name="r" placeholder="Author name or part, etc."></td>
-                <td align="left"><input type="submit" style="width:100px;" name="s" value="Apply/Search"/></td></tr>
+                <td><input type="search" autocomplete = "off" style="width:173px;" id='textbox' class='textbox' name="r" placeholder="Author name or part, etc." value="<?php echo $_GET['r'];?>" autofocus></td>
+                <td align="left"><input type="submit" style="width:100px;" id="bottone_keyword" class="bottoni" name="s" value="Apply/Search"/></td></tr>
                 <tr><td colspan="3" align="center">Search on:
                         <label><input type="checkbox" name="all" value="1">Record</label>
                         <label><input type="checkbox" name="h" value="1">Authors</label>
@@ -145,10 +150,10 @@
                 <tr><td colspan="3" align="center">Order by:
                         <label><input type="radio" name="o" value="dated" checked>Date(D)</label>
                         <label><input type="radio" name="o" value="datec">Date(I)</label>
-                        <label><input type="radio" name="o" value="named">Name(D)</label>
-                        <label><input type="radio" name="o" value="namec">Name(I)</label>
                         <label><input type="radio" name="o" value="idd">ID(D)</label>
                         <label><input type="radio" name="o" value="idc">ID(I)</label>
+                        <label><input type="radio" name="o" value="named">Name(D)</label>
+                        <label><input type="radio" name="o" value="namec">Name(I)</label>
                     </td>
             </form></tr>
         </table>

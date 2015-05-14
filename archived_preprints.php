@@ -48,16 +48,6 @@
     </head>
     <body>
         <?php
-        #rilevazione del browser in uso
-        $agent = $_SERVER['HTTP_USER_AGENT'];
-        if (strlen(strstr($agent, "Firefox")) > 0) {
-            $browser = 'Firefox';
-        }
-        if (strlen($browser) > 0) {
-            $view = 0;
-        } else {
-            $view = 1;
-        }
         #importo file per utilizzare funzioni...
         require_once $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'authorization/sec_sess.php';
         include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/check_nomi_data.php');
@@ -72,6 +62,7 @@
                                     <h1><a href='#' id='logo'>DMI Preprints</a></h1>
                                     <nav id='nav'>
                                         <a href='main.php'>preprint search</a>
+                                        <a href='view_preprints.php?p=1&w=0'>arXiv publications</a>
                                         <a href='reserved.php' class='current-page-item'>Reserved Area</a>
                                     </nav>
                                 </header>";
@@ -82,7 +73,8 @@
             $nav2 = "<header id='header'>
                                     <h1><a href='#' id='logo'>DMI Preprints</a></h1>
                                     <nav id='nav'>
-                                        <a href='main.php' class='current-page-item'>preprint search</a>
+                                        <a href='main.php'>preprint search</a>
+                                        <a href='view_preprints.php?p=1&w=0' class='current-page-item'>arXiv publications</a>
                                         <a href='reserved.php'>Reserved Area</a>
                                     </nav>
                                 </header>";
@@ -105,7 +97,7 @@
             <tr><form name="f1" action="<?php echo $rit ?>" method="GET">
                 <td align="right"><?php echo $t ?>&nbsp&nbsp&nbsp</td>
                 <td><input type="submit" name="b2" value="Back" id="bottone_keyword" class="bottoni"/></td>
-                <input type="text" name="p" value="1" checked hidden/><input type="text" name="w" value="<?php echo $view; ?>" checked hidden/>
+                <input type="text" name="p" value="1" checked hidden/><input type="text" name="w" value="0" checked hidden/>
             </form></tr>
             <?php
             echo $nav;

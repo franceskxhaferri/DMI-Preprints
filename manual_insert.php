@@ -56,6 +56,7 @@
                                     <h1><a href="#" id="logo">DMI Preprints</a></h1>
                                     <nav id="nav">
                                         <a href="main.php">preprint search</a>
+                                        <a href='view_preprints.php?p=1&w=0'>arXiv publications</a>
                                         <a href="reserved.php" class="current-page-item">Reserved Area</a>
                                     </nav>
                                 </header>
@@ -68,7 +69,7 @@
                 </div><center><form name="f1" action="arXiv_panel.php" method="GET">
                     <table>
                         <tr><td align="right">Go to arXiv panel&nbsp&nbsp&nbsp</td>
-                            <td><input type="submit" name="b1" value="Back" id="bottone_keyword" class="bottoni" onclick="return confirmExit()"/></td>
+                            <td><input type="submit" name="b1" value="Back" id='bottone_keyword' class='bottoni' onclick="return confirmExit()"/></td>
                         </tr>
                     </table>
                 </form></center><hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
@@ -78,7 +79,7 @@
             } else {
                 ?>
                 <form name="f2" action="manual_insert.php" method="POST" enctype="multipart/form-data">
-                    <center><div><br/><h2>preprint informations</h2><h1>field with "*" are required</h1><br/><input type="reset" name="reset" value="Reset"><br/><br/>
+                    <center><div><br/><h2>preprint informations</h2><h1>field with "*" are required</h1><br/><input type="reset" name="reset" value="Reset" style='width:40px;' id='bottone_keyword' class='bottoni'/><br/><br/>
                             *id of pubblication<br/><br/>
                             <textarea style="width:65%; height:16px" name="id" id="textbox" class="textbox" required placeholder="example of id: 0000.0000v1" autofocus></textarea><br/><br/><br/>
                             *data of pubblication<br/><br/>
@@ -98,7 +99,7 @@
                             *PDF or other document file<br/>
                             <input type="hidden" name="MAX_FILE_SIZE" value="10000000"><br/>
                             <input type="file" required name="fileToUpload" id="fileToUpload"><br/><br/>
-                            <input type="submit" name="bottoni8" value="Insert preprint" id="bottone_keyword" class="bottoni" onclick="return confirmInsert()"/><br/><br/>
+                            <input type="submit" name="bottoni8" value="Insert preprint" style='width:80px;' id='bottone_keyword' class='bottoni' onclick="return confirmInsert()"/><br/><br/>
                             </form>
                             <?php
                             $target_dir = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints' . "/upload/";

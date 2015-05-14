@@ -65,6 +65,7 @@
                                     <h1><a href="#" id="logo">DMI Preprints</a></h1>
                                     <nav id="nav">
                                         <a href="main.php">preprint search</a>
+                                        <a href='view_preprints.php?p=1&w=0'>arXiv publications</a>
                                         <a href="reserved.php" class="current-page-item">Reserved Area</a>
                                     </nav>
                                 </header>
@@ -75,9 +76,21 @@
                 <br/><div><center><br/><h2>AUTHORS LIST</h2></center>
                     <center><table>
                             <tr><form name="f1" action="arXiv_panel.php" method="GET"><td align="right">Go to arXiv panel&nbsp&nbsp&nbsp</td>
-                                <td colspan="2"><input type="submit" name="b1" value="Back" id="bottone_keyword" class="bottoni"></td></form></tr>
-                            <form name="f2" action="authors_list.php" method="POST"><tr><td align="right">Add author to list or search by name&nbsp&nbsp&nbsp</td><td><input type="submit" name="b2" value="Insert / Search" id="bottone_keyword" class="bottoni"></td><td><input type="search" autocomplete = "off" required name="txt1" id="textbox" class="textbox" placeholder="name1, name2, name..." autofocus></td><td align="center"><label>&nbsp&nbsp&nbsp&nbspInsert?<input type="checkbox" name="insert" value="1" checked/></label></td></tr>
-                                <tr align="center"></tr></form>                                                                                                                                        </table></center>
+                                <td colspan="2"><input type="submit" name="b1" value="Back" id="bottone_keyword" class="bottoni"/></td></form></tr><tr><td align="center" colspan="3"><br/></td></tr>
+                            
+                            <tr><form name="f2" action="authors_list.php" method="POST">
+		                    <td align="right">
+				            <label><input type="checkbox" name="insert" value="1" checked/>
+				            Add author to list or search by name&nbsp&nbsp&nbsp</label>
+		                    </td>
+		                    <td>
+		                    	<input type="search" style="width:173px;" id='textbox' class='textbox' autocomplete = "off" required name="txt1" placeholder="name1, name2, name..." autofocus />
+		                    </td>
+		                    <td>
+		                    	<input type="submit" name="b2" value="Insert/Search" style="width:80px;" id="bottone_keyword" class="bottoni"/>
+		                    </td>
+                            </form></tr>
+                                                                                                                                                                </table></center>
                 </div>
                 <div>
                     <?php
@@ -106,7 +119,7 @@
                             echo "<tr><td><label><input type='checkbox' name='" . $i . "' value='checked'/>$y.&nbsp&nbsp&nbsp" . $nomi[$i] . "</label></td></tr>";
                             $y++;
                         }
-                        echo "</table></center><br/><center><input type='submit' name='b3' value='Remove' id='bottone_keyword' class='bottoni' onclick='return confirmDelete()'></center></form>";
+                        echo "</table></center><br/><center><input type='submit' style='width:50px;' id='bottone_keyword' class='bottoni' name='b3' value='Remove' onclick='return confirmDelete()'></center></form>";
                         if ($lunghezza == 0) {
                             #richiamo funzione per corretto update successivo
                             aggiornanomi();
