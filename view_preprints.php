@@ -62,8 +62,8 @@
             $nav = "<header id='header'>
                                     <h1><a href='#' id='logo'>DMI Preprints</a></h1>
                                     <nav id='nav'>
-                                        <a href='main.php'>preprint search</a>
-                                        <a href='view_preprints.php?p=1&w=0'>arXiv publications</a>
+                                        <a href='main.php'>DMI Publications</a>
+                                        <a href='view_preprints.php?p=1&w=0'>arXiv Publications</a>
                                         <a href='reserved.php' class='current-page-item'>Reserved Area</a>
                                     </nav>
                                 </header>";
@@ -73,8 +73,8 @@
             $nav = "<header id='header'>
                                     <h1><a href='#' id='logo'>DMI Preprints</a></h1>
                                     <nav id='nav'>
-                                        <a href='main.php'>preprint search</a>
-                                        <a href='view_preprints.php?p=1&w=0' class='current-page-item'>arXiv publications</a>
+                                        <a href='main.php'>DMI Publications</a>
+                                        <a href='view_preprints.php?p=1&w=0' class='current-page-item'>arXiv Publications</a>
                                         <a href='reserved.php'>Reserved Area</a>
                                     </nav>
                                 </header>";
@@ -84,8 +84,8 @@
             $nav = "<header id='header'>
                                     <h1><a href='#' id='logo'>DMI Preprints</a></h1>
                                     <nav id='nav'>
-                                        <a href='main.php'>preprint search</a>
-                                        <a href='view_preprints.php?p=1&w=0' class='current-page-item'>arXiv publications</a>
+                                        <a href='main.php'>DMI Publications</a>
+                                        <a href='view_preprints.php?p=1&w=0' class='current-page-item'>arXiv Publications</a>
                                         <a href='reserved.php'>Reserved Area</a>
                                     </nav>
                                 </header>";
@@ -112,12 +112,14 @@
             ?>
         </div><center>
         <table>
-        <?php if ($_SESSION['logged_type'] === "mod"){
-		echo "<tr><form name='f1' action='$rit' method='GET'>
+            <?php
+            if ($_SESSION['logged_type'] === "mod") {
+                echo "<tr><form name='f1' action='$rit' method='GET'>
 		        <td align='right'>$t&nbsp&nbsp&nbsp</td>
 		        <td colspan='2'><input type='submit' name='b1' value='Back' id='bottone_keyword' class='bottoni'/></td>
 		    </form></tr>";
-        }?>
+            }
+            ?>
             <tr><form name="f2" action="archived_preprints.php" method="GET">
                 <input type="text" name="p" value="1" checked hidden/>
                 <td align="right">Archived preprints, contains old publications&nbsp&nbsp&nbsp</td>
@@ -136,7 +138,7 @@
                     <label><input type="radio" name="f" value="category">Category</label>
                     <label><input type="radio" name="f" value="year">Year</label>
                     <label><input type="radio" name="f" value="id">ID&nbsp&nbsp&nbsp</label></td>
-                <td><input type="search" autocomplete = "off" style="width:173px;" id='textbox' class='textbox' name="r" placeholder="Author name or part, etc." value="<?php echo $_GET['r'];?>" autofocus></td>
+                <td><input type="search" autocomplete = "off" style="width:173px;" id='textbox' class='textbox' name="r" placeholder="Author name or part, etc." value="<?php echo $_GET['r']; ?>" autofocus></td>
                 <td align="left"><input type="submit" style="width:100px;" id="bottone_keyword" class="bottoni" name="s" value="Apply/Search"/></td></tr>
                 <tr><td colspan="3" align="center">Search on:
                         <label><input type="checkbox" name="all" value="1">Record</label>

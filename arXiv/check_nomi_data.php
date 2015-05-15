@@ -123,32 +123,32 @@ function searchpreprint() {
         if ($_GET['h'] == "1") {
             $query = $query . "SELECT * FROM PREPRINTS WHERE autori LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION ";
             $cat++;
-            $cat3=$cat3."authors, ";
+            $cat3 = $cat3 . "authors, ";
         }
         if ($_GET['t'] == "1") {
             $query = $query . "SELECT * FROM PREPRINTS WHERE titolo LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION ";
             $cat++;
-            $cat3=$cat3."title, ";
+            $cat3 = $cat3 . "title, ";
         }
         if ($_GET['a'] == "1") {
             $query = $query . "SELECT * FROM PREPRINTS WHERE abstract LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION ";
             $cat++;
-            $cat3=$cat3."abstract, ";
+            $cat3 = $cat3 . "abstract, ";
         }
         if ($_GET['y'] == "1") {
             $query = $query . "SELECT * FROM PREPRINTS WHERE categoria LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION ";
             $cat++;
-            $cat3=$cat3."category, ";
+            $cat3 = $cat3 . "category, ";
         }
         if ($_GET['c'] == "1") {
             $query = $query . "SELECT * FROM PREPRINTS WHERE commenti LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION ";
             $cat++;
-            $cat3=$cat3."comments, ";
+            $cat3 = $cat3 . "comments, ";
         }
         if ($_GET['j'] == "1") {
             $query = $query . "SELECT * FROM PREPRINTS WHERE referenze LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION ";
             $cat++;
-            $cat3=$cat3."journal-ref, ";
+            $cat3 = $cat3 . "journal-ref, ";
         }
     } else {
         $query = " 
@@ -182,10 +182,10 @@ function searchpreprint() {
     #query di ricerca
     $querytotale = mysql_query($query);
     $ristot = mysql_num_rows($querytotale);
-    if($cat != "ALL RECORDS"){
-    	echo $ristot . " RESULTS ON " . $cat . " FIELD(".$cat3.") FOR: '" . $_GET['r'] . "' (results ordered by ".$orstr.")";
-    }else{
-    	echo $ristot . " RESULTS ON " . $cat . " FOR: '" . $_GET['r'] . "' (results ordered by ".$orstr.")";
+    if ($cat != "ALL RECORDS") {
+        echo $ristot . " RESULTS ON " . $cat . " FIELD(" . $cat3 . ") FOR: '" . $_GET['r'] . "' (results ordered by " . $orstr . ")";
+    } else {
+        echo $ristot . " RESULTS ON " . $cat . " FOR: '" . $_GET['r'] . "' (results ordered by " . $orstr . ")";
     }
     $npag = ceil($ristot / $risperpag);
     $query = $query . " ORDER BY " . $order . " LIMIT " . $limit . "," . $risperpag . "";
@@ -364,7 +364,7 @@ function filtropreprint() {
         $querytotale = mysql_query("SELECT * FROM PREPRINTS WHERE " . $argom . " LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1'");
         $ristot = mysql_num_rows($querytotale);
         if ($ristot != 0) {
-            echo $ristot." RESULTS FOR: '" . ($_GET['r']) . "'(" . $_GET['f'] . " filter) (results ordered by " . $orstr . ")";
+            echo $ristot . " RESULTS FOR: '" . ($_GET['r']) . "'(" . $_GET['f'] . " filter) (results ordered by " . $orstr . ")";
         } else {
             echo "SEARCHED " . strtoupper($_GET['f']) . " '" . ($_GET['r']) . "' NOT FOUND!";
             echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";

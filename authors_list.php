@@ -64,8 +64,8 @@
                                 <header id="header">
                                     <h1><a href="#" id="logo">DMI Preprints</a></h1>
                                     <nav id="nav">
-                                        <a href="main.php">preprint search</a>
-                                        <a href='view_preprints.php?p=1&w=0'>arXiv publications</a>
+                                        <a href="main.php">DMI Publications</a>
+                                        <a href='view_preprints.php?p=1&w=0'>arXiv Publications</a>
                                         <a href="reserved.php" class="current-page-item">Reserved Area</a>
                                     </nav>
                                 </header>
@@ -77,20 +77,20 @@
                     <center><table>
                             <tr><form name="f1" action="arXiv_panel.php" method="GET"><td align="right">Go to arXiv panel&nbsp&nbsp&nbsp</td>
                                 <td colspan="2"><input type="submit" name="b1" value="Back" id="bottone_keyword" class="bottoni"/></td></form></tr><tr><td align="center" colspan="3"><br/></td></tr>
-                            
+
                             <tr><form name="f2" action="authors_list.php" method="POST">
-		                    <td align="right">
-				            <label><input type="checkbox" name="insert" value="1" checked/>
-				            Add author to list or search by name&nbsp&nbsp&nbsp</label>
-		                    </td>
-		                    <td>
-		                    	<input type="search" style="width:173px;" id='textbox' class='textbox' autocomplete = "off" required name="txt1" placeholder="name1, name2, name..." autofocus />
-		                    </td>
-		                    <td>
-		                    	<input type="submit" name="b2" value="Insert/Search" style="width:80px;" id="bottone_keyword" class="bottoni"/>
-		                    </td>
+                                <td align="right">
+                                    <label><input type="checkbox" name="insert" value="1" checked/>
+                                        Add author to list or search by name&nbsp&nbsp&nbsp</label>
+                                </td>
+                                <td>
+                                    <input type="search" style="width:173px;" id='textbox' class='textbox' autocomplete = "off" required name="txt1" placeholder="name1, name2, name..." autofocus />
+                                </td>
+                                <td>
+                                    <input type="submit" name="b2" value="Insert/Search" style="width:80px;" id="bottone_keyword" class="bottoni"/>
+                                </td>
                             </form></tr>
-                                                                                                                                                                </table></center>
+                        </table></center>
                 </div>
                 <div>
                     <?php
