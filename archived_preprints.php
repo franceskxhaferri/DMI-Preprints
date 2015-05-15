@@ -66,8 +66,8 @@
                                         <a href='reserved.php' class='current-page-item'>Reserved Area</a>
                                     </nav>
                                 </header>";
-            $t = "Go to arXiv panel";
             $rit = "arXiv_panel.php";
+            $cred = 1;
         } else {
             $nav = "";
             $nav2 = "<header id='header'>
@@ -78,8 +78,6 @@
                                         <a href='reserved.php'>Reserved Area</a>
                                     </nav>
                                 </header>";
-            $t = "Go to approved preprints";
-            $rit = "view_preprints.php";
         }
         ?>
         <div id="header-wrapper">
@@ -93,32 +91,33 @@
         </div>
         <div><center><br/><br/><h2>ARCHIVED PREPRINTS</h2></center>
         </div><center>
-        <table>
-            <tr><form name="f1" action="<?php echo $rit ?>" method="GET">
-                <td align="right"><?php echo $t ?>&nbsp&nbsp&nbsp</td>
-                <td><input type="submit" name="b2" value="Back" id="bottone_keyword" class="bottoni"/></td>
-                <input type="text" name="p" value="1" checked hidden/><input type="text" name="w" value="0" checked hidden/>
-            </form></tr>
-            <?php
+        <?php
+        if ($cred == 1) {
+            echo "<table><tr><form name='f1' action='<?php echo $rit ?>' method='GET'>
+                <td align='right'>Go to arXiv panel&nbsp&nbsp&nbsp</td>
+                <td><input type='submit' name='b2' value='Back' id='bottone_keyword' class='bottoni'/></td>
+                <input type='text' name='p' value='1' checked hidden/><input type='text' name='w' value='0' checked hidden/>
+            </form></tr>";
             echo $nav;
-            ?>
-        </table>
-    </center>
-    <?php
-    if (sessioneavviata() == True) {
-        echo "<br/><br/><center>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTION CAN'T BE USED IN THIS MOMENT!</center><br/>";
-    } else {
-        echo "<br/><center><a style='text-decoration: none;' href='javascript:FinePagina()'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8595;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><center><div>";
-        if (isset($_GET['c'])) {
-            #funzione gestione preprint archiviati
-            leggipreprintarchiviati();
-        } else {
-            #funzione gestione preprint archiviati
-            leggipreprintarchiviati();
-            echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><br/>";
         }
+        ?>
+    </table>
+</center>
+<?php
+if (sessioneavviata() == True) {
+    echo "<br/><br/><center>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTION CAN'T BE USED IN THIS MOMENT!</center><br/>";
+} else {
+    echo "<br/><center><a style='text-decoration: none;' href='javascript:FinePagina()'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8595;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><center><div>";
+    if (isset($_GET['c'])) {
+        #funzione gestione preprint archiviati
+        leggipreprintarchiviati();
+    } else {
+        #funzione gestione preprint archiviati
+        leggipreprintarchiviati();
+        echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><br/>";
     }
-    ?>
+}
+?>
 </div></center>
 </body>
 </html>

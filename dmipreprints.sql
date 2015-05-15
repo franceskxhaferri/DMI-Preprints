@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mag 07, 2015 alle 22:26
+-- Generation Time: Mag 16, 2015 alle 01:30
 -- Versione del server: 5.6.24-0ubuntu2
 -- PHP Version: 5.6.4-4ubuntu6
 
@@ -30,6 +30,16 @@ CREATE TABLE IF NOT EXISTS `AUTORI` (
   `nome` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dump dei dati per la tabella `AUTORI`
+--
+
+INSERT INTO `AUTORI` (`nome`) VALUES
+('BRUNO IANNAZZO'),
+('GIANLUCA VINTI'),
+('LAURA ANGELONI'),
+('MASSIMO GIULIETTI');
+
 -- --------------------------------------------------------
 
 --
@@ -39,6 +49,16 @@ CREATE TABLE IF NOT EXISTS `AUTORI` (
 CREATE TABLE IF NOT EXISTS `AUTORI_BACKUP` (
   `nome` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dump dei dati per la tabella `AUTORI_BACKUP`
+--
+
+INSERT INTO `AUTORI_BACKUP` (`nome`) VALUES
+('BRUNO IANNAZZO'),
+('GIANLUCA VINTI'),
+('LAURA ANGELONI'),
+('MASSIMO GIULIETTI');
 
 -- --------------------------------------------------------
 
@@ -55,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `DATA_ULTIMO_LANCIO` (
 --
 
 INSERT INTO `DATA_ULTIMO_LANCIO` (`data`) VALUES
-('2015-05-07 22:23');
+('2015-05-16 01:28');
 
 -- --------------------------------------------------------
 
@@ -65,17 +85,17 @@ INSERT INTO `DATA_ULTIMO_LANCIO` (`data`) VALUES
 
 CREATE TABLE IF NOT EXISTS `PREPRINTS` (
   `id_pubblicazione` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `titolo` varchar(1000) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `data_pubblicazione` varchar(1000) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `autori` varchar(1000) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `referenze` varchar(1000) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `commenti` varchar(1000) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `categoria` varchar(1000) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `abstract` varchar(10000) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `titolo` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `data_pubblicazione` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `autori` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `referenze` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `commenti` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `categoria` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `abstract` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci,
   `Bin_data` longblob,
-  `Filename` varchar(1000) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Filesize` varchar(1000) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Filetype` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Filename` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `Filesize` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `Filetype` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci,
   `checked` varchar(1) NOT NULL DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -87,17 +107,17 @@ CREATE TABLE IF NOT EXISTS `PREPRINTS` (
 
 CREATE TABLE IF NOT EXISTS `PREPRINTS_ARCHIVIATI` (
   `id_pubblicazione` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `titolo` varchar(1000) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `data_pubblicazione` varchar(1000) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `autori` varchar(1000) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `referenze` varchar(1000) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `commenti` varchar(1000) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `categoria` varchar(1000) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `abstract` varchar(10000) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `titolo` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `data_pubblicazione` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `autori` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `referenze` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `commenti` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `categoria` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `abstract` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci,
   `Bin_data` longblob,
-  `Filename` varchar(1000) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Filesize` varchar(1000) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Filetype` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Filename` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `Filesize` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `Filetype` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci,
   `checked` varchar(1) NOT NULL DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -133,7 +153,7 @@ CREATE TABLE IF NOT EXISTS `sessione_data` (
 --
 
 INSERT INTO `sessione_data` (`data`) VALUES
-('20150507');
+('20150516');
 
 -- --------------------------------------------------------
 

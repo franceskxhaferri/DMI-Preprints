@@ -119,48 +119,147 @@ function searchpreprint() {
     }
     $cat = 0;
     #verifica parametri ricerca
+    if ($_GET['e'] != 1 && $_GET['i'] != 1 && $_GET['t'] != 1 && $_GET['a'] != 1 && $_GET['c'] != 1 && $_GET['j'] != 1 && $_GET['h'] != 1 && $_GET['y'] != 1 && $_GET['all'] != 1 && $_GET['d'] == 1) {
+        $query = " 
+	    	SELECT * FROM PREPRINTS WHERE id_pubblicazione LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
+	    	SELECT * FROM PREPRINTS WHERE titolo LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
+	    	SELECT * FROM PREPRINTS WHERE data_pubblicazione LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
+	    	SELECT * FROM PREPRINTS WHERE autori LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
+	    	SELECT * FROM PREPRINTS WHERE referenze LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
+	    	SELECT * FROM PREPRINTS WHERE commenti LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
+	    	SELECT * FROM PREPRINTS WHERE categoria LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
+	    	SELECT * FROM PREPRINTS WHERE abstract LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION 
+	    	SELECT * FROM PREPRINTS_ARCHIVIATI WHERE id_pubblicazione LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
+	    	SELECT * FROM PREPRINTS_ARCHIVIATI WHERE titolo LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
+
+	    	SELECT * FROM PREPRINTS_ARCHIVIATI WHERE data_pubblicazione LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
+	    	SELECT * FROM PREPRINTS_ARCHIVIATI WHERE autori LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
+	    	SELECT * FROM PREPRINTS_ARCHIVIATI WHERE referenze LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
+	    	SELECT * FROM PREPRINTS_ARCHIVIATI WHERE commenti LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
+	    	SELECT * FROM PREPRINTS_ARCHIVIATI WHERE categoria LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
+	    	SELECT * FROM PREPRINTS_ARCHIVIATI WHERE abstract LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION ";
+        $cat = "ALL";
+    }
     if ($_GET['all'] != "1") {
-        if ($_GET['h'] == "1") {
-            $query = $query . "SELECT * FROM PREPRINTS WHERE autori LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION ";
-            $cat++;
-            $cat3 = $cat3 . "authors, ";
-        }
-        if ($_GET['t'] == "1") {
-            $query = $query . "SELECT * FROM PREPRINTS WHERE titolo LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION ";
-            $cat++;
-            $cat3 = $cat3 . "title, ";
-        }
-        if ($_GET['a'] == "1") {
-            $query = $query . "SELECT * FROM PREPRINTS WHERE abstract LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION ";
-            $cat++;
-            $cat3 = $cat3 . "abstract, ";
-        }
-        if ($_GET['y'] == "1") {
-            $query = $query . "SELECT * FROM PREPRINTS WHERE categoria LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION ";
-            $cat++;
-            $cat3 = $cat3 . "category, ";
-        }
-        if ($_GET['c'] == "1") {
-            $query = $query . "SELECT * FROM PREPRINTS WHERE commenti LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION ";
-            $cat++;
-            $cat3 = $cat3 . "comments, ";
-        }
-        if ($_GET['j'] == "1") {
-            $query = $query . "SELECT * FROM PREPRINTS WHERE referenze LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION ";
-            $cat++;
-            $cat3 = $cat3 . "journal-ref, ";
+        if ($_GET['d'] != "1") {
+            if ($_GET['h'] == "1") {
+                $query = $query . "SELECT * FROM PREPRINTS WHERE autori LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION ";
+                $cat++;
+                $cat3 = $cat3 . "authors, ";
+            }
+            if ($_GET['t'] == "1") {
+                $query = $query . "SELECT * FROM PREPRINTS WHERE titolo LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION ";
+                $cat++;
+                $cat3 = $cat3 . "title, ";
+            }
+            if ($_GET['a'] == "1") {
+                $query = $query . "SELECT * FROM PREPRINTS WHERE abstract LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION ";
+                $cat++;
+                $cat3 = $cat3 . "abstract, ";
+            }
+            if ($_GET['y'] == "1") {
+                $query = $query . "SELECT * FROM PREPRINTS WHERE categoria LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION ";
+                $cat++;
+                $cat3 = $cat3 . "category, ";
+            }
+            if ($_GET['c'] == "1") {
+                $query = $query . "SELECT * FROM PREPRINTS WHERE commenti LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION ";
+                $cat++;
+                $cat3 = $cat3 . "comments, ";
+            }
+            if ($_GET['j'] == "1") {
+                $query = $query . "SELECT * FROM PREPRINTS WHERE referenze LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION ";
+                $cat++;
+                $cat3 = $cat3 . "journal-ref, ";
+            }
+            if ($_GET['e'] == "1") {
+                $query = $query . "SELECT * FROM PREPRINTS WHERE data_pubblicazione LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION ";
+                $cat++;
+                $cat3 = $cat3 . "year, ";
+            }
+            if ($_GET['i'] == "1") {
+                $query = $query . "SELECT * FROM PREPRINTS WHERE id_pubblicazione LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION ";
+                $cat++;
+                $cat3 = $cat3 . "ID, ";
+            }
+        } else {
+            if ($_GET['h'] == "1") {
+                $query = $query . "SELECT * FROM PREPRINTS WHERE autori LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION 
+		    SELECT * FROM PREPRINTS_ARCHIVIATI WHERE autori LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION ";
+                $cat++;
+                $cat3 = $cat3 . "authors, ";
+            }
+            if ($_GET['t'] == "1") {
+                $query = $query . "SELECT * FROM PREPRINTS WHERE titolo LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION 
+		    SELECT * FROM PREPRINTS_ARCHIVIATI WHERE titolo LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION ";
+                $cat++;
+                $cat3 = $cat3 . "title, ";
+            }
+            if ($_GET['a'] == "1") {
+                $query = $query . "SELECT * FROM PREPRINTS WHERE abstract LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION SELECT * FROM PREPRINTS_ARCHIVIATI WHERE abstract LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION ";
+                $cat++;
+                $cat3 = $cat3 . "abstract, ";
+            }
+            if ($_GET['y'] == "1") {
+                $query = $query . "SELECT * FROM PREPRINTS WHERE categoria LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION SELECT * FROM PREPRINTS_ARCHIVIATI WHERE categoria LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION ";
+                $cat++;
+                $cat3 = $cat3 . "category, ";
+            }
+            if ($_GET['c'] == "1") {
+                $query = $query . "SELECT * FROM PREPRINTS WHERE commenti LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION SELECT * FROM PREPRINTS_ARCHIVIATI WHERE commenti LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION ";
+                $cat++;
+                $cat3 = $cat3 . "comments, ";
+            }
+            if ($_GET['j'] == "1") {
+                $query = $query . "SELECT * FROM PREPRINTS WHERE referenze LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION SELECT * FROM PREPRINTS_ARCHIVIATI WHERE referenze LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION ";
+                $cat++;
+                $cat3 = $cat3 . "journal-ref, ";
+            }
+            if ($_GET['e'] == "1") {
+                $query = $query . "SELECT * FROM PREPRINTS WHERE data_pubblicazione LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION SELECT * FROM PREPRINTS_ARCHIVIATI WHERE data_pubblicazione LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION ";
+                $cat++;
+                $cat3 = $cat3 . "year, ";
+            }
+            if ($_GET['i'] == "1") {
+                $query = $query . "SELECT * FROM PREPRINTS WHERE id_pubblicazione LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION SELECT * FROM PREPRINTS_ARCHIVIATI WHERE data_pubblicazione LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION ";
+                $cat++;
+                $cat3 = $cat3 . "ID, ";
+            }
+            $cat3 = $cat3 . "included archived, ";
         }
     } else {
-        $query = " 
-    	SELECT * FROM PREPRINTS WHERE id_pubblicazione LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
-    	SELECT * FROM PREPRINTS WHERE titolo LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
-    	SELECT * FROM PREPRINTS WHERE data_pubblicazione LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
-    	SELECT * FROM PREPRINTS WHERE autori LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
-    	SELECT * FROM PREPRINTS WHERE referenze LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
-    	SELECT * FROM PREPRINTS WHERE commenti LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
-    	SELECT * FROM PREPRINTS WHERE categoria LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
-    	SELECT * FROM PREPRINTS WHERE abstract LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION ";
-        $cat = "ALL RECORDS";
+        if ($_GET['d'] != "1") {
+            $query = " 
+	    	SELECT * FROM PREPRINTS WHERE id_pubblicazione LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
+	    	SELECT * FROM PREPRINTS WHERE titolo LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
+	    	SELECT * FROM PREPRINTS WHERE data_pubblicazione LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
+	    	SELECT * FROM PREPRINTS WHERE autori LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
+	    	SELECT * FROM PREPRINTS WHERE referenze LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
+	    	SELECT * FROM PREPRINTS WHERE commenti LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
+	    	SELECT * FROM PREPRINTS WHERE categoria LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
+	    	SELECT * FROM PREPRINTS WHERE abstract LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION ";
+            $cat = "ALL RECORDS";
+        } else {
+            $query = " 
+	    	SELECT * FROM PREPRINTS WHERE id_pubblicazione LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
+	    	SELECT * FROM PREPRINTS WHERE titolo LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
+	    	SELECT * FROM PREPRINTS WHERE data_pubblicazione LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
+	    	SELECT * FROM PREPRINTS WHERE autori LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
+	    	SELECT * FROM PREPRINTS WHERE referenze LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
+	    	SELECT * FROM PREPRINTS WHERE commenti LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
+	    	SELECT * FROM PREPRINTS WHERE categoria LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
+	    	SELECT * FROM PREPRINTS WHERE abstract LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION 
+	    	SELECT * FROM PREPRINTS_ARCHIVIATI WHERE id_pubblicazione LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
+	    	SELECT * FROM PREPRINTS_ARCHIVIATI WHERE titolo LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
+	    	SELECT * FROM PREPRINTS_ARCHIVIATI WHERE data_pubblicazione LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
+	    	SELECT * FROM PREPRINTS_ARCHIVIATI WHERE autori LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
+	    	SELECT * FROM PREPRINTS_ARCHIVIATI WHERE referenze LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
+	    	SELECT * FROM PREPRINTS_ARCHIVIATI WHERE commenti LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
+	    	SELECT * FROM PREPRINTS_ARCHIVIATI WHERE categoria LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
+	    	SELECT * FROM PREPRINTS_ARCHIVIATI WHERE abstract LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION ";
+            $cat = "ALL RECORDS";
+            $cat3 = $cat3 . "included archived, ";
+        }
     }
     $query = substr($query, 0, -7);
     $cat3 = substr($cat3, 0, -2);
@@ -197,28 +296,28 @@ function searchpreprint() {
             $t1 = $p - 1;
             $t2 = $p - 2;
             $t3 = $p - 3;
-            echo '<a style="color:#007897; text-decoration: none;" title="First page" href="view_preprints.php?p=1&w=' . $_GET['w'] . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '&o=' . $_GET['o'] . '&t=' . $_GET['t'] . '&a=' . $_GET['a'] . '&c=' . $_GET['c'] . '&j=' . $_GET['j'] . '"> &#8656 </a>';
+            echo '<a style="color:#007897; text-decoration: none;" title="First page" href="view_preprints.php?p=1&w=' . $_GET['w'] . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '&o=' . $_GET['o'] . '&t=' . $_GET['t'] . '&a=' . $_GET['a'] . '&c=' . $_GET['c'] . '&j=' . $_GET['j'] . '&d=' . $_GET['d'] . '&all=' . $_GET['all'] . '&h=' . $_GET['h'] . '&y=' . $_GET['y'] . '&e=' . $_GET['e'] . '&i=' . $_GET['i'] . '"> &#8656 </a>';
             if ($p >= 3 && $t3 > 0) {
-                echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p - 3) . '&w=' . $_GET['w'] . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '&o=' . $_GET['o'] . '&t=' . $_GET['t'] . '&a=' . $_GET['a'] . '&c=' . $_GET['c'] . '&j=' . $_GET['j'] . '"> ' . " " . $t3 . " " . ' </a>';
+                echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p - 3) . '&w=' . $_GET['w'] . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '&o=' . $_GET['o'] . '&t=' . $_GET['t'] . '&a=' . $_GET['a'] . '&c=' . $_GET['c'] . '&j=' . $_GET['j'] . '&d=' . $_GET['d'] . '&all=' . $_GET['all'] . '&h=' . $_GET['h'] . '&y=' . $_GET['y'] . '&e=' . $_GET['e'] . '&i=' . $_GET['i'] . '"> ' . " " . $t3 . " " . ' </a>';
             }
             if ($p >= 2 && $t2 > 0) {
-                echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p - 2) . '&w=' . $_GET['w'] . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '&o=' . $_GET['o'] . '&t=' . $_GET['t'] . '&a=' . $_GET['a'] . '&c=' . $_GET['c'] . '&j=' . $_GET['j'] . '"> ' . " " . $t2 . " " . ' </a>';
+                echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p - 2) . '&w=' . $_GET['w'] . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '&o=' . $_GET['o'] . '&t=' . $_GET['t'] . '&a=' . $_GET['a'] . '&c=' . $_GET['c'] . '&j=' . $_GET['j'] . '&d=' . $_GET['d'] . '&all=' . $_GET['all'] . '&h=' . $_GET['h'] . '&y=' . $_GET['y'] . '&e=' . $_GET['e'] . '&i=' . $_GET['i'] . '"> ' . " " . $t2 . " " . ' </a>';
             }
-            echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p - 1) . '&w=' . $_GET['w'] . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '&o=' . $_GET['o'] . '&t=' . $_GET['t'] . '&a=' . $_GET['a'] . '&c=' . $_GET['c'] . '&j=' . $_GET['j'] . '"> ' . " " . $t1 . " " . ' </a>';
+            echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p - 1) . '&w=' . $_GET['w'] . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '&o=' . $_GET['o'] . '&t=' . $_GET['t'] . '&a=' . $_GET['a'] . '&c=' . $_GET['c'] . '&j=' . $_GET['j'] . '&d=' . $_GET['d'] . '&all=' . $_GET['all'] . '&h=' . $_GET['h'] . '&y=' . $_GET['y'] . '&e=' . $_GET['e'] . '&i=' . $_GET['i'] . '"> ' . " " . $t1 . " " . ' </a>';
         }
         echo " " . $p . " ";
         if ($p != $npag) {
             $t4 = $p + 1;
             $t5 = $p + 2;
             $t6 = $p + 3;
-            echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p + 1) . '&w=' . $_GET['w'] . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '&o=' . $_GET['o'] . '&t=' . $_GET['t'] . '&a=' . $_GET['a'] . '&c=' . $_GET['c'] . '&j=' . $_GET['j'] . '"> ' . " " . $t4 . " " . ' </a>';
+            echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p + 1) . '&w=' . $_GET['w'] . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '&o=' . $_GET['o'] . '&t=' . $_GET['t'] . '&a=' . $_GET['a'] . '&c=' . $_GET['c'] . '&j=' . $_GET['j'] . '&d=' . $_GET['d'] . '&all=' . $_GET['all'] . '&h=' . $_GET['h'] . '&y=' . $_GET['y'] . '&e=' . $_GET['e'] . '&i=' . $_GET['i'] . '"> ' . " " . $t4 . " " . ' </a>';
             if ($p < $npag && $t5 <= $npag) {
-                echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p + 2) . '&w=' . $_GET['w'] . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '&o=' . $_GET['o'] . '&t=' . $_GET['t'] . '&a=' . $_GET['a'] . '&c=' . $_GET['c'] . '&j=' . $_GET['j'] . '"> ' . " " . $t5 . " " . ' </a>';
+                echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p + 2) . '&w=' . $_GET['w'] . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '&o=' . $_GET['o'] . '&t=' . $_GET['t'] . '&a=' . $_GET['a'] . '&c=' . $_GET['c'] . '&j=' . $_GET['j'] . '&d=' . $_GET['d'] . '&all=' . $_GET['all'] . '&h=' . $_GET['h'] . '&y=' . $_GET['y'] . '&e=' . $_GET['e'] . '&i=' . $_GET['i'] . '"> ' . " " . $t5 . " " . ' </a>';
             }
             if ($p < $npag && $t6 <= $npag) {
-                echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p + 3) . '&w=' . $_GET['w'] . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '&o=' . $_GET['o'] . '&t=' . $_GET['t'] . '&a=' . $_GET['a'] . '&c=' . $_GET['c'] . '&j=' . $_GET['j'] . '"> ' . " " . $t6 . " " . ' </a>';
+                echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p + 3) . '&w=' . $_GET['w'] . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '&o=' . $_GET['o'] . '&t=' . $_GET['t'] . '&a=' . $_GET['a'] . '&c=' . $_GET['c'] . '&j=' . $_GET['j'] . '&d=' . $_GET['d'] . '&all=' . $_GET['all'] . '&h=' . $_GET['h'] . '&y=' . $_GET['y'] . '&e=' . $_GET['e'] . '&i=' . $_GET['i'] . '"> ' . " " . $t6 . " " . ' </a>';
             }
-            echo '<a style="color:#007897; text-decoration: none;" title="Last page" href="view_preprints.php?p=' . $npag . '&w=' . $_GET['w'] . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '&o=' . $_GET['o'] . '&t=' . $_GET['t'] . '&a=' . $_GET['a'] . '&c=' . $_GET['c'] . '&j=' . $_GET['j'] . '"> &#8658 </a>';
+            echo '<a style="color:#007897; text-decoration: none;" title="Last page" href="view_preprints.php?p=' . $npag . '&w=' . $_GET['w'] . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '&o=' . $_GET['o'] . '&t=' . $_GET['t'] . '&a=' . $_GET['a'] . '&c=' . $_GET['c'] . '&j=' . $_GET['j'] . '&d=' . $_GET['d'] . '&all=' . $_GET['all'] . '&h=' . $_GET['h'] . '&y=' . $_GET['y'] . '&e=' . $_GET['e'] . '&i=' . $_GET['i'] . '"> &#8658 </a>';
         }
         echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
     }
@@ -226,18 +325,23 @@ function searchpreprint() {
     #recupero e visualizzazione dei campi della ricerca effettuata
     while ($row = mysql_fetch_array($result)) {
         $i++;
-        if ($cred == 1) {
-            echo "<h1>" . $i . ".<br/></h1><div align='left' style='width:90%;'>";
-            if ($_GET['w'] == "0") {
-                echo "<p><h1>Id of pubblication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./pdf/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a>&nbsp&nbsp&nbsp<a title='Change this preprint' style='color:#007897;' href='./manual_edit.php?id=" . $row['id_pubblicazione'] . "' onclick='window.open(this.href); return false'>edit</a></div><div style='margin-left:2%;'>" . $row['id_pubblicazione'] . "</div>";
+        if (file_exists("./pdf/" . $row['Filename'])) {
+            if ($cred == 1) {
+                echo "<h1>" . $i . ".<br/></h1><div align='left' style='width:90%;'>";
+                if ($_GET['w'] == "0") {
+                    echo "<p><h1>Id of pubblication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./pdf/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a>&nbsp&nbsp&nbsp<a title='Change this preprint' style='color:#007897;' href='./manual_edit.php?id=" . $row['id_pubblicazione'] . "' onclick='window.open(this.href); return false'>edit</a></div><div style='margin-left:2%;'>" . $row['id_pubblicazione'] . "</div>";
+                } else {
+                    echo "<p><h1>Id of pubblication:</h1></p><div style='float:right;'><a title='Change this preprint' style='color:#007897;' href='./manual_edit.php?id=" . $row['id_pubblicazione'] . "' onclick='window.open(this.href); return false'>edit</a></div><div style='margin-left:2%;'>" . $row['id_pubblicazione'] . "</div>";
+                }
             } else {
-                echo "<p><h1>Id of pubblication:</h1></p><div style='float:right;'><a title='Change this preprint' style='color:#007897;' href='./manual_edit.php?id=" . $row['id_pubblicazione'] . "' onclick='window.open(this.href); return false'>edit</a></div><div style='margin-left:2%;'>" . $row['id_pubblicazione'] . "</div>";
+                echo "<h1>" . $i . ".<br/></h1><div align='left' style='width:90%;'>";
+                if ($_GET['w'] == "0") {
+                    echo "<p><h1>Id of pubblication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./pdf/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a></div><div style='margin-left:2%;'>" . $row['id_pubblicazione'] . "</div>";
+                }
             }
         } else {
             echo "<h1>" . $i . ".<br/></h1><div align='left' style='width:90%;'>";
-            if ($_GET['w'] == "0") {
-                echo "<p><h1>Id of pubblication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./pdf/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a></div><div style='margin-left:2%;'>" . $row['id_pubblicazione'] . "</div>";
-            }
+            echo "<p><h1>Id of pubblication:</h1></p><div style='float:right;'>Archived</div><div style='margin-left:2%;'>" . $row['id_pubblicazione'] . "</div>";
         }
         echo "<p><h1>Title:</h1></p><div style='margin-left:2%; margin-right:2%;'>" . stripslashes($row['titolo']) . "</div>";
         echo "<p><h1>Date of pubblication:</h1></p><div style='margin-left:2%; margin-right:2%;'>" . stripslashes($row['data_pubblicazione']) . "</div>";
@@ -267,28 +371,28 @@ function searchpreprint() {
             $t1 = $p - 1;
             $t2 = $p - 2;
             $t3 = $p - 3;
-            echo '<a style="color:#007897; text-decoration: none;" title="First page" href="view_preprints.php?p=1&w=' . $_GET['w'] . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '&o=' . $_GET['o'] . '&t=' . $_GET['t'] . '&a=' . $_GET['a'] . '&c=' . $_GET['c'] . '&j=' . $_GET['j'] . '"> &#8656 </a>';
+            echo '<a style="color:#007897; text-decoration: none;" title="First page" href="view_preprints.php?p=1&w=' . $_GET['w'] . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '&o=' . $_GET['o'] . '&t=' . $_GET['t'] . '&a=' . $_GET['a'] . '&c=' . $_GET['c'] . '&j=' . $_GET['j'] . '&d=' . $_GET['d'] . '&all=' . $_GET['all'] . '&h=' . $_GET['h'] . '&y=' . $_GET['y'] . '&e=' . $_GET['e'] . '&i=' . $_GET['i'] . '"> &#8656 </a>';
             if ($p >= 3 && $t3 > 0) {
-                echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p - 3) . '&w=' . $_GET['w'] . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '&o=' . $_GET['o'] . '&t=' . $_GET['t'] . '&a=' . $_GET['a'] . '&c=' . $_GET['c'] . '&j=' . $_GET['j'] . '"> ' . " " . $t3 . " " . ' </a>';
+                echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p - 3) . '&w=' . $_GET['w'] . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '&o=' . $_GET['o'] . '&t=' . $_GET['t'] . '&a=' . $_GET['a'] . '&c=' . $_GET['c'] . '&j=' . $_GET['j'] . '&d=' . $_GET['d'] . '&all=' . $_GET['all'] . '&h=' . $_GET['h'] . '&y=' . $_GET['y'] . '&e=' . $_GET['e'] . '&i=' . $_GET['i'] . '"> ' . " " . $t3 . " " . ' </a>';
             }
             if ($p >= 2 && $t2 > 0) {
-                echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p - 2) . '&w=' . $_GET['w'] . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '&o=' . $_GET['o'] . '&t=' . $_GET['t'] . '&a=' . $_GET['a'] . '&c=' . $_GET['c'] . '&j=' . $_GET['j'] . '"> ' . " " . $t2 . " " . ' </a>';
+                echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p - 2) . '&w=' . $_GET['w'] . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '&o=' . $_GET['o'] . '&t=' . $_GET['t'] . '&a=' . $_GET['a'] . '&c=' . $_GET['c'] . '&j=' . $_GET['j'] . '&d=' . $_GET['d'] . '&all=' . $_GET['all'] . '&h=' . $_GET['h'] . '&y=' . $_GET['y'] . '&e=' . $_GET['e'] . '&i=' . $_GET['i'] . '"> ' . " " . $t2 . " " . ' </a>';
             }
-            echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p - 1) . '&w=' . $_GET['w'] . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '&o=' . $_GET['o'] . '&t=' . $_GET['t'] . '&a=' . $_GET['a'] . '&c=' . $_GET['c'] . '&j=' . $_GET['j'] . '"> ' . " " . $t1 . " " . ' </a>';
+            echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p - 1) . '&w=' . $_GET['w'] . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '&o=' . $_GET['o'] . '&t=' . $_GET['t'] . '&a=' . $_GET['a'] . '&c=' . $_GET['c'] . '&j=' . $_GET['j'] . '&d=' . $_GET['d'] . '&all=' . $_GET['all'] . '&h=' . $_GET['h'] . '&y=' . $_GET['y'] . '&e=' . $_GET['e'] . '&i=' . $_GET['i'] . '"> ' . " " . $t1 . " " . ' </a>';
         }
         echo " " . $p . " ";
         if ($p != $npag) {
             $t4 = $p + 1;
             $t5 = $p + 2;
             $t6 = $p + 3;
-            echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p + 1) . '&w=' . $_GET['w'] . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '&o=' . $_GET['o'] . '&t=' . $_GET['t'] . '&a=' . $_GET['a'] . '&c=' . $_GET['c'] . '&j=' . $_GET['j'] . '"> ' . " " . $t4 . " " . ' </a>';
+            echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p + 1) . '&w=' . $_GET['w'] . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '&o=' . $_GET['o'] . '&t=' . $_GET['t'] . '&a=' . $_GET['a'] . '&c=' . $_GET['c'] . '&j=' . $_GET['j'] . '&d=' . $_GET['d'] . '&all=' . $_GET['all'] . '&h=' . $_GET['h'] . '&y=' . $_GET['y'] . '&e=' . $_GET['e'] . '&i=' . $_GET['i'] . '"> ' . " " . $t4 . " " . ' </a>';
             if ($p < $npag && $t5 <= $npag) {
-                echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p + 2) . '&w=' . $_GET['w'] . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '&o=' . $_GET['o'] . '&t=' . $_GET['t'] . '&a=' . $_GET['a'] . '&c=' . $_GET['c'] . '&j=' . $_GET['j'] . '"> ' . " " . $t5 . " " . ' </a>';
+                echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p + 2) . '&w=' . $_GET['w'] . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '&o=' . $_GET['o'] . '&t=' . $_GET['t'] . '&a=' . $_GET['a'] . '&c=' . $_GET['c'] . '&j=' . $_GET['j'] . '&d=' . $_GET['d'] . '&all=' . $_GET['all'] . '&h=' . $_GET['h'] . '&y=' . $_GET['y'] . '&e=' . $_GET['e'] . '&i=' . $_GET['i'] . '"> ' . " " . $t5 . " " . ' </a>';
             }
             if ($p < $npag && $t6 <= $npag) {
-                echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p + 3) . '&w=' . $_GET['w'] . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '&o=' . $_GET['o'] . '&t=' . $_GET['t'] . '&a=' . $_GET['a'] . '&c=' . $_GET['c'] . '&j=' . $_GET['j'] . '"> ' . " " . $t6 . " " . ' </a>';
+                echo '<a style="color:#007897; text-decoration: none;" href="view_preprints.php?p=' . ($p + 3) . '&w=' . $_GET['w'] . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '&o=' . $_GET['o'] . '&t=' . $_GET['t'] . '&a=' . $_GET['a'] . '&c=' . $_GET['c'] . '&j=' . $_GET['j'] . '&d=' . $_GET['d'] . '&all=' . $_GET['all'] . '&h=' . $_GET['h'] . '&y=' . $_GET['y'] . '&e=' . $_GET['e'] . '&i=' . $_GET['i'] . '"> ' . " " . $t6 . " " . ' </a>';
             }
-            echo '<a style="color:#007897; text-decoration: none;" title="Last page" href="view_preprints.php?p=' . $npag . '&w=' . $_GET['w'] . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '&o=' . $_GET['o'] . '&t=' . $_GET['t'] . '&a=' . $_GET['a'] . '&c=' . $_GET['c'] . '&j=' . $_GET['j'] . '"> &#8658 </a>';
+            echo '<a style="color:#007897; text-decoration: none;" title="Last page" href="view_preprints.php?p=' . $npag . '&w=' . $_GET['w'] . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '&o=' . $_GET['o'] . '&t=' . $_GET['t'] . '&a=' . $_GET['a'] . '&c=' . $_GET['c'] . '&j=' . $_GET['j'] . '&d=' . $_GET['d'] . '&all=' . $_GET['all'] . '&h=' . $_GET['h'] . '&y=' . $_GET['y'] . '&e=' . $_GET['e'] . '&i=' . $_GET['i'] . '"> &#8658 </a>';
         }
         echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
     }
@@ -374,12 +478,26 @@ function filtropreprint() {
         $sql = "SELECT * FROM PREPRINTS WHERE " . $argom . " LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' ORDER BY " . $order . " LIMIT " . $limit . "," . $risperpag . "";
         $result = mysql_query($sql) or die(mysql_error());
     } else {
-        $querytotale = mysql_query("SELECT * FROM PREPRINTS WHERE autori LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1'");
+        #senza filtro
+        $query = " 
+    	SELECT * FROM PREPRINTS WHERE id_pubblicazione LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
+    	SELECT * FROM PREPRINTS WHERE titolo LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
+    	SELECT * FROM PREPRINTS WHERE data_pubblicazione LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
+    	SELECT * FROM PREPRINTS WHERE autori LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
+    	SELECT * FROM PREPRINTS WHERE referenze LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
+    	SELECT * FROM PREPRINTS WHERE commenti LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
+    	SELECT * FROM PREPRINTS WHERE categoria LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
+    	SELECT * FROM PREPRINTS WHERE abstract LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1'";
+        $querytotale = mysql_query($query);
         $ristot = mysql_num_rows($querytotale);
-        echo "PREPRINTS APPROVED: " . $ristot;
+        $query = $query . " ORDER BY " . $order . " LIMIT " . $limit . "," . $risperpag . "";
+        if (!isset($_GET['r']) or $_GET['r'] == "") {
+            echo "PREPRINTS: " . $ristot;
+        } else {
+            echo "PREPRINTS FINDED: " . $ristot . " (results ordered by " . $orstr . ")";
+        }
         $npag = ceil($ristot / $risperpag);
-        $sql = "SELECT * FROM PREPRINTS WHERE autori LIKE '%" . $_GET['r'] . "%' AND checked='1' ORDER BY data_pubblicazione DESC LIMIT " . $limit . "," . $risperpag . "";
-        $result = mysql_query($sql) or die(mysql_error());
+        $result = mysql_query($query) or die(mysql_error());
     }
     echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
     #impostazione della paginazione dei risultati

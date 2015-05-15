@@ -40,6 +40,13 @@
                 var h = window.screen.height;
                 window.scrollTo(w * h, w * h)
             }
+            function showHide(id)
+            {
+                if (id.style.display != 'block')
+                    id.style.display = 'block';
+                else
+                    id.style.display = 'none';
+            }
         </script>
     </head>
     <body>
@@ -47,9 +54,11 @@
         if ($_GET['w'] != "0") {
             $view = 0;
             $upview = 1;
+            $string = "Disable";
         } else {
             $view = 1;
             $upview = 0;
+            $string = "Enable";
         }
         #importo file per utilizzare funzioni...
         require_once $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'authorization/sec_sess.php';
@@ -91,7 +100,7 @@
                                 </header>";
         }
         if ($_SESSION['logged_type'] != "mod") {
-            $str1 = "<h1><center>in this section are the preprints that have been published by the <a style='color:#007897;' href='./authors_list.php' onclick='window.open(this.href); return false'>authors</a> of the department on arxiv.org</center></h1><br/>";
+            $str1 = "<h1><center>in this section are the preprints that have been published by the <a style='color:#007897;' href='./authors_list.php' onclick='window.open(this.href); return false'>authors</a> of the department on arxiv.org</center></h1>";
             $str2 = "ARXIV PREPRINTS";
         } else {
             $str2 = "APPROVED PREPRINTS";
@@ -111,58 +120,64 @@
             echo $str1;
             ?>
         </div><center>
-        <table>
-            <?php
-            if ($_SESSION['logged_type'] === "mod") {
-                echo "<tr><form name='f1' action='$rit' method='GET'>
-		        <td align='right'>$t&nbsp&nbsp&nbsp</td>
-		        <td colspan='2'><input type='submit' name='b1' value='Back' id='bottone_keyword' class='bottoni'/></td>
-		    </form></tr>";
-            }
-            ?>
-            <tr><form name="f2" action="archived_preprints.php" method="GET">
-                <input type="text" name="p" value="1" checked hidden/>
-                <td align="right">Archived preprints, contains old publications&nbsp&nbsp&nbsp</td>
-                <td colspan="2"><input type="submit" name="b2" value="Archived preprints" id="bottone_keyword" class="bottoni"/></td>
-            </form></tr>
-            <tr style="height:30px;"><td align="center" colspan="3"><br/><h1>Advanced settings results</h1><br/></td></tr>
-            <tr><form name="f5" action="view_preprints.php?p=1&w=<?php echo $view; ?>" method="POST">
-                <td align="right">Enable/Disable on page view&nbsp&nbsp&nbsp</td>
-                <td colspan="2"><input type="submit" style="width:100px;" name="w" value="Enable/Disable" id="bottone_keyword" class="bottoni"/></td>
-            </form></tr>
-            <form name="f4" action="view_preprints.php" method="GET">
-                <tr><input type="text" name="p" value="1" hidden>
-                <input type="text" name="w" value="<?php echo $upview; ?>" hidden>
-                <td align="right">Filter by:
-                    <label><input type="radio" name="f" value="author" checked>Author</label>
-                    <label><input type="radio" name="f" value="category">Category</label>
-                    <label><input type="radio" name="f" value="year">Year</label>
-                    <label><input type="radio" name="f" value="id">ID&nbsp&nbsp&nbsp</label></td>
-                <td><input type="search" autocomplete = "off" style="width:173px;" id='textbox' class='textbox' name="r" placeholder="Author name or part, etc." value="<?php echo $_GET['r']; ?>" autofocus></td>
-                <td align="left"><input type="submit" style="width:100px;" id="bottone_keyword" class="bottoni" name="s" value="Apply/Search"/></td></tr>
-                <tr><td colspan="3" align="center">Search on:
-                        <label><input type="checkbox" name="all" value="1">Record</label>
-                        <label><input type="checkbox" name="h" value="1">Authors</label>
-                        <label><input type="checkbox" name="t" value="1">Title</label>
-                        <label><input type="checkbox" name="a" value="1">Abstract</label>
-                        <label><input type="checkbox" name="y" value="1">Category</label>
-                        <label><input type="checkbox" name="c" value="1">Comments</label>
-                        <label><input type="checkbox" name="j" value="1">Journal-ref</label>
-                    </td></tr>
-                <tr><td colspan="3" align="center">Order by:
-                        <label><input type="radio" name="o" value="dated" checked>Date(D)</label>
-                        <label><input type="radio" name="o" value="datec">Date(I)</label>
-                        <label><input type="radio" name="o" value="idd">ID(D)</label>
-                        <label><input type="radio" name="o" value="idc">ID(I)</label>
-                        <label><input type="radio" name="o" value="named">Name(D)</label>
-                        <label><input type="radio" name="o" value="namec">Name(I)</label>
-                    </td>
-            </form></tr>
-        </table>
+        <?php
+        if ($_SESSION['logged_type'] === "mod") {
+            echo "<form name='f1' action='$rit' method='GET'>
+		        $t&nbsp&nbsp&nbsp
+		        <input type='submit' name='b1' value='Back' id='bottone_keyword' class='bottoni'/>
+		    </form>
+		    ";
+        }
+        ?>
+        <br/><a style='color:#007897;' href="archived_preprints.php?p=1" onclick='window.open(this.href);
+                return false'>Archived preprints</a><br/><br/>
+        <form name="f5" action="view_preprints.php?p=1&w=<?php echo $view; ?>" method="POST">
+            Enable/Disable on page view
+            <input type="submit" style="width:40px;" name="w" value="<?php echo $string; ?>" id="bottone_keyword" class="bottoni"/>
+        </form>
+        <form name="f4" action="view_preprints.php" method="GET">
+            <input type="text" name="p" value="1" hidden>
+            <input type="text" name="w" value="<?php echo $upview; ?>" hidden>
+            Advanced:
+            <input type="button" value="Show/Hide" onclick="javascript:showHide(adv);"/>
+            Filter by
+            <select name="f">
+                <option value="all" selected="selected">All preprint:</option>
+                <option value="author">Authors:</option>
+                <option value="category">Category:</option>
+                <option value="year">Year:</option>
+                <option value="id">Identifier(ID):</option>
+            </select>
+            <input type="search" autocomplete = "off" style="width:200px;" name="r" placeholder="Author name or part, etc." value="<?php echo $_GET['r']; ?>"/>
+            <input type="submit" name="s" value="Go"/>
+            <div id="adv" hidden>
+                <div style="float:left; width:37%;" align="right">Search on:</div>
+                <div style="float:right; width:63%;" align="left">
+                    <label><input type="checkbox" name="d" value="1">Include-archived</label>
+                    <label><input type="checkbox" name="all" value="1">Record</label>
+                    <label><input type="checkbox" name="h" value="1">Author</label>
+                    <label><input type="checkbox" name="t" value="1">Title</label>
+                    <label><input type="checkbox" name="e" value="1">Year</label><br/>
+                    <label><input type="checkbox" name="a" value="1">Abstract</label>
+                    <label><input type="checkbox" name="y" value="1">Category</label>
+                    <label><input type="checkbox" name="c" value="1">Comments</label>
+                    <label><input type="checkbox" name="j" value="1">Journal-ref</label>
+                    <label><input type="checkbox" name="i" value="1">ID</label>
+                </div>
+                <div style="float:right; width:100%;" align="center">Order by:
+                    <label><input type="radio" name="o" value="dated" checked>Date(D)</label>
+                    <label><input type="radio" name="o" value="datec">Date(I)</label>
+                    <label><input type="radio" name="o" value="idd">ID(D)</label>
+                    <label><input type="radio" name="o" value="idc">ID(I)</label>
+                    <label><input type="radio" name="o" value="named">Name(D)</label>
+                    <label><input type="radio" name="o" value="namec">Name(I)</label>
+                </div><br/><br/><br/>
+            </div>
+        </form>
         <?php
         echo "<br/><center><a style='text-decoration: none;' href='javascript:FinePagina()'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8595;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><center>";
         if (isset($_GET['s'])) {
-            if ($_GET['t'] == 1 or $_GET['a'] == 1 or $_GET['c'] == 1 or $_GET['j'] == 1 or $_GET['h'] == 1 or $_GET['y'] == 1 or $_GET['all'] == 1) {
+            if ($_GET['t'] == 1 or $_GET['a'] == 1 or $_GET['c'] == 1 or $_GET['j'] == 1 or $_GET['h'] == 1 or $_GET['y'] == 1 or $_GET['all'] == 1 or $_GET['d'] == 1 or $_GET['e'] or $_GET['i']) {
                 searchpreprint();
                 echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'>&nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><br/>";
             } else {
@@ -171,7 +186,7 @@
                 echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'>&nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><br/>";
             }
         } else {
-            if ($_GET['t'] == 1 or $_GET['a'] == 1 or $_GET['c'] == 1 or $_GET['j'] == 1 or $_GET['h'] == 1 or $_GET['y'] == 1 or $_GET['all'] == 1) {
+            if ($_GET['t'] == 1 or $_GET['a'] == 1 or $_GET['c'] == 1 or $_GET['j'] == 1 or $_GET['h'] == 1 or $_GET['y'] == 1 or $_GET['all'] == 1 or $_GET['d'] == 1 or $_GET['e'] or $_GET['i']) {
                 searchpreprint();
                 echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'>&nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><br/>";
             } else {
