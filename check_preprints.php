@@ -119,7 +119,7 @@
                                         $y++;
                                     }
                                 }
-                                echo "</table></center><center><br/><input type='submit' name='b2' value='Remove' style='width:50px;' id='bottone_keyword' class='bottoni' onclick='return confirmDelete()'><input type='submit' name='b3' value='Insert' style='width:50px;' id='bottone_keyword' class='bottoni' onclick='return confirmInsert()'></center></form>";
+                                echo "</table></center><center><br/><input type='submit' name='b2' value='Remove' style='width:70px;' id='bottone_keyword' class='bottoni' onclick='return confirmDelete()'><input type='submit' name='b3' value='Insert' style='width:70px;' id='bottone_keyword' class='bottoni' onclick='return confirmInsert()'></center></form>";
                                 #Chiudo la lettura della directory.
                                 closedir($directory_handle);
                             }

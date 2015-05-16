@@ -93,7 +93,7 @@
         </div><center>
         <?php
         if ($cred == 1) {
-            echo "<table><tr><form name='f1' action='<?php echo $rit ?>' method='GET'>
+            echo "<table><tr><form name='f1' action='".$rit."' method='GET'>
                 <td align='right'>Go to arXiv panel&nbsp&nbsp&nbsp</td>
                 <td><input type='submit' name='b2' value='Back' id='bottone_keyword' class='bottoni'/></td>
                 <input type='text' name='p' value='1' checked hidden/><input type='text' name='w' value='0' checked hidden/>

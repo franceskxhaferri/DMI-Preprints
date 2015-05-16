@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mag 16, 2015 alle 01:30
+-- Generation Time: Mag 16, 2015 alle 23:19
 -- Versione del server: 5.6.24-0ubuntu2
 -- PHP Version: 5.6.4-4ubuntu6
 
@@ -30,16 +30,6 @@ CREATE TABLE IF NOT EXISTS `AUTORI` (
   `nome` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dump dei dati per la tabella `AUTORI`
---
-
-INSERT INTO `AUTORI` (`nome`) VALUES
-('BRUNO IANNAZZO'),
-('GIANLUCA VINTI'),
-('LAURA ANGELONI'),
-('MASSIMO GIULIETTI');
-
 -- --------------------------------------------------------
 
 --
@@ -49,16 +39,6 @@ INSERT INTO `AUTORI` (`nome`) VALUES
 CREATE TABLE IF NOT EXISTS `AUTORI_BACKUP` (
   `nome` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dump dei dati per la tabella `AUTORI_BACKUP`
---
-
-INSERT INTO `AUTORI_BACKUP` (`nome`) VALUES
-('BRUNO IANNAZZO'),
-('GIANLUCA VINTI'),
-('LAURA ANGELONI'),
-('MASSIMO GIULIETTI');
 
 -- --------------------------------------------------------
 
@@ -75,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `DATA_ULTIMO_LANCIO` (
 --
 
 INSERT INTO `DATA_ULTIMO_LANCIO` (`data`) VALUES
-('2015-05-16 01:28');
+('2015-05-16 23:14');
 
 -- --------------------------------------------------------
 
@@ -191,13 +171,13 @@ ALTER TABLE `DATA_ULTIMO_LANCIO`
 -- Indexes for table `PREPRINTS`
 --
 ALTER TABLE `PREPRINTS`
- ADD PRIMARY KEY (`id_pubblicazione`);
+ ADD PRIMARY KEY (`id_pubblicazione`), ADD FULLTEXT KEY `titolo` (`titolo`), ADD FULLTEXT KEY `id_pubblicazione` (`id_pubblicazione`), ADD FULLTEXT KEY `data_pubblicazione` (`data_pubblicazione`), ADD FULLTEXT KEY `autori` (`autori`), ADD FULLTEXT KEY `autori_2` (`autori`), ADD FULLTEXT KEY `referenze` (`referenze`), ADD FULLTEXT KEY `commenti` (`commenti`), ADD FULLTEXT KEY `categoria` (`categoria`), ADD FULLTEXT KEY `abstract` (`abstract`), ADD FULLTEXT KEY `id_pubblicazione_2` (`id_pubblicazione`,`titolo`,`data_pubblicazione`,`autori`,`referenze`,`commenti`,`categoria`,`abstract`);
 
 --
 -- Indexes for table `PREPRINTS_ARCHIVIATI`
 --
 ALTER TABLE `PREPRINTS_ARCHIVIATI`
- ADD PRIMARY KEY (`id_pubblicazione`);
+ ADD PRIMARY KEY (`id_pubblicazione`), ADD FULLTEXT KEY `id_pubblicazione` (`id_pubblicazione`,`titolo`,`data_pubblicazione`,`autori`,`referenze`,`commenti`,`categoria`,`abstract`);
 
 --
 -- Indexes for table `sessione`
