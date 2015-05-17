@@ -98,7 +98,7 @@ function searchfulltext() {
     } else {
         $risperpag = 5;
     }
-    $query = "SELECT *, MATCH(id_pubblicazione, titolo, data_pubblicazione, autori, referenze, commenti, categoria, abstract) AGAINST('" . addslashes($_GET['ft']) . "') AS attinenza FROM PREPRINTS WHERE MATCH(id_pubblicazione, titolo, data_pubblicazione, autori, referenze, commenti, categoria, abstract) AGAINST('" . addslashes($_GET['ft']) . "') ORDER BY attinenza DESC";
+    $query = "SELECT *, MATCH (id_pubblicazione, titolo, data_pubblicazione, autori, referenze, commenti, categoria, abstract) AGAINST('" . addslashes($_GET['ft']) . "') AS attinenza FROM PREPRINTS WHERE MATCH (id_pubblicazione, titolo, data_pubblicazione, autori, referenze, commenti, categoria, abstract) AGAINST ('" . addslashes($_GET['ft']) . "') ORDER BY attinenza DESC";
     #recupero pagina
     $p = $_GET['p'];
     #limite risultati

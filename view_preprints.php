@@ -101,7 +101,7 @@
         }
         if ($_SESSION['logged_type'] != "mod") {
             $str1 = "<h1><center>in this section are the preprints that have been published by the <a style='color:#007897;' href='./authors_list.php' onclick='window.open(this.href); return false'>authors</a> of the department on arxiv.org</center></h1>";
-            $str2 = "ARXIV PREPRINTS";
+            $str2 = "ARXIV PUBLICATIONS";
         } else {
             $str2 = "APPROVED PREPRINTS";
         }
@@ -130,7 +130,7 @@
         }
         ?>
         <br/>
-        <form name="f5" action="<?php echo 'view_preprints.php?p=' . $_GET['p'] . '&w=' . $view . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '&o=' . $_GET['o'] . '&t=' . $_GET['t'] . '&a=' . $_GET['a'] . '&c=' . $_GET['c'] . '&j=' . $_GET['j'] . '&d=' . $_GET['d'] . '&all=' . $_GET['all'] . '&h=' . $_GET['h'] . '&y=' . $_GET['y'] . '&e=' . $_GET['e'] . '&i=' . $_GET['i'] . '&rp=' . $_GET['rp'] . '&ft=' . $_GET['ft'] . '&go=' . $_GET['go'] . ''; ?>" method="POST">
+        <form name="f5" action="<?php echo 'view_preprints.php?p=' . $_GET['p'] . '&w=' . $view . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '&o=' . $_GET['o'] . '&t=' . $_GET['t'] . '&a=' . $_GET['a'] . '&c=' . $_GET['c'] . '&j=' . $_GET['j'] . '&d=' . $_GET['d'] . '&all=' . $_GET['all'] . '&h=' . $_GET['h'] . '&y=' . $_GET['y'] . '&e=' . $_GET['e'] . '&i=' . $_GET['i'] . '&rp=' . $_GET['rp'] . '&ft=' . $_GET['ft'] . '&go=' . $_GET['go'] . '&s=' . $_GET['s'] . '&year1=' . $_GET['year1'] . '&year2=' . $_GET['year2'] . '&year3=' . $_GET['year3'] . ''; ?>" method="POST">
             Enable/Disable on page view
             <input type="submit" style="width:40px;" name="w" value="<?php echo $string; ?>" id="bottone_keyword" class="bottoni"/>
             To see archived(old) preprints click <a style='color:#007897;' href="archived_preprints.php?p=1" onclick='window.open(this.href);
@@ -189,40 +189,52 @@
                     <label><input type="radio" name="o" value="named">Name(D)</label>
                     <label><input type="radio" name="o" value="namec">Name(I)</label>
                 </div><br/><br/>
-                <div>
-                    <form name="f4" action="view_preprints.php" method="GET">
-                        Full text search(semantic search, use for search phrases) 
-                        <input type="search" autocomplete = "off" style="width:200px;" name="ft" placeholder="Insert phrase, or idiom" value="<?php echo $_GET['ft']; ?>"/>
-                        <input type="submit" name="go" value="Send"/>
-                    </form>
-                </div>
         </form>
+        <div>
+            <form name="f4" action="view_preprints.php" method="GET">
+                <input type="text" name="p" value="1" hidden>
+                <input type="text" name="w" value="<?php echo $upview; ?>" hidden>
+                Full text search(semantic search, use for search phrases) 
+                <input type="search" autocomplete = "off" style="width:200px;" name="ft" placeholder="Insert phrase, or idiom" value="<?php echo $_GET['ft']; ?>"/>
+                <input type="submit" name="go" value="Send"/>
+                &nbsp&nbspResults for page: 
+                <select name="rp">
+                    <option value="5" selected="selected">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                    <option value="25">25</option>
+                </select>&nbsp&nbsp
+            </form>
+        </div>
     </div>
     <?php
     echo "<br/><center><a style='text-decoration: none;' href='javascript:FinePagina()'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8595;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><center>";
-    if (isset($_GET['go'])) {
+    #ricerca full text
+    if (isset($_GET['go']) && $_GET['go'] != "") {
         searchfulltext();
         echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'>&nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><br/>";
     }
+    #ricerca normale
     if (isset($_GET['s'])) {
         if (!is_numeric($_GET['year2']) && is_numeric($_GET['year3'])) {
-            echo "YEAR NOT VALID!";
-            break;
-        }
-        if (!is_numeric($_GET['year3']) && is_numeric($_GET['year2'])) {
-            echo "YEAR NOT VALID!";
-            break;
-        }
-        if ($_GET['t'] == 1 or $_GET['a'] == 1 or $_GET['c'] == 1 or $_GET['j'] == 1 or $_GET['h'] == 1 or $_GET['y'] == 1 or $_GET['all'] == 1 or $_GET['d'] == 1 or $_GET['e'] == 1 or $_GET['i'] == 1 or is_numeric($_GET['year1']) or is_numeric($_GET['year2']) or is_numeric($_GET['year3'])) {
-            searchpreprint();
-            echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'>&nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><br/>";
+            echo "<br/>YEAR NOT VALID!";
         } else {
-            #funzione lettura e filtro preprint
-            filtropreprint();
-            echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'>&nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><br/>";
+            if (!is_numeric($_GET['year3']) && is_numeric($_GET['year2'])) {
+                echo "<br/>YEAR NOT VALID!";
+            } else {
+                if ($_GET['t'] == 1 or $_GET['a'] == 1 or $_GET['c'] == 1 or $_GET['j'] == 1 or $_GET['h'] == 1 or $_GET['y'] == 1 or $_GET['all'] == 1 or $_GET['d'] == 1 or $_GET['e'] == 1 or $_GET['i'] == 1 or is_numeric($_GET['year1']) or is_numeric($_GET['year2']) or is_numeric($_GET['year3'])) {
+                    searchpreprint();
+                    echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'>&nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><br/>";
+                } else {
+                    #funzione lettura e filtro preprint
+                    filtropreprint();
+                    echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'>&nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><br/>";
+                }
+            }
         }
     } else {
-        if ($_GET['t'] == 1 or $_GET['a'] == 1 or $_GET['c'] == 1 or $_GET['j'] == 1 or $_GET['h'] == 1 or $_GET['y'] == 1 or $_GET['all'] == 1 or $_GET['d'] == 1 or $_GET['e'] == 1 or $_GET['i'] == 1 or is_numeric($_GET['year1']) or is_numeric($_GET['year2']) or is_numeric($_GET['year3']) && $_GET['go'] != "Send") {
+        if (($_GET['t'] == 1 or $_GET['a'] == 1 or $_GET['c'] == 1 or $_GET['j'] == 1 or $_GET['h'] == 1 or $_GET['y'] == 1 or $_GET['all'] == 1 or $_GET['d'] == 1 or $_GET['e'] == 1 or $_GET['i'] == 1 or is_numeric($_GET['year1']) or is_numeric($_GET['year2']) or is_numeric($_GET['year3'])) && $_GET['go'] != "Send") {
             searchpreprint();
             echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'>&nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><br/>";
         } else {

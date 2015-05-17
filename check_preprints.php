@@ -103,7 +103,7 @@
                             #Apro l'oggetto directory
                             if ($directory_handle = opendir($directory)) {
                                 #Scorro l'oggetto fino a quando non è termnato cioè false
-                                echo "<tr><td><input type='checkbox' name='checkall' onclick='checkedAll(f1);'/></td><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNAME:</td><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspCREATED:</td></tr>";
+                                echo "<tr><td><input type='checkbox' name='checkall' onclick='checkedAll(f1);'/></td><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNAME:</td><td>&nbsp&nbsp&nbspRECORD:</td><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspCREATED:</td></tr>";
                                 $i = 0;
                                 $y = 1;
                                 while (($file = readdir($directory_handle)) !== false) {
@@ -111,7 +111,10 @@
                                     #o dagli elementi . e .. lo visualizzo a schermo
                                     if ((!is_dir($file)) & ($file != ".") & ($file != "..")) {
                                         $array[$i] = $file;
-                                        echo "<tr><td colspan='2'><label><input type='checkbox' name='" . $i . "' value='checked'/>$y.&nbsp&nbsp&nbsp<a href=" . $base . $file . " onclick='window.open(this.href);return false' title='" . $file . "'>" . $file . "</a></label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>";
+                                        $ids = $file;
+                                        $ids = substr($ids, 0, -4);
+                                        $ids = str_replace("-", "/", $ids);
+                                        echo "<tr><td colspan='2'><label><input type='checkbox' name='" . $i . "' value='checked'/>$y.&nbsp&nbsp&nbsp<a href=" . $base . $file . " onclick='window.open(this.href);return false' title='" . $file . "'>" . $file . "</a></label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td><td><a href=./manual_edit.php?id=" . $ids . " onclick='window.open(this.href);return false' title='" . $ids . "'>" . $ids . "</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>";
                                         #recupero data creazione file
                                         $dat = date("Y-m-d H:i", filemtime($base . $file));
                                         echo "<td>&nbsp&nbsp&nbsp$dat</td></tr>";
