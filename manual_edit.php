@@ -80,7 +80,7 @@
                 if (!isset($_GET['id'])) {
                     echo "<center><br/><a style='color:#007897;' href='./view_preprints.php?p=1&w=0' onclick='window.open(this.href); return false' title='Go to preprints list'>View from inserted preprints</a></center>";
                     echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
-                    echo " <center><div><form name='f2' action='manual_edit.php' method='POST'>Insert id of pubblication: <input type='search' autocomplete = 'off' style='width:175px;' name='id' id='textbox' required class='textbox' placeholder='example of id: 0000.0000v1' autofocus/><input type='submit' name='bottoni8' value='Get preprint' style='width:70px;' id='bottone_keyword' class='bottoni'/><br/>
+                    echo " <center><div><form name='f2' action='manual_edit.php' method='POST'>Insert id of pubblication: <input type='search' autocomplete = 'on' style='width:175px;' name='id' id='textbox' required class='textbox' placeholder='example of id: 0000.0000v1' autofocus/> <input type='submit' name='bottoni8' value='Get preprint' style='width:70px;' id='bottone_keyword' class='bottoni'/><br/>
 		               </form></div>
 		               ";
                     $var = False;
@@ -112,23 +112,23 @@
 			</script>
                 <form name='f1' action='manual_edit.php' method='POST' enctype='multipart/form-data'>
                     <center><div><br/><h2>preprint informations</h2><h1>field with '*' are required</h1><br/><input type='reset' name='reset' value='Reset' style='width:40px;' id='bottone_keyword' class='bottoni'><br/><br/>
-			    id of pubblication (not editable)<br/><br/>
+			    id of pubblication (not editable):<br/><br/>
                             <textarea readonly style='width:65%; height:16px' name='id' id='textbox' class='textbox' placeholder='example of id: 0000.0000v1'>" . $ris[0] . "</textarea><br/><br/><br/>
-                            data of pubblication (not editable)<br/><br/>
+                            data of pubblication (not editable):<br/><br/>
                             <textarea readonly style='width:65%; height:16px' name='data' id='textbox' class='textbox' placeholder='example of data: 2011-12-30T10:37:35Z'>" . $ris[2] . "</textarea><br/><br/><br/>
-                            *preprint title<br/><br/>
+                            *preprint title:<br/><br/>
                             <textarea style='width:65%; height:16px' name='title' id='textbox' class='textbox' required placeholder='example of title: The geometric...' autofocus>" . $ris[1] . "</textarea><br/><br/><br/>
-                            journal reference<br/><br/>
+                            journal reference:<br/><br/>
                             <textarea style='width:65%; height:16px' name='journal' id='textbox' class='textbox' placeholder='example of Journal: Numer. Linear Algebra...'>" . $ris[4] . "</textarea><br/><br/><br/>
-                            comments<br/><br/>
+                            comments:<br/><br/>
                             <textarea style='width:65%; height:16px' name='comments' id='textbox' class='textbox' placeholder='example of comments: 10 pages...'>" . $ris[5] . "</textarea><br/><br/><br/>
-                            *arXiv category<br/><br/>
+                            *arXiv category:<br/><br/>
                             <textarea style='width:65%; height:16px' name='category' id='textbox' class='textbox' required placeholder='example of category: math.NA...'>" . $ris[6] . "</textarea><br/><br/><br/>
-                            *authors name<br/><br/>
+                            *authors name:<br/><br/>
                             <textarea style='width:65%; height:16px' name='author' id='textbox' class='textbox' required placeholder='example of author: Mario Rossi, Luca...'>" . $ris[3] . "</textarea><br/><br/><br/>
-                            *abstract<br/><br/>
+                            *abstract:<br/><br/>
                             <textarea style='width:65%; height:300px' name='abstract' id='textbox' class='textbox' required placeholder='example of abstract: The geometric...'>" . $ris[7] . "</textarea><br/><br/>
-                            PDF / other document file <br/>
+                            file to upload: <br/>
                             <input type='hidden' name='MAX_FILE_SIZE' value='10000000'><br/>
                             <input type='file' name='fileToUpload' id='fileToUpload'><br/><br/><br/>
                             <div style='float:left; width:600px;'><input type='submit' name='bottoni9' value='Remove' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmDelete()'/></div>
@@ -138,7 +138,7 @@
                     $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
                     if (isset($_POST['bottoni9'])) {
                         $id1 = $_POST['id'];
-                        #eliminazione dell'preprint selezionato
+                        #eliminazione del preprint selezionato
                         delete_pdf($id1);
                         cancellaselected($id1);
                         echo '<script type="text/javascript">alert("Preprint ' . $info[0] . ' removed correctly!");</script>';

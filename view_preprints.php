@@ -147,7 +147,7 @@
                     <option value="year">Year:</option>
                     <option value="id">Identifier(ID):</option>
                 </select>
-                <input type="search" autocomplete = "off" style="width:250px;" name="r" placeholder="Author name, part, etc." value="<?php echo $_GET['r']; ?>"/>
+                <input type="search" autocomplete = "on" style="width:250px;" name="r" placeholder="Author name, part, etc." value="<?php echo $_GET['r']; ?>"/>
             <input type="submit" name="s" value="Send"/></div>
         <div id="adv" hidden>
             <div style="height:30px;">Years restrictions: 
@@ -199,7 +199,7 @@
                         <option value="20">20</option>
                         <option value="25">25</option>
                     </select>&nbsp&nbsp
-                    Search: <input type="search" autocomplete = "off" style="width:400px;" name="ft" placeholder="Insert phrase, name, keyword, etc." value="<?php echo $_GET['ft']; ?>"/>
+                    Search: <input type="search" autocomplete = "on" style="width:400px;" name="ft" placeholder="Insert phrase, name, keyword, etc." value="<?php echo $_GET['ft']; ?>"/>
                     <input type="submit" name="go" value="Send"/>&nbsp&nbsp
                     Search on: 
                     <label><input type="radio" name="st" value="0" checked>Latest</label>

@@ -84,7 +84,7 @@
                                         Add author to list or search by name&nbsp&nbsp&nbsp</label>
                                 </td>
                                 <td>
-                                    <input type="search" style="width:173px;" id='textbox' class='textbox' autocomplete = "off" required name="txt1" placeholder="name1, name2, name..." autofocus />
+                                    <input type="search" style="width:173px;" id='textbox' class='textbox' autocomplete = "on" required name="txt1" placeholder="name1, name2, name..." autofocus />
                                 </td>
                                 <td>
                                     <input type="submit" name="b2" value="Insert/Search" style="width:80px;" id="bottone_keyword" class="bottoni"/>
