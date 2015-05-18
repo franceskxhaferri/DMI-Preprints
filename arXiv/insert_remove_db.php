@@ -55,8 +55,7 @@ function update_preprints($array) {
      referenze='" . $array[4] . "',
      commenti='" . $array[5] . "',
      categoria='" . $array[6] . "',
-     abstract='" . $array[7] . "',
-     checked='1'
+     abstract='" . $array[7] . "'
     WHERE 
      id_pubblicazione='" . $array[0] . "'";
     $query = mysql_query($sql) or die(mysql_error());
