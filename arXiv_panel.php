@@ -56,7 +56,7 @@
                         </div>
                     </div>
                 </div>
-                <br/><div align="center"><center><br/><h2>ARXIV PANEL</h2></center><br/>
+                <div align="center"><center><br/><h2>ARXIV PANEL</h2></center>
                     <center><table>
                             <tr><form name="f1" action="reserved.php" method="GET">
                                 <td align="right" style="width:350px;">Go to reserved area&nbsp&nbsp&nbsp</td>

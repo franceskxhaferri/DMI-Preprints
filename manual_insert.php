@@ -36,9 +36,9 @@
                 return confirm("Delete this preprint?");
             }
             function confirmExit()
-	{
-	   return confirm('All unsaved changes will be lost, continue?');
-	}
+            {
+                return confirm('All unsaved changes will be lost, continue?');
+            }
         </script>
     </head>
     <body>
@@ -73,7 +73,7 @@
                 </div><center><form name="f1" action="arXiv_panel.php" method="GET">
                     <table>
                         <tr><td align="right">Go to arXiv panel&nbsp&nbsp&nbsp</td>
-                            <td><input type="submit" name="b1" value="Back" id='bottone_keyword' class='bottoni onclick="return confirmExit()"'/></td>
+                            <td><input type="submit" name="b1" value="Back" id='bottone_keyword' class='bottoni' onclick="return confirmExit()"/></td>
                         </tr>
                     </table><br/><a style='color:#007897;' href='http://arxiv.org/' onclick='window.open(this.href);
                                     return false' title='arXiv'>arXiv.org</a>
