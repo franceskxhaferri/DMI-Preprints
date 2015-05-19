@@ -35,6 +35,10 @@
             {
                 return confirm("Delete this preprint?");
             }
+            function confirmExit()
+	{
+	   return confirm('All unsaved changes will be lost, continue?');
+	}
         </script>
     </head>
     <body>
@@ -69,7 +73,7 @@
                 </div><center><form name="f1" action="arXiv_panel.php" method="GET">
                     <table>
                         <tr><td align="right">Go to arXiv panel&nbsp&nbsp&nbsp</td>
-                            <td><input type="submit" name="b1" value="Back" id='bottone_keyword' class='bottoni'/></td>
+                            <td><input type="submit" name="b1" value="Back" id='bottone_keyword' class='bottoni onclick="return confirmExit()"'/></td>
                         </tr>
                     </table><br/><a style='color:#007897;' href='http://arxiv.org/' onclick='window.open(this.href);
                                     return false' title='arXiv'>arXiv.org</a>
@@ -99,13 +103,7 @@
                     }
                     echo "</div>";
                     if ($id1 == $ris[0] && isset($_POST['b7'])) {
-                        echo "";
-                        echo "<script type='text/javascript'>
-				function confirmExit()
-				{
-				   return confirm('All unsaved changes will be lost, continue?');
-				}
-			</script>
+                        echo "
                 <form name='f1' action='manual_insert.php' method='POST' enctype='multipart/form-data'>
                     <center><div><br/><h2>preprint informations</h2><h1>field with '*' are required</h1><br/><input type='reset' name='reset' value='Reset' style='width:40px;' id='bottone_keyword' class='bottoni'><br/><br/>document/pdf:<br/><br/><a href=./pdf_downloads/" . $id1 . ".pdf onclick='window.open(this.href);return false' style='color:#007897;' title='PDF'>LINK</a><br/><br/><br/>
 			    id of pubblication (not editable):<br/><br/>
