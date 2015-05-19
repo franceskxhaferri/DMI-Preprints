@@ -109,7 +109,7 @@
                                 while (($file = readdir($directory_handle)) !== false) {
                                     #Se l'elemento trovato è diverso da una directory
                                     #o dagli elementi . e .. lo visualizzo a schermo
-                                    if ((!is_dir($file)) & ($file != ".") & ($file != "..")) {
+                                    if ((!is_dir($file)) & ($file != ".") & ($file != "..") & ($file != "readme.txt")) {
                                         $array[$i] = $file;
                                         $ids = $file;
                                         $ids = substr($ids, 0, -4);
