@@ -95,7 +95,7 @@
                         echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
                         #leggere cartella...
                         #Imposto la directory da leggere
-                        $directory = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints' . "/pdf_downloads/";
+                        $directory = $basedir3;
                         echo "<form name='f3' action='check_preprints.php' id='f1' method='GET'><center><table>";
                         #Apriamo una directory e leggiamone il contenuto.
                         if (is_dir($directory)) {

@@ -84,7 +84,7 @@
                 echo "<br/><br/><center>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTION CAN'T BE USED IN THIS MOMENT!</center><br/>";
             } else {
                 ?>
-                <center><div><form name='f2' action='manual_insert.php' method='POST'>Get informations of the preprint from arXiv: <input type='search' autocomplete = 'on' style='width:175px;' name='id' id='textbox' required class='textbox' placeholder='Insert id(arXiv): 0000.0000' autofocus/> <input type='submit' name='b7' value='Get preprint' style='width:70px;' id='bottone_keyword' class='bottoni'/><br/>
+                <center><div><form name='f2' action='manual_insert.php' method='POST'>Get preprint informations from arXiv: <input type='search' autocomplete = 'on' style='width:175px;' name='id' id='textbox' required class='textbox' placeholder='Insert id(arXiv): 0000.0000' autofocus/> <input type='submit' name='b7' value='Get preprint' style='width:70px;' id='bottone_keyword' class='bottoni'/><br/>
                         </form></div>
                     <hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>
                     <?php
@@ -106,21 +106,21 @@
                     if ($id1 == $ris[0] && isset($_POST['b7'])) {
                         echo "
                 <form name='f1' action='manual_insert.php' method='POST' enctype='multipart/form-data'>
-                    <center><div><br/><h2>preprint informations</h2><h1>field with '*' are required</h1><br/><input type='reset' name='reset' value='Reset'><br/><br/>document/pdf:<br/><br/><a href=./pdf_downloads/" . $id1 . ".pdf onclick='window.open(this.href);return false' style='color:#007897;' title='PDF'>LINK</a><br/><br/><br/>
+                    <center><div><br/><h2>preprint informations</h2><h1>field with '*' are required</h1><br/><input type='reset' name='reset' value='Reset'><br/><br/>document/pdf:<br/><br/><a href=./pdf_downloads/" . $id1 . ".pdf onclick='window.open(this.href);return false' style='color:#007897;' title='PDF'>LINK</a><br/><br/>
 			    id of pubblication (not editable):<br/><br/>
-                            <textarea readonly  style='width:65%; height:16px' name='id' id='textbox' class='textbox' placeholder='example of id: 0000.0000v1'>" . $ris[0] . "</textarea><br/><br/><br/>
+                            <textarea readonly  style='width:65%; height:16px' name='id' id='textbox' class='textbox' placeholder='example of id: 0000.0000v1'>" . $ris[0] . "</textarea><br/><br/>
                             data of pubblication (not editable):<br/><br/>
-                            <textarea readonly style='width:65%; height:16px' name='data' id='textbox' class='textbox' placeholder='example of data: 2011-12-30T10:37:35Z'>" . $ris[2] . "</textarea><br/><br/><br/>
+                            <textarea readonly style='width:65%; height:16px' name='data' id='textbox' class='textbox' placeholder='example of data: 2011-12-30T10:37:35Z'>" . $ris[2] . "</textarea><br/><br/>
                             *preprint title:<br/><br/>
-                            <textarea style='width:65%; height:16px' name='title' id='textbox' class='textbox' required placeholder='example of title: The geometric...' autofocus>" . $ris[1] . "</textarea><br/><br/><br/>
+                            <textarea style='width:65%; height:16px' name='title' id='textbox' class='textbox' required placeholder='example of title: The geometric...' autofocus>" . $ris[1] . "</textarea><br/><br/>
                             journal reference:<br/><br/>
-                            <textarea style='width:65%; height:16px' name='journal' id='textbox' class='textbox' placeholder='example of Journal: Numer. Linear Algebra...'>" . $ris[4] . "</textarea><br/><br/><br/>
+                            <textarea style='width:65%; height:16px' name='journal' id='textbox' class='textbox' placeholder='example of Journal: Numer. Linear Algebra...'>" . $ris[4] . "</textarea><br/><br/>
                             comments:<br/><br/>
-                            <textarea style='width:65%; height:16px' name='comments' id='textbox' class='textbox' placeholder='example of comments: 10 pages...'>" . $ris[5] . "</textarea><br/><br/><br/>
+                            <textarea style='width:65%; height:16px' name='comments' id='textbox' class='textbox' placeholder='example of comments: 10 pages...'>" . $ris[5] . "</textarea><br/><br/>
                             *arXiv category:<br/><br/>
-                            <textarea style='width:65%; height:16px' name='category' id='textbox' class='textbox' required placeholder='example of category: math.NA...'>" . $ris[6] . "</textarea><br/><br/><br/>
+                            <textarea style='width:65%; height:16px' name='category' id='textbox' class='textbox' required placeholder='example of category: math.NA...'>" . $ris[6] . "</textarea><br/><br/>
                             *authors name:<br/><br/>
-                            <textarea style='width:65%; height:16px' name='author' id='textbox' class='textbox' required placeholder='example of author: Mario Rossi, Luca...'>" . $ris[3] . "</textarea><br/><br/><br/>
+                            <textarea style='width:65%; height:16px' name='author' id='textbox' class='textbox' required placeholder='example of author: Mario Rossi, Luca...'>" . $ris[3] . "</textarea><br/><br/>
                             *abstract:<br/><br/>
                             <textarea style='width:65%; height:300px' name='abstract' id='textbox' class='textbox' required placeholder='example of abstract: The geometric...'>" . $ris[7] . "</textarea><br/><br/>
                             file to upload: <br/>
@@ -133,21 +133,21 @@
                         echo "<form name='f2' action='manual_insert.php' method='POST' enctype='multipart/form-data'>
                     <center><div><br/><h2>preprint informations</h2><h1>field with '*' are required</h1><br/><input type='reset' name='reset' value='Reset'/><br/><br/>
                             *id of pubblication:<br/><br/>
-                            <textarea style='width:65%; height:16px' name='id' id='textbox' class='textbox' required placeholder='example of id: 0000.0000v1' autofocus></textarea><br/><br/><br/>
+                            <textarea style='width:65%; height:16px' name='id' id='textbox' class='textbox' required placeholder='example of id: 0000.0000v1' autofocus></textarea><br/><br/>
                             *data of pubblication:<br/><br/>
-                            <textarea style='width:65%; height:16px' name='date' id='textbox' class='textbox' required placeholder='example of data: 2011-12-30T10:37:35Z'></textarea><br/><br/><br/>
+                            <textarea style='width:65%; height:16px' name='date' id='textbox' class='textbox' required placeholder='example of data: 2011-12-30T10:37:35Z'></textarea><br/><br/>
                             *preprint title:<br/><br/>
-                            <textarea style='width:65%; height:16px' name='title' id='textbox' class='textbox' required placeholder='example of title: The geometric...'></textarea><br/><br/><br/>
+                            <textarea style='width:65%; height:16px' name='title' id='textbox' class='textbox' required placeholder='example of title: The geometric...'></textarea><br/><br/>
                             *authors name:<br/><br/>
-                            <textarea style='width:65%; height:16px' name='author' id='textbox' class='textbox' required placeholder='example of author: Mario Rossi, Luca...'></textarea><br/><br/><br/>
+                            <textarea style='width:65%; height:16px' name='author' id='textbox' class='textbox' required placeholder='example of author: Mario Rossi, Luca...'></textarea><br/><br/>
                             journal reference:<br/><br/>
-                            <textarea style='width:65%; height:16px' name='journal' id='textbox' class='textbox' placeholder='example of Journal: Numer. Linear Algebra...'></textarea><br/><br/><br/>
+                            <textarea style='width:65%; height:16px' name='journal' id='textbox' class='textbox' placeholder='example of Journal: Numer. Linear Algebra...'></textarea><br/><br/>
                             comments:<br/><br/>
-                            <textarea style='width:65%; height:16px' name='comments' id='textbox' class='textbox' placeholder='example of comments: 10 pages...'></textarea><br/><br/><br/>
+                            <textarea style='width:65%; height:16px' name='comments' id='textbox' class='textbox' placeholder='example of comments: 10 pages...'></textarea><br/><br/>
                             *arXiv category:<br/><br/>
-                            <textarea style='width:65%; height:16px' name='category' id='textbox' class='textbox' required placeholder='example of category: math.NA...'></textarea><br/><br/><br/>
+                            <textarea style='width:65%; height:16px' name='category' id='textbox' class='textbox' required placeholder='example of category: math.NA...'></textarea><br/><br/>
                             *abstract:<br/><br/>
-                            <textarea style='width:65%; height:300px' name='abstract' id='textbox' class='textbox' required placeholder='example of abstract: The geometric...'></textarea><br/><br/><br/>
+                            <textarea style='width:65%; height:300px' name='abstract' id='textbox' class='textbox' required placeholder='example of abstract: The geometric...'></textarea><br/><br/>
                             *file to upload:<br/>
                             <input type='hidden' name='MAX_FILE_SIZE' value='10000000'><br/>
                             <input type='file' required name='fileToUpload' id='fileToUpload'><br/><br/>
@@ -183,7 +183,7 @@
                             $fileType = $_FILES["fileToUpload"]["type"];
                             #inserimento file nel database
                             insert_one_pdf($info[0], $fileType);
-                            echo '<script type="text/javascript">alert("Preprint ' . $info[0] . ' inserted correctly!");</script>';
+                            echo '<script type="text/javascript">alert("Preprint ' . $_POST['id'] . ' inserted correctly!");</script>';
                         } else {
                             echo '<script type="text/javascript">alert("Sorry, there was an error uploading your file!");</script>';
                         }
@@ -193,7 +193,7 @@
                         #eliminazione del preprint selezionato
                         unlink($basedir3 . $_POST['id'] . ".pdf");
                         cancellaselected($_POST['id']);
-                        echo '<script type="text/javascript">alert("Preprint ' . $info[0] . ' removed correctly!");</script>';
+                        echo '<script type="text/javascript">alert("Preprint ' . $_POST['id'] . ' removed correctly!");</script>';
                         echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./manual_insert.php">';
                     }
                     #bottone inserimento
@@ -230,13 +230,13 @@
                                 #spostamento pdf
                                 #inserimento nel database del file
                                 insert_one_pdf($info[0], $fileType);
-                                echo '<script type="text/javascript">alert("Preprint ' . $info[0] . ' inserted correctly!");</script>';
+                                echo '<script type="text/javascript">alert("Preprint ' . $_POST['id'] . ' inserted correctly!");</script>';
                                 echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./manual_insert.php">';
                             } else {
                                 echo '<script type="text/javascript">alert("Error, file not uploaded!");</script>';
                             }
                         } else {
-                            echo '<script type="text/javascript">alert("Preprint ' . $info[0] . ' inserted correctly!");</script>';
+                            echo '<script type="text/javascript">alert("Preprint ' . $_POST['id'] . ' inserted correctly!");</script>';
                             echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./manual_insert.php">';
                         }
                     }

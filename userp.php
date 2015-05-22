@@ -99,9 +99,9 @@
             <?php
             ?>
             <form name="f3" action="userp.php" method="POST" enctype="multipart/form-data">
-                <center><div><br/><h2>Insert new preprint</h2><h1>field with "*" are required</h1><br/><br/><input type="reset" name="reset" value="Reset"/><br/><br/><br/>
+                <center><div><br/><h2>Insert new preprint</h2><h1>field with "*" are required</h1><br/><input type="reset" name="reset" value="Reset"/><br/><br/>
                         *publication category:<br/><br/>
-                        <select name="category" required style="width:200px;" onchange='Checkcath(this.value);'>
+                        <select name="category" required style="width:250px;" onchange='Checkcath(this.value);'>
                             <option value="">--Select Category--</option>
                             <option value="Computer Science">Computer Science</option>
                             <option value="Mathematics">Mathematics</option>
@@ -112,17 +112,16 @@
                             <option value="Other">Other:</option>
                         </select><br/><br/>
                         <div id="cat" hidden><textarea style="width:65%; height:16px;" name="category2" class="textbox" placeholder="example of category: math.NA..."></textarea><br/><br/></div>
-                        <br/>
                         *publication title:<br/><br/>
-                        <textarea style="width:65%; height:16px" name="title" id="textbox" class="textbox" required placeholder="example of title: The geometric..."></textarea><br/><br/><br/>
+                        <textarea style="width:65%; height:16px" name="title" id="textbox" class="textbox" required placeholder="example of title: The geometric..."></textarea><br/><br/>
                         *authors name:<br/><br/>
-                        <textarea style="width:65%; height:16px" name="author" id="textbox" class="textbox" required placeholder="example of author: Mario Rossi, Luca..."></textarea><br/><br/><br/>
+                        <textarea style="width:65%; height:16px" name="author" id="textbox" class="textbox" required placeholder="example of author: Mario Rossi, Luca..."></textarea><br/><br/>
                         journal reference:<br/><br/>
-                        <textarea style="width:65%; height:16px" name="journal" id="textbox" class="textbox" placeholder="example of Journal: Numer. Linear Algebra..."></textarea><br/><br/><br/>
+                        <textarea style="width:65%; height:16px" name="journal" id="textbox" class="textbox" placeholder="example of Journal: Numer. Linear Algebra..."></textarea><br/><br/>
                         comments:<br/><br/>
-                        <textarea style="width:65%; height:16px" name="comments" id="textbox" class="textbox" placeholder="example of comments: 10 pages..."></textarea><br/><br/><br/>
+                        <textarea style="width:65%; height:16px" name="comments" id="textbox" class="textbox" placeholder="example of comments: 10 pages..."></textarea><br/><br/>
                         *abstract:<br/><br/>
-                        <textarea style="width:65%; height:300px" name="abstract" id="textbox" class="textbox" required placeholder="example of abstract: The geometric..."></textarea><br/><br/><br/>
+                        <textarea style="width:65%; height:300px" name="abstract" id="textbox" class="textbox" required placeholder="example of abstract: The geometric..."></textarea><br/><br/>
                         *PDF:<br/>
                         <input type="hidden" name="MAX_FILE_SIZE" value="10000000"><br/>
                         <input type="file" required name="fileToUpload" id="fileToUpload"><br/><br/>
@@ -165,7 +164,7 @@
                                 rename($basedir . $_FILES["fileToUpload"]["name"], $basedir . $id . ".pdf");
                                 #inserimento file nel database
                                 insertpdf($id, $fileType);
-                                echo '<script type="text/javascript">alert("Preprint ' . $id . ' inserted correctly! Go to uploaded section to edit your pubblications.");</script>';
+                                echo '<script type="text/javascript">alert("Preprint inserted correctly! ID generated: ' . $id . ' \nGo on uploaded section to edit your pubblications.");</script>';
                             } else {
                                 echo '<script type="text/javascript">alert("Sorry, there was an error uploading your file!");</script>';
                             }

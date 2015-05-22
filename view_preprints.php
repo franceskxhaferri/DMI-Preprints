@@ -134,7 +134,7 @@
                     <option value="year">Year:</option>
                     <option value="id">Identifier(ID):</option>
                 </select>
-                <input type="search" autocomplete = "on" style="width:250px;" name="r" placeholder="Author name, part, etc." value="<?php echo $_GET['r']; ?>"/>
+                <input type="search" autocomplete = "on" style="width:300px;" name="r" placeholder="Author name, part, etc." value="<?php echo $_GET['r']; ?>"/>
             <input type="submit" name="s" value="Send"/></div>
         <div id="adv" hidden>
             <div style="height:30px;">Years restrictions: 

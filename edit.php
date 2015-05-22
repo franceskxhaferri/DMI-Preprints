@@ -29,7 +29,7 @@
         <script type='text/javascript'>
             function confirmDelete()
             {
-                return confirm("Delete this preprint?");
+                return confirm("Delete this preprint?\n(It can not be undone)");
             }
             function confirmInsert()
             {
@@ -37,7 +37,7 @@
             }
             function confirmUpgrade()
             {
-                return confirm("Upgrade preprint version?");
+                return confirm("Upgrade preprint version?\n(It can not be undone)");
             }
         </script>
 
@@ -116,26 +116,26 @@
                 <form name='f1' action='edit.php?r=" . $_GET['r'] . "' method='POST' enctype='multipart/form-data'>
                     <center><div><br/><h2>preprint informations</h2><h1>field with '*' are required</h1><br/><input type='reset' name='reset' value='Reset'><br/><br/>
 			    id of pubblication (not editable):<br/><br/>
-                            <textarea readonly style='width:65%; height:16px' name='id' id='textbox' class='textbox' placeholder='example of id: 0000.0000v1'>" . $ris[0] . "</textarea><br/><br/><br/>
+                            <textarea readonly style='width:65%; height:16px' name='id' id='textbox' class='textbox' placeholder='example of id: 0000.0000v1'>" . $ris[0] . "</textarea><br/><br/>
                             data of pubblication (not editable):<br/><br/>
-                            <textarea readonly style='width:65%; height:16px' name='data' id='textbox' class='textbox' placeholder='example of data: 2011-12-30T10:37:35Z'>" . $ris[2] . "</textarea><br/><br/><br/>
+                            <textarea readonly style='width:65%; height:16px' name='data' id='textbox' class='textbox' placeholder='example of data: 2011-12-30T10:37:35Z'>" . $ris[2] . "</textarea><br/><br/>
                             *preprint title:<br/><br/>
-                            <textarea style='width:65%; height:16px' name='title' id='textbox' class='textbox' required placeholder='example of title: The geometric...' autofocus>" . $ris[1] . "</textarea><br/><br/><br/>
+                            <textarea style='width:65%; height:16px' name='title' id='textbox' class='textbox' required placeholder='example of title: The geometric...' autofocus>" . $ris[1] . "</textarea><br/><br/>
                             journal reference:<br/><br/>
-                            <textarea style='width:65%; height:16px' name='journal' id='textbox' class='textbox' placeholder='example of Journal: Numer. Linear Algebra...'>" . $ris[4] . "</textarea><br/><br/><br/>
+                            <textarea style='width:65%; height:16px' name='journal' id='textbox' class='textbox' placeholder='example of Journal: Numer. Linear Algebra...'>" . $ris[4] . "</textarea><br/><br/>
                             comments:<br/><br/>
-                            <textarea style='width:65%; height:16px' name='comments' id='textbox' class='textbox' placeholder='example of comments: 10 pages...'>" . $ris[5] . "</textarea><br/><br/><br/>
+                            <textarea style='width:65%; height:16px' name='comments' id='textbox' class='textbox' placeholder='example of comments: 10 pages...'>" . $ris[5] . "</textarea><br/><br/>
                             *arXiv category:<br/><br/>
-                            <textarea style='width:65%; height:16px' name='category' id='textbox' class='textbox' required placeholder='example of category: math.NA...'>" . $ris[6] . "</textarea><br/><br/><br/>
+                            <textarea style='width:65%; height:16px' name='category' id='textbox' class='textbox' required placeholder='example of category: math.NA...'>" . $ris[6] . "</textarea><br/><br/>
                             *authors name:<br/><br/>
-                            <textarea style='width:65%; height:16px' name='author' id='textbox' class='textbox' required placeholder='example of author: Mario Rossi, Luca...'>" . $ris[3] . "</textarea><br/><br/><br/>
+                            <textarea style='width:65%; height:16px' name='author' id='textbox' class='textbox' required placeholder='example of author: Mario Rossi, Luca...'>" . $ris[3] . "</textarea><br/><br/>
                             *abstract:<br/><br/>
                             <textarea style='width:65%; height:300px' name='abstract' id='textbox' class='textbox' required placeholder='example of abstract: The geometric...'>" . $ris[7] . "</textarea><br/><br/>
                             file to upload: <br/>
                             <input type='hidden' name='MAX_FILE_SIZE' value='10000000'><br/>
-                            <input type='file' name='fileToUpload' id='fileToUpload'><br/><br/><br/>
+                            <input type='file' name='fileToUpload' id='fileToUpload'><br/><br/>
                             <br/><input type='submit' name='b9' value='Remove' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmDelete()'/>
-                            <input type='submit' name='b10' value='Upgrade' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmUpgrade()'/>
+                            <input type='submit' name='b10' value='Upgrade version' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmUpgrade()'/>
                             <input type='submit' name='b11' value='Complete' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmInsert()'/><br/><br/>
                             </form>";
                 $target_file = $basedir . basename($_FILES["fileToUpload"]["name"]);
@@ -145,7 +145,7 @@
                     #eliminazione del preprint selezionato
                     delete_pdf($id1);
                     cancellaselected($id1);
-                    echo '<script type="text/javascript">alert("Preprint ' . $info[0] . ' removed correctly!");</script>';
+                    echo '<script type="text/javascript">alert("Preprint ' . $_POST['id'] . ' removed correctly!");</script>';
                     echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./uploaded.php">';
                 }
                 #bottone upgrade
@@ -219,13 +219,13 @@
                             $fileType = $_FILES["fileToUpload"]["type"];
                             #inserimento nel database del file
                             insert_one_pdf($info[0], $fileType);
-                            echo '<script type="text/javascript">alert("Preprint ' . $info[0] . ' updated correctly!");</script>';
+                            echo '<script type="text/javascript">alert("Preprint ' . $_POST['id'] . ' updated correctly!");</script>';
                             echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./uploaded.php">';
                         } else {
                             echo '<script type="text/javascript">alert("Error, file not uploaded!");</script>';
                         }
                     } else {
-                        echo '<script type="text/javascript">alert("Preprint ' . $info[0] . ' updated correctly!");</script>';
+                        echo '<script type="text/javascript">alert("Preprint ' . $_POST['id'] . ' updated correctly!");</script>';
                         echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./uploaded.php">';
                     }
                 }
