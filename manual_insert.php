@@ -48,6 +48,8 @@
         include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/check_nomi_data.php');
         include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/insert_remove_db.php');
         include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/arXiv_parsing.php');
+        #importazione variabili globali
+        include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
         sec_session_start();
         if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] < 86400)) {
             if ($_SESSION['logged_type'] === "mod") {
@@ -75,7 +77,7 @@
                             <td><input type="submit" name="b1" value="Back" id='bottone_keyword' class='bottoni' onclick="return confirmExit()"/></td>
                         </tr>
                     </table><br/><a style='color:#007897;' href='http://arxiv.org/' onclick='window.open(this.href);
-                                    return false' title='arXiv'>arXiv.org</a>
+                            return false' title='arXiv'>arXiv.org</a>
                 </form></center><hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
             <?php
             if (sessioneavviata() == True) {
@@ -152,10 +154,7 @@
                             <input type='submit' name='b8' value='Insert preprint' style='width:80px;' id='bottone_keyword' class='bottoni' onclick='return confirmInsert()'/><br/><br/>
                             </form>";
                     }
-                    $copia = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints' . "/pdf/";
-                    $basedir = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints' . "/pdf_downloads/";
-                    $target_dir = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints' . "/upload/";
-                    $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+                    $target_file = $basedir2 . basename($_FILES["fileToUpload"]["name"]);
                     $type = "document/pdf"; // impostato il tipo per un'pdf
                     #bottone insert manually
                     if (isset($_POST['b8'])) {
@@ -192,7 +191,7 @@
                     #bottone delete
                     if (isset($_POST['b9'])) {
                         #eliminazione del preprint selezionato
-                        unlink($basedir . $_POST['id'] . ".pdf");
+                        unlink($basedir3 . $_POST['id'] . ".pdf");
                         cancellaselected($_POST['id']);
                         echo '<script type="text/javascript">alert("Preprint ' . $info[0] . ' removed correctly!");</script>';
                         echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./manual_insert.php">';
@@ -222,8 +221,8 @@
                         #inserimento del pdf sul database
                         insert_one_pdf2($_POST['id']);
                         #spostamento del file pdf
-                        copy($basedir . $_POST['id'] . ".pdf", $copia . $_POST['id'] . ".pdf");
-                        unlink($basedir . $_POST['id'] . ".pdf");
+                        copy($basedir3 . $_POST['id'] . ".pdf", $copia . $_POST['id'] . ".pdf");
+                        unlink($basedir3 . $_POST['id'] . ".pdf");
                         if ($_FILES["fileToUpload"]["size"] > 0) {
                             #caricamento del file scelto
                             if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {

@@ -47,10 +47,10 @@
         if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] < 86400)) {
             if ($_SESSION['logged_type'] === "mod" or $_SESSION['logged_type'] === "user") {
                 //sessione moderatore
-                if ($_SESSION['logged_type'] === "mod"){
-                	$ind = "modp.php";
-                }else{
-                	$ind = "userp.php";
+                if ($_SESSION['logged_type'] === "mod") {
+                    $ind = "modp.php";
+                } else {
+                    $ind = "userp.php";
                 }
                 ?>
                 <div id="header-wrapper">
@@ -69,7 +69,7 @@
                     </div>
                 </div>
             <center><div><br/>
-                    <form name="f1" action="<?php echo $ind;?>" method="POST">
+                    <form name="f1" action="<?php echo $ind; ?>" method="POST">
                         Go back to new insertion: <input type="submit" name="b4" value="Back" id="bottoni" class="bottoni">
                     </form>
                 </div>

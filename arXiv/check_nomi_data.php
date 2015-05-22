@@ -3,11 +3,8 @@
 #funzione per la verifica se ci sono sessioni attive
 
 function sessioneavviata() {
-    #definizione parametri di connessione al database
-    $hostname_db = "localhost";
-    $db_monte = "dmipreprints"; //nome del database
-    $username_db = "root"; //l'username
-    $password_db = "1234"; // password
+#importazione variabili globali
+    include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
     $var = True;
     $a = date("Ymd", time());
     $datas = datasessione();
@@ -26,11 +23,8 @@ function sessioneavviata() {
 #funzione di avvio della sessione
 
 function avviasessione() {
-    #definizione parametri di connessione al database
-    $hostname_db = "localhost";
-    $db_monte = "dmipreprints"; //nome del database
-    $username_db = "root"; //l'username
-    $password_db = "1234"; // password
+#importazione variabili globali
+    include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
     $a = date("Ymd", time());
     $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
     mysql_select_db($db_monte, $db_connection);
@@ -44,11 +38,8 @@ function avviasessione() {
 #funzione per terminare la sessione
 
 function chiudisessione() {
-    #definizione parametri di connessione al database
-    $hostname_db = "localhost";
-    $db_monte = "dmipreprints"; //nome del database
-    $username_db = "root"; //l'username
-    $password_db = "1234"; // password
+#importazione variabili globali
+    include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
     $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
     mysql_select_db($db_monte, $db_connection);
     $sql = "UPDATE sessione SET attivo='0'";
@@ -59,13 +50,10 @@ function chiudisessione() {
 #funzione verifica nuovo nome
 
 function nomiprec($nome) {
+#importazione variabili globali
+    include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
     #cerca se il nome se era stato gia cercato...
     $nome = trim($nome);
-    #definizione parametri di connessione al database
-    $hostname_db = "localhost";
-    $db_monte = "dmipreprints"; //nome del database
-    $username_db = "root"; //l'username
-    $password_db = "1234"; // password
     $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
     mysql_select_db($db_monte, $db_connection);
     $sql = "SELECT * FROM AUTORI_BACKUP WHERE nome='" . $nome . "'";
@@ -83,6 +71,8 @@ function nomiprec($nome) {
 #funzione ricerca full text
 
 function searchfulltext() {
+#importazione variabili globali
+    include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
     require_once $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'authorization/sec_sess.php';
     sec_session_start();
     if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] < 86400)) {
@@ -93,12 +83,6 @@ function searchfulltext() {
         }
     }
     echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
-    $copia = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints' . "/pdf/";
-    #definizione parametri di connessione al database
-    $hostname_db = "localhost";
-    $db_monte = "dmipreprints"; //nome del database
-    $username_db = "root"; //l'username
-    $password_db = "1234"; // password
     $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
     mysql_select_db($db_monte, $db_connection);
     #risultati visualizzati per pagina
@@ -258,6 +242,8 @@ function searchfulltext() {
 # funzione lettura dei preprint
 
 function searchpreprint() {
+#importazione variabili globali
+    include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
     require_once $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'authorization/sec_sess.php';
     sec_session_start();
     if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] < 86400)) {
@@ -477,12 +463,6 @@ function searchpreprint() {
     $query = substr($query, 0, -7);
     $cat3 = substr($cat3, 0, -2);
     echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
-    $copia = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints' . "/pdf/";
-    #definizione parametri di connessione al database
-    $hostname_db = "localhost";
-    $db_monte = "dmipreprints"; //nome del database
-    $username_db = "root"; //l'username
-    $password_db = "1234"; // password
     $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
     mysql_select_db($db_monte, $db_connection);
     #risultati visualizzati per pagina
@@ -633,6 +613,8 @@ function searchpreprint() {
 # funzione filtro e lettura dei preprint
 
 function filtropreprint() {
+#importazione variabili globali
+    include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
     require_once $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'authorization/sec_sess.php';
     sec_session_start();
     if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] < 86400)) {
@@ -679,12 +661,6 @@ function filtropreprint() {
         $argom = "id_pubblicazione";
     }
     echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
-    $copia = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints' . "/pdf/";
-    #definizione parametri di connessione al database
-    $hostname_db = "localhost";
-    $db_monte = "dmipreprints"; //nome del database
-    $username_db = "root"; //l'username
-    $password_db = "1234"; // password
     $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
     mysql_select_db($db_monte, $db_connection);
     #risultati visualizzati per pagina
@@ -851,12 +827,8 @@ function filtropreprint() {
 #funzione lettura dei preprint archiviati
 
 function leggipreprintarchiviati() {
-    $copia = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . "arXiv/pdf/";
-    #definizione parametri di connessione al database
-    $hostname_db = "localhost";
-    $db_monte = "dmipreprints"; //nome del database
-    $username_db = "root"; //l'username
-    $password_db = "1234"; // password
+#importazione variabili globali
+    include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
     $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
     mysql_select_db($db_monte, $db_connection);
     $risperpag = 5;
@@ -962,11 +934,8 @@ function leggipreprintarchiviati() {
 # funzione cancellazione preprint
 
 function cancellaselected($id) {
-    #definizione parametri di connessione al database
-    $hostname_db = "localhost";
-    $db_monte = "dmipreprints"; //nome del database
-    $username_db = "root"; //l'username
-    $password_db = "1234"; // password
+#importazione variabili globali
+    include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
     $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
     mysql_select_db($db_monte, $db_connection);
     $sql = "DELETE FROM PREPRINTS WHERE id_pubblicazione='" . $id . "'";
@@ -979,11 +948,8 @@ function cancellaselected($id) {
 # funzione cancellazione preprint archiviati
 
 function cancellapreprint() {
-    #definizione parametri di connessione al database
-    $hostname_db = "localhost";
-    $db_monte = "dmipreprints"; //nome del database
-    $username_db = "root"; //l'username
-    $password_db = "1234"; // password
+#importazione variabili globali
+    include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
     $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
     mysql_select_db($db_monte, $db_connection);
     $sql = "DELETE FROM PREPRINTS_ARCHIVIATI WHERE checked='1'";
@@ -995,11 +961,8 @@ function cancellapreprint() {
 #funzione che cerca se il preprint è stato già scaricato nell'esecuzione in corso
 
 function preprintscaricati($id) {
-    #definizione parametri di connessione al database
-    $hostname_db = "localhost";
-    $db_monte = "dmipreprints"; //nome del database
-    $username_db = "root"; //l'username
-    $password_db = "1234"; // password
+#importazione variabili globali
+    include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
     $var = False;
     $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
     mysql_select_db($db_monte, $db_connection);
@@ -1017,11 +980,8 @@ function preprintscaricati($id) {
 #funzione per l'inserimento dell'id dentro temp
 
 function aggiornapreprintscaricati($id) {
-    #definizione parametri di connessione al database
-    $hostname_db = "localhost";
-    $db_monte = "dmipreprints"; //nome del database
-    $username_db = "root"; //l'username
-    $password_db = "1234"; // password
+#importazione variabili globali
+    include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
     $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
     mysql_select_db($db_monte, $db_connection);
     $sql = "INSERT INTO temp (id) VALUES ('" . $id . "') ON DUPLICATE KEY UPDATE id = VALUES(id)";
@@ -1032,11 +992,8 @@ function aggiornapreprintscaricati($id) {
 #funzione per la cancellazione del contenuto temp
 
 function azzerapreprint() {
-    #definizione parametri di connessione al database
-    $hostname_db = "localhost";
-    $db_monte = "dmipreprints"; //nome del database
-    $username_db = "root"; //l'username
-    $password_db = "1234"; // password
+#importazione variabili globali
+    include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
     $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
     mysql_select_db($db_monte, $db_connection);
     $sql = "SELECT id FROM temp";
@@ -1052,11 +1009,8 @@ function azzerapreprint() {
 
 function cercapreprint($id) {
     $id = trim($id);
-    #definizione parametri di connessione al database
-    $hostname_db = "localhost";
-    $db_monte = "dmipreprints"; //nome del database
-    $username_db = "root"; //l'username
-    $password_db = "1234"; // password
+#importazione variabili globali
+    include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
     $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
     mysql_select_db($db_monte, $db_connection);
     $sql = "SELECT * FROM PREPRINTS WHERE id_pubblicazione='" . $id . "' UNION SELECT * FROM PRINTS WHERE id_pubblicazione='" . $id . "'";
@@ -1079,13 +1033,10 @@ function cercapreprint($id) {
 #funzione che cerca se il nome è presente
 
 function cercanome($nome) {
+#importazione variabili globali
+    include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
     #cerca se il nome se era stato gia cercato...
     $nome = trim($nome);
-    #definizione parametri di connessione al database
-    $hostname_db = "localhost";
-    $db_monte = "dmipreprints"; //nome del database
-    $username_db = "root"; //l'username
-    $password_db = "1234"; // password
     $var = False;
     $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
     mysql_select_db($db_monte, $db_connection);
@@ -1102,14 +1053,10 @@ function cercanome($nome) {
 #funzione aggiornamento nomi_ultimo_lancio
 
 function aggiornanomi() {
+#importazione variabili globali
+    include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
     #leggo i nuovi nomi e li inserisco in array...
     $array = legginomi();
-    #cerca se il nome se era stato gia cercato...
-    #definizione parametri di connessione al database
-    $hostname_db = "localhost";
-    $db_monte = "dmipreprints"; //nome del database
-    $username_db = "root"; //l'username
-    $password_db = "1234"; // password
     $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
     mysql_select_db($db_monte, $db_connection);
     $sql = "SELECT nome FROM AUTORI_BACKUP";
@@ -1130,13 +1077,9 @@ function aggiornanomi() {
 # funzione lettura nomi
 
 function legginomi() {
+#importazione variabili globali
+    include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
     #leggo i nuovi nomi e li inserisco in array...
-    #cerca se il nome se era stato gia cercato...
-    #definizione parametri di connessione al database
-    $hostname_db = "localhost";
-    $db_monte = "dmipreprints"; //nome del database
-    $username_db = "root"; //l'username
-    $password_db = "1234"; // password
     $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
     mysql_select_db($db_monte, $db_connection);
     $sql = "SELECT nome FROM AUTORI";
@@ -1153,11 +1096,8 @@ function legginomi() {
 #funzione scrittura nomi
 
 function scrivinomi($nomi) {
-    #definizione parametri di connessione al database
-    $hostname_db = "localhost";
-    $db_monte = "dmipreprints"; //nome del database
-    $username_db = "root"; //l'username
-    $password_db = "1234"; // password
+#importazione variabili globali
+    include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
     $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
     mysql_select_db($db_monte, $db_connection);
     $sql = "SELECT nome FROM AUTORI";
@@ -1216,11 +1156,8 @@ function aggiungiutente($nome, $a) {
 #data ultima sessione
 
 function datasessione() {
-    #definizione parametri di connessione al database
-    $hostname_db = "localhost";
-    $db_monte = "dmipreprints"; //nome del database
-    $username_db = "root"; //l'username
-    $password_db = "1234"; // password
+#importazione variabili globali
+    include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
     $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
     mysql_select_db($db_monte, $db_connection);
     $sql = "SELECT data FROM sessione_data";
@@ -1234,11 +1171,8 @@ function datasessione() {
 #ritorno la data come intero
 
 function dataprec() {
-    #definizione parametri di connessione al database
-    $hostname_db = "localhost";
-    $db_monte = "dmipreprints"; //nome del database
-    $username_db = "root"; //l'username
-    $password_db = "1234"; // password
+#importazione variabili globali
+    include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
     $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
     mysql_select_db($db_monte, $db_connection);
     $sql = "SELECT data FROM DATA_ULTIMO_LANCIO";
@@ -1257,11 +1191,8 @@ function dataprec() {
 #ritorno la data come una stringa
 
 function datastring() {
-    #definizione parametri di connessione al database
-    $hostname_db = "localhost";
-    $db_monte = "dmipreprints"; //nome del database
-    $username_db = "root"; //l'username
-    $password_db = "1234"; // password
+#importazione variabili globali
+    include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
     $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
     mysql_select_db($db_monte, $db_connection);
     $sql = "SELECT data FROM DATA_ULTIMO_LANCIO";
@@ -1275,12 +1206,9 @@ function datastring() {
 #aggiorno data_ultimo_lancio con la data di ultimo lancio
 
 function aggiornadata() {
+#importazione variabili globali
+    include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
     $a = date("Y-m-d H:i", time());
-    #definizione parametri di connessione al database
-    $hostname_db = "localhost";
-    $db_monte = "dmipreprints"; //nome del database
-    $username_db = "root"; //l'username
-    $password_db = "1234"; // password
     $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
     mysql_select_db($db_monte, $db_connection);
     $sql = "SELECT data FROM DATA_ULTIMO_LANCIO";

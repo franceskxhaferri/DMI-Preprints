@@ -86,14 +86,14 @@
                     <?php
                     include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/insert_remove_db.php');
                     include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/arXiv_parsing.php');
+                    #importazione variabili globali
+                    include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
                     if (sessioneavviata() == True) {
                         echo "<center><br/>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE LIST CAN'T BE CHANGED IN THIS MOMENT!</center><br/>";
                     } else {
                         echo "<center><a style='text-decoration: none;' href='javascript:FinePagina()'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8595;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center>";
                         echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
                         #leggere cartella...
-                        #base link
-                        $base = "./pdf_downloads/";
                         #Imposto la directory da leggere
                         $directory = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints' . "/pdf_downloads/";
                         echo "<form name='f3' action='check_preprints.php' id='f1' method='GET'><center><table>";
@@ -113,9 +113,9 @@
                                         $ids = $file;
                                         $ids = substr($ids, 0, -4);
                                         $ids = str_replace("-", "/", $ids);
-                                        echo "<tr><td colspan='2'><label><input type='checkbox' name='" . $i . "' value='checked'/>$y.&nbsp&nbsp&nbsp<a href=" . $base . $file . " onclick='window.open(this.href);return false' title='" . $file . "'>" . $file . "</a></label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td><td><a href=./manual_edit.php?id=" . $ids . " onclick='window.open(this.href);return false' title='" . $ids . "'>" . $ids . "</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>";
+                                        echo "<tr><td colspan='2'><label><input type='checkbox' name='" . $i . "' value='checked'/>$y.&nbsp&nbsp&nbsp<a href=" . $basedir3 . $file . " onclick='window.open(this.href);return false' title='" . $file . "'>" . $file . "</a></label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td><td><a href=./manual_edit.php?id=" . $ids . " onclick='window.open(this.href);return false' title='" . $ids . "'>" . $ids . "</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>";
                                         #recupero data creazione file
-                                        $dat = date("Y-m-d H:i", filemtime($base . $file));
+                                        $dat = date("Y-m-d H:i", filemtime($basedir3 . $file));
                                         echo "<td>&nbsp&nbsp&nbsp$dat</td></tr>";
                                         $i++;
                                         $y++;
@@ -128,12 +128,11 @@
                         }
                         $z = 0;
                         $lunghezza = $i;
-                        $basedir2 = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints' . "/pdf/";
                         #eliminazione pdf, lettura cartella e ...
                         if (isset($_GET['b2'])) {
                             for ($j = 0; $j < $lunghezza; $j++) {
-                                $percorso = $base . $array[$j];
-                                $percorso2 = $basedir2 . $array[$j];
+                                $percorso = $basedir3 . $array[$j];
+                                $percorso2 = $copia . $array[$j];
                                 $delete = $_GET[$j];
                                 if ($delete == "checked") {
                                     $z++;
@@ -168,8 +167,8 @@
                         #inserimento pdf, lettura cartella e ...
                         if (isset($_GET['b3'])) {
                             for ($j = 0; $j < $lunghezza; $j++) {
-                                $percorso = $base . $array[$j];
-                                $percorso2 = $basedir2 . $array[$j];
+                                $percorso = $basedir3 . $array[$j];
+                                $percorso2 = $copia . $array[$j];
                                 $delete = $_GET[$j];
                                 if ($delete == "checked") {
                                     $z++;

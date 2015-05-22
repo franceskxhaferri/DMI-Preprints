@@ -50,6 +50,8 @@
         require_once $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'authorization/sec_sess.php';
         include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/check_nomi_data.php');
         include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'mysql/func.php');
+        #importazione variabili globali
+        include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
         sec_session_start();
         if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] < 86400)) {
             if ($_SESSION['logged_type'] === "mod") {
@@ -73,14 +75,14 @@
             <center><div>
                     <?php
                     print_r(" Name: ");
-    		    print_r($_SESSION['nome']);
+                    print_r($_SESSION['nome']);
                     print_r(" Access type: ");
                     print_r($_SESSION['logged_type']);
                     ?>
                     <br/><br/>
                     <table>
                         <tr>
-                           <td>
+                            <td>
                                 <form name="f5" action="uploaded.php" method="GET">
                                     <input type="text" name="p" value="1" checked hidden/>
                                     <input type="submit" name="b5" value="Uploaded section" id="bottone_keyword" class="bottoni"/>
@@ -148,8 +150,7 @@
                                             <input type="submit" name="b3" value="Insert preprint" style='width:80px;' id='bottone_keyword' class='bottoni' onclick="return confirmInsert()"/><br/><br/>
                                             </form>
                                             <?php
-                                            $target_dir = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints' . "/upload_dmi/";
-                                            $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+                                            $target_file = $basedir . basename($_FILES["fileToUpload"]["name"]);
                                             if (isset($_POST['b1'])) {
                                                 session_start();
                                                 session_unset();
@@ -180,7 +181,7 @@
                                                     $fileType = $_FILES["fileToUpload"]["type"];
                                                     #richiamo della funzione per inserire le info del preprint all'interno del database
                                                     $id = insert_pubb($info, $_SESSION['uid']);
-                                                    rename($target_dir . $_FILES["fileToUpload"]["name"], $target_dir . $id . ".pdf");
+                                                    rename($basedir . $_FILES["fileToUpload"]["name"], $basedir . $id . ".pdf");
                                                     #inserimento file nel database
                                                     insertpdf($id, $fileType);
                                                     echo '<script type="text/javascript">alert("Preprint ' . $id . ' inserted correctly!");</script>';

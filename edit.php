@@ -49,6 +49,8 @@
         include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/check_nomi_data.php');
         include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/insert_remove_db.php');
         include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'mysql/func.php');
+        #importazione variabili globali
+        include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
         sec_session_start();
         if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] < 86400)) {
             if (($_SESSION['logged_type'] === "mod" or $_SESSION['logged_type'] === "user") && $_SESSION['uid'] == $_GET['r']) {
@@ -136,8 +138,7 @@
                             <input type='submit' name='b10' value='Upgrade' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmUpgrade()'/>
                             <input type='submit' name='b11' value='Complete' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmInsert()'/><br/><br/>
                             </form>";
-                $target_dir = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints' . "/upload_dmi/";
-                $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+                $target_file = $basedir . basename($_FILES["fileToUpload"]["name"]);
                 #bottone cancella
                 if (isset($_POST['b9'])) {
                     $id1 = $_POST['id'];
@@ -177,7 +178,7 @@
                             version_preprintd($info[0]);
                             #richiamo della funzione per inserire le info del preprint all'interno del database
                             insert_p($info, $_GET['r']);
-                            rename($target_dir . $_FILES["fileToUpload"]["name"], $target_dir . $info[0] . ".pdf");
+                            rename($basedir . $_FILES["fileToUpload"]["name"], $basedir . $info[0] . ".pdf");
                             #spostamento pdf
                             #inserimento nel database del file
                             insertpdf($info[0], $fileType);

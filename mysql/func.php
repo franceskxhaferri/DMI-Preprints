@@ -3,6 +3,8 @@
 #funzione inserimento informazioni preprint
 
 function insert_pubb($array, $uid) {
+#importazione variabili globali
+    include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
     #adattamento stringhe pericolose per la query...
     $array[1] = addslashes($array[1]);
     $array[2] = addslashes($array[2]);
@@ -11,11 +13,6 @@ function insert_pubb($array, $uid) {
     $array[5] = addslashes($array[5]);
     $array[6] = addslashes($array[6]);
     $array[7] = addslashes($array[7]);
-    #definizione parametri di connessione al database
-    $hostname_db = "localhost";
-    $db_monte = "dmipreprints"; //nome del database
-    $username_db = "root"; //l'username
-    $password_db = "1234"; // password
     #connessione al database...
     $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
     mysql_select_db($db_monte, $db_connection);
@@ -36,6 +33,8 @@ function insert_pubb($array, $uid) {
 #funzione inserimento informazioni preprint
 
 function insert_p($array, $uid) {
+#importazione variabili globali
+    include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
     #adattamento stringhe pericolose per la query...
     $array[1] = addslashes($array[1]);
     $array[2] = addslashes($array[2]);
@@ -44,11 +43,6 @@ function insert_p($array, $uid) {
     $array[5] = addslashes($array[5]);
     $array[6] = addslashes($array[6]);
     $array[7] = addslashes($array[7]);
-    #definizione parametri di connessione al database
-    $hostname_db = "localhost";
-    $db_monte = "dmipreprints"; //nome del database
-    $username_db = "root"; //l'username
-    $password_db = "1234"; // password
     #connessione al database...
     $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
     mysql_select_db($db_monte, $db_connection);
@@ -62,13 +56,8 @@ function insert_p($array, $uid) {
 #funzione che inserisce il pdf caricato all'interno dei database
 
 function insertpdf($id, $type) {
-    #definizione parametri di connessione al database
-    $hostname_db = "localhost";
-    $db_monte = "dmipreprints"; //nome del database
-    $username_db = "root"; //l'username
-    $password_db = "1234"; // password
-    $copia = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints' . "/pdf/";
-    $basedir = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints' . "/upload_dmi/"; // � la directory da dove prelevare in automatico tutti i file in esso contenuti
+#importazione variabili globali
+    include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
     #connessione al database...
     $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
     mysql_select_db($db_monte, $db_connection);
@@ -98,12 +87,8 @@ function insertpdf($id, $type) {
 #funzione che visualizza lista upload
 
 function leggiupload($uid) {
-    $copia = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . "arXiv/pdf/";
-    #definizione parametri di connessione al database
-    $hostname_db = "localhost";
-    $db_monte = "dmipreprints"; //nome del database
-    $username_db = "root"; //l'username
-    $password_db = "1234"; // password
+#importazione variabili globali
+    include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
     $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
     mysql_select_db($db_monte, $db_connection);
     if (!isset($_GET['p'])) {
@@ -202,12 +187,8 @@ function leggiupload($uid) {
 #funzione che controlla la versione del preprint e lo archivia eventualmente
 
 function version_preprintd($id1) {
-    #definizione parametri di connessione al database
-    $hostname_db = "localhost";
-    $db_monte = "dmipreprints"; #nome del database
-    $username_db = "root"; #l'username
-    $password_db = "1234"; #password
-    $basedir = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints' . "/pdf/";
+#importazione variabili globali
+    include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
     #connessione al database...
     $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
     mysql_select_db($db_monte, $db_connection);
@@ -230,7 +211,7 @@ function version_preprintd($id1) {
             } else {
                 $query = mysql_query($sql) or die(mysql_error());
                 $row = mysql_fetch_array($query);
-                unlink($basedir . $row['Filename']);
+                unlink($copia . $row['Filename']);
                 #rimozione da preprints...
                 $sql2 = "DELETE FROM PRINTS WHERE id_pubblicazione='" . $id . $i . "'";
                 $query2 = mysql_query($sql2) or die(mysql_error());

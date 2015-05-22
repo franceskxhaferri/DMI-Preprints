@@ -133,8 +133,9 @@
                            <input type='submit' name='bottoni9' value='Remove' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmDelete()'/>
                             <input type='submit' name='bottoni10' value='Complete' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmInsert()'/><br/><br/>
                             </form>";
-                    $target_dir = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints' . "/upload/";
-                    $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+#importazione variabili globali
+                    include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
+                    $target_file = $basedir2 . basename($_FILES["fileToUpload"]["name"]);
                     if (isset($_POST['bottoni9'])) {
                         $id1 = $_POST['id'];
                         #eliminazione del preprint selezionato

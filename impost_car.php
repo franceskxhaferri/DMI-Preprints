@@ -3,9 +3,26 @@
 $ini_array = parse_ini_file("/etc/dmipreprints/set.ini");
 
 //mysql
-$mysql_user = $ini_array['mysql_user']; 
-$mysql_pass = $ini_array['mysql_pass'];
-$mysql_addr = $ini_array['mysql_addr'];
+global $hostname_db;
+global $db_monte; //nome del database
+global $username_db; //l'username
+global $password_db; // password
+
+$hostname_db = "localhost";
+$db_monte = "dmipreprints"; //nome del database
+$username_db = "root"; //l'username
+$password_db = "1234";
+
+//percorsi cartelle
+global $copia;
+global $basedir;
+global $basedir2;
+global $basedir3;
+
+$copia = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints' . "/pdf/";
+$basedir = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints' . "/upload_dmi/";
+$basedir2 = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints' . "/upload/";
+$basedir3 = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints' . "/pdf_downloads/";
 
 //ldap
 $ldaphost = $ini_array['ldap_host'];
