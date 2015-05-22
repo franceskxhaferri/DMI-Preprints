@@ -60,8 +60,7 @@
                                 <header id="header">
                                     <h1><a href="#" id="logo">DMI Preprints</a></h1>
                                     <nav id="nav">
-                                        <a href="main.php">DMI Publications</a>
-                                        <a href='view_preprints.php?p=1&w=0'>arXiv Publications</a>
+                                        <a href='view_preprints.php?p=1&w=0'>Publications</a>
                                         <a href="reserved.php" class="current-page-item">Reserved Area</a>
                                     </nav>
                                 </header>
@@ -212,7 +211,7 @@
                         }
                         $info[0] = $_POST['id'];
                         $info[1] = $_POST['title'];
-                        $info[2] = $_POST['date'];
+                        $info[2] = $_POST['data'];
                         $info[3] = $_POST['author'];
                         $info[6] = $_POST['category'];
                         $info[7] = $_POST['abstract'];

@@ -47,8 +47,7 @@
                                 <header id="header">
                                     <h1><a href="#" id="logo">DMI Preprints</a></h1>
                                     <nav id="nav">
-                                        <a href="main.php">DMI Publications</a>
-                                        <a href="view_preprints.php?p=1&w=0">arXiv Publications</a>
+                                        <a href="view_preprints.php?p=1&w=0">Publications</a>
                                         <a href="reserved.php" class="current-page-item" class="current-page-item">Reserved Area</a>
                                     </nav>
                                 </header>
@@ -61,16 +60,6 @@
                             <tr><form name="f1" action="reserved.php" method="GET">
                                 <td align="right" style="width:350px;">Go to reserved area&nbsp&nbsp&nbsp</td>
                                 <td style="width:350px;"><input type="submit" name="b1" value="Back" id="bottone_keyword" class="bottoni"/></td>
-                            </form></tr>
-                            <tr><form name="f2" action="view_preprints.php" method="GET">
-                                <input type="text" name="p" value="1" checked hidden/><input type="text" name="w" value="0" checked hidden/>
-                                <td align="right" style="width:350px;">Preprints checked and inserted on database&nbsp&nbsp&nbsp</td>
-                                <td style="width:350px;"><input type="submit" name="b2" value="Approved section" id="bottone_keyword" class="bottoni"/></td>
-                            </form></tr>
-                            <tr><form name="f3" action="archived_preprints.php" method="GET">
-                                <input type="text" name="p" value="1" checked hidden/>
-                                <td align="right" style="width:350px;">Archived preprints, contains old publications&nbsp&nbsp&nbsp</td>
-                                <td style="width:350px;"><input type="submit" name="b3" value="Archived section" id="bottone_keyword" class="bottoni"/></td>
                             </form></tr>
                             <tr><form name="f4" action="authors_list.php" method="GET">
                                 <td align="right" style="width:350px;">List of authors that will be searched on arXiv&nbsp&nbsp&nbsp</td>

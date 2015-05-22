@@ -70,9 +70,8 @@
             $nav = "<header id='header'>
                                     <h1><a href='#' id='logo'>DMI Preprints</a></h1>
                                     <nav id='nav'>
-                                        <a href='main.php'>DMI Publications</a>
-                                        <a href='view_preprints.php?p=1&w=0'>arXiv Publications</a>
-                                        <a href='reserved.php' class='current-page-item'>Reserved Area</a>
+                                        <a href='view_preprints.php?p=1&w=0' class='current-page-item'>Publications</a>
+                                        <a href='reserved.php'>Reserved Area</a>
                                     </nav>
                                 </header>";
         } else if ($_SESSION['logged_type'] === "user") {
@@ -81,8 +80,7 @@
             $nav = "<header id='header'>
                                     <h1><a href='#' id='logo'>DMI Preprints</a></h1>
                                     <nav id='nav'>
-                                        <a href='main.php'>DMI Publications</a>
-                                        <a href='view_preprints.php?p=1&w=0' class='current-page-item'>arXiv Publications</a>
+                                        <a href='view_preprints.php?p=1&w=0' class='current-page-item'>Publications</a>
                                         <a href='reserved.php'>Reserved Area</a>
                                     </nav>
                                 </header>";
@@ -92,14 +90,13 @@
             $nav = "<header id='header'>
                                     <h1><a href='#' id='logo'>DMI Preprints</a></h1>
                                     <nav id='nav'>
-                                        <a href='main.php'>DMI Publications</a>
-                                        <a href='view_preprints.php?p=1&w=0' class='current-page-item'>arXiv Publications</a>
+                                        <a href='view_preprints.php?p=1&w=0' class='current-page-item'>Publications</a>
                                         <a href='reserved.php'>Reserved Area</a>
                                     </nav>
                                 </header>";
         }
         if ($_SESSION['logged_type'] != "mod") {
-            $str1 = "<h1><center>in this section are the preprints that have been published by the <a style='color:#007897;' href='./authors_list.php' onclick='window.open(this.href); return false'>authors</a> of the department on arxiv.org</center></h1>";
+            $str1 = "<h1><center>in this section are the preprints that have been published on DMI archive and preprints published by the <a style='color:#007897;' href='./authors_list.php' onclick='window.open(this.href); return false'>authors</a> of the department on arxiv.org</center></h1><br/>";
         } else {
             $str2 = "<h2>APPROVED PREPRINTS</h2>";
         }
@@ -118,16 +115,6 @@
             echo $str1;
             ?>
         </div><center>
-        <?php
-        if ($_SESSION['logged_type'] === "mod") {
-            echo "<form name='f1' action='$rit' method='GET'>
-		        $t&nbsp&nbsp&nbsp
-		        <input type='submit' name='b1' value='Back' id='bottone_keyword' class='bottoni'/>
-		    </form>
-		    ";
-        }
-        ?>
-        <br/>
         <form name="f5" action="<?php echo 'view_preprints.php?p=' . $_GET['p'] . '&w=' . $view . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '&o=' . $_GET['o'] . '&t=' . $_GET['t'] . '&a=' . $_GET['a'] . '&c=' . $_GET['c'] . '&j=' . $_GET['j'] . '&d=' . $_GET['d'] . '&all=' . $_GET['all'] . '&h=' . $_GET['h'] . '&y=' . $_GET['y'] . '&e=' . $_GET['e'] . '&i=' . $_GET['i'] . '&rp=' . $_GET['rp'] . '&ft=' . $_GET['ft'] . '&go=' . $_GET['go'] . '&s=' . $_GET['s'] . '&year1=' . $_GET['year1'] . '&year2=' . $_GET['year2'] . '&year3=' . $_GET['year3'] . '&st=' . $_GET['st'] . ''; ?>" method="POST">
             Enable/Disable on page view:
             <input type="submit" style="width:40px;" name="w" value="<?php echo $string; ?>" id="bottone_keyword" class="bottoni"/>
@@ -190,7 +177,7 @@
                 <form name="f4" action="view_preprints.php" method="GET">
                     <input type="text" name="p" value="1" hidden>
                     <input type="text" name="w" value="<?php echo $upview; ?>" hidden>
-                    <font color="#007897">Full text search(semantic search)</font><br/>
+                    <font color="#007897">Full text search</font><br/>
                     Results for page: 
                     <select name="rp">
                         <option value="5" selected="selected">5</option>
@@ -202,8 +189,9 @@
                     Search: <input type="search" autocomplete = "on" style="width:400px;" name="ft" placeholder="Insert phrase, name, keyword, etc." value="<?php echo $_GET['ft']; ?>"/>
                     <input type="submit" name="go" value="Send"/>&nbsp&nbsp
                     Search on: 
-                    <label><input type="radio" name="st" value="0" checked>Latest</label>
-                    <label><input type="radio" name="st" value="1">Archived</label>
+                    <label><input type="radio" name="st" value="2" checked>DMI</label>
+                    <label><input type="radio" name="st" value="1">ArXiv</label>
+                    <label><input type="radio" name="st" value="0">Archived</label>
                 </form>
                 <div align="left" style="margin-left:6%; width:500px;"><br/>
                     EXAMPLE OF USING BOOLEAN OPERATORS(full text search):<br/>
