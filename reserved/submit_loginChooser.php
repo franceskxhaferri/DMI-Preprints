@@ -12,11 +12,13 @@ if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 
 if (isset($_SESSION['logged_type'])) {
     if ($_SESSION['logged_type'] === "user") {
         //sessione utente
-        require_once $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'reserved/controlPanel_user.php';
+        header('Location:./userp.php');
+	exit;
     } else {
         if ($_SESSION['logged_type'] === "mod") {
             //sessione moderatore
-            require_once $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'reserved/controlPanel_mod.php';
+            header('Location:./modp.php');
+	    exit;
         } else {
             echo 'errore login chooser';
         }
