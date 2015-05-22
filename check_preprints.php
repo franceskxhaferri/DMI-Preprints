@@ -108,7 +108,7 @@
                                 while (($file = readdir($directory_handle)) !== false) {
                                     #Se l'elemento trovato è diverso da una directory
                                     #o dagli elementi . e .. lo visualizzo a schermo
-                                    if ((!is_dir($file)) & ($file != ".") & ($file != "..") & ($file != "readme.txt")) {
+                                    if ((!is_dir($file)) & ($file != ".") & ($file != "..") & ($file != "index.html")) {
                                         $array[$i] = $file;
                                         $ids = $file;
                                         $ids = substr($ids, 0, -4);
@@ -140,7 +140,7 @@
                                     if (is_dir($directory)) {
                                         if ($directory_handle = opendir($directory)) {
                                             while (($file = readdir($directory_handle)) !== false) {
-                                                if ((!is_dir($file)) & ($file != ".") & ($file != "..")) {
+                                                if ((!is_dir($file)) & ($file != ".") & ($file != "..") & ($file != "index.html")) {
                                                     if ($file == $array[$j]) {
                                                         #cancello file...
                                                         unlink($percorso);
@@ -176,7 +176,7 @@
                                     if (is_dir($directory)) {
                                         if ($directory_handle = opendir($directory)) {
                                             while (($file = readdir($directory_handle)) !== false) {
-                                                if ((!is_dir($file)) & ($file != ".") & ($file != "..")) {
+                                                if ((!is_dir($file)) & ($file != ".") & ($file != "..") & ($file != "index.html")) {
                                                     if ($file == $array[$j]) {
                                                         $idd = substr($file, 0, -4);
                                                         #inserimento file nel database

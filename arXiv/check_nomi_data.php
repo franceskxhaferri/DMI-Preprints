@@ -1190,7 +1190,7 @@ function aggiungiutente($nome, $a) {
     for ($i = 0; $i < $nl; $i++) {
         $temp = $array2[$i];
         $temp = trim($temp);
-        $temp = strtoupper($temp);
+        $temp = ucwords($temp);
         #verifico se il nome è già presente...
         $array[$l] = $temp;
         $l++;

@@ -75,12 +75,11 @@
                 <br/><div><center><br/><h2>AUTHORS LIST</h2></center>
                     <center><table>
                             <tr><form name="f1" action="arXiv_panel.php" method="GET"><td align="right">Go to arXiv panel&nbsp&nbsp&nbsp</td>
-                                <td colspan="2"><input type="submit" name="b1" value="Back" id="bottone_keyword" class="bottoni"/></td></form></tr><tr><td align="center" colspan="3"><br/></td></tr>
-
+                                <td colspan="2"><input type="submit" name="b1" value="Back" id="bottone_keyword" class="bottoni"/></td></form></tr><tr><td align="center" colspan="3"></td></tr>
                             <tr><form name="f2" action="authors_list.php" method="POST">
                                 <td align="right">
                                     <label><input type="checkbox" name="insert" value="1" checked/>
-                                        Add author to list or search by name&nbsp&nbsp&nbsp</label>
+                                        Add author to list or search by name:&nbsp&nbsp&nbsp</label>
                                 </td>
                                 <td>
                                     <input type="search" style="width:173px;" id='textbox' class='textbox' autocomplete = "on" required name="txt1" placeholder="name1, name2, name..." autofocus />
@@ -111,7 +110,7 @@
                         #conto lunghezza array
                         $lunghezza = count($nomi);
                         echo "<form name='f4' action='authors_list.php' id='f1' method='POST'><center><table>";
-                        echo "<tr><td><input type='checkbox' name='checkall' onclick='checkedAll(f1);'/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<font color='#007897'>NAME:</color></td></tr>";
+                        echo "<tr><td><input type='checkbox' name='checkall' onclick='checkedAll(f1);'/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNAME:</td></tr>";
                         #creazione della tabella html dei file all'interno di pdf_downloads
                         $y = 1;
                         for ($i = 0; $i < $lunghezza; $i++) {

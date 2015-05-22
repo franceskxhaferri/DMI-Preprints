@@ -104,7 +104,7 @@
                     if ($id1 == $ris[0] && isset($_POST['b7'])) {
                         echo "
                 <form name='f1' action='manual_insert.php' method='POST' enctype='multipart/form-data'>
-                    <center><div><br/><h2>preprint informations</h2><h1>field with '*' are required</h1><br/><input type='reset' name='reset' value='Reset' style='width:40px;' id='bottone_keyword' class='bottoni'><br/><br/>document/pdf:<br/><br/><a href=./pdf_downloads/" . $id1 . ".pdf onclick='window.open(this.href);return false' style='color:#007897;' title='PDF'>LINK</a><br/><br/><br/>
+                    <center><div><br/><h2>preprint informations</h2><h1>field with '*' are required</h1><br/><input type='reset' name='reset' value='Reset'><br/><br/>document/pdf:<br/><br/><a href=./pdf_downloads/" . $id1 . ".pdf onclick='window.open(this.href);return false' style='color:#007897;' title='PDF'>LINK</a><br/><br/><br/>
 			    id of pubblication (not editable):<br/><br/>
                             <textarea readonly  style='width:65%; height:16px' name='id' id='textbox' class='textbox' placeholder='example of id: 0000.0000v1'>" . $ris[0] . "</textarea><br/><br/><br/>
                             data of pubblication (not editable):<br/><br/>
@@ -124,12 +124,12 @@
                             file to upload: <br/>
                             <input type='hidden' name='MAX_FILE_SIZE' value='10000000'><br/>
                             <input type='file' name='fileToUpload' id='fileToUpload'><br/><br/><br/>
-                            <div style='float:left; width:600px;'><input type='submit' name='b9' value='Remove' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmDelete()'/></div>
-                            <div style='float:right; width:600px;'><input type='submit' name='b10' value='Complete' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmInsert()'/></div><br/><br/>
+                            <input type='submit' name='b9' value='Remove' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmDelete()'/>
+                            <input type='submit' name='b10' value='Complete' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmInsert()'/><br/><br/>
                             </form>";
                     } else {
                         echo "<form name='f2' action='manual_insert.php' method='POST' enctype='multipart/form-data'>
-                    <center><div><br/><h2>preprint informations</h2><h1>field with '*' are required</h1><br/><input type='reset' name='reset' value='Reset' style='width:40px;' id='bottone_keyword' class='bottoni'/><br/><br/>
+                    <center><div><br/><h2>preprint informations</h2><h1>field with '*' are required</h1><br/><input type='reset' name='reset' value='Reset'/><br/><br/>
                             *id of pubblication:<br/><br/>
                             <textarea style='width:65%; height:16px' name='id' id='textbox' class='textbox' required placeholder='example of id: 0000.0000v1' autofocus></textarea><br/><br/><br/>
                             *data of pubblication:<br/><br/>

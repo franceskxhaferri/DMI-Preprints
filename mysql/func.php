@@ -79,7 +79,7 @@ function insertpdf($id, $type) {
     if ($handle = opendir($basedir)) {
         $i = 0;
         while ((false !== ($file = readdir($handle)))) {
-            if ($file != '.' && $file != '..') {
+            if ($file != '.' && $file != '..' && $file != 'index.html') {
                 $sql = "UPDATE PRINTS SET Filename= '" . $file . "', checked='1' WHERE id_pubblicazione='" . $id . "'";
                 $query = mysql_query($sql) or die(mysql_error());
                 fclose($var);
