@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>DMIPreprints</title>
+        <title>DMI Papers</title>
         <!--<script src="js/jquery.min.js"></script>-->
         <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
         <script src="js/config.js"></script>
@@ -68,7 +68,7 @@
             $t = "Go to arXiv panel";
             $rit = "arXiv_panel.php";
             $nav = "<header id='header'>
-                                    <h1><a href='#' id='logo'>DMI Preprints</a></h1>
+                                    <h1><a href='#' id='logo'>DMI Papers</a></h1>
                                     <nav id='nav'>
                                         <a href='view_preprints.php?p=1&w=0' class='current-page-item'>Publications</a>
                                         <a href='reserved.php'>Reserved Area</a>
@@ -78,7 +78,7 @@
             $t = "Go to reserved area";
             $rit = "reserved.php";
             $nav = "<header id='header'>
-                                    <h1><a href='#' id='logo'>DMI Preprints</a></h1>
+                                    <h1><a href='#' id='logo'>DMI Papers</a></h1>
                                     <nav id='nav'>
                                         <a href='view_preprints.php?p=1&w=0' class='current-page-item'>Publications</a>
                                         <a href='reserved.php'>Reserved Area</a>
@@ -88,7 +88,7 @@
             $t = "Go to homepage";
             $rit = "main.php";
             $nav = "<header id='header'>
-                                    <h1><a href='#' id='logo'>DMI Preprints</a></h1>
+                                    <h1><a href='#' id='logo'>DMI Papers</a></h1>
                                     <nav id='nav'>
                                         <a href='view_preprints.php?p=1&w=0' class='current-page-item'>Publications</a>
                                         <a href='reserved.php'>Reserved Area</a>
@@ -97,8 +97,6 @@
         }
         if ($_SESSION['logged_type'] != "mod") {
             $str1 = "<h1><center>in this section are the preprints that have been published on DMI archive and preprints published by the <a style='color:#007897;' href='./authors_list.php' onclick='window.open(this.href); return false'>authors</a> of the department on arxiv.org</center></h1><br/>";
-        } else {
-            $str2 = "<h2>APPROVED PREPRINTS</h2>";
         }
         ?>
         <div id="header-wrapper">
@@ -110,7 +108,7 @@
                 </div>
             </div>
         </div>
-        <div><center><br/><?php echo $str2; ?></center>
+        <div><br/>
             <?php
             echo $str1;
             ?>
@@ -200,7 +198,7 @@
                     </div>
                 </form>
                 </div>
-                <div align="left" style="margin-left:11%; width:600px;"><br/>
+                <div align="left" style="margin-left:9%; width:700px;"><br/>
                     EXAMPLE OF USING BOOLEAN OPERATORS(full text search):<br/>
                     <div style="float:left;">&#9679;</div><div style="margin-left:15px;">'Milan Rome': this must be one of the two terms.</div>
                     <div style="float:left;">&#9679;</div><div style="margin-left:15px;">'+Milan +Rome': must be present both terms.</div>
