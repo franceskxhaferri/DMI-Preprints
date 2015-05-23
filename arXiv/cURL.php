@@ -1,6 +1,6 @@
 <?php
 
-#funzione per dei download pdf
+#funzione per download dei pdf
 
 function curl_download($url, $path){
 	$ch = curl_init($url);

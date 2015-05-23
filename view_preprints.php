@@ -134,10 +134,12 @@
                     <option value="year">Year:</option>
                     <option value="id">Identifier(ID):</option>
                 </select>
-                <input type="search" autocomplete = "on" style="width:300px;" name="r" placeholder="Author name, part, etc." value="<?php echo $_GET['r']; ?>"/>
+                <input type="search" autocomplete = "on" style="width:15%;" name="r" placeholder="Author name, part, etc." value="<?php echo $_GET['r']; ?>"/>
             <input type="submit" name="s" value="Send"/></div>
         <div id="adv" hidden>
-            <div style="height:30px;">Years restrictions: 
+            <div style="height:30px;">
+            	Reset selections: <input type="reset" name="reset" value="Reset">&nbsp&nbsp
+            	Years restrictions: 
                 until <input type="text" name="year1" style="width:35px" placeholder="Last">
                 , or from <input type="text" name="year2" style="width:35px" placeholder="First">
                 to <input type="text" name="year3" style="width:35px" placeholder="Last">
@@ -148,8 +150,8 @@
                     <option value="15">15</option>
                     <option value="20">20</option>
                     <option value="25">25</option>
-                </select>&nbsp&nbsp
-                Reset selections: <input type="reset" name="reset" value="Reset"></div>
+                </select>
+                </div>
             <div style="float:left; width:37%; height:50px;" align="right">
                 Search on:<br/></div>
             <div style="float:right; width:63%; height:50px;" align="left">
@@ -157,8 +159,8 @@
                 <label><input type="checkbox" name="all" value="1">Record</label>
                 <label><input type="checkbox" name="h" value="1">Author</label>
                 <label><input type="checkbox" name="t" value="1">Title</label>
-                <label><input type="checkbox" name="e" value="1">Year</label><br/>	
-                <label><input type="checkbox" name="a" value="1">Abstract</label>
+                <label><input type="checkbox" name="a" value="1">Abstract</label><br/>
+                <label><input type="checkbox" name="e" value="1">Date</label>
                 <label><input type="checkbox" name="y" value="1">Category</label>
                 <label><input type="checkbox" name="c" value="1">Comments</label>
                 <label><input type="checkbox" name="j" value="1">Journal-ref</label>
@@ -178,6 +180,11 @@
                     <input type="text" name="p" value="1" hidden>
                     <input type="text" name="w" value="<?php echo $upview; ?>" hidden>
                     <font color="#007897">Full text search</font><br/>
+                    <div style="height:30px;">
+                    Search: <input type="search" autocomplete = "on" style="width:43%;" name="ft" placeholder="Insert phrase, name, keyword, etc." value="<?php echo $_GET['ft']; ?>"/>
+                    <input type="submit" name="go" value="Send"/></div>
+                    <div style="height:20px;">
+                    Reset selections: <input type="reset" name="reset" value="Reset">&nbsp&nbsp
                     Results for page: 
                     <select name="rp">
                         <option value="5" selected="selected">5</option>
@@ -186,14 +193,14 @@
                         <option value="20">20</option>
                         <option value="25">25</option>
                     </select>&nbsp&nbsp
-                    Search: <input type="search" autocomplete = "on" style="width:400px;" name="ft" placeholder="Insert phrase, name, keyword, etc." value="<?php echo $_GET['ft']; ?>"/>
-                    <input type="submit" name="go" value="Send"/>&nbsp&nbsp
                     Search on: 
                     <label><input type="radio" name="st" value="2" checked>DMI</label>
                     <label><input type="radio" name="st" value="1">ArXiv</label>
                     <label><input type="radio" name="st" value="0">Archived</label>
+                    </div>
                 </form>
-                <div align="left" style="margin-left:6%; width:500px;"><br/>
+                </div>
+                <div align="left" style="margin-left:11%; width:600px;"><br/>
                     EXAMPLE OF USING BOOLEAN OPERATORS(full text search):<br/>
                     <div style="float:left;">&#9679;</div><div style="margin-left:15px;">'Milan Rome': this must be one of the two terms.</div>
                     <div style="float:left;">&#9679;</div><div style="margin-left:15px;">'+Milan +Rome': must be present both terms.</div>
@@ -205,7 +212,7 @@
             </div>
         </div>
         <?php
-        echo "<br/><center><a style='text-decoration: none;' href='javascript:FinePagina()'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8595;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><center>";
+        echo "<center><br/><a style='text-decoration: none;' href='javascript:FinePagina()'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8595;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><center>";
         #ricerca full text
         if (isset($_GET['go']) && $_GET['go'] != "") {
             searchfulltext();
