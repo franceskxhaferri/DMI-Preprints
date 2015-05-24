@@ -18,11 +18,11 @@ function insert_pubb($array, $uid) {
     mysql_select_db($db_monte, $db_connection);
     #generazione chiave
     $generato = rand();
-    while (mysql_num_rows(mysql_query("SELECT * FROM PRINTS WHERE id_pubblicazione='" . $generato . "v1'")) != 0) {
+    while (mysql_num_rows(mysql_query("SELECT * FROM PREPRINTS WHERE id_pubblicazione='" . $generato . "v1'")) != 0) {
         $generato = rand();
     }
     $generato = $generato . "v1";
-    $sql = "INSERT INTO PRINTS ( uid, id_pubblicazione, titolo, data_pubblicazione, autori, referenze, commenti, categoria, abstract) "
+    $sql = "INSERT INTO PREPRINTS ( uid, id_pubblicazione, titolo, data_pubblicazione, autori, referenze, commenti, categoria, abstract) "
             . "VALUES ('" . $uid . "','" . $generato . "','" . $array[1] . "','" . date("c", time()) . "','" . $array[3] . "','" . $array[4] . "','" . $array[5] . "','" . $array[6] . "','" . $array[7] . "') ON DUPLICATE KEY UPDATE id_pubblicazione = VALUES(id_pubblicazione)";
     $query = mysql_query($sql) or die(mysql_error());
     #chiusura connessione al database
@@ -46,7 +46,7 @@ function insert_p($array, $uid) {
     #connessione al database...
     $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
     mysql_select_db($db_monte, $db_connection);
-    $sql = "INSERT INTO PRINTS ( uid, id_pubblicazione, titolo, data_pubblicazione, autori, referenze, commenti, categoria, abstract) "
+    $sql = "INSERT INTO PREPRINTS ( uid, id_pubblicazione, titolo, data_pubblicazione, autori, referenze, commenti, categoria, abstract) "
             . "VALUES ('" . $uid . "','" . $array[0] . "','" . $array[1] . "','" . date("c", time()) . "','" . $array[3] . "','" . $array[4] . "','" . $array[5] . "','" . $array[6] . "','" . $array[7] . "') ON DUPLICATE KEY UPDATE id_pubblicazione = VALUES(id_pubblicazione)";
     $query = mysql_query($sql) or die(mysql_error());
     #chiusura connessione al database
@@ -61,7 +61,7 @@ function insertpdf($id, $type) {
     #connessione al database...
     $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
     mysql_select_db($db_monte, $db_connection);
-    $sql2 = "SELECT * FROM PRINTS WHERE id_pubblicazione='" . $id . "'";
+    $sql2 = "SELECT * FROM PREPRINTS WHERE id_pubblicazione='" . $id . "'";
     $query2 = mysql_query($sql2) or die(mysql_error());
     $row = mysql_fetch_array($query2);
     unlink($copia . $row['Filename']);
@@ -69,7 +69,7 @@ function insertpdf($id, $type) {
         $i = 0;
         while ((false !== ($file = readdir($handle)))) {
             if ($file != '.' && $file != '..' && $file != 'index.html') {
-                $sql = "UPDATE PRINTS SET Filename= '" . $file . "', checked='1' WHERE id_pubblicazione='" . $id . "'";
+                $sql = "UPDATE PREPRINTS SET Filename= '" . $file . "', checked='1' WHERE id_pubblicazione='" . $id . "'";
                 $query = mysql_query($sql) or die(mysql_error());
                 fclose($var);
                 $i++;
@@ -98,7 +98,7 @@ function leggiupload($uid) {
     }
     $risperpag = 5;
     $limit = $risperpag * $p - $risperpag;
-    $querytotale = mysql_query("SELECT * FROM PRINTS WHERE uid='" . $uid . "'");
+    $querytotale = mysql_query("SELECT * FROM PREPRINTS WHERE uid='" . $uid . "'");
     $ristot = mysql_num_rows($querytotale);
     echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
     echo "PREPRINTS UPLOADED: " . $ristot . "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
@@ -134,7 +134,7 @@ function leggiupload($uid) {
         }
         echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
     }
-    $sql = "SELECT * FROM PRINTS WHERE uid='" . $uid . "' ORDER BY data_pubblicazione DESC LIMIT " . $limit . "," . $risperpag . "";
+    $sql = "SELECT * FROM PREPRINTS WHERE uid='" . $uid . "' ORDER BY data_pubblicazione DESC LIMIT " . $limit . "," . $risperpag . "";
     $result = mysql_query($sql) or die(mysql_error());
     $i = $limit;
     #recupero info e visualizzazione
@@ -199,12 +199,12 @@ function version_preprintd($id1) {
     $index = intval($index);
     #verifica se esistono preprints precedenti e li sposto...
     for ($i = 0; $i <= $index; $i++) {
-        $sql = "SELECT * FROM PRINTS WHERE id_pubblicazione='" . $id . $i . "'";
+        $sql = "SELECT * FROM PREPRINTS WHERE id_pubblicazione='" . $id . $i . "'";
         $query = mysql_query($sql) or die(mysql_error());
         $array = mysql_fetch_row($query);
         if ($id1 > $query['id_pubblicazione']) {
             #archiviazione preprints precedenti...
-            $sql2 = "INSERT INTO PREPRINTS_ARCHIVIATI SELECT * FROM PRINTS WHERE id_pubblicazione='" . $id . $i . "' ON DUPLICATE KEY UPDATE id_pubblicazione = VALUES(id_pubblicazione)";
+            $sql2 = "INSERT INTO PREPRINTS_ARCHIVIATI SELECT * FROM PREPRINTS WHERE id_pubblicazione='" . $id . $i . "' ON DUPLICATE KEY UPDATE id_pubblicazione = VALUES(id_pubblicazione)";
             #controllo se la copia è avvenuta, in caso positivo la cancello...
             if (!$query2 = mysql_query($sql2)) {
                 die(mysql_error());
@@ -213,7 +213,7 @@ function version_preprintd($id1) {
                 $row = mysql_fetch_array($query);
                 unlink($copia . $row['Filename']);
                 #rimozione da preprints...
-                $sql2 = "DELETE FROM PRINTS WHERE id_pubblicazione='" . $id . $i . "'";
+                $sql2 = "DELETE FROM PREPRINTS WHERE id_pubblicazione='" . $id . $i . "'";
                 $query2 = mysql_query($sql2) or die(mysql_error());
             }
         }

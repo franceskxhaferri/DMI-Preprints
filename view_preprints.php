@@ -33,20 +33,45 @@
                 src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
         </script>
         <script type="text/javascript">
-            function FinePagina()
-            {
-                var w = window.screen.width;
-                var h = window.screen.height;
-                window.scrollTo(w * h, w * h)
-            }
-            function showHide(id)
-            {
-                if (id.style.display != 'block')
-                    id.style.display = 'block';
-                else
-                    id.style.display = 'none';
-            }
-        </script>
+		    function FinePagina(){
+		        var w = window.screen.width;
+		        var h = window.screen.height;
+		        window.scrollTo(w * h, w * h)
+		    }
+		function showHide(id){
+			if (id.style.display != 'block'){
+			    id.style.display = 'block';
+			    checkCookie();
+			}else{
+			    id.style.display = 'none';
+			}
+		}
+            	function setCookie(cname,cvalue,exdays) {
+		    var d = new Date();
+		    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+		    var expires = "expires=" + d.toGMTString();
+		    document.cookie = cname+"="+cvalue+"; "+expires;
+		}
+		function getCookie(cname) {
+		    var name = cname + "=";
+		    var ca = document.cookie.split(';');
+		    for(var i=0; i<ca.length; i++) {
+			var c = ca[i];
+			while (c.charAt(0)==' ') c = c.substring(1);
+			if (c.indexOf(name) == 0) {
+			    return c.substring(name.length, c.length);
+			}
+		    }
+		    return "";
+		}
+		function checkCookie() {
+		    var adv=getCookie("adv");
+		    if (adv == "") {
+			alert( "EXAMPLE OF USING BOOLEAN OPERATORS(full text search):\n'Milan Rome': this must be one of the two terms.\n'+Milan +Rome': must be present both terms.\n'+Milan Rome': there must be 'Milan' and possibly 'Rome'.\n'+Milan -Rome': there must be 'Milan' but not 'Rome'.\n'+Milan +(<Rome >Venice)': must be present or 'Milan' and 'Rome' or 'Milan' and 'Venice', but the records with 'Milan' and 'Venice' are of greater. ('<' Means less important, '>' means greater relevance).\n'''Milan Rome''': This must be the exact sequence 'Milan Rome'.\n" );
+			setCookie("adv", "yes", 30);
+		    }
+		}
+        </script>       
     </head>
     <body>
         <?php
@@ -118,7 +143,8 @@
             <input type="submit" style="width:40px;" name="w" value="<?php echo $string; ?>" id="bottone_keyword" class="bottoni"/>
             To see <a style='color:#007897;' href="archived_preprints.php?p=1" onclick='window.open(this.href);
                     return false'>archived</a>(old publications)
-        </form><br/><div style="height:30px;">
+        </form><br/><font color="#007897">Keyword search</font>
+        <div style="height:30px;">
             <form name="f4" action="view_preprints.php" method="GET">
                 <input type="text" name="p" value="1" hidden>
                 <input type="text" name="w" value="<?php echo $upview; ?>" hidden>
@@ -177,7 +203,8 @@
                 <form name="f4" action="view_preprints.php" method="GET">
                     <input type="text" name="p" value="1" hidden>
                     <input type="text" name="w" value="<?php echo $upview; ?>" hidden>
-                    <font color="#007897">Full text search</font><br/>
+                    <font color="#007897">Full text search (<a style='color:#007897;' onclick='window.open(this.href);
+                    return false' href="http://en.wikipedia.org/wiki/Full_text_search">info</a>)</font><br/>
                     <div style="height:30px;">
                     Search: <input type="search" autocomplete = "on" style="width:43%;" name="ft" placeholder="Insert phrase, name, keyword, etc." value="<?php echo $_GET['ft']; ?>"/>
                     <input type="submit" name="go" value="Send"/></div>
@@ -192,20 +219,10 @@
                         <option value="25">25</option>
                     </select>&nbsp&nbsp
                     Search on: 
-                    <label><input type="radio" name="st" value="2" checked>DMI</label>
-                    <label><input type="radio" name="st" value="1">ArXiv</label>
+                    <label><input type="radio" name="st" value="1" checked>Currents</label>
                     <label><input type="radio" name="st" value="0">Archived</label>
                     </div>
                 </form>
-                </div>
-                <div align="left" style="margin-left:9%; width:700px;"><br/>
-                    EXAMPLE OF USING BOOLEAN OPERATORS(full text search):<br/>
-                    <div style="float:left;">&#9679;</div><div style="margin-left:15px;">'Milan Rome': this must be one of the two terms.</div>
-                    <div style="float:left;">&#9679;</div><div style="margin-left:15px;">'+Milan +Rome': must be present both terms.</div>
-                    <div style="float:left;">&#9679;</div><div style="margin-left:15px;">'+Milan Rome': there must be "Milan" and possibly "Rome".</div>
-                    <div style="float:left;">&#9679;</div><div style="margin-left:15px;">'+Milan -Rome': there must be "Milan" but not "Rome".</div>
-                    <div style="float:left;">&#9679;</div><div style="margin-left:15px;">'+Milan +(&lt;Rome &gt;Venice)'': must be present or "Milan" and "Rome" or "Milan" and "Venice", but the records with "Milan" and "Venice" are of greater. ("<" Means less important, ">" means greater relevance).</div>
-                    <div style="float:left;">&#9679;</div><div style="margin-left:15px;">'"Milan Rome"': This must be the exact sequence "Milan Rome".</div>
                 </div>
             </div>
         </div>

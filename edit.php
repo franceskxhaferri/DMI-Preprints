@@ -74,7 +74,7 @@
                 <div><center><br/><br/><h2>manual editing</h2></center>
                 </div><center>
                 <table>
-                    <tr><form name="f1" action="uploaded.php" method="GET"><td align="right" style='width:150px; height:16px'>Go to arXiv panel&nbsp&nbsp&nbsp</td>
+                    <tr><form name="f1" action="uploaded.php" method="GET"><td align="right" style='width:150px; height:16px'>Go to uploaded&nbsp&nbsp&nbsp</td>
                         <td><input type="submit" name="b1" value="Back" id='bottone_keyword' class='bottoni' onclick="return confirmExit()"/></td>
                         </tr>
                     </form></table>
@@ -135,7 +135,7 @@
                             <input type='hidden' name='MAX_FILE_SIZE' value='10000000'><br/>
                             <input type='file' name='fileToUpload' id='fileToUpload'><br/><br/>
                             <br/><input type='submit' name='b9' value='Remove' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmDelete()'/>
-                            <input type='submit' name='b10' value='Upgrade version' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmUpgrade()'/>
+                            <input type='submit' name='b10' value='Upgrade' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmUpgrade()'/>
                             <input type='submit' name='b11' value='Complete' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmInsert()'/><br/><br/>
                             </form>";
                 $target_file = $basedir . basename($_FILES["fileToUpload"]["name"]);

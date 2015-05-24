@@ -101,7 +101,7 @@
             <form name="f3" action="userp.php" method="POST" enctype="multipart/form-data">
                 <center><div><br/><h2>Insert new preprint</h2><h1>field with "*" are required</h1><br/><input type="reset" name="reset" value="Reset"/><br/><br/>
                         *publication category:<br/><br/>
-                        <select name="category" required style="width:250px;" onchange='Checkcath(this.value);'>
+                        <select name="category" required style="width:200px;" onchange='Checkcath(this.value);'>
                             <option value="">--Select Category--</option>
                             <option value="Computer Science">Computer Science</option>
                             <option value="Mathematics">Mathematics</option>

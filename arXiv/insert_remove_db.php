@@ -53,19 +53,6 @@ function update_preprints($array) {
     WHERE 
      id_pubblicazione='" . $array[0] . "'";
     $query = mysql_query($sql) or die(mysql_error());
-    $sql = "UPDATE
-    	PRINTS 
-    SET
-     titolo= '" . $array[1] . "', 
-     data_pubblicazione='" . $array[2] . "',
-     autori='" . $array[3] . "',
-     referenze='" . $array[4] . "',
-     commenti='" . $array[5] . "',
-     categoria='" . $array[6] . "',
-     abstract='" . $array[7] . "'
-    WHERE 
-     id_pubblicazione='" . $array[0] . "'";
-    $query = mysql_query($sql) or die(mysql_error());
     #chiusura connessione al database
     mysql_close($db_connection);
 }
@@ -79,10 +66,6 @@ function delete_pdf($id) {
     $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
     mysql_select_db($db_monte, $db_connection);
     $sql = "SELECT * FROM PREPRINTS WHERE id_pubblicazione='" . $id . "'";
-    $query = mysql_query($sql) or die(mysql_error());
-    $row = mysql_fetch_array($query);
-    unlink($copia . $row['Filename']);
-    $sql = "SELECT * FROM PRINTS WHERE id_pubblicazione='" . $id . "'";
     $query = mysql_query($sql) or die(mysql_error());
     $row = mysql_fetch_array($query);
     unlink($copia . $row['Filename']);
