@@ -75,10 +75,10 @@
                         </div>
                     </div>
                 </div>
-                <div><center><br/><br/><h2>CHECK PREPRINTS</h2></center>
+                <div><center><br/><br/><h2>APPROVE PREPRINTS</h2></center>
                     <center><table>
-                            <tr><td  align="right" style="width:300px;">Go to arXiv panel&nbsp&nbsp&nbsp</td>
-                            <form name="f1" action="arXiv_panel.php" method="GET">
+                            <tr><td  align="right" style="width:300px;">Go to admin panel&nbsp&nbsp&nbsp</td>
+                            <form name="f1" action="modp.php" method="GET">
                                 <td style="width:280px;"><input type="submit" name="b1" value="Back" id="bottone_keyword" class="bottoni"></td>
                             </form></tr></table></center>
                 </div><br/>
@@ -86,17 +86,15 @@
                     <?php
                     include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/insert_remove_db.php');
                     include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/arXiv_parsing.php');
+                    include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'mysql/func.php');
                     #importazione variabili globali
                     include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
-                    if (sessioneavviata() == True) {
-                        echo "<center><br/>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE LIST CAN'T BE CHANGED IN THIS MOMENT!</center><br/>";
-                    } else {
                         echo "<center><a style='text-decoration: none;' href='javascript:FinePagina()'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8595;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center>";
                         echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
                         #leggere cartella...
                         #Imposto la directory da leggere
-                        $directory = $basedir3;
-                        echo "<form name='f3' action='check_preprints.php' id='f1' method='GET'><center><table>";
+                        $directory = $basedir;
+                        echo "<form name='f3' action='approve_preprints.php' id='f1' method='GET'><center><table>";
                         #Apriamo una directory e leggiamone il contenuto.
                         if (is_dir($directory)) {
                             #Apro l'oggetto directory
@@ -112,10 +110,9 @@
                                         $array[$i] = $file;
                                         $ids = $file;
                                         $ids = substr($ids, 0, -4);
-                                        $ids = str_replace("-", "/", $ids);
-                                        echo "<tr><td colspan='2'><label><input type='checkbox' name='" . $i . "' value='checked'/>$y.&nbsp&nbsp&nbsp<a href=./pdf_downloads/" . $file . " onclick='window.open(this.href);return false' title='" . $file . "'>" . $file . "</a></label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td><td><a href=./manual_edit.php?id=" . $ids . " onclick='window.open(this.href);return false' title='" . $ids . "'>" . $ids . "</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>";
+                                        echo "<tr><td colspan='2'><label><input type='checkbox' name='" . $i . "' value='checked'/>$y.&nbsp&nbsp&nbsp<a href=./upload_dmi/" . $file . " onclick='window.open(this.href);return false' title='" . $file . "'>" . $file . "</a></label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td><td><a href=./manual_edit.php?id=" . $ids . " onclick='window.open(this.href);return false' title='" . $ids . "'>" . $ids . "</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>";
                                         #recupero data creazione file
-                                        $dat = date("Y-m-d H:i", filemtime($basedir3 . $file));
+                                        $dat = date("Y-m-d H:i", filemtime($basedir . $file));
                                         echo "<td>&nbsp&nbsp&nbsp$dat</td></tr>";
                                         $i++;
                                         $y++;
@@ -131,7 +128,7 @@
                         #eliminazione pdf, lettura cartella e ...
                         if (isset($_GET['b2'])) {
                             for ($j = 0; $j < $lunghezza; $j++) {
-                                $percorso = $basedir3 . $array[$j];
+                                $percorso = $basedir . $array[$j];
                                 $percorso2 = $copia . $array[$j];
                                 $delete = $_GET[$j];
                                 if ($delete == "checked") {
@@ -161,13 +158,13 @@
                             } else {
                                 echo '<script type="text/javascript">alert("' . $z . ' preprints removed correctly!");</script>';
                                 #aggiorno la pagina dopo 0 secondi
-                                echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./check_preprints.php">';
+                                echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./approve_preprints.php">';
                             }
                         }
                         #inserimento pdf, lettura cartella e ...
                         if (isset($_GET['b3'])) {
                             for ($j = 0; $j < $lunghezza; $j++) {
-                                $percorso = $basedir3 . $array[$j];
+                                $percorso = $basedir . $array[$j];
                                 $percorso2 = $copia . $array[$j];
                                 $delete = $_GET[$j];
                                 if ($delete == "checked") {
@@ -179,7 +176,7 @@
                                                     if ($file == $array[$j]) {
                                                         $idd = substr($file, 0, -4);
                                                         #inserimento file nel database
-                                                        insert_one_pdf2($idd);
+                                                        insertopdf($idd);
                                                     }
                                                 }
                                             }
@@ -195,7 +192,7 @@
                             } else {
                                 echo '<script type="text/javascript">alert("' . $z . ' preprints inserted correctly!");</script>';
                                 #aggiorno la pagina dopo 0 secondi
-                                echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./check_preprints.php">';
+                                echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./approve_preprints.php">';
                             }
                         }
 
@@ -206,7 +203,6 @@
                         if ($i == 0) {
                             echo '<script type="text/javascript">alert("No preprints to be checked!");</script>';
                         }
-                    }
                 } else {
                     echo '<script type="text/javascript">alert("ACCESS DENIED!");</script>';
                     echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';

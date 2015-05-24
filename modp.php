@@ -95,9 +95,9 @@
                                 </form>
                             </td>
                             <td>
-                                <form name="f3" action="view_preprints.php" method="GET">
+                                <form name="f3" action="approve_preprints.php" method="GET">
                                     <input type="text" name="p" value="1" checked hidden/><input type="text" name="w" value="0" checked hidden/>
-                                    <input type="submit" name="b3" value="Approved section" id="bottone_keyword" class="bottoni"/>
+                                    <input type="submit" name="bb3" value="Approve section" id="bottone_keyword" class="bottoni"/>
                                 </form>
                             </td>
                             <td>

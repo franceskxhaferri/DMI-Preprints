@@ -163,8 +163,8 @@
                                 $id = insert_pubb($info, $_SESSION['uid']);
                                 rename($basedir . $_FILES["fileToUpload"]["name"], $basedir . $id . ".pdf");
                                 #inserimento file nel database
-                                insertpdf($id, $fileType);
-                                echo '<script type="text/javascript">alert("Preprint inserted correctly! ID generated: ' . $id . ' \nGo on uploaded section to edit your pubblications.");</script>';
+                                #insertpdf($id, $fileType);
+                                echo '<script type="text/javascript">alert("Preprint submitted correctly!\nAfter approvation go on uploaded section to edit your pubblications.");</script>';
                             } else {
                                 echo '<script type="text/javascript">alert("Sorry, there was an error uploading your file!");</script>';
                             }

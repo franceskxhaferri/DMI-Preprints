@@ -55,6 +55,39 @@ function insert_p($array, $uid) {
 
 #funzione che inserisce il pdf caricato all'interno dei database
 
+function insertopdf($id) {
+#importazione variabili globali
+    include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
+    #connessione al database...
+    $id = str_replace("-", "/", $id);
+    $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
+    mysql_select_db($db_monte, $db_connection);
+    $sql2 = "SELECT * FROM PREPRINTS WHERE id_pubblicazione='" . $id . "'";
+    $query2 = mysql_query($sql2) or die(mysql_error());
+    $row = mysql_fetch_array($query2);
+    if ($handle = opendir($basedir)) {
+        $i = 0;
+        while ((false !== ($file = readdir($handle)))) {
+            if ($file != '.' && $file != '..' && $file != 'index.html') {
+                $idd = substr($file, 0, -4);
+                if ($row['id_pubblicazione'] == $idd) {
+                    $sql = "UPDATE PREPRINTS SET Filename='" . $file . "', checked='1' WHERE id_pubblicazione='" . $id . "'";
+                    $query = mysql_query($sql) or die(mysql_error());
+                    $i++;
+                    copy($basedir . $file, $copia . $file);
+                    unlink($basedir . $file);
+                }
+            }
+        }
+        #chiusura della directory...
+        closedir($handle);
+    }
+    #chiusura connessione al database
+    mysql_close($db_connection);
+}
+
+#funzione che inserisce un pdf all'interno dei database
+
 function insertpdf($id, $type) {
 #importazione variabili globali
     include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
@@ -98,7 +131,7 @@ function leggiupload($uid) {
     }
     $risperpag = 5;
     $limit = $risperpag * $p - $risperpag;
-    $querytotale = mysql_query("SELECT * FROM PREPRINTS WHERE uid='" . $uid . "'");
+    $querytotale = mysql_query("SELECT * FROM PREPRINTS WHERE uid='" . $uid . "' AND checked='1'");
     $ristot = mysql_num_rows($querytotale);
     echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
     echo "PREPRINTS UPLOADED: " . $ristot . "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
@@ -134,7 +167,7 @@ function leggiupload($uid) {
         }
         echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
     }
-    $sql = "SELECT * FROM PREPRINTS WHERE uid='" . $uid . "' ORDER BY data_pubblicazione DESC LIMIT " . $limit . "," . $risperpag . "";
+    $sql = "SELECT * FROM PREPRINTS WHERE uid='" . $uid . "' AND checked='1' ORDER BY data_pubblicazione DESC LIMIT " . $limit . "," . $risperpag . "";
     $result = mysql_query($sql) or die(mysql_error());
     $i = $limit;
     #recupero info e visualizzazione
