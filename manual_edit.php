@@ -111,9 +111,11 @@
 			</script>
                 <form name='f1' action='manual_edit.php' method='POST' enctype='multipart/form-data'>
                     <center><div><br/><h2>preprint informations</h2><h1>field with '*' are required</h1><br/><input type='reset' name='reset' value='Reset'><br/><br/>
-			    id of pubblication (not editable):<br/><br/>
+                    	    UID publisher(not editable):<br/><br/>
+                            <textarea readonly style='width:65%; height:16px' name='uid' id='textbox' class='textbox'>" . $ris[8] . "</textarea><br/><br/>
+			    id of pubblication(not editable):<br/><br/>
                             <textarea readonly style='width:65%; height:16px' name='id' id='textbox' class='textbox' placeholder='example of id: 0000.0000v1'>" . $ris[0] . "</textarea><br/><br/>
-                            data of pubblication (not editable):<br/><br/>
+                            data of pubblication(not editable):<br/><br/>
                             <textarea readonly style='width:65%; height:16px' name='data' id='textbox' class='textbox' placeholder='example of data: 2011-12-30T10:37:35Z'>" . $ris[2] . "</textarea><br/><br/>
                             *preprint title:<br/><br/>
                             <textarea style='width:65%; height:16px' name='title' id='textbox' class='textbox' required placeholder='example of title: The geometric...' autofocus>" . $ris[1] . "</textarea><br/><br/>
@@ -121,7 +123,7 @@
                             <textarea style='width:65%; height:16px' name='journal' id='textbox' class='textbox' placeholder='example of Journal: Numer. Linear Algebra...'>" . $ris[4] . "</textarea><br/><br/>
                             comments:<br/><br/>
                             <textarea style='width:65%; height:16px' name='comments' id='textbox' class='textbox' placeholder='example of comments: 10 pages...'>" . $ris[5] . "</textarea><br/><br/>
-                            *arXiv category:<br/><br/>
+                            *category:<br/><br/>
                             <textarea style='width:65%; height:16px' name='category' id='textbox' class='textbox' required placeholder='example of category: math.NA...'>" . $ris[6] . "</textarea><br/><br/>
                             *authors name:<br/><br/>
                             <textarea style='width:65%; height:16px' name='author' id='textbox' class='textbox' required placeholder='example of author: Mario Rossi, Luca...'>" . $ris[3] . "</textarea><br/><br/>

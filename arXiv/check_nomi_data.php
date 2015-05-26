@@ -987,6 +987,7 @@ function cercapreprint($id) {
         $var[5] = stripslashes($row['commenti']);
         $var[6] = stripslashes($row['categoria']);
         $var[7] = stripslashes($row['abstract']);
+        $var[8] = stripslashes($row['uid']);
     }
     mysql_close($db_connection);
     return $var;
