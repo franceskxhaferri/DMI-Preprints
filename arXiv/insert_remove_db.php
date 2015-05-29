@@ -184,6 +184,7 @@ function version_preprint($id1) {
             } else {
                 $query = mysql_query($sql) or die(mysql_error());
                 $row = mysql_fetch_array($query);
+                copy($copia . $row['Filename'], $basedir4 . $row['Filename']);
                 unlink($copia . $row['Filename']);
                 #rimozione da preprints...
                 $sql2 = "DELETE FROM PREPRINTS WHERE id_pubblicazione='" . $id . $i . "'";

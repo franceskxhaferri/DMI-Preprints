@@ -15,10 +15,12 @@ global $copia;
 global $basedir;
 global $basedir2;
 global $basedir3;
+global $basedir4;
 $copia = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints' . "/pdf/";
 $basedir = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints' . "/upload_dmi/";
 $basedir2 = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints' . "/upload/";
 $basedir3 = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints' . "/pdf_downloads/";
+$basedir4 = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints' . "/pdf_archived/";
 
 #ldap
 global $ldaphost;

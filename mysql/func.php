@@ -244,6 +244,7 @@ function version_preprintd($id1) {
             } else {
                 $query = mysql_query($sql) or die(mysql_error());
                 $row = mysql_fetch_array($query);
+                copy($copia . $row['Filename'], $basedir4 . $row['Filename']);
                 unlink($copia . $row['Filename']);
                 #rimozione da preprints...
                 $sql2 = "DELETE FROM PREPRINTS WHERE id_pubblicazione='" . $id . $i . "'";
@@ -253,6 +254,12 @@ function version_preprintd($id1) {
     }
     #chiusura connessione al database
     mysql_close($db_connection);
+}
+
+#invio mail agli admin quando avviene un nuovo submit
+
+function sendmailadmin($uid, $idp){
+	mail("xhaferri@msn.com", "New preprint submitted by: " . $uid . " with id: ".$idp, "New preprint submitted by: " . $uid . " with id: ".$idp, "From: webmaster@{$_SERVER['SERVER_NAME']}\r\n" ."Reply-To: webmaster@{$_SERVER['SERVER_NAME']}\r\n" ."X-Mailer: PHP/" . phpversion());
 }
 
 ?>

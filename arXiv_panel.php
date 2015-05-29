@@ -58,7 +58,7 @@
                 <div align="center"><center><br/><h2>ARXIV PANEL</h2></center>
                     <center><table>
                             <tr><form name="f1" action="reserved.php" method="GET">
-                                <td align="right" style="width:350px;">Go to reserved area&nbsp&nbsp&nbsp</td>
+                                <td align="right" style="width:350px;">Go to admin panel&nbsp&nbsp&nbsp</td>
                                 <td style="width:350px;"><input type="submit" name="b1" value="Back" id="bottone_keyword" class="bottoni"/></td>
                             </form></tr>
                             <tr><form name="f4" action="authors_list.php" method="GET">
