@@ -76,7 +76,7 @@
                     <?php
                     print_r(" Name: ");
                     print_r($_SESSION['nome']);
-                    print_r(" Access type: ");
+                    print_r("<br/> Access type: ");
                     print_r($_SESSION['logged_type']);
                     ?>
                     <br/><br/>
@@ -179,7 +179,7 @@
                                                 if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
                                                     $fileType = $_FILES["fileToUpload"]["type"];
                                                     #richiamo della funzione per inserire le info del preprint all'interno del database
-                                                    $id = insert_pubb($info, $_SESSION['uid']);
+                                                    $id = insert_pubb($info, $_SESSION['nome']." (".$_SESSION['uid'].")");
                                                     rename($basedir . $_FILES["fileToUpload"]["name"], $basedir . $id . ".pdf");
                                                     #inserimento file nel database
                                                     insertpdf($id, $fileType);

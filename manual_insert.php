@@ -106,7 +106,7 @@
                     if ($id1 == $ris[0] && isset($_POST['b7'])) {
                         echo "
                 <form name='f1' action='manual_insert.php' method='POST' enctype='multipart/form-data'>
-                    <center><div><br/><h2>preprint informations</h2><h1>field with '*' are required</h1><br/><input type='reset' name='reset' value='Reset'><br/><br/>document/pdf:<br/><br/><a href=./pdf_downloads/" . $id1 . ".pdf onclick='window.open(this.href);return false' style='color:#007897;' title='PDF'>LINK</a><br/><br/>
+                    <center><div><br/><h2>preprint informations</h2><h1>field with '*' are required</h1><br/><input type='reset' name='reset' value='Reset'><br/><br/>document/pdf:<br/><br/><a href=./pdf_downloads/" . $id1 . ".pdf onclick='window.open(this.href);return false' style='color:#007897;' title='PDF'>view</a><br/><br/>
 			    id of pubblication (not editable):<br/><br/>
                             <textarea readonly  style='width:65%; height:16px' name='id' id='textbox' class='textbox' placeholder='example of id: 0000.0000v1'>" . $ris[0] . "</textarea><br/><br/>
                             data of pubblication (not editable):<br/><br/>
