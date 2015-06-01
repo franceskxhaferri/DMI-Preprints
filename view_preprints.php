@@ -26,12 +26,7 @@
             webshims.setOptions('forms-ext', {types: 'date'});
             webshims.polyfill('forms forms-ext');
         </script>
-        <script type="text/x-mathjax-config">
-            MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
-        </script>
-        <script type="text/javascript"
-                src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-        </script>
+
         <script type="text/javascript">
 		    function FinePagina(){
 		        var w = window.screen.width;
@@ -64,14 +59,39 @@
 		    }
 		    return "";
 		}
+		//cookie istruzioni fulltext search
 		function checkCookie() {
 		    var adv=getCookie("adv");
 		    if (adv == "") {
 			alert( "EXAMPLE OF USING BOOLEAN OPERATORS(full text search):\n'Milan Rome': this must be one of the two terms.\n'+Milan +Rome': must be present both terms.\n'+Milan Rome': there must be 'Milan' and possibly 'Rome'.\n'+Milan -Rome': there must be 'Milan' but not 'Rome'.\n'+Milan +(<Rome >Venice)': must be present or 'Milan' and 'Rome' or 'Milan' and 'Venice', but the records with 'Milan' and 'Venice' are of greater. ('<' Means less important, '>' means greater relevance).\n'''Milan Rome''': This must be the exact sequence 'Milan Rome'.\n" );
-			setCookie("adv", "yes", 30);
+			setCookie("adv", "yes", 15);
+		    }
+		}
+		//cookie mathjax
+		function checkCookie2() {
+		    var math = getCookie("math");
+		    if (math == "no") {
+		    	setCookie("math", "yes", 1825);
+		    	window.location.reload()
+		    }else{
+		    	setCookie("math", "no", 1825);
+		    	window.location.reload()
 		    }
 		}
         </script>       
+        <?php
+        $valbotton = "Enable";
+        #controllo cookie mathjax
+        if($_COOKIE['math'] == "yes" or !isset($_COOKIE['math'])){
+        	echo "	<script type='text/x-mathjax-config'>
+            			MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$']]}});
+        		</script>
+        		<script type='text/javascript'
+                		src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'>
+        		</script>";
+        	$valbotton = "Disable";
+        }
+        ?>
     </head>
     <body>
         <?php
@@ -139,11 +159,16 @@
             ?>
         </div><center>
         <form name="f5" action="<?php echo 'view_preprints.php?p=' . $_GET['p'] . '&w=' . $view . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '&o=' . $_GET['o'] . '&t=' . $_GET['t'] . '&a=' . $_GET['a'] . '&c=' . $_GET['c'] . '&j=' . $_GET['j'] . '&d=' . $_GET['d'] . '&all=' . $_GET['all'] . '&h=' . $_GET['h'] . '&y=' . $_GET['y'] . '&e=' . $_GET['e'] . '&i=' . $_GET['i'] . '&rp=' . $_GET['rp'] . '&ft=' . $_GET['ft'] . '&go=' . $_GET['go'] . '&s=' . $_GET['s'] . '&year1=' . $_GET['year1'] . '&year2=' . $_GET['year2'] . '&year3=' . $_GET['year3'] . '&st=' . $_GET['st'] . ''; ?>" method="POST">
+        Visualization options: <input type="button" value="Show/Hide" onclick="javascript:showHide(opt);"/>
+        To see <a style='color:#007897;' href="archived_preprints.php?p=1" onclick='window.open(this.href); return false'>archived</a>(old publications)
+        <div hidden id="opt"><br/>
+            Enable/Disable MathJax:
+            <input type="button" value="<?php echo $valbotton; ?>" onclick="javascript:checkCookie2();" id="bottone_keyword" class="bottoni" style="width:40px;"/> 
             Enable/Disable on page view:
             <input type="submit" style="width:40px;" name="w" value="<?php echo $string; ?>" id="bottone_keyword" class="bottoni"/>
-            To see <a style='color:#007897;' href="archived_preprints.php?p=1" onclick='window.open(this.href);
-                    return false'>archived</a>(old publications)
-        </form><br/><font color="#007897">Keyword search</font>
+        </div>
+        </form>
+        <br/><font color="#007897">Keyword search</font>
         <div style="height:30px;">
             <form name="f4" action="view_preprints.php" method="GET">
                 <input type="text" name="p" value="1" hidden>
@@ -174,6 +199,7 @@
                     <option value="15">15</option>
                     <option value="20">20</option>
                     <option value="25">25</option>
+                    <option value="50">50</option>
                 </select>
                 </div>
             <div style="float:left; width:37%; height:50px;" align="right">
@@ -217,6 +243,7 @@
                         <option value="15">15</option>
                         <option value="20">20</option>
                         <option value="25">25</option>
+                        <option value="50">50</option>
                     </select>&nbsp&nbsp
                     Search on: 
                     <label><input type="radio" name="st" value="1" checked>Currents</label>
