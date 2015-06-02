@@ -258,8 +258,8 @@ function version_preprintd($id1) {
 
 #invio mail agli admin quando avviene un nuovo submit
 
-function sendmailadmin($uid, $idp){
-	mail("example@msn.com", "New preprint submitted by: " . $uid . " with id: ".$idp, "New preprint submitted by: " . $uid . " with id: ".$idp, "From: webmaster@{$_SERVER['SERVER_NAME']}\r\n" ."Reply-To: webmaster@{$_SERVER['SERVER_NAME']}\r\n" ."X-Mailer: PHP/" . phpversion());
+function sendmailadmin($uid, $idp) {
+    mail("example@msn.com", "New preprint submitted by: " . $uid . " with id: " . $idp, "New preprint submitted by: " . $uid . " with id: " . $idp, "From: webmaster@{$_SERVER['SERVER_NAME']}\r\n" . "Reply-To: webmaster@{$_SERVER['SERVER_NAME']}\r\n" . "X-Mailer: PHP/" . phpversion());
 }
 
 ?>

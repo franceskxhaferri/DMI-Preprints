@@ -40,74 +40,74 @@
                 return confirm("Upgrade preprint version?\n(It can not be undone)");
             }
         </script>
-	<script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [["$","$"],["\\(","\\)"]]
-        }
-      });
-    </script>
-    <script type="text/javascript"
-      src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML-full">
-    </script>
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({
+            tex2jax: {
+            inlineMath: [["$","$"],["\\(","\\)"]]
+            }
+            });
+        </script>
+        <script type="text/javascript"
+                src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML-full">
+        </script>
     </head>
     <body>
-    <script>
-    	//text area title
-	(function () {
-	window.UpdateMathtit = function (TeX) {
-	    //set the MathOutput HTML
-	    document.getElementById("titlediv").innerHTML = TeX;
-	    //reprocess the MathOutput Element
-	    MathJax.Hub.Queue(["Typeset",MathJax.Hub,"titlediv"]);
-	}
-	})();
-	//text area authors
-	(function () {
-	window.UpdateMathaut = function (TeX) {
-	    //set the MathOutput HTML
-	    document.getElementById("authordiv").innerHTML = TeX;
-	    //reprocess the MathOutput Element
-	    MathJax.Hub.Queue(["Typeset",MathJax.Hub,"authordiv"]);
-	}
-	})();
-	//text area journal
-	(function () {
-	window.UpdateMathjou = function (TeX) {
-	    //set the MathOutput HTML
-	    document.getElementById("journaldiv").innerHTML = TeX;
-	    //reprocess the MathOutput Element
-	    MathJax.Hub.Queue(["Typeset",MathJax.Hub,"journaldiv"]);
-	}
-	})();
-	//text area comments
-	(function () {
-	window.UpdateMathcom = function (TeX) {
-	    //set the MathOutput HTML
-	    document.getElementById("commentsdiv").innerHTML = TeX;
-	    //reprocess the MathOutput Element
-	    MathJax.Hub.Queue(["Typeset",MathJax.Hub,"commentsdiv"]);
-	}
-	})();
-	//text area category
-	(function () {
-	window.UpdateMathcat = function (TeX) {
-	    //set the MathOutput HTML
-	    document.getElementById("categorydiv").innerHTML = TeX;
-	    //reprocess the MathOutput Element
-	    MathJax.Hub.Queue(["Typeset",MathJax.Hub,"categorydiv"]);
-	}
-	})();
-	//text area abstract
-	(function () {
-	window.UpdateMathabs = function (TeX) {
-	    //set the MathOutput HTML
-	    document.getElementById("abstractdiv").innerHTML = TeX;
-	    //reprocess the MathOutput Element
-	    MathJax.Hub.Queue(["Typeset",MathJax.Hub,"abstractdiv"]);
-	}
-	})();
-    </script>
+        <script>
+            //text area title
+            (function () {
+                window.UpdateMathtit = function (TeX) {
+                    //set the MathOutput HTML
+                    document.getElementById("titlediv").innerHTML = TeX;
+                    //reprocess the MathOutput Element
+                    MathJax.Hub.Queue(["Typeset", MathJax.Hub, "titlediv"]);
+                }
+            })();
+            //text area authors
+            (function () {
+                window.UpdateMathaut = function (TeX) {
+                    //set the MathOutput HTML
+                    document.getElementById("authordiv").innerHTML = TeX;
+                    //reprocess the MathOutput Element
+                    MathJax.Hub.Queue(["Typeset", MathJax.Hub, "authordiv"]);
+                }
+            })();
+            //text area journal
+            (function () {
+                window.UpdateMathjou = function (TeX) {
+                    //set the MathOutput HTML
+                    document.getElementById("journaldiv").innerHTML = TeX;
+                    //reprocess the MathOutput Element
+                    MathJax.Hub.Queue(["Typeset", MathJax.Hub, "journaldiv"]);
+                }
+            })();
+            //text area comments
+            (function () {
+                window.UpdateMathcom = function (TeX) {
+                    //set the MathOutput HTML
+                    document.getElementById("commentsdiv").innerHTML = TeX;
+                    //reprocess the MathOutput Element
+                    MathJax.Hub.Queue(["Typeset", MathJax.Hub, "commentsdiv"]);
+                }
+            })();
+            //text area category
+            (function () {
+                window.UpdateMathcat = function (TeX) {
+                    //set the MathOutput HTML
+                    document.getElementById("categorydiv").innerHTML = TeX;
+                    //reprocess the MathOutput Element
+                    MathJax.Hub.Queue(["Typeset", MathJax.Hub, "categorydiv"]);
+                }
+            })();
+            //text area abstract
+            (function () {
+                window.UpdateMathabs = function (TeX) {
+                    //set the MathOutput HTML
+                    document.getElementById("abstractdiv").innerHTML = TeX;
+                    //reprocess the MathOutput Element
+                    MathJax.Hub.Queue(["Typeset", MathJax.Hub, "abstractdiv"]);
+                }
+            })();
+        </script>
         <?php
         #importo file per utilizzare funzioni...
         require_once $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'authorization/sec_sess.php';
@@ -118,8 +118,8 @@
         include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
         sec_session_start();
         if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] < 86400)) {
-        #if ($_SESSION['nome']." (".$_SESSION['uid'].")" == $row['uid'] && $row['uid'] != ""){
-            if (($_SESSION['logged_type'] === "mod" or $_SESSION['logged_type'] === "user") && $_SESSION['nome']." (".$_SESSION['uid'].")" == $_GET['r']) {
+            #if ($_SESSION['nome']." (".$_SESSION['uid'].")" == $row['uid'] && $row['uid'] != ""){
+            if (($_SESSION['logged_type'] === "mod" or $_SESSION['logged_type'] === "user") && $_SESSION['nome'] . " (" . $_SESSION['uid'] . ")" == $_GET['r']) {
                 //sessione moderatore
                 ?>
                 <div id="header-wrapper">
@@ -228,14 +228,14 @@
                             <input type='submit' name='b10' value='Upgrade' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmUpgrade()'/>
                             <input type='submit' name='b11' value='Complete' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmInsert()'/><br/><br/></center>
                             </div></div></form>";
-                            echo "
+                echo "
                             	<script>
-					UpdateMathtit('".addslashes($ris[1])."');
-					UpdateMathjou('".addslashes($ris[4])."');
-					UpdateMathcom('".addslashes($ris[5])."');
-					UpdateMathcat('".addslashes($ris[6])."');
-					UpdateMathaut('".addslashes($ris[3])."');
-					UpdateMathabs('".addslashes($ris[7])."');
+					UpdateMathtit('" . addslashes($ris[1]) . "');
+					UpdateMathjou('" . addslashes($ris[4]) . "');
+					UpdateMathcom('" . addslashes($ris[5]) . "');
+					UpdateMathcat('" . addslashes($ris[6]) . "');
+					UpdateMathaut('" . addslashes($ris[3]) . "');
+					UpdateMathabs('" . addslashes($ris[7]) . "');
 				</script>";
                 $target_file = $basedir . basename($_FILES["fileToUpload"]["name"]);
                 #bottone cancella

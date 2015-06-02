@@ -37,5 +37,4 @@ $shared_secret = "radius_secret";
 #mod uid
 global $mod_uid;
 $mod_uid = "rz690001";
-
 ?>

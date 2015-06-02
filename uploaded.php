@@ -36,16 +36,16 @@
                 return confirm("All unsaved information will be lost, exit?");
             }
         </script>
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [["$","$"],["\\(","\\)"]]
-        }
-      });
-    </script>
-    <script type="text/javascript"
-      src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML-full">
-    </script>
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({
+            tex2jax: {
+            inlineMath: [["$","$"],["\\(","\\)"]]
+            }
+            });
+        </script>
+        <script type="text/javascript"
+                src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML-full">
+        </script>
     </head>
     <body>
         <?php
@@ -85,7 +85,7 @@
                 </div>
                 <?php
                 #lettura preprint caricati
-                leggiupload($_SESSION['nome']." (".$_SESSION['uid'].")");
+                leggiupload($_SESSION['nome'] . " (" . $_SESSION['uid'] . ")");
             } else {
                 echo '<script type="text/javascript">alert("ACCESS DENIED!");</script>';
                 echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';

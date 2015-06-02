@@ -40,74 +40,74 @@
                 return confirm('All unsaved changes will be lost, it will be moved to check section, continue?');
             }
         </script>
-        		<script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [["$","$"],["\\(","\\)"]]
-        }
-      });
-    </script>
-    <script type="text/javascript"
-      src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML-full">
-    </script>
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({
+            tex2jax: {
+            inlineMath: [["$","$"],["\\(","\\)"]]
+            }
+            });
+        </script>
+        <script type="text/javascript"
+                src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML-full">
+        </script>
     </head>
     <body>
-            <script>
-    	//text area title
-	(function () {
-	window.UpdateMathtit = function (TeX) {
-	    //set the MathOutput HTML
-	    document.getElementById("titlediv").innerHTML = TeX;
-	    //reprocess the MathOutput Element
-	    MathJax.Hub.Queue(["Typeset",MathJax.Hub,"titlediv"]);
-	}
-	})();
-	//text area authors
-	(function () {
-	window.UpdateMathaut = function (TeX) {
-	    //set the MathOutput HTML
-	    document.getElementById("authordiv").innerHTML = TeX;
-	    //reprocess the MathOutput Element
-	    MathJax.Hub.Queue(["Typeset",MathJax.Hub,"authordiv"]);
-	}
-	})();
-	//text area journal
-	(function () {
-	window.UpdateMathjou = function (TeX) {
-	    //set the MathOutput HTML
-	    document.getElementById("journaldiv").innerHTML = TeX;
-	    //reprocess the MathOutput Element
-	    MathJax.Hub.Queue(["Typeset",MathJax.Hub,"journaldiv"]);
-	}
-	})();
-	//text area comments
-	(function () {
-	window.UpdateMathcom = function (TeX) {
-	    //set the MathOutput HTML
-	    document.getElementById("commentsdiv").innerHTML = TeX;
-	    //reprocess the MathOutput Element
-	    MathJax.Hub.Queue(["Typeset",MathJax.Hub,"commentsdiv"]);
-	}
-	})();
-	//text area category
-	(function () {
-	window.UpdateMathcat = function (TeX) {
-	    //set the MathOutput HTML
-	    document.getElementById("categorydiv").innerHTML = TeX;
-	    //reprocess the MathOutput Element
-	    MathJax.Hub.Queue(["Typeset",MathJax.Hub,"categorydiv"]);
-	}
-	})();
-	//text area abstract
-	(function () {
-	window.UpdateMathabs = function (TeX) {
-	    //set the MathOutput HTML
-	    document.getElementById("abstractdiv").innerHTML = TeX;
-	    //reprocess the MathOutput Element
-	    MathJax.Hub.Queue(["Typeset",MathJax.Hub,"abstractdiv"]);
-	}
-	})();
-    </script>
+        <script>
+            //text area title
+            (function () {
+                window.UpdateMathtit = function (TeX) {
+                    //set the MathOutput HTML
+                    document.getElementById("titlediv").innerHTML = TeX;
+                    //reprocess the MathOutput Element
+                    MathJax.Hub.Queue(["Typeset", MathJax.Hub, "titlediv"]);
+                }
+            })();
+            //text area authors
+            (function () {
+                window.UpdateMathaut = function (TeX) {
+                    //set the MathOutput HTML
+                    document.getElementById("authordiv").innerHTML = TeX;
+                    //reprocess the MathOutput Element
+                    MathJax.Hub.Queue(["Typeset", MathJax.Hub, "authordiv"]);
+                }
+            })();
+            //text area journal
+            (function () {
+                window.UpdateMathjou = function (TeX) {
+                    //set the MathOutput HTML
+                    document.getElementById("journaldiv").innerHTML = TeX;
+                    //reprocess the MathOutput Element
+                    MathJax.Hub.Queue(["Typeset", MathJax.Hub, "journaldiv"]);
+                }
+            })();
+            //text area comments
+            (function () {
+                window.UpdateMathcom = function (TeX) {
+                    //set the MathOutput HTML
+                    document.getElementById("commentsdiv").innerHTML = TeX;
+                    //reprocess the MathOutput Element
+                    MathJax.Hub.Queue(["Typeset", MathJax.Hub, "commentsdiv"]);
+                }
+            })();
+            //text area category
+            (function () {
+                window.UpdateMathcat = function (TeX) {
+                    //set the MathOutput HTML
+                    document.getElementById("categorydiv").innerHTML = TeX;
+                    //reprocess the MathOutput Element
+                    MathJax.Hub.Queue(["Typeset", MathJax.Hub, "categorydiv"]);
+                }
+            })();
+            //text area abstract
+            (function () {
+                window.UpdateMathabs = function (TeX) {
+                    //set the MathOutput HTML
+                    document.getElementById("abstractdiv").innerHTML = TeX;
+                    //reprocess the MathOutput Element
+                    MathJax.Hub.Queue(["Typeset", MathJax.Hub, "abstractdiv"]);
+                }
+            })();
+        </script>
         <?php
         #importo file per utilizzare funzioni...
         require_once $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'authorization/sec_sess.php';
@@ -152,28 +152,28 @@
                 ?>
                 <center><div><form name='f2' action='manual_insert.php' method='POST'>Get preprint informations from arXiv: <input type='search' autocomplete = 'on' style='width:175px;' name='id' id='textbox' required class='textbox' placeholder='Insert id(arXiv): 0000.0000' autofocus/> <input type='submit' name='b7' value='Get preprint' style='width:70px;' id='bottone_keyword' class='bottoni'/><br/>
                         </form></div></center>
-                    <hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>
-                    <?php
-                    if (isset($_POST['b7'])) {
-                        echo "<div hidden>";
-                        $id = trim($_POST['id']);
-                        arxiv_call($id, 0);
-                        for ($i = 1; $i < 11; $i++) {
-                            $id1 = $id . "v" . $i;
-                            $ris = cercapreprint($id1);
-                            if ($id1 == $ris[0]) {
-                                #azzeramento file temporaneo...
-                                azzerapreprint();
-                                break;
-                            }
+                <hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>
+                <?php
+                if (isset($_POST['b7'])) {
+                    echo "<div hidden>";
+                    $id = trim($_POST['id']);
+                    arxiv_call($id, 0);
+                    for ($i = 1; $i < 11; $i++) {
+                        $id1 = $id . "v" . $i;
+                        $ris = cercapreprint($id1);
+                        if ($id1 == $ris[0]) {
+                            #azzeramento file temporaneo...
+                            azzerapreprint();
+                            break;
                         }
                     }
-                    echo "</div>";
-                    if ($id1 == $ris[0] && isset($_POST['b7'])) {
-                        echo "
+                }
+                echo "</div>";
+                if ($id1 == $ris[0] && isset($_POST['b7'])) {
+                    echo "
                 <form name='f1' action='manual_insert.php' method='POST' enctype='multipart/form-data'>
                     <div style='margin-left:1%; margin-right:1%;'><div style='float:left; width:100%;'><center><div><br/><h2>preprint informations</h2><h1>field with '*' are required</h1><br/><input type='reset' name='reset' value='Reset'><br/><br/></center>
-                    	<div style='font-weight: bold;'>document:</div><br/><div style='float:left; width:49%;'><center><a href=./pdf_downloads/" . $id1 . ".pdf onclick='window.open(this.href);return false' style='color:#007897;' title='".$ris[0]."'>PDF</a></center></div>
+                    	<div style='font-weight: bold;'>document:</div><br/><div style='float:left; width:49%;'><center><a href=./pdf_downloads/" . $id1 . ".pdf onclick='window.open(this.href);return false' style='color:#007897;' title='" . $ris[0] . "'>PDF</a></center></div>
 			    <br/><br/><div style='font-weight: bold;'>id of pubblication (not editable):</div><br/>
                             <textarea readonly style='width:49%;' name='id' id='textbox' class='textbox' placeholder='example of id: 0000.0000v1'>" . $ris[0] . "</textarea><br/><br/>
                             <div style='font-weight: bold;'>data of pubblication (not editable):</div><br/>
@@ -220,17 +220,17 @@
                             <input type='submit' name='b9' value='Remove' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmDelete()'/>
                             <input type='submit' name='b10' value='Complete' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmInsert()'/><br/><br/></center>
                             </div></div></form>";
-			    echo "
+                    echo "
                             	<script>
-					UpdateMathtit('".addslashes($ris[1])."');
-					UpdateMathjou('".addslashes($ris[4])."');
-					UpdateMathcom('".addslashes($ris[5])."');
-					UpdateMathcat('".addslashes($ris[6])."');
-					UpdateMathaut('".addslashes($ris[3])."');
-					UpdateMathabs('".addslashes($ris[7])."');
+					UpdateMathtit('" . addslashes($ris[1]) . "');
+					UpdateMathjou('" . addslashes($ris[4]) . "');
+					UpdateMathcom('" . addslashes($ris[5]) . "');
+					UpdateMathcat('" . addslashes($ris[6]) . "');
+					UpdateMathaut('" . addslashes($ris[3]) . "');
+					UpdateMathabs('" . addslashes($ris[7]) . "');
 				</script>";
-                    } else {
-                        echo "<form name='f2' action='manual_insert.php' method='POST' enctype='multipart/form-data'>
+                } else {
+                    echo "<form name='f2' action='manual_insert.php' method='POST' enctype='multipart/form-data'>
                     <div style='margin-left:1%; margin-right:1%;'><div style='float:left; width:100%;'><center><div><br/><h2>preprint informations</h2><h1>field with '*' are required</h1><br/><input type='reset' name='reset' value='Reset'/><br/><br/></center>
                             <div style='font-weight: bold;'>*id of pubblication:</div><br/>
                             <textarea style='width:49%;' name='id' id='textbox' class='textbox' required placeholder='example of id: 0000.0000v1' autofocus></textarea><br/><br/>
@@ -272,102 +272,102 @@
                             <input type='submit' name='b8' value='Insert preprint' style='width:80px;' id='bottone_keyword' class='bottoni' onclick='return confirmInsert()'/><br/><br/></center>
                             </div></div>
                             </form>";
+                }
+                $target_file = $basedir2 . basename($_FILES["fileToUpload"]["name"]);
+                $type = "document/pdf"; // impostato il tipo per un'pdf
+                #bottone insert manually
+                if (isset($_POST['b8'])) {
+                    if (empty($_POST['journal'])) {
+                        $info[4] = "No journal ref";
+                    } else {
+                        $info[4] = $_POST['journal'];
                     }
-                    $target_file = $basedir2 . basename($_FILES["fileToUpload"]["name"]);
-                    $type = "document/pdf"; // impostato il tipo per un'pdf
-                    #bottone insert manually
-                    if (isset($_POST['b8'])) {
-                        if (empty($_POST['journal'])) {
-                            $info[4] = "No journal ref";
-                        } else {
-                            $info[4] = $_POST['journal'];
-                        }
-                        if (empty($_POST['comments'])) {
-                            $info[5] = "No journal ref";
-                        } else {
-                            $info[5] = $_POST['comments'];
-                        }
-                        $info[0] = $_POST['id'];
-                        $info[1] = $_POST['title'];
-                        $info[2] = $_POST['date'];
-                        $info[3] = $_POST['author'];
-                        $info[6] = $_POST['category'];
-                        $info[7] = $_POST['abstract'];
-                        #richiamo della funzione per il versionamento dei preprints
-                        version_preprint($info[0]);
-                        #richiamo della funzione per inserire le info del preprint all'interno del database
-                        insert_preprints($info);
-                        #upload del file selezionato
-                        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                            $fileType = $_FILES["fileToUpload"]["type"];
-                            #inserimento file nel database
-                            insert_one_pdf($info[0], $fileType);
-                            echo '<script type="text/javascript">alert("Preprint ' . $_POST['id'] . ' inserted correctly!");</script>';
-                        } else {
-                            echo '<script type="text/javascript">alert("Sorry, there was an error uploading your file!");</script>';
-                        }
+                    if (empty($_POST['comments'])) {
+                        $info[5] = "No journal ref";
+                    } else {
+                        $info[5] = $_POST['comments'];
                     }
-                    #bottone delete
-                    if (isset($_POST['b9'])) {
-                        #eliminazione del preprint selezionato
-                        unlink($basedir3 . $_POST['id'] . ".pdf");
-                        cancellaselected($_POST['id']);
-                        echo '<script type="text/javascript">alert("Preprint ' . $_POST['id'] . ' removed correctly!");</script>';
-                        echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./manual_insert.php">';
-                    }
-                    #bottone inserimento
-                    if (isset($_POST['b10'])) {
-                        if (empty($_POST['journal'])) {
-                            $info[4] = "No journal ref";
-                        } else {
-                            $info[4] = $_POST['journal'];
-                        }
-                        if (empty($_POST['comments'])) {
-                            $info[5] = "No journal ref";
-                        } else {
-                            $info[5] = $_POST['comments'];
-                        }
-                        $info[0] = $_POST['id'];
-                        $info[1] = $_POST['title'];
-                        $info[2] = $_POST['data'];
-                        $info[3] = $_POST['author'];
-                        $info[6] = $_POST['category'];
-                        $info[7] = $_POST['abstract'];
-                        #richiamo della funzione per il versionamento dei preprints
-                        version_preprint($info[0]);
-                        #richiamo della funzione per inserire le info del preprint all'interno del database
-                        insert_preprints($info);
-                        #inserimento del pdf sul database
-                        insert_one_pdf2($_POST['id']);
-                        #spostamento del file pdf
-                        copy($basedir3 . $_POST['id'] . ".pdf", $copia . $_POST['id'] . ".pdf");
-                        unlink($basedir3 . $_POST['id'] . ".pdf");
-                        if ($_FILES["fileToUpload"]["size"] > 0) {
-                            #caricamento del file scelto
-                            if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                                $fileType = $_FILES["fileToUpload"]["type"];
-                                #spostamento pdf
-                                #inserimento nel database del file
-                                insert_one_pdf($info[0], $fileType);
-                                echo '<script type="text/javascript">alert("Preprint ' . $_POST['id'] . ' inserted correctly!");</script>';
-                                echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./manual_insert.php">';
-                            } else {
-                                echo '<script type="text/javascript">alert("Error, file not uploaded!");</script>';
-                            }
-                        } else {
-                            echo '<script type="text/javascript">alert("Preprint ' . $_POST['id'] . ' inserted correctly!");</script>';
-                            echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./manual_insert.php">';
-                        }
+                    $info[0] = $_POST['id'];
+                    $info[1] = $_POST['title'];
+                    $info[2] = $_POST['date'];
+                    $info[3] = $_POST['author'];
+                    $info[6] = $_POST['category'];
+                    $info[7] = $_POST['abstract'];
+                    #richiamo della funzione per il versionamento dei preprints
+                    version_preprint($info[0]);
+                    #richiamo della funzione per inserire le info del preprint all'interno del database
+                    insert_preprints($info);
+                    #upload del file selezionato
+                    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+                        $fileType = $_FILES["fileToUpload"]["type"];
+                        #inserimento file nel database
+                        insert_one_pdf($info[0], $fileType);
+                        echo '<script type="text/javascript">alert("Preprint ' . $_POST['id'] . ' inserted correctly!");</script>';
+                    } else {
+                        echo '<script type="text/javascript">alert("Sorry, there was an error uploading your file!");</script>';
                     }
                 }
-            } else {
-                echo '<script type="text/javascript">alert("ACCESS DENIED!");</script>';
-                echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
+                #bottone delete
+                if (isset($_POST['b9'])) {
+                    #eliminazione del preprint selezionato
+                    unlink($basedir3 . $_POST['id'] . ".pdf");
+                    cancellaselected($_POST['id']);
+                    echo '<script type="text/javascript">alert("Preprint ' . $_POST['id'] . ' removed correctly!");</script>';
+                    echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./manual_insert.php">';
+                }
+                #bottone inserimento
+                if (isset($_POST['b10'])) {
+                    if (empty($_POST['journal'])) {
+                        $info[4] = "No journal ref";
+                    } else {
+                        $info[4] = $_POST['journal'];
+                    }
+                    if (empty($_POST['comments'])) {
+                        $info[5] = "No journal ref";
+                    } else {
+                        $info[5] = $_POST['comments'];
+                    }
+                    $info[0] = $_POST['id'];
+                    $info[1] = $_POST['title'];
+                    $info[2] = $_POST['data'];
+                    $info[3] = $_POST['author'];
+                    $info[6] = $_POST['category'];
+                    $info[7] = $_POST['abstract'];
+                    #richiamo della funzione per il versionamento dei preprints
+                    version_preprint($info[0]);
+                    #richiamo della funzione per inserire le info del preprint all'interno del database
+                    insert_preprints($info);
+                    #inserimento del pdf sul database
+                    insert_one_pdf2($_POST['id']);
+                    #spostamento del file pdf
+                    copy($basedir3 . $_POST['id'] . ".pdf", $copia . $_POST['id'] . ".pdf");
+                    unlink($basedir3 . $_POST['id'] . ".pdf");
+                    if ($_FILES["fileToUpload"]["size"] > 0) {
+                        #caricamento del file scelto
+                        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+                            $fileType = $_FILES["fileToUpload"]["type"];
+                            #spostamento pdf
+                            #inserimento nel database del file
+                            insert_one_pdf($info[0], $fileType);
+                            echo '<script type="text/javascript">alert("Preprint ' . $_POST['id'] . ' inserted correctly!");</script>';
+                            echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./manual_insert.php">';
+                        } else {
+                            echo '<script type="text/javascript">alert("Error, file not uploaded!");</script>';
+                        }
+                    } else {
+                        echo '<script type="text/javascript">alert("Preprint ' . $_POST['id'] . ' inserted correctly!");</script>';
+                        echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./manual_insert.php">';
+                    }
+                }
             }
         } else {
+            echo '<script type="text/javascript">alert("ACCESS DENIED!");</script>';
             echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
         }
-        ?>
+    } else {
+        echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
+    }
+    ?>
 </div>
 </body>
 </html>

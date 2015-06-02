@@ -8,7 +8,7 @@
         include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/check_nomi_data.php');
         include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/cURL.php');
         include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/insert_remove_db.php');
-        
+
         define('EOL', "<br />\n");
         $seconds = 86400;
 
@@ -19,8 +19,8 @@
         #funzione per il recupero delle informazioni da arxiv.org
 
         function arxiv_call($nome, $dataultimolancio) {
-        	#importazione variabili globali
-		include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
+            #importazione variabili globali
+            include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
             #inizializzo variabile per contare preprints scaricati...
             $k = 0;
             #adattamento stringa nome per chiamata su arXiv...
