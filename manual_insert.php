@@ -37,7 +37,7 @@
             }
             function confirmExit()
             {
-                return confirm('All unsaved changes will be lost, it will be moved to check section, continue?');
+                return confirm('All unsaved changes will be lost, continue?');
             }
         </script>
         <script type="text/x-mathjax-config">
@@ -143,7 +143,7 @@
                             <td><input type="submit" name="b1" value="Back" id='bottone_keyword' class='bottoni' onclick="return confirmExit()"/></td>
                         </tr>
                     </table><br/><a style='color:#007897;' href='http://arxiv.org/' onclick='window.open(this.href);
-                            return false' title='arXiv'>arXiv.org</a>
+                                    return false' title='arXiv'>arXiv.org</a>
                 </form></center><hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
             <?php
             if (sessioneavviata() == True) {
@@ -179,11 +179,23 @@
                             <div style='font-weight: bold;'>data of pubblication (not editable):</div><br/>
                             <textarea readonly style='width:49%;' name='data' id='textbox' class='textbox' placeholder='example of data: 2011-12-30T10:37:35Z'>" . $ris[2] . "</textarea><br/><br/>
                             <div style='float:right; width:49%;'>
+	    				<div style='font-weight: bold;'>category preview:</div><br/>
+	    				<div id='categorydiv'></div>
+	    			</div>
+                            <div style='font-weight: bold;'>*category:</div><br/>
+                            <textarea style='width:49%;' name='category' id='textbox' class='textbox' required placeholder='example of category: math.NA...' onkeyup='UpdateMathcat(this.value)' maxlength='280'>" . $ris[6] . "</textarea><br/><br/>
+                            <div style='float:right; width:49%;'>
 	    				<div style='font-weight: bold;'>title preview:</div><br/>
 	    				<div id='titlediv'></div>
 	    			</div>
-                            <div style='font-weight: bold;'>*preprint title:</div><br/>
+                            <div style='font-weight: bold;'>*title:</div><br/>
                             <textarea style='width:49%;' name='title' id='textbox' class='textbox' required placeholder='example of title: The geometric...' autofocus onkeyup='UpdateMathtit(this.value)' maxlength='280'>" . $ris[1] . "</textarea><br/><br/>
+                            <div style='float:right; width:49%;'>
+	    				<div style='font-weight: bold;'>authors preview:</div><br/>
+	    				<div id='authordiv'></div>
+	    			</div>
+                            <div style='font-weight: bold;'>*authors:</div><br/>
+                            <textarea style='width:49%;' name='author' id='textbox' class='textbox' required placeholder='example of author: Mario Rossi, Luca...' onkeyup='UpdateMathaut(this.value)' maxlength='280'>" . $ris[3] . "</textarea><br/><br/>
                             <div style='float:right; width:49%;'>
 	    				<div style='font-weight: bold;'>journal preview:</div><br/>
 	    				<div id='journaldiv'></div>
@@ -196,18 +208,6 @@
 	    			</div>
                             <div style='font-weight: bold;'>comments:</div><br/>
                             <textarea style='width:49%;' name='comments' id='textbox' class='textbox' placeholder='example of comments: 10 pages...' onkeyup='UpdateMathcom(this.value)' maxlength='280'>" . $ris[5] . "</textarea><br/><br/>
-                            <div style='float:right; width:49%;'>
-	    				<div style='font-weight: bold;'>category preview:</div><br/>
-	    				<div id='categorydiv'></div>
-	    			</div>
-                            <div style='font-weight: bold;'>*category:</div><br/>
-                            <textarea style='width:49%;' name='category' id='textbox' class='textbox' required placeholder='example of category: math.NA...' onkeyup='UpdateMathcat(this.value)' maxlength='280'>" . $ris[6] . "</textarea><br/><br/>
-                            <div style='float:right; width:49%;'>
-	    				<div style='font-weight: bold;'>authors preview:</div><br/>
-	    				<div id='authordiv'></div>
-	    			</div>
-                            <div style='font-weight: bold;'>*authors name:</div><br/>
-                            <textarea style='width:49%;' name='author' id='textbox' class='textbox' required placeholder='example of author: Mario Rossi, Luca...' onkeyup='UpdateMathaut(this.value)' maxlength='280'>" . $ris[3] . "</textarea><br/><br/>
                             <div style='float:right; width:49%;'>
 	    				<div style='font-weight: bold;'>abstract preview:</div><br/>
 	    				<div id='abstractdiv'></div>
@@ -228,7 +228,14 @@
 					UpdateMathcat('" . addslashes($ris[6]) . "');
 					UpdateMathaut('" . addslashes($ris[3]) . "');
 					UpdateMathabs('" . addslashes($ris[7]) . "');
-				</script>";
+				</script>
+				<script type='text/javascript'>
+					function confirmExit()
+					    {
+						return confirm('All unsaved changes will be lost, it will be moved to check section, continue?');
+					    }
+				</script>
+				";
                 } else {
                     echo "<form name='f2' action='manual_insert.php' method='POST' enctype='multipart/form-data'>
                     <div style='margin-left:1%; margin-right:1%;'><div style='float:left; width:100%;'><center><div><br/><h2>preprint informations</h2><h1>field with '*' are required</h1><br/><input type='reset' name='reset' value='Reset'/><br/><br/></center>
@@ -236,17 +243,23 @@
                             <textarea style='width:49%;' name='id' id='textbox' class='textbox' required placeholder='example of id: 0000.0000v1' autofocus></textarea><br/><br/>
                             <div style='font-weight: bold;'>*data of pubblication:</div><br/>
                             <textarea style='width:49%;' name='date' id='textbox' class='textbox' required placeholder='example of data: 2011-12-30T10:37:35Z'></textarea><br/><br/>
+                        <div style='float:right; width:49%;'>
+	    				<div style='font-weight: bold;'>category preview:</div><br/>
+	    				<div id='categorydiv'></div>
+	    			</div>
+                            <div style='font-weight: bold;'>*category:</div><br/>
+                            <textarea style='width:49%;' name='category' id='textbox' class='textbox' required placeholder='example of category: math.NA...' onkeyup='UpdateMathcat(this.value)' maxlength='280'>" . $ris[6] . "</textarea><br/><br/>
                              <div style='float:right; width:49%;'>
 	    				<div style='font-weight: bold;'>title preview:</div><br/>
 	    				<div id='titlediv'></div>
 	    		</div>
-                        <div style='font-weight: bold;'>*publication title:</div><br/>
+                        <div style='font-weight: bold;'>*title:</div><br/>
                         <textarea style='width:49%;' name='title' id='textbox' class='textbox' required placeholder='example of title: The geometric...' onkeyup='UpdateMathtit(this.value)' maxlength='280'></textarea><br/><br/>
                         <div style='float:right; width:49%;'>
 	    				<div style='font-weight: bold;'>authors preview:</div><br/>
 	    				<div id='authordiv'></div>
 	    		</div>
-                        <div style='font-weight: bold;'>*authors name:</div><br/>
+                        <div style='font-weight: bold;'>*authors:</div><br/>
                         <textarea style='width:49%;' name='author' id='textbox' class='textbox' required placeholder='example of author: Mario Rossi, Luca...' onkeyup='UpdateMathaut(this.value)' maxlength='280'></textarea><br/><br/>
                         <div style='float:right; width:49%;'>
 	    				<div style='font-weight: bold;'>journal preview:</div><br/>
@@ -313,7 +326,7 @@
                     unlink($basedir3 . $_POST['id'] . ".pdf");
                     cancellaselected($_POST['id']);
                     echo '<script type="text/javascript">alert("Preprint ' . $_POST['id'] . ' removed correctly!");</script>';
-                    echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./manual_insert.php">';
+                    echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./arXiv_panel.php">';
                 }
                 #bottone inserimento
                 if (isset($_POST['b10'])) {
@@ -350,13 +363,13 @@
                             #inserimento nel database del file
                             insert_one_pdf($info[0], $fileType);
                             echo '<script type="text/javascript">alert("Preprint ' . $_POST['id'] . ' inserted correctly!");</script>';
-                            echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./manual_insert.php">';
+                            echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./arXiv_panel.php">';
                         } else {
                             echo '<script type="text/javascript">alert("Error, file not uploaded!");</script>';
                         }
                     } else {
                         echo '<script type="text/javascript">alert("Preprint ' . $_POST['id'] . ' inserted correctly!");</script>';
-                        echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./manual_insert.php">';
+                        echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./arXiv_panel.php">';
                     }
                 }
             }

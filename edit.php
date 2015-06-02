@@ -186,11 +186,23 @@
                             <div style='font-weight: bold;'>data of pubblication (not editable):</div><br/>
                             <textarea readonly style='width:49%;' name='data' id='textbox' class='textbox' placeholder='example of data: 2011-12-30T10:37:35Z'>" . $ris[2] . "</textarea><br/><br/>
                             <div style='float:right; width:49%;'>
+	    				<div style='font-weight: bold;'>category preview:</div><br/>
+	    				<div id='categorydiv'></div>
+	    			</div>
+                            <div style='font-weight: bold;'>*category:</div><br/>
+                            <textarea style='width:49%;' name='category' id='textbox' class='textbox' required placeholder='example of category: math.NA...' autofocus onkeyup='UpdateMathcat(this.value)' maxlength='280'>" . $ris[6] . "</textarea><br/><br/>
+                            <div style='float:right; width:49%;'>
 	    				<div style='font-weight: bold;'>title preview:</div><br/>
 	    				<div id='titlediv'></div>
 	    			</div>
-                            <div style='font-weight: bold;'>*preprint title:</div><br/>
-                            <textarea style='width:49%;' name='title' id='textbox' class='textbox' required placeholder='example of title: The geometric...' autofocus onkeyup='UpdateMathtit(this.value)' maxlength='280'>" . $ris[1] . "</textarea><br/><br/>
+                            <div style='font-weight: bold;'>*title:</div><br/>
+                            <textarea style='width:49%;' name='title' id='textbox' class='textbox' required placeholder='example of title: The geometric...' onkeyup='UpdateMathtit(this.value)' maxlength='280'>" . $ris[1] . "</textarea><br/><br/>
+                            <div style='float:right; width:49%;'>
+	    				<div style='font-weight: bold;'>authors preview:</div><br/>
+	    				<div id='authordiv'></div>
+	    			</div>
+                            <div style='font-weight: bold;'>*authors:</div><br/>
+                            <textarea style='width:49%;' name='author' id='textbox' class='textbox' required placeholder='example of author: Mario Rossi, Luca...' onkeyup='UpdateMathaut(this.value)' maxlength='280'>" . $ris[3] . "</textarea><br/><br/>
                             <div style='float:right; width:49%;'>
 	    				<div style='font-weight: bold;'>journal preview:</div><br/>
 	    				<div id='journaldiv'></div>
@@ -203,18 +215,6 @@
 	    			</div>
                             <div style='font-weight: bold;'>comments:</div><br/>
                             <textarea style='width:49%;' name='comments' id='textbox' class='textbox' placeholder='example of comments: 10 pages...' onkeyup='UpdateMathcom(this.value)' maxlength='280'>" . $ris[5] . "</textarea><br/><br/>
-                            <div style='float:right; width:49%;'>
-	    				<div style='font-weight: bold;'>category preview:</div><br/>
-	    				<div id='categorydiv'></div>
-	    			</div>
-                            <div style='font-weight: bold;'>*category:</div><br/>
-                            <textarea style='width:49%;' name='category' id='textbox' class='textbox' required placeholder='example of category: math.NA...' onkeyup='UpdateMathcat(this.value)' maxlength='280'>" . $ris[6] . "</textarea><br/><br/>
-                            <div style='float:right; width:49%;'>
-	    				<div style='font-weight: bold;'>authors preview:</div><br/>
-	    				<div id='authordiv'></div>
-	    			</div>
-                            <div style='font-weight: bold;'>*authors name:</div><br/>
-                            <textarea style='width:49%;' name='author' id='textbox' class='textbox' required placeholder='example of author: Mario Rossi, Luca...' onkeyup='UpdateMathaut(this.value)' maxlength='280'>" . $ris[3] . "</textarea><br/><br/>
                             <div style='float:right; width:49%;'>
 	    				<div style='font-weight: bold;'>abstract preview:</div><br/>
 	    				<div id='abstractdiv'></div>

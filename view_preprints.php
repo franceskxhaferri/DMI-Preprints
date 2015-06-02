@@ -149,7 +149,7 @@
             <div class="container">
                 <div class="row">
                     <div class="12u">
-<?php echo $nav; ?>
+                        <?php echo $nav; ?>
                     </div>
                 </div>
             </div>

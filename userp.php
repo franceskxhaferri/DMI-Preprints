@@ -133,24 +133,23 @@
                     <?php
                     print_r("<font style='font-weight: bold;'>Name: </font>");
                     print_r($_SESSION['nome']);
-                    print_r("<br/><font style='font-weight: bold;'>Access type: </font>");
+                    print_r(" <font style='font-weight: bold;'>Access type: </font>");
                     print_r($_SESSION['logged_type']);
                     ?>
                     <br/><br/>
-                    <table>
-                        <tr>
-                            <td>
-                                <form name="f2" action="uploaded.php?p=1" method="POST">
-                                    <input type="submit" name="b2" value="View uploaded" id="bottoni" class="bottoni">
-                                </form>
-                            </td>
-                            <td>
-                                <form name="f1" action="userp.php" method="POST">
-                                    <input type="submit" name="b1" value="Logout" id="botton_logout" class="bottoni" style="color: red;" onclick="return confirmLogout()">
-                                </form>
-                            </td>
-                        </tr>
-                    </table>
+                    <div style="width:390px;">
+                        <div style="float:left; margin-left:0.5%;">
+                            <form name="f1" action="userp.php" method="POST">
+                                <input type="submit" name="b1" value="Logout" id="botton_logout" class="bottoni" style="color: red;" onclick="return confirmLogout()">
+                            </form>
+                        </div>
+                        <div style="float:left; margin-left:0.5%;">
+                            <form name="f2" action="uploaded.php?p=1" method="POST">
+                                <input type="submit" name="b2" value="My upload" id="bottoni" class="bottoni">
+                            </form>
+                        </div>
+                        <div style="clear:both;"></div>
+                    </div>
                 </div></center>
             <hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
             <?php
@@ -175,13 +174,13 @@
                             <div style="font-weight: bold;">title preview:</div><br/>
                             <div id="titlediv"></div>
                         </div>
-                        <div style="font-weight: bold;">*publication title:</div><br/>
+                        <div style="font-weight: bold;">*title:</div><br/>
                         <textarea style="width:49%;" name="title" id="textbox" class="textbox" required placeholder="example of title: The geometric..." onkeyup="UpdateMathtit(this.value)" maxlength="280"></textarea><br/><br/>
                         <div style="float:right; width:49%;">
                             <div style="font-weight: bold;">authors preview:</div><br/>
                             <div id="authordiv"></div>
                         </div>
-                        <div style="font-weight: bold;">*authors name:</div><br/>
+                        <div style="font-weight: bold;">*authors:</div><br/>
                         <textarea style="width:49%;" name="author" id="textbox" class="textbox" required placeholder="example of author: Mario Rossi, Luca..." onkeyup="UpdateMathaut(this.value)" maxlength="280"></textarea><br/><br/>
                         <div style="float:right; width:49%;">
                             <div style="font-weight: bold;">journal preview:</div><br/>

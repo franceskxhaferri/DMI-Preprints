@@ -132,7 +132,7 @@
                 <div><center><br/><br/><h2>manual editing</h2></center>
                 </div><center>
                 <table>
-                    <tr><form name="f1" action="arXiv_panel.php" method="GET"><td align="right" style='width:150px; height:16px'>Go to arXiv panel&nbsp&nbsp&nbsp</td>
+                    <tr><form name="f1" action="modp.php" method="GET"><td align="right" style='width:150px; height:16px'>Go to admin panel&nbsp&nbsp&nbsp</td>
                         <td><input type="submit" name="b1" value="Back" id='bottone_keyword' class='bottoni' onclick="return confirmExit()"/></td>
                         </tr>
                     </form></table>
@@ -145,7 +145,7 @@
                     echo "<center><br/><a style='color:#007897;' href='./view_preprints.php?p=1&w=0' onclick='window.open(this.href); return false' title='Go to preprints list'>View from inserted preprints</a></center>";
                     echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
                     echo " <center><div><form name='f2' action='manual_edit.php' method='POST'>Insert id of publication: <input type='search' autocomplete = 'on' style='width:175px;' name='id' id='textbox' required class='textbox' placeholder='example of id: 0000.0000v1' autofocus/> <input type='submit' name='bottoni8' value='Get preprint' style='width:70px;' id='bottone_keyword' class='bottoni'/><br/>
-		               </form></div>
+		               </form></div></center>
 		               ";
                     $var = False;
                 }
@@ -183,11 +183,23 @@
                             <div style='font-weight: bold;'>data of pubblication (not editable):</div><br/>
                             <textarea readonly style='width:49%;' name='data' id='textbox' class='textbox' placeholder='example of data: 2011-12-30T10:37:35Z'>" . $ris[2] . "</textarea><br/><br/>
                             <div style='float:right; width:49%;'>
+	    				<div style='font-weight: bold;'>category preview:</div><br/>
+	    				<div id='categorydiv'></div>
+	    			</div>
+                            <div style='font-weight: bold;'>*category:</div><br/>
+                            <textarea style='width:49%;' name='category' id='textbox' class='textbox' required placeholder='example of category: math.NA...' autofocus onkeyup='UpdateMathcat(this.value)' maxlength='280'>" . $ris[6] . "</textarea><br/><br/>
+                            <div style='float:right; width:49%;'>
 	    				<div style='font-weight: bold;'>title preview:</div><br/>
 	    				<div id='titlediv'></div>
 	    			</div>
-                            <div style='font-weight: bold;'>*preprint title:</div><br/>
-                            <textarea style='width:49%;' name='title' id='textbox' class='textbox' required placeholder='example of title: The geometric...' autofocus onkeyup='UpdateMathtit(this.value)' maxlength='280'>" . $ris[1] . "</textarea><br/><br/>
+                            <div style='font-weight: bold;'>*title:</div><br/>
+                            <textarea style='width:49%;' name='title' id='textbox' class='textbox' required placeholder='example of title: The geometric...' onkeyup='UpdateMathtit(this.value)' maxlength='280'>" . $ris[1] . "</textarea><br/><br/>
+                            <div style='float:right; width:49%;'>
+	    				<div style='font-weight: bold;'>authors preview:</div><br/>
+	    				<div id='authordiv'></div>
+	    			</div>
+                            <div style='font-weight: bold;'>*authors:</div><br/>
+                            <textarea style='width:49%;' name='author' id='textbox' class='textbox' required placeholder='example of author: Mario Rossi, Luca...' onkeyup='UpdateMathaut(this.value)' maxlength='280'>" . $ris[3] . "</textarea><br/><br/>
                             <div style='float:right; width:49%;'>
 	    				<div style='font-weight: bold;'>journal preview:</div><br/>
 	    				<div id='journaldiv'></div>
@@ -201,18 +213,6 @@
                             <div style='font-weight: bold;'>comments:</div><br/>
                             <textarea style='width:49%;' name='comments' id='textbox' class='textbox' placeholder='example of comments: 10 pages...' onkeyup='UpdateMathcom(this.value)' maxlength='280'>" . $ris[5] . "</textarea><br/><br/>
                             <div style='float:right; width:49%;'>
-	    				<div style='font-weight: bold;'>category preview:</div><br/>
-	    				<div id='categorydiv'></div>
-	    			</div>
-                            <div style='font-weight: bold;'>*category:</div><br/>
-                            <textarea style='width:49%;' name='category' id='textbox' class='textbox' required placeholder='example of category: math.NA...' onkeyup='UpdateMathcat(this.value)' maxlength='280'>" . $ris[6] . "</textarea><br/><br/>
-                            <div style='float:right; width:49%;'>
-	    				<div style='font-weight: bold;'>authors preview:</div><br/>
-	    				<div id='authordiv'></div>
-	    			</div>
-                            <div style='font-weight: bold;'>*authors name:</div><br/>
-                            <textarea style='width:49%;' name='author' id='textbox' class='textbox' required placeholder='example of author: Mario Rossi, Luca...' onkeyup='UpdateMathaut(this.value)' maxlength='280'>" . $ris[3] . "</textarea><br/><br/>
-                            <div style='float:right; width:49%;'>
 	    				<div style='font-weight: bold;'>abstract preview:</div><br/>
 	    				<div id='abstractdiv'></div>
 	    			</div>
@@ -222,7 +222,7 @@
                             <input type='hidden' name='MAX_FILE_SIZE' value='10000000'><br/>
                             <input type='file' name='fileToUpload' id='fileToUpload'><br/><br/>
                            <input type='submit' name='bottoni9' value='Remove' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmDelete()'/>
-                            <input type='submit' name='bottoni10' value='Complete' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmInsert()'/><br/><br/>
+                            <input type='submit' name='bottoni10' value='Complete' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmInsert()'/><br/><br/></center>
                             </div></div></form>";
                     echo "
                             	<script>
@@ -292,6 +292,6 @@
         echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
     }
     ?>
-</div><br/><br/></center>
+</div><br/><br/>
 </body>
 </html>

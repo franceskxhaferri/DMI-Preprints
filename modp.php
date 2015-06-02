@@ -133,141 +133,147 @@
                     <?php
                     print_r("<font style='font-weight: bold;'>Name: </font>");
                     print_r($_SESSION['nome']);
-                    print_r("<br/><font style='font-weight: bold;'>Access type: </font>");
+                    print_r(" <font style='font-weight: bold;'>Access type: </font>");
                     print_r($_SESSION['logged_type']);
                     ?>
-                    <br/><br/>
-                    <table>
-                        <tr>
-                            <td>
-                                <form name="f5" action="uploaded.php" method="GET">
-                                    <input type="text" name="p" value="1" checked hidden/>
-                                    <input type="submit" name="b5" value="Uploaded section" id="bottone_keyword" class="bottoni"/>
-                                </form>
-                            </td>
-                            <td>
-                                <form name="f4" action="archived_preprints.php" method="GET">
-                                    <input type="text" name="p" value="1" checked hidden/>
-                                    <input type="submit" name="b4" value="Archived section" id="bottone_keyword" class="bottoni"/>
-                                </form>
-                            </td>
-                            <td>
-                                <form name="f3" action="approve_preprints.php" method="GET">
-                                    <input type="text" name="p" value="1" checked hidden/><input type="text" name="w" value="0" checked hidden/>
-                                    <input type="submit" name="bb3" value="Approve section" id="bottone_keyword" class="bottoni"/>
-                                </form>
-                            </td>
-                            <td>
-                                <form name="f2" action="arXiv_panel.php" method="GET">
-                                    <input type="submit" name="b2" value="ArXiv panel" id="bottone_keyword" class="bottoni">
-                                </form>
-                            </td>
-                            <td>
-                                <form name="f1" action="modp.php" method="POST">
-                                    <input type="submit" name="b1" value="Logout" id="botton_logout" class="bottoni" style="color: red;" onclick="return confirmLogout()">
-                                </form>
-                            </td>
-                        </tr>
-                    </table>
-                </div></center>
+                </div>
+                <br/>
+                <div>
+                    <div style="float:left; margin-left:0.5%;">
+                        <form name="f1" action="modp.php" method="POST">
+                            <input type="submit" name="b1" value="Logout" id="botton_logout" class="bottoni" style="color: red;" onclick="return confirmLogout()">
+                        </form>
+                    </div>
+                    <div style="float:left; margin-left:0.5%;">
+                        <form name="f5" action="uploaded.php" method="GET">
+                            <input type="text" name="p" value="1" checked hidden/>
+                            <input type="submit" name="b5" value="My upload" id="bottone_keyword" class="bottoni"/>
+                        </form>
+                    </div>
+                    <div style="float:left; margin-left:0.5%;">
+                        <form name="f4" action="archived_preprints.php" method="GET">
+                            <input type="text" name="p" value="1" checked hidden/>
+                            <input type="submit" name="b4" value="Archived section" id="bottone_keyword" class="bottoni"/>
+                        </form>
+                    </div>
+                    <div style="float:left; margin-left:0.5%;">
+                        <form name="f3" action="approve_preprints.php" method="GET">
+                            <input type="text" name="p" value="1" checked hidden/><input type="text" name="w" value="0" checked hidden/>
+                            <input type="submit" name="bb3" value="Check section" id="bottone_keyword" class="bottoni"/>
+                        </form>
+                    </div>
+                    <div style="float:left; margin-left:0.5%;">
+                        <form name="f7" action="check_preprints.php" method="GET">
+                            <input type="text" name="p" value="1" checked hidden/><input type="text" name="w" value="0" checked hidden/>
+                            <input type="submit" name="bb3" value="Check arXiv section" id="bottone_keyword" class="bottoni"/>
+                        </form>
+                    </div>
+                    <div style="float:left; margin-left:0.5%;">
+                        <form name="f6" action="manual_edit.php" method="GET">
+                            <input type="text" name="p" value="1" checked hidden/>
+                            <input type="submit" name="b5" value="Edit section" id="bottone_keyword" class="bottoni"/>
+                        </form>
+                    </div>
+                    <div style="float:left; margin-left:0.5%;">
+                        <form name="f2" action="arXiv_panel.php" method="GET">
+                            <input type="submit" name="b2" value="ArXiv panel" id="bottone_keyword" class="bottoni">
+                        </form>
+                    </div>
+                    <div style="clear:both;"></div>
+                </div>
+            </center>
             <hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
-            <?php
-            if (sessioneavviata() == True) {
-                echo "<br/><br/><center>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTION CAN'T BE USED IN THIS MOMENT!</center><br/>";
+            <form name="f3" action="modp.php" method="POST" enctype="multipart/form-data">
+                <center><div><br/><h2>Insert new preprint</h2><h1>field with "*" are required</h1><br/>
+                    <input type="reset" name="reset" value="Reset"/><br/><br/></center>
+                <div style="margin-left:1%; margin-right:1%;"><div style="float:left; width:100%;">
+                        <div style="font-weight: bold;">*publication category:</div><br/>
+                        <select name="category" required onchange='Checkcath(this.value);'>
+                            <option value="">--Select Category--</option>
+                            <option value="Computer Science">Computer Science</option>
+                            <option value="Mathematics">Mathematics</option>
+                            <option value="Statistics">Statistics</option>
+                            <option value="Physics">Physics</option>
+                            <option value="Quantitative Biology">Quantitative Biology</option>
+                            <option value="Quantitative Finance">Quantitative Finance</option>
+                            <option value="Other">Other:</option>
+                        </select><br/><br/>
+                        <div id="cat" hidden><textarea style="width:49%;" name="category2" class="textbox" placeholder="example of category: math.NA..." maxlength="280"></textarea><br/><br/></div>
+                        <div style="float:right; width:49%;">
+                            <div style="font-weight: bold;">title preview:</div><br/>
+                            <div id="titlediv"></div>
+                        </div>
+                        <div style="font-weight: bold;">*title:</div><br/>
+                        <textarea style="width:49%;" name="title" id="textbox" class="textbox" required placeholder="example of title: The geometric..." onkeyup="UpdateMathtit(this.value)" maxlength="280"></textarea><br/><br/>
+                        <div style="float:right; width:49%;">
+                            <div style="font-weight: bold;">authors preview:</div><br/>
+                            <div id="authordiv"></div>
+                        </div>
+                        <div style="font-weight: bold;">*authors:</div><br/>
+                        <textarea style="width:49%;" name="author" id="textbox" class="textbox" required placeholder="example of author: Mario Rossi, Luca..." onkeyup="UpdateMathaut(this.value)" maxlength="280"></textarea><br/><br/>
+                        <div style="float:right; width:49%;">
+                            <div style="font-weight: bold;">journal preview:</div><br/>
+                            <div id="journaldiv"></div>
+                        </div>
+                        <div style="font-weight: bold;">journal reference:</div><br/>
+                        <textarea style="width:49%;" name="journal" id="textbox" class="textbox" placeholder="example of Journal: Numer. Linear Algebra..." onkeyup="UpdateMathjou(this.value)" maxlength="280"></textarea><br/><br/>
+                        <div style="float:right; width:49%;">
+                            <div style="font-weight: bold;">comments preview:</div><br/>
+                            <div id="commentsdiv"></div>
+                        </div>
+                        <div style="font-weight: bold;">comments:</div><br/>
+                        <textarea style="width:49%;" name="comments" id="textbox" class="textbox" placeholder="example of comments: 10 pages..." onkeyup="UpdateMathcom(this.value)" maxlength="280"></textarea><br/><br/>
+                        <div style="float:right; width:49%;">
+                            <div style="font-weight: bold;">abstract preview:</div><br/>
+                            <div id="abstractdiv"></div>
+                        </div>
+                        <div style="font-weight: bold;">*abstract:</div><br/>
+                        <textarea style="width:49%; height:300px;" name="abstract" id="textbox" class="textbox" required placeholder="example of abstract: The geometric..." onkeyup="UpdateMathabs(this.value)"></textarea><br/><br/></div>
+                </div></div>
+            <center>
+                <div style="font-weight: bold;">*PDF:<br/></div>
+                <input type="hidden" name="MAX_FILE_SIZE" value="10000000"><br/>
+                <input type="file" required name="fileToUpload" id="fileToUpload"><br/><br/>
+                <input type="submit" name="b3" value="Insert preprint" style='width:80px;' id='bottone_keyword' class='bottoni' onclick="return confirmInsert()"/><br/><br/></center>
+        </form>
+        <?php
+        $target_file = $basedir . basename($_FILES["fileToUpload"]["name"]);
+        if (isset($_POST['b1'])) {
+            session_start();
+            session_unset();
+            session_destroy();
+            echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
+        }
+        if (isset($_POST['b3'])) {
+            if (empty($_POST['journal'])) {
+                $info[4] = "No journal ref";
             } else {
-                ?>
-                <form name="f3" action="modp.php" method="POST" enctype="multipart/form-data">
-                    <center><div><br/><h2>Insert new preprint</h2><h1>field with "*" are required</h1><br/>
-                        <input type="reset" name="reset" value="Reset"/><br/><br/></center>
-                    <div style="margin-left:1%; margin-right:1%;"><div style="float:left; width:100%;">
-                            <div style="font-weight: bold;">*publication category:</div><br/>
-                            <select name="category" required onchange='Checkcath(this.value);'>
-                                <option value="">--Select Category--</option>
-                                <option value="Computer Science">Computer Science</option>
-                                <option value="Mathematics">Mathematics</option>
-                                <option value="Statistics">Statistics</option>
-                                <option value="Physics">Physics</option>
-                                <option value="Quantitative Biology">Quantitative Biology</option>
-                                <option value="Quantitative Finance">Quantitative Finance</option>
-                                <option value="Other">Other:</option>
-                            </select><br/><br/>
-                            <div id="cat" hidden><textarea style="width:49%;" name="category2" class="textbox" placeholder="example of category: math.NA..." maxlength="280"></textarea><br/><br/></div>
-                            <div style="float:right; width:49%;">
-                                <div style="font-weight: bold;">title preview:</div><br/>
-                                <div id="titlediv"></div>
-                            </div>
-                            <div style="font-weight: bold;">*publication title:</div><br/>
-                            <textarea style="width:49%;" name="title" id="textbox" class="textbox" required placeholder="example of title: The geometric..." onkeyup="UpdateMathtit(this.value)" maxlength="280"></textarea><br/><br/>
-                            <div style="float:right; width:49%;">
-                                <div style="font-weight: bold;">authors preview:</div><br/>
-                                <div id="authordiv"></div>
-                            </div>
-                            <div style="font-weight: bold;">*authors name:</div><br/>
-                            <textarea style="width:49%;" name="author" id="textbox" class="textbox" required placeholder="example of author: Mario Rossi, Luca..." onkeyup="UpdateMathaut(this.value)" maxlength="280"></textarea><br/><br/>
-                            <div style="float:right; width:49%;">
-                                <div style="font-weight: bold;">journal preview:</div><br/>
-                                <div id="journaldiv"></div>
-                            </div>
-                            <div style="font-weight: bold;">journal reference:</div><br/>
-                            <textarea style="width:49%;" name="journal" id="textbox" class="textbox" placeholder="example of Journal: Numer. Linear Algebra..." onkeyup="UpdateMathjou(this.value)" maxlength="280"></textarea><br/><br/>
-                            <div style="float:right; width:49%;">
-                                <div style="font-weight: bold;">comments preview:</div><br/>
-                                <div id="commentsdiv"></div>
-                            </div>
-                            <div style="font-weight: bold;">comments:</div><br/>
-                            <textarea style="width:49%;" name="comments" id="textbox" class="textbox" placeholder="example of comments: 10 pages..." onkeyup="UpdateMathcom(this.value)" maxlength="280"></textarea><br/><br/>
-                            <div style="float:right; width:49%;">
-                                <div style="font-weight: bold;">abstract preview:</div><br/>
-                                <div id="abstractdiv"></div>
-                            </div>
-                            <div style="font-weight: bold;">*abstract:</div><br/>
-                            <textarea style="width:49%; height:300px;" name="abstract" id="textbox" class="textbox" required placeholder="example of abstract: The geometric..." onkeyup="UpdateMathabs(this.value)"></textarea><br/><br/></div>
-                    </div></div>
-                <center>
-                    <div style="font-weight: bold;">*PDF:<br/></div>
-                    <input type="hidden" name="MAX_FILE_SIZE" value="10000000"><br/>
-                    <input type="file" required name="fileToUpload" id="fileToUpload"><br/><br/>
-                    <input type="submit" name="b3" value="Insert preprint" style='width:80px;' id='bottone_keyword' class='bottoni' onclick="return confirmInsert()"/><br/><br/></center>
-            </form>
-            <?php
-            $target_file = $basedir . basename($_FILES["fileToUpload"]["name"]);
-            if (isset($_POST['b1'])) {
-                session_start();
-                session_unset();
-                session_destroy();
-                echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
+                $info[4] = $_POST['journal'];
             }
-            if (isset($_POST['b3'])) {
-                if (empty($_POST['journal'])) {
-                    $info[4] = "No journal ref";
-                } else {
-                    $info[4] = $_POST['journal'];
-                }
-                if (empty($_POST['comments'])) {
-                    $info[5] = "No journal ref";
-                } else {
-                    $info[5] = $_POST['comments'];
-                }
-                if ($_POST['category'] == "Other") {
-                    $info[6] = $_POST['category2'];
-                } else {
-                    $info[6] = $_POST['category'];
-                }
-                $info[1] = $_POST['title'];
-                $info[3] = $_POST['author'];
-                $info[7] = $_POST['abstract'];
-                #upload del file selezionato
-                if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                    $fileType = $_FILES["fileToUpload"]["type"];
-                    #richiamo della funzione per inserire le info del preprint all'interno del database
-                    $id = insert_pubb($info, $_SESSION['nome'] . " (" . $_SESSION['uid'] . ")");
-                    rename($basedir . $_FILES["fileToUpload"]["name"], $basedir . $id . ".pdf");
-                    #inserimento file nel database
-                    insertpdf($id, $fileType);
-                    echo '<script type="text/javascript">alert("Preprint inserted correctly! ID generated: ' . $id . ' \nGo on uploaded section to edit your pubblications.");</script>';
-                } else {
-                    echo '<script type="text/javascript">alert("Sorry, there was an error uploading your file!");</script>';
-                }
+            if (empty($_POST['comments'])) {
+                $info[5] = "No journal ref";
+            } else {
+                $info[5] = $_POST['comments'];
+            }
+            if ($_POST['category'] == "Other") {
+                $info[6] = $_POST['category2'];
+            } else {
+                $info[6] = $_POST['category'];
+            }
+            $info[1] = $_POST['title'];
+            $info[3] = $_POST['author'];
+            $info[7] = $_POST['abstract'];
+            #upload del file selezionato
+            if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+                $fileType = $_FILES["fileToUpload"]["type"];
+                #richiamo della funzione per inserire le info del preprint all'interno del database
+                $id = insert_pubb($info, $_SESSION['nome'] . " (" . $_SESSION['uid'] . ")");
+                rename($basedir . $_FILES["fileToUpload"]["name"], $basedir . $id . ".pdf");
+                #inserimento file nel database
+                insertpdf($id, $fileType);
+                echo '<script type="text/javascript">alert("Preprint inserted correctly! ID generated: ' . $id . ' \nGo on uploaded section to edit your pubblications.");</script>';
+            } else {
+                echo '<script type="text/javascript">alert("Sorry, there was an error uploading your file!");</script>';
             }
         }
     } else {

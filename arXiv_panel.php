@@ -61,6 +61,7 @@
                                 <td align="right" style="width:350px;">Go to admin panel&nbsp&nbsp&nbsp</td>
                                 <td style="width:350px;"><input type="submit" name="b1" value="Back" id="bottone_keyword" class="bottoni"/></td>
                             </form></tr>
+                            <tr></tr>
                             <tr><form name="f4" action="authors_list.php" method="GET">
                                 <td align="right" style="width:350px;">List of authors that will be searched on arXiv&nbsp&nbsp&nbsp</td>
                                 <td style="width:350px;"><input type="submit" name="b4" value="Authors section" id="bottone_keyword" class="bottoni"/></td>
@@ -68,10 +69,6 @@
                             <tr><form name="f5" action="manual_insert.php" method="GET">
                                 <td align="right" style="width:350px;">Insert manually one preprint&nbsp&nbsp&nbsp</td>
                                 <td style="width:350px;"><input type="submit" name="b5" value="Insert section" id="bottone_keyword" class="bottoni"/></td>
-                            </form></tr>
-                            <tr><form name="f6" action="manual_edit.php" method="GET">
-                                <td align="right" style="width:350px;">Manual editing for inserted preprints&nbsp&nbsp&nbsp</td>
-                                <td style="width:350px;"><input type="submit" name="b6" value="Edit section" id="bottone_keyword" class="bottoni"/></td>
                             </form></tr>
                             <tr><form name="f7" action="check_preprints.php" method="GET">
                                 <td align="right" style="width:350px;">

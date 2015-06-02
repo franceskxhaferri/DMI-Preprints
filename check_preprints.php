@@ -77,10 +77,20 @@
                 </div>
                 <div><center><br/><br/><h2>CHECK PREPRINTS</h2></center>
                     <center><table>
-                            <tr><td  align="right" style="width:300px;">Go to arXiv panel&nbsp&nbsp&nbsp</td>
-                            <form name="f1" action="arXiv_panel.php" method="GET">
-                                <td style="width:280px;"><input type="submit" name="b1" value="Back" id="bottone_keyword" class="bottoni"></td>
-                            </form></tr></table></center>
+                            <?php
+                            if (isset($_GET['bb3'])) {
+                                echo "<tr><td  align='right' style='width:300px;'>Go to admin panel&nbsp&nbsp&nbsp</td>
+                            <form name='f1' action='modp.php' method='GET'>
+                                <td style='width:280px;'><input type='submit' name='b1' value='Back' id='bottone_keyword' class='bottoni'></td>
+                            </form></tr>";
+                            } else {
+                                echo "<tr><td  align='right' style='width:300px;'>Go to arXiv panel&nbsp&nbsp&nbsp</td>
+                            <form name='f1' action='arXiv_panel.php' method='GET'>
+                                <td style='width:280px;'><input type='submit' name='b1' value='Back' id='bottone_keyword' class='bottoni'></td>
+                            </form></tr>";
+                            }
+                            ?>
+                        </table></center>
                 </div><br/>
                 <div>
                     <?php
