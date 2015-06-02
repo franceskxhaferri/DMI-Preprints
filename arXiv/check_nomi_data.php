@@ -150,35 +150,35 @@ function searchfulltext() {
     while ($row = mysql_fetch_array($result)) {
         $i++;
         if ($cred == 1) {
-            echo "<h1>" . $i . ".<br/></h1><div align='left' style='width:90%;'>";
+            echo "<h1>" . $i . ".<br/></h1><div align='left' style='width:98%;'>";
             if ($_GET['w'] == "0") {
-                echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./pdf/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a>&nbsp&nbsp&nbsp<a title='Change this preprint' style='color:#007897;' href='./manual_edit.php?id=" . $row['id_pubblicazione'] . "' onclick='window.open(this.href); return false'>edit</a></div><div style='margin-left:2%;'>" . $row['id_pubblicazione'] . "</div>";
+                echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./pdf/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a>&nbsp&nbsp&nbsp<a title='Change this preprint' style='color:#007897;' href='./manual_edit.php?id=" . $row['id_pubblicazione'] . "' onclick='window.open(this.href); return false'>edit</a></div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
             } else {
-                echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a title='Change this preprint' style='color:#007897;' href='./manual_edit.php?id=" . $row['id_pubblicazione'] . "' onclick='window.open(this.href); return false'>edit</a></div><div style='margin-left:2%;'>" . $row['id_pubblicazione'] . "</div>";
+                echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a title='Change this preprint' style='color:#007897;' href='./manual_edit.php?id=" . $row['id_pubblicazione'] . "' onclick='window.open(this.href); return false'>edit</a></div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
             }
         } else {
-            echo "<h1>" . $i . ".<br/></h1><div align='left' style='width:90%;'>";
+            echo "<h1>" . $i . ".<br/></h1><div align='left' style='width:98%;'>";
             if ($_GET['w'] == "0") {
             	if ($_SESSION['nome']." (".$_SESSION['uid'].")" == $row['uid'] && $row['uid'] != ""){
-            		echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./pdf/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a>&nbsp&nbsp&nbsp<a title='Change this preprint' style='color:#007897;' href='./edit.php?id=" . $row['id_pubblicazione'] . "&r=" . $row['uid'] . "' onclick='window.open(this.href); return false'>edit</a></div><div style='margin-left:2%;'>" . $row['id_pubblicazione'] . "</div>";
+            		echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./pdf/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a>&nbsp&nbsp&nbsp<a title='Change this preprint' style='color:#007897;' href='./edit.php?id=" . $row['id_pubblicazione'] . "&r=" . $row['uid'] . "' onclick='window.open(this.href); return false'>edit</a></div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
             	}else{
-                	echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./pdf/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a></div><div style='margin-left:2%;'>" . $row['id_pubblicazione'] . "</div>";
+                	echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./pdf/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a></div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
                 }
             } else {
             	if ($_SESSION['nome']." (".$_SESSION['uid'].")" == $row['uid'] && $row['uid'] != ""){
-            		echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a title='Change this preprint' style='color:#007897;' href='./edit.php?id=" . $row['id_pubblicazione'] . "&r=" . $row['uid'] . "' onclick='window.open(this.href); return false'>edit</a></div><div style='margin-left:2%;'>" . $row['id_pubblicazione'] . "</div>";
+            		echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a title='Change this preprint' style='color:#007897;' href='./edit.php?id=" . $row['id_pubblicazione'] . "&r=" . $row['uid'] . "' onclick='window.open(this.href); return false'>edit</a></div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
             	}else{
-                	echo "<p><h1>Id of publication:</h1></p><div style='margin-left:2%;'>" . $row['id_pubblicazione'] . "</div>";
+                	echo "<p><h1>Id of publication:</h1></p><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
                 }
             }
         }
-        echo "<p><h1>Title:</h1></p><div style='margin-left:2%; margin-right:2%;'>" . stripslashes($row['titolo']) . "</div>";
-        echo "<p><h1>Date of publication:</h1></p><div style='margin-left:2%; margin-right:2%;'>" . stripslashes($row['data_pubblicazione']) . "</div>";
-        echo "<p><h1>Authors:</h1></p><div style='margin-left:2%; margin-right:2%;'>" . stripslashes($row['autori']) . "</div>";
-        echo "<p><h1>Journal reference:</h1></p><div style='margin-left:2%; margin-right:2%;'>" . stripslashes($row['referenze']) . "</div>";
-        echo "<p><h1>Comments:</h1></p><div style='margin-left:2%; margin-right:2%;'>" . stripslashes($row['commenti']) . "</div>";
-        echo "<p><h1>Category:</h1></p><div style='margin-left:2%; margin-right:2%;'>" . stripslashes($row['categoria']) . "</div>";
-        echo "<p><h1>Abstract:</h1></p><div style='margin-left:2%; margin-right:2%;'>" . stripslashes($row['abstract']) . "</div>";
+        echo "<p><h1>Title:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . stripslashes($row['titolo']) . "</div>";
+        echo "<p><h1>Date of publication:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . stripslashes($row['data_pubblicazione']) . "</div>";
+        echo "<p><h1>Authors:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . stripslashes($row['autori']) . "</div>";
+        echo "<p><h1>Journal reference:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . stripslashes($row['referenze']) . "</div>";
+        echo "<p><h1>Comments:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . stripslashes($row['commenti']) . "</div>";
+        echo "<p><h1>Category:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . stripslashes($row['categoria']) . "</div>";
+        echo "<p><h1>Abstract:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . stripslashes($row['abstract']) . "</div>";
         $na = $row['Filename'];
         $na = substr($na, -3, 3);
         #controllo se il file é un pdf
@@ -189,7 +189,7 @@ function searchfulltext() {
             }
         } else {
             if ($_GET['w'] == "1") {
-                echo "<p><h1>document:</h1></p><div style='margin-left:2%; margin-right:2%;'><a style='color:#007897;' href=./pdf/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>LINK</a> (On page view disabled for this file)</div>";
+                echo "<p><h1>document:</h1></p><div style='margin-left:1%; margin-right:1%;'><a style='color:#007897;' href=./pdf/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>LINK</a> (On page view disabled for this file)</div>";
             }
         }
         echo "</div><hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
@@ -490,60 +490,60 @@ function searchpreprint() {
     while ($row = mysql_fetch_array($result)) {
         $i++;
         if ($cred == 1) {
-            echo "<h1>" . $i . ".<br/></h1><div align='left' style='width:90%;'>";
+            echo "<h1>" . $i . ".<br/></h1><div align='left' style='width:98%;'>";
             if ($_GET['w'] == "0") {
             	if (file_exists("./pdf/" . $row['Filename'])) {
-                	echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./pdf/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a>&nbsp&nbsp&nbsp<a title='Change this preprint' style='color:#007897;' href='./manual_edit.php?id=" . $row['id_pubblicazione'] . "' onclick='window.open(this.href); return false'>edit</a></div><div style='margin-left:2%;'>" . $row['id_pubblicazione'] . "</div>";
+                	echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./pdf/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a>&nbsp&nbsp&nbsp<a title='Change this preprint' style='color:#007897;' href='./manual_edit.php?id=" . $row['id_pubblicazione'] . "' onclick='window.open(this.href); return false'>edit</a></div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
                 }else{
-                	echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./pdf_archived/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a> (Archived)</div><div style='margin-left:2%;'>" . $row['id_pubblicazione'] . "</div>";
+                	echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./pdf_archived/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a> (Archived)</div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
                 }
             } else {
             	if (file_exists("./pdf/" . $row['Filename'])) {
-                	echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a title='Change this preprint' style='color:#007897;' href='./manual_edit.php?id=" . $row['id_pubblicazione'] . "' onclick='window.open(this.href); return false'>edit</a></div><div style='margin-left:2%;'>" . $row['id_pubblicazione'] . "</div>";
+                	echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a title='Change this preprint' style='color:#007897;' href='./manual_edit.php?id=" . $row['id_pubblicazione'] . "' onclick='window.open(this.href); return false'>edit</a></div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
                 }else{
-                	echo "<p><h1>Id of publication:</h1></p><div style='float:right;'>(Archived)</div><div style='margin-left:2%;'>" . $row['id_pubblicazione'] . "</div>";
+                	echo "<p><h1>Id of publication:</h1></p><div style='float:right;'>(Archived)</div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
                 }
             }
         } else {
-            echo "<h1>" . $i . ".<br/></h1><div align='left' style='width:90%;'>";
+            echo "<h1>" . $i . ".<br/></h1><div align='left' style='width:98%;'>";
             #visualizzazione
             if ($_GET['w'] == "0") {
             	if ($_SESSION['nome']." (".$_SESSION['uid'].")" == $row['uid'] && $row['uid'] != ""){
             		if (file_exists("./pdf/" . $row['Filename'])) {
-            			echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./pdf/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a>&nbsp&nbsp&nbsp<a title='Change this preprint' style='color:#007897;' href='./edit.php?id=" . $row['id_pubblicazione'] . "&r=" . $row['uid'] . "' onclick='window.open(this.href); return false'>edit</a></div><div style='margin-left:2%;'>" . $row['id_pubblicazione'] . "</div>";
+            			echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./pdf/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a>&nbsp&nbsp&nbsp<a title='Change this preprint' style='color:#007897;' href='./edit.php?id=" . $row['id_pubblicazione'] . "&r=" . $row['uid'] . "' onclick='window.open(this.href); return false'>edit</a></div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
             		}else{
-            			echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./pdf_archived/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a> (Archived)</div><div style='margin-left:2%;'>" . $row['id_pubblicazione'] . "</div>";
+            			echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./pdf_archived/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a> (Archived)</div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
             		}
             	}else{
             		if (file_exists("./pdf/" . $row['Filename'])) {
-                		echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./pdf/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a></div><div style='margin-left:2%;'>" . $row['id_pubblicazione'] . "</div>";
+                		echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./pdf/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a></div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
                 	}else{
-                		echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./pdf_archived/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a> (Archived)</div><div style='margin-left:2%;'>" . $row['id_pubblicazione'] . "</div>";
+                		echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./pdf_archived/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a> (Archived)</div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
                 	}
                 }
             } else {
             	if ($_SESSION['nome']." (".$_SESSION['uid'].")" == $row['uid'] && $row['uid'] != ""){
             		if (file_exists("./pdf/" . $row['Filename'])) {
-            			echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a title='Change this preprint' style='color:#007897;' href='./edit.php?id=" . $row['id_pubblicazione'] . "&r=" . $row['uid'] . "' onclick='window.open(this.href); return false'>edit</a></div><div style='margin-left:2%;'>" . $row['id_pubblicazione'] . "</div>";
+            			echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a title='Change this preprint' style='color:#007897;' href='./edit.php?id=" . $row['id_pubblicazione'] . "&r=" . $row['uid'] . "' onclick='window.open(this.href); return false'>edit</a></div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
             		}else{
-            			echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a title='Change this preprint' style='color:#007897;' href='./pdf_archived/" . $row['Filename'] . "' onclick='window.open(this.href); return false'>view</a> (Archived)</div><div style='margin-left:2%;'>" . $row['id_pubblicazione'] . "</div>";
+            			echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a title='Change this preprint' style='color:#007897;' href='./pdf_archived/" . $row['Filename'] . "' onclick='window.open(this.href); return false'>view</a> (Archived)</div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
             		}
             	}else{
             		if (file_exists("./pdf/" . $row['Filename'])) {
-                		echo "<p><h1>Id of publication:</h1></p><div style='margin-left:2%;'>" . $row['id_pubblicazione'] . "</div>";
+                		echo "<p><h1>Id of publication:</h1></p><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
                 	}else{
-                		echo "<p><h1>Id of publication:</h1></p><div style='float:right;'>(Archived)</div><div style='margin-left:2%;'>" . $row['id_pubblicazione'] . "</div>";
+                		echo "<p><h1>Id of publication:</h1></p><div style='float:right;'>(Archived)</div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
                 	}
                 }
             }
         }
-        echo "<p><h1>Title:</h1></p><div style='margin-left:2%; margin-right:2%;'>" . stripslashes($row['titolo']) . "</div>";
-        echo "<p><h1>Date of publication:</h1></p><div style='margin-left:2%; margin-right:2%;'>" . stripslashes($row['data_pubblicazione']) . "</div>";
-        echo "<p><h1>Authors:</h1></p><div style='margin-left:2%; margin-right:2%;'>" . stripslashes($row['autori']) . "</div>";
-        echo "<p><h1>Journal reference:</h1></p><div style='margin-left:2%; margin-right:2%;'>" . stripslashes($row['referenze']) . "</div>";
-        echo "<p><h1>Comments:</h1></p><div style='margin-left:2%; margin-right:2%;'>" . stripslashes($row['commenti']) . "</div>";
-        echo "<p><h1>Category:</h1></p><div style='margin-left:2%; margin-right:2%;'>" . stripslashes($row['categoria']) . "</div>";
-        echo "<p><h1>Abstract:</h1></p><div style='margin-left:2%; margin-right:2%;'>" . stripslashes($row['abstract']) . "</div>";
+        echo "<p><h1>Title:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . stripslashes($row['titolo']) . "</div>";
+        echo "<p><h1>Date of publication:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . stripslashes($row['data_pubblicazione']) . "</div>";
+        echo "<p><h1>Authors:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . stripslashes($row['autori']) . "</div>";
+        echo "<p><h1>Journal reference:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . stripslashes($row['referenze']) . "</div>";
+        echo "<p><h1>Comments:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . stripslashes($row['commenti']) . "</div>";
+        echo "<p><h1>Category:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . stripslashes($row['categoria']) . "</div>";
+        echo "<p><h1>Abstract:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . stripslashes($row['abstract']) . "</div>";
         $na = $row['Filename'];
         $na = substr($na, -3, 3);
         #controllo se il file é un pdf
@@ -559,9 +559,9 @@ function searchpreprint() {
         } else {
             if ($_GET['w'] == "1") {
             	if (file_exists("./pdf/" . $row['Filename'])) {
-                	echo "<p><h1>document:</h1></p><div style='margin-left:2%; margin-right:2%;'><a style='color:#007897;' href=./pdf/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>LINK</a> (On page view disabled for this file)</div>";
+                	echo "<p><h1>document:</h1></p><div style='margin-left:1%; margin-right:1%;'><a style='color:#007897;' href=./pdf/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>LINK</a> (On page view disabled for this file)</div>";
                 }else{
-                	echo "<p><h1>document:</h1></p><div style='margin-left:2%; margin-right:2%;'><a style='color:#007897;' href=./pdf_archived/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>LINK</a></div>";
+                	echo "<p><h1>document:</h1></p><div style='margin-left:1%; margin-right:1%;'><a style='color:#007897;' href=./pdf_archived/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>LINK</a></div>";
                 }
             }
         }
@@ -741,35 +741,35 @@ function filtropreprint() {
     while ($row = mysql_fetch_array($result)) {
         $i++;
         if ($cred == 1) {
-            echo "<h1>" . $i . ".<br/></h1><div align='left' style='width:90%;'>";
+            echo "<h1>" . $i . ".<br/></h1><div align='left' style='width:98%;'>";
             if ($_GET['w'] == "0") {
-                echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./pdf/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a>&nbsp&nbsp&nbsp<a title='Change this preprint' style='color:#007897;' href='./manual_edit.php?id=" . $row['id_pubblicazione'] . "' onclick='window.open(this.href); return false'>edit</a></div><div style='margin-left:2%;'>" . $row['id_pubblicazione'] . "</div>";
+                echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./pdf/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a>&nbsp&nbsp&nbsp<a title='Change this preprint' style='color:#007897;' href='./manual_edit.php?id=" . $row['id_pubblicazione'] . "' onclick='window.open(this.href); return false'>edit</a></div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
             } else {
-                echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a title='Change this preprint' style='color:#007897;' href='./manual_edit.php?id=" . $row['id_pubblicazione'] . "' onclick='window.open(this.href); return false'>edit</a></div><div style='margin-left:2%;'>" . $row['id_pubblicazione'] . "</div>";
+                echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a title='Change this preprint' style='color:#007897;' href='./manual_edit.php?id=" . $row['id_pubblicazione'] . "' onclick='window.open(this.href); return false'>edit</a></div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
             }
         } else {
-            echo "<h1>" . $i . ".<br/></h1><div align='left' style='width:90%;'>";
+            echo "<h1>" . $i . ".<br/></h1><div align='left' style='width:98%;'>";
             if ($_GET['w'] == "0") {
             	if ($_SESSION['nome']." (".$_SESSION['uid'].")" == $row['uid'] && $row['uid'] != ""){
-            		echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./pdf/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a>&nbsp&nbsp&nbsp<a title='Change this preprint' style='color:#007897;' href='./edit.php?id=" . $row['id_pubblicazione'] . "&r=" . $row['uid'] . "' onclick='window.open(this.href); return false'>edit</a></div><div style='margin-left:2%;'>" . $row['id_pubblicazione'] . "</div>";
+            		echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./pdf/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a>&nbsp&nbsp&nbsp<a title='Change this preprint' style='color:#007897;' href='./edit.php?id=" . $row['id_pubblicazione'] . "&r=" . $row['uid'] . "' onclick='window.open(this.href); return false'>edit</a></div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
             	}else{
-                	echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./pdf/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a></div><div style='margin-left:2%;'>" . $row['id_pubblicazione'] . "</div>";
+                	echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./pdf/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a></div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
                 }
             } else {
             	if ($_SESSION['nome']." (".$_SESSION['uid'].")" == $row['uid'] && $row['uid'] != ""){
-            		echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a title='Change this preprint' style='color:#007897;' href='./edit.php?id=" . $row['id_pubblicazione'] . "&r=" . $row['uid'] . "' onclick='window.open(this.href); return false'>edit</a></div><div style='margin-left:2%;'>" . $row['id_pubblicazione'] . "</div>";
+            		echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a title='Change this preprint' style='color:#007897;' href='./edit.php?id=" . $row['id_pubblicazione'] . "&r=" . $row['uid'] . "' onclick='window.open(this.href); return false'>edit</a></div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
             	}else{
-                	echo "<p><h1>Id of publication:</h1></p><div style='margin-left:2%;'>" . $row['id_pubblicazione'] . "</div>";
+                	echo "<p><h1>Id of publication:</h1></p><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
                 }
             }
         }
-        echo "<p><h1>Title:</h1></p><div style='margin-left:2%; margin-right:2%;'>" . stripslashes($row['titolo']) . "</div>";
-        echo "<p><h1>Date of publication:</h1></p><div style='margin-left:2%; margin-right:2%;'>" . stripslashes($row['data_pubblicazione']) . "</div>";
-        echo "<p><h1>Authors:</h1></p><div style='margin-left:2%; margin-right:2%;'>" . stripslashes($row['autori']) . "</div>";
-        echo "<p><h1>Journal reference:</h1></p><div style='margin-left:2%; margin-right:2%;'>" . stripslashes($row['referenze']) . "</div>";
-        echo "<p><h1>Comments:</h1></p><div style='margin-left:2%; margin-right:2%;'>" . stripslashes($row['commenti']) . "</div>";
-        echo "<p><h1>Category:</h1></p><div style='margin-left:2%; margin-right:2%;'>" . stripslashes($row['categoria']) . "</div>";
-        echo "<p><h1>Abstract:</h1></p><div style='margin-left:2%; margin-right:2%;'>" . stripslashes($row['abstract']) . "</div>";
+        echo "<p><h1>Title:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . stripslashes($row['titolo']) . "</div>";
+        echo "<p><h1>Date of publication:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . stripslashes($row['data_pubblicazione']) . "</div>";
+        echo "<p><h1>Authors:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . stripslashes($row['autori']) . "</div>";
+        echo "<p><h1>Journal reference:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . stripslashes($row['referenze']) . "</div>";
+        echo "<p><h1>Comments:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . stripslashes($row['commenti']) . "</div>";
+        echo "<p><h1>Category:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . stripslashes($row['categoria']) . "</div>";
+        echo "<p><h1>Abstract:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . stripslashes($row['abstract']) . "</div>";
         $na = $row['Filename'];
         $na = substr($na, -3, 3);
         #controllo se il file é un pdf
@@ -780,7 +780,7 @@ function filtropreprint() {
             }
         } else {
             if ($_GET['w'] == "1") {
-                echo "<p><h1>document:</h1></p><div style='margin-left:2%; margin-right:2%;'><a style='color:#007897;' href=./pdf/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>LINK</a> (On page view disabled for this file)</div>";
+                echo "<p><h1>document:</h1></p><div style='margin-left:1%; margin-right:1%;'><a style='color:#007897;' href=./pdf/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>LINK</a> (On page view disabled for this file)</div>";
             }
         }
         echo "</div><hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
@@ -875,15 +875,15 @@ function leggipreprintarchiviati() {
         #recupero info e visualizzazione
         while ($row = mysql_fetch_array($result)) {
             $i++;
-            echo "<h1>" . $i . ".<br/></h1><div align='left' style='width:90%;'>";
-            echo "<p><h1>Id of pubblication:</h1></p><div style='margin-left:2%;'>" . $row['id_pubblicazione'] . "</div>";
-            echo "<p><h1>Title:</h1></p><div style='margin-left:2%; margin-right:2%;'>" . stripslashes($row['titolo']) . "</div>";
-            echo "<p><h1>Date of pubblication:</h1></p><div style='margin-left:2%; margin-right:2%;'>" . stripslashes($row['data_pubblicazione']) . "</div>";
-            echo "<p><h1>Authors:</h1></p><div style='margin-left:2%; margin-right:2%;'>" . stripslashes($row['autori']) . "</div>";
-            echo "<p><h1>Journal reference:</h1></p><div style='margin-left:2%; margin-right:2%;'>" . stripslashes($row['referenze']) . "</div>";
-            echo "<p><h1>Comments:</h1></p><div style='margin-left:2%; margin-right:2%;'>" . stripslashes($row['commenti']) . "</div>";
-            echo "<p><h1>Category:</h1></p><div style='margin-left:2%; margin-right:2%;'>" . stripslashes($row['categoria']) . "</div>";
-            echo "<p><h1>Abstract:</h1></p><div style='margin-left:2%; margin-right:2%;'>" . stripslashes($row['abstract']) . "</div>";
+            echo "<h1>" . $i . ".<br/></h1><div align='left' style='width:98%;'>";
+            echo "<p><h1>Id of pubblication:</h1></p><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
+            echo "<p><h1>Title:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . stripslashes($row['titolo']) . "</div>";
+            echo "<p><h1>Date of pubblication:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . stripslashes($row['data_pubblicazione']) . "</div>";
+            echo "<p><h1>Authors:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . stripslashes($row['autori']) . "</div>";
+            echo "<p><h1>Journal reference:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . stripslashes($row['referenze']) . "</div>";
+            echo "<p><h1>Comments:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . stripslashes($row['commenti']) . "</div>";
+            echo "<p><h1>Category:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . stripslashes($row['categoria']) . "</div>";
+            echo "<p><h1>Abstract:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . stripslashes($row['abstract']) . "</div>";
 
             echo "</div><hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
         }

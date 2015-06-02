@@ -173,16 +173,16 @@ function leggiupload($uid) {
     #recupero info e visualizzazione
     while ($row = mysql_fetch_array($result)) {
         $i++;
-        echo "<h1>" . $i . ".<br/></h1><div align='left' style='width:90%;'>";
-        echo "<p><h1>Id of pubblication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./pdf/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a>&nbsp&nbsp&nbsp<a title='Change this preprint' style='color:#007897;' href='./edit.php?id=" . $row['id_pubblicazione'] . "&r=" . $uid . "' onclick='window.open(this.href); return false'>edit</a></div><div style='margin-left:2%;'>" . $row['id_pubblicazione'] . "</div>";
-        #echo "<p><h1>Id of pubblication:</h1></p><div style='margin-left:2%;'>" . $row['id_pubblicazione'] . "</div>";
-        echo "<p><h1>Title:</h1></p><div style='margin-left:2%; margin-right:2%;'>" . stripslashes($row['titolo']) . "</div>";
-        echo "<p><h1>Date of pubblication:</h1></p><div style='margin-left:2%; margin-right:2%;'>" . stripslashes($row['data_pubblicazione']) . "</div>";
-        echo "<p><h1>Authors:</h1></p><div style='margin-left:2%; margin-right:2%;'>" . stripslashes($row['autori']) . "</div>";
-        echo "<p><h1>Journal reference:</h1></p><div style='margin-left:2%; margin-right:2%;'>" . stripslashes($row['referenze']) . "</div>";
-        echo "<p><h1>Comments:</h1></p><div style='margin-left:2%; margin-right:2%;'>" . stripslashes($row['commenti']) . "</div>";
-        echo "<p><h1>Category:</h1></p><div style='margin-left:2%; margin-right:2%;'>" . stripslashes($row['categoria']) . "</div>";
-        echo "<p><h1>Abstract:</h1></p><div style='margin-left:2%; margin-right:2%;'>" . stripslashes($row['abstract']) . "</div>";
+        echo "<h1>" . $i . ".<br/></h1><div align='left' style='width:98%;'>";
+        echo "<p><h1>Id of pubblication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./pdf/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a>&nbsp&nbsp&nbsp<a title='Change this preprint' style='color:#007897;' href='./edit.php?id=" . $row['id_pubblicazione'] . "&r=" . $uid . "' onclick='window.open(this.href); return false'>edit</a></div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
+        #echo "<p><h1>Id of pubblication:</h1></p><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
+        echo "<p><h1>Title:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . stripslashes($row['titolo']) . "</div>";
+        echo "<p><h1>Date of pubblication:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . stripslashes($row['data_pubblicazione']) . "</div>";
+        echo "<p><h1>Authors:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . stripslashes($row['autori']) . "</div>";
+        echo "<p><h1>Journal reference:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . stripslashes($row['referenze']) . "</div>";
+        echo "<p><h1>Comments:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . stripslashes($row['commenti']) . "</div>";
+        echo "<p><h1>Category:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . stripslashes($row['categoria']) . "</div>";
+        echo "<p><h1>Abstract:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . stripslashes($row['abstract']) . "</div>";
 
         echo "</div><hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
     }
@@ -259,7 +259,7 @@ function version_preprintd($id1) {
 #invio mail agli admin quando avviene un nuovo submit
 
 function sendmailadmin($uid, $idp){
-	mail("xhaferri@msn.com", "New preprint submitted by: " . $uid . " with id: ".$idp, "New preprint submitted by: " . $uid . " with id: ".$idp, "From: webmaster@{$_SERVER['SERVER_NAME']}\r\n" ."Reply-To: webmaster@{$_SERVER['SERVER_NAME']}\r\n" ."X-Mailer: PHP/" . phpversion());
+	mail("example@msn.com", "New preprint submitted by: " . $uid . " with id: ".$idp, "New preprint submitted by: " . $uid . " with id: ".$idp, "From: webmaster@{$_SERVER['SERVER_NAME']}\r\n" ."Reply-To: webmaster@{$_SERVER['SERVER_NAME']}\r\n" ."X-Mailer: PHP/" . phpversion());
 }
 
 ?>

@@ -40,9 +40,74 @@
                 return confirm("Upgrade preprint version?\n(It can not be undone)");
             }
         </script>
-
+	<script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [["$","$"],["\\(","\\)"]]
+        }
+      });
+    </script>
+    <script type="text/javascript"
+      src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML-full">
+    </script>
     </head>
     <body>
+    <script>
+    	//text area title
+	(function () {
+	window.UpdateMathtit = function (TeX) {
+	    //set the MathOutput HTML
+	    document.getElementById("titlediv").innerHTML = TeX;
+	    //reprocess the MathOutput Element
+	    MathJax.Hub.Queue(["Typeset",MathJax.Hub,"titlediv"]);
+	}
+	})();
+	//text area authors
+	(function () {
+	window.UpdateMathaut = function (TeX) {
+	    //set the MathOutput HTML
+	    document.getElementById("authordiv").innerHTML = TeX;
+	    //reprocess the MathOutput Element
+	    MathJax.Hub.Queue(["Typeset",MathJax.Hub,"authordiv"]);
+	}
+	})();
+	//text area journal
+	(function () {
+	window.UpdateMathjou = function (TeX) {
+	    //set the MathOutput HTML
+	    document.getElementById("journaldiv").innerHTML = TeX;
+	    //reprocess the MathOutput Element
+	    MathJax.Hub.Queue(["Typeset",MathJax.Hub,"journaldiv"]);
+	}
+	})();
+	//text area comments
+	(function () {
+	window.UpdateMathcom = function (TeX) {
+	    //set the MathOutput HTML
+	    document.getElementById("commentsdiv").innerHTML = TeX;
+	    //reprocess the MathOutput Element
+	    MathJax.Hub.Queue(["Typeset",MathJax.Hub,"commentsdiv"]);
+	}
+	})();
+	//text area category
+	(function () {
+	window.UpdateMathcat = function (TeX) {
+	    //set the MathOutput HTML
+	    document.getElementById("categorydiv").innerHTML = TeX;
+	    //reprocess the MathOutput Element
+	    MathJax.Hub.Queue(["Typeset",MathJax.Hub,"categorydiv"]);
+	}
+	})();
+	//text area abstract
+	(function () {
+	window.UpdateMathabs = function (TeX) {
+	    //set the MathOutput HTML
+	    document.getElementById("abstractdiv").innerHTML = TeX;
+	    //reprocess the MathOutput Element
+	    MathJax.Hub.Queue(["Typeset",MathJax.Hub,"abstractdiv"]);
+	}
+	})();
+    </script>
         <?php
         #importo file per utilizzare funzioni...
         require_once $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'authorization/sec_sess.php';
@@ -115,30 +180,63 @@
 				}
 			</script>
                 <form name='f1' action='edit.php?r=" . $_GET['r'] . "' method='POST' enctype='multipart/form-data'>
-                    <center><div><br/><h2>preprint informations</h2><h1>field with '*' are required</h1><br/><input type='reset' name='reset' value='Reset'><br/><br/>
-			    id of pubblication (not editable):<br/><br/>
-                            <textarea readonly style='width:65%; height:16px' name='id' id='textbox' class='textbox' placeholder='example of id: 0000.0000v1'>" . $ris[0] . "</textarea><br/><br/>
-                            data of pubblication (not editable):<br/><br/>
-                            <textarea readonly style='width:65%; height:16px' name='data' id='textbox' class='textbox' placeholder='example of data: 2011-12-30T10:37:35Z'>" . $ris[2] . "</textarea><br/><br/>
-                            *preprint title:<br/><br/>
-                            <textarea style='width:65%; height:16px' name='title' id='textbox' class='textbox' required placeholder='example of title: The geometric...' autofocus>" . $ris[1] . "</textarea><br/><br/>
-                            journal reference:<br/><br/>
-                            <textarea style='width:65%; height:16px' name='journal' id='textbox' class='textbox' placeholder='example of Journal: Numer. Linear Algebra...'>" . $ris[4] . "</textarea><br/><br/>
-                            comments:<br/><br/>
-                            <textarea style='width:65%; height:16px' name='comments' id='textbox' class='textbox' placeholder='example of comments: 10 pages...'>" . $ris[5] . "</textarea><br/><br/>
-                            *arXiv category:<br/><br/>
-                            <textarea style='width:65%; height:16px' name='category' id='textbox' class='textbox' required placeholder='example of category: math.NA...'>" . $ris[6] . "</textarea><br/><br/>
-                            *authors name:<br/><br/>
-                            <textarea style='width:65%; height:16px' name='author' id='textbox' class='textbox' required placeholder='example of author: Mario Rossi, Luca...'>" . $ris[3] . "</textarea><br/><br/>
-                            *abstract:<br/><br/>
-                            <textarea style='width:65%; height:300px' name='abstract' id='textbox' class='textbox' required placeholder='example of abstract: The geometric...'>" . $ris[7] . "</textarea><br/><br/>
-                            file to upload: <br/>
+                    <div style='margin-left:1%; margin-right:1%;'><div style='float:left; width:100%;'><center><br/><h2>preprint informations</h2><h1>field with '*' are required</h1><br/><input type='reset' name='reset' value='Reset'><br/><br/></center>
+			    <div style='font-weight: bold;'>id of pubblication (not editable):</div><br/>
+                            <textarea readonly style='width:49%;' name='id' id='textbox' class='textbox' placeholder='example of id: 0000.0000v1'>" . $ris[0] . "</textarea><br/><br/>
+                            <div style='font-weight: bold;'>data of pubblication (not editable):</div><br/>
+                            <textarea readonly style='width:49%;' name='data' id='textbox' class='textbox' placeholder='example of data: 2011-12-30T10:37:35Z'>" . $ris[2] . "</textarea><br/><br/>
+                            <div style='float:right; width:49%;'>
+	    				<div style='font-weight: bold;'>title preview:</div><br/>
+	    				<div id='titlediv'></div>
+	    			</div>
+                            <div style='font-weight: bold;'>*preprint title:</div><br/>
+                            <textarea style='width:49%;' name='title' id='textbox' class='textbox' required placeholder='example of title: The geometric...' autofocus onkeyup='UpdateMathtit(this.value)' maxlength='280'>" . $ris[1] . "</textarea><br/><br/>
+                            <div style='float:right; width:49%;'>
+	    				<div style='font-weight: bold;'>journal preview:</div><br/>
+	    				<div id='journaldiv'></div>
+	    			</div>
+                            <div style='font-weight: bold;'>journal reference:</div><br/>
+                            <textarea style='width:49%;' name='journal' id='textbox' class='textbox' placeholder='example of Journal: Numer. Linear Algebra...' onkeyup='UpdateMathjou(this.value)' maxlength='280'>" . $ris[4] . "</textarea><br/><br/>
+                            <div style='float:right; width:49%;'>
+	    				<div style='font-weight: bold;'>comments preview:</div><br/>
+	    				<div id='commentsdiv'></div>
+	    			</div>
+                            <div style='font-weight: bold;'>comments:</div><br/>
+                            <textarea style='width:49%;' name='comments' id='textbox' class='textbox' placeholder='example of comments: 10 pages...' onkeyup='UpdateMathcom(this.value)' maxlength='280'>" . $ris[5] . "</textarea><br/><br/>
+                            <div style='float:right; width:49%;'>
+	    				<div style='font-weight: bold;'>category preview:</div><br/>
+	    				<div id='categorydiv'></div>
+	    			</div>
+                            <div style='font-weight: bold;'>*category:</div><br/>
+                            <textarea style='width:49%;' name='category' id='textbox' class='textbox' required placeholder='example of category: math.NA...' onkeyup='UpdateMathcat(this.value)' maxlength='280'>" . $ris[6] . "</textarea><br/><br/>
+                            <div style='float:right; width:49%;'>
+	    				<div style='font-weight: bold;'>authors preview:</div><br/>
+	    				<div id='authordiv'></div>
+	    			</div>
+                            <div style='font-weight: bold;'>*authors name:</div><br/>
+                            <textarea style='width:49%;' name='author' id='textbox' class='textbox' required placeholder='example of author: Mario Rossi, Luca...' onkeyup='UpdateMathaut(this.value)' maxlength='280'>" . $ris[3] . "</textarea><br/><br/>
+                            <div style='float:right; width:49%;'>
+	    				<div style='font-weight: bold;'>abstract preview:</div><br/>
+	    				<div id='abstractdiv'></div>
+	    			</div>
+                            <div style='font-weight: bold;'>*abstract:</div><br/>
+                            <textarea style='width:49%; height:300px;' name='abstract' id='textbox' class='textbox' required placeholder='example of abstract: The geometric...' onkeyup='UpdateMathabs(this.value)'>" . $ris[7] . "</textarea><br/><br/><center>
+                            <div style='font-weight: bold;'>file to upload:</div>
                             <input type='hidden' name='MAX_FILE_SIZE' value='10000000'><br/>
                             <input type='file' name='fileToUpload' id='fileToUpload'><br/><br/>
                             <br/><input type='submit' name='b9' value='Remove' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmDelete()'/>
                             <input type='submit' name='b10' value='Upgrade' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmUpgrade()'/>
-                            <input type='submit' name='b11' value='Complete' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmInsert()'/><br/><br/>
-                            </form>";
+                            <input type='submit' name='b11' value='Complete' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmInsert()'/><br/><br/></center>
+                            </div></div></form>";
+                            echo "
+                            	<script>
+					UpdateMathtit('".addslashes($ris[1])."');
+					UpdateMathjou('".addslashes($ris[4])."');
+					UpdateMathcom('".addslashes($ris[5])."');
+					UpdateMathcat('".addslashes($ris[6])."');
+					UpdateMathaut('".addslashes($ris[3])."');
+					UpdateMathabs('".addslashes($ris[7])."');
+				</script>";
                 $target_file = $basedir . basename($_FILES["fileToUpload"]["name"]);
                 #bottone cancella
                 if (isset($_POST['b9'])) {
@@ -240,6 +338,6 @@
         echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
     }
     ?>
-</div><br/><br/></center>
+</div><br/><br/>
 </body>
 </html>

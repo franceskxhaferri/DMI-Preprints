@@ -36,6 +36,16 @@
                 return confirm("All unsaved information will be lost, exit?");
             }
         </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [["$","$"],["\\(","\\)"]]
+        }
+      });
+    </script>
+    <script type="text/javascript"
+      src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML-full">
+    </script>
     </head>
     <body>
         <?php
