@@ -143,7 +143,7 @@
                             <td><input type="submit" name="b1" value="Back" id='bottone_keyword' class='bottoni' onclick="return confirmExit()"/></td>
                         </tr>
                     </table><br/><a style='color:#007897;' href='http://arxiv.org/' onclick='window.open(this.href);
-                                    return false' title='arXiv'>arXiv.org</a>
+                            return false' title='arXiv'>arXiv.org</a>
                 </form></center><hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
             <?php
             if (sessioneavviata() == True) {

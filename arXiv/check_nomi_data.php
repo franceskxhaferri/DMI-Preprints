@@ -93,8 +93,10 @@ function searchfulltext() {
     }
     if ($_GET['st'] == "1") {
         $query = "SELECT *, MATCH (id_pubblicazione, titolo, data_pubblicazione, autori, referenze, commenti, categoria, abstract) AGAINST('*" . addslashes($_GET['ft']) . "*' IN BOOLEAN MODE) AS attinenza FROM PREPRINTS WHERE MATCH (id_pubblicazione, titolo, data_pubblicazione, autori, referenze, commenti, categoria, abstract) AGAINST ('*" . addslashes($_GET['ft']) . "*' IN BOOLEAN MODE) ORDER BY attinenza DESC";
+        $cat = "on currents";
     } else {
         $query = "SELECT *, MATCH (id_pubblicazione, titolo, data_pubblicazione, autori, referenze, commenti, categoria, abstract) AGAINST('*" . addslashes($_GET['ft']) . "*' IN BOOLEAN MODE) AS attinenza FROM PREPRINTS_ARCHIVIATI WHERE MATCH (id_pubblicazione, titolo, data_pubblicazione, autori, referenze, commenti, categoria, abstract) AGAINST ('*" . addslashes($_GET['ft']) . "*' IN BOOLEAN MODE) ORDER BY attinenza DESC";
+        $cat = "on archived";
     }
     #recupero pagina
     $p = $_GET['p'];
@@ -104,7 +106,7 @@ function searchfulltext() {
     $querytotale = mysql_query($query);
     $ristot = mysql_num_rows($querytotale);
     if ($ristot != 0) {
-        echo "FULLTEXT SEARCH '" . $_GET['ft'] . "' FOUND " . $ristot . " RESULTS(results ordered by pertinence)(results for page " . $_GET['rp'] . ")";
+        echo "FULLTEXT SEARCH '" . $_GET['ft'] . "' FOUND " . $ristot . " RESULTS(" . $cat . ")(results ordered by pertinence)(results for page " . $_GET['rp'] . ")";
     } else {
         echo "SEARCHED '" . ($_GET['ft']) . "' NOT FOUND!";
         echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
@@ -423,7 +425,7 @@ function searchpreprint() {
 	    	SELECT * FROM PREPRINTS_ARCHIVIATI WHERE categoria LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
 	    	SELECT * FROM PREPRINTS_ARCHIVIATI WHERE abstract LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION ";
                 $cat = "all records";
-                $cat3 = $cat3 . "included archived, ";
+                $cat3 = $cat3 . ", included archived, ";
             }
         }
     }
@@ -448,7 +450,7 @@ function searchpreprint() {
     if ($cat != "all records") {
         echo "SEARCH '" . $_GET['r'] . "' FOUND " . $ristot . " RESULTS(" . $cat3 . ")(results ordered by " . $orstr . ")(results for page " . $_GET['rp'] . ")";
     } else {
-        echo "SEARCH '" . $_GET['r'] . "' FOUND " . $ristot . " RESULTS(" . $cat . ")(results ordered by " . $orstr . ")(results for page " . $_GET['rp'] . ")";
+        echo "SEARCH '" . $_GET['r'] . "' FOUND " . $ristot . " RESULTS(" . $cat . $cat3 . ")(results ordered by " . $orstr . ")(results for page " . $_GET['rp'] . ")";
     }
     $npag = ceil($ristot / $risperpag);
     $query = $query . " ORDER BY " . $order . " LIMIT " . $limit . "," . $risperpag . "";
