@@ -110,17 +110,11 @@
                     window.location.reload()
                 }
             }
-            //controllo cookie pageview
+            //settaggio cookie pageview
             function checkCookie4() {
-                var pageview = getCookie("pageview");
-                if (pageview == "") {
-                    setCookie("pageview", "0", 1825);
-                    window.location.reload()
-                }
+                setCookie("pageview", "0", 1825);
+                window.location.reload()
             }
-        </script>
-        <script type="text/javascript">
-            javascript:checkCookie4();
         </script>
         <?php
         $valbotton = "Enable";
@@ -135,10 +129,14 @@
             $valbotton = "Disable";
         }
         #controllo cookie pageview
-        if ($_COOKIE['pageview'] == "0") {
-            $string = "Enable";
+        if ($_COOKIE['pageview'] == "") {
+            echo "<script>javascript:checkCookie4();</script>";
         } else {
-            $string = "Disable";
+            if ($_COOKIE['pageview'] == "0") {
+                $string = "Enable";
+            } else {
+                $string = "Disable";
+            }
         }
         ?>
     </head>
