@@ -70,6 +70,7 @@
                     alert("EXAMPLE OF USING BOOLEAN OPERATORS(full text search):\n'Milan Rome': this must be one of the two terms.\n'+Milan +Rome': must be present both terms.\n'+Milan Rome': there must be 'Milan' and possibly 'Rome'.\n'+Milan -Rome': there must be 'Milan' but not 'Rome'.\n'+Milan +(<Rome >Venice)': must be present or 'Milan' and 'Rome' or 'Milan' and 'Venice', but the records with 'Milan' and 'Venice' are of greater. ('<' Means less important, '>' means greater relevance).\n'''Milan Rome''': This must be the exact sequence 'Milan Rome'.\n");
                     setCookie("adv", "yes", 15);
                 }
+                window.scrollTo(0, 0);
             }
             //opzioni di visualizzazione
             function showHide2(id) {
@@ -84,7 +85,7 @@
             function checkCookie1() {
                 var adv = getCookie("opt");
                 if (adv == "") {
-                    alert("This settings use cookie, in this way your preferences will remain stored in your browser.");
+                    alert("This settings use cookies, your preferences will remain stored in your browser.");
                     setCookie("opt", "yes", 15);
                 }
             }
@@ -107,6 +108,17 @@
                     window.location.reload()
                 } else {
                     setCookie("pageview", "0", 1825);
+                    window.location.reload()
+                }
+            }
+            //cookie searchbar
+            function checkCookie5() {
+                var pageview = getCookie("searchbar");
+                if (pageview == "0") {
+                    setCookie("searchbar", "1", 1825);
+                    window.location.reload()
+                } else {
+                    setCookie("searchbar", "0", 1825);
                     window.location.reload()
                 }
             }
@@ -137,6 +149,12 @@
             } else {
                 $string = "Disable";
             }
+        }
+        #controllo cookie searchbar
+        if ($_COOKIE['searchbar'] == "0") {
+            $string2 = "Enable";
+        } else {
+            $string2 = "Disable";
         }
         ?>
     </head>
@@ -196,39 +214,124 @@
             echo $str1;
             ?>
         </div><center>
-        Visualization options: <input type="button" value="Show/Hide" onclick="javascript:showHide2(opt);"/>
+        Settings: <input type="button" value="Show/Hide" onclick="javascript:showHide2(opt);"/>
         To see <a style='color:#007897;' href="archived_preprints.php" onclick='window.open(this.href);
                 return false'>archived</a>(old publications)<br/>
         <div hidden id="opt"><br/>
-            Enable/Disable MathJax:
-            <input type="button" value="<?php echo $valbotton; ?>" onclick="javascript:checkCookie2();" id="bottone_keyword" class="bottoni" style="width:40px;"/> 
-            Enable/Disable on page view:
-            <input type="button" value="<?php echo $string; ?>" onclick="javascript:checkCookie3();" id="bottone_keyword" class="bottoni" style="width:40px;"/>
+            <table>
+                </tr>
+                <td>Enable/Disable float Search Bar:&nbsp</td>
+                <td><input type="button" value="<?php echo $string2; ?>" onclick="javascript:checkCookie5();" style="width:50px;"/></td>
+                </tr>
+                <tr>
+                    <td>Enable/Disable MathJax:</td>
+                    <td><input type="button" value="<?php echo $valbotton; ?>" onclick="javascript:checkCookie2();" style="width:50px;"/></td>
+                </tr>
+                <td>Enable/Disable on Page View:</td>
+                <td><input type="button" value="<?php echo $string; ?>" onclick="javascript:checkCookie3();" style="width:50px;"/></td>
+                </tr>
+            </table>
         </div>
-        <br/><font color="#007897">Keyword search</font>
-        <div style="height:30px;">
-            <form name="f4" action="view_preprints.php" method="GET">
-                <input type="text" name="p" value="1" hidden>
-                Advanced search options:
-                <input type="button" value="Show/Hide" onclick="javascript:showHide(adv);"/>
+        <?php
+        if ($_COOKIE['searchbar'] == "1" or ! isset($_COOKIE['searchbar'])) {
+            #search bar
+            echo "<div style='width:100%; padding: 10px; position: fixed; bottom: 0px;'>
+		    	<form name='f3' action='view_preprints.php' method='GET'>
+		        <input type='button' value='More' onclick='javascript:showHide(adv);'/>
+		        <select name='f'>
+		            <option value='all' selected='selected'>All preprint:</option>
+		            <option value='author'>Authors:</option>
+		            <option value='category'>Category:</option>
+		            <option value='year'>Year:</option>
+		            <option value='id'>Identifier(ID):</option>
+		        </select>
+		        <input type='search' autocomplete = 'on' style='width:20%;' name='r' placeholder='Author name, part, etc.' value='" . $_GET['r'] . "'/>
+		    <input type='submit' name='s' value='Send'/>
+		    <input type='text' name='o' value='dated' hidden>
+		    </form></div>
+		    <form name='f4' action='view_preprints.php' method='GET'>
+        <div id='adv' hidden><br/>
+        <font color='#007897'>Advanced search:</font><br/>
+        	<div style='height:30px;'>
                 Filter by
-                <select name="f">
-                    <option value="all" selected="selected">All preprint:</option>
-                    <option value="author">Authors:</option>
-                    <option value="category">Category:</option>
-                    <option value="year">Year:</option>
-                    <option value="id">Identifier(ID):</option>
+                <select name='f'>
+                    <option value='all' selected='selected'>All preprint:</option>
+                    <option value='author'>Authors:</option>
+                    <option value='category'>Category:</option>
+                    <option value='year'>Year:</option>
+                    <option value='id'>Identifier(ID):</option>
                 </select>
-                <input type="search" autocomplete = "on" style="width:15%;" name="r" placeholder="Author name, part, etc." value="<?php echo $_GET['r']; ?>"/>
-            <input type="submit" name="s" value="Send"/></div>
-        <div id="adv" hidden>
+                <input type='search' autocomplete = 'on' style='width:40%;' name='r' placeholder='Author name, part, etc.' value='" . $_GET['r'] . "'/> <input type='submit' name='s' value='Send'/></div>";
+        } else {
+            #ricerca classica
+            echo "
+        	<br/><font color='#007897'>Keyword search</font>
+        	<div style='height:30px;'>
+            	<form name='f4' action='view_preprints.php' method='GET'>
+                <input type='text' name='p' value='1' hidden>
+                Advanced search:
+                <input type='button' value='Show/Hide' onclick='javascript:showHide(adv);'/>
+                Filter by
+                <select name='f'>
+                    <option value='all' selected='selected'>All preprint:</option>
+                    <option value='author'>Authors:</option>
+                    <option value='category'>Category:</option>
+                    <option value='year'>Year:</option>
+                    <option value='id'>Identifier(ID):</option>
+                </select>
+                <input type='search' autocomplete = 'on' style='width:20%;' name='r' placeholder='Author name, part, etc.' value='" . $_GET['r'] . "'/>
+            <input type='submit' name='s' value='Send'/></div>
+            <div id='adv' hidden>";
+        }
+        ?>
+        <div style="height:30px;">
+            Reset selections: <input type="reset" name="reset" value="Reset">&nbsp&nbsp
+            Years restrictions: 
+            until <input type="text" name="year1" style="width:35px" placeholder="Last">
+            , or from <input type="text" name="year2" style="width:35px" placeholder="First">
+            to <input type="text" name="year3" style="width:35px" placeholder="Last">
+            &nbsp&nbspResults for page: 
+            <select name="rp">
+                <option value="5" selected="selected">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+            </select>
+        </div>
+        <div>
+            Search on:
+            <label><input type="checkbox" name="d" value="1">Archived</label>
+            <label><input type="checkbox" name="all" value="1">Record</label>
+            <label><input type="checkbox" name="h" value="1">Author</label>
+            <label><input type="checkbox" name="t" value="1">Title</label>
+            <label><input type="checkbox" name="a" value="1">Abstract</label>
+            <label><input type="checkbox" name="e" value="1">Date</label>
+            <label><input type="checkbox" name="y" value="1">Category</label>
+            <label><input type="checkbox" name="c" value="1">Comments</label>
+            <label><input type="checkbox" name="j" value="1">Journal-ref</label>
+            <label><input type="checkbox" name="i" value="1">ID</label>
+        </div>
+        <div>Order results by:
+            <label><input type="radio" name="o" value="dated" checked>Date (D)</label>
+            <label><input type="radio" name="o" value="datec">Date (I)</label>
+            <label><input type="radio" name="o" value="idd">Identifier (D)</label>
+            <label><input type="radio" name="o" value="idc">Identifier (I)</label>
+            <label><input type="radio" name="o" value="named">Author-name (D)</label>
+            <label><input type="radio" name="o" value="namec">Author-name (I)</label>
+        </div><br/>
+    </form>
+    <div>
+        <form name="f4" action="view_preprints.php" method="GET">
+            <font color="#007897">Full text search: (<a style='color:#007897;' onclick='window.open(this.href);
+                    return false' href="http://en.wikipedia.org/wiki/Full_text_search">info</a>)</font><br/>
             <div style="height:30px;">
+                Search: <input type="search" autocomplete = "on" style="width:50%;" name="ft" placeholder="Insert phrase, name, keyword, etc." value="<?php echo $_GET['ft']; ?>"/>
+                <input type="submit" name="go" value="Send"/></div>
+            <div style="height:20px;">
                 Reset selections: <input type="reset" name="reset" value="Reset">&nbsp&nbsp
-                Years restrictions: 
-                until <input type="text" name="year1" style="width:35px" placeholder="Last">
-                , or from <input type="text" name="year2" style="width:35px" placeholder="First">
-                to <input type="text" name="year3" style="width:35px" placeholder="Last">
-                &nbsp&nbspResults for page: 
+                Results for page: 
                 <select name="rp">
                     <option value="5" selected="selected">5</option>
                     <option value="10">10</option>
@@ -236,102 +339,59 @@
                     <option value="20">20</option>
                     <option value="25">25</option>
                     <option value="50">50</option>
-                </select>
+                </select>&nbsp&nbsp
+                Search on: 
+                <label><input type="radio" name="st" value="1" checked>Currents</label>
+                <label><input type="radio" name="st" value="0">Archived</label>
             </div>
-            <div style="float:left; width:37%; height:50px;" align="right">
-                Search on:<br/></div>
-            <div style="float:right; width:63%; height:50px;" align="left">
-                <label><input type="checkbox" name="d" value="1">Include-archived</label>
-                <label><input type="checkbox" name="all" value="1">Record</label>
-                <label><input type="checkbox" name="h" value="1">Author</label>
-                <label><input type="checkbox" name="t" value="1">Title</label>
-                <label><input type="checkbox" name="a" value="1">Abstract</label><br/>
-                <label><input type="checkbox" name="e" value="1">Date</label>
-                <label><input type="checkbox" name="y" value="1">Category</label>
-                <label><input type="checkbox" name="c" value="1">Comments</label>
-                <label><input type="checkbox" name="j" value="1">Journal-ref</label>
-                <label><input type="checkbox" name="i" value="1">ID</label>
-            </div>
-            <div style="float:right; width:100%; height:30px;" align="center">Order by:
-                <label><input type="radio" name="o" value="dated" checked>Date(D)</label>
-                <label><input type="radio" name="o" value="datec">Date(I)</label>
-                <label><input type="radio" name="o" value="idd">ID(D)</label>
-                <label><input type="radio" name="o" value="idc">ID(I)</label>
-                <label><input type="radio" name="o" value="named">Name(D)</label>
-                <label><input type="radio" name="o" value="namec">Name(I)</label>
-            </div><br/><br/>
-            </form>
-            <div>
-                <form name="f4" action="view_preprints.php" method="GET">
-                    <input type="text" name="p" value="1" hidden>
-                    <font color="#007897">Full text search (<a style='color:#007897;' onclick='window.open(this.href);
-                            return false' href="http://en.wikipedia.org/wiki/Full_text_search">info</a>)</font><br/>
-                    <div style="height:30px;">
-                        Search: <input type="search" autocomplete = "on" style="width:43%;" name="ft" placeholder="Insert phrase, name, keyword, etc." value="<?php echo $_GET['ft']; ?>"/>
-                        <input type="submit" name="go" value="Send"/></div>
-                    <div style="height:20px;">
-                        Reset selections: <input type="reset" name="reset" value="Reset">&nbsp&nbsp
-                        Results for page: 
-                        <select name="rp">
-                            <option value="5" selected="selected">5</option>
-                            <option value="10">10</option>
-                            <option value="15">15</option>
-                            <option value="20">20</option>
-                            <option value="25">25</option>
-                            <option value="50">50</option>
-                        </select>&nbsp&nbsp
-                        Search on: 
-                        <label><input type="radio" name="st" value="1" checked>Currents</label>
-                        <label><input type="radio" name="st" value="0">Archived</label>
-                    </div>
-                </form>
-            </div>
-        </div>
+        </form>
     </div>
-    <?php
-    echo "<center><br/><a style='text-decoration: none;' href='javascript:FinePagina()'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8595;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><center>";
-    #ricerca full text
-    if (isset($_GET['go']) && $_GET['go'] != "") {
-        searchfulltext();
+</div>
+</div>
+<?php
+echo "<center><br/><a style='text-decoration: none;' href='javascript:FinePagina()'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8595;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><center>";
+#ricerca full text
+if (isset($_GET['go']) && $_GET['go'] != "") {
+    searchfulltext();
+    echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'>&nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><br/>";
+}
+#ricerca normale
+if (isset($_GET['s']) && $_GET['s'] != "") {
+    if (!is_numeric($_GET['year2']) && is_numeric($_GET['year3'])) {
+        echo '<script type="text/javascript">alert("YEAR NOT VALID!(insert both years)");</script>';
+        #funzione lettura e filtro preprint
+        filtropreprint();
         echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'>&nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><br/>";
-    }
-    #ricerca normale
-    if (isset($_GET['s']) && $_GET['s'] != "") {
-        if (!is_numeric($_GET['year2']) && is_numeric($_GET['year3'])) {
+    } else {
+        if (!is_numeric($_GET['year3']) && is_numeric($_GET['year2'])) {
             echo '<script type="text/javascript">alert("YEAR NOT VALID!(insert both years)");</script>';
             #funzione lettura e filtro preprint
             filtropreprint();
             echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'>&nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><br/>";
         } else {
-            if (!is_numeric($_GET['year3']) && is_numeric($_GET['year2'])) {
-                echo '<script type="text/javascript">alert("YEAR NOT VALID!(insert both years)");</script>';
+            if ($_GET['t'] == 1 or $_GET['a'] == 1 or $_GET['c'] == 1 or $_GET['j'] == 1 or $_GET['h'] == 1 or $_GET['y'] == 1 or $_GET['all'] == 1 or $_GET['d'] == 1 or $_GET['e'] == 1 or $_GET['i'] == 1 or is_numeric($_GET['year1']) or is_numeric($_GET['year2']) or is_numeric($_GET['year3'])) {
+                searchpreprint();
+                echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'>&nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><br/>";
+            } else {
                 #funzione lettura e filtro preprint
                 filtropreprint();
                 echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'>&nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><br/>";
-            } else {
-                if ($_GET['t'] == 1 or $_GET['a'] == 1 or $_GET['c'] == 1 or $_GET['j'] == 1 or $_GET['h'] == 1 or $_GET['y'] == 1 or $_GET['all'] == 1 or $_GET['d'] == 1 or $_GET['e'] == 1 or $_GET['i'] == 1 or is_numeric($_GET['year1']) or is_numeric($_GET['year2']) or is_numeric($_GET['year3'])) {
-                    searchpreprint();
-                    echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'>&nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><br/>";
-                } else {
-                    #funzione lettura e filtro preprint
-                    filtropreprint();
-                    echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'>&nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><br/>";
-                }
-            }
-        }
-    } else {
-        if (($_GET['t'] == 1 or $_GET['a'] == 1 or $_GET['c'] == 1 or $_GET['j'] == 1 or $_GET['h'] == 1 or $_GET['y'] == 1 or $_GET['all'] == 1 or $_GET['d'] == 1 or $_GET['e'] == 1 or $_GET['i'] == 1 or is_numeric($_GET['year1']) or is_numeric($_GET['year2']) or is_numeric($_GET['year3'])) && $_GET['go'] != "Send") {
-            searchpreprint();
-            echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'>&nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><br/>";
-        } else {
-            if ($_GET['go'] != "Send") {
-                #funzione lettura e filtro preprint
-                filtropreprint();
-                echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><br/>";
             }
         }
     }
-    ?>
-</div>
+} else {
+    if (($_GET['t'] == 1 or $_GET['a'] == 1 or $_GET['c'] == 1 or $_GET['j'] == 1 or $_GET['h'] == 1 or $_GET['y'] == 1 or $_GET['all'] == 1 or $_GET['d'] == 1 or $_GET['e'] == 1 or $_GET['i'] == 1 or is_numeric($_GET['year1']) or is_numeric($_GET['year2']) or is_numeric($_GET['year3'])) && $_GET['go'] != "Send") {
+        searchpreprint();
+        echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'>&nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><br/>";
+    } else {
+        if ($_GET['go'] != "Send") {
+            #funzione lettura e filtro preprint
+            filtropreprint();
+            echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><br/>";
+        }
+    }
+}
+?>
+</div><br/><br/>
 </body>
 </html>
