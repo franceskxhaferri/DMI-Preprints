@@ -121,7 +121,7 @@
                                 <header id="header">
                                     <h1><a href="#" id="logo">DMI Papers</a></h1>
                                     <nav id="nav">
-                                        <a href='./view_preprints.php?p=1&w=0'>Publications</a>
+                                        <a href='./view_preprints.php'>Publications</a>
                                         <a href="./reserved.php" class="current-page-item">Reserved Area</a>
                                     </nav>
                                 </header>
@@ -148,7 +148,7 @@
                         <a style="height:17px; color:white;" href="./uploaded.php?p=1" id="bottone_keyword" class="bottoni">My upload</a>
                     </div>
                     <div style="float:left; margin-left:0.5%;">
-                        <a style="height:17px; color:white;" href="./archived_preprints.php?p=1" id="bottone_keyword" class="bottoni">Archived section</a>
+                        <a style="height:17px; color:white;" href="./archived_preprints.php" id="bottone_keyword" class="bottoni">Archived section</a>
                     </div>
                     <div style="float:left; margin-left:0.5%;">
                         <a style="height:17px; color:white;" href="./approve_preprints.php" id="bottone_keyword" class="bottoni">Check section</a>

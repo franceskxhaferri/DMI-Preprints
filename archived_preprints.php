@@ -61,7 +61,7 @@
             $nav2 = "<header id='header'>
                                     <h1><a href='#' id='logo'>DMI Papers</a></h1>
                                     <nav id='nav'>
-                                        <a href='./view_preprints.php?p=1&w=0'>Publications</a>
+                                        <a href='./view_preprints.php'>Publications</a>
                                         <a href='./reserved.php' class='current-page-item'>Reserved Area</a>
                                     </nav>
                                 </header>";
@@ -72,7 +72,7 @@
             $nav2 = "<header id='header'>
                                     <h1><a href='#' id='logo'>DMI Papers</a></h1>
                                     <nav id='nav'>
-                                        <a href='./view_preprints.php?p=1&w=0' class='current-page-item'>Publications</a>
+                                        <a href='./view_preprints.php' class='current-page-item'>Publications</a>
                                         <a href='./reserved.php'>Reserved Area</a>
                                     </nav>
                                 </header>";

@@ -26,13 +26,14 @@
             webshims.setOptions('forms-ext', {types: 'date'});
             webshims.polyfill('forms forms-ext');
         </script>
-
         <script type="text/javascript">
+            //scorri pagina
             function FinePagina() {
                 var w = window.screen.width;
                 var h = window.screen.height;
                 window.scrollTo(w * h, w * h)
             }
+            //ricerca avanzata
             function showHide(id) {
                 if (id.style.display != 'block') {
                     id.style.display = 'block';
@@ -41,12 +42,14 @@
                     id.style.display = 'none';
                 }
             }
+            //setta cookie
             function setCookie(cname, cvalue, exdays) {
                 var d = new Date();
                 d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
                 var expires = "expires=" + d.toGMTString();
                 document.cookie = cname + "=" + cvalue + "; " + expires;
             }
+            //legge cookie
             function getCookie(cname) {
                 var name = cname + "=";
                 var ca = document.cookie.split(';');
@@ -68,6 +71,23 @@
                     setCookie("adv", "yes", 15);
                 }
             }
+            //opzioni di visualizzazione
+            function showHide2(id) {
+                if (id.style.display != 'block') {
+                    id.style.display = 'block';
+                    checkCookie1();
+                } else {
+                    id.style.display = 'none';
+                }
+            }
+            //avviso cookie
+            function checkCookie1() {
+                var adv = getCookie("opt");
+                if (adv == "") {
+                    alert("This settings use cookie, in this way your preferences will remain stored in your browser.");
+                    setCookie("opt", "yes", 15);
+                }
+            }
             //cookie mathjax
             function checkCookie2() {
                 var math = getCookie("math");
@@ -79,7 +99,29 @@
                     window.location.reload()
                 }
             }
-        </script>       
+            //cookie pageview
+            function checkCookie3() {
+                var pageview = getCookie("pageview");
+                if (pageview == "0") {
+                    setCookie("pageview", "1", 1825);
+                    window.location.reload()
+                } else {
+                    setCookie("pageview", "0", 1825);
+                    window.location.reload()
+                }
+            }
+            //controllo cookie pageview
+            function checkCookie4() {
+                var pageview = getCookie("pageview");
+                if (pageview == "") {
+                    setCookie("pageview", "0", 1825);
+                    window.location.reload()
+                }
+            }
+        </script>
+        <script type="text/javascript">
+            javascript:checkCookie4();
+        </script>
         <?php
         $valbotton = "Enable";
         #controllo cookie mathjax
@@ -92,19 +134,16 @@
         		</script>";
             $valbotton = "Disable";
         }
+        #controllo cookie pageview
+        if ($_COOKIE['pageview'] == "0") {
+            $string = "Enable";
+        } else {
+            $string = "Disable";
+        }
         ?>
     </head>
     <body>
         <?php
-        if ($_GET['w'] != "0") {
-            $view = 0;
-            $upview = 1;
-            $string = "Disable";
-        } else {
-            $view = 1;
-            $upview = 0;
-            $string = "Enable";
-        }
         #importo file per utilizzare funzioni...
         require_once $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'authorization/sec_sess.php';
         include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/check_nomi_data.php');
@@ -116,7 +155,7 @@
             $nav = "<header id='header'>
                                     <h1><a href='#' id='logo'>DMI Papers</a></h1>
                                     <nav id='nav'>
-                                        <a href='./view_preprints.php?p=1&w=0' class='current-page-item'>Publications</a>
+                                        <a href='./view_preprints.php' class='current-page-item'>Publications</a>
                                         <a href='./reserved.php'>Reserved Area</a>
                                     </nav>
                                 </header>";
@@ -126,7 +165,7 @@
             $nav = "<header id='header'>
                                     <h1><a href='#' id='logo'>DMI Papers</a></h1>
                                     <nav id='nav'>
-                                        <a href='./view_preprints.php?p=1&w=0' class='current-page-item'>Publications</a>
+                                        <a href='./view_preprints.php' class='current-page-item'>Publications</a>
                                         <a href='./reserved.php'>Reserved Area</a>
                                     </nav>
                                 </header>";
@@ -136,7 +175,7 @@
             $nav = "<header id='header'>
                                     <h1><a href='#' id='logo'>DMI Papers</a></h1>
                                     <nav id='nav'>
-                                        <a href='./view_preprints.php?p=1&w=0' class='current-page-item'>Publications</a>
+                                        <a href='./view_preprints.php' class='current-page-item'>Publications</a>
                                         <a href='./reserved.php'>Reserved Area</a>
                                     </nav>
                                 </header>";
@@ -159,22 +198,19 @@
             echo $str1;
             ?>
         </div><center>
-        <form name="f5" action="<?php echo './view_preprints.php?p=' . $_GET['p'] . '&w=' . $view . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '&o=' . $_GET['o'] . '&t=' . $_GET['t'] . '&a=' . $_GET['a'] . '&c=' . $_GET['c'] . '&j=' . $_GET['j'] . '&d=' . $_GET['d'] . '&all=' . $_GET['all'] . '&h=' . $_GET['h'] . '&y=' . $_GET['y'] . '&e=' . $_GET['e'] . '&i=' . $_GET['i'] . '&rp=' . $_GET['rp'] . '&ft=' . $_GET['ft'] . '&go=' . $_GET['go'] . '&s=' . $_GET['s'] . '&year1=' . $_GET['year1'] . '&year2=' . $_GET['year2'] . '&year3=' . $_GET['year3'] . '&st=' . $_GET['st'] . ''; ?>" method="POST">
-            Visualization options: <input type="button" value="Show/Hide" onclick="javascript:showHide(opt);"/>
-            To see <a style='color:#007897;' href="archived_preprints.php?p=1" onclick='window.open(this.href);
-                    return false'>archived</a>(old publications)
-            <div hidden id="opt"><br/>
-                Enable/Disable MathJax:
-                <input type="button" value="<?php echo $valbotton; ?>" onclick="javascript:checkCookie2();" id="bottone_keyword" class="bottoni" style="width:40px;"/> 
-                Enable/Disable on page view:
-                <input type="submit" style="width:40px;" name="w" value="<?php echo $string; ?>" id="bottone_keyword" class="bottoni"/>
-            </div>
-        </form>
+        Visualization options: <input type="button" value="Show/Hide" onclick="javascript:showHide2(opt);"/>
+        To see <a style='color:#007897;' href="archived_preprints.php" onclick='window.open(this.href);
+                return false'>archived</a>(old publications)<br/>
+        <div hidden id="opt"><br/>
+            Enable/Disable MathJax:
+            <input type="button" value="<?php echo $valbotton; ?>" onclick="javascript:checkCookie2();" id="bottone_keyword" class="bottoni" style="width:40px;"/> 
+            Enable/Disable on page view:
+            <input type="button" value="<?php echo $string; ?>" onclick="javascript:checkCookie3();" id="bottone_keyword" class="bottoni" style="width:40px;"/>
+        </div>
         <br/><font color="#007897">Keyword search</font>
         <div style="height:30px;">
             <form name="f4" action="view_preprints.php" method="GET">
                 <input type="text" name="p" value="1" hidden>
-                <input type="text" name="w" value="<?php echo $upview; ?>" hidden>
                 Advanced search options:
                 <input type="button" value="Show/Hide" onclick="javascript:showHide(adv);"/>
                 Filter by
@@ -230,7 +266,6 @@
             <div>
                 <form name="f4" action="view_preprints.php" method="GET">
                     <input type="text" name="p" value="1" hidden>
-                    <input type="text" name="w" value="<?php echo $upview; ?>" hidden>
                     <font color="#007897">Full text search (<a style='color:#007897;' onclick='window.open(this.href);
                             return false' href="http://en.wikipedia.org/wiki/Full_text_search">info</a>)</font><br/>
                     <div style="height:30px;">

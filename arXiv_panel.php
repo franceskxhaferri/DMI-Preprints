@@ -47,7 +47,7 @@
                                 <header id="header">
                                     <h1><a href="#" id="logo">DMI Papers</a></h1>
                                     <nav id="nav">
-                                        <a href="./view_preprints.php?p=1&w=0">Publications</a>
+                                        <a href="./view_preprints.php">Publications</a>
                                         <a href="./reserved.php" class="current-page-item" class="current-page-item">Reserved Area</a>
                                     </nav>
                                 </header>
