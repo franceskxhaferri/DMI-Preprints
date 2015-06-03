@@ -116,8 +116,8 @@
             $nav = "<header id='header'>
                                     <h1><a href='#' id='logo'>DMI Papers</a></h1>
                                     <nav id='nav'>
-                                        <a href='view_preprints.php?p=1&w=0' class='current-page-item'>Publications</a>
-                                        <a href='reserved.php'>Reserved Area</a>
+                                        <a href='./view_preprints.php?p=1&w=0' class='current-page-item'>Publications</a>
+                                        <a href='./reserved.php'>Reserved Area</a>
                                     </nav>
                                 </header>";
         } else if ($_SESSION['logged_type'] === "user") {
@@ -126,8 +126,8 @@
             $nav = "<header id='header'>
                                     <h1><a href='#' id='logo'>DMI Papers</a></h1>
                                     <nav id='nav'>
-                                        <a href='view_preprints.php?p=1&w=0' class='current-page-item'>Publications</a>
-                                        <a href='reserved.php'>Reserved Area</a>
+                                        <a href='./view_preprints.php?p=1&w=0' class='current-page-item'>Publications</a>
+                                        <a href='./reserved.php'>Reserved Area</a>
                                     </nav>
                                 </header>";
         } else {
@@ -136,8 +136,8 @@
             $nav = "<header id='header'>
                                     <h1><a href='#' id='logo'>DMI Papers</a></h1>
                                     <nav id='nav'>
-                                        <a href='view_preprints.php?p=1&w=0' class='current-page-item'>Publications</a>
-                                        <a href='reserved.php'>Reserved Area</a>
+                                        <a href='./view_preprints.php?p=1&w=0' class='current-page-item'>Publications</a>
+                                        <a href='./reserved.php'>Reserved Area</a>
                                     </nav>
                                 </header>";
         }
@@ -159,7 +159,7 @@
             echo $str1;
             ?>
         </div><center>
-        <form name="f5" action="<?php echo 'view_preprints.php?p=' . $_GET['p'] . '&w=' . $view . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '&o=' . $_GET['o'] . '&t=' . $_GET['t'] . '&a=' . $_GET['a'] . '&c=' . $_GET['c'] . '&j=' . $_GET['j'] . '&d=' . $_GET['d'] . '&all=' . $_GET['all'] . '&h=' . $_GET['h'] . '&y=' . $_GET['y'] . '&e=' . $_GET['e'] . '&i=' . $_GET['i'] . '&rp=' . $_GET['rp'] . '&ft=' . $_GET['ft'] . '&go=' . $_GET['go'] . '&s=' . $_GET['s'] . '&year1=' . $_GET['year1'] . '&year2=' . $_GET['year2'] . '&year3=' . $_GET['year3'] . '&st=' . $_GET['st'] . ''; ?>" method="POST">
+        <form name="f5" action="<?php echo './view_preprints.php?p=' . $_GET['p'] . '&w=' . $view . '&r=' . $_GET['r'] . '&f=' . $_GET['f'] . '&o=' . $_GET['o'] . '&t=' . $_GET['t'] . '&a=' . $_GET['a'] . '&c=' . $_GET['c'] . '&j=' . $_GET['j'] . '&d=' . $_GET['d'] . '&all=' . $_GET['all'] . '&h=' . $_GET['h'] . '&y=' . $_GET['y'] . '&e=' . $_GET['e'] . '&i=' . $_GET['i'] . '&rp=' . $_GET['rp'] . '&ft=' . $_GET['ft'] . '&go=' . $_GET['go'] . '&s=' . $_GET['s'] . '&year1=' . $_GET['year1'] . '&year2=' . $_GET['year2'] . '&year3=' . $_GET['year3'] . '&st=' . $_GET['st'] . ''; ?>" method="POST">
             Visualization options: <input type="button" value="Show/Hide" onclick="javascript:showHide(opt);"/>
             To see <a style='color:#007897;' href="archived_preprints.php?p=1" onclick='window.open(this.href);
                     return false'>archived</a>(old publications)

@@ -67,8 +67,8 @@
                                 <header id="header">
                                     <h1><a href="#" id="logo">DMI Papers</a></h1>
                                     <nav id="nav">
-                                        <a href='view_preprints.php?p=1&w=0'>Publications</a>
-                                        <a href="reserved.php" class="current-page-item">Reserved Area</a>
+                                        <a href='./view_preprints.php?p=1&w=0'>Publications</a>
+                                        <a href="./reserved.php" class="current-page-item">Reserved Area</a>
                                     </nav>
                                 </header>
                             </div>
@@ -76,21 +76,18 @@
                     </div>
                 </div>
                 <div><center><br/><br/><h2>CHECK PREPRINTS</h2></center>
-                    <center><table>
-                            <?php
-                            if (isset($_GET['bb3'])) {
-                                echo "<tr><td  align='right' style='width:300px;'>Go to admin panel&nbsp&nbsp&nbsp</td>
-                            <form name='f1' action='modp.php' method='GET'>
-                                <td style='width:280px;'><input type='submit' name='b1' value='Back' id='bottone_keyword' class='bottoni'></td>
-                            </form></tr>";
-                            } else {
-                                echo "<tr><td  align='right' style='width:300px;'>Go to arXiv panel&nbsp&nbsp&nbsp</td>
-                            <form name='f1' action='arXiv_panel.php' method='GET'>
-                                <td style='width:280px;'><input type='submit' name='b1' value='Back' id='bottone_keyword' class='bottoni'></td>
-                            </form></tr>";
-                            }
-                            ?>
-                        </table></center>
+                    <center>
+                        <?php
+                        if (isset($_GET['bb3'])) {
+                            echo "
+                                Go to admin panel&nbsp&nbsp&nbsp
+                                <a style='height:17px; color:white;' href='./modp.php' id='bottone_keyword' class='bottoni'>Back</a><br/>";
+                        } else {
+                            echo "
+                                Go to arXiv panel&nbsp&nbsp&nbsp
+                                <a style='height:17px; color:white;' href='./arXiv_panel.php' id='bottone_keyword' class='bottoni'>Back</a><br/>";
+                        }
+                        ?>
                 </div><br/>
                 <div>
                     <?php

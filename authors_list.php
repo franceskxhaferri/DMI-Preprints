@@ -64,8 +64,8 @@
                                 <header id="header">
                                     <h1><a href="#" id="logo">DMI Papers</a></h1>
                                     <nav id="nav">
-                                        <a href='view_preprints.php?p=1&w=0'>Publications</a>
-                                        <a href="reserved.php" class="current-page-item">Reserved Area</a>
+                                        <a href='./view_preprints.php?p=1&w=0'>Publications</a>
+                                        <a href="./reserved.php" class="current-page-item">Reserved Area</a>
                                     </nav>
                                 </header>
                             </div>
@@ -74,15 +74,15 @@
                 </div>
                 <br/><div><center><br/><h2>AUTHORS LIST</h2></center>
                     <center>
-                        <form name="f1" action="arXiv_panel.php" method="GET">Go to arXiv panel 
-                            <input type="submit" name="b1" value="Back" id="bottone_keyword" class="bottoni"/></td></form></tr><tr><td align="center" colspan="3">
-                                <hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
-                                <form name="f2" action="authors_list.php" method="POST">
-                                    <label><input type="checkbox" name="insert" value="1" checked/>
-                                        Add author to list or search by name: </label>
-                                    <input type="search" style="width:300px;" id='textbox' class='textbox' autocomplete = "on" required name="txt1" placeholder="name1, name2, name3, name..." autofocus />
-                                    <input type="submit" name="b2" value="Insert/Search" style="width:80px;" id="bottone_keyword" class="bottoni"/>
-                                </form>
+                        Go to arXiv panel 
+                        <a style="height:17px; color:white;" href="./arXiv_panel.php" id="bottone_keyword" class="bottoni">Back</a><br>
+                        <hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
+                        <form name="f2" action="authors_list.php" method="POST">
+                            <label><input type="checkbox" name="insert" value="1" checked/>
+                                Add author to list or search by name: </label>
+                            <input type="search" style="width:300px;" id='textbox' class='textbox' autocomplete = "on" required name="txt1" placeholder="name1, name2, name3, name..." autofocus />
+                            <input type="submit" name="b2" value="Insert/Search" style="width:80px;" id="bottone_keyword" class="bottoni"/>
+                        </form>
                     </center>
                 </div>
                 <hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">

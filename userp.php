@@ -29,7 +29,7 @@
         <script type='text/javascript'>
             function confirmInsert()
             {
-                return confirm("All data are correct?");
+                return confirm("Are you sure?");
             }
             function confirmLogout()
             {
@@ -121,8 +121,8 @@
                                 <header id="header">
                                     <h1><a href="#" id="logo">DMI Papers</a></h1>
                                     <nav id="nav">
-                                        <a href='view_preprints.php?p=1&w=0'>Publications</a>
-                                        <a href="reserved.php" class="current-page-item">Reserved Area</a>
+                                        <a href='./view_preprints.php?p=1&w=0'>Publications</a>
+                                        <a href="./reserved.php" class="current-page-item">Reserved Area</a>
                                     </nav>
                                 </header>
                             </div>
@@ -140,22 +140,18 @@
                     <div style="width:390px;">
                         <div style="float:left; margin-left:0.5%;">
                             <form name="f1" action="userp.php" method="POST">
-                                <input type="submit" name="b1" value="Logout" id="botton_logout" class="bottoni" style="color: red;" onclick="return confirmLogout()">
+                                <input style="height:17px; color: red;" type="submit" name="b1" value="Logout" id="bottoni" class="bottoni" onclick="return confirmLogout()">
                             </form>
                         </div>
                         <div style="float:left; margin-left:0.5%;">
-                            <form name="f2" action="uploaded.php?p=1" method="POST">
-                                <input type="submit" name="b2" value="My upload" id="bottoni" class="bottoni">
-                            </form>
+                            <a style="height:17px; color:white;" href="./uploaded.php?p=1" id="bottoni" class="bottoni">My upload</a>
                         </div>
                         <div style="clear:both;"></div>
                     </div>
                 </div></center>
             <hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
-            <?php
-            ?>
             <form name="f3" action="userp.php" method="POST" enctype="multipart/form-data">
-                <center><div><br/><h2>Insert new preprint</h2><h1>field with "*" are required</h1><br/>
+                <center><div><br/><h2>Insert new paper</h2><h1>field with "*" are required</h1><br/>
                     <input type="reset" name="reset" value="Reset"/><br/><br/></center>
                 <div style="margin-left:1%; margin-right:1%;"><div style="float:left; width:100%;">
                         <div style="font-weight: bold;">*publication category:</div><br/>
@@ -205,7 +201,7 @@
                 <div style="font-weight: bold;">*PDF:<br/></div>
                 <input type="hidden" name="MAX_FILE_SIZE" value="10000000"><br/>
                 <input type="file" required name="fileToUpload" id="fileToUpload"><br/><br/>
-                <input type="submit" name="b3" value="Insert preprint" style='width:80px;' id='bottone_keyword' class='bottoni' onclick="return confirmInsert()"/><br/><br/></center>
+                <input type="submit" name="b3" value="Insert paper" style='width:80px;' id='bottone_keyword' class='bottoni' onclick="return confirmInsert()"/><br/><br/></center>
         </form>
         <?php
         $target_file = $basedir . basename($_FILES["fileToUpload"]["name"]);
@@ -245,7 +241,7 @@
                 #inserimento file nel database
                 sendmailadmin($_SESSION['nome'] . " (" . $_SESSION['uid'] . ")", $id);
                 #insertpdf($id, $fileType);
-                echo '<script type="text/javascript">alert("Preprint submitted correctly!\nAfter approvation go on uploaded section to edit your pubblications.");</script>';
+                echo '<script type="text/javascript">alert("Preprint submitted correctly!\nAfter approvation go on my upload to edit your pubblications.");</script>';
             } else {
                 echo '<script type="text/javascript">alert("Sorry, there was an error uploading your file!");</script>';
             }

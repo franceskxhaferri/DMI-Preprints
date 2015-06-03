@@ -29,15 +29,15 @@
         <script type='text/javascript'>
             function confirmDelete()
             {
-                return confirm("Delete this preprint?\n(It can not be undone)");
+                return confirm("Delete this publication?\n(It can not be undone)");
             }
             function confirmInsert()
             {
-                return confirm("Update preprint information?");
+                return confirm("Update publication information?\n(If you want to upload a new pdf use upgrade function)");
             }
             function confirmUpgrade()
             {
-                return confirm("Upgrade preprint version?\n(It can not be undone)");
+                return confirm("Upgrade publication to following version?\n(This is used for the uploading a new pdf, it can not be undone)");
             }
         </script>
         <script type="text/x-mathjax-config">
@@ -129,8 +129,8 @@
                                 <header id="header">
                                     <h1><a href="#" id="logo">DMI Papers</a></h1>
                                     <nav id="nav">
-                                        <a href='view_preprints.php?p=1&w=0'>Publications</a>
-                                        <a href="reserved.php" class="current-page-item">Reserved Area</a>
+                                        <a href='./view_preprints.php?p=1&w=0'>Publications</a>
+                                        <a href="./reserved.php" class="current-page-item">Reserved Area</a>
                                     </nav>
                                 </header>
                             </div>
@@ -180,7 +180,7 @@
 				}
 			</script>
                 <form name='f1' action='edit.php?r=" . $_GET['r'] . "' method='POST' enctype='multipart/form-data'>
-                    <div style='margin-left:1%; margin-right:1%;'><div style='float:left; width:100%;'><center><br/><h2>preprint informations</h2><h1>field with '*' are required</h1><br/><input type='reset' name='reset' value='Reset'><br/><br/></center>
+                    <div style='margin-left:1%; margin-right:1%;'><div style='float:left; width:100%;'><center><br/><h2>Publication informations</h2><h1>field with '*' are required</h1><br/><input type='reset' name='reset' value='Reset'><br/><br/></center>
 			    <div style='font-weight: bold;'>id of pubblication (not editable):</div><br/>
                             <textarea readonly style='width:49%;' name='id' id='textbox' class='textbox' placeholder='example of id: 0000.0000v1'>" . $ris[0] . "</textarea><br/><br/>
                             <div style='font-weight: bold;'>data of pubblication (not editable):</div><br/>
@@ -226,7 +226,7 @@
                             <input type='file' name='fileToUpload' id='fileToUpload'><br/><br/>
                             <br/><input type='submit' name='b9' value='Remove' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmDelete()'/>
                             <input type='submit' name='b10' value='Upgrade' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmUpgrade()'/>
-                            <input type='submit' name='b11' value='Complete' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmInsert()'/><br/><br/></center>
+                            <input type='submit' name='b11' value='Update' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmInsert()'/><br/><br/></center>
                             </div></div></form>";
                 echo "
                             	<script>
@@ -244,7 +244,7 @@
                     #eliminazione del preprint selezionato
                     delete_pdf($id1);
                     cancellaselected($id1);
-                    echo '<script type="text/javascript">alert("Preprint ' . $_POST['id'] . ' removed correctly!");</script>';
+                    echo '<script type="text/javascript">alert("Publication ' . $_POST['id'] . ' removed correctly!");</script>';
                     echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./uploaded.php">';
                 }
                 #bottone upgrade
@@ -281,7 +281,7 @@
                             #spostamento pdf
                             #inserimento nel database del file
                             insertpdf($info[0], $fileType);
-                            echo '<script type="text/javascript">alert("Preprint ' . $_POST['id'] . ' upgrated to ' . $info[0] . ' correctly!");</script>';
+                            echo '<script type="text/javascript">alert("Publication ' . $_POST['id'] . ' upgrated to ' . $info[0] . ' correctly!");</script>';
                             echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./uploaded.php">';
                         } else {
                             echo '<script type="text/javascript">alert("Error, file not uploaded!");</script>';
@@ -318,13 +318,13 @@
                             $fileType = $_FILES["fileToUpload"]["type"];
                             #inserimento nel database del file
                             insert_one_pdf($info[0], $fileType);
-                            echo '<script type="text/javascript">alert("Preprint ' . $_POST['id'] . ' updated correctly!");</script>';
+                            echo '<script type="text/javascript">alert("Publication ' . $_POST['id'] . ' updated correctly!");</script>';
                             echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./uploaded.php">';
                         } else {
                             echo '<script type="text/javascript">alert("Error, file not uploaded!");</script>';
                         }
                     } else {
-                        echo '<script type="text/javascript">alert("Preprint ' . $_POST['id'] . ' updated correctly!");</script>';
+                        echo '<script type="text/javascript">alert("Publication ' . $_POST['id'] . ' updated correctly!");</script>';
                         echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./uploaded.php">';
                     }
                 }

@@ -29,7 +29,7 @@
         <script type='text/javascript'>
             function confirmInsert()
             {
-                return confirm("All data are correct?");
+                return confirm("Are you sure?");
             }
             function confirmLogout()
             {
@@ -70,8 +70,8 @@
                                 <header id="header">
                                     <h1><a href="#" id="logo">DMI Papers</a></h1>
                                     <nav id="nav">
-                                        <a href='view_preprints.php?p=1&w=0'>Publications</a>
-                                        <a href="reserved.php" class="current-page-item">Reserved Area</a>
+                                        <a href='./view_preprints.php?p=1&w=0'>Publications</a>
+                                        <a href="./reserved.php" class="current-page-item">Reserved Area</a>
                                     </nav>
                                 </header>
                             </div>
@@ -79,9 +79,7 @@
                     </div>
                 </div>
             <center><div><br/>
-                    <form name="f1" action="<?php echo $ind; ?>" method="POST">
-                        Go back to new insertion: <input type="submit" name="b4" value="Back" id="bottoni" class="bottoni">
-                    </form>
+                    Go back to new insertion: <a style="color:white;" href="<?php echo $ind; ?>" id="bottoni" class="bottoni">Back</a>
                 </div>
                 <?php
                 #lettura preprint caricati

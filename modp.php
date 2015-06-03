@@ -121,8 +121,8 @@
                                 <header id="header">
                                     <h1><a href="#" id="logo">DMI Papers</a></h1>
                                     <nav id="nav">
-                                        <a href='view_preprints.php?p=1&w=0'>Publications</a>
-                                        <a href="reserved.php" class="current-page-item">Reserved Area</a>
+                                        <a href='./view_preprints.php?p=1&w=0'>Publications</a>
+                                        <a href="./reserved.php" class="current-page-item">Reserved Area</a>
                                     </nav>
                                 </header>
                             </div>
@@ -141,50 +141,33 @@
                 <div>
                     <div style="float:left; margin-left:0.5%;">
                         <form name="f1" action="modp.php" method="POST">
-                            <input type="submit" name="b1" value="Logout" id="botton_logout" class="bottoni" style="color: red;" onclick="return confirmLogout()">
+                            <input type="submit" name="b1" value="Logout" id="botton_logout" class="bottoni" style="height:17px; color: red;" onclick="return confirmLogout()">
                         </form>
                     </div>
                     <div style="float:left; margin-left:0.5%;">
-                        <form name="f5" action="uploaded.php" method="GET">
-                            <input type="text" name="p" value="1" checked hidden/>
-                            <input type="submit" name="b5" value="My upload" id="bottone_keyword" class="bottoni"/>
-                        </form>
+                        <a style="height:17px; color:white;" href="./uploaded.php?p=1" id="bottone_keyword" class="bottoni">My upload</a>
                     </div>
                     <div style="float:left; margin-left:0.5%;">
-                        <form name="f4" action="archived_preprints.php" method="GET">
-                            <input type="text" name="p" value="1" checked hidden/>
-                            <input type="submit" name="b4" value="Archived section" id="bottone_keyword" class="bottoni"/>
-                        </form>
+                        <a style="height:17px; color:white;" href="./archived_preprints.php?p=1" id="bottone_keyword" class="bottoni">Archived section</a>
                     </div>
                     <div style="float:left; margin-left:0.5%;">
-                        <form name="f3" action="approve_preprints.php" method="GET">
-                            <input type="text" name="p" value="1" checked hidden/><input type="text" name="w" value="0" checked hidden/>
-                            <input type="submit" name="bb3" value="Check section" id="bottone_keyword" class="bottoni"/>
-                        </form>
+                        <a style="height:17px; color:white;" href="./approve_preprints.php" id="bottone_keyword" class="bottoni">Check section</a>
                     </div>
                     <div style="float:left; margin-left:0.5%;">
-                        <form name="f7" action="check_preprints.php" method="GET">
-                            <input type="text" name="p" value="1" checked hidden/><input type="text" name="w" value="0" checked hidden/>
-                            <input type="submit" name="bb3" value="Check arXiv section" id="bottone_keyword" class="bottoni"/>
-                        </form>
+                        <a style="height:17px; color:white;" href="./check_preprints.php?bb3=1" id="bottone_keyword" class="bottoni">Check arXiv section</a>
                     </div>
                     <div style="float:left; margin-left:0.5%;">
-                        <form name="f6" action="manual_edit.php" method="GET">
-                            <input type="text" name="p" value="1" checked hidden/>
-                            <input type="submit" name="b5" value="Edit section" id="bottone_keyword" class="bottoni"/>
-                        </form>
+                        <a style="height:17px; color:white;" href="./manual_edit.php" id="bottone_keyword" class="bottoni">Edit section</a>
                     </div>
                     <div style="float:left; margin-left:0.5%;">
-                        <form name="f2" action="arXiv_panel.php" method="GET">
-                            <input type="submit" name="b2" value="ArXiv panel" id="bottone_keyword" class="bottoni">
-                        </form>
+                        <a style="height:17px; color:white;" href="./arXiv_panel.php" id="bottone_keyword" class="bottoni">ArXiv panel</a>
                     </div>
                     <div style="clear:both;"></div>
                 </div>
             </center>
             <hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
             <form name="f3" action="modp.php" method="POST" enctype="multipart/form-data">
-                <center><div><br/><h2>Insert new preprint</h2><h1>field with "*" are required</h1><br/>
+                <center><div><br/><h2>Insert new paper</h2><h1>field with "*" are required</h1><br/>
                     <input type="reset" name="reset" value="Reset"/><br/><br/></center>
                 <div style="margin-left:1%; margin-right:1%;"><div style="float:left; width:100%;">
                         <div style="font-weight: bold;">*publication category:</div><br/>
@@ -234,7 +217,7 @@
                 <div style="font-weight: bold;">*PDF:<br/></div>
                 <input type="hidden" name="MAX_FILE_SIZE" value="10000000"><br/>
                 <input type="file" required name="fileToUpload" id="fileToUpload"><br/><br/>
-                <input type="submit" name="b3" value="Insert preprint" style='width:80px;' id='bottone_keyword' class='bottoni' onclick="return confirmInsert()"/><br/><br/></center>
+                <input type="submit" name="b3" value="Insert paper" style='width:80px;' id='bottone_keyword' class='bottoni' onclick="return confirmInsert()"/><br/><br/></center>
         </form>
         <?php
         $target_file = $basedir . basename($_FILES["fileToUpload"]["name"]);
@@ -271,7 +254,7 @@
                 rename($basedir . $_FILES["fileToUpload"]["name"], $basedir . $id . ".pdf");
                 #inserimento file nel database
                 insertpdf($id, $fileType);
-                echo '<script type="text/javascript">alert("Preprint inserted correctly! ID generated: ' . $id . ' \nGo on uploaded section to edit your pubblications.");</script>';
+                echo '<script type="text/javascript">alert("Preprint inserted correctly!\nID generated: ' . $id . ', go on my upload to edit your pubblications.");</script>';
             } else {
                 echo '<script type="text/javascript">alert("Sorry, there was an error uploading your file!");</script>';
             }

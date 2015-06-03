@@ -61,8 +61,8 @@
             $nav2 = "<header id='header'>
                                     <h1><a href='#' id='logo'>DMI Papers</a></h1>
                                     <nav id='nav'>
-                                        <a href='view_preprints.php?p=1&w=0'>Publications</a>
-                                        <a href='reserved.php' class='current-page-item'>Reserved Area</a>
+                                        <a href='./view_preprints.php?p=1&w=0'>Publications</a>
+                                        <a href='./reserved.php' class='current-page-item'>Reserved Area</a>
                                     </nav>
                                 </header>";
             $rit = "modp.php";
@@ -72,8 +72,8 @@
             $nav2 = "<header id='header'>
                                     <h1><a href='#' id='logo'>DMI Papers</a></h1>
                                     <nav id='nav'>
-                                        <a href='view_preprints.php?p=1&w=0' class='current-page-item'>Publications</a>
-                                        <a href='reserved.php'>Reserved Area</a>
+                                        <a href='./view_preprints.php?p=1&w=0' class='current-page-item'>Publications</a>
+                                        <a href='./reserved.php'>Reserved Area</a>
                                     </nav>
                                 </header>";
         }
@@ -91,11 +91,11 @@
         </div><center>
         <?php
         if ($cred == 1) {
-            echo "<table><tr><form name='f1' action='" . $rit . "' method='GET'>
+            echo "<table>
+            	<tr>
                 <td align='right'>Go to admin panel&nbsp&nbsp&nbsp</td>
-                <td><input type='submit' name='b2' value='Back' id='bottone_keyword' class='bottoni'/></td>
-                <input type='text' name='p' value='1' checked hidden/><input type='text' name='w' value='0' checked hidden/>
-            </form></tr>";
+                <td align='center'><a style='height:17px; color:white;' href='./modp.php' id='bottone_keyword' class='bottoni'>Back</a></td>
+                </tr>";
             echo $nav;
         }
         ?>

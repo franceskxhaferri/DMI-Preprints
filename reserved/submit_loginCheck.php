@@ -23,8 +23,7 @@ if (isset($_POST['uid']) && isset($_POST['pw'])) {
                 $_SESSION['logged_type'] = "user";
             }
             $_SESSION['uid'] = $inputUID;
-            $_SESSION['nome'] = "Bruno Iannazzo";
-            #$_SESSION['nome'] = $output_ldap[0]['sn'][0];
+            $_SESSION['nome'] = $output_ldap[0]['sn'][0];
             $_SESSION['LAST_ACTIVITY'] = time(); //aggiorna timestamp sessione
         } else {
             print_r("\nNO autenticazione\n");

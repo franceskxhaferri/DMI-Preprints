@@ -47,8 +47,8 @@
                                 <header id="header">
                                     <h1><a href="#" id="logo">DMI Papers</a></h1>
                                     <nav id="nav">
-                                        <a href="view_preprints.php?p=1&w=0">Publications</a>
-                                        <a href="reserved.php" class="current-page-item" class="current-page-item">Reserved Area</a>
+                                        <a href="./view_preprints.php?p=1&w=0">Publications</a>
+                                        <a href="./reserved.php" class="current-page-item" class="current-page-item">Reserved Area</a>
                                     </nav>
                                 </header>
                             </div>
@@ -56,33 +56,28 @@
                     </div>
                 </div>
                 <div align="center"><center><br/><h2>ARXIV PANEL</h2></center>
-                    <center><table>
-                            <tr><form name="f1" action="reserved.php" method="GET">
-                                <td align="right" style="width:350px;">Go to admin panel&nbsp&nbsp&nbsp</td>
-                                <td style="width:350px;"><input type="submit" name="b1" value="Back" id="bottone_keyword" class="bottoni"/></td>
-                            </form></tr>
-                            <tr></tr>
-                            <tr><form name="f4" action="authors_list.php" method="GET">
-                                <td align="right" style="width:350px;">List of authors that will be searched on arXiv&nbsp&nbsp&nbsp</td>
-                                <td style="width:350px;"><input type="submit" name="b4" value="Authors section" id="bottone_keyword" class="bottoni"/></td>
-                            </form></tr>
-                            <tr><form name="f5" action="manual_insert.php" method="GET">
-                                <td align="right" style="width:350px;">Insert manually one preprint&nbsp&nbsp&nbsp</td>
-                                <td style="width:350px;"><input type="submit" name="b5" value="Insert section" id="bottone_keyword" class="bottoni"/></td>
-                            </form></tr>
-                            <tr><form name="f7" action="check_preprints.php" method="GET">
-                                <td align="right" style="width:350px;">
-                                    Controls the preprints recently downloaded&nbsp&nbsp&nbsp</td>
-                                <td style="width:350px;"><input type="submit" name="b7" value="Check section" id="bottone_keyword" class="bottoni"/></td>
-                            </form></tr>
-                            <tr><form name="f8" action="arXiv_panel.php" method="POST">
-                                <td align="right" style="width:350px;">Refresh from arXiv for new preprints&nbsp&nbsp&nbsp</td>
-                                <td style="width:350px;"><input type="submit" name="b8" value="Update from arXiv" id="bottone_keyword" class="bottoni"/></td>
-                            </form></tr>
-                            <tr><form name="f9" action="arXiv_panel.php" method="POST">
-                                <td align="right" style="width:500px;">Download all from arXiv, this overwrites all data!&nbsp&nbsp&nbsp</td>
-                                <td style="width:500px;"><input type="submit" name="b9" value="Download from arXiv" id="bottone_keyword" class="bottoni" onclick='return confirmDownload()'/></td>
-                            </form></tr>
+                    <center><table><tr><td align="right">
+                                    Go to admin panel&nbsp&nbsp&nbsp</td><td align="center">
+                                    <a style="height:17px; color:white;" href="./reserved.php" id="bottone_keyword" class="bottoni">Back</a></td></tr>
+                            <tr><td align="right">
+                                    List of authors that will be searched on arXiv&nbsp&nbsp&nbsp</td><td align="center">
+                                    <a style="height:17px; color:white;" href="./authors_list.php" id="bottone_keyword" class="bottoni">Authors section</a></td></tr>
+                            <tr><td align="right">
+                                    Insert manually one preprint from arXiv&nbsp&nbsp&nbsp</td><td align="center">
+                                    <a style="height:17px; color:white;" href="./manual_insert.php" id="bottone_keyword" class="bottoni">Insert section</a></td></tr>
+                            <tr><td align="right">
+                                    Controls the preprints recently downloaded&nbsp&nbsp&nbsp</td><td align="center">
+                                    <a style="height:17px; color:white;" href="./check_preprints.php" id="bottone_keyword" class="bottoni">Check section</a></td></tr>
+                            <tr><td align="right">
+                                    <form name="f8" action="arXiv_panel.php" method="POST">
+                                        Refresh from arXiv for new preprints&nbsp&nbsp&nbsp</td><td align="center">
+                                    <input type="submit" name="b8" value="Update from arXiv" id="bottone_keyword" class="bottoni"/>
+                                    </form></td></tr>
+                            <tr><td align="right">
+                                    <form name="f9" action="arXiv_panel.php" method="POST">
+                                        Download all from arXiv, this overwrites all data!&nbsp&nbsp&nbsp</td><td align="center">
+                                    <input type="submit" name="b9" value="Download from arXiv" id="bottone_keyword" class="bottoni" onclick='return confirmDownload()'/>
+                                    </form></td></tr>
                         </table></center><br/><a style='text-decoration: none;' href='javascript:FinePagina()'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8595;&nbsp&nbsp&nbsp&nbsp&nbsp </a><br/><hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
                     <?php
                     include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/arXiv_parsing.php');
