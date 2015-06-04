@@ -707,7 +707,7 @@ function filtropreprint() {
             $query = $query . " ORDER BY data_pubblicazione DESC LIMIT " . $limit . "," . $risperpag . "";
         }
         if (!isset($_GET['r']) or $_GET['r'] == "") {
-            echo "PREPRINTS: " . $ristot;
+            echo "PAPERS: " . $ristot;
         } else {
             echo "SEARCH '" . $_GET['r'] . "' FOUND " . $ristot . " RESULTS(" . $_GET['f'] . ")(results ordered by " . $orstr . ")(results for page " . $_GET['rp'] . ")";
         }
@@ -849,7 +849,7 @@ function leggipreprintarchiviati() {
     $querytotale = mysql_query("SELECT * FROM PREPRINTS_ARCHIVIATI WHERE checked='1'");
     $ristot = mysql_num_rows($querytotale);
     echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
-    echo "PREPRINTS ARCHIVED: " . $ristot . "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
+    echo "PAPERS ARCHIVED: " . $ristot . "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
     $npag = ceil($ristot / $risperpag);
     #impostazione della navigazione per pagine
     if ($ristot != 0) {
@@ -931,11 +931,11 @@ function leggipreprintarchiviati() {
         #controllo di preprint da rimuovere
         if ($ristot != 0) {
             cancellapreprint();
-            echo '<script type="text/javascript">alert("Preprints deleted from database!");</script>';
+            echo '<script type="text/javascript">alert("Papers deleted from database!");</script>';
             echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./archived_preprints.php?p=1">';
         } else {
             $limit = 0;
-            echo '<script type="text/javascript">alert("No archived preprint!");</script>';
+            echo '<script type="text/javascript">alert("No archived papers!");</script>';
         }
     }
     $x = $limit + 1;

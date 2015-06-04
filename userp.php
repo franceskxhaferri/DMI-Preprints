@@ -154,7 +154,7 @@
                 <center><div><br/><h2>Insert new paper</h2><h1>field with "*" are required</h1><br/>
                     <input type="reset" name="reset" value="Reset"/><br/><br/></center>
                 <div style="margin-left:1%; margin-right:1%;"><div style="float:left; width:100%;">
-                        <div style="font-weight: bold;">*publication category:</div><br/>
+                        <div style="font-weight: bold;">*category:</div><br/>
                         <select name="category" required onchange='Checkcath(this.value);'>
                             <option value="">--Select Category--</option>
                             <option value="Computer Science">Computer Science</option>
@@ -201,7 +201,7 @@
                 <div style="font-weight: bold;">*PDF:<br/></div>
                 <input type="hidden" name="MAX_FILE_SIZE" value="10000000"><br/>
                 <input type="file" required name="fileToUpload" id="fileToUpload"><br/><br/>
-                <input type="submit" name="b3" value="Insert paper" style='width:80px;' id='bottone_keyword' class='bottoni' onclick="return confirmInsert()"/><br/><br/></center>
+                <input type="submit" name="b3" value="Submit paper" style='width:80px;' id='bottone_keyword' class='bottoni' onclick="return confirmInsert()"/><br/><br/></center>
         </form>
         <?php
         $target_file = $basedir . basename($_FILES["fileToUpload"]["name"]);
@@ -241,7 +241,7 @@
                 #inserimento file nel database
                 sendmailadmin($_SESSION['nome'] . " (" . $_SESSION['uid'] . ")", $id);
                 #insertpdf($id, $fileType);
-                echo '<script type="text/javascript">alert("Preprint submitted correctly!\nAfter approvation go on my upload to edit your pubblications.");</script>';
+                echo '<script type="text/javascript">alert("Paper submitted correctly!\nAfter approvation go on my upload to edit your pubblications.");</script>';
             } else {
                 echo '<script type="text/javascript">alert("Sorry, there was an error uploading your file!");</script>';
             }

@@ -29,11 +29,11 @@
         <script type='text/javascript'>
             function confirmDelete()
             {
-                return confirm("Delete this preprint?");
+                return confirm("Delete this paper?");
             }
             function confirmInsert()
             {
-                return confirm("Update preprint information?");
+                return confirm("Update paper information?");
             }
         </script>
         <script type="text/x-mathjax-config">
@@ -139,9 +139,9 @@
                 echo "<br/><center>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTION CAN'T BE USED IN THIS MOMENT!</center><br/>";
             } else {
                 if (!isset($_GET['id'])) {
-                    echo "<center><br/><a style='color:#007897;' href='./view_preprints.php' onclick='window.open(this.href); return false' title='Go to preprints list'>View from inserted preprints</a></center>";
+                    echo "<center><br/><a style='color:#007897;' href='./view_preprints.php' onclick='window.open(this.href); return false' title='Go to preprints list'>View from inserted papers</a></center>";
                     echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
-                    echo " <center><div><form name='f2' action='manual_edit.php' method='POST'>Insert id of publication: <input type='search' autocomplete = 'on' style='width:175px;' name='id' id='textbox' required class='textbox' placeholder='example of id: 0000.0000v1' autofocus/> <input type='submit' name='bottoni8' value='Get preprint' style='width:70px;' id='bottone_keyword' class='bottoni'/><br/>
+                    echo " <center><div><form name='f2' action='manual_edit.php' method='POST'>Insert id of publication: <input type='search' autocomplete = 'on' style='width:175px;' name='id' id='textbox' required class='textbox' placeholder='example of id: 0000.0000v1' autofocus/> <input type='submit' name='bottoni8' value='Get paper' style='width:70px;' id='bottone_keyword' class='bottoni'/><br/>
 		               </form></div></center>
 		               ";
                     $var = False;
@@ -172,12 +172,12 @@
 				}
 			</script>
                 <form name='f1' action='manual_edit.php' method='POST' enctype='multipart/form-data'>
-                    <div style='margin-left:1%; margin-right:1%;'><div style='float:left; width:100%;'><center><div><br/><h2>preprint informations</h2><h1>field with '*' are required</h1><br/><input type='reset' name='reset' value='Reset'><br/><br/></center>
+                    <div style='margin-left:1%; margin-right:1%;'><div style='float:left; width:100%;'><center><div><br/><h2>paper informations</h2><h1>field with '*' are required</h1><br/><input type='reset' name='reset' value='Reset'><br/><br/></center>
                     	    <div style='font-weight: bold;'>UID publisher(not editable):</div><br/>
                             <textarea readonly style='width:49%;' name='uid' id='textbox' class='textbox'>" . $ris[8] . "</textarea><br/><br/>
-			    <div style='font-weight: bold;'>id of pubblication (not editable):</div><br/>
+			    <div style='font-weight: bold;'>id (not editable):</div><br/>
                             <textarea readonly style='width:49%;' name='id' id='textbox' class='textbox' placeholder='example of id: 0000.0000v1'>" . $ris[0] . "</textarea><br/><br/>
-                            <div style='font-weight: bold;'>data of pubblication (not editable):</div><br/>
+                            <div style='font-weight: bold;'>date (not editable):</div><br/>
                             <textarea readonly style='width:49%;' name='data' id='textbox' class='textbox' placeholder='example of data: 2011-12-30T10:37:35Z'>" . $ris[2] . "</textarea><br/><br/>
                             <div style='float:right; width:49%;'>
 	    				<div style='font-weight: bold;'>category preview:</div><br/>
@@ -238,7 +238,7 @@
                         #eliminazione del preprint selezionato
                         delete_pdf($id1);
                         cancellaselected($id1);
-                        echo '<script type="text/javascript">alert("Preprint ' . $_POST['id'] . ' removed correctly!");</script>';
+                        echo '<script type="text/javascript">alert("Paper ' . $_POST['id'] . ' removed correctly!");</script>';
                         echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./manual_edit.php">';
                     }
                     if (isset($_POST['bottoni10'])) {
@@ -268,13 +268,13 @@
                                 $fileType = $_FILES["fileToUpload"]["type"];
                                 #inserimento nel database del file
                                 insert_one_pdf($info[0], $fileType);
-                                echo '<script type="text/javascript">alert("Preprint ' . $_POST['id'] . ' updated correctly!");</script>';
+                                echo '<script type="text/javascript">alert("Paper ' . $_POST['id'] . ' updated correctly!");</script>';
                                 echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./manual_edit.php">';
                             } else {
                                 echo '<script type="text/javascript">alert("Error, file not uploaded!");</script>';
                             }
                         } else {
-                            echo '<script type="text/javascript">alert("Preprint ' . $_POST['id'] . ' updated correctly!");</script>';
+                            echo '<script type="text/javascript">alert("Paper ' . $_POST['id'] . ' updated correctly!");</script>';
                             echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./manual_edit.php">';
                         }
                     }

@@ -170,7 +170,7 @@
                 <center><div><br/><h2>Insert new paper</h2><h1>field with "*" are required</h1><br/>
                     <input type="reset" name="reset" value="Reset"/><br/><br/></center>
                 <div style="margin-left:1%; margin-right:1%;"><div style="float:left; width:100%;">
-                        <div style="font-weight: bold;">*publication category:</div><br/>
+                        <div style="font-weight: bold;">*category:</div><br/>
                         <select name="category" required onchange='Checkcath(this.value);'>
                             <option value="">--Select Category--</option>
                             <option value="Computer Science">Computer Science</option>

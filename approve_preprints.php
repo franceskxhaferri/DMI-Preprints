@@ -43,11 +43,11 @@
             }
             function confirmDelete()
             {
-                return confirm("Remove selected preprints?");
+                return confirm("Remove selected papers?");
             }
             function confirmInsert()
             {
-                return confirm("Insert selected preprints?");
+                return confirm("Insert selected papers?");
             }
         </script>
     </head>
@@ -77,7 +77,7 @@
                 </div>
                 <div>
                     <center><br/><br/>
-                        <h2>APPROVE PREPRINTS</h2>
+                        <h2>APPROVE DMI PAPER</h2>
                         Go to admin panel&nbsp&nbsp&nbsp
                         <a style="height:17px; color:white;" href="./modp.php" id="bottone_keyword" class="bottoni">Back</a><br/>
                     </center>
@@ -154,9 +154,9 @@
                         }
                         #controllo se sono stati selezionati preprint da rimuovere
                         if ($z == 0) {
-                            echo '<script type="text/javascript">alert("No preprints selected!");</script>';
+                            echo '<script type="text/javascript">alert("No paper selected!");</script>';
                         } else {
-                            echo '<script type="text/javascript">alert("' . $z . ' preprints removed correctly!");</script>';
+                            echo '<script type="text/javascript">alert("' . $z . ' papers removed correctly!");</script>';
                             #aggiorno la pagina dopo 0 secondi
                             echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./approve_preprints.php">';
                         }
@@ -188,9 +188,9 @@
                         }
                         #controllo se sono stati selezionati preprint da rimuovere
                         if ($z == 0) {
-                            echo '<script type="text/javascript">alert("No preprints selected!");</script>';
+                            echo '<script type="text/javascript">alert("No papers selected!");</script>';
                         } else {
-                            echo '<script type="text/javascript">alert("' . $z . ' preprints inserted correctly!");</script>';
+                            echo '<script type="text/javascript">alert("' . $z . ' papers inserted correctly!");</script>';
                             #aggiorno la pagina dopo 0 secondi
                             echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./approve_preprints.php">';
                         }
@@ -201,7 +201,7 @@
                     echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><br/>";
                     #avviso per utente di nessun preprint
                     if ($i == 0) {
-                        echo '<script type="text/javascript">alert("No preprints to be checked!");</script>';
+                        echo '<script type="text/javascript">alert("No paper to be checked!");</script>';
                     }
                 } else {
                     echo '<script type="text/javascript">alert("ACCESS DENIED!");</script>';

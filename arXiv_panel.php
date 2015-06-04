@@ -63,14 +63,14 @@
                                     List of authors that will be searched on arXiv&nbsp&nbsp&nbsp</td><td align="center">
                                     <a style="height:17px; color:white;" href="./authors_list.php" id="bottone_keyword" class="bottoni">Authors section</a></td></tr>
                             <tr><td align="right">
-                                    Insert manually one preprint from arXiv&nbsp&nbsp&nbsp</td><td align="center">
+                                    Insert manually one paper from arXiv&nbsp&nbsp&nbsp</td><td align="center">
                                     <a style="height:17px; color:white;" href="./manual_insert.php" id="bottone_keyword" class="bottoni">Insert section</a></td></tr>
                             <tr><td align="right">
-                                    Controls the preprints recently downloaded&nbsp&nbsp&nbsp</td><td align="center">
+                                    Controls the papers recently downloaded&nbsp&nbsp&nbsp</td><td align="center">
                                     <a style="height:17px; color:white;" href="./check_preprints.php" id="bottone_keyword" class="bottoni">Check section</a></td></tr>
                             <tr><td align="right">
                                     <form name="f8" action="arXiv_panel.php" method="POST">
-                                        Refresh from arXiv for new preprints&nbsp&nbsp&nbsp</td><td align="center">
+                                        Refresh from arXiv for new papers&nbsp&nbsp&nbsp</td><td align="center">
                                     <input type="submit" name="b8" value="Update from arXiv" id="bottone_keyword" class="bottoni"/>
                                     </form></td></tr>
                             <tr><td align="right">
@@ -115,7 +115,7 @@
                                     azzerapreprint();
                                     #chiudo la sessione di download
                                     chiudisessione();
-                                    echo "<br/>PREPRINTS DOWNLOADED: " . $j . "<br/><br/>";
+                                    echo "<br/>PAPERS DOWNLOADED: " . $j . "<br/><br/>";
                                     $dc1 = true;
                                 }
                             } else {
@@ -157,7 +157,7 @@
                                     azzerapreprint();
                                     #chiudo la sessione di download
                                     chiudisessione();
-                                    echo "<br/>PREPRINTS DOWNLOADED: " . $j . "<br/><br/>";
+                                    echo "<br/>PAPERS DOWNLOADED: " . $j . "<br/><br/>";
                                     $dc2 = true;
                                 }
                             } else {

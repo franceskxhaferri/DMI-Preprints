@@ -42,7 +42,7 @@
             }
             function confirmDelete()
             {
-                return confirm("Remove all archived preprints?");
+                return confirm("Remove all archived papers?");
             }
         </script>
     </head>
@@ -55,7 +55,7 @@
         sec_session_start();
         if ($_SESSION['logged_type'] === "mod") {
             $nav = "<tr><form name='f2' action='archived_preprints.php' method='GET'>
-		<td align='right'>Delete all archived preprints from database&nbsp&nbsp&nbsp</td>
+		<td align='right'>Delete all archived papers from database&nbsp&nbsp&nbsp</td>
 		<td><input type='submit' name='c' value='Remove all' id='bottone_keyword' class='bottoni' onclick='return confirmDelete()'/></td>
 		</form></tr>";
             $nav2 = "<header id='header'>
@@ -87,7 +87,7 @@
                 </div>
             </div>
         </div>
-        <div><center><br/><br/><h2>ARCHIVED PREPRINTS</h2></center>
+        <div><center><br/><br/><h2>ARCHIVED PAPERS</h2></center>
         </div><center>
         <?php
         if ($cred == 1) {

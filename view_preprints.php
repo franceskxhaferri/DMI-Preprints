@@ -197,7 +197,7 @@
                                 </header>";
         }
         if ($_SESSION['logged_type'] != "mod") {
-            $str1 = "<h1><center>in this section are the preprints that have been published on DMI archive and preprints published by the <a style='color:#007897;' href='./authors_list.php' onclick='window.open(this.href); return false'>authors</a> of the department on arxiv.org</center></h1><br/>";
+            $str1 = "<h1><center>in this section are the papers that have been published on DMI archive and papers published by the <a style='color:#007897;' href='./authors_list.php' onclick='window.open(this.href); return false'>authors</a> of the department on arxiv.org</center></h1><br/>";
         }
         ?>
         <div id="header-wrapper">
@@ -220,7 +220,7 @@
         <div hidden id="opt"><br/>
             <table>
                 </tr>
-                <td>Enable/Disable float Search Bar:&nbsp</td>
+                <td>Enable/Disable Floating Search Bar:&nbsp</td>
                 <td><input type="button" value="<?php echo $string2; ?>" onclick="javascript:checkCookie5();" style="width:50px;"/></td>
                 </tr>
                 <tr>
@@ -239,11 +239,11 @@
 		    	<form name='f3' action='view_preprints.php' method='GET'>
 		        <input type='button' value='More' onclick='javascript:showHide(adv);'/>
 		        <select name='f'>
-		            <option value='all' selected='selected'>All preprint:</option>
+		            <option value='all' selected='selected'>All papers:</option>
 		            <option value='author'>Authors:</option>
 		            <option value='category'>Category:</option>
 		            <option value='year'>Year:</option>
-		            <option value='id'>Identifier(ID):</option>
+		            <option value='id'>ID:</option>
 		        </select>
 		        <input type='search' autocomplete = 'on' style='width:20%;' name='r' placeholder='Author name, part, etc.' value='" . $_GET['r'] . "'/>
 		    <input type='submit' name='s' value='Send'/>
@@ -255,11 +255,11 @@
         	<div style='height:30px;'>
                 Filter by
                 <select name='f'>
-                    <option value='all' selected='selected'>All preprint:</option>
+                    <option value='all' selected='selected'>All papers:</option>
                     <option value='author'>Authors:</option>
                     <option value='category'>Category:</option>
                     <option value='year'>Year:</option>
-                    <option value='id'>Identifier(ID):</option>
+                    <option value='id'>ID:</option>
                 </select>
                 <input type='search' autocomplete = 'on' style='width:40%;' name='r' placeholder='Author name, part, etc.' value='" . $_GET['r'] . "'/> <input type='submit' name='s' value='Send'/></div>";
         } else {
@@ -273,11 +273,11 @@
                 <input type='button' value='Show/Hide' onclick='javascript:showHide(adv);'/>
                 Filter by
                 <select name='f'>
-                    <option value='all' selected='selected'>All preprint:</option>
+                    <option value='all' selected='selected'>All papers:</option>
                     <option value='author'>Authors:</option>
                     <option value='category'>Category:</option>
                     <option value='year'>Year:</option>
-                    <option value='id'>Identifier(ID):</option>
+                    <option value='id'>ID:</option>
                 </select>
                 <input type='search' autocomplete = 'on' style='width:20%;' name='r' placeholder='Author name, part, etc.' value='" . $_GET['r'] . "'/>
             <input type='submit' name='s' value='Send'/></div>

@@ -134,7 +134,7 @@ function leggiupload($uid) {
     $querytotale = mysql_query("SELECT * FROM PREPRINTS WHERE uid='" . $uid . "' AND checked='1'");
     $ristot = mysql_num_rows($querytotale);
     echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
-    echo "PREPRINTS UPLOADED: " . $ristot . "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
+    echo "PAPERS UPLOADED: " . $ristot . "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
     $npag = ceil($ristot / $risperpag);
     #impostazione della navigazione per pagine
     if ($ristot != 0) {

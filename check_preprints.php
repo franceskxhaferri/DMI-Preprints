@@ -43,11 +43,11 @@
             }
             function confirmDelete()
             {
-                return confirm("Remove selected preprints?");
+                return confirm("Remove selected papers?");
             }
             function confirmInsert()
             {
-                return confirm("Insert selected preprints?");
+                return confirm("Insert selected papers?");
             }
         </script>
     </head>
@@ -75,10 +75,10 @@
                         </div>
                     </div>
                 </div>
-                <div><center><br/><br/><h2>CHECK PREPRINTS</h2></center>
+                <div><center><br/><br/><h2>CHECK ARXIV PAPER</h2></center>
                     <center>
                         <?php
-                        if (isset($_GET['bb3'])) {
+                        if ($_GET['bb3']==1) {
                             echo "
                                 Go to admin panel&nbsp&nbsp&nbsp
                                 <a style='height:17px; color:white;' href='./modp.php' id='bottone_keyword' class='bottoni'>Back</a><br/>";
@@ -128,7 +128,8 @@
                                         $y++;
                                     }
                                 }
-                                echo "</table></center><center><br/><input type='submit' name='b2' value='Remove' style='width:70px;' id='bottone_keyword' class='bottoni' onclick='return confirmDelete()'><input type='submit' name='b3' value='Insert' style='width:70px;' id='bottone_keyword' class='bottoni' onclick='return confirmInsert()'></center></form>";
+                                echo "</table></center><center><br/><input type='submit' name='b2' value='Remove' style='width:70px;' id='bottone_keyword' class='bottoni' onclick='return confirmDelete()'><input type='submit' name='b3' value='Insert' style='width:70px;' id='bottone_keyword' class='bottoni' onclick='return confirmInsert()'></center>
+                                <input type='text' name=bb3 value='".$_GET['bb3']."' hidden></form>";
                                 #Chiudo la lettura della directory.
                                 closedir($directory_handle);
                             }
@@ -164,9 +165,9 @@
                             }
                             #controllo se sono stati selezionati preprint da rimuovere
                             if ($z == 0) {
-                                echo '<script type="text/javascript">alert("No preprints selected!");</script>';
+                                echo '<script type="text/javascript">alert("No papers selected!");</script>';
                             } else {
-                                echo '<script type="text/javascript">alert("' . $z . ' preprints removed correctly!");</script>';
+                                echo '<script type="text/javascript">alert("' . $z . ' papers removed correctly!");</script>';
                                 #aggiorno la pagina dopo 0 secondi
                                 echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./check_preprints.php">';
                             }
@@ -198,20 +199,18 @@
                             }
                             #controllo se sono stati selezionati preprint da rimuovere
                             if ($z == 0) {
-                                echo '<script type="text/javascript">alert("No preprints selected!");</script>';
+                                echo '<script type="text/javascript">alert("No paper selected!");</script>';
                             } else {
-                                echo '<script type="text/javascript">alert("' . $z . ' preprints inserted correctly!");</script>';
+                                echo '<script type="text/javascript">alert("' . $z . ' papers inserted correctly!");</script>';
                                 #aggiorno la pagina dopo 0 secondi
                                 echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./check_preprints.php">';
                             }
                         }
-
-
                         echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
                         echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><br/>";
                         #avviso per utente di nessun preprint
                         if ($i == 0) {
-                            echo '<script type="text/javascript">alert("No preprints to be checked!");</script>';
+                            echo '<script type="text/javascript">alert("No paper to be checked!");</script>';
                         }
                     }
                 } else {
