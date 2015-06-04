@@ -119,6 +119,19 @@
                     window.location.reload()
                 } else {
                     setCookie("searchbar", "0", 1825);
+                    setCookie("searchbarall", "0", 1825);
+                    window.location.reload()
+                }
+            }
+            //cookie searchbar in tutte le pagine
+            function checkCookie6() {
+                var pageview = getCookie("searchbarall");
+                if (pageview == "0") {
+                    setCookie("searchbarall", "1", 1825);
+                    setCookie("searchbar", "1", 1825);
+                    window.location.reload()
+                } else {
+                    setCookie("searchbarall", "0", 1825);
                     window.location.reload()
                 }
             }
@@ -155,6 +168,12 @@
             $string2 = "Enable";
         } else {
             $string2 = "Disable";
+        }
+        #controllo cookie searchbar all
+        if ($_COOKIE['searchbarall'] == "0" or ! isset($_COOKIE['searchbarall'])) {
+            $string3 = "Enable";
+        } else {
+            $string3 = "Disable";
         }
         ?>
     </head>
@@ -219,16 +238,17 @@
                 return false'>archived</a>(old publications)<br/>
         <div hidden id="opt"><br/>
             <table>
-                </tr>
-                <td>Enable/Disable Floating Search Bar:&nbsp</td>
-                <td><input type="button" value="<?php echo $string2; ?>" onclick="javascript:checkCookie5();" style="width:50px;"/></td>
+                <tr>
+                    <td>&nbspFloating Search Bar:&nbsp</td>
+                    <td><input type="button" value="<?php echo $string2; ?>" onclick="javascript:checkCookie5();" style="width:50px;"/></td>
+                    <td>&nbspFloating Search Bar-all pages:&nbsp</td>
+                    <td><input type="button" value="<?php echo $string3; ?>" onclick="javascript:checkCookie6();" style="width:50px;"/></td>
                 </tr>
                 <tr>
-                    <td>Enable/Disable MathJax:</td>
+                    <td>&nbspMathJax:&nbsp</td>
                     <td><input type="button" value="<?php echo $valbotton; ?>" onclick="javascript:checkCookie2();" style="width:50px;"/></td>
-                </tr>
-                <td>Enable/Disable on Page View:</td>
-                <td><input type="button" value="<?php echo $string; ?>" onclick="javascript:checkCookie3();" style="width:50px;"/></td>
+                    <td>&nbspOn page view for PDF:&nbsp</td>
+                    <td><input type="button" value="<?php echo $string; ?>" onclick="javascript:checkCookie3();" style="width:50px;"/></td>
                 </tr>
             </table>
         </div>
@@ -349,6 +369,10 @@
 </div>
 </div>
 <?php
+#visualizza opzioni avanzate
+if ($_GET['More'] == "More") {
+    echo "<script>javascript:showHide(adv);</script>";
+}
 echo "<center><br/><a style='text-decoration: none;' href='javascript:FinePagina()'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8595;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><center>";
 #ricerca full text
 if (isset($_GET['go']) && $_GET['go'] != "") {

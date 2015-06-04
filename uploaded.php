@@ -82,6 +82,36 @@
                     Go back to new insertion: <a style="color:white;" href="<?php echo $ind; ?>" id="bottoni" class="bottoni">Back</a>
                 </div>
                 <?php
+                if ($_COOKIE['searchbarall'] == "1") {
+                    #search bar
+                    echo "<center><div style='width:100%; padding: 10px; position: fixed; bottom: 0px;'>
+				    	<form name='f3' action='view_preprints.php' method='GET'>
+					<input type='submit' name='More' value='More'/>
+					<select name='f'>
+					    <option value='all' selected='selected'>All papers:</option>
+					    <option value='author'>Authors:</option>
+					    <option value='category'>Category:</option>
+					    <option value='year'>Year:</option>
+					    <option value='id'>ID:</option>
+					</select>
+					<input type='search' autocomplete = 'on' style='width:20%;' name='r' placeholder='Author name, part, etc.' value='" . $_GET['r'] . "'/>
+				    <input type='submit' name='s' value='Send'/>
+				    <input type='text' name='o' value='dated' hidden>
+				    </form></div>
+				    <form name='f4' action='view_preprints.php' method='GET'>
+			<div id='adv' hidden><br/>
+			<font color='#007897'>Advanced search:</font><br/>
+				<div style='height:30px;'>
+				Filter by
+				<select name='f'>
+				    <option value='all' selected='selected'>All papers:</option>
+				    <option value='author'>Authors:</option>
+				    <option value='category'>Category:</option>
+				    <option value='year'>Year:</option>
+				    <option value='id'>ID:</option>
+				</select>
+				<input type='search' autocomplete = 'on' style='width:40%;' name='r' placeholder='Author name, part, etc.' value='" . $_GET['r'] . "'/> <input type='submit' name='s' value='Send'/></form></div></center>";
+                }
                 #lettura preprint caricati
                 leggiupload($_SESSION['nome'] . " (" . $_SESSION['uid'] . ")");
             } else {
@@ -92,6 +122,6 @@
             echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
         }
         ?>
-    </div><br/><br/></center>
+    </div></center><br/><br/>
 </body>
 </html>

@@ -148,6 +148,36 @@
         if (sessioneavviata() == True) {
             echo "<br/><br/><center>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTION CAN'T BE USED IN THIS MOMENT!</center><br/>";
         } else {
+            if ($_COOKIE['searchbarall'] == "1") {
+                #search bar
+                echo "<center><div style='width:100%; padding: 10px; position: fixed; bottom: 0px;'>
+				    	<form name='f3' action='view_preprints.php' method='GET'>
+					<input type='submit' name='More' value='More'/>
+					<select name='f'>
+					    <option value='all' selected='selected'>All papers:</option>
+					    <option value='author'>Authors:</option>
+					    <option value='category'>Category:</option>
+					    <option value='year'>Year:</option>
+					    <option value='id'>ID:</option>
+					</select>
+					<input type='search' autocomplete = 'on' style='width:20%;' name='r' placeholder='Author name, part, etc.' value='" . $_GET['r'] . "'/>
+				    <input type='submit' name='s' value='Send'/>
+				    <input type='text' name='o' value='dated' hidden>
+				    </form></div>
+				    <form name='f4' action='view_preprints.php' method='GET'>
+			<div id='adv' hidden><br/>
+			<font color='#007897'>Advanced search:</font><br/>
+				<div style='height:30px;'>
+				Filter by
+				<select name='f'>
+				    <option value='all' selected='selected'>All papers:</option>
+				    <option value='author'>Authors:</option>
+				    <option value='category'>Category:</option>
+				    <option value='year'>Year:</option>
+				    <option value='id'>ID:</option>
+				</select>
+				<input type='search' autocomplete = 'on' style='width:40%;' name='r' placeholder='Author name, part, etc.' value='" . $_GET['r'] . "'/> <input type='submit' name='s' value='Send'/></form></div></center>";
+            }
             ?>
             <center><div><form name='f2' action='manual_insert.php' method='POST'>Get paper informations from arXiv: <input type='search' autocomplete = 'on' style='width:175px;' name='id' id='textbox' required class='textbox' placeholder='Insert id(arXiv): 0000.0000' autofocus/> <input type='submit' name='b7' value='Get paper' style='width:70px;' id='bottone_keyword' class='bottoni'/><br/>
                     </form></div></center>
@@ -217,7 +247,7 @@
                             <input type='hidden' name='MAX_FILE_SIZE' value='10000000'><br/>
                             <input type='file' name='fileToUpload' id='fileToUpload'><br/><br/><br/>
                             <input type='submit' name='b9' value='Remove' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmDelete()'/>
-                            <input type='submit' name='b10' value='Insert' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmInsert()'/><br/><br/></center>
+                            <input type='submit' name='b10' value='Insert' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmInsert()'/><br/><br/><br/><br/></center>
                             </div></div></form>";
                 echo "
                             	<script>
@@ -283,7 +313,7 @@
                             <input type='file' required name='fileToUpload' id='fileToUpload'><br/><br/>
                             <input type='submit' name='b8' value='Insert' style='width:80px;' id='bottone_keyword' class='bottoni' onclick='return confirmInsert()'/><br/><br/></center>
                             </div></div>
-                            </form>";
+                            </form><br/><br/>";
             }
             $target_file = $basedir2 . basename($_FILES["fileToUpload"]["name"]);
             $type = "document/pdf"; // impostato il tipo per un'pdf
@@ -380,6 +410,6 @@
     echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
 }
 ?>
-</div>
+</div><br/><br/>
 </body>
 </html>

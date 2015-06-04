@@ -88,6 +88,36 @@
                 <hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
                 <div>
                     <?php
+                    if ($_COOKIE['searchbarall'] == "1") {
+                        #search bar
+                        echo "<center><div style='width:100%; padding: 10px; position: fixed; bottom: 0px;'>
+				    	<form name='f3' action='view_preprints.php' method='GET'>
+					<input type='submit' name='More' value='More'/>
+					<select name='f'>
+					    <option value='all' selected='selected'>All papers:</option>
+					    <option value='author'>Authors:</option>
+					    <option value='category'>Category:</option>
+					    <option value='year'>Year:</option>
+					    <option value='id'>ID:</option>
+					</select>
+					<input type='search' autocomplete = 'on' style='width:20%;' name='r' placeholder='Author name, part, etc.' value='" . $_GET['r'] . "'/>
+				    <input type='submit' name='s' value='Send'/>
+				    <input type='text' name='o' value='dated' hidden>
+				    </form></div>
+				    <form name='f4' action='view_preprints.php' method='GET'>
+			<div id='adv' hidden><br/>
+			<font color='#007897'>Advanced search:</font><br/>
+				<div style='height:30px;'>
+				Filter by
+				<select name='f'>
+				    <option value='all' selected='selected'>All papers:</option>
+				    <option value='author'>Authors:</option>
+				    <option value='category'>Category:</option>
+				    <option value='year'>Year:</option>
+				    <option value='id'>ID:</option>
+				</select>
+				<input type='search' autocomplete = 'on' style='width:40%;' name='r' placeholder='Author name, part, etc.' value='" . $_GET['r'] . "'/> <input type='submit' name='s' value='Send'/></form></div></center>";
+                    }
                     #importo file per utilizzare funzioni...
                     include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/check_nomi_data.php');
                     if (sessioneavviata() == True) {
@@ -184,6 +214,6 @@
                 echo "</table></center></form>";
             }
             ?>
-        </div>
+        </div><br/><br/>
     </body>
 </html>
