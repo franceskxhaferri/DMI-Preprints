@@ -57,6 +57,11 @@
                     id.style.display = 'none';
                 }
             }
+            //chiudi menu click fuori dalla finestra
+            function myFunction() {
+                adv.style.display = 'none';
+                opt.style.display = 'none';
+            }
         </script>
         <script type="text/x-mathjax-config">
             MathJax.Hub.Config({
@@ -139,34 +144,12 @@
             #if ($_SESSION['nome']." (".$_SESSION['uid'].")" == $row['uid'] && $row['uid'] != ""){
             if (($_SESSION['logged_type'] === "mod" or $_SESSION['logged_type'] === "user") && $_SESSION['nome'] . " (" . $_SESSION['uid'] . ")" == $_GET['r']) {
                 //sessione moderatore
-                ?>
-                <div id="header-wrapper">
-                    <div class="container">
-                        <div class="row">
-                            <div class="12u">
-                                <header id="header">
-                                    <h1><a href="#" id="logo">DMI Papers</a></h1>
-                                    <nav id="nav">
-                                        <a href='./view_preprints.php'>Publications</a>
-                                        <a href="./reserved.php" class="current-page-item">Reserved Area</a>
-                                    </nav>
-                                </header>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div><center><br/><br/><h2>manual editing</h2></center>
-                </div><center>
-                <table>
-                    <tr><form name="f1" action="uploaded.php" method="GET"><td align="right" style='width:150px; height:16px'>Go to uploaded&nbsp&nbsp&nbsp</td>
-                        <td><input type="submit" name="b1" value="Back" id='bottone_keyword' class='bottoni' onclick="return confirmExit()"/></td>
-                        </tr>
-                    </form></table>
-            </center>
-            <?php
-            if ($_COOKIE['searchbarall'] == "1") {
-                #search bar
-                echo "<center><div style='z-index:999999; width:100%; padding: 2px; position: fixed; border-top: 1px dashed Navy; border-color: #3C3C3C; background-color:#DDDDDD; bottom: 0px;'>
+                if ($_COOKIE['searchbarall'] == "1") {
+                    #search bar
+                    echo "<center><div style='z-index:999999; width:100%; padding: 2px; position: fixed; border-top: 1px solid; border-color: #AFAFAF; background-color:#DDDDDD; bottom: 0px;'><form name='f5' action='view_preprints.php' method='GET'  style='height:12px; width:12px; float:left;'>
+		    <input type='image' title='Close' name='close' value=1 src='./images/close.jpeg' border='0'  style='height:12px; width:12px; float:left;'/>
+		    <input type='text' name='clos' value='1' hidden>
+		    </form>
 			     <div id='adv' hidden>
 			     <div>
 			<form name='f4' action='view_preprints.php' method='GET'>
@@ -241,41 +224,64 @@
 		            <option value='year'>Year:</option>
 		            <option value='id'>ID:</option>
 		        </select>
-		        <input type='search' autocomplete = 'on' style='width:22%;' name='r' placeholder='Author name, part, etc.'/>
+		        <input type='search' autocomplete = 'on' style='width:22%;' name='r' placeholder='Author name, part, etc.' value='" . $_GET['r'] . "'/>
 		    <input type='submit' name='s' value='Send'/></form>
-		    <form name='f5' action='view_preprints.php' method='GET'  style='height:12px; width:12px; float:left;'>
-		    <input type='image' title='Close' name='close' value=1 src='./images/close.jpeg' border='0'  style='height:12px; width:12px; float:left;'/>
-		    <input type='text' name='clos' value='1' hidden>
-		    </form></div></center>";
-            }
-            if (!isset($_GET['id'])) {
-                echo "<center><br/><a style='color:#007897;' href='./view_preprints.php?p=1&w=0' onclick='window.open(this.href); return false' title='Go to preprints list'>View from inserted preprints</a></center>";
-                echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
-                echo " <center><div><form name='f2' action='manual_edit.php' method='POST'>Insert id of publication: <input type='search' autocomplete = 'on' style='width:175px;' name='id' id='textbox' required class='textbox' placeholder='example of id: 0000.0000v1' autofocus/> <input type='submit' name='b8' value='Get preprint' style='width:70px;' id='bottone_keyword' class='bottoni'/><br/>
+		    </div></center>";
+                }
+                ?>
+                <div onclick="myFunction()">
+                    <div id="header-wrapper">
+                        <div class="container">
+                            <div class="row">
+                                <div class="12u">
+                                    <header id="header">
+                                        <h1><a href="#" id="logo">DMI Papers</a></h1>
+                                        <nav id="nav">
+                                            <a href='./view_preprints.php'>Publications</a>
+                                            <a href="./reserved.php" class="current-page-item">Reserved Area</a>
+                                        </nav>
+                                    </header>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div><center><br/><br/><h2>manual editing</h2></center>
+                    </div><center>
+                        <table>
+                            <tr><form name="f1" action="uploaded.php" method="GET"><td align="right" style='width:150px; height:16px'>Go to uploaded&nbsp&nbsp&nbsp</td>
+                                <td><input type="submit" name="b1" value="Back" id='bottone_keyword' class='bottoni' onclick="return confirmExit()"/></td>
+                                </tr>
+                            </form></table>
+                    </center>
+                    <?php
+                    if (!isset($_GET['id'])) {
+                        echo "<center><br/><a style='color:#007897;' href='./view_preprints.php?p=1&w=0' onclick='window.open(this.href); return false' title='Go to preprints list'>View from inserted preprints</a></center>";
+                        echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
+                        echo " <center><div><form name='f2' action='manual_edit.php' method='POST'>Insert id of publication: <input type='search' autocomplete = 'on' style='width:175px;' name='id' id='textbox' required class='textbox' placeholder='example of id: 0000.0000v1' autofocus/> <input type='submit' name='b8' value='Get preprint' style='width:70px;' id='bottone_keyword' class='bottoni'/><br/>
 		               </form></div></center>
 		               ";
-                $var = False;
-            }
-            echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
-            if (isset($_POST['b8']) or isset($_POST['b9']) or isset($_POST['b11']) or isset($_POST['b10']) or isset($_GET['id'])) {
-                if (empty($_POST['id'])) {
-                    $id = $_GET['id'];
-                } else {
-                    $id = $_POST['id'];
-                }
-                #adattamento stringa
-                $id = trim($id);
-                #funzione per recupero informazioni dell'preprint
-                $ris = cercapreprint($id);
-                if ($ris[0] == $id) {
-                    #sblocco altri campi
-                    $var = True;
-                } else {
-                    echo '<script type="text/javascript">alert("ID incorrect!");</script>';
-                }
-            }
-            if ($var == True) {
-                echo "<script type='text/javascript'>
+                        $var = False;
+                    }
+                    echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
+                    if (isset($_POST['b8']) or isset($_POST['b9']) or isset($_POST['b11']) or isset($_POST['b10']) or isset($_GET['id'])) {
+                        if (empty($_POST['id'])) {
+                            $id = $_GET['id'];
+                        } else {
+                            $id = $_POST['id'];
+                        }
+                        #adattamento stringa
+                        $id = trim($id);
+                        #funzione per recupero informazioni dell'preprint
+                        $ris = cercapreprint($id);
+                        if ($ris[0] == $id) {
+                            #sblocco altri campi
+                            $var = True;
+                        } else {
+                            echo '<script type="text/javascript">alert("ID incorrect!");</script>';
+                        }
+                    }
+                    if ($var == True) {
+                        echo "<script type='text/javascript'>
 				function confirmExit()
 				{
 				   return confirm('All unsaved changes will be lost, continue?');
@@ -330,7 +336,7 @@
                             <input type='submit' name='b10' value='Upgrade' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmUpgrade()'/>
                             <input type='submit' name='b11' value='Update' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmInsert()'/><br/><br/><br/><br/></center>
                             </div></div></form>";
-                echo "
+                        echo "
                             	<script>
 					UpdateMathtit('" . addslashes($ris[1]) . "');
 					UpdateMathjou('" . addslashes($ris[4]) . "');
@@ -339,107 +345,107 @@
 					UpdateMathaut('" . addslashes($ris[3]) . "');
 					UpdateMathabs('" . addslashes($ris[7]) . "');
 				</script>";
-                $target_file = $basedir . basename($_FILES["fileToUpload"]["name"]);
-                #bottone cancella
-                if (isset($_POST['b9'])) {
-                    $id1 = $_POST['id'];
-                    #eliminazione del preprint selezionato
-                    delete_pdf($id1);
-                    cancellaselected($id1);
-                    echo '<script type="text/javascript">alert("Publication ' . $_POST['id'] . ' removed correctly!");</script>';
-                    echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./uploaded.php">';
-                }
-                #bottone upgrade
-                if (isset($_POST['b10'])) {
-                    if (empty($_POST['journal'])) {
-                        $info[4] = "No journal ref";
-                    } else {
-                        $info[4] = $_POST['journal'];
-                    }
-                    if (empty($_POST['comments'])) {
-                        $info[5] = "No journal ref";
-                    } else {
-                        $info[5] = $_POST['comments'];
-                    }
-                    $rest = substr($_POST['id'], 0, -1);
-                    $len = strlen($_POST['id']);
-                    $ver = substr($_POST['id'], $len - 1, $len);
-                    $ver++;
-                    $info[0] = $rest . $ver;
-                    $info[1] = $_POST['title'];
-                    $info[2] = $_POST['data'];
-                    $info[3] = $_POST['author'];
-                    $info[6] = $_POST['category'];
-                    $info[7] = $_POST['abstract'];
-                    if ($_FILES["fileToUpload"]["size"] > 0) {
-                        #caricamento del file scelto
-                        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                            $fileType = $_FILES["fileToUpload"]["type"];
-                            #richiamo della funzione per il versionamento dei preprints
-                            version_preprintd($info[0]);
+                        $target_file = $basedir . basename($_FILES["fileToUpload"]["name"]);
+                        #bottone cancella
+                        if (isset($_POST['b9'])) {
+                            $id1 = $_POST['id'];
+                            #eliminazione del preprint selezionato
+                            delete_pdf($id1);
+                            cancellaselected($id1);
+                            echo '<script type="text/javascript">alert("Publication ' . $_POST['id'] . ' removed correctly!");</script>';
+                            echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./uploaded.php">';
+                        }
+                        #bottone upgrade
+                        if (isset($_POST['b10'])) {
+                            if (empty($_POST['journal'])) {
+                                $info[4] = "No journal ref";
+                            } else {
+                                $info[4] = $_POST['journal'];
+                            }
+                            if (empty($_POST['comments'])) {
+                                $info[5] = "No journal ref";
+                            } else {
+                                $info[5] = $_POST['comments'];
+                            }
+                            $rest = substr($_POST['id'], 0, -1);
+                            $len = strlen($_POST['id']);
+                            $ver = substr($_POST['id'], $len - 1, $len);
+                            $ver++;
+                            $info[0] = $rest . $ver;
+                            $info[1] = $_POST['title'];
+                            $info[2] = $_POST['data'];
+                            $info[3] = $_POST['author'];
+                            $info[6] = $_POST['category'];
+                            $info[7] = $_POST['abstract'];
+                            if ($_FILES["fileToUpload"]["size"] > 0) {
+                                #caricamento del file scelto
+                                if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+                                    $fileType = $_FILES["fileToUpload"]["type"];
+                                    #richiamo della funzione per il versionamento dei preprints
+                                    version_preprintd($info[0]);
+                                    #richiamo della funzione per inserire le info del preprint all'interno del database
+                                    insert_p($info, $_GET['r']);
+                                    rename($basedir . $_FILES["fileToUpload"]["name"], $basedir . $info[0] . ".pdf");
+                                    #spostamento pdf
+                                    #inserimento nel database del file
+                                    insertpdf($info[0], $fileType);
+                                    echo '<script type="text/javascript">alert("Publication ' . $_POST['id'] . ' upgrated to ' . $info[0] . ' correctly!");</script>';
+                                    echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./uploaded.php">';
+                                } else {
+                                    echo '<script type="text/javascript">alert("Error, file not uploaded!");</script>';
+                                }
+                            } else {
+                                echo '<script type="text/javascript">alert("Select file to upload!");</script>';
+                            }
+                        }
+                        #bottone aggiorna info
+                        if (isset($_POST['b11'])) {
+                            if (empty($_POST['journal'])) {
+                                $info[4] = "No journal ref";
+                            } else {
+                                $info[4] = $_POST['journal'];
+                            }
+                            if (empty($_POST['comments'])) {
+                                $info[5] = "No journal ref";
+                            } else {
+                                $info[5] = $_POST['comments'];
+                            }
+                            $info[0] = $_POST['id'];
+                            $info[1] = $_POST['title'];
+                            $info[2] = $_POST['data'];
+                            $info[3] = $_POST['author'];
+                            $info[6] = $_POST['category'];
+                            $info[7] = $_POST['abstract'];
                             #richiamo della funzione per inserire le info del preprint all'interno del database
-                            insert_p($info, $_GET['r']);
-                            rename($basedir . $_FILES["fileToUpload"]["name"], $basedir . $info[0] . ".pdf");
-                            #spostamento pdf
-                            #inserimento nel database del file
-                            insertpdf($info[0], $fileType);
-                            echo '<script type="text/javascript">alert("Publication ' . $_POST['id'] . ' upgrated to ' . $info[0] . ' correctly!");</script>';
-                            echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./uploaded.php">';
-                        } else {
-                            echo '<script type="text/javascript">alert("Error, file not uploaded!");</script>';
+                            update_preprints($info);
+                            $check = $_POST['check'];
+                            #controllo se ci sono file da caricare
+                            if ($_FILES["fileToUpload"]["size"] > 0) {
+                                #caricamento del file scelto
+                                if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+                                    $fileType = $_FILES["fileToUpload"]["type"];
+                                    #inserimento nel database del file
+                                    insert_one_pdf($info[0], $fileType);
+                                    echo '<script type="text/javascript">alert("Publication ' . $_POST['id'] . ' updated correctly!");</script>';
+                                    echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./uploaded.php">';
+                                } else {
+                                    echo '<script type="text/javascript">alert("Error, file not uploaded!");</script>';
+                                }
+                            } else {
+                                echo '<script type="text/javascript">alert("Publication ' . $_POST['id'] . ' updated correctly!");</script>';
+                                echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./uploaded.php">';
+                            }
                         }
-                    } else {
-                        echo '<script type="text/javascript">alert("Select file to upload!");</script>';
+                        echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
                     }
+                } else {
+                    echo '<script type="text/javascript">alert("ACCESS DENIED!");</script>';
+                    echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
                 }
-                #bottone aggiorna info
-                if (isset($_POST['b11'])) {
-                    if (empty($_POST['journal'])) {
-                        $info[4] = "No journal ref";
-                    } else {
-                        $info[4] = $_POST['journal'];
-                    }
-                    if (empty($_POST['comments'])) {
-                        $info[5] = "No journal ref";
-                    } else {
-                        $info[5] = $_POST['comments'];
-                    }
-                    $info[0] = $_POST['id'];
-                    $info[1] = $_POST['title'];
-                    $info[2] = $_POST['data'];
-                    $info[3] = $_POST['author'];
-                    $info[6] = $_POST['category'];
-                    $info[7] = $_POST['abstract'];
-                    #richiamo della funzione per inserire le info del preprint all'interno del database
-                    update_preprints($info);
-                    $check = $_POST['check'];
-                    #controllo se ci sono file da caricare
-                    if ($_FILES["fileToUpload"]["size"] > 0) {
-                        #caricamento del file scelto
-                        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                            $fileType = $_FILES["fileToUpload"]["type"];
-                            #inserimento nel database del file
-                            insert_one_pdf($info[0], $fileType);
-                            echo '<script type="text/javascript">alert("Publication ' . $_POST['id'] . ' updated correctly!");</script>';
-                            echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./uploaded.php">';
-                        } else {
-                            echo '<script type="text/javascript">alert("Error, file not uploaded!");</script>';
-                        }
-                    } else {
-                        echo '<script type="text/javascript">alert("Publication ' . $_POST['id'] . ' updated correctly!");</script>';
-                        echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./uploaded.php">';
-                    }
-                }
-                echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
+            } else {
+                echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
             }
-        } else {
-            echo '<script type="text/javascript">alert("ACCESS DENIED!");</script>';
-            echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
-        }
-    } else {
-        echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
-    }
-    ?>
-</div><br/><br/>
+            ?>
+        </div></div><br/><br/>
 </body>
 </html>

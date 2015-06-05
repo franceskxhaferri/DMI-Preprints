@@ -62,6 +62,11 @@
                     id.style.display = 'none';
                 }
             }
+            //chiudi menu click fuori dalla finestra
+            function myFunction() {
+                adv.style.display = 'none';
+                opt.style.display = 'none';
+            }
         </script>
     </head>
     <body>
@@ -71,46 +76,12 @@
         include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/check_nomi_data.php');
         include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/insert_remove_db.php');
         sec_session_start();
-        if ($_SESSION['logged_type'] === "mod") {
-            $nav = "<tr><form name='f2' action='archived_preprints.php' method='GET'>
-		<td align='right'>Delete all archived papers from database&nbsp&nbsp&nbsp</td>
-		<td><input type='submit' name='c' value='Remove all' id='bottone_keyword' class='bottoni' onclick='return confirmDelete()'/></td>
-		</form></tr>";
-            $nav2 = "<header id='header'>
-                                    <h1><a href='#' id='logo'>DMI Papers</a></h1>
-                                    <nav id='nav'>
-                                        <a href='./view_preprints.php'>Publications</a>
-                                        <a href='./reserved.php' class='current-page-item'>Reserved Area</a>
-                                    </nav>
-                                </header>";
-            $rit = "modp.php";
-            $cred = 1;
-        } else {
-            $nav = "";
-            $nav2 = "<header id='header'>
-                                    <h1><a href='#' id='logo'>DMI Papers</a></h1>
-                                    <nav id='nav'>
-                                        <a href='./view_preprints.php' class='current-page-item'>Publications</a>
-                                        <a href='./reserved.php'>Reserved Area</a>
-                                    </nav>
-                                </header>";
-        }
-        ?>
-        <div id="header-wrapper">
-            <div class="container">
-                <div class="row">
-                    <div class="12u">
-                        <?php echo $nav2; ?>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div><center><br/><br/><h2>ARCHIVED PAPERS</h2></center>
-        </div><center>
-        <?php
         if ($_COOKIE['searchbarall'] == "1") {
             #search bar
-            echo "<div style='z-index:999999; width:100%; padding: 2px; position: fixed; border-top: 1px dashed Navy; border-color: #3C3C3C; background-color:#DDDDDD; bottom: 0px;'>
+            echo "<center><div style='z-index:999999; width:100%; padding: 2px; position: fixed; border-top: 1px solid; border-color: #AFAFAF; background-color:#DDDDDD; bottom: 0px;'><form name='f5' action='view_preprints.php' method='GET'  style='height:12px; width:12px; float:left;'>
+		    <input type='image' title='Close' name='close' value=1 src='./images/close.jpeg' border='0'  style='height:12px; width:12px; float:left;'/>
+		    <input type='text' name='clos' value='1' hidden>
+		    </form>
 			     <div id='adv' hidden>
 			     <div>
 			<form name='f4' action='view_preprints.php' method='GET'>
@@ -187,37 +158,72 @@
 		        </select>
 		        <input type='search' autocomplete = 'on' style='width:22%;' name='r' placeholder='Author name, part, etc.' value='" . $_GET['r'] . "'/>
 		    <input type='submit' name='s' value='Send'/></form>
-		    <form name='f5' action='view_preprints.php' method='GET'  style='height:12px; width:12px; float:left;'>
-		    <input type='image' title='Close' name='close' value=1 src='./images/close.jpeg' border='0'  style='height:12px; width:12px; float:left;'/>
-		    <input type='text' name='clos' value='1' hidden>
-		    </form></div>";
+		    </div></center>";
         }
-        if ($cred == 1) {
-            echo "<table>
+        if ($_SESSION['logged_type'] === "mod") {
+            $nav = "<tr><form name='f2' action='archived_preprints.php' method='GET'>
+		<td align='right'>Delete all archived papers from database&nbsp&nbsp&nbsp</td>
+		<td><input type='submit' name='c' value='Remove all' id='bottone_keyword' class='bottoni' onclick='return confirmDelete()'/></td>
+		</form></tr>";
+            $nav2 = "<header id='header'>
+                                    <h1><a href='#' id='logo'>DMI Papers</a></h1>
+                                    <nav id='nav'>
+                                        <a href='./view_preprints.php'>Publications</a>
+                                        <a href='./reserved.php' class='current-page-item'>Reserved Area</a>
+                                    </nav>
+                                </header>";
+            $rit = "modp.php";
+            $cred = 1;
+        } else {
+            $nav = "";
+            $nav2 = "<header id='header'>
+                                    <h1><a href='#' id='logo'>DMI Papers</a></h1>
+                                    <nav id='nav'>
+                                        <a href='./view_preprints.php' class='current-page-item'>Publications</a>
+                                        <a href='./reserved.php'>Reserved Area</a>
+                                    </nav>
+                                </header>";
+        }
+        ?>
+        <div onclick="myFunction()">
+            <div id="header-wrapper">
+                <div class="container">
+                    <div class="row">
+                        <div class="12u">
+                            <?php echo $nav2; ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div><center><br/><br/><h2>ARCHIVED PAPERS</h2></center>
+            </div><center>
+                <?php
+                if ($cred == 1) {
+                    echo "<table>
             	<tr>
                 <td align='right'>Go to admin panel&nbsp&nbsp&nbsp</td>
                 <td align='center'><a style='height:17px; color:white;' href='./modp.php' id='bottone_keyword' class='bottoni'>Back</a></td>
                 </tr>";
-            echo $nav;
-        }
-        ?>
-    </table>
-</center>
-<?php
-if (sessioneavviata() == True) {
-    echo "<br/><br/><center>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTION CAN'T BE USED IN THIS MOMENT!</center><br/>";
-} else {
-    echo "<br/><center><a style='text-decoration: none;' href='javascript:FinePagina()'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8595;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><center><div>";
-    if (isset($_GET['c'])) {
-        #funzione gestione preprint archiviati
-        leggipreprintarchiviati();
-    } else {
-        #funzione gestione preprint archiviati
-        leggipreprintarchiviati();
-        echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><br/>";
-    }
-}
-?>
-</div></center><br/><br/>
+                    echo $nav;
+                }
+                ?>
+                </table>
+            </center><div onclick="myFunction()">
+                <?php
+                if (sessioneavviata() == True) {
+                    echo "<br/><br/><center>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTION CAN'T BE USED IN THIS MOMENT!</center><br/>";
+                } else {
+                    echo "<br/><center><a style='text-decoration: none;' href='javascript:FinePagina()'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8595;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><center><div>";
+                    if (isset($_GET['c'])) {
+                        #funzione gestione preprint archiviati
+                        leggipreprintarchiviati();
+                    } else {
+                        #funzione gestione preprint archiviati
+                        leggipreprintarchiviati();
+                        echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><br/>";
+                    }
+                }
+                ?>
+            </div></div></div></center><br/><br/>
 </body>
 </html>

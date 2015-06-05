@@ -61,6 +61,11 @@
                 else
                     element.style.display = 'none';
             }
+            //chiudi menu click fuori dalla finestra
+            function myFunction() {
+                adv.style.display = 'none';
+                opt.style.display = 'none';
+            }
         </script>
         <script type="text/x-mathjax-config">
             MathJax.Hub.Config({
@@ -132,31 +137,12 @@
         if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] < 86400)) {
             if ($_SESSION['logged_type'] === "mod") {
                 //sessione moderatore
-                ?>
-                <div id="header-wrapper">
-                    <div class="container">
-                        <div class="row">
-                            <div class="12u">
-                                <header id="header">
-                                    <h1><a href="#" id="logo">DMI Papers</a></h1>
-                                    <nav id="nav">
-                                        <a href='./view_preprints.php'>Publications</a>
-                                        <a href="./reserved.php" class="current-page-item">Reserved Area</a>
-                                    </nav>
-                                </header>
-                            </div>
-                        </div>
-                    </div>
-                </div><br/>
-            <center><div>
-                    <?php
-                    print_r("<font style='font-weight: bold;'>Name: </font>");
-                    print_r($_SESSION['nome']);
-                    print_r(" <font style='font-weight: bold;'>Access type: </font>");
-                    print_r($_SESSION['logged_type']);
-                    if ($_COOKIE['searchbarall'] == "1") {
-                        #search bar
-                        echo "<div style='z-index:999999; width:100%; padding: 2px; position: fixed; border-top: 1px dashed Navy; border-color: #3C3C3C; background-color:#DDDDDD; bottom: 0px;'>
+                if ($_COOKIE['searchbarall'] == "1") {
+                    #search bar
+                    echo "<center><div style='z-index:999999; width:100%; padding: 2px; position: fixed; border-top: 1px solid; border-color: #AFAFAF; background-color:#DDDDDD; bottom: 0px;'><form name='f5' action='view_preprints.php' method='GET'  style='height:12px; width:12px; float:left;'>
+		    <input type='image' title='Close' name='close' value=1 src='./images/close.jpeg' border='0'  style='height:12px; width:12px; float:left;'/>
+		    <input type='text' name='clos' value='1' hidden>
+		    </form>
 			     <div id='adv' hidden>
 			     <div>
 			<form name='f4' action='view_preprints.php' method='GET'>
@@ -233,89 +219,109 @@
 		        </select>
 		        <input type='search' autocomplete = 'on' style='width:22%;' name='r' placeholder='Author name, part, etc.' value='" . $_GET['r'] . "'/>
 		    <input type='submit' name='s' value='Send'/></form>
-		    <form name='f5' action='view_preprints.php' method='GET'  style='height:12px; width:12px; float:left;'>
-		    <input type='image' title='Close' name='close' value=1 src='./images/close.jpeg' border='0'  style='height:12px; width:12px; float:left;'/>
-		    <input type='text' name='clos' value='1' hidden>
-		    </form></div>";
-                    }
-                    ?>
-                </div>
-                <br/>
-                <div>
-                    <div style="float:left; margin-left:0.5%;">
-                        <form name="f1" action="modp.php" method="POST">
-                            <input type="submit" name="b1" value="Logout" id="botton_logout" class="bottoni" style="height:17px; color: red;" onclick="return confirmLogout()">
-                        </form>
-                    </div>
-                    <div style="float:left; margin-left:0.5%;">
-                        <a style="height:17px; color:white;" href="./uploaded.php?p=1" id="bottone_keyword" class="bottoni">My upload</a>
-                    </div>
-                    <div style="float:left; margin-left:0.5%;">
-                        <a style="height:17px; color:white;" href="./archived_preprints.php" id="bottone_keyword" class="bottoni">Archived section</a>
-                    </div>
-                    <div style="float:left; margin-left:0.5%;">
-                        <a style="height:17px; color:white;" href="./approve_preprints.php" id="bottone_keyword" class="bottoni">Check section</a>
-                    </div>
-                    <div style="float:left; margin-left:0.5%;">
-                        <a style="height:17px; color:white;" href="./check_preprints.php?bb3=1" id="bottone_keyword" class="bottoni">Check arXiv section</a>
-                    </div>
-                    <div style="float:left; margin-left:0.5%;">
-                        <a style="height:17px; color:white;" href="./manual_edit.php" id="bottone_keyword" class="bottoni">Edit section</a>
-                    </div>
-                    <div style="float:left; margin-left:0.5%;">
-                        <a style="height:17px; color:white;" href="./arXiv_panel.php" id="bottone_keyword" class="bottoni">ArXiv panel</a>
-                    </div>
-                    <div style="clear:both;"></div>
-                </div>
-            </center>
-            <hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
-            <form name="f3" action="modp.php" method="POST" enctype="multipart/form-data">
-                <center><div><br/><h2>Insert new paper</h2><h1>field with "*" are required</h1><br/>
-                    <input type="reset" name="reset" value="Reset"/><br/><br/></center>
-                <div style="margin-left:1%; margin-right:1%;"><div style="float:left; width:100%;">
-                        <div style="font-weight: bold;">*category:</div><br/>
-                        <select name="category" required onchange='Checkcath(this.value);'>
-                            <option value="">--Select Category--</option>
-                            <option value="Computer Science">Computer Science</option>
-                            <option value="Mathematics">Mathematics</option>
-                            <option value="Statistics">Statistics</option>
-                            <option value="Physics">Physics</option>
-                            <option value="Quantitative Biology">Quantitative Biology</option>
-                            <option value="Quantitative Finance">Quantitative Finance</option>
-                            <option value="Other">Other:</option>
-                        </select><br/><br/>
-                        <div id="cat" hidden><textarea style="width:49%;" name="category2" class="textbox" placeholder="example of category: math.NA..." maxlength="280"></textarea><br/><br/></div>
-                        <div style="float:right; width:49%;">
-                            <div style="font-weight: bold;">title preview:</div><br/>
-                            <div id="titlediv"></div>
+		    </div></center>";
+                }
+                ?>
+                <div onclick="myFunction()">
+                    <div id="header-wrapper">
+                        <div class="container">
+                            <div class="row">
+                                <div class="12u">
+                                    <header id="header">
+                                        <h1><a href="#" id="logo">DMI Papers</a></h1>
+                                        <nav id="nav">
+                                            <a href='./view_preprints.php'>Publications</a>
+                                            <a href="./reserved.php" class="current-page-item">Reserved Area</a>
+                                        </nav>
+                                    </header>
+                                </div>
+                            </div>
                         </div>
-                        <div style="font-weight: bold;">*title:</div><br/>
-                        <textarea style="width:49%;" name="title" id="textbox" class="textbox" required placeholder="example of title: The geometric..." onkeyup="UpdateMathtit(this.value)" maxlength="280"></textarea><br/><br/>
-                        <div style="float:right; width:49%;">
-                            <div style="font-weight: bold;">authors preview:</div><br/>
-                            <div id="authordiv"></div>
+                    </div><br/>
+                    <center><div>
+                            <?php
+                            print_r("<font style='font-weight: bold;'>Name: </font>");
+                            print_r($_SESSION['nome']);
+                            print_r(" <font style='font-weight: bold;'>Access type: </font>");
+                            print_r($_SESSION['logged_type']);
+                            ?>
                         </div>
-                        <div style="font-weight: bold;">*authors:</div><br/>
-                        <textarea style="width:49%;" name="author" id="textbox" class="textbox" required placeholder="example of author: Mario Rossi, Luca..." onkeyup="UpdateMathaut(this.value)" maxlength="280"></textarea><br/><br/>
-                        <div style="float:right; width:49%;">
-                            <div style="font-weight: bold;">journal preview:</div><br/>
-                            <div id="journaldiv"></div>
+                        <br/>
+                        <div>
+                            <div style="float:left; margin-left:0.5%;">
+                                <form name="f1" action="modp.php" method="POST">
+                                    <input type="submit" name="b1" value="Logout" id="botton_logout" class="bottoni" style="height:17px; color: red;" onclick="return confirmLogout()">
+                                </form>
+                            </div>
+                            <div style="float:left; margin-left:0.5%;">
+                                <a style="height:17px; color:white;" href="./uploaded.php?p=1" id="bottone_keyword" class="bottoni">My upload</a>
+                            </div>
+                            <div style="float:left; margin-left:0.5%;">
+                                <a style="height:17px; color:white;" href="./archived_preprints.php" id="bottone_keyword" class="bottoni">Archived section</a>
+                            </div>
+                            <div style="float:left; margin-left:0.5%;">
+                                <a style="height:17px; color:white;" href="./approve_preprints.php" id="bottone_keyword" class="bottoni">Check section</a>
+                            </div>
+                            <div style="float:left; margin-left:0.5%;">
+                                <a style="height:17px; color:white;" href="./check_preprints.php?bb3=1" id="bottone_keyword" class="bottoni">Check arXiv section</a>
+                            </div>
+                            <div style="float:left; margin-left:0.5%;">
+                                <a style="height:17px; color:white;" href="./manual_edit.php" id="bottone_keyword" class="bottoni">Edit section</a>
+                            </div>
+                            <div style="float:left; margin-left:0.5%;">
+                                <a style="height:17px; color:white;" href="./arXiv_panel.php" id="bottone_keyword" class="bottoni">ArXiv panel</a>
+                            </div>
+                            <div style="clear:both;"></div>
                         </div>
-                        <div style="font-weight: bold;">journal reference:</div><br/>
-                        <textarea style="width:49%;" name="journal" id="textbox" class="textbox" placeholder="example of Journal: Numer. Linear Algebra..." onkeyup="UpdateMathjou(this.value)" maxlength="280"></textarea><br/><br/>
-                        <div style="float:right; width:49%;">
-                            <div style="font-weight: bold;">comments preview:</div><br/>
-                            <div id="commentsdiv"></div>
-                        </div>
-                        <div style="font-weight: bold;">comments:</div><br/>
-                        <textarea style="width:49%;" name="comments" id="textbox" class="textbox" placeholder="example of comments: 10 pages..." onkeyup="UpdateMathcom(this.value)" maxlength="280"></textarea><br/><br/>
-                        <div style="float:right; width:49%;">
-                            <div style="font-weight: bold;">abstract preview:</div><br/>
-                            <div id="abstractdiv"></div>
-                        </div>
-                        <div style="font-weight: bold;">*abstract:</div><br/>
-                        <textarea style="width:49%; height:300px;" name="abstract" id="textbox" class="textbox" required placeholder="example of abstract: The geometric..." onkeyup="UpdateMathabs(this.value)"></textarea><br/><br/></div>
-                </div></div>
+                    </center>
+                    <hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
+                    <form name="f3" action="modp.php" method="POST" enctype="multipart/form-data">
+                        <center><div><br/><h2>Insert new paper</h2><h1>field with "*" are required</h1><br/>
+                            <input type="reset" name="reset" value="Reset"/><br/><br/></center>
+                        <div style="margin-left:1%; margin-right:1%;"><div style="float:left; width:100%;">
+                                <div style="font-weight: bold;">*category:</div><br/>
+                                <select name="category" required onchange='Checkcath(this.value);'>
+                                    <option value="">--Select Category--</option>
+                                    <option value="Computer Science">Computer Science</option>
+                                    <option value="Mathematics">Mathematics</option>
+                                    <option value="Statistics">Statistics</option>
+                                    <option value="Physics">Physics</option>
+                                    <option value="Quantitative Biology">Quantitative Biology</option>
+                                    <option value="Quantitative Finance">Quantitative Finance</option>
+                                    <option value="Other">Other:</option>
+                                </select><br/><br/>
+                                <div id="cat" hidden><textarea style="width:49%;" name="category2" class="textbox" placeholder="example of category: math.NA..." maxlength="280"></textarea><br/><br/></div>
+                                <div style="float:right; width:49%;">
+                                    <div style="font-weight: bold;">title preview:</div><br/>
+                                    <div id="titlediv"></div>
+                                </div>
+                                <div style="font-weight: bold;">*title:</div><br/>
+                                <textarea style="width:49%;" name="title" id="textbox" class="textbox" required placeholder="example of title: The geometric..." onkeyup="UpdateMathtit(this.value)" maxlength="280"></textarea><br/><br/>
+                                <div style="float:right; width:49%;">
+                                    <div style="font-weight: bold;">authors preview:</div><br/>
+                                    <div id="authordiv"></div>
+                                </div>
+                                <div style="font-weight: bold;">*authors:</div><br/>
+                                <textarea style="width:49%;" name="author" id="textbox" class="textbox" required placeholder="example of author: Mario Rossi, Luca..." onkeyup="UpdateMathaut(this.value)" maxlength="280"></textarea><br/><br/>
+                                <div style="float:right; width:49%;">
+                                    <div style="font-weight: bold;">journal preview:</div><br/>
+                                    <div id="journaldiv"></div>
+                                </div>
+                                <div style="font-weight: bold;">journal reference:</div><br/>
+                                <textarea style="width:49%;" name="journal" id="textbox" class="textbox" placeholder="example of Journal: Numer. Linear Algebra..." onkeyup="UpdateMathjou(this.value)" maxlength="280"></textarea><br/><br/>
+                                <div style="float:right; width:49%;">
+                                    <div style="font-weight: bold;">comments preview:</div><br/>
+                                    <div id="commentsdiv"></div>
+                                </div>
+                                <div style="font-weight: bold;">comments:</div><br/>
+                                <textarea style="width:49%;" name="comments" id="textbox" class="textbox" placeholder="example of comments: 10 pages..." onkeyup="UpdateMathcom(this.value)" maxlength="280"></textarea><br/><br/>
+                                <div style="float:right; width:49%;">
+                                    <div style="font-weight: bold;">abstract preview:</div><br/>
+                                    <div id="abstractdiv"></div>
+                                </div>
+                                <div style="font-weight: bold;">*abstract:</div><br/>
+                                <textarea style="width:49%; height:300px;" name="abstract" id="textbox" class="textbox" required placeholder="example of abstract: The geometric..." onkeyup="UpdateMathabs(this.value)"></textarea><br/><br/></div>
+                        </div></div>
             <center>
                 <div style="font-weight: bold;">*PDF:<br/></div>
                 <input type="hidden" name="MAX_FILE_SIZE" value="10000000"><br/>
@@ -370,6 +376,6 @@
     echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
 }
 ?>
-</div></center><br/><br/>
+</div></div></center><br/><br/>
 </body>
 </html>

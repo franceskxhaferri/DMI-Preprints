@@ -95,10 +95,12 @@
                 var math = getCookie("math");
                 if (math == "no") {
                     setCookie("math", "yes", 1825);
-                    window.location.reload()
+                    alert("MathJax is now abilited!");
+                    window.location.reload();
                 } else {
                     setCookie("math", "no", 1825);
-                    window.location.reload()
+                    alert("MathJax is now disabled!");
+                    window.location.reload();
                 }
             }
             //cookie pageview
@@ -106,10 +108,12 @@
                 var pageview = getCookie("pageview");
                 if (pageview == "0") {
                     setCookie("pageview", "1", 1825);
-                    window.location.reload()
+                    alert("On page view is now abilited, PDF will be shown in the page!");
+                    window.location.reload();
                 } else {
                     setCookie("pageview", "0", 1825);
-                    window.location.reload()
+                    alert("On page view is now disabled!");
+                    window.location.reload();
                 }
             }
             //cookie searchbar
@@ -117,11 +121,13 @@
                 var pageview = getCookie("searchbar");
                 if (pageview == "0") {
                     setCookie("searchbar", "1", 1825);
-                    window.location.reload()
+                    alert("Search Bar is now abilited!");
+                    window.location.reload();
                 } else {
                     setCookie("searchbar", "0", 1825);
                     setCookie("searchbarall", "0", 1825);
-                    window.location.reload()
+                    alert("Search Bar is now disabled!");
+                    window.location.reload();
                 }
             }
             //cookie searchbar in tutte le pagine
@@ -130,20 +136,28 @@
                 if (pageview == "0") {
                     setCookie("searchbarall", "1", 1825);
                     setCookie("searchbar", "1", 1825);
-                    window.location.reload()
+                    alert("Search Bar is now abilited on all pages, now the bar will appear on every page!");
+                    window.location.reload();
                 } else {
                     setCookie("searchbarall", "0", 1825);
-                    window.location.reload()
+                    alert("Search Bar is now disabled on all pages, now the bar will appear only in this page!");
+                    window.location.reload();
                 }
             }
             //cookie searchbar in tutte le pagine
             function checkCookie7() {
                 setCookie("searchbarall", "0", 1825);
+                alert("Search Bar is now disabled on all pages, now the bar will appear only in this page!");
             }
             //settaggio cookie pageview
             function checkCookie4() {
                 setCookie("pageview", "0", 1825);
-                window.location.reload()
+                window.location.reload();
+            }
+            //chiudi menu click fuori dalla finestra
+            function myFunction() {
+                adv.style.display = 'none';
+                opt.style.display = 'none';
             }
         </script>
         <?php
@@ -240,10 +254,10 @@
         </div><center>
         To see <a style="color:#007897;" href="archived_preprints.php" onclick="window.open(this.href);
                 return false">archived</a>(old publications)<br/>
-        <?php
-        if ($_COOKIE['searchbar'] == "1" or ! isset($_COOKIE['searchbar'])) {
-            #search bar
-            echo "<div style='z-index:999999; width:100%; padding: 2px; position: fixed; border-top: 1px dashed Navy; border-color: #3C3C3C; background-color:#DDDDDD; bottom: 0px;'>
+                  <?php
+                  if ($_COOKIE['searchbar'] == "1" or ! isset($_COOKIE['searchbar'])) {
+                      #search bar
+                      echo "<div style='z-index:999999; width:100%; padding: 2px; position: fixed; border-top: 1px solid; border-color: #AFAFAF; background-color:#DDDDDD; bottom: 0px;'><input type='image' title='Close' onclick='javascript:checkCookie5();' src='./images/close.jpeg' border='0' style='height:12px; width:12px; float:left;' />
 			     <div id='adv' hidden>
 			     <div>
 			<form name='f4' action='view_preprints.php' method='GET'>
@@ -339,12 +353,11 @@
 		        </select>
 		        <input type='search' autocomplete = 'on' style='width:22%;' name='r' placeholder='Author name, part, etc.' value='" . $_GET['r'] . "'/>
 		    <input type='submit' name='s' value='Send'/>
-		    <input type='image' title='Close' onclick='javascript:checkCookie5();' src='./images/close.jpeg' border='0' style='height:12px; width:12px; float:left;' />
 		    </form></div>
                 ";
-        } else {
-            #ricerca classica
-            echo "
+                  } else {
+                      #ricerca classica
+                      echo "
         	<br/><font color='#007897'>Keyword search</font>
         	<div style='height:30px;'>
             	<form name='f4' action='view_preprints.php' method='GET'>
@@ -443,61 +456,61 @@
 				<label><input type='radio' name='st' value='0'>Archived</label>
 			    </form></div><br/>
 		    </div></div>";
-        }
-        ?>
-    </div>
-    <?php
+                  }
+                  ?>
+    </div><div onclick="myFunction()">
+        <?php
 #visualizza opzioni avanzate
-    if ($_GET['More'] == "More") {
-        echo "<script>javascript:showHide(adv);</script>";
-    }
+        if ($_GET['More'] == "More") {
+            echo "<script>javascript:showHide(adv);</script>";
+        }
 #disabilita searchbar su altre pagine
-    if ($_GET['clos'] == "1") {
-        echo "<script>javascript:checkCookie7();</script>";
-    }
-    echo "<center><br/><a style='text-decoration: none;' href='javascript:FinePagina()'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8595;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><center>";
+        if ($_GET['clos'] == "1") {
+            echo "<script>javascript:checkCookie7();</script>";
+        }
+        echo "<center><br/><a style='text-decoration: none;' href='javascript:FinePagina()'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8595;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><center>";
 #ricerca full text
-    if (isset($_GET['go']) && $_GET['go'] != "") {
-        searchfulltext();
-        echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'>&nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><br/>";
-    }
-#ricerca normale
-    if (isset($_GET['s']) && $_GET['s'] != "") {
-        if (!is_numeric($_GET['year2']) && is_numeric($_GET['year3'])) {
-            echo '<script type="text/javascript">alert("YEAR NOT VALID!(insert both years)");</script>';
-            #funzione lettura e filtro preprint
-            filtropreprint();
+        if (isset($_GET['go']) && $_GET['go'] != "") {
+            searchfulltext();
             echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'>&nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><br/>";
-        } else {
-            if (!is_numeric($_GET['year3']) && is_numeric($_GET['year2'])) {
+        }
+#ricerca normale
+        if (isset($_GET['s']) && $_GET['s'] != "") {
+            if (!is_numeric($_GET['year2']) && is_numeric($_GET['year3'])) {
                 echo '<script type="text/javascript">alert("YEAR NOT VALID!(insert both years)");</script>';
                 #funzione lettura e filtro preprint
                 filtropreprint();
                 echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'>&nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><br/>";
             } else {
-                if ($_GET['t'] == 1 or $_GET['a'] == 1 or $_GET['c'] == 1 or $_GET['j'] == 1 or $_GET['h'] == 1 or $_GET['y'] == 1 or $_GET['all'] == 1 or $_GET['d'] == 1 or $_GET['e'] == 1 or $_GET['i'] == 1 or is_numeric($_GET['year1']) or is_numeric($_GET['year2']) or is_numeric($_GET['year3'])) {
-                    searchpreprint();
-                    echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'>&nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><br/>";
-                } else {
+                if (!is_numeric($_GET['year3']) && is_numeric($_GET['year2'])) {
+                    echo '<script type="text/javascript">alert("YEAR NOT VALID!(insert both years)");</script>';
                     #funzione lettura e filtro preprint
                     filtropreprint();
                     echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'>&nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><br/>";
+                } else {
+                    if ($_GET['t'] == 1 or $_GET['a'] == 1 or $_GET['c'] == 1 or $_GET['j'] == 1 or $_GET['h'] == 1 or $_GET['y'] == 1 or $_GET['all'] == 1 or $_GET['d'] == 1 or $_GET['e'] == 1 or $_GET['i'] == 1 or is_numeric($_GET['year1']) or is_numeric($_GET['year2']) or is_numeric($_GET['year3'])) {
+                        searchpreprint();
+                        echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'>&nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><br/>";
+                    } else {
+                        #funzione lettura e filtro preprint
+                        filtropreprint();
+                        echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'>&nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><br/>";
+                    }
+                }
+            }
+        } else {
+            if (($_GET['t'] == 1 or $_GET['a'] == 1 or $_GET['c'] == 1 or $_GET['j'] == 1 or $_GET['h'] == 1 or $_GET['y'] == 1 or $_GET['all'] == 1 or $_GET['d'] == 1 or $_GET['e'] == 1 or $_GET['i'] == 1 or is_numeric($_GET['year1']) or is_numeric($_GET['year2']) or is_numeric($_GET['year3'])) && $_GET['go'] != "Send") {
+                searchpreprint();
+                echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'>&nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><br/>";
+            } else {
+                if ($_GET['go'] != "Send") {
+                    #funzione lettura e filtro preprint
+                    filtropreprint();
+                    echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><br/>";
                 }
             }
         }
-    } else {
-        if (($_GET['t'] == 1 or $_GET['a'] == 1 or $_GET['c'] == 1 or $_GET['j'] == 1 or $_GET['h'] == 1 or $_GET['y'] == 1 or $_GET['all'] == 1 or $_GET['d'] == 1 or $_GET['e'] == 1 or $_GET['i'] == 1 or is_numeric($_GET['year1']) or is_numeric($_GET['year2']) or is_numeric($_GET['year3'])) && $_GET['go'] != "Send") {
-            searchpreprint();
-            echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'>&nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><br/>";
-        } else {
-            if ($_GET['go'] != "Send") {
-                #funzione lettura e filtro preprint
-                filtropreprint();
-                echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><br/>";
-            }
-        }
-    }
-    ?>
+        ?></div>
 </div><br/><br/>
 </body>
 </html>

@@ -53,6 +53,11 @@
                     id.style.display = 'none';
                 }
             }
+            //chiudi menu click fuori dalla finestra
+            function myFunction() {
+                adv.style.display = 'none';
+                opt.style.display = 'none';
+            }
         </script>
         <script type="text/x-mathjax-config">
             MathJax.Hub.Config({
@@ -80,29 +85,12 @@
                 } else {
                     $ind = "userp.php";
                 }
-                ?>
-                <div id="header-wrapper">
-                    <div class="container">
-                        <div class="row">
-                            <div class="12u">
-                                <header id="header">
-                                    <h1><a href="#" id="logo">DMI Papers</a></h1>
-                                    <nav id="nav">
-                                        <a href='./view_preprints.php'>Publications</a>
-                                        <a href="./reserved.php" class="current-page-item">Reserved Area</a>
-                                    </nav>
-                                </header>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            <center><div><br/>
-                    Go back to new insertion: <a style="color:white;" href="<?php echo $ind; ?>" id="bottoni" class="bottoni">Back</a>
-                </div>
-                <?php
                 if ($_COOKIE['searchbarall'] == "1") {
                     #search bar
-                    echo "<center><div style='z-index:999999; width:100%; padding: 2px; position: fixed; border-top: 1px dashed Navy; border-color: #3C3C3C; background-color:#DDDDDD; bottom: 0px;'>
+                    echo "<center><div style='z-index:999999; width:100%; padding: 2px; position: fixed; border-top: 1px solid; border-color: #AFAFAF; background-color:#DDDDDD; bottom: 0px;'><form name='f5' action='view_preprints.php' method='GET'  style='height:12px; width:12px; float:left;'>
+		    <input type='image' title='Close' name='close' value=1 src='./images/close.jpeg' border='0'  style='height:12px; width:12px; float:left;'/>
+		    <input type='text' name='clos' value='1' hidden>
+		    </form>
 			     <div id='adv' hidden>
 			     <div>
 			<form name='f4' action='view_preprints.php' method='GET'>
@@ -179,21 +167,39 @@
 		        </select>
 		        <input type='search' autocomplete = 'on' style='width:22%;' name='r' placeholder='Author name, part, etc.' value='" . $_GET['r'] . "'/>
 		    <input type='submit' name='s' value='Send'/></form>
-		    <form name='f5' action='view_preprints.php' method='GET'  style='height:12px; width:12px; float:left;'>
-		    <input type='image' title='Close' name='close' value=1 src='./images/close.jpeg' border='0'  style='height:12px; width:12px; float:left;'/>
-		    <input type='text' name='clos' value='1' hidden>
-		    </form></div></center>";
+		    </div></center>";
                 }
-                #lettura preprint caricati
-                leggiupload($_SESSION['nome'] . " (" . $_SESSION['uid'] . ")");
-            } else {
-                echo '<script type="text/javascript">alert("ACCESS DENIED!");</script>';
-                echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
-            }
-        } else {
-            echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
-        }
-        ?>
-    </div></center><br/><br/>
+                ?>
+                <div onclick="myFunction()">
+                    <div id="header-wrapper">
+                        <div class="container">
+                            <div class="row">
+                                <div class="12u">
+                                    <header id="header">
+                                        <h1><a href="#" id="logo">DMI Papers</a></h1>
+                                        <nav id="nav">
+                                            <a href='./view_preprints.php'>Publications</a>
+                                            <a href="./reserved.php" class="current-page-item">Reserved Area</a>
+                                        </nav>
+                                    </header>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <center><div><br/>
+                            Go back to new insertion: <a style="color:white;" href="<?php echo $ind; ?>" id="bottoni" class="bottoni">Back</a>
+                        </div>
+                        <?php
+                        #lettura preprint caricati
+                        leggiupload($_SESSION['nome'] . " (" . $_SESSION['uid'] . ")");
+                    } else {
+                        echo '<script type="text/javascript">alert("ACCESS DENIED!");</script>';
+                        echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
+                    }
+                } else {
+                    echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
+                }
+                ?>
+        </div></div></center><br/><br/>
 </body>
 </html>
