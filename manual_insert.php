@@ -39,6 +39,24 @@
             {
                 return confirm('All unsaved changes will be lost, continue?');
             }
+            //opzioni di visualizzazione
+            function showHide2(id) {
+                if (id.style.display != 'block') {
+                    id.style.display = 'block';
+                    showHide2(adv);
+                } else {
+                    id.style.display = 'none';
+                }
+            }
+            //ricerca avanzata
+            function showHide(id) {
+                if (id.style.display != 'block') {
+                    id.style.display = 'block';
+                    showHide(opt);
+                } else {
+                    id.style.display = 'none';
+                }
+            }
         </script>
         <script type="text/x-mathjax-config">
             MathJax.Hub.Config({
@@ -150,33 +168,87 @@
         } else {
             if ($_COOKIE['searchbarall'] == "1") {
                 #search bar
-                echo "<center><div style='width:100%; padding: 10px; position: fixed; bottom: 0px;'>
-				    	<form name='f3' action='view_preprints.php' method='GET'>
-					<input type='submit' name='More' value='More'/>
-					<select name='f'>
-					    <option value='all' selected='selected'>All papers:</option>
-					    <option value='author'>Authors:</option>
-					    <option value='category'>Category:</option>
-					    <option value='year'>Year:</option>
-					    <option value='id'>ID:</option>
-					</select>
-					<input type='search' autocomplete = 'on' style='width:20%;' name='r' placeholder='Author name, part, etc.' value='" . $_GET['r'] . "'/>
-				    <input type='submit' name='s' value='Send'/>
-				    <input type='text' name='o' value='dated' hidden>
-				    </form></div>
-				    <form name='f4' action='view_preprints.php' method='GET'>
-			<div id='adv' hidden><br/>
-			<font color='#007897'>Advanced search:</font><br/>
-				<div style='height:30px;'>
-				Filter by
-				<select name='f'>
-				    <option value='all' selected='selected'>All papers:</option>
-				    <option value='author'>Authors:</option>
-				    <option value='category'>Category:</option>
-				    <option value='year'>Year:</option>
-				    <option value='id'>ID:</option>
-				</select>
-				<input type='search' autocomplete = 'on' style='width:40%;' name='r' placeholder='Author name, part, etc.' value='" . $_GET['r'] . "'/> <input type='submit' name='s' value='Send'/></form></div></center>";
+                echo "<center><div style='z-index:999999; width:100%; padding: 2px; position: fixed; border-top: 1px dashed Navy; border-color: #3C3C3C; background-color:#DDDDDD; bottom: 0px;'>
+			     <div id='adv' hidden>
+			     <div>
+			<form name='f4' action='view_preprints.php' method='GET'>
+			    <font color='#007897'>Full text search: (<a style='color:#007897;' onclick='window.open(this.href);
+				    return false' href='http://en.wikipedia.org/wiki/Full_text_search'>info</a>)</font><br/>
+			    <div style='height:30px;'>
+				Search: <input type='search' autocomplete = 'on' style='width:50%;' name='ft' placeholder='Insert phrase, name, keyword, etc.' value='" . $_GET['ft'] . "'/>
+				<input type='submit' name='go' value='Send'/></div>
+			    <div style='height:20px;'>
+				Reset selections: <input type='reset' name='reset' value='Reset'>&nbsp&nbsp
+				Results for page: 
+				<select name='rp'>
+				    <option value='5' selected='selected'>5</option>
+				    <option value='10'>10</option>
+				    <option value='15'>15</option>
+				    <option value='20'>20</option>
+				    <option value='25'>25</option>
+				    <option value='50'>50</option>
+				</select>&nbsp&nbsp
+				Search on: 
+				<label><input type='radio' name='st' value='1' checked>Currents</label>
+				<label><input type='radio' name='st' value='0'>Archived</label>
+			    </form></div><br/>
+		    </div>
+			<form name='f4' action='view_preprints.php' method='GET'>
+			<font color='#007897'>Advanced search options:</font><br/>
+				        <div style='height:30px;'>
+			    Reset selections: <input type='reset' name='reset' value='Reset'>&nbsp&nbsp
+			    Years restrictions: 
+			    until <input type='text' name='year1' style='width:35px' placeholder='Last'>
+			    , or from <input type='text' name='year2' style='width:35px' placeholder='First'>
+			    to <input type='text' name='year3' style='width:35px' placeholder='Last'>
+			    &nbsp&nbspResults for page: 
+			    <select name='rp'>
+				<option value='5' selected='selected'>5</option>
+				<option value='10'>10</option>
+				<option value='15'>15</option>
+				<option value='20'>20</option>
+				<option value='25'>25</option>
+				<option value='50'>50</option>
+			    </select>
+			</div>
+			<div>
+			    Search on:
+			    <label><input type='checkbox' name='d' value='1'>Archived</label>
+			    <label><input type='checkbox' name='all' value='1'>Record</label>
+			    <label><input type='checkbox' name='h' value='1'>Author</label>
+			    <label><input type='checkbox' name='t' value='1'>Title</label>
+			    <label><input type='checkbox' name='a' value='1'>Abstract</label>
+			    <label><input type='checkbox' name='e' value='1'>Date</label>
+			    <label><input type='checkbox' name='y' value='1'>Category</label>
+			    <label><input type='checkbox' name='c' value='1'>Comments</label>
+			    <label><input type='checkbox' name='j' value='1'>Journal-ref</label>
+			    <label><input type='checkbox' name='i' value='1'>ID</label>
+			</div>
+			<div>Order results by:
+			    <label><input type='radio' name='o' value='dated' checked>Date (D)</label>
+			    <label><input type='radio' name='o' value='datec'>Date (I)</label>
+			    <label><input type='radio' name='o' value='idd'>Identifier (D)</label>
+			    <label><input type='radio' name='o' value='idc'>Identifier (I)</label>
+			    <label><input type='radio' name='o' value='named'>Author-name (D)</label>
+			    <label><input type='radio' name='o' value='namec'>Author-name (I)</label>
+			</div><br/>
+		    </div>
+		        Advanced:
+		        <input type='button' value='Show/Hide' onclick='javascript:showHide(adv);'/>
+		         Filter results by 
+		        <select name='f'>
+		            <option value='all' selected='selected'>All papers:</option>
+		            <option value='author'>Authors:</option>
+		            <option value='category'>Category:</option>
+		            <option value='year'>Year:</option>
+		            <option value='id'>ID:</option>
+		        </select>
+		        <input type='search' autocomplete = 'on' style='width:22%;' name='r' placeholder='Author name, part, etc.' value='" . $_GET['r'] . "'/>
+		    <input type='submit' name='s' value='Send'/></form>
+		    <form name='f5' action='view_preprints.php' method='GET'  style='height:12px; width:12px; float:left;'>
+		    <input type='image' title='Close' name='close' value=1 src='./images/close.jpeg' border='0'  style='height:12px; width:12px; float:left;'/>
+		    <input type='text' name='clos' value='1' hidden>
+		    </form></div></center>";
             }
             ?>
             <center><div><form name='f2' action='manual_insert.php' method='POST'>Get paper informations from arXiv: <input type='search' autocomplete = 'on' style='width:175px;' name='id' id='textbox' required class='textbox' placeholder='Insert id(arXiv): 0000.0000' autofocus/> <input type='submit' name='b7' value='Get paper' style='width:70px;' id='bottone_keyword' class='bottoni'/><br/>
