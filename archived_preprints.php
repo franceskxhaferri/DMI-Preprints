@@ -195,20 +195,29 @@
                     </div>
                 </div>
             </div>
-            <div><center><br/><br/><h2>ARCHIVED PAPERS</h2></center>
-            </div><center>
+            <center>
+                <div>
+                    <br/>
+                    <br/>
+                    <h2>ARCHIVED PAPERS</h2>
+                </div>
                 <?php
                 if ($cred == 1) {
-                    echo "<table>
-            	<tr>
-                <td align='right'>Go to admin panel&nbsp&nbsp&nbsp</td>
-                <td align='center'><a style='height:17px; color:white;' href='./modp.php' id='bottone_keyword' class='bottoni'>Back</a></td>
-                </tr>";
-                    echo $nav;
+                    echo "
+                        <table>
+                        <tr>
+                        <td align='right'>
+                        Go to admin panel&nbsp&nbsp&nbsp
+                        </td>
+                        <td align='center'>
+                        <a style='height:17px; color:white;' href='./modp.php' id='bottone_keyword' class='bottoni'>Back</a>
+                        </td>
+                        </tr>";
+                    echo $nav . "</table>";
                 }
                 ?>
-                </table>
-            </center><div onclick="myFunction()">
+            </center>
+            <div onclick="myFunction()">
                 <?php
                 if (sessioneavviata() == True) {
                     echo "<br/><br/><center>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTION CAN'T BE USED IN THIS MOMENT!</center><br/>";
@@ -224,6 +233,9 @@
                     }
                 }
                 ?>
-            </div></div></div></center><br/><br/>
-</body>
+            </div>
+        </div>
+        <br/>
+        <br/>
+    </body>
 </html>

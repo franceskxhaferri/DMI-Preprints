@@ -247,17 +247,20 @@
                 </div>
             </div>
         </div>
-        <div><br/>
+        <div>
+            <br/>
             <?php
             echo $str1;
             ?>
-        </div><center>
+        </div>
+    <center>
         To see <a style="color:#007897;" href="archived_preprints.php" onclick="window.open(this.href);
-                return false">archived</a>(old publications)<br/>
-                  <?php
-                  if ($_COOKIE['searchbar'] == "1" or ! isset($_COOKIE['searchbar'])) {
-                      #search bar
-                      echo "<div style='z-index:999999; width:100%; padding: 2px; position: fixed; border-top: 1px solid; border-color: #AFAFAF; background-color:#DDDDDD; bottom: 0px;'><input type='image' title='Close' onclick='javascript:checkCookie5();' src='./images/close.jpeg' border='0' style='height:12px; width:12px; float:left;' />
+                return false">archived</a>(old publications)
+        <br/>
+        <?php
+        if ($_COOKIE['searchbar'] == "1" or ! isset($_COOKIE['searchbar'])) {
+            #search bar
+            echo "<div style='z-index:999999; width:100%; padding: 2px; position: fixed; border-top: 1px solid; border-color: #AFAFAF; background-color:#DDDDDD; bottom: 0px;'><input type='image' title='Close' onclick='javascript:checkCookie5();' src='./images/close.jpeg' border='0' style='height:12px; width:12px; float:left;'>
 			     <div id='adv' hidden>
 			     <div>
 			<form name='f4' action='view_preprints.php' method='GET'>
@@ -355,16 +358,16 @@
 		    <input type='submit' name='s' value='Send'/>
 		    </form></div>
                 ";
-                  } else {
-                      #ricerca classica
-                      echo "
+        } else {
+            #ricerca classica
+            echo "
         	<br/><font color='#007897'>Keyword search</font>
         	<div style='height:30px;'>
             	<form name='f4' action='view_preprints.php' method='GET'>
                 Settings:
-	        <input type='button' value='Show' onclick='javascript:showHide2(opt);'/>
+	        <input type='button' value='Show' onclick='javascript:showHide2(opt);'>
                 Advanced search:
-                <input type='button' value='Show/Hide' onclick='javascript:showHide(adv);'/>
+                <input type='button' value='Show/Hide' onclick='javascript:showHide(adv);'>
                 Filter by
                 <select name='f'>
                     <option value='all' selected='selected'>All papers:</option>
@@ -380,15 +383,15 @@
 			    <table>
 				<tr>
 				    <td>&nbspFloating Search Bar:&nbsp</td>
-				    <td><input type='button' value='" . $string2 . "' onclick='javascript:checkCookie5();' style='width:50px;'/></td>
+				    <td><input type='button' value='" . $string2 . "' onclick='javascript:checkCookie5();' style='width:50px;'></td>
 				    <td>&nbspFloating Search Bar-all pages:&nbsp</td>
-				    <td><input type='button' value='" . $string3 . "' onclick='javascript:checkCookie6();' style='width:50px;'/></td>
+				    <td><input type='button' value='" . $string3 . "' onclick='javascript:checkCookie6();' style='width:50px;'></td>
 				</tr>
 				<tr>
 				    <td>&nbspMathJax:&nbsp</td>
-				    <td><input type='button' value='" . $valbotton . "' onclick='javascript:checkCookie2();' style='width:50px;'/></td>
+				    <td><input type='button' value='" . $valbotton . "' onclick='javascript:checkCookie2();' style='width:50px;'></td>
 				    <td>&nbspOn page view for PDF:&nbsp</td>
-				    <td><input type='button' value='" . $string . "' onclick='javascript:checkCookie3();' style='width:50px;'/></td>
+				    <td><input type='button' value='" . $string . "' onclick='javascript:checkCookie3();' style='width:50px;'></td>
 				</tr>
 			    </table><br/>
 			</div>
@@ -439,7 +442,7 @@
 				    return false' href='http://en.wikipedia.org/wiki/Full_text_search'>info</a>)</font><br/>
 			    <div style='height:30px;'>
 				Search: <input type='search' autocomplete = 'on' style='width:50%;' name='ft' placeholder='Insert phrase, name, keyword, etc.' value='" . $_GET['ft'] . "'/>
-				<input type='submit' name='go' value='Send'/></div>
+				<input type='submit' name='go' value='Send'></div>
 			    <div style='height:20px;'>
 				Reset selections: <input type='reset' name='reset' value='Reset'>&nbsp&nbsp
 				Results for page: 
@@ -456,9 +459,10 @@
 				<label><input type='radio' name='st' value='0'>Archived</label>
 			    </form></div><br/>
 		    </div></div>";
-                  }
-                  ?>
-    </div><div onclick="myFunction()">
+        }
+        ?>
+    </center>
+    <div onclick="myFunction()">
         <?php
 #visualizza opzioni avanzate
         if ($_GET['More'] == "More") {
@@ -510,7 +514,9 @@
                 }
             }
         }
-        ?></div>
-</div><br/><br/>
+        ?>
+    </div>
+    <br/>
+    <br/>
 </body>
 </html>

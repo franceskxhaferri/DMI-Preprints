@@ -237,8 +237,12 @@
                             </div>
                         </div>
                     </div>
-                    <div><center><br/><br/><h2>manual editing</h2></center>
-                    </div><center>                	
+                    <center>
+                        <div>
+                            <br/>
+                            <br/>
+                            <h2>manual editing</h2>
+                        </div>               	
                         Go to admin panel&nbsp&nbsp&nbsp
                         <a style="height:17px; color:white;" href="./modp.php" id="bottone_keyword" class="bottoni" onclick="return confirmExit()" >Back</a><br/>
                     </center>
@@ -397,6 +401,6 @@
                 echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
             }
             ?>
-        </div></div>
-</body>
+        </div>
+    </body>
 </html>

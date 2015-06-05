@@ -184,12 +184,15 @@
                         </div>
                     </div>
                     <div>
-                        <center><br/><br/>
+                        <center>
+                            <br/>
+                            <br/>
                             <h2>APPROVE DMI PAPER</h2>
                             Go to admin panel&nbsp&nbsp&nbsp
                             <a style="height:17px; color:white;" href="./modp.php" id="bottone_keyword" class="bottoni">Back</a><br/>
                         </center>
-                    </div><br/>
+                    </div>
+                    <br/>
                     <div>
                         <?php
                         include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/insert_remove_db.php');
@@ -318,6 +321,9 @@
                 }
                 ?>
                 <br/>
-            </div></div><br/><br/>
+            </div>
+        </div>
+        <br/>
+        <br/>
     </body>
 </html>

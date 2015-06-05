@@ -163,153 +163,191 @@
                             </div>
                         </div>
                     </div>
-                    <div align="center"><center><br/><h2>ARXIV PANEL</h2></center>
-                        <center><table><tr><td align="right">
-                                        Go to admin panel&nbsp&nbsp&nbsp</td><td align="center">
-                                        <a style="height:17px; color:white;" href="./reserved.php" id="bottone_keyword" class="bottoni">Back</a></td></tr>
-                                <tr><td align="right">
-                                        List of authors that will be searched on arXiv&nbsp&nbsp&nbsp</td><td align="center">
-                                        <a style="height:17px; color:white;" href="./authors_list.php" id="bottone_keyword" class="bottoni">Authors section</a></td></tr>
-                                <tr><td align="right">
+                    <div align="center">
+                        <center>
+                            <br/>
+                            <h2>ARXIV PANEL</h2>
+                            <table>
+                                <tr>
+                                    <td align="right">
+                                        Go to admin panel&nbsp&nbsp&nbsp
+                                    </td>
+                                    <td align="center">
+                                        <a style="height:17px; color:white;" href="./reserved.php" id="bottone_keyword" class="bottoni">Back</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="right">
+                                        List of authors that will be searched on arXiv&nbsp&nbsp&nbsp
+                                    </td>
+                                    <td align="center">
+                                        <a style="height:17px; color:white;" href="./authors_list.php" id="bottone_keyword" class="bottoni">Authors section</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="right">
                                         Insert manually one paper from arXiv&nbsp&nbsp&nbsp</td><td align="center">
-                                        <a style="height:17px; color:white;" href="./manual_insert.php" id="bottone_keyword" class="bottoni">Insert section</a></td></tr>
-                                <tr><td align="right">
+                                        <a style="height:17px; color:white;" href="./manual_insert.php" id="bottone_keyword" class="bottoni">Insert section</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="right">
                                         Controls the papers recently downloaded&nbsp&nbsp&nbsp</td><td align="center">
-                                        <a style="height:17px; color:white;" href="./check_preprints.php" id="bottone_keyword" class="bottoni">Check section</a></td></tr>
-                                <tr><td align="right">
+                                        <a style="height:17px; color:white;" href="./check_preprints.php" id="bottone_keyword" class="bottoni">Check section</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="right">
+                                        Refresh from arXiv for new papers&nbsp&nbsp&nbsp
+                                    </td>
+                                    <td align="center">
                                         <form name="f8" action="arXiv_panel.php" method="POST">
-                                            Refresh from arXiv for new papers&nbsp&nbsp&nbsp</td><td align="center">
-                                        <input type="submit" name="b8" value="Update from arXiv" id="bottone_keyword" class="bottoni"/>
-                                        </form></td></tr>
-                                <tr><td align="right">
+                                            <input type="submit" name="b8" value="Update from arXiv" id="bottone_keyword" class="bottoni">
+                                        </form>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="right">
+                                        Download all from arXiv, this overwrites all data!&nbsp&nbsp&nbsp
+                                    </td>
+                                    <td align="center">
                                         <form name="f9" action="arXiv_panel.php" method="POST">
-                                            Download all from arXiv, this overwrites all data!&nbsp&nbsp&nbsp</td><td align="center">
-                                        <input type="submit" name="b9" value="Download from arXiv" id="bottone_keyword" class="bottoni" onclick='return confirmDownload()'/>
-                                        </form></td></tr>
-                            </table></center><br/><a style='text-decoration: none;' href='javascript:FinePagina()'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8595;&nbsp&nbsp&nbsp&nbsp&nbsp </a><br/><hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
-                        <?php
-                        include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/arXiv_parsing.php');
-                        include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/check_nomi_data.php');
-                        if (isset($_POST['b8'])) {
-                            if ($sock = @fsockopen('www.arxiv.org', 80, $num, $error, 5)) {
-                                if (sessioneavviata() == False) {
-                                    #avvio della sessione
-                                    avviasessione();
-                                    #inizializzo variabile j per contare elementi scaricati...
-                                    $j = 0;
-                                    #data ultimo lancio...
-                                    $data = dataprec();
-                                    #leggo nomi da file nomi.txt
-                                    $array = legginomi();
-                                    #conto lunghezza dell'array $array
-                                    $nl = count($array);
-                                    if ($nl == 0) {
-                                        chiudisessione();
-                                        echo '<script type="text/javascript">alert("No authors inside list!");</script>';
-                                    } else {
-                                        #inizializzo variabile per contare preprints scaricati...
-                                        for ($i = 0; $i < $nl; $i++) {
-                                            $nomi = $array[$i];
-                                            #rimozione spazi all'inizio e alla fine della stringa nomi
-                                            $nomi = trim($nomi);
-                                            #uso la funzione arxiv call per contare i download
-                                            $j = $j + arxiv_call($nomi, $data);
+                                            <input type="submit" name="b9" value="Download from arXiv" id="bottone_keyword" class="bottoni" onclick='return confirmDownload()'>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br/>
+                            <a style='text-decoration: none;' href='javascript:FinePagina()'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8595;&nbsp&nbsp&nbsp&nbsp&nbsp </a>
+                            <br/>
+                            <hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
+                            <?php
+                            include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/arXiv_parsing.php');
+                            include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/check_nomi_data.php');
+                            if (isset($_POST['b8'])) {
+                                if ($sock = @fsockopen('www.arxiv.org', 80, $num, $error, 5)) {
+                                    if (sessioneavviata() == False) {
+                                        #avvio della sessione
+                                        avviasessione();
+                                        #inizializzo variabile j per contare elementi scaricati...
+                                        $j = 0;
+                                        #data ultimo lancio...
+                                        $data = dataprec();
+                                        #leggo nomi da file nomi.txt
+                                        $array = legginomi();
+                                        #conto lunghezza dell'array $array
+                                        $nl = count($array);
+                                        if ($nl == 0) {
+                                            chiudisessione();
+                                            echo '<script type="text/javascript">alert("No authors inside list!");</script>';
+                                        } else {
+                                            #inizializzo variabile per contare preprints scaricati...
+                                            for ($i = 0; $i < $nl; $i++) {
+                                                $nomi = $array[$i];
+                                                #rimozione spazi all'inizio e alla fine della stringa nomi
+                                                $nomi = trim($nomi);
+                                                #uso la funzione arxiv call per contare i download
+                                                $j = $j + arxiv_call($nomi, $data);
+                                            }
+                                            #aggiornamento dei nomi nel file nomi_ultimo_lancio...
+                                            aggiornanomi();
+                                            #aggiornamento file data_ultimo_lancio.txt con la data di oggi...
+                                            aggiornadata();
+                                            #azzeramento file temporaneo...
+                                            azzerapreprint();
+                                            #chiudo la sessione di download
+                                            chiudisessione();
+                                            echo "<br/>PAPERS DOWNLOADED: " . $j . "<br/><br/>";
+                                            $dc1 = true;
                                         }
-                                        #aggiornamento dei nomi nel file nomi_ultimo_lancio...
-                                        aggiornanomi();
-                                        #aggiornamento file data_ultimo_lancio.txt con la data di oggi...
-                                        aggiornadata();
-                                        #azzeramento file temporaneo...
-                                        azzerapreprint();
-                                        #chiudo la sessione di download
-                                        chiudisessione();
-                                        echo "<br/>PAPERS DOWNLOADED: " . $j . "<br/><br/>";
-                                        $dc1 = true;
+                                    } else {
+                                        echo '<script type="text/javascript">alert("UPDATE SESSION IS ALREADY STARTED FROM OTHER ADMIN!");</script>';
+                                        $risul = true;
+                                        #sessione già avviata
                                     }
-                                } else {
-                                    echo '<script type="text/javascript">alert("UPDATE SESSION IS ALREADY STARTED FROM OTHER ADMIN!");</script>';
-                                    $risul = true;
-                                    #sessione già avviata
                                 }
                             }
-                        }
-                        if (isset($_POST['b9'])) {
-                            if ($sock = @fsockopen('www.arxiv.org', 80, $num, $error, 5)) {
-                                if (sessioneavviata() == False) {
-                                    #avvio della sessione
-                                    avviasessione();
-                                    #inizializzo variabile j per contare elementi scaricati...
-                                    $j = 0;
-                                    #leggo i nomi dal file nomi.txt
-                                    $array = legginomi();
-                                    #conto lunghezza dell'array $array
-                                    $nl = count($array);
-                                    if ($nl == 0) {
-                                        chiudisessione();
-                                        #nessun autore
-                                        echo '<script type="text/javascript">alert("No authors inside list!");</script>';
-                                    } else {
-                                        #inizializzo variabile per contare preprints scaricati...
-                                        for ($i = 0; $i < $nl; $i++) {
-                                            #inserisco un nome alla volta nella variabile $nomi
-                                            $nomi = $array[$i];
-                                            #rimozione dei spazi all'inizio e alla fine della stringha
-                                            $nomi = trim($nomi);
-                                            $j = $j + arxiv_call($nomi, 0);
+                            if (isset($_POST['b9'])) {
+                                if ($sock = @fsockopen('www.arxiv.org', 80, $num, $error, 5)) {
+                                    if (sessioneavviata() == False) {
+                                        #avvio della sessione
+                                        avviasessione();
+                                        #inizializzo variabile j per contare elementi scaricati...
+                                        $j = 0;
+                                        #leggo i nomi dal file nomi.txt
+                                        $array = legginomi();
+                                        #conto lunghezza dell'array $array
+                                        $nl = count($array);
+                                        if ($nl == 0) {
+                                            chiudisessione();
+                                            #nessun autore
+                                            echo '<script type="text/javascript">alert("No authors inside list!");</script>';
+                                        } else {
+                                            #inizializzo variabile per contare preprints scaricati...
+                                            for ($i = 0; $i < $nl; $i++) {
+                                                #inserisco un nome alla volta nella variabile $nomi
+                                                $nomi = $array[$i];
+                                                #rimozione dei spazi all'inizio e alla fine della stringha
+                                                $nomi = trim($nomi);
+                                                $j = $j + arxiv_call($nomi, 0);
+                                            }
+                                            #aggiornamento dei nomi nel file nomi_ultimo_lancio...
+                                            aggiornanomi();
+                                            #aggiornamento file data_ultimo_lancio.txt con la data di oggi...
+                                            aggiornadata();
+                                            #azzeramento temp
+                                            azzerapreprint();
+                                            #chiudo la sessione di download
+                                            chiudisessione();
+                                            echo "<br/>PAPERS DOWNLOADED: " . $j . "<br/><br/>";
+                                            $dc2 = true;
                                         }
-                                        #aggiornamento dei nomi nel file nomi_ultimo_lancio...
-                                        aggiornanomi();
-                                        #aggiornamento file data_ultimo_lancio.txt con la data di oggi...
-                                        aggiornadata();
-                                        #azzeramento temp
-                                        azzerapreprint();
-                                        #chiudo la sessione di download
-                                        chiudisessione();
-                                        echo "<br/>PAPERS DOWNLOADED: " . $j . "<br/><br/>";
-                                        $dc2 = true;
+                                    } else {
+                                        echo '<script type="text/javascript">alert("DOWNLOAD SESSION IS ALREADY STARTED FROM OTHER ADMIN!");</script>';
+                                        $risul = true;
                                     }
-                                } else {
-                                    echo '<script type="text/javascript">alert("DOWNLOAD SESSION IS ALREADY STARTED FROM OTHER ADMIN!");</script>';
-                                    $risul = true;
                                 }
                             }
-                        }
-                        #server arxiv down o server interno non connesso
-                        if (!$sock = @fsockopen('www.arxiv.org', 80, $num, $error, 5)) {
-                            echo '<script type="text/javascript">alert("INTERNAL SERVER OFFLINE OR ARVIX IS DOWN IN THIS MOMENT!");</script>';
-                            echo 'INTERNAL SERVER OFFLINE OR ARVIX IS DOWN IN THIS MOMENT!<br/><br/>';
-                        }
-                        if (sessioneavviata() == True) {
-                            if ($risul != true) {
-                                echo '<script type="text/javascript">alert("WARNING ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTIONS HAS BEEN BLOCKED!");</script>';
+                            #server arxiv down o server interno non connesso
+                            if (!$sock = @fsockopen('www.arxiv.org', 80, $num, $error, 5)) {
+                                echo '<script type="text/javascript">alert("INTERNAL SERVER OFFLINE OR ARVIX IS DOWN IN THIS MOMENT!");</script>';
+                                echo 'INTERNAL SERVER OFFLINE OR ARVIX IS DOWN IN THIS MOMENT!<br/><br/>';
                             }
-                            echo "WARNING ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTIONS HAS BEEN BLOCKED!";
+                            if (sessioneavviata() == True) {
+                                if ($risul != true) {
+                                    echo '<script type="text/javascript">alert("WARNING ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTIONS HAS BEEN BLOCKED!");</script>';
+                                }
+                                echo "WARNING ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTIONS HAS BEEN BLOCKED!";
+                            } else {
+                                #memorizzo in $data ultimo aggiornamento e la visualizzo
+                                $data = datastring();
+                                echo " LAST UPDATE: " . $data;
+                                #update o download completato correttamente
+                                if ($dc1 == true) {
+                                    echo '<script type="text/javascript">alert("Update complete!");</script>';
+                                }
+                                if ($dc2 == true) {
+                                    echo '<script type="text/javascript">alert("Download complete!");</script>';
+                                }
+                            }
+                            echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
                         } else {
-                            #memorizzo in $data ultimo aggiornamento e la visualizzo
-                            $data = datastring();
-                            echo " LAST UPDATE: " . $data;
-                            #update o download completato correttamente
-                            if ($dc1 == true) {
-                                echo '<script type="text/javascript">alert("Update complete!");</script>';
-                            }
-                            if ($dc2 == true) {
-                                echo '<script type="text/javascript">alert("Download complete!");</script>';
-                            }
+                            #credenziali non mod
+                            echo '<script type="text/javascript">alert("ACCESS DENIED!");</script>';
+                            echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
                         }
-                        echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
                     } else {
-                        #credenziali non mod
-                        echo '<script type="text/javascript">alert("ACCESS DENIED!");</script>';
                         echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
                     }
-                } else {
-                    echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
-                }
-                ?>
-                <center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center>
-                    <?php
                     ?>
+                    <a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a>
+                </center>
+                <?php
+                ?>
                 <br/>
-            </div></div><br/><br/>
+            </div>
+        </div>
+        <br/>
+        <br/>
     </body>
 </html>

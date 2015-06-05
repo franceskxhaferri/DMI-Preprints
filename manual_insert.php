@@ -244,21 +244,33 @@
                             </div>
                         </div>
                     </div>
-                    <div><center><br/><br/><h2>manual insertion</h2></center>
+                    <div>
+                        <center>
+                            <br/>
+                            <br/>
+                            <h2>manual insertion</h2>
+                        </center>
                     </div>
                     <center>
-                        Go to arXiv panel&nbsp&nbsp&nbsp</td>
+                        Go to arXiv panel&nbsp&nbsp&nbsp
                         <a style="height:17px; color:white;" href="./arXiv_panel.php" id="bottone_keyword" class="bottoni" onclick="return confirmExit()" >Back</a><br/><br/>
                         <a style='color:#007897;' href='http://arxiv.org/' onclick='window.open(this.href);
-                                return false' title='arXiv'>arXiv.org</a>
-                    </center><hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
+                                        return false' title='arXiv'>arXiv.org</a>
+                    </center>
+                    <hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
                     <?php
                     if (sessioneavviata() == True) {
                         echo "<br/><br/><center>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTION CAN'T BE USED IN THIS MOMENT!</center><br/>";
                     } else {
                         ?>
-                        <center><div><form name='f2' action='manual_insert.php' method='POST'>Get paper informations from arXiv: <input type='search' autocomplete = 'on' style='width:175px;' name='id' id='textbox' required class='textbox' placeholder='Insert id(arXiv): 0000.0000' autofocus/> <input type='submit' name='b7' value='Get paper' style='width:70px;' id='bottone_keyword' class='bottoni'/><br/>
-                                </form></div></center>
+                        <center>
+                            <div>
+                                <form name='f2' action='manual_insert.php' method='POST'>
+                                    Get paper informations from arXiv:
+                                    <input type='search' autocomplete = 'on' style='width:175px;' name='id' id='textbox' required class='textbox' placeholder='Insert id(arXiv): 0000.0000' autofocus/> <input type='submit' name='b7' value='Get paper' style='width:70px;' id='bottone_keyword' class='bottoni'><br/>
+                                </form>
+                            </div>
+                        </center>
                         <hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>
                         <?php
                         if (isset($_POST['b7'])) {
@@ -488,6 +500,7 @@
                 echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
             }
             ?>
-        </div></div><br/><br/>
-</body>
+        </div>
+        <br/>
+    </body>
 </html>

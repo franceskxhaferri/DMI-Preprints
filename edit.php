@@ -224,7 +224,7 @@
 		            <option value='year'>Year:</option>
 		            <option value='id'>ID:</option>
 		        </select>
-		        <input type='search' autocomplete = 'on' style='width:22%;' name='r' placeholder='Author name, part, etc.' value='" . $_GET['r'] . "'/>
+		        <input type='search' autocomplete = 'on' style='width:22%;' name='r' placeholder='Author name, part, etc.' value=''/>
 		    <input type='submit' name='s' value='Send'/></form>
 		    </div></center>";
                 }
@@ -245,13 +245,23 @@
                             </div>
                         </div>
                     </div>
-                    <div><center><br/><br/><h2>manual editing</h2></center>
-                    </div><center>
-                        <table>
-                            <tr><form name="f1" action="uploaded.php" method="GET"><td align="right" style='width:150px; height:16px'>Go to uploaded&nbsp&nbsp&nbsp</td>
-                                <td><input type="submit" name="b1" value="Back" id='bottone_keyword' class='bottoni' onclick="return confirmExit()"/></td>
+                    <center>
+                        <div>
+                            <br/>
+                            <br/>
+                            <h2>manual editing</h2>
+                        </div>
+                        <form name="f1" action="uploaded.php" method="GET">
+                            <table>
+                                <tr>
+                                    <td align="right" style='width:150px; height:16px'>Go to uploaded&nbsp&nbsp&nbsp
+                                    </td>
+                                    <td>
+                                        <input type="submit" name="b1" value="Back" id='bottone_keyword' class='bottoni' onclick="return confirmExit()">
+                                    </td>
                                 </tr>
-                            </form></table>
+                            </table>
+                        </form>
                     </center>
                     <?php
                     if (!isset($_GET['id'])) {
@@ -446,6 +456,8 @@
                 echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
             }
             ?>
-        </div></div><br/><br/>
-</body>
+        </div>
+        <br/>
+        <br/>
+    </body>
 </html>

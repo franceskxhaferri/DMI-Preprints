@@ -183,8 +183,11 @@
                             </div>
                         </div>
                     </div>
-                    <div><center><br/><br/><h2>CHECK ARXIV PAPER</h2></center>
+                    <div>
                         <center>
+                            <br/>
+                            <br/>
+                            <h2>CHECK ARXIV PAPER</h2>
                             <?php
                             if ($_GET['bb3'] == 1) {
                                 echo "
@@ -196,7 +199,9 @@
                                 <a style='height:17px; color:white;' href='./arXiv_panel.php' id='bottone_keyword' class='bottoni'>Back</a><br/>";
                             }
                             ?>
-                    </div><br/>
+                        </center>
+                    </div>
+                    <br/>
                     <div>
                         <?php
                         include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/insert_remove_db.php');
@@ -330,6 +335,9 @@
                 }
                 ?>
                 <br/>
-            </div></div><br/><br/>
+            </div>
+        </div>
+        <br/>
+        <br/>
     </body>
 </html>

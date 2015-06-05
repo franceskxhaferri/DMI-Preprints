@@ -180,14 +180,19 @@
                             </div>
                         </div>
                     </div>
-                    <br/><div><center><br/><h2>AUTHORS LIST</h2></center>
+                    <br/>
+                    <div>
                         <center>
+                            <br/>
+                            <h2>AUTHORS LIST</h2>
                             Go to arXiv panel 
                             <a style="height:17px; color:white;" href="./arXiv_panel.php" id="bottone_keyword" class="bottoni">Back</a><br>
                             <hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
                             <form name="f2" action="authors_list.php" method="POST">
-                                <label><input type="checkbox" name="insert" value="1" checked/>
-                                    Add author to list or search by name: </label>
+                                <label>
+                                    <input type="checkbox" name="insert" value="1" checked/>
+                                    Add author to list or search by name:
+                                </label>
                                 <input type="search" style="width:300px;" id='textbox' class='textbox' autocomplete = "on" required name="txt1" placeholder="name1, name2, name3, name..." autofocus />
                                 <input type="submit" name="b2" value="Insert/Search" style="width:80px;" id="bottone_keyword" class="bottoni"/>
                             </form>
@@ -292,6 +297,9 @@
                     echo "</table></center></form>";
                 }
                 ?>
-            </div></div><br/><br/>
+            </div>
+        </div>
+        <br/>
+        <br/>
     </body>
 </html>

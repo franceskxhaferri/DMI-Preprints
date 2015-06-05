@@ -186,7 +186,9 @@
                             </div>
                         </div>
                     </div>
-                    <center><div><br/>
+                    <center>
+                        <div>
+                            <br/>
                             Go back to new insertion: <a style="color:white;" href="<?php echo $ind; ?>" id="bottoni" class="bottoni">Back</a>
                         </div>
                         <?php
@@ -200,6 +202,10 @@
                     echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
                 }
                 ?>
-        </div></div></center><br/><br/>
-</body>
+            </center>
+        </div>
+        <br/>
+        <br/>
+        <br/>
+    </body>
 </html>
