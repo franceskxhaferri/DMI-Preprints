@@ -139,7 +139,7 @@
                 //sessione moderatore
                 if ($_COOKIE['searchbarall'] == "1") {
                     #search bar
-                    echo "<center><div style='z-index:999999; width:100%; padding: 2px; position: fixed; border-top: 1px solid; border-color: #AFAFAF; background-color:#DDDDDD; bottom: 0px;'><form name='f5' action='view_preprints.php' method='GET'  style='height:12px; width:12px; float:left;'>
+                    echo "<center><div style='z-index:999999; width:100%; padding: 2px; position: fixed; border-bottom: 1px solid; border-top: 1px solid; border-color: #AFAFAF; background-color:#DDDDDD; bottom: 0px;'><form name='f5' action='view_preprints.php' method='GET'  style='height:12px; width:12px; float:left;'>
 		    <input type='image' title='Close' name='close' value=1 src='./images/close.jpeg' border='0'  style='height:12px; width:12px; float:left;'/>
 		    <input type='text' name='clos' value='1' hidden>
 		    </form>
@@ -217,7 +217,7 @@
 		            <option value='year'>Year:</option>
 		            <option value='id'>ID:</option>
 		        </select>
-		        <input type='search' autocomplete = 'on' style='width:22%;' name='r' placeholder='Author name, part, etc.' value='" . $_GET['r'] . "'/>
+		        <input type='search' autocomplete = 'on' style='width:30%;' name='r' placeholder='Author name, part, etc.' value='" . $_GET['r'] . "'/>
 		    <input type='submit' name='s' value='Send'/></form>
 		    </div></center>";
                 }

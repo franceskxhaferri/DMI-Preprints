@@ -260,7 +260,7 @@
         <?php
         if ($_COOKIE['searchbar'] == "1" or ! isset($_COOKIE['searchbar'])) {
             #search bar
-            echo "<div style='z-index:999999; width:100%; padding: 2px; position: fixed; border-top: 1px solid; border-color: #AFAFAF; background-color:#DDDDDD; bottom: 0px;'><input type='image' title='Close' onclick='javascript:checkCookie5();' src='./images/close.jpeg' border='0' style='height:12px; width:12px; float:left;'>
+            echo "<div style='z-index:999999; width:100%; padding: 2px; position: fixed; border-bottom: 1px solid; border-top: 1px solid; border-color: #AFAFAF; background-color:#DDDDDD; bottom: 0px;'><input type='image' title='Close' onclick='javascript:checkCookie5();' src='./images/close.jpeg' border='0' style='height:12px; width:12px; float:left;'>
 			     <div id='adv' hidden>
 			     <div>
 			<form name='f4' action='view_preprints.php' method='GET'>
@@ -354,7 +354,7 @@
 		            <option value='year'>Year:</option>
 		            <option value='id'>ID:</option>
 		        </select>
-		        <input type='search' autocomplete = 'on' style='width:22%;' name='r' placeholder='Author name, part, etc.' value='" . $_GET['r'] . "'/>
+		        <input type='search' autocomplete = 'on' style='width:30%;' name='r' placeholder='Author name, part, etc.' value='" . $_GET['r'] . "'/>
 		    <input type='submit' name='s' value='Send'/>
 		    </form></div>
                 ";
