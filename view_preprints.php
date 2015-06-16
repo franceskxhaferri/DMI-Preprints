@@ -133,7 +133,7 @@
             //cookie searchbar in tutte le pagine
             function checkCookie6() {
                 var pageview = getCookie("searchbarall");
-                if (pageview == "0") {
+                if (pageview == "0" || pageview == "") {
                     setCookie("searchbarall", "1", 1825);
                     setCookie("searchbar", "1", 1825);
                     alert("Search Bar is now abilited on all pages, now the bar will appear on every page!");
