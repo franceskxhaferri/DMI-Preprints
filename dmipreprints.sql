@@ -185,7 +185,7 @@ ALTER TABLE `DATA_ULTIMO_LANCIO`
 -- Indexes for table `PREPRINTS`
 --
 ALTER TABLE `PREPRINTS`
- ADD PRIMARY KEY (`id_pubblicazione`), ADD FULLTEXT KEY `titolo` (`titolo`), ADD FULLTEXT KEY `id_pubblicazione` (`id_pubblicazione`), ADD FULLTEXT KEY `data_pubblicazione` (`data_pubblicazione`), ADD FULLTEXT KEY `autori` (`autori`), ADD FULLTEXT KEY `autori_2` (`autori`), ADD FULLTEXT KEY `referenze` (`referenze`), ADD FULLTEXT KEY `commenti` (`commenti`), ADD FULLTEXT KEY `categoria` (`categoria`), ADD FULLTEXT KEY `abstract` (`abstract`), ADD FULLTEXT KEY `id_pubblicazione_2` (`id_pubblicazione`,`titolo`,`data_pubblicazione`,`autori`,`referenze`,`commenti`,`categoria`,`abstract`);
+ ADD PRIMARY KEY (`id_pubblicazione`), ADD FULLTEXT KEY `id_pubblicazione` (`id_pubblicazione`,`titolo`,`data_pubblicazione`,`autori`,`referenze`,`commenti`,`categoria`,`abstract`);
 
 --
 -- Indexes for table `PREPRINTS_ARCHIVIATI`
