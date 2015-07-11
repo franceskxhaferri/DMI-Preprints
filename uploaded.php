@@ -58,6 +58,19 @@
                 adv.style.display = 'none';
                 opt.style.display = 'none';
             }
+            //funzione scrolltop
+            $(document).ready(function () {
+                var s = $("#gotop");
+                var pos = s.position();
+                $(window).scroll(function () {
+                    var windowpos = $(window).scrollTop();
+                    if (windowpos >= 60) {
+                        s.addClass("gotopview2");
+                    } else {
+                        s.removeClass("gotopview2");
+                    }
+                });
+            });
         </script>
         <script type="text/x-mathjax-config">
             MathJax.Hub.Config({
@@ -80,6 +93,7 @@
         if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] < 86400)) {
             if ($_SESSION['logged_type'] === "mod" or $_SESSION['logged_type'] === "user") {
                 //sessione moderatore
+                echo "<div id='gotop' hidden><a title='Go top' style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'><img style='width:25px; height:25px;' src='./images/top.gif'></a></div>";
                 if ($_SESSION['logged_type'] === "mod") {
                     $ind = "modp.php";
                 } else {

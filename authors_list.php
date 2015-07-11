@@ -70,6 +70,19 @@
                 adv.style.display = 'none';
                 opt.style.display = 'none';
             }
+            //funzione scrolltop
+            $(document).ready(function () {
+                var s = $("#gotop");
+                var pos = s.position();
+                $(window).scroll(function () {
+                    var windowpos = $(window).scrollTop();
+                    if (windowpos >= 60) {
+                        s.addClass("gotopview2");
+                    } else {
+                        s.removeClass("gotopview2");
+                    }
+                });
+            });
         </script>
     </head>
     <body>
@@ -79,6 +92,7 @@
         if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] < 86400)) {
             if ($_SESSION['logged_type'] === "mod") {
                 //sessione moderatore
+                echo "<div id='gotop' hidden><a title='Go top' style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'><img style='width:25px; height:25px;' src='./images/top.gif'></a></div>";
                 if ($_COOKIE['searchbarall'] == "1") {
                     #search bar
                     echo "<center><div style='z-index:999999; width:100%; padding: 2px; position: fixed; border-bottom: 1px solid; border-top: 1px solid; border-color: #AFAFAF; background-color:#DDDDDD; bottom: 0px;'><form name='f5' action='view_preprints.php' method='GET'  style='height:12px; width:12px; float:left;'>
@@ -198,7 +212,6 @@
                             </form>
                         </center>
                     </div>
-                    <hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
                     <div>
                         <?php
                         #importo file per utilizzare funzioni...
@@ -206,7 +219,6 @@
                         if (sessioneavviata() == True) {
                             echo "<center><br/><br/>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE LIST CAN'T BE CHANGED IN THIS MOMENT!</center><br/>";
                         } else {
-                            echo "<center><a style='text-decoration: none;' href='javascript:FinePagina()'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8595; &nbsp&nbsp&nbsp&nbsp&nbsp</a></center>";
                             echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
                             if (isset($_POST['b2'])) {
                                 $name = $_POST['txt1'];
@@ -260,7 +272,6 @@
                                 }
                             }
                             echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
-                            echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center>";
                         }
                     } else {
                         #importo file per utilizzare funzioni...

@@ -67,6 +67,19 @@
                 adv.style.display = 'none';
                 opt.style.display = 'none';
             }
+            //funzione scrolltop
+            $(document).ready(function () {
+                var s = $("#gotop");
+                var pos = s.position();
+                $(window).scroll(function () {
+                    var windowpos = $(window).scrollTop();
+                    if (windowpos >= 60) {
+                        s.addClass("gotopview2");
+                    } else {
+                        s.removeClass("gotopview2");
+                    }
+                });
+            });
         </script>
     </head>
     <body>
@@ -76,6 +89,7 @@
         include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/check_nomi_data.php');
         include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/insert_remove_db.php');
         sec_session_start();
+        echo "<div id='gotop' hidden><a title='Go top' style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'><img style='width:25px; height:25px;' src='./images/top.gif'></a></div>";
         if ($_COOKIE['searchbarall'] == "1") {
             #search bar
             echo "<center><div style='z-index:999999; width:100%; padding: 2px; position: fixed; border-bottom: 1px solid; border-top: 1px solid; border-color: #AFAFAF; background-color:#DDDDDD; bottom: 0px;'><form name='f5' action='view_preprints.php' method='GET'  style='height:12px; width:12px; float:left;'>
@@ -216,24 +230,22 @@
                     echo $nav . "</table>";
                 }
                 ?>
-            </center>
-            <div onclick="myFunction()">
-                <?php
-                if (sessioneavviata() == True) {
-                    echo "<br/><br/><center>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTION CAN'T BE USED IN THIS MOMENT!</center><br/>";
-                } else {
-                    echo "<br/><center><a style='text-decoration: none;' href='javascript:FinePagina()'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8595;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><center><div>";
-                    if (isset($_GET['c'])) {
-                        #funzione gestione preprint archiviati
-                        leggipreprintarchiviati();
+                <div onclick="myFunction()">
+                    <?php
+                    if (sessioneavviata() == True) {
+                        echo "<br/><br/><center>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTION CAN'T BE USED IN THIS MOMENT!</center><br/>";
                     } else {
-                        #funzione gestione preprint archiviati
-                        leggipreprintarchiviati();
-                        echo "<center><a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a></center><br/>";
+                        if (isset($_GET['c'])) {
+                            #funzione gestione preprint archiviati
+                            leggipreprintarchiviati();
+                        } else {
+                            #funzione gestione preprint archiviati
+                            leggipreprintarchiviati();
+                        }
                     }
-                }
-                ?>
-            </div>
+                    ?>
+                </div>
+            </center>
         </div>
         <br/>
         <br/>

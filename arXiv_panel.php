@@ -53,6 +53,19 @@
                 adv.style.display = 'none';
                 opt.style.display = 'none';
             }
+            //funzione scrolltop
+            $(document).ready(function () {
+                var s = $("#gotop");
+                var pos = s.position();
+                $(window).scroll(function () {
+                    var windowpos = $(window).scrollTop();
+                    if (windowpos >= 60) {
+                        s.addClass("gotopview2");
+                    } else {
+                        s.removeClass("gotopview2");
+                    }
+                });
+            });
         </script>	
     </head>
     <body>
@@ -61,6 +74,7 @@
         sec_session_start();
         if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] < 86400)) {
             if ($_SESSION['logged_type'] === "mod") {
+                echo "<div id='gotop' hidden><a title='Go top' style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'><img style='width:25px; height:25px;' src='./images/top.gif'></a></div>";
                 if ($_COOKIE['searchbarall'] == "1") {
                     #search bar
                     echo "<center><div style='z-index:999999; width:100%; padding: 2px; position: fixed; border-bottom: 1px solid; border-top: 1px solid; border-color: #AFAFAF; background-color:#DDDDDD; bottom: 0px;'><form name='f5' action='view_preprints.php' method='GET'  style='height:12px; width:12px; float:left;'>
@@ -217,9 +231,6 @@
                                     </td>
                                 </tr>
                             </table>
-                            <br/>
-                            <a style='text-decoration: none;' href='javascript:FinePagina()'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8595;&nbsp&nbsp&nbsp&nbsp&nbsp </a>
-                            <br/>
                             <hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
                             <?php
                             include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/arXiv_parsing.php');
@@ -340,7 +351,6 @@
                         echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
                     }
                     ?>
-                    <a style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'> &nbsp&nbsp&nbsp&nbsp&nbsp&#8593;&nbsp&nbsp&nbsp&nbsp&nbsp </a>
                 </center>
                 <?php
                 ?>

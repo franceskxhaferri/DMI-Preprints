@@ -124,6 +124,32 @@
                     MathJax.Hub.Queue(["Typeset", MathJax.Hub, "abstractdiv"]);
                 }
             })();
+            //funzione scrolltop
+            $(document).ready(function () {
+                var s = $("#gotop");
+                var pos = s.position();
+                $(window).scroll(function () {
+                    var windowpos = $(window).scrollTop();
+                    if (windowpos >= 60) {
+                        s.addClass("gotopview2");
+                    } else {
+                        s.removeClass("gotopview2");
+                    }
+                });
+            });
+            //funzione toolbar fixed
+            $(document).ready(function () {
+                var s = $("#sticker");
+                var pos = s.position();
+                $(window).scroll(function () {
+                    var windowpos = $(window).scrollTop();
+                    if (windowpos >= pos.top) {
+                        s.addClass("stick");
+                    } else {
+                        s.removeClass("stick");
+                    }
+                });
+            });
         </script>
         <?php
         #importo file per utilizzare funzioni...
@@ -136,6 +162,7 @@
         if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] < 86400)) {
             if ($_SESSION['logged_type'] === "mod" or $_SESSION['logged_type'] === "user") {
                 //sessione moderatore
+                echo "<div id='gotop' hidden><a title='Go top' style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'><img style='width:25px; height:25px;' src='./images/top.gif'></a></div>";
                 if ($_COOKIE['searchbarall'] == "1") {
                     #search bar
                     echo "<center><div style='z-index:999999; width:100%; padding: 2px; position: fixed; border-bottom: 1px solid; border-top: 1px solid; border-color: #AFAFAF; background-color:#DDDDDD; bottom: 0px;'><form name='f5' action='view_preprints.php' method='GET'  style='height:12px; width:12px; float:left;'>
@@ -238,27 +265,24 @@
                     </div>
                     <br/>
                     <center>
-                        <div>
+                        <div id="sticker">
+                            <div style="float:right; margin-right:1%; margin-top:4px;">
                             <?php
-                            print_r("<font style='font-weight: bold;'>Name: </font>");
+                            print_r("<font style='font-weight: bold;'>Welcome back: </font>");
                             print_r($_SESSION['nome']);
                             print_r(" <font style='font-weight: bold;'>Access type: </font>");
                             print_r($_SESSION['logged_type']);
                             ?>
-                            <br/>
-                            <br/>
-                            <div style="width:390px;">
-                                <div style="float:left; margin-left:0.5%;">
-                                    <form name="f1" action="userp.php" method="POST">
-                                        <input style="height:17px; color: red;" type="submit" name="b1" value="Logout" id="bottoni" class="bottoni" onclick="return confirmLogout()">
-                                    </form>
-                                </div>
-                                <div style="float:left; margin-left:0.5%;">
-                                    <a style="height:17px; color:white;" href="./uploaded.php?p=1" id="bottoni" class="bottoni">My upload</a>
-                                </div>
-                                <div style="clear:both;">
-
-                                </div>
+                            </div>
+                            <div style="float:left; margin-left:0.5%;">
+                                <form name="f1" action="userp.php" method="POST">
+                                    <input style="height:17px; color: red;" type="submit" name="b1" value="Logout" id="bottoni" class="bottoni" onclick="return confirmLogout()">
+                                </form>
+                            </div>
+                            <div style="float:left; margin-left:0.5%;">
+                                <a style="height:17px; color:white;" href="./uploaded.php?p=1" id="bottoni" class="bottoni">My uploads</a>
+                            </div>
+                            <div style="clear:both;">
                             </div>
                         </div>
                     </center>
