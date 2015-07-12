@@ -88,13 +88,12 @@
 	
 	/* barra di ricerca*/
 	
+		/*searchbar integrata nella pagina*/
 	        #sticker {
-		    z-index:999999;
 		    width:100%;
-		    border-color: #AFAFAF;
-		    background-color:#DDDDDD;
 		}
 		
+		/*searchbar alta*/
 		.stick {
 		    position:fixed;
 		    top:0px;
@@ -106,9 +105,23 @@
 		    background-color:#DDDDDD;
 		}
 		
+		/*searchbar bassa*/
+		#stickbottom {
+		    position:fixed;
+		    bottom:0px;
+		    z-index:999999;
+		    width:100%;
+		    padding: 2px;
+		    border-top: 1px solid;
+		    border-color: #AFAFAF;
+		    background-color:#DDDDDD;
+		}
+		
+		/*freccia torna su*/
 		#gotop {
 		}
 		
+		/*freccia torna su pagina principale*/
 		.gotopview {
 		    display:inline;
 		    position:fixed;
@@ -118,10 +131,11 @@
 		    padding: 2px;
 		}
 		
+		/*freccia torna su altre pagine*/
 		.gotopview2 {
 		    display:inline;
 		    position:fixed;
-		    bottom:30px;
+		    bottom:35px;
 		    right:10px;
 		    z-index:999999;
 		    padding: 2px;

@@ -125,19 +125,6 @@
                     MathJax.Hub.Queue(["Typeset", MathJax.Hub, "abstractdiv"]);
                 }
             })();
-            //funzione scrolltop
-            $(document).ready(function () {
-                var s = $("#gotop");
-                var pos = s.position();
-                $(window).scroll(function () {
-                    var windowpos = $(window).scrollTop();
-                    if (windowpos >= 60) {
-                        s.addClass("gotopview2");
-                    } else {
-                        s.removeClass("gotopview2");
-                    }
-                });
-            });
             //funzione toolbar fixed
             $(document).ready(function () {
                 var s = $("#sticker");
@@ -149,6 +136,35 @@
                     } else {
                         s.removeClass("stick");
                     }
+                });
+            });
+            //funzione visualizza freccia torna su 
+            $(document).ready(function () {
+                var s = $("#gotop");
+                var pos = s.position();
+                $(window).scroll(function () {
+                    var windowpos = $(window).scrollTop();
+                    if (windowpos >= 100) {
+                        s.addClass("gotopview2");
+                    } else {
+                        s.removeClass("gotopview2");
+                    }
+                });
+            });
+            //funzione animazioni scrolling
+            $(document).ready(function () {
+                //Check to see if the window is top if not then display button
+                $(window).scroll(function () {
+                    if ($(this).scrollTop() > 100) {
+                        $('#scrollToTop').fadeIn();
+                    } else {
+                        $('#scrollToTop').fadeOut();
+                    }
+                });
+                //funzione click per lo scrolling
+                $('#scrollToTop').click(function () {
+                    $('html, body').animate({scrollTop: 0}, 800);
+                    return false;
                 });
             });
         </script>
@@ -163,16 +179,14 @@
         if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] < 86400)) {
             if ($_SESSION['logged_type'] === "mod") {
                 //sessione moderatore
-                echo "<div id='gotop' hidden><a title='Go top' style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'><img style='width:25px; height:25px;' src='./images/top.gif'></a></div>";
+                echo "<div id='gotop' hidden><a id='scrollToTop' title='Go top'><img style='width:25px; height:25px;' src='./images/top.gif'></a></div>";
                 if ($_COOKIE['searchbarall'] == "1") {
                     #search bar
-                    echo "<center><div style='z-index:999999; width:100%; padding: 2px; position: fixed; border-bottom: 1px solid; border-top: 1px solid; border-color: #AFAFAF; background-color:#DDDDDD; bottom: 0px;'><form name='f5' action='view_preprints.php' method='GET'  style='height:12px; width:12px; float:left;'>
-		    <input type='image' title='Close' name='close' value=1 src='./images/close.jpeg' border='0'  style='height:12px; width:12px; float:left;'/>
-		    <input type='text' name='clos' value='1' hidden>
-		    </form>
+                    echo "<center><div id='stickbottom'>
+		    <a href='view_preprints.php?clos=1' title='Close' name='close'><img src='./images/close.gif' style='height:15px; width:15px; float:left;'></a>
 			     <div id='adv' hidden>
 			     <div>
-			<form name='f4' action='view_preprints.php' method='GET'>
+			<form name='f1' action='view_preprints.php' method='GET'>
 			    <font color='#007897'>Full text search: (<a style='color:#007897;' onclick='window.open(this.href);
 				    return false' href='http://en.wikipedia.org/wiki/Full_text_search'>info</a>)</font><br/>
 			    <div style='height:30px;'>
@@ -194,7 +208,7 @@
 				<label><input type='radio' name='st' value='0'>Archived</label>
 			    </form></div><br/>
 		    </div>
-			<form name='f4' action='view_preprints.php' method='GET'>
+			<form name='f2' action='view_preprints.php' method='GET'>
 			<font color='#007897'>Advanced search options:</font><br/>
 				        <div style='height:30px;'>
 			    Reset selections: <input type='reset' name='reset' value='Reset'>&nbsp&nbsp

@@ -144,7 +144,7 @@
             //cookie searchbar in tutte le pagine
             function checkCookie7() {
                 setCookie("searchbarall", "0", 1825);
-                alert("Search Bar is now disabled on all pages, now the bar will appear only in this page!");
+                alert("Search Bar is now disabled on all pages, use settings menu to riactivate!");
             }
             //settaggio cookie pageview
             function checkCookie4() {
@@ -170,17 +170,33 @@
                     }
                 });
             });
-            //funzione scrolltop
+            //funzione visualizza freccia torna su 
             $(document).ready(function () {
                 var s = $("#gotop");
                 var pos = s.position();
                 $(window).scroll(function () {
                     var windowpos = $(window).scrollTop();
-                    if (windowpos >= 60) {
+                    if (windowpos >= 100) {
                         s.addClass("gotopview");
                     } else {
                         s.removeClass("gotopview");
                     }
+                });
+            });
+            //funzione animazioni scrolling
+            $(document).ready(function () {
+                //Check to see if the window is top if not then display button
+                $(window).scroll(function () {
+                    if ($(this).scrollTop() > 100) {
+                        $('#scrollToTop').fadeIn();
+                    } else {
+                        $('#scrollToTop').fadeOut();
+                    }
+                });
+                //funzione click per lo scrolling
+                $('#scrollToTop').click(function () {
+                    $('html, body').animate({scrollTop: 0}, 800);
+                    return false;
                 });
             });
         </script>
@@ -205,6 +221,11 @@
             } else {
                 $string = "Disable";
             }
+        }
+        #disabilita searchbar su altre pagine
+        if ($_GET['clos'] == "1" && $_COOKIE['searchbarall'] == "1") {
+            echo "<script>javascript:checkCookie7();</script>";
+            echo "<meta http-equiv='refresh' content='0'; URL=./view_preprints.php>";
         }
         #controllo cookie searchbar all
         if ($_COOKIE['searchbarall'] == "0" or ! isset($_COOKIE['searchbarall'])) {
@@ -273,7 +294,7 @@
         </div>
     <center>
         <?php
-        echo "<div id='gotop' hidden><a title='Go top' style='text-decoration: none;' href='javascript:window.scrollTo(0,0)'><img style='width:25px; height:25px;' src='./images/top.gif'></a></div>";
+        echo "<div id='gotop' hidden><a id='scrollToTop' title='Go top'><img style='width:25px; height:25px;' src='./images/top.gif'></a></div>";
         echo "
         <div id='sticker'>
             <form name='f1' action='view_preprints.php' method='GET'>
@@ -386,10 +407,6 @@
 #visualizza opzioni avanzate
             if ($_GET['More'] == "More") {
                 echo "<script>javascript:showHide(adv);</script>";
-            }
-#disabilita searchbar su altre pagine
-            if ($_GET['clos'] == "1") {
-                echo "<script>javascript:checkCookie7();</script>";
             }
 #ricerca full text
             if (isset($_GET['go']) && $_GET['go'] != "") {
