@@ -280,9 +280,9 @@
                     <br/>
                     <center>
                         <div id="sticker">
-                            <div style="float:right; margin-right:1%; margin-top:4px;">
+                            <div>
                                 <?php
-                                print_r("<font style='font-weight: bold;'>Welcome back: </font>");
+                                print_r("<font style='font-weight: bold;'>Name: </font>");
                                 print_r($_SESSION['nome']);
                                 print_r(" <font style='font-weight: bold;'>Access type: </font>");
                                 print_r($_SESSION['logged_type']);

@@ -282,28 +282,31 @@
                     <br/>
                     <center>
                         <div id="sticker">
-                            <div style="float:right; margin-right:1%; margin-top:4px;">
+                            <div style="float:left; margin-left:1%;">
                                 <?php
-                                print_r("<font style='font-weight: bold;'>Welcome back: </font>");
+                                print_r("<font style='font-weight: bold;'>Name: </font>");
                                 print_r($_SESSION['nome']);
                                 print_r(" <font style='font-weight: bold;'>Access type: </font>");
                                 print_r($_SESSION['logged_type']);
                                 ?>
                             </div>
-                            <div style="float:left; margin-left:0.5%;">
+                            <div style="float:right; margin-right:4%;">
+                                <?php
+                                if (check_approve() == true) {
+                                    print_r(" <font style='color:red; font-style: italic'>There are preprint to be approved!</font>");
+                                }
+                                ?>
+                            </div>
+                            <div style="float:left; margin-left:1%;">
                                 <form name="f1" action="modp.php" method="POST">
                                     <input type="submit" name="b1" value="Logout" id="botton_logout" class="bottoni" style="height:17px; color: red;" onclick="return confirmLogout()">
+                                    <a style="height:17px; color:white;" href="./uploaded.php?p=1" id="bottone_keyword" class="bottoni">My uploads</a>
+                                    <a style="height:17px; color:white;" href="./archived_preprints.php" id="bottone_keyword" class="bottoni">Archived section</a>
+                                    <a style="height:17px; color:white;" href="./approve_preprints.php" id="bottone_keyword" class="bottoni">Check section</a>
+                                    <a style="height:17px; color:white;" href="./check_preprints.php?bb3=1" id="bottone_keyword" class="bottoni">Check arXiv section</a>
+                                    <a style="height:17px; color:white;" href="./manual_edit.php" id="bottone_keyword" class="bottoni">Edit section</a>
+                                    <a style="height:17px; color:white;" href="./arXiv_panel.php" id="bottone_keyword" class="bottoni">ArXiv panel</a>
                                 </form>
-                            </div>
-                            <div style="float:left; margin-left:0.25%;">
-                                <a style="height:17px; color:white;" href="./uploaded.php?p=1" id="bottone_keyword" class="bottoni">My uploads</a>
-                                <a style="height:17px; color:white;" href="./archived_preprints.php" id="bottone_keyword" class="bottoni">Archived section</a>
-                                <a style="height:17px; color:white;" href="./approve_preprints.php" id="bottone_keyword" class="bottoni">Check section</a>
-                            </div>
-                            <div style="float:left; margin-left:0.5%;">
-                                <a style="height:17px; color:white;" href="./check_preprints.php?bb3=1" id="bottone_keyword" class="bottoni">Check arXiv section</a>
-                                <a style="height:17px; color:white;" href="./manual_edit.php" id="bottone_keyword" class="bottoni">Edit section</a>
-                                <a style="height:17px; color:white;" href="./arXiv_panel.php" id="bottone_keyword" class="bottoni">ArXiv panel</a>
                             </div>
                             <div style="clear:both;">
                             </div>
@@ -344,7 +347,6 @@
                                 </div>
                                 <br/>
                                 <div id="titlediv">
-
                                 </div>
                             </div>
                             <div style="font-weight: bold;">
