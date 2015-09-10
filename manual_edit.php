@@ -378,8 +378,9 @@
                                 #eliminazione del preprint selezionato
                                 delete_pdf($id1);
                                 cancellaselected($id1);
-                                echo '<script type="text/javascript">alert("Paper ' . $_POST['id'] . ' removed correctly!");</script>';
-                                echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./manual_edit.php">';
+                                echo '<script type="text/javascript">
+                                alert("Paper ' . $_POST['id'] . ' removed correctly!");
+                                window.close();</script>';
                             }
                             if (isset($_POST['bottoni10'])) {
                                 if (empty($_POST['journal'])) {
@@ -408,14 +409,16 @@
                                         $fileType = $_FILES["fileToUpload"]["type"];
                                         #inserimento nel database del file
                                         insert_one_pdf($info[0], $fileType);
-                                        echo '<script type="text/javascript">alert("Paper ' . $_POST['id'] . ' updated correctly!");</script>';
-                                        echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./manual_edit.php">';
+                                        echo '<script type="text/javascript">
+                                        alert("Paper ' . $_POST['id'] . ' updated correctly!");
+                                        window.close();</script>';
                                     } else {
                                         echo '<script type="text/javascript">alert("Error, file not uploaded!");</script>';
                                     }
                                 } else {
-                                    echo '<script type="text/javascript">alert("Paper ' . $_POST['id'] . ' updated correctly!");</script>';
-                                    echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./manual_edit.php">';
+                                    echo '<script type="text/javascript">
+                                    alert("Paper ' . $_POST['id'] . ' updated correctly!");
+                                    window.close();</script>';
                                 }
                             }
                             echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";

@@ -314,7 +314,7 @@
                         <option value='year'>Year:</option>
                         <option value='id'>ID:</option>
                     </select>
-                    <input type='search' autocomplete = 'on' style='width:30%;' name='r' placeholder='Author name, id of publication, etc.' value='" . $_GET['r'] . "'/>
+                    <input type='search' autocomplete = 'on' style='width:33%;' name='r' placeholder='Author name, id of publication, etc.' value='" . $_GET['r'] . "'/>
                            <input type='submit' name='s' value='Send'/>
                 </div>
                 <div style='clear:both;'></div>
