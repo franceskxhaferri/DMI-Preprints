@@ -300,12 +300,9 @@
             <form name='f1' action='view_preprints.php' method='GET'>
                 <div style='float:right; width:100%;'>
                     To see <a style='color:#007897;' href='archived_preprints.php' onclick='window.open(this.href);
-                            return false'>archived</a> (old publications)&nbsp&nbsp&nbsp&nbsp
-                    Settings:
-                    <input type='button' value='Show/Hide' onclick='javascript:showHide2(opt);'/>&nbsp
-                    Advanced:
-                    <input type='button' value='Show/Hide' onclick='javascript:showHide(adv);
-                            javascript:showHide(adv2);'/>&nbsp&nbsp&nbsp&nbsp
+                            return false'>archived</a>(old publications)&nbsp&nbsp&nbsp&nbsp
+                    <input type='button' value='Display Options' onclick='javascript:showHide2(opt);'style='width:130px'>&nbsp
+                    <input type='button' value='Advanced Search' onclick='javascript:showHide(adv);javascript:showHide(adv2);' style='width:130px'>&nbsp&nbsp&nbsp&nbsp
                     Filter results by
                     <select name='f'>
                         <option value='all' selected='selected'>All papers:</option>
@@ -314,11 +311,11 @@
                         <option value='year'>Year:</option>
                         <option value='id'>ID:</option>
                     </select>
-                    <input type='search' autocomplete = 'on' style='width:33%;' name='r' placeholder='Author name, id of publication, etc.' value='" . $_GET['r'] . "'/>
-                           <input type='submit' name='s' value='Send'/>
+                    <input type='search' autocomplete = 'on' style='width:33%;' name='r' placeholder='Author name, id of publication, year of publication, etc.' value='" . $_GET['r'] . "'>
+                        <input type='submit' name='s' value='Send'>
                 </div>
                 <div style='clear:both;'></div>
-                <div id='adv' hidden style='margin-top:5px;'>
+                <div id='adv' hidden=''>
                     <div>
                         Reset selections: 
                         <input type='reset' name='reset' value='Reset'>&nbsp&nbsp
@@ -338,6 +335,8 @@
                             <option value='25'>25</option>
                             <option value='50'>50</option>
                         </select>
+                        &nbsp&nbspGo to page:
+                        <input type='text' name='p' style='width:25px' placeholder='n&#176;'>
                         <br/>
                         Search on:
                         <label><input type='checkbox' name='d' value='1'>Archived</label>
@@ -359,7 +358,6 @@
                         <label><input type='radio' name='o' value='named'>Author-name (D)</label>
                         <label><input type='radio' name='o' value='namec'>Author-name (I)</label>
                     </div>
-                    <br/>
                 </div>
             </form>
             <div id='adv2' hidden=''>
@@ -368,11 +366,11 @@
                             return false' href='http://en.wikipedia.org/wiki/Full_text_search'>info</a>)
                     </font>
                     <br/>
-                    <div style='margin-top:5px;'>
+                    <div style='margin-top:3px;'>
                         Search: <input type='search' autocomplete = 'on' style='width:50%;' name='ft' placeholder='Insert phrase, name, keyword, etc.' value='" . $_GET['ft'] . "'/>
                                        <input type='submit' name='go' value='Send'/>
                     </div>
-                    <div style='margin-bottom:5px;'>
+                    <div style='margin-top:3px;>
                         Reset selections: 
                         <input type='reset' name='reset' value='Reset'>&nbsp&nbsp
                         Results for page: 
@@ -383,15 +381,18 @@
                             <option value='20'>20</option>
                             <option value='25'>25</option>
                             <option value='50'>50</option>
-                        </select>&nbsp&nbsp
+                        </select>
+                        &nbsp&nbspGo to page:
+                        <input type='text' name='p' style='width:25px' placeholder='n&#176;'>
+                        &nbsp&nbsp
                         Search on: 
                         <label><input type='radio' name='st' value='1' checked>Currents</label>
                         <label><input type='radio' name='st' value='0'>Archived</label>
                     </div>
                 </form>
             </div>
-            <div hidden id='opt' hidden='' style='margin-bottom:5px;'>
-                <h1>Settings:</h1>
+            <div hidden id='opt' hidden=''>
+                <h1>Display Options:</h1>
                 MathJax script:&nbsp
                 <input type='button' value='" . $valbotton . "' onclick='javascript:checkCookie2();' style='width:50px;'/>&nbsp
                 Search Bar on all pages:&nbsp

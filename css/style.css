@@ -75,11 +75,11 @@
 	}
 
 	a:link{
-		color:#007897;
+		color: #007897;
 	}
 	
 	a:visited{
-		color:green;
+		color: green;
 	}
 	
 	* > p:last-child {
@@ -95,15 +95,39 @@
 		
 		/*searchbar alta*/
 		.stick {
-		    position:fixed;
-		    top:0px;
-		    z-index:999999;
-		    width:100%;
+		    position: fixed;
+		    top: 0px;
+		    z-index: 999999;
+		    width: 100%;
 		    padding: 2px;
 		    border-bottom: 1px solid;
 		    border-color: #9A9A9A;
 		    background-color: #D9D9D9;
 		    box-shadow: 0px 0px 5px #9A9A9A;
+		}
+		
+		#adv {
+		    border-bottom: 1px dashed #9A9A9A;
+		    padding: 3px;
+		}
+		
+		#adv2 {
+		    padding-top: 3px;
+		}
+		
+		#opt {
+		    border-top: 1px dashed #9A9A9A;
+		    margin-top: 3px;
+		    padding-top: 3px;
+		}
+		
+		#adva {
+		    margin-bottom: 3px;
+		}
+		
+		#adv2a {
+		    border-bottom: 1px dashed #9A9A9A;
+		    padding-bottom: 10px;
 		}
 		
 		/*searchbar bassa*/
@@ -131,8 +155,8 @@
 		.gotopview {
 		    display:inline;
 		    position:fixed;
-		    bottom:50px;
-		    right:50px;
+		    bottom:7%;
+		    right:4%;
 		    z-index:999999;
 		}
 		
@@ -140,8 +164,8 @@
 		.gotopview2 {
 		    display:inline;
 		    position:fixed;
-		    bottom:55px;
-		    right:20px;
+		    bottom:10%;
+		    right:4%;
 		    z-index:999999;
 		}
 

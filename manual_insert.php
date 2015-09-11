@@ -43,7 +43,7 @@
             function showHide2(id) {
                 if (id.style.display != 'block') {
                     id.style.display = 'block';
-                    showHide2(adv);
+                    showHide2(adva);
                 } else {
                     id.style.display = 'none';
                 }
@@ -59,7 +59,7 @@
             }
             //chiudi menu click fuori dalla finestra
             function myFunction() {
-                adv.style.display = 'none';
+                adva.style.display = 'none';
                 opt.style.display = 'none';
             }
         </script>
@@ -177,8 +177,9 @@
                     #search bar
                     echo "<center><div id='stickbottom'>
 		    <a href='view_preprints.php?clos=1' title='Close' name='close'><img src='./images/close.gif' style='height:15px; width:15px; float:left;'></a>
-			     <div id='adv' hidden>
+			     <div id='adva' hidden>
 			     <div>
+			     <div id ='adv2a'>
 			<form name='f4' action='view_preprints.php' method='GET'>
 			    <font color='#007897'>Full text search: (<a style='color:#007897;' onclick='window.open(this.href);
 				    return false' href='http://en.wikipedia.org/wiki/Full_text_search'>info</a>)</font><br/>
@@ -195,15 +196,17 @@
 				    <option value='20'>20</option>
 				    <option value='25'>25</option>
 				    <option value='50'>50</option>
-				</select>&nbsp&nbsp
+				</select>
+				&nbsp&nbspGo to page:
+                        <input type='text' name='p' style='width:25px' placeholder='n&#176;'>&nbsp&nbsp
 				Search on: 
 				<label><input type='radio' name='st' value='1' checked>Currents</label>
 				<label><input type='radio' name='st' value='0'>Archived</label>
-			    </form></div><br/>
+			    </form></div>
 		    </div>
 			<form name='f4' action='view_preprints.php' method='GET'>
+			</div>
 			<font color='#007897'>Advanced search options:</font><br/>
-				        <div style='height:30px;'>
 			    Reset selections: <input type='reset' name='reset' value='Reset'>&nbsp&nbsp
 			    Years restrictions: 
 			    until <input type='text' name='year1' style='width:35px' placeholder='Last'>
@@ -218,7 +221,8 @@
 				<option value='25'>25</option>
 				<option value='50'>50</option>
 			    </select>
-			</div>
+			    &nbsp&nbspGo to page:
+                        <input type='text' name='p' style='width:25px' placeholder='n&#176;'>
 			<div>
 			    Search on:
 			    <label><input type='checkbox' name='d' value='1'>Archived</label>
@@ -239,10 +243,10 @@
 			    <label><input type='radio' name='o' value='idc'>Identifier (I)</label>
 			    <label><input type='radio' name='o' value='named'>Author-name (D)</label>
 			    <label><input type='radio' name='o' value='namec'>Author-name (I)</label>
-			</div><br/>
+			</div>
 		    </div>
 		        Advanced:
-		        <input type='button' value='Show/Hide' onclick='javascript:showHide(adv);'/>
+		        <input type='button' value='Show/Hide' onclick='javascript:showHide(adva);'/>
 		         Filter results by 
 		        <select name='f'>
 		            <option value='all' selected='selected'>All papers:</option>
@@ -283,7 +287,7 @@
                         Go to arXiv panel&nbsp&nbsp&nbsp
                         <a style="height:17px; color:white;" href="./arXiv_panel.php" id="bottone_keyword" class="bottoni" onclick="return confirmExit()" >Back</a><br/><br/>
                         <a style='color:#007897;' href='http://arxiv.org/' onclick='window.open(this.href);
-                                        return false' title='arXiv'>arXiv.org</a>
+                                return false' title='arXiv'>arXiv.org</a>
                     </center>
                     <hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
                     <?php
