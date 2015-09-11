@@ -316,7 +316,6 @@
                 </div>
                 <div style='clear:both;'></div>
                 <div id='adv' hidden=''>
-                    <div>
                         Reset selections: 
                         <input type='reset' name='reset' value='Reset'>&nbsp&nbsp
                         Years restrictions: 
@@ -357,7 +356,6 @@
                         <label><input type='radio' name='o' value='idc'>Identifier (I)</label>
                         <label><input type='radio' name='o' value='named'>Author-name (D)</label>
                         <label><input type='radio' name='o' value='namec'>Author-name (I)</label>
-                    </div>
                 </div>
             </form>
             <div id='adv2' hidden=''>
@@ -366,11 +364,8 @@
                             return false' href='http://en.wikipedia.org/wiki/Full_text_search'>info</a>)
                     </font>
                     <br/>
-                    <div style='margin-top:3px;'>
                         Search: <input type='search' autocomplete = 'on' style='width:50%;' name='ft' placeholder='Insert phrase, name, keyword, etc.' value='" . $_GET['ft'] . "'/>
-                                       <input type='submit' name='go' value='Send'/>
-                    </div>
-                    <div style='margin-top:3px;>
+                                       <input type='submit' name='go' value='Send'/><br/>
                         Reset selections: 
                         <input type='reset' name='reset' value='Reset'>&nbsp&nbsp
                         Results for page: 
@@ -388,7 +383,6 @@
                         Search on: 
                         <label><input type='radio' name='st' value='1' checked>Currents</label>
                         <label><input type='radio' name='st' value='0'>Archived</label>
-                    </div>
                 </form>
             </div>
             <div hidden id='opt' hidden=''>
@@ -400,9 +394,10 @@
                 On page view for PDF:&nbsp
                 <input type='button' value='" . $string . "' onclick='javascript:checkCookie3();' style='width:50px;'/>&nbsp
             </div>
-        </div><br/>
+        </div>
         ";
         ?>
+        <br/>
         <div onclick="myFunction()">
             <?php
 #visualizza opzioni avanzate

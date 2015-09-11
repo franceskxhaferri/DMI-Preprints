@@ -105,7 +105,7 @@
 		    background-color: #D9D9D9;
 		    box-shadow: 0px 0px 5px #9A9A9A;
 		}
-		
+		/*opzioni di ricerca avanzate*/
 		#adv {
 		    border-bottom: 1px dashed #9A9A9A;
 		    padding: 3px;
@@ -116,8 +116,6 @@
 		}
 		
 		#opt {
-		    border-top: 1px dashed #9A9A9A;
-		    margin-top: 3px;
 		    padding-top: 3px;
 		}
 		
