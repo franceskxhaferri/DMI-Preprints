@@ -121,16 +121,19 @@
 		
 		/*freccia torna su*/
 		#gotop {
+		width: 25px;
+  		height: 25px;
+		border-radius: 150px;
+		box-shadow: 0px 0px 5px #9A9A9A;
 		}
 		
 		/*freccia torna su pagina principale*/
 		.gotopview {
 		    display:inline;
 		    position:fixed;
-		    bottom:10px;
-		    right:10px;
+		    bottom:50px;
+		    right:50px;
 		    z-index:999999;
-		    padding: 2px;
 		}
 		
 		/*freccia torna su altre pagine*/
@@ -138,9 +141,8 @@
 		    display:inline;
 		    position:fixed;
 		    bottom:55px;
-		    right:10px;
+		    right:20px;
 		    z-index:999999;
-		    padding: 2px;
 		}
 
 /* Reusable */
