@@ -20,16 +20,26 @@
         <!--[if lte IE 9]><link rel="stylesheet" href="css/ie9.css" /><![endif]-->
         <!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
         <script type="text/javascript">
-            function FinePagina()
-            {
-                var w = window.screen.width;
-                var h = window.screen.height;
-                window.scrollTo(w * h, w * h)
+
+            //visualizza icona di caricamento
+            function loading(id) {
+                if (id.style.display != 'block') {
+                    id.style.display = 'block';
+                } else {
+                    id.style.display = 'none';
+                }
             }
-            function confirmDownload()
-            {
-                return confirm("Warning! this overwrite the existent data and will take more time, continue?");
+            //messaggio conferma download
+            function confirmDownload() {
+                var x = confirm("Warning! this overwrite the existent data and will take more time, continue?");
+                if (x) {
+                    loading(load);
+                    return x
+                } else {
+                    return x
+                }
             }
+
             //opzioni di visualizzazione
             function showHide2(id) {
                 if (id.style.display != 'block') {
@@ -197,6 +207,7 @@
                     </div>
                     <div align="center">
                         <center>
+
                             <br/>
                             <h2>ARXIV PANEL</h2>
                             <table>
@@ -234,7 +245,7 @@
                                     </td>
                                     <td align="center">
                                         <form name="f8" action="arXiv_panel.php" method="POST">
-                                            <input type="submit" name="b8" value="Update from arXiv" id="bottone_keyword" class="bottoni">
+                                            <input type="submit" name="b8" value="Update from arXiv" id="bottone_keyword" class="bottoni" onclick='return loading(load)'>
                                         </form>
                                     </td>
                                 </tr>
@@ -377,5 +388,10 @@
         </div>
         <br/>
         <br/>
-    </body>
-</html>
+        <div id="load">
+        <center>
+            <img src="./images/loader.gif" alt="Loading" style="width: 287px; height: 141px;">
+            </center>
+            <div>
+                </body>
+                </html>

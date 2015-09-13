@@ -205,11 +205,11 @@
         #controllo cookie mathjax
         if ($_COOKIE['math'] == "yes" or ! isset($_COOKIE['math'])) {
             echo "	<script type='text/x-mathjax-config'>
-            			MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$']]}});
-        		</script>
-        		<script type='text/javascript'
-                		src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'>
-        		</script>";
+            MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+        </script>
+        <script type='text/javascript'
+                src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'>
+        </script>";
             $valbotton = "Disable";
         }
         #controllo cookie pageview
@@ -301,8 +301,8 @@
                 <div style='float:right; width:100%;'>
                     To see <a style='color:#007897;' href='archived_preprints.php' onclick='window.open(this.href);
                             return false'>archived</a>(old publications)&nbsp&nbsp&nbsp&nbsp
-                    <input type='button' value='Display Options' onclick='javascript:showHide2(opt);'style='width:130px'>&nbsp
-                    <input type='button' value='Advanced Search' onclick='javascript:showHide(adv);javascript:showHide(adv2);' style='width:130px'>&nbsp&nbsp&nbsp&nbsp
+                    <input type='button' value='Display Options' onclick='javascript:showHide2(opt)';>&nbsp
+                    <input type='button' value='Search Options' onclick='javascript:showHide(adv);javascript:showHide(adv2);'>&nbsp&nbsp&nbsp&nbsp
                     Filter results by
                     <select name='f'>
                         <option value='all' selected='selected'>All papers:</option>
