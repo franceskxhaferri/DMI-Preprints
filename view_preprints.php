@@ -300,7 +300,7 @@
             <form name='f1' action='view_preprints.php' method='GET'>
                 <div style='float:right; width:100%;'>
                     To see <a style='color:#007897;' href='archived_preprints.php' onclick='window.open(this.href);
-                            return false'>archived</a>(old publications)&nbsp&nbsp&nbsp&nbsp
+                            return false'>archived</a> old publications &nbsp&nbsp&nbsp&nbsp
                     <input type='button' value='Display Options' onclick='javascript:showHide2(opt)';>&nbsp
                     <input type='button' value='Search Options' onclick='javascript:showHide(adv);javascript:showHide(adv2);'>&nbsp&nbsp&nbsp&nbsp
                     Filter results by
@@ -350,12 +350,12 @@
                         <label><input type='checkbox' name='i' value='1'>ID</label>
                         <br/>
                         Order results by:
-                        <label><input type='radio' name='o' value='dated' checked>Date (D)</label>
-                        <label><input type='radio' name='o' value='datec'>Date (I)</label>
-                        <label><input type='radio' name='o' value='idd'>Identifier (D)</label>
-                        <label><input type='radio' name='o' value='idc'>Identifier (I)</label>
-                        <label><input type='radio' name='o' value='named'>Author-name (D)</label>
-                        <label><input type='radio' name='o' value='namec'>Author-name (I)</label>
+                        <label><input type='radio' name='o' value='dated' checked>Date &#8595;</label>
+                        <label><input type='radio' name='o' value='datec'>Date &#8593;</label>
+                        <label><input type='radio' name='o' value='idd'>Identifier &#8595;</label>
+                        <label><input type='radio' name='o' value='idc'>Identifier &#8593;</label>
+                        <label><input type='radio' name='o' value='named'>Author-name &#8595;</label>
+                        <label><input type='radio' name='o' value='namec'>Author-name &#8593;</label>
                 </div>
             </form>
             <div id='adv2' hidden=''>

@@ -242,12 +242,12 @@
 			    <label><input type='checkbox' name='j' value='1'>Journal-ref</label>
 			    <label><input type='checkbox' name='i' value='1'>ID</label>
 			<br/>Order results by:
-			    <label><input type='radio' name='o' value='dated' checked>Date (D)</label>
-			    <label><input type='radio' name='o' value='datec'>Date (I)</label>
-			    <label><input type='radio' name='o' value='idd'>Identifier (D)</label>
-			    <label><input type='radio' name='o' value='idc'>Identifier (I)</label>
-			    <label><input type='radio' name='o' value='named'>Author-name (D)</label>
-			    <label><input type='radio' name='o' value='namec'>Author-name (I)</label>
+			    <label><input type='radio' name='o' value='dated' checked>Date &#8595;</label>
+                        <label><input type='radio' name='o' value='datec'>Date &#8593;</label>
+                        <label><input type='radio' name='o' value='idd'>Identifier &#8595;</label>
+                        <label><input type='radio' name='o' value='idc'>Identifier &#8593;</label>
+                        <label><input type='radio' name='o' value='named'>Author-name &#8595;</label>
+                        <label><input type='radio' name='o' value='namec'>Author-name &#8593;</label>
 			<br/>
 		    </div>
 		        Advanced:

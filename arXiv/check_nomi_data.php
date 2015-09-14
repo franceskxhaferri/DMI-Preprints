@@ -158,7 +158,7 @@ function searchfulltext() {
         if ($cred == 1) {
             echo "<h1>" . $i . ".<br/></h1><div align='left' style='width:98%;'>";
             if ($_COOKIE['pageview'] == "0") {
-                echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./counter.php?id=" . $row['id_pubblicazione'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a>&nbsp&nbsp&nbsp<a title='Change this preprint' style='color:#007897;' href='./manual_edit.php?id=" . $row['id_pubblicazione'] . "' onclick='window.open(this.href); return false'>edit</a></div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
+                echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./counter.php?id=" . $row['id_pubblicazione'] . "&i=1 onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a>&nbsp&nbsp&nbsp<a title='Change this preprint' style='color:#007897;' href='./manual_edit.php?id=" . $row['id_pubblicazione'] . "' onclick='window.open(this.href); return false'>edit</a></div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
             } else {
                 echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a title='Change this preprint' style='color:#007897;' href='./manual_edit.php?id=" . $row['id_pubblicazione'] . "' onclick='window.open(this.href); return false'>edit</a></div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
             }
@@ -166,9 +166,9 @@ function searchfulltext() {
             echo "<h1>" . $i . ".<br/></h1><div align='left' style='width:98%;'>";
             if ($_COOKIE['pageview'] == "0") {
                 if ($_SESSION['nome'] . " (" . $_SESSION['uid'] . ")" == $row['uid'] && $row['uid'] != "") {
-                    echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./counter.php?id=" . $row['id_pubblicazione'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a>&nbsp&nbsp&nbsp<a title='Change this preprint' style='color:#007897;' href='./edit.php?id=" . $row['id_pubblicazione'] . "&r=" . $row['uid'] . "' onclick='window.open(this.href); return false'>edit</a></div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
+                    echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./counter.php?id=" . $row['id_pubblicazione'] . "&i=1 onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a>&nbsp&nbsp&nbsp<a title='Change this preprint' style='color:#007897;' href='./edit.php?id=" . $row['id_pubblicazione'] . "&r=" . $row['uid'] . "' onclick='window.open(this.href); return false'>edit</a></div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
                 } else {
-                    echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./counter.php?id=" . $row['id_pubblicazione'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a></div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
+                    echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./counter.php?id=" . $row['id_pubblicazione'] . "&i=1 onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a></div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
                 }
             } else {
                 if ($_SESSION['nome'] . " (" . $_SESSION['uid'] . ")" == $row['uid'] && $row['uid'] != "") {
@@ -504,7 +504,7 @@ function searchpreprint() {
             echo "<h1>" . $i . ".<br/></h1><div align='left' style='width:98%;'>";
             if ($_COOKIE['pageview'] == "0") {
                 if (file_exists("./pdf/" . $row['Filename'])) {
-                    echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./mysql/counter.php?id=" . $row['id_pubblicazione'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a>&nbsp&nbsp&nbsp<a title='Change this preprint' style='color:#007897;' href='./manual_edit.php?id=" . $row['id_pubblicazione'] . "' onclick='window.open(this.href); return false'>edit</a></div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
+                    echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./mysql/counter.php?id=" . $row['id_pubblicazione'] . "&i=1 onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a>&nbsp&nbsp&nbsp<a title='Change this preprint' style='color:#007897;' href='./manual_edit.php?id=" . $row['id_pubblicazione'] . "' onclick='window.open(this.href); return false'>edit</a></div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
                 } else {
                     echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./pdf_archived/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a> (Archived)</div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
                 }
@@ -521,13 +521,13 @@ function searchpreprint() {
             if ($_COOKIE['pageview'] == "0") {
                 if ($_SESSION['nome'] . " (" . $_SESSION['uid'] . ")" == $row['uid'] && $row['uid'] != "") {
                     if (file_exists("./pdf/" . $row['Filename'])) {
-                        echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./counter.php?id=" . $row['id_pubblicazione'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a>&nbsp&nbsp&nbsp<a title='Change this preprint' style='color:#007897;' href='./edit.php?id=" . $row['id_pubblicazione'] . "&r=" . $row['uid'] . "' onclick='window.open(this.href); return false'>edit</a></div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
+                        echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./counter.php?id=" . $row['id_pubblicazione'] . "&i=1 onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a>&nbsp&nbsp&nbsp<a title='Change this preprint' style='color:#007897;' href='./edit.php?id=" . $row['id_pubblicazione'] . "&r=" . $row['uid'] . "' onclick='window.open(this.href); return false'>edit</a></div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
                     } else {
                         echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./pdf_archived/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a> (Archived)</div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
                     }
                 } else {
                     if (file_exists("./pdf/" . $row['Filename'])) {
-                        echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./counter.php?id=" . $row['id_pubblicazione'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a></div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
+                        echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./counter.php?id=" . $row['id_pubblicazione'] . "&i=1 onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a></div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
                     } else {
                         echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./pdf_archived/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a> (Archived)</div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
                     }
@@ -570,7 +570,7 @@ function searchpreprint() {
         } else {
             if ($_COOKIE['pageview'] == "1") {
                 if (file_exists("./pdf/" . $row['Filename'])) {
-                    echo "<p><h1>document:</h1></p><div style='margin-left:1%; margin-right:1%;'><a style='color:#007897;' href=./mysql/counter.php?id=" . $row['id_pubblicazione'] . "' onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>LINK</a> (On page view disabled for this file)</div>";
+                    echo "<p><h1>document:</h1></p><div style='margin-left:1%; margin-right:1%;'><a style='color:#007897;' href=./mysql/counter.php?id=" . $row['id_pubblicazione'] . "&i=1 onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>LINK</a> (On page view disabled for this file)</div>";
                 } else {
                     echo "<p><h1>document:</h1></p><div style='margin-left:1%; margin-right:1%;'><a style='color:#007897;' href=./pdf_archived/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>LINK</a></div>";
                 }
@@ -755,7 +755,7 @@ function filtropreprint() {
         if ($cred == 1) {
             echo "<h1>" . $i . ".<br/></h1><div align='left' style='width:98%;'>";
             if ($_COOKIE['pageview'] == "0") {
-                echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./counter.php?id=" . $row['id_pubblicazione'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a>&nbsp&nbsp&nbsp<a title='Change this preprint' style='color:#007897;' href='./manual_edit.php?id=" . $row['id_pubblicazione'] . "' onclick='window.open(this.href); return false'>edit</a></div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
+                echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./counter.php?id=" . $row['id_pubblicazione'] . "&i=1 onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a>&nbsp&nbsp&nbsp<a title='Change this preprint' style='color:#007897;' href='./manual_edit.php?id=" . $row['id_pubblicazione'] . "' onclick='window.open(this.href); return false'>edit</a></div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
             } else {
                 echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a title='Change this preprint' style='color:#007897;' href='./manual_edit.php?id=" . $row['id_pubblicazione'] . "' onclick='window.open(this.href); return false'>edit</a></div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
             }
@@ -763,9 +763,9 @@ function filtropreprint() {
             echo "<h1>" . $i . ".<br/></h1><div align='left' style='width:98%;'>";
             if ($_COOKIE['pageview'] == "0") {
                 if ($_SESSION['nome'] . " (" . $_SESSION['uid'] . ")" == $row['uid'] && $row['uid'] != "") {
-                    echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./counter.php?id=" . $row['id_pubblicazione'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a>&nbsp&nbsp&nbsp<a title='Change this preprint' style='color:#007897;' href='./edit.php?id=" . $row['id_pubblicazione'] . "&r=" . $row['uid'] . "' onclick='window.open(this.href); return false'>edit</a></div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
+                    echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./counter.php?id=" . $row['id_pubblicazione'] . "&i=1 onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a>&nbsp&nbsp&nbsp<a title='Change this preprint' style='color:#007897;' href='./edit.php?id=" . $row['id_pubblicazione'] . "&r=" . $row['uid'] . "' onclick='window.open(this.href); return false'>edit</a></div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
                 } else {
-                    echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./counter.php?id=" . $row['id_pubblicazione'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a></div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
+                    echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./counter.php?id=" . $row['id_pubblicazione'] . "&i=1 onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a></div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
                 }
             } else {
                 if ($_SESSION['nome'] . " (" . $_SESSION['uid'] . ")" == $row['uid'] && $row['uid'] != "") {

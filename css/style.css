@@ -192,15 +192,18 @@
 		
 		/*div caricamento*/
 		#load{
-			width: 287px;
-			height: 141px;
+			width: 288px;
+			height: 142px;
 			display: none;
-			top: 35%;
-			left: 39%;
+			top: 50%;
+			left: 50%;
+			margin-left:-143px;
+			margin-top:-71px;
 		    	position: fixed;
 		    	z-index: 999999;
 		    	background-color:#D9D9D9;
-		    	box-shadow: 0px 0px 5px #9A9A9A;
+		    	border-color: 1px solid #808080;
+		    	box-shadow: 0px 0px 5px #000000;
 		}
 
 /* Reusable */

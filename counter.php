@@ -134,12 +134,12 @@
                         <label><input type='checkbox' name='i' value='1'>ID</label>
                         <br/>
                         Order results by:
-                        <label><input type='radio' name='o' value='dated' checked>Date (D)</label>
-                        <label><input type='radio' name='o' value='datec'>Date (I)</label>
-                        <label><input type='radio' name='o' value='idd'>Identifier (D)</label>
-                        <label><input type='radio' name='o' value='idc'>Identifier (I)</label>
-                        <label><input type='radio' name='o' value='named'>Author-name (D)</label>
-                        <label><input type='radio' name='o' value='namec'>Author-name (I)</label>
+                        <label><input type='radio' name='o' value='dated' checked>Date &#8595;</label>
+                        <label><input type='radio' name='o' value='datec'>Date &#8593;</label>
+                        <label><input type='radio' name='o' value='idd'>Identifier &#8595;</label>
+                        <label><input type='radio' name='o' value='idc'>Identifier &#8593;</label>
+                        <label><input type='radio' name='o' value='named'>Author-name &#8595;</label>
+                        <label><input type='radio' name='o' value='namec'>Author-name &#8593;</label>
                 </div>
             </form>
             <div id='adv2' hidden=''>
@@ -175,20 +175,26 @@
         #importazione variabili globali
         include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
         #connessione al database...
-        $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
-        mysql_select_db($db_monte, $db_connection);
-        #acquisizione valore
-        $id = $_GET['id'];
-        $sql = "SELECT * FROM PREPRINTS WHERE id_pubblicazione='" . $id . "'";
-        $query = mysql_query($sql) or die(mysql_error());
-        $row = mysql_fetch_array($query);
-        #incremento valore
-        $sql = "UPDATE PREPRINTS SET counter='" . ($row['counter'] + 1) . "' WHERE id_pubblicazione='" . $id . "'";
-        $query = mysql_query($sql) or die(mysql_error());
-        #chiusura connessione al database
-        mysql_close($db_connection);
-        #reindirizzamento al pdf
-        $var = "./pdf/" . $row['Filename'];
+	$db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
+	mysql_select_db($db_monte, $db_connection);
+	#acquisizione valore
+	$id = $_GET['id'];
+	$sql = "SELECT * FROM PREPRINTS WHERE id_pubblicazione='" . $id . "'";
+	$query = mysql_query($sql) or die(mysql_error());
+	$row = mysql_fetch_array($query);
+        if ($_GET['i']==1){
+		#incremento valore
+		$sql = "UPDATE PREPRINTS SET counter='" . ($row['counter'] + 1) . "' WHERE id_pubblicazione='" . $id . "'";
+		$query = mysql_query($sql) or die(mysql_error());
+		#chiusura connessione al database
+		mysql_close($db_connection);
+		#reindirizzamento al pdf
+		$var = "./pdf/" . $row['Filename'];
+		$var2= "./counter.php?id=".$id;
+		echo "<meta http-equiv=refresh content='0; url=$var2'>";
+        }else{
+        	$var = "./pdf/" . $row['Filename'];
+        }
         ?>
         <div onclick="myFunction()">
             <div style="float:left; width:70%; height: 630px;">
@@ -196,7 +202,7 @@
             </div>
             <font style="font-weight: bold; margin-left:5px;">PUBLICATION INFORMATIONS: </font><br/>
             <div id="divinfo">
-                <p style="padding: 5px;">
+                <p style="padding: 6px;">
                     <font style="font-weight: bold;">ID: </font><?php echo $row['id_pubblicazione']; ?><br/><br/>
                     <font style="font-weight: bold;">Submitted by: </font><?php echo $row['uid']; ?><br/>
                     <font style="font-weight: bold;">Date: </font><?php echo $row['data_pubblicazione']; ?><br/><br/>
