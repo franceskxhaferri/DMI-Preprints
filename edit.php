@@ -26,140 +26,16 @@
             webshims.setOptions('forms-ext', {types: 'date'});
             webshims.polyfill('forms forms-ext');
         </script>
-        <script type='text/javascript'>
-            function confirmDelete()
-            {
-                return confirm("Delete this publication?\n(It can not be undone)");
-            }
-            function confirmInsert()
-            {
-                return confirm("Update publication information?\n(If you want to upload a new pdf use upgrade function)");
-            }
-            function confirmUpgrade()
-            {
-                return confirm("Upgrade publication to following version?\n(This is used for the uploading a new pdf, it can not be undone)");
-            }
-            //opzioni di visualizzazione
-            function showHide2(id) {
-                if (id.style.display != 'block') {
-                    id.style.display = 'block';
-                    showHide2(adva);
-                } else {
-                    id.style.display = 'none';
-                }
-            }
-            //ricerca avanzata
-            function showHide(id) {
-                if (id.style.display != 'block') {
-                    id.style.display = 'block';
-                    showHide(opt);
-                } else {
-                    id.style.display = 'none';
-                }
-            }
-            //chiudi menu click fuori dalla finestra
-            function myFunction() {
-                adva.style.display = 'none';
-                opt.style.display = 'none';
-            }
-        </script>
         <script type="text/x-mathjax-config">
-            MathJax.Hub.Config({
-            tex2jax: {
-            inlineMath: [["$","$"],["\\(","\\)"]]
-            }
-            });
+            MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
         </script>
         <script type="text/javascript"
-                src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML-full">
+                src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+        <script type="text/javascript" src="./js/allscript.js">
         </script>
     </head>
     <body>
-        <script>
-            //text area title
-            (function () {
-                window.UpdateMathtit = function (TeX) {
-                    //set the MathOutput HTML
-                    document.getElementById("titlediv").innerHTML = TeX;
-                    //reprocess the MathOutput Element
-                    MathJax.Hub.Queue(["Typeset", MathJax.Hub, "titlediv"]);
-                }
-            })();
-            //text area authors
-            (function () {
-                window.UpdateMathaut = function (TeX) {
-                    //set the MathOutput HTML
-                    document.getElementById("authordiv").innerHTML = TeX;
-                    //reprocess the MathOutput Element
-                    MathJax.Hub.Queue(["Typeset", MathJax.Hub, "authordiv"]);
-                }
-            })();
-            //text area journal
-            (function () {
-                window.UpdateMathjou = function (TeX) {
-                    //set the MathOutput HTML
-                    document.getElementById("journaldiv").innerHTML = TeX;
-                    //reprocess the MathOutput Element
-                    MathJax.Hub.Queue(["Typeset", MathJax.Hub, "journaldiv"]);
-                }
-            })();
-            //text area comments
-            (function () {
-                window.UpdateMathcom = function (TeX) {
-                    //set the MathOutput HTML
-                    document.getElementById("commentsdiv").innerHTML = TeX;
-                    //reprocess the MathOutput Element
-                    MathJax.Hub.Queue(["Typeset", MathJax.Hub, "commentsdiv"]);
-                }
-            })();
-            //text area category
-            (function () {
-                window.UpdateMathcat = function (TeX) {
-                    //set the MathOutput HTML
-                    document.getElementById("categorydiv").innerHTML = TeX;
-                    //reprocess the MathOutput Element
-                    MathJax.Hub.Queue(["Typeset", MathJax.Hub, "categorydiv"]);
-                }
-            })();
-            //text area abstract
-            (function () {
-                window.UpdateMathabs = function (TeX) {
-                    //set the MathOutput HTML
-                    document.getElementById("abstractdiv").innerHTML = TeX;
-                    //reprocess the MathOutput Element
-                    MathJax.Hub.Queue(["Typeset", MathJax.Hub, "abstractdiv"]);
-                }
-            })();
-            //funzione visualizza freccia torna su 
-            $(document).ready(function () {
-                var s = $("#gotop");
-                var pos = s.position();
-                $(window).scroll(function () {
-                    var windowpos = $(window).scrollTop();
-                    if (windowpos >= 100) {
-                        s.addClass("gotopview2");
-                    } else {
-                        s.removeClass("gotopview2");
-                    }
-                });
-            });
-            //funzione animazioni scrolling
-            $(document).ready(function () {
-                //Check to see if the window is top if not then display button
-                $(window).scroll(function () {
-                    if ($(this).scrollTop() > 100) {
-                        $('#scrollToTop').fadeIn();
-                    } else {
-                        $('#scrollToTop').fadeOut();
-                    }
-                });
-                //funzione click per lo scrolling
-                $('#scrollToTop').click(function () {
-                    $('html, body').animate({scrollTop: 0}, 800);
-                    return false;
-                });
-            });
-        </script>
         <?php
         #importo file per utilizzare funzioni...
         require_once $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'authorization/sec_sess.php';
@@ -247,7 +123,7 @@
 			</div>
 		    </div>
 		        Advanced:
-		        <input type='button' value='Show/Hide' onclick='javascript:showHide(adva);'/>
+		        <input type='button' value='Show/Hide' onclick='javascript:showHide2(adva,adv2a);'/>
 		         Filter results by 
 		        <select name='f'>
 		            <option value='all' selected='selected'>All papers:</option>
@@ -261,7 +137,7 @@
 		    </div></center>";
                 }
                 ?>
-                <div onclick="myFunction()">
+                <div onclick="myFunction2()">
                     <div id="header-wrapper">
                         <div class="container">
                             <div class="row">
@@ -374,9 +250,9 @@
                             <div style='font-weight: bold;'>file to upload:</div>
                             <input type='hidden' name='MAX_FILE_SIZE' value='10000000'><br/>
                             <input type='file' name='fileToUpload' id='fileToUpload'><br/><br/>
-                            <br/><input type='submit' name='b9' value='Remove' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmDelete()'/>
+                            <br/><input type='submit' name='b9' value='Remove' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmDelete2()'/>
                             <input type='submit' name='b10' value='Upgrade' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmUpgrade()'/>
-                            <input type='submit' name='b11' value='Update' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmInsert()'/><br/><br/><br/><br/></center>
+                            <input type='submit' name='b11' value='Update' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmInsert2()'/><br/><br/><br/><br/></center>
                             </div></div></form>";
                         echo "
                             	<script>

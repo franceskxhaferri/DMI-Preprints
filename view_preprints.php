@@ -26,192 +26,15 @@
             webshims.setOptions('forms-ext', {types: 'date'});
             webshims.polyfill('forms forms-ext');
         </script>
-        <script type="text/javascript">
-            //scorri fondo pagina
-            function FinePagina() {
-                var w = window.screen.width;
-                var h = window.screen.height;
-                window.scrollTo(w * h, w * h)
-            }
-            //visualizza ricerca avanzata
-            function showHide(id) {
-                if (id.style.display != 'block') {
-                    id.style.display = 'block';
-                    checkCookie();
-                    showHide(opt);
-                } else {
-                    id.style.display = 'none';
-                }
-            }
-            //setta cookie
-            function setCookie(cname, cvalue, exdays) {
-                var d = new Date();
-                d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-                var expires = "expires=" + d.toGMTString();
-                document.cookie = cname + "=" + cvalue + "; " + expires;
-            }
-            //legge cookie
-            function getCookie(cname) {
-                var name = cname + "=";
-                var ca = document.cookie.split(';');
-                for (var i = 0; i < ca.length; i++) {
-                    var c = ca[i];
-                    while (c.charAt(0) == ' ')
-                        c = c.substring(1);
-                    if (c.indexOf(name) == 0) {
-                        return c.substring(name.length, c.length);
-                    }
-                }
-                return "";
-            }
-            //cookie istruzioni fulltext search
-            function checkCookie() {
-                var adv = getCookie("adv");
-                if (adv == "") {
-                    alert("EXAMPLE OF USING BOOLEAN OPERATORS(full text search):\n'Milan Rome': this must be one of the two terms.\n'+Milan +Rome': must be present both terms.\n'+Milan Rome': there must be 'Milan' and possibly 'Rome'.\n'+Milan -Rome': there must be 'Milan' but not 'Rome'.\n'+Milan +(<Rome >Venice)': must be present or 'Milan' and 'Rome' or 'Milan' and 'Venice', but the records with 'Milan' and 'Venice' are of greater. ('<' Means less important, '>' means greater relevance).\n'''Milan Rome''': This must be the exact sequence 'Milan Rome'.\n");
-                    setCookie("adv", "yes", 15);
-                }
-            }
-            //opzioni di visualizzazione settaggi
-            function showHide2(id) {
-                if (id.style.display != 'block') {
-                    id.style.display = 'block';
-                    checkCookie1();
-                    showHide2(adv);
-                    showHide3(adv2);
-                } else {
-                    id.style.display = 'none';
-                }
-            }
-            //opzioni di visualizzazione fulltext search
-            function showHide3(id) {
-                if (id.style.display != 'block') {
-                    id.style.display = 'block';
-                    showHide2(adv2);
-                } else {
-                    id.style.display = 'none';
-                }
-            }
-            //avviso cookie impostazioni
-            function checkCookie1() {
-                var adv = getCookie("opt");
-                if (adv == "") {
-                    alert("This settings use cookies, your preferences will remain stored in your browser.");
-                    setCookie("opt", "yes", 15);
-                }
-            }
-            //cookie mathjax
-            function checkCookie2() {
-                var math = getCookie("math");
-                if (math == "no") {
-                    setCookie("math", "yes", 1825);
-                    alert("MathJax is now abilited!");
-                    window.location.reload();
-                } else {
-                    setCookie("math", "no", 1825);
-                    alert("MathJax is now disabled!");
-                    window.location.reload();
-                }
-            }
-            //cookie pageview
-            function checkCookie3() {
-                var pageview = getCookie("pageview");
-                if (pageview == "0") {
-                    setCookie("pageview", "1", 1825);
-                    alert("On page view is now abilited, PDF will be shown in the page!");
-                    window.location.reload();
-                } else {
-                    adv.style.display = 'none';
-                    setCookie("pageview", "0", 1825);
-                    alert("On page view is now disabled!");
-                    window.location.reload();
-                }
-            }
-            //cookie searchbar in tutte le pagine
-            function checkCookie6() {
-                var pageview = getCookie("searchbarall");
-                if (pageview == "0" || pageview == "") {
-                    setCookie("searchbarall", "1", 1825);
-                    setCookie("searchbar", "1", 1825);
-                    alert("Search Bar is now abilited on all pages, now the bar will appear on every page!");
-                    window.location.reload();
-                } else {
-                    setCookie("searchbarall", "0", 1825);
-                    alert("Search Bar is now disabled on all pages, now the bar will appear only in this page!");
-                    window.location.reload();
-                }
-            }
-            //cookie searchbar in tutte le pagine
-            function checkCookie7() {
-                setCookie("searchbarall", "0", 1825);
-                alert("Search Bar is now disabled on all pages, use settings menu to riactivate!");
-            }
-            //settaggio cookie pageview
-            function checkCookie4() {
-                setCookie("pageview", "0", 1825);
-                window.location.reload();
-            }
-            //chiudi menu click fuori dalla finestra
-            function myFunction() {
-                adv.style.display = 'none';
-                adv2.style.display = 'none';
-                opt.style.display = 'none';
-            }
-            //funzione searchbar fixed
-            $(document).ready(function () {
-                var s = $("#sticker");
-                var pos = s.position();
-                $(window).scroll(function () {
-                    var windowpos = $(window).scrollTop();
-                    if (windowpos >= pos.top) {
-                        s.addClass("stick");
-                    } else {
-                        s.removeClass("stick");
-                    }
-                });
-            });
-            //funzione visualizza freccia torna su 
-            $(document).ready(function () {
-                var s = $("#gotop");
-                var pos = s.position();
-                $(window).scroll(function () {
-                    var windowpos = $(window).scrollTop();
-                    if (windowpos >= 100) {
-                        s.addClass("gotopview");
-                    } else {
-                        s.removeClass("gotopview");
-                    }
-                });
-            });
-            //funzione animazioni scrolling
-            $(document).ready(function () {
-                //Check to see if the window is top if not then display button
-                $(window).scroll(function () {
-                    if ($(this).scrollTop() > 100) {
-                        $('#scrollToTop').fadeIn();
-                    } else {
-                        $('#scrollToTop').fadeOut();
-                    }
-                });
-                //funzione click per lo scrolling
-                $('#scrollToTop').click(function () {
-                    $('html, body').animate({scrollTop: 0}, 800);
-                    return false;
-                });
-            });
-        </script>
-        <?php
-        $valbotton = "Enable";
-        #controllo cookie mathjax
-        if ($_COOKIE['math'] == "yes" or ! isset($_COOKIE['math'])) {
-            echo "	<script type='text/x-mathjax-config'>
+        <script type="text/x-mathjax-config">
             MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
         </script>
-        <script type='text/javascript'
-                src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'>
-        </script>";
-            $valbotton = "Disable";
-        }
+        <script type="text/javascript"
+                src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+        <script type="text/javascript" src="./js/allscript.js">
+        </script>
+        <?php
         #controllo cookie pageview
         if ($_COOKIE['pageview'] == "") {
             echo "<script>javascript:checkCookie4();</script>";
@@ -300,9 +123,9 @@
             <form name='f1' action='view_preprints.php' method='GET'>
                 <div style='float:right; width:100%;'>
                     To see <a style='color:#007897;' href='archived_preprints.php' onclick='window.open(this.href);
-                            return false'>archived</a> old publications &nbsp&nbsp&nbsp&nbsp
-                    <input type='button' value='Display Options' onclick='javascript:showHide2(opt)';>&nbsp
-                    <input type='button' value='Search Options' onclick='javascript:showHide(adv);javascript:showHide(adv2);'>&nbsp&nbsp&nbsp&nbsp
+                            return false'>archived</a> (old publications) &nbsp&nbsp&nbsp&nbsp
+                    <input type='button' value='Display Options' onclick='javascript:showHide3(adv,adv2,opt)';>&nbsp
+                    <input type='button' value='Search Options' onclick='javascript:showHide4(adv,adv2,opt);'>&nbsp&nbsp&nbsp&nbsp
                     Filter results by
                     <select name='f'>
                         <option value='all' selected='selected'>All papers:</option>
@@ -387,8 +210,6 @@
             </div>
             <div hidden id='opt' hidden=''>
                 <h1>Display Options:</h1>
-                MathJax script:&nbsp
-                <input type='button' value='" . $valbotton . "' onclick='javascript:checkCookie2();' style='width:50px;'/>&nbsp
                 Search Bar on all pages:&nbsp
                 <input type='button' value='" . $string3 . "' onclick='javascript:checkCookie6();' style='width:50px;'/>&nbsp
                 On page view for PDF:&nbsp
@@ -400,10 +221,6 @@
         <br/>
         <div onclick="myFunction()">
             <?php
-#visualizza opzioni avanzate
-            if ($_GET['More'] == "More") {
-                echo "<script>javascript:showHide(adv);</script>";
-            }
 #ricerca full text
             if (isset($_GET['go']) && $_GET['go'] != "") {
                 searchfulltext();

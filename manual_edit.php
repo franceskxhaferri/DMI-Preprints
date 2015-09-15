@@ -26,6 +26,12 @@
             webshims.setOptions('forms-ext', {types: 'date'});
             webshims.polyfill('forms forms-ext');
         </script>
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+        </script>
+        <script type="text/javascript"
+                src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
         <script type='text/javascript'>
             function confirmDelete()
             {
@@ -58,16 +64,6 @@
                 adva.style.display = 'none';
                 opt.style.display = 'none';
             }
-        </script>
-        <script type="text/x-mathjax-config">
-            MathJax.Hub.Config({
-            tex2jax: {
-            inlineMath: [["$","$"],["\\(","\\)"]]
-            }
-            });
-        </script>
-        <script type="text/javascript"
-                src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML-full">
         </script>
     </head>
     <body>
@@ -239,7 +235,7 @@
 			</div>
 		    </div>
 		        Advanced:
-		        <input type='button' value='Show/Hide' onclick='javascript:showHide(adva);'/>
+		        <input type='button' value='Show/Hide' onclick='javascript:showHide2(adva,adv2a);'/>
 		         Filter results by 
 		        <select name='f'>
 		            <option value='all' selected='selected'>All papers:</option>
@@ -253,7 +249,7 @@
 		    </div></center>";
                 }
                 ?>
-                <div onclick="myFunction()">
+                <div onclick="myFunction2()">
                     <div id="header-wrapper">
                         <div class="container">
                             <div class="row">

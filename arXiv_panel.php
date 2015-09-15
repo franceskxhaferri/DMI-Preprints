@@ -19,79 +19,7 @@
         <link href='css/targetweb-modal-overlay.css' rel='stylesheet' type='text/css'>
         <!--[if lte IE 9]><link rel="stylesheet" href="css/ie9.css" /><![endif]-->
         <!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
-        <script type="text/javascript">
-
-            //visualizza icona di caricamento
-            function loading(id) {
-                if (id.style.display != 'block') {
-                    id.style.display = 'block';
-                } else {
-                    id.style.display = 'none';
-                }
-            }
-            //messaggio conferma download
-            function confirmDownload() {
-                var x = confirm("Warning! this overwrite the existent data and will take more time, continue?");
-                if (x) {
-                    loading(load);
-                    return x
-                } else {
-                    return x
-                }
-            }
-
-            //opzioni di visualizzazione
-            function showHide2(id) {
-                if (id.style.display != 'block') {
-                    id.style.display = 'block';
-                    showHide2(adva);
-                } else {
-                    id.style.display = 'none';
-                }
-            }
-            //ricerca avanzata
-            function showHide(id) {
-                if (id.style.display != 'block') {
-                    id.style.display = 'block';
-                    showHide(opt);
-                } else {
-                    id.style.display = 'none';
-                }
-            }
-            //chiudi menu click fuori dalla finestra
-            function myFunction() {
-                adva.style.display = 'none';
-                opt.style.display = 'none';
-            }
-            //funzione visualizza freccia torna su 
-            $(document).ready(function () {
-                var s = $("#gotop");
-                var pos = s.position();
-                $(window).scroll(function () {
-                    var windowpos = $(window).scrollTop();
-                    if (windowpos >= 100) {
-                        s.addClass("gotopview2");
-                    } else {
-                        s.removeClass("gotopview2");
-                    }
-                });
-            });
-            //funzione animazioni scrolling
-            $(document).ready(function () {
-                //Check to see if the window is top if not then display button
-                $(window).scroll(function () {
-                    if ($(this).scrollTop() > 100) {
-                        $('#scrollToTop').fadeIn();
-                    } else {
-                        $('#scrollToTop').fadeOut();
-                    }
-                });
-                //funzione click per lo scrolling
-                $('#scrollToTop').click(function () {
-                    $('html, body').animate({scrollTop: 0}, 800);
-                    return false;
-                });
-            });
+        <script type="text/javascript" src="./js/allscript.js">
         </script>	
     </head>
     <body>
@@ -174,7 +102,7 @@
 			</div>
 		    </div>
 		        Advanced:
-		        <input type='button' value='Show/Hide' onclick='javascript:showHide(adva);'/>
+		        <input type='button' value='Show/Hide' onclick='javascript:showHide2(adva,adv2a);'/>
 		         Filter results by 
 		        <select name='f'>
 		            <option value='all' selected='selected'>All papers:</option>
@@ -189,7 +117,7 @@
                 }
                 //sessione moderatore
                 ?>
-                <div onclick="myFunction()">
+                <div onclick="myFunction2()">
                     <div id="header-wrapper">
                         <div class="container">
                             <div class="row">
@@ -245,7 +173,7 @@
                                     </td>
                                     <td align="center">
                                         <form name="f8" action="arXiv_panel.php" method="POST">
-                                            <input type="submit" name="b8" value="Update from arXiv" id="bottone_keyword" class="bottoni" onclick='return loading(load)'>
+                                            <input type="submit" name="b8" value="Update from arXiv" id="bottone_keyword" class="bottoni" onclick="return loading(load)">
                                         </form>
                                     </td>
                                 </tr>
@@ -255,7 +183,7 @@
                                     </td>
                                     <td align="center">
                                         <form name="f9" action="arXiv_panel.php" method="POST">
-                                            <input type="submit" name="b9" value="Download from arXiv" id="bottone_keyword" class="bottoni" onclick='return confirmDownload()'>
+                                            <input type="submit" name="b9" value="Download from arXiv" id="bottone_keyword" class="bottoni" onclick="return confirmDownload()">
                                         </form>
                                     </td>
                                 </tr>
@@ -388,10 +316,10 @@
         </div>
         <br/>
         <br/>
+    <center>
         <div id="load">
-        <center>
-            <img src="./images/loader.gif" alt="Loading" style="width: 287px; height: 141px;">
-            </center>
+            <img src="./images/loader.gif" alt="Loading" style="width: 192px; height: 94px;">
             <div>
+                </center>
                 </body>
                 </html>

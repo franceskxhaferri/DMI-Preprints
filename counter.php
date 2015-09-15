@@ -30,53 +30,9 @@
             MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
         </script>
         <script type="text/javascript"
-                src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+                src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
         </script>
-        <script type="text/javascript">
-            //visualizza ricerca avanzata
-            function showHide(id) {
-                if (id.style.display != 'block') {
-                    id.style.display = 'block';
-                } else {
-                    id.style.display = 'none';
-                }
-            }
-
-            //chiudi menu click fuori dalla finestra
-            function myFunction() {
-                adv.style.display = 'none';
-                adv2.style.display = 'none';
-            }
-
-            //funzione visualizza freccia torna su 
-            $(document).ready(function () {
-                var s = $("#gotop");
-                var pos = s.position();
-                $(window).scroll(function () {
-                    var windowpos = $(window).scrollTop();
-                    if (windowpos >= 100) {
-                        s.addClass("gotopview2");
-                    } else {
-                        s.removeClass("gotopview2");
-                    }
-                });
-            });
-            //funzione animazioni scrolling
-            $(document).ready(function () {
-                //Check to see if the window is top if not then display button
-                $(window).scroll(function () {
-                    if ($(this).scrollTop() > 100) {
-                        $('#scrollToTop').fadeIn();
-                    } else {
-                        $('#scrollToTop').fadeOut();
-                    }
-                });
-                //funzione click per lo scrolling
-                $('#scrollToTop').click(function () {
-                    $('html, body').animate({scrollTop: 0}, 800);
-                    return false;
-                });
-            });
+        <script type="text/javascript" src="./js/allscript.js">
         </script>
     </head>
     <body>
@@ -175,25 +131,25 @@
         #importazione variabili globali
         include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
         #connessione al database...
-	$db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
-	mysql_select_db($db_monte, $db_connection);
-	#acquisizione valore
-	$id = $_GET['id'];
-	$sql = "SELECT * FROM PREPRINTS WHERE id_pubblicazione='" . $id . "'";
-	$query = mysql_query($sql) or die(mysql_error());
-	$row = mysql_fetch_array($query);
-        if ($_GET['i']==1){
-		#incremento valore
-		$sql = "UPDATE PREPRINTS SET counter='" . ($row['counter'] + 1) . "' WHERE id_pubblicazione='" . $id . "'";
-		$query = mysql_query($sql) or die(mysql_error());
-		#chiusura connessione al database
-		mysql_close($db_connection);
-		#reindirizzamento al pdf
-		$var = "./pdf/" . $row['Filename'];
-		$var2= "./counter.php?id=".$id;
-		echo "<meta http-equiv=refresh content='0; url=$var2'>";
-        }else{
-        	$var = "./pdf/" . $row['Filename'];
+        $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
+        mysql_select_db($db_monte, $db_connection);
+        #acquisizione valore
+        $id = $_GET['id'];
+        $sql = "SELECT * FROM PREPRINTS WHERE id_pubblicazione='" . $id . "'";
+        $query = mysql_query($sql) or die(mysql_error());
+        $row = mysql_fetch_array($query);
+        if ($_GET['i'] == 1) {
+            #incremento valore
+            $sql = "UPDATE PREPRINTS SET counter='" . ($row['counter'] + 1) . "' WHERE id_pubblicazione='" . $id . "'";
+            $query = mysql_query($sql) or die(mysql_error());
+            #chiusura connessione al database
+            mysql_close($db_connection);
+            #reindirizzamento al pdf
+            $var = "./pdf/" . $row['Filename'];
+            $var2 = "./counter.php?id=" . $id;
+            echo "<meta http-equiv=refresh content='0; url=$var2'>";
+        } else {
+            $var = "./pdf/" . $row['Filename'];
         }
         ?>
         <div onclick="myFunction()">

@@ -19,88 +19,7 @@
         <link href='css/targetweb-modal-overlay.css' rel='stylesheet' type='text/css'>
         <!--[if lte IE 9]><link rel="stylesheet" href="css/ie9.css" /><![endif]-->
         <!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
-        <script type="text/javascript">
-            checked = false;
-            function checkedAll(f1) {
-                var aa = document.getElementById('f1');
-                if (checked == false)
-                {
-                    checked = true
-                }
-                else
-                {
-                    checked = false
-                }
-                for (var i = 0; i < aa.elements.length; i++) {
-                    aa.elements[i].checked = checked;
-                }
-            }
-            function FinePagina()
-            {
-                var w = window.screen.width;
-                var h = window.screen.height;
-                window.scrollTo(w * h, w * h)
-            }
-            function confirmDelete()
-            {
-                return confirm("Remove selected papers?");
-            }
-            function confirmInsert()
-            {
-                return confirm("Insert selected papers?");
-            }
-            //opzioni di visualizzazione
-            function showHide2(id) {
-                if (id.style.display != 'block') {
-                    id.style.display = 'block';
-                    showHide2(adva);
-                } else {
-                    id.style.display = 'none';
-                }
-            }
-            //ricerca avanzata
-            function showHide(id) {
-                if (id.style.display != 'block') {
-                    id.style.display = 'block';
-                    showHide(opt);
-                } else {
-                    id.style.display = 'none';
-                }
-            }
-            //chiudi menu click fuori dalla finestra
-            function myFunction() {
-                adva.style.display = 'none';
-                opt.style.display = 'none';
-            }
-            //funzione visualizza freccia torna su 
-            $(document).ready(function () {
-                var s = $("#gotop");
-                var pos = s.position();
-                $(window).scroll(function () {
-                    var windowpos = $(window).scrollTop();
-                    if (windowpos >= 100) {
-                        s.addClass("gotopview2");
-                    } else {
-                        s.removeClass("gotopview2");
-                    }
-                });
-            });
-            //funzione animazioni scrolling
-            $(document).ready(function () {
-                //Check to see if the window is top if not then display button
-                $(window).scroll(function () {
-                    if ($(this).scrollTop() > 100) {
-                        $('#scrollToTop').fadeIn();
-                    } else {
-                        $('#scrollToTop').fadeOut();
-                    }
-                });
-                //funzione click per lo scrolling
-                $('#scrollToTop').click(function () {
-                    $('html, body').animate({scrollTop: 0}, 800);
-                    return false;
-                });
-            });
+        <script type="text/javascript" src="./js/allscript.js">
         </script>
     </head>
     <body>
@@ -185,7 +104,7 @@
 			</div>
 		    </div>
 		        Advanced:
-		        <input type='button' value='Show/Hide' onclick='javascript:showHide(adva);'/>
+		        <input type='button' value='Show/Hide' onclick='javascript:showHide2(adva,adv2a);'/>
 		         Filter results by 
 		        <select name='f'>
 		            <option value='all' selected='selected'>All papers:</option>
@@ -199,7 +118,7 @@
 		    </div></center>";
                 }
                 ?>
-                <div onclick="myFunction()">
+                <div onclick="myFunction2()">
                     <div id="header-wrapper">
                         <div class="container">
                             <div class="row">
@@ -259,7 +178,7 @@
                                         $y++;
                                     }
                                 }
-                                echo "</table></center><center><br/><input type='submit' name='b2' value='Remove' style='width:70px;' id='bottone_keyword' class='bottoni' onclick='return confirmDelete()'><input type='submit' name='b3' value='Insert' style='width:70px;' id='bottone_keyword' class='bottoni' onclick='return confirmInsert()'></center></form>";
+                                echo "</table></center><center><br/><input type='submit' name='b2' value='Remove' style='width:70px;' id='bottone_keyword' class='bottoni' onclick='return confirmDelete3()'><input type='submit' name='b3' value='Insert' style='width:70px;' id='bottone_keyword' class='bottoni' onclick='return confirmInsert3()'></center></form>";
                                 #Chiudo la lettura della directory.
                                 closedir($directory_handle);
                             }

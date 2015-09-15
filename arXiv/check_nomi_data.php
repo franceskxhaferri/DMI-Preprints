@@ -703,13 +703,14 @@ function filtropreprint() {
     	SELECT * FROM PREPRINTS WHERE abstract LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1'";
         $querytotale = mysql_query($query);
         $ristot = mysql_num_rows($querytotale);
+        $npag = ceil($ristot / $risperpag);
         if (isset($_GET['o']) && $_GET['o'] != "") {
             $query = $query . " ORDER BY " . $order . " LIMIT " . $limit . "," . $risperpag . "";
         } else {
             $query = $query . " ORDER BY data_pubblicazione DESC LIMIT " . $limit . "," . $risperpag . "";
         }
         if (!isset($_GET['r']) or $_GET['r'] == "") {
-            echo "PAPERS: " . $ristot;
+            echo $ristot . " ELEMENTS ON " . $npag . " PAGES";
         } else {
             echo "SEARCH '" . $_GET['r'] . "' FOUND " . $ristot . " RESULTS(" . $_GET['f'] . ")(results ordered by " . $orstr . ")(results for page " . $_GET['rp'] . ")";
         }
@@ -852,7 +853,7 @@ function leggipreprintarchiviati() {
     $querytotale = mysql_query("SELECT * FROM PREPRINTS_ARCHIVIATI WHERE checked='1'");
     $ristot = mysql_num_rows($querytotale);
     echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
-    echo "PAPERS ARCHIVED: " . $ristot . "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
+    echo "ELEMENTS ARCHIVED: " . $ristot . "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
     $npag = ceil($ristot / $risperpag);
     #impostazione della navigazione per pagine
     if ($ristot != 0) {
