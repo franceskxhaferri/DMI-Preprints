@@ -21,6 +21,12 @@
         <!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
         <script type="text/javascript" src="./js/allscript.js">
         </script>	
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+        </script>
+        <script type="text/javascript"
+                src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
     </head>
     <body>
         <?php
@@ -36,7 +42,7 @@
 			     <div id='adva' hidden>
 			     <div>
 			     <div id ='adv2a'>
-			<form name='f4' action='view_preprints.php' method='GET'>
+			<form name='f4' action='view_preprints.php' method='GET' onsubmit='loading(load);'>
 			    <font color='#007897'>Full text search: (<a style='color:#007897;' onclick='window.open(this.href);
 				    return false' href='http://en.wikipedia.org/wiki/Full_text_search'>info</a>)</font><br/>
 			    <div style='height:30px;'>
@@ -61,7 +67,7 @@
 			    </form></div>
 		    </div>
 		    </div>
-			<form name='f4' action='view_preprints.php' method='GET'>
+			<form name='f4' action='view_preprints.php' method='GET' onsubmit='loading(load);'>
 			<font color='#007897'>Advanced search options:</font><br/>
 			    Reset selections: <input type='reset' name='reset' value='Reset'>&nbsp&nbsp
 			    Years restrictions: 
@@ -172,8 +178,8 @@
                                         Refresh from arXiv for new papers&nbsp&nbsp&nbsp
                                     </td>
                                     <td align="center">
-                                        <form name="f8" action="arXiv_panel.php" method="POST">
-                                            <input type="submit" name="b8" value="Update from arXiv" id="bottone_keyword" class="bottoni" onclick="return loading(load)">
+                                        <form name="f8" action="arXiv_panel.php" method="POST" onsubmit="loading(load);">
+                                            <input type="submit" name="b8" value="Update from arXiv" id="bottone_keyword" class="bottoni">
                                         </form>
                                     </td>
                                 </tr>
@@ -319,7 +325,7 @@
     <center>
         <div id="load">
             <img src="./images/loader.gif" alt="Loading" style="width: 192px; height: 94px;">
-            <div>
-                </center>
-                </body>
-                </html>
+        </div>
+    </center>
+</body>
+</html>

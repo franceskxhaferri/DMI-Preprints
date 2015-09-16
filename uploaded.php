@@ -32,67 +32,7 @@
         <script type="text/javascript"
                 src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
         </script>
-        <script type='text/javascript'>
-            function confirmInsert()
-            {
-                return confirm("Are you sure?");
-            }
-            function confirmLogout()
-            {
-                return confirm("All unsaved information will be lost, exit?");
-            }
-            //opzioni di visualizzazione
-            function showHide2(id) {
-                if (id.style.display != 'block') {
-                    id.style.display = 'block';
-                    showHide2(adva);
-                } else {
-                    id.style.display = 'none';
-                }
-            }
-            //ricerca avanzata
-            function showHide(id) {
-                if (id.style.display != 'block') {
-                    id.style.display = 'block';
-                    showHide(opt);
-                } else {
-                    id.style.display = 'none';
-                }
-            }
-            //chiudi menu click fuori dalla finestra
-            function myFunction() {
-                adva.style.display = 'none';
-                opt.style.display = 'none';
-            }
-            //funzione visualizza freccia torna su 
-            $(document).ready(function () {
-                var s = $("#gotop");
-                var pos = s.position();
-                $(window).scroll(function () {
-                    var windowpos = $(window).scrollTop();
-                    if (windowpos >= 100) {
-                        s.addClass("gotopview2");
-                    } else {
-                        s.removeClass("gotopview2");
-                    }
-                });
-            });
-            //funzione animazioni scrolling
-            $(document).ready(function () {
-                //Check to see if the window is top if not then display button
-                $(window).scroll(function () {
-                    if ($(this).scrollTop() > 100) {
-                        $('#scrollToTop').fadeIn();
-                    } else {
-                        $('#scrollToTop').fadeOut();
-                    }
-                });
-                //funzione click per lo scrolling
-                $('#scrollToTop').click(function () {
-                    $('html, body').animate({scrollTop: 0}, 800);
-                    return false;
-                });
-            });
+        <script type="text/javascript" src="./js/allscript.js">
         </script>
     </head>
     <body>
@@ -118,7 +58,7 @@
 			     <div id='adva' hidden>
 			     <div>
 			     <div id ='adv2a'>
-			<form name='f4' action='view_preprints.php' method='GET'>
+			<form name='f4' action='view_preprints.php' method='GET' onsubmit='loading(load);'>
 			    <font color='#007897'>Full text search: (<a style='color:#007897;' onclick='window.open(this.href);
 				    return false' href='http://en.wikipedia.org/wiki/Full_text_search'>info</a>)</font><br/>
 			    <div style='height:30px;'>
@@ -143,7 +83,7 @@
 			    </form></div>
 		    </div>
 		    </div>
-			<form name='f4' action='view_preprints.php' method='GET'>
+			<form name='f4' action='view_preprints.php' method='GET' onsubmit='loading(load);'>
 			<font color='#007897'>Advanced search options:</font><br/>
 			    Reset selections: <input type='reset' name='reset' value='Reset'>&nbsp&nbsp
 			    Years restrictions: 

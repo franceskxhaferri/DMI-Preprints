@@ -92,14 +92,23 @@ function showHide3(id, id2, id3) {
     checkCookie();
     id.style.display = 'none';
     id2.style.display = 'none';
-    id3.style.display = 'block';
+    if (id3.style.display != 'block') {
+        id3.style.display = 'block';
+    } else {
+        id3.style.display = 'none';
+    }
 }
 //visualizza ricerca avanzata
 function showHide4(id, id2, id3) {
     checkCookie();
-    id.style.display = 'block';
-    id2.style.display = 'block';
     id3.style.display = 'none';
+    if (id.style.display != 'block') {
+        id.style.display = 'block';
+        id2.style.display = 'block';
+    } else {
+        id.style.display = 'none';
+        id2.style.display = 'none';
+    }
 }
 //chiudi menu click fuori dalla finestra
 function myFunction() {

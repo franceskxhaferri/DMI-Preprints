@@ -59,7 +59,7 @@
 			     <div id='adva' hidden>
 			     <div>
 			     <div id ='adv2a'>
-			<form name='f1' action='view_preprints.php' method='GET'>
+			<form name='f1' action='view_preprints.php' method='GET' onsubmit='loading(load);'>
 			    <font color='#007897'>Full text search: (<a style='color:#007897;' onclick='window.open(this.href);
 				    return false' href='http://en.wikipedia.org/wiki/Full_text_search'>info</a>)</font><br/>
 			    <div style='height:30px;'>
@@ -83,7 +83,7 @@
 				<label><input type='radio' name='st' value='0'>Archived</label>
 			    </form></div>
 		    </div>
-			<form name='f2' action='view_preprints.php' method='GET'>
+			<form name='f2' action='view_preprints.php' method='GET' onsubmit='loading(load);'>
 			<font color='#007897'>Advanced search options:</font><br/>
 			    Reset selections: <input type='reset' name='reset' value='Reset'>&nbsp&nbsp
 			    Years restrictions: 
@@ -172,7 +172,7 @@
                                 ?>
                             </div>
                             <div style="float:left; margin-left:1%;">
-                                <form name="f1" action="modp.php" method="POST">
+                                <form name="f1" action="modp.php" method="POST" onsubmit="loading(load);">
                                     <input type="submit" name="b1" value="Logout" id="botton_logout" class="bottoni" style="height:17px; color: red;" onclick="return confirmLogout()">
                                     <a style="height:17px; color:white;" href="./uploaded.php?p=1" id="bottone_keyword" class="bottoni">My uploads</a>
                                     <a style="height:17px; color:white;" href="./approve_preprints.php" id="bottone_keyword" class="bottoni">Check section</a>
@@ -188,7 +188,7 @@
                         </div>
                     </center>
                     <hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
-                    <form name="f3" action="modp.php" method="POST" enctype="multipart/form-data">
+                    <form name="f3" action="modp.php" method="POST" enctype="multipart/form-data" onsubmit="loading(load);">
                         <center>
                             <br/>
                             <h2>Insert new paper</h2>
@@ -360,5 +360,10 @@
         </div>
         <br/>
         <br/>
-    </body>
+    <center>
+        <div id="load">
+            <img src="./images/loader.gif" alt="Loading" style="width: 192px; height: 94px;">
+        </div>
+    </center>
+</body>
 </html>

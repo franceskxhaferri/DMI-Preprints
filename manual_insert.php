@@ -56,7 +56,7 @@
 			     <div id='adva' hidden>
 			     <div>
 			     <div id ='adv2a'>
-			<form name='f4' action='view_preprints.php' method='GET'>
+			<form name='f4' action='view_preprints.php' method='GET' onsubmit='loading(load);'>
 			    <font color='#007897'>Full text search: (<a style='color:#007897;' onclick='window.open(this.href);
 				    return false' href='http://en.wikipedia.org/wiki/Full_text_search'>info</a>)</font><br/>
 			    <div style='height:30px;'>
@@ -80,7 +80,7 @@
 				<label><input type='radio' name='st' value='0'>Archived</label>
 			    </form></div>
 		    </div>
-			<form name='f4' action='view_preprints.php' method='GET'>
+			<form name='f4' action='view_preprints.php' method='GET' onsubmit='loading(load);'>
 			</div>
 			<font color='#007897'>Advanced search options:</font><br/>
 			    Reset selections: <input type='reset' name='reset' value='Reset'>&nbsp&nbsp
@@ -163,7 +163,7 @@
                         Go to arXiv panel&nbsp&nbsp&nbsp
                         <a style="height:17px; color:white;" href="./arXiv_panel.php" id="bottone_keyword" class="bottoni" onclick="return confirmExit()" >Back</a><br/><br/>
                         <a style='color:#007897;' href='http://arxiv.org/' onclick='window.open(this.href);
-                                        return false' title='arXiv'>arXiv.org</a>
+                                return false' title='arXiv'>arXiv.org</a>
                     </center>
                     <hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
                     <?php
@@ -173,9 +173,9 @@
                         ?>
                         <center>
                             <div>
-                                <form name='f2' action='manual_insert.php' method='POST'>
+                                <form name='f2' action='manual_insert.php' method='POST' onsubmit="loading(load);">
                                     Get paper informations from arXiv:
-                                    <input type='search' autocomplete = 'on' style='width:175px;' name='id' id='textbox' required class='textbox' placeholder='Insert id(arXiv): 0000.0000' autofocus/> <input type='submit' name='b7' value='Get paper' style='width:70px;' id='bottone_keyword' class='bottoni' onclick="loading(load);"><br/>
+                                    <input type='search' autocomplete = 'on' style='width:175px;' name='id' id='textbox' required class='textbox' placeholder='Insert id(arXiv): 0000.0000' autofocus/> <input type='submit' name='b7' value='Get paper' style='width:70px;' id='bottone_keyword' class='bottoni' ><br/>
                                 </form>
                             </div>
                         </center>
@@ -198,7 +198,7 @@
                         echo "</div>";
                         if ($id1 == $ris[0] && isset($_POST['b7'])) {
                             echo "
-                <form name='f1' action='manual_insert.php' method='POST' enctype='multipart/form-data' onclick='myFunction()'>
+                <form name='f1' action='manual_insert.php' method='POST' enctype='multipart/form-data' onclick='myFunction()' onsubmit='loading(load);'>
                     <div style='margin-left:1%; margin-right:1%;'><div style='float:left; width:100%;'><center><div><br/><h2>paper informations</h2><h1>field with '*' are required</h1><br/><input type='reset' name='reset' value='Reset'><br/><br/></center>
                     	<div style='font-weight: bold;'>document:</div><br/><div style='float:left; width:49%;'><center><a href=./pdf_downloads/" . $id1 . ".pdf onclick='window.open(this.href);return false' style='color:#007897;' title='" . $ris[0] . "'>PDF</a></center></div>
 			    <br/><br/><div style='font-weight: bold;'>id (not editable):</div><br/>
@@ -264,7 +264,7 @@
 				</script>
 				";
                         } else {
-                            echo "<form name='f2' action='manual_insert.php' method='POST' enctype='multipart/form-data' onclick='myFunction()'>
+                            echo "<form name='f2' action='manual_insert.php' method='POST' enctype='multipart/form-data' onclick='myFunction()' onsubmit='loading(load);'>
                     <div style='margin-left:1%; margin-right:1%;'><div style='float:left; width:100%;'><center><div><br/><h2>paper informations</h2><h1>field with '*' are required</h1><br/><input type='reset' name='reset' value='Reset'/><br/><br/></center>
                             <div style='font-weight: bold;'>*id:</div><br/>
                             <textarea style='width:49%;' name='id' id='textbox' class='textbox' required placeholder='example of id: 0000.0000v1' autofocus></textarea><br/><br/>

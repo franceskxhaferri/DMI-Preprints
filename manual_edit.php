@@ -32,126 +32,10 @@
         <script type="text/javascript"
                 src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
         </script>
-        <script type='text/javascript'>
-            function confirmDelete()
-            {
-                return confirm("Delete this paper?");
-            }
-            function confirmInsert()
-            {
-                return confirm("Update paper information?");
-            }
-            //opzioni di visualizzazione
-            function showHide2(id) {
-                if (id.style.display != 'block') {
-                    id.style.display = 'block';
-                    showHide2(adva);
-                } else {
-                    id.style.display = 'none';
-                }
-            }
-            //ricerca avanzata
-            function showHide(id) {
-                if (id.style.display != 'block') {
-                    id.style.display = 'block';
-                    showHide(opt);
-                } else {
-                    id.style.display = 'none';
-                }
-            }
-            //chiudi menu click fuori dalla finestra
-            function myFunction() {
-                adva.style.display = 'none';
-                opt.style.display = 'none';
-            }
+        <script type="text/javascript" src="./js/allscript.js">
         </script>
     </head>
     <body>
-        <script>
-            //text area title
-            (function () {
-                window.UpdateMathtit = function (TeX) {
-                    //set the MathOutput HTML
-                    document.getElementById("titlediv").innerHTML = TeX;
-                    //reprocess the MathOutput Element
-                    MathJax.Hub.Queue(["Typeset", MathJax.Hub, "titlediv"]);
-                }
-            })();
-            //text area authors
-            (function () {
-                window.UpdateMathaut = function (TeX) {
-                    //set the MathOutput HTML
-                    document.getElementById("authordiv").innerHTML = TeX;
-                    //reprocess the MathOutput Element
-                    MathJax.Hub.Queue(["Typeset", MathJax.Hub, "authordiv"]);
-                }
-            })();
-            //text area journal
-            (function () {
-                window.UpdateMathjou = function (TeX) {
-                    //set the MathOutput HTML
-                    document.getElementById("journaldiv").innerHTML = TeX;
-                    //reprocess the MathOutput Element
-                    MathJax.Hub.Queue(["Typeset", MathJax.Hub, "journaldiv"]);
-                }
-            })();
-            //text area comments
-            (function () {
-                window.UpdateMathcom = function (TeX) {
-                    //set the MathOutput HTML
-                    document.getElementById("commentsdiv").innerHTML = TeX;
-                    //reprocess the MathOutput Element
-                    MathJax.Hub.Queue(["Typeset", MathJax.Hub, "commentsdiv"]);
-                }
-            })();
-            //text area category
-            (function () {
-                window.UpdateMathcat = function (TeX) {
-                    //set the MathOutput HTML
-                    document.getElementById("categorydiv").innerHTML = TeX;
-                    //reprocess the MathOutput Element
-                    MathJax.Hub.Queue(["Typeset", MathJax.Hub, "categorydiv"]);
-                }
-            })();
-            //text area abstract
-            (function () {
-                window.UpdateMathabs = function (TeX) {
-                    //set the MathOutput HTML
-                    document.getElementById("abstractdiv").innerHTML = TeX;
-                    //reprocess the MathOutput Element
-                    MathJax.Hub.Queue(["Typeset", MathJax.Hub, "abstractdiv"]);
-                }
-            })();
-            //funzione visualizza freccia torna su 
-            $(document).ready(function () {
-                var s = $("#gotop");
-                var pos = s.position();
-                $(window).scroll(function () {
-                    var windowpos = $(window).scrollTop();
-                    if (windowpos >= 100) {
-                        s.addClass("gotopview2");
-                    } else {
-                        s.removeClass("gotopview2");
-                    }
-                });
-            });
-            //funzione animazioni scrolling
-            $(document).ready(function () {
-                //Check to see if the window is top if not then display button
-                $(window).scroll(function () {
-                    if ($(this).scrollTop() > 100) {
-                        $('#scrollToTop').fadeIn();
-                    } else {
-                        $('#scrollToTop').fadeOut();
-                    }
-                });
-                //funzione click per lo scrolling
-                $('#scrollToTop').click(function () {
-                    $('html, body').animate({scrollTop: 0}, 800);
-                    return false;
-                });
-            });
-        </script>
         <?php
         #importo file per utilizzare funzioni...
         require_once $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'authorization/sec_sess.php';
@@ -169,7 +53,7 @@
 			     <div id='adva' hidden>
 			     <div>
 			     <div id ='adv2a'>
-			<form name='f4' action='view_preprints.php' method='GET'>
+			<form name='f4' action='view_preprints.php' method='GET' onsubmit='loading(load);'>
 			    <font color='#007897'>Full text search: (<a style='color:#007897;' onclick='window.open(this.href);
 				    return false' href='http://en.wikipedia.org/wiki/Full_text_search'>info</a>)</font><br/>
 			    <div style='height:30px;'>
@@ -194,7 +78,7 @@
 			    </form></div>
 		    </div>
 		    </div>
-			<form name='f4' action='view_preprints.php' method='GET'>
+			<form name='f4' action='view_preprints.php' method='GET' onsubmit='loading(load);'>
 			<font color='#007897'>Advanced search options:</font><br/>
 			    Reset selections: <input type='reset' name='reset' value='Reset'>&nbsp&nbsp
 			    Years restrictions: 
@@ -281,7 +165,7 @@
                         if (!isset($_GET['id'])) {
                             echo "<center><br/><a style='color:#007897;' href='./view_preprints.php' onclick='window.open(this.href); return false' title='Go to preprints list'>View from inserted papers</a></center>";
                             echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
-                            echo " <center><div><form name='f2' action='manual_edit.php' method='POST'>Insert id of publication: <input type='search' autocomplete = 'on' style='width:175px;' name='id' id='textbox' required class='textbox' placeholder='example of id: 0000.0000v1' autofocus/> <input type='submit' name='bottoni8' value='Get paper' style='width:70px;' id='bottone_keyword' class='bottoni'/><br/>
+                            echo " <center><div><form name='f2' action='manual_edit.php' method='POST' onsubmit='loading(load);'>Insert id of publication: <input type='search' autocomplete = 'on' style='width:175px;' name='id' id='textbox' required class='textbox' placeholder='example of id: 0000.0000v1' autofocus/> <input type='submit' name='bottoni8' value='Get paper' style='width:70px;' id='bottone_keyword' class='bottoni'/><br/>
 		               </form></div></center>
 		               ";
                             $var = False;
@@ -311,7 +195,7 @@
 				   return confirm('All unsaved changes will be lost, continue?');
 				}
 			</script>
-                <form name='f1' action='manual_edit.php' method='POST' enctype='multipart/form-data'>
+                <form name='f1' action='manual_edit.php' method='POST' enctype='multipart/form-data' onsubmit='loading(load);'>
                     <div style='margin-left:1%; margin-right:1%;'><div style='float:left; width:100%;'><center><div><br/><h2>paper informations</h2><h1>field with '*' are required</h1><br/><input type='reset' name='reset' value='Reset'><br/><br/></center>
                     	    <div style='font-weight: bold;'>UID publisher(not editable):</div><br/>
                             <textarea readonly style='width:49%;' name='uid' id='textbox' class='textbox'>" . $ris[8] . "</textarea><br/><br/>
@@ -433,5 +317,10 @@
             }
             ?>
         </div>
-    </body>
+    <center>
+        <div id="load">
+            <img src="./images/loader.gif" alt="Loading" style="width: 192px; height: 94px;">
+        </div>
+    </center>
+</body>
 </html>

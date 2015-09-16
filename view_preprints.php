@@ -120,7 +120,7 @@
         echo "<div id='gotop' hidden><a id='scrollToTop' title='Go top'><img style='width:25px; height:25px;' src='./images/top.gif'></a></div>";
         echo "
         <div id='sticker'>
-            <form name='f1' action='view_preprints.php' method='GET'>
+            <form name='f1' action='view_preprints.php' method='GET' onsubmit='loading(load);'>
                 <div style='float:right; width:100%;'>
                     To see <a style='color:#007897;' href='archived_preprints.php' onclick='window.open(this.href);
                             return false'>archived</a> (old publications) &nbsp&nbsp&nbsp&nbsp
@@ -182,7 +182,7 @@
                 </div>
             </form>
             <div id='adv2' hidden=''>
-                <form name='f2' action='view_preprints.php' method='GET'>
+                <form name='f2' action='view_preprints.php' method='GET' onsubmit='loading(load);'>
                     <font color='#007897'>Full text search: (<a style='color:#007897;' onclick='window.open(this.href);
                             return false' href='http://en.wikipedia.org/wiki/Full_text_search'>info</a>)
                     </font>
@@ -257,6 +257,11 @@
             }
             ?>
         </div><br/>
+    </center>
+    <center>
+        <div id="load">
+            <img src="./images/loader.gif" alt="Loading" style="width: 192px; height: 94px;">
+        </div>
     </center>
 </body>
 </html>

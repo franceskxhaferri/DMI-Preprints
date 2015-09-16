@@ -40,7 +40,7 @@
 			     <div id='adva' hidden>
 			     <div>
 			     <div id ='adv2a'>
-			<form name='f4' action='view_preprints.php' method='GET'>
+			<form name='f4' action='view_preprints.php' method='GET' onsubmit='loading(load);'>
 			    <font color='#007897'>Full text search: (<a style='color:#007897;' onclick='window.open(this.href);
 				    return false' href='http://en.wikipedia.org/wiki/Full_text_search'>info</a>)</font><br/>
 			    <div style='height:30px;'>
@@ -65,7 +65,7 @@
 			    </form></div>
 		    </div>
 		    </div>
-			<form name='f4' action='view_preprints.php' method='GET'>
+			<form name='f4' action='view_preprints.php' method='GET' onsubmit='loading(load);'>
 			<font color='#007897'>Advanced search options:</font><br/>
 			    Reset selections: <input type='reset' name='reset' value='Reset'>&nbsp&nbsp
 			    Years restrictions: 
@@ -167,7 +167,7 @@
                             #leggere cartella...
                             #Imposto la directory da leggere
                             $directory = $basedir3;
-                            echo "<form name='f3' action='check_preprints.php' id='f1' method='GET'><center><table>";
+                            echo "<form name='f3' action='check_preprints.php' id='f1' method='GET' onsubmit='loading(load);'><center><table>";
                             #Apriamo una directory e leggiamone il contenuto.
                             if (is_dir($directory)) {
                                 #Apro l'oggetto directory
@@ -289,5 +289,10 @@
         </div>
         <br/>
         <br/>
-    </body>
+    <center>
+        <div id="load">
+            <img src="./images/loader.gif" alt="Loading" style="width: 192px; height: 94px;">
+        </div>
+    </center>
+</body>
 </html>

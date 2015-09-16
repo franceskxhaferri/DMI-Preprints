@@ -39,7 +39,7 @@
         <?php
         echo "<center>
         <div id='utildiv'>
-            <form name='f1' action='view_preprints.php' method='GET'>
+            <form name='f1' action='view_preprints.php' method='GET' onsubmit='loading(load);'>
                 <div style='float:right; width:100%;'>
                             Advanced search options / Full text search:
                     <input type='button' value='Show/Hide' onclick='javascript:showHide(adv);javascript:showHide(adv2);'>
@@ -51,7 +51,7 @@
                         <option value='year'>Year:</option>
                         <option value='id'>ID:</option>
                     </select>
-                    <input type='search' autocomplete = 'on' style='width:45%;' name='r' placeholder='Author name, id of publication, year of publication, etc.' value='" . $_GET['r'] . "'>
+                    <input type='search' autocomplete = 'on' style='width:40%;' name='r' placeholder='Author name, id of publication, year of publication, etc.' value='" . $_GET['r'] . "'>
                         <input type='submit' name='s' value='Send'>
                 </div>
                 <div style='clear:both;'></div>
@@ -99,7 +99,7 @@
                 </div>
             </form>
             <div id='adv2' hidden=''>
-                <form name='f2' action='view_preprints.php' method='GET'>
+                <form name='f2' action='view_preprints.php' method='GET' onsubmit='loading(load);'>
                     <font color='#007897'>Full text search: (<a style='color:#007897;' onclick='window.open(this.href);
                             return false' href='http://en.wikipedia.org/wiki/Full_text_search'>info</a>)
                     </font>
