@@ -125,8 +125,8 @@
                                     <header id="header">
                                         <h1><a href="#" id="logo">DMI Papers</a></h1>
                                         <nav id="nav">
-                                            <a href='./view_preprints.php'>Publications</a>
-                                            <a href="./reserved.php" class="current-page-item">Reserved Area</a>
+                                            <a href='./view_preprints.php' onclick="loading(load);">Publications</a>
+                                            <a href="./reserved.php" class="current-page-item" onclick="loading(load);">Reserved Area</a>
                                         </nav>
                                     </header>
                                 </div>
@@ -139,7 +139,7 @@
                             <br/>
                             <h2>AUTHORS LIST</h2>
                             Go to arXiv panel 
-                            <a style="height:17px; color:white;" href="./arXiv_panel.php" id="bottone_keyword" class="bottoni">Back</a><br>
+                            <a style="height:17px; color:white;" href="./arXiv_panel.php" id="bottone_keyword" class="bottoni" onclick="loading(load);">Back</a><br>
                             <hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
                             <form name="f2" action="authors_list.php" method="POST">
                                 <label>
@@ -147,7 +147,7 @@
                                     Add author to list or search by name:
                                 </label>
                                 <input type="search" style="width:300px;" id='textbox' class='textbox' autocomplete = "on" required name="txt1" placeholder="name1, name2, name3, name..." autofocus />
-                                <input type="submit" name="b2" value="Insert/Search" style="width:80px;" id="bottone_keyword" class="bottoni"/>
+                                <input type="submit" name="b2" value="Insert/Search" style="width:100px;" id="bottone_keyword" class="bottoni"/>
                             </form>
                         </center>
                     </div>
@@ -169,15 +169,15 @@
                             $nomi = legginomi();
                             #conto lunghezza array
                             $lunghezza = count($nomi);
-                            echo "<form name='f4' action='authors_list.php' id='f1' method='POST' onsubmit='loading(load);'><center><table>";
-                            echo "<tr><td><input type='checkbox' name='checkall' onclick='checkedAll(f1);'/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNAME:</td></tr>";
+                            echo "<form name='f4' action='authors_list.php' id='f1' method='POST' onsubmit='loading(load);'><center><table id='table' style='width:25%;'>";
+                            echo "<tr id='th'><td id='tdh'><label><input type='checkbox' name='checkall' onclick='checkedAll(f1);'/>N&deg;:</label></td><td id='tdh' align='center'>NAME:</td></tr>";
                             #creazione della tabella html dei file all'interno di pdf_downloads
                             $y = 1;
                             for ($i = 0; $i < $lunghezza; $i++) {
-                                echo "<tr><td><label><input type='checkbox' name='" . $i . "' value='checked'/>$y.&nbsp&nbsp&nbsp" . $nomi[$i] . "</label></td></tr>";
+                                echo "<tr id='th'><td id='td'><label><input type='checkbox' name='" . $i . "' value='checked'/>$y.</label></td><td id='td'>" . $nomi[$i] . "</td></tr>";
                                 $y++;
                             }
-                            echo "</table></center><br/><center><input type='submit' style='width:50px;' id='bottone_keyword' class='bottoni' name='b3' value='Remove' onclick='return confirmDelete4()'></center></form>";
+                            echo "</table></center><br/><center><input type='submit' style='width:100px;' id='bottone_keyword' class='bottoni' name='b3' value='Remove' onclick='return confirmDelete4()'></center></form>";
                             if ($lunghezza == 0) {
                                 #richiamo funzione per corretto update successivo
                                 aggiornanomi();

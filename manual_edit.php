@@ -141,8 +141,8 @@
                                     <header id="header">
                                         <h1><a href="#" id="logo">DMI Papers</a></h1>
                                         <nav id="nav">
-                                            <a href='./view_preprints.php'>Publications</a>
-                                            <a href="./reserved.php" class="current-page-item">Reserved Area</a>
+                                            <a href='./view_preprints.php' onclick="loading(load);">Publications</a>
+                                            <a href="./reserved.php" class="current-page-item" onclick="loading(load);">Reserved Area</a>
                                         </nav>
                                     </header>
                                 </div>
@@ -190,9 +190,14 @@
                         }
                         if ($var == True) {
                             echo "<script type='text/javascript'>
-				function confirmExit()
-				{
-				   return confirm('All unsaved changes will be lost, continue?');
+				function confirmExit(){
+				    var x = confirm('All unsaved changes will be lost, continue?');
+				    if (x) {
+					loading(load);
+					return x;
+				    } else {
+					return x;
+				    }
 				}
 			</script>
                 <form name='f1' action='manual_edit.php' method='POST' enctype='multipart/form-data' onsubmit='loading(load);'>

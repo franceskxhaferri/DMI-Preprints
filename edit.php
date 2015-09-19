@@ -47,7 +47,8 @@
         sec_session_start();
         if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] < 86400)) {
             #if ($_SESSION['nome']." (".$_SESSION['uid'].")" == $row['uid'] && $row['uid'] != ""){
-            if (($_SESSION['logged_type'] === "mod" or $_SESSION['logged_type'] === "user") && $_SESSION['nome'] . " (" . $_SESSION['uid'] . ")" == $_GET['r']) {
+            if (($_SESSION['logged_type'] === "mod" or $_SESSION['logged_type'] === "user") &&
+                    ($_SESSION['nome'] . " (" . $_SESSION['uid'] . ")" == $_GET['r']) && $_GET['r'] != " ()") {
                 //sessione moderatore
                 echo "<div id='gotop' hidden><a id='scrollToTop' title='Go top'><img style='width:25px; height:25px;' src='./images/top.gif'></a></div>";
                 if ($_COOKIE['searchbarall'] == "1") {
@@ -145,8 +146,8 @@
                                     <header id="header">
                                         <h1><a href="#" id="logo">DMI Papers</a></h1>
                                         <nav id="nav">
-                                            <a href='./view_preprints.php'>Publications</a>
-                                            <a href="./reserved.php" class="current-page-item">Reserved Area</a>
+                                            <a href='./view_preprints.php' onclick="loading(load);">Publications</a>
+                                            <a href="./reserved.php" class="current-page-item" onclick="loading(load);">Reserved Area</a>
                                         </nav>
                                     </header>
                                 </div>

@@ -131,8 +131,8 @@
                                     <header id="header">
                                         <h1><a href="#" id="logo">DMI Papers</a></h1>
                                         <nav id="nav">
-                                            <a href="./view_preprints.php">Publications</a>
-                                            <a href="./reserved.php" class="current-page-item" class="current-page-item">Reserved Area</a>
+                                            <a href="./view_preprints.php" onclick="loading(load);">Publications</a>
+                                            <a href="./reserved.php" class="current-page-item" class="current-page-item" onclick="loading(load);">Reserved Area</a>
                                         </nav>
                                     </header>
                                 </div>
@@ -150,7 +150,7 @@
                                         Go to admin panel&nbsp&nbsp&nbsp
                                     </td>
                                     <td align="center">
-                                        <a style="height:17px; color:white;" href="./reserved.php" id="bottone_keyword" class="bottoni">Back</a>
+                                        <a style="height:17px; color:white;" href="./reserved.php" id="bottone_keyword" class="bottoni" onclick="loading(load);">Back</a>
                                     </td>
                                 </tr>
                                 <tr>
@@ -158,19 +158,19 @@
                                         List of authors that will be searched on arXiv&nbsp&nbsp&nbsp
                                     </td>
                                     <td align="center">
-                                        <a style="height:17px; color:white;" href="./authors_list.php" id="bottone_keyword" class="bottoni">Authors section</a>
+                                        <a style="height:17px; color:white;" href="./authors_list.php" id="bottone_keyword" class="bottoni" onclick="loading(load);">Authors section</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td align="right">
                                         Insert manually one paper from arXiv&nbsp&nbsp&nbsp</td><td align="center">
-                                        <a style="height:17px; color:white;" href="./manual_insert.php" id="bottone_keyword" class="bottoni">Insert section</a>
+                                        <a style="height:17px; color:white;" href="./manual_insert.php" id="bottone_keyword" class="bottoni" onclick="loading(load);">Insert section</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td align="right">
                                         Controls the papers recently downloaded&nbsp&nbsp&nbsp</td><td align="center">
-                                        <a style="height:17px; color:white;" href="./check_preprints.php" id="bottone_keyword" class="bottoni">Check section</a>
+                                        <a style="height:17px; color:white;" href="./check_preprints.php" id="bottone_keyword" class="bottoni" onclick="loading(load);">Check section</a>
                                     </td>
                                 </tr>
                                 <tr>
@@ -293,6 +293,51 @@
                                 }
                                 echo "WARNING ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTIONS HAS BEEN BLOCKED!";
                             } else {
+                                #controllo se ci sono state interruzioni
+                                if (controllainterruzione() == True) {
+                                    echo '<script type="text/javascript">alert("The last update was not stopped properly, was performed a new update!");</script>';
+                                    if ($sock = @fsockopen('www.arxiv.org', 80, $num, $error, 5)) {
+                                        if (sessioneavviata() == False) {
+                                            #avvio della sessione
+                                            avviasessione();
+                                            #inizializzo variabile j per contare elementi scaricati...
+                                            $j = 0;
+                                            #data ultimo lancio...
+                                            $data = dataprec();
+                                            #leggo nomi da file nomi.txt
+                                            $array = legginomi();
+                                            #conto lunghezza dell'array $array
+                                            $nl = count($array);
+                                            if ($nl == 0) {
+                                                chiudisessione();
+                                                echo '<script type="text/javascript">alert("No authors inside list!");</script>';
+                                            } else {
+                                                #inizializzo variabile per contare preprints scaricati...
+                                                for ($i = 0; $i < $nl; $i++) {
+                                                    $nomi = $array[$i];
+                                                    #rimozione spazi all'inizio e alla fine della stringa nomi
+                                                    $nomi = trim($nomi);
+                                                    #uso la funzione arxiv call per contare i download
+                                                    $j = $j + arxiv_call($nomi, $data);
+                                                }
+                                                #aggiornamento dei nomi nel file nomi_ultimo_lancio...
+                                                aggiornanomi();
+                                                #aggiornamento file data_ultimo_lancio.txt con la data di oggi...
+                                                aggiornadata();
+                                                #azzeramento file temporaneo...
+                                                azzerapreprint();
+                                                #chiudo la sessione di download
+                                                chiudisessione();
+                                                echo "<br/>PAPERS DOWNLOADED: " . $j . "<br/><br/>";
+                                                $dc1 = true;
+                                            }
+                                        } else {
+                                            echo '<script type="text/javascript">alert("UPDATE SESSION IS ALREADY STARTED FROM OTHER ADMIN!");</script>';
+                                            $risul = true;
+                                            #sessione già avviata
+                                        }
+                                    }
+                                }
                                 #memorizzo in $data ultimo aggiornamento e la visualizzo
                                 $data = datastring();
                                 echo " LAST UPDATE: " . $data;

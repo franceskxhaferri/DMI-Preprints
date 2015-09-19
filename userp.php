@@ -145,8 +145,8 @@
                                     <header id="header">
                                         <h1><a href="#" id="logo">DMI Papers</a></h1>
                                         <nav id="nav">
-                                            <a href='./view_preprints.php'>Publications</a>
-                                            <a href="./reserved.php" class="current-page-item">Reserved Area</a>
+                                            <a href='./view_preprints.php' onclick="loading(load);">Publications</a>
+                                            <a href="./reserved.php" class="current-page-item" onclick="loading(load);">Reserved Area</a>
                                         </nav>
                                     </header>
                                 </div>
@@ -155,22 +155,23 @@
                     </div>
                     <br/>
                     <center>
+
                         <div id="sticker">
-                            <div>
+                            <div style="float:right; margin-right:1%; margin-top:4px;">
                                 <?php
                                 print_r("<font style='font-weight: bold;'>Name: </font>");
                                 print_r($_SESSION['nome']);
-                                print_r(" <font style='font-weight: bold;'>Access type: </font>");
+                                print_r(" <font style='font-weight: bold;'>Credentials: </font>");
                                 print_r($_SESSION['logged_type']);
                                 ?>
                             </div>
-                            <div style="float:left; margin-left:0.5%;">
+                            <div style="float:left; margin-left:1%;">
                                 <form name="f1" action="userp.php" method="POST" onsubmit="loading(load);">
                                     <input style="height:17px; color: red;" type="submit" name="b1" value="Logout" id="bottoni" class="bottoni" onclick="return confirmLogout()">
                                 </form>
                             </div>
-                            <div style="float:left; margin-left:0.5%;">
-                                <a style="height:17px; color:white;" href="./uploaded.php?p=1" id="bottoni" class="bottoni">My uploads</a>
+                            <div style="float:left; margin-left:1%;">
+                                <a style="height:17px; color:white;" href="./uploaded.php?p=1" id="bottoni" class="bottoni" onclick="loading(load);">My uploads</a>
                             </div>
                             <div style="clear:both;">
                             </div>
@@ -184,7 +185,6 @@
                             <h1>field with "*" are required</h1>
                             <br/>
                             <input type="reset" name="reset" value="Reset">
-                            <br/>
                             <br/>
                         </center>
                         <div style="margin-left:1%; margin-right:1%;">

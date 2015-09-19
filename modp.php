@@ -145,8 +145,8 @@
                                     <header id="header">
                                         <h1><a href="#" id="logo">DMI Papers</a></h1>
                                         <nav id="nav">
-                                            <a href='./view_preprints.php'>Publications</a>
-                                            <a href="./reserved.php" class="current-page-item">Reserved Area</a>
+                                            <a href='./view_preprints.php' onclick="loading(load);">Publications</a>
+                                            <a href="./reserved.php" class="current-page-item" onclick="loading(load);">Reserved Area</a>
                                         </nav>
                                     </header>
                                 </div>
@@ -155,35 +155,31 @@
                     </div>
                     <br/>
                     <center>
+                        <div style="margin-left:1%; margin-bottom:5px;">
+                            <?php
+                            print_r("<font style='font-weight: bold;'>Name: </font>");
+                            print_r($_SESSION['nome']);
+                            print_r(" <font style='font-weight: bold;'>Credentials: </font>");
+                            print_r($_SESSION['logged_type']);
+                            ?>
+                        </div>
                         <div id="sticker">
-                            <div style="float:left; margin-left:1%;">
-                                <?php
-                                print_r("<font style='font-weight: bold;'>Name: </font>");
-                                print_r($_SESSION['nome']);
-                                print_r(" <font style='font-weight: bold;'>Access type: </font>");
-                                print_r($_SESSION['logged_type']);
-                                ?>
-                            </div>
-                            <div style="float:right; margin-right:4%;">
-                                <?php
-                                if (check_approve() == true) {
-                                    print_r(" <font style='color:red; font-style: italic'>There are preprint to be approved!</font>");
-                                }
-                                ?>
-                            </div>
-                            <div style="float:left; margin-left:1%;">
+                            <div style="margin-left:1%;">
                                 <form name="f1" action="modp.php" method="POST" onsubmit="loading(load);">
                                     <input type="submit" name="b1" value="Logout" id="botton_logout" class="bottoni" style="height:17px; color: red;" onclick="return confirmLogout()">
-                                    <a style="height:17px; color:white;" href="./uploaded.php?p=1" id="bottone_keyword" class="bottoni">My uploads</a>
-                                    <a style="height:17px; color:white;" href="./approve_preprints.php" id="bottone_keyword" class="bottoni">Check section</a>
-                                    <a style="height:17px; color:white;" href="./check_preprints.php?bb3=1" id="bottone_keyword" class="bottoni">Check arXiv section</a>
-                                    <a style="height:17px; color:white;" href="./manual_edit.php" id="bottone_keyword" class="bottoni">Edit section</a>
-                                    <a style="height:17px; color:white;" href="./manual_insert.php" id="bottone_keyword" class="bottoni">Insert from arXiv</a>
-                                    <a style="height:17px; color:white;" href="./arXiv_panel.php" id="bottone_keyword" class="bottoni">ArXiv panel</a>
-                                    <a style="height:17px; color:white;" href="./archived_preprints.php" id="bottone_keyword" class="bottoni">Archived section</a>
+                                    <a style="height:17px; color:white;" href="./uploaded.php?p=1" id="bottone_keyword" class="bottoni" onclick="loading(load);">My uploads</a>
+                                    <a style="height:17px; color:white;" href="./check_preprints.php?bb3=1" id="bottone_keyword" class="bottoni" onclick="loading(load);">Check section</a>
+                                    <a style="height:17px; color:white;" href="./arXiv_panel.php" id="bottone_keyword" class="bottoni" onclick="loading(load);">ArXiv panel</a>
+                                    <a style="height:17px; color:white;" href="./manual_edit.php" id="bottone_keyword" class="bottoni" onclick="loading(load);">Edit section</a>
+                                    <a style="height:17px; color:white;" href="./archived_preprints.php" id="bottone_keyword" class="bottoni" onclick="loading(load);">Archived section</a>
                                 </form>
-                            </div>
-                            <div style="clear:both;">
+                                <div>
+                                    <?php
+                                    if (check_approve() == true) {
+                                        print_r(" <font style='color:red; font-style: italic'>There are preprint to be approved!</font>");
+                                    }
+                                    ?>
+                                </div>
                             </div>
                         </div>
                     </center>

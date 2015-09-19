@@ -137,8 +137,8 @@
             $nav2 = "<header id='header'>
                                     <h1><a href='#' id='logo'>DMI Papers</a></h1>
                                     <nav id='nav'>
-                                        <a href='./view_preprints.php'>Publications</a>
-                                        <a href='./reserved.php' class='current-page-item'>Reserved Area</a>
+                                        <a href='./view_preprints.php' onclick='loading(load);'>Publications</a>
+                                        <a href='./reserved.php' class='current-page-item' onclick='loading(load);'>Reserved Area</a>
                                     </nav>
                                 </header>";
             $rit = "modp.php";
@@ -148,8 +148,8 @@
             $nav2 = "<header id='header'>
                                     <h1><a href='#' id='logo'>DMI Papers</a></h1>
                                     <nav id='nav'>
-                                        <a href='./view_preprints.php' class='current-page-item'>Publications</a>
-                                        <a href='./reserved.php'>Reserved Area</a>
+                                        <a href='./view_preprints.php' class='current-page-item' onclick='loading(load);'>Publications</a>
+                                        <a href='./reserved.php' onclick='loading(load);'>Reserved Area</a>
                                     </nav>
                                 </header>";
         }
@@ -179,7 +179,7 @@
                         Go to admin panel&nbsp&nbsp&nbsp
                         </td>
                         <td align='center'>
-                        <a style='height:17px; color:white;' href='./modp.php' id='bottone_keyword' class='bottoni'>Back</a>
+                        <a style='height:17px; color:white;' href='./modp.php' id='bottone_keyword' class='bottoni' onclick='loading(load);'>Back</a>
                         </td>
                         </tr>";
                     echo $nav . "</table>";

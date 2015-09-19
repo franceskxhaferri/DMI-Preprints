@@ -144,8 +144,8 @@
                                     <header id="header">
                                         <h1><a href="#" id="logo">DMI Papers</a></h1>
                                         <nav id="nav">
-                                            <a href='./view_preprints.php'>Publications</a>
-                                            <a href="./reserved.php" class="current-page-item">Reserved Area</a>
+                                            <a href='./view_preprints.php' onclick="loading(load);">Publications</a>
+                                            <a href="./reserved.php" class="current-page-item" onclick="loading(load);">Reserved Area</a>
                                         </nav>
                                     </header>
                                 </div>
@@ -163,7 +163,7 @@
                         Go to arXiv panel&nbsp&nbsp&nbsp
                         <a style="height:17px; color:white;" href="./arXiv_panel.php" id="bottone_keyword" class="bottoni" onclick="return confirmExit()" >Back</a><br/><br/>
                         <a style='color:#007897;' href='http://arxiv.org/' onclick='window.open(this.href);
-                                return false' title='arXiv'>arXiv.org</a>
+                                        return false' title='arXiv'>arXiv.org</a>
                     </center>
                     <hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
                     <?php
@@ -257,10 +257,15 @@
 					UpdateMathabs('" . addslashes($ris[7]) . "');
 				</script>
 				<script type='text/javascript'>
-					function confirmExit()
-					    {
-						return confirm('All unsaved changes will be lost, it will be moved to check section, continue?');
-					    }
+				    function confirmExit(){
+				    var x = confirm('All unsaved changes will be lost, it will be moved to check section, continue?');
+				    if (x) {
+					loading(load);
+					return x;
+				    } else {
+					return x;
+				    }
+				}
 				</script>
 				";
                         } else {

@@ -140,7 +140,7 @@ $(document).ready(function () {
     var pos = s.position();
     $(window).scroll(function () {
         var windowpos = $(window).scrollTop();
-        if (windowpos >= 100) {
+        if (windowpos >= 120) {
             s.addClass("gotopview");
         } else {
             s.removeClass("gotopview");
@@ -249,14 +249,103 @@ function checkedAll(f1) {
     var aa = document.getElementById('f1');
     if (checked == false)
     {
-        checked = true
+        checked = true;
     }
     else
     {
-        checked = false
+        checked = false;
     }
     for (var i = 0; i < aa.elements.length; i++) {
         aa.elements[i].checked = checked;
+        evidenziaTr(aa.elements[i]);
+    }
+}
+//funzione seleziona tutte checkbox
+function checkedAll2(f1) {
+    var aa = document.getElementById('f2');
+    if (checked == false)
+    {
+        checked = true;
+    }
+    else
+    {
+        checked = false;
+    }
+    for (var i = 0; i < aa.elements.length; i++) {
+        aa.elements[i].checked = checked;
+        evidenziaTr(aa.elements[i]);
+    }
+}
+//evidenzia elementi selezionati
+function evidenziaTr(ck) {
+    var flag = ck.checked
+    while (ck = ck.parentNode) {
+        if (ck.tagName == 'TR') {
+            ck.className = (flag) ? 'on' : '';
+        }
+    }
+}
+//script che evidenzia righe selezionate
+window.onload = function () {
+    var t = document.getElementById('table');
+    var t2 = document.getElementById('table1');
+    t.onclick = function (e) {
+        e = e || event;
+        var src = e.target || e.srcElement;
+        if (src.tagName == 'INPUT' && src.type == 'checkbox' && src.id != 'tdh') {
+            evidenziaTr(src);
+        }
+        else {
+            if (src.tagName != 'A' && src.id != 'tdh') {
+                var found = true;
+                while (src.tagName != 'TR') {
+                    if (src == t) {
+                        found = false;
+                        break;
+                    }
+                    src = src.parentNode;
+                }
+                if (found) {
+                    var els = src.getElementsByTagName('input');
+                    for (var k = 0, l = els.length; k < l; k++) {
+                        if (els[k].type == "checkbox") {
+                            els[k].checked = !els[k].checked;
+                            evidenziaTr(els[k]);
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+    t2.onclick = function (e) {
+        e = e || event;
+        var src = e.target || e.srcElement;
+        if (src.tagName == 'INPUT' && src.type == 'checkbox' && src.id != 'tdh') {
+            evidenziaTr(src);
+        }
+        else {
+            if (src.tagName != 'A' && src.id != 'tdh') {
+                var found = true;
+                while (src.tagName != 'TR') {
+                    if (src == t) {
+                        found = false;
+                        break;
+                    }
+                    src = src.parentNode;
+                }
+                if (found) {
+                    var els = src.getElementsByTagName('input');
+                    for (var k = 0, l = els.length; k < l; k++) {
+                        if (els[k].type == "checkbox") {
+                            els[k].checked = !els[k].checked;
+                            evidenziaTr(els[k]);
+                        }
+                    }
+                }
+            }
+        }
+
     }
 }
 //visualizza schermata di caricamento
@@ -277,17 +366,20 @@ function confirmDownload() {
         return x;
     }
 }
-function confirmInsert()
-{
+function confirmInsert() {
     return confirm("Are you sure?");
 }
-function confirmDelete()
-{
+function confirmDelete() {
     return confirm("Delete this paper?");
 }
-function confirmExit()
-{
-    return confirm('All unsaved changes will be lost, continue?');
+function confirmExit() {
+    var x = confirm("All unsaved changes will be lost, continue?");
+    if (x) {
+        loading(load);
+        return x;
+    } else {
+        return x;
+    }
 }
 function confirmDelete2()
 {

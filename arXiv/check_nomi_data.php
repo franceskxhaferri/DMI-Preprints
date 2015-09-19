@@ -895,7 +895,7 @@ function leggipreprintarchiviati() {
         while ($row = mysql_fetch_array($result)) {
             $i++;
             echo "<h1>" . $i . ".<br/></h1><div align='left' style='width:98%;'>";
-            echo "<p><h1>Id of pubblication:</h1></p><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
+            echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./pdf_archived/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a></div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
             echo "<p><h1>Title:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . ($row['titolo']) . "</div>";
             echo "<p><h1>Date of pubblication:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . ($row['data_pubblicazione']) . "</div>";
             echo "<p><h1>Authors:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . ($row['autori']) . "</div>";
@@ -903,7 +903,7 @@ function leggipreprintarchiviati() {
             echo "<p><h1>Comments:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . ($row['commenti']) . "</div>";
             echo "<p><h1>Category:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . ($row['categoria']) . "</div>";
             echo "<p><h1>Abstract:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . ($row['abstract']) . "</div>";
-
+            echo "<p><h1>Views:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . number_format(($row['counter']), 0, ',', '.') . "</div>";
             echo "</div><hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
         }
         #visualizzazione della navigazione per pagine
@@ -929,7 +929,6 @@ function leggipreprintarchiviati() {
                 }
                 echo '<a style="color:#007897; text-decoration: none;" title="Last page" href="archived_preprints.php?p=' . $npag . '&r=' . $_GET['r'] . '"> &#8658 </a>';
             }
-            echo "<p><h1>Views:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . number_format(($row['counter']), 0, ',', '.') . "</div>";
             echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
         }
     } else {
@@ -972,9 +971,26 @@ function cancellapreprint() {
     while ($row = mysql_fetch_array($result)) {
         unlink($basedir4 . $row['Filename']);
     }
-    $sql = "DELETE FROM PREPRINTS_ARCHIVIATI WHERE checked='1'";
+    $sql = "TRUNCATE TABLE PREPRINTS_ARCHIVIATI";
     $result = mysql_query($sql) or die(mysql_error());
     mysql_close($db_connection);
+}
+
+#funzione che controlla se si sono verificate interruzioni nell'ultimo update
+
+function controllainterruzione() {
+#importazione variabili globali
+    include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
+    $var = False;
+    $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
+    mysql_select_db($db_monte, $db_connection);
+    $sql = "SELECT id FROM temp";
+    $result = mysql_query($sql) or die(mysql_error());
+    if ((mysql_num_rows($result)) != 0) {
+        $var = True;
+    }
+    mysql_close($db_connection);
+    return $var;
 }
 
 #funzione che cerca se il preprint è stato già scaricato nell'esecuzione in corso
@@ -1015,12 +1031,8 @@ function azzerapreprint() {
     include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
     $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
     mysql_select_db($db_monte, $db_connection);
-    $sql = "SELECT id FROM temp";
+    $sql = "TRUNCATE TABLE temp";
     $result = mysql_query($sql) or die(mysql_error());
-    while ($row = mysql_fetch_array($result)) {
-        $sql = "DELETE FROM temp WHERE id='" . $row['id'] . "'";
-        $query = mysql_query($sql) or die(mysql_error());
-    }
     mysql_close($db_connection);
 }
 
@@ -1079,13 +1091,9 @@ function aggiornanomi() {
     $array = legginomi();
     $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
     mysql_select_db($db_monte, $db_connection);
-    $sql = "SELECT nome FROM AUTORI_BACKUP";
+    $sql = "TRUNCATE TABLE AUTORI_BACKUP";
     $result = mysql_query($sql) or die(mysql_error());
     $nl2 = count($array);
-    while ($row = mysql_fetch_array($result)) {
-        $sql = "DELETE FROM AUTORI_BACKUP WHERE nome='" . $row['nome'] . "'";
-        $query = mysql_query($sql) or die(mysql_error());
-    }
     #aggiorno i nomi...
     for ($i = 0; $i < $nl2; $i++) {
         $sql = "INSERT INTO AUTORI_BACKUP (nome) VALUES ('" . $array[$i] . "')";
@@ -1120,13 +1128,9 @@ function scrivinomi($nomi) {
     include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
     $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
     mysql_select_db($db_monte, $db_connection);
-    $sql = "SELECT nome FROM AUTORI";
+    $sql = "TRUNCATE TABLE AUTORI";
     $result = mysql_query($sql) or die(mysql_error());
     $nl2 = count($nomi);
-    while ($row = mysql_fetch_array($result)) {
-        $sql = "DELETE FROM AUTORI WHERE nome='" . $row['nome'] . "'";
-        $query = mysql_query($sql) or die(mysql_error());
-    }
     #aggiorno i nomi...
     for ($i = 0; $i < $nl2; $i++) {
         $sql = "INSERT INTO AUTORI (nome) VALUES ('" . $nomi[$i] . "') ON DUPLICATE KEY UPDATE nome = VALUES(nome)";

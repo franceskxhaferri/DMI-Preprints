@@ -146,8 +146,8 @@
                                     <header id="header">
                                         <h1><a href="#" id="logo">DMI Papers</a></h1>
                                         <nav id="nav">
-                                            <a href='./view_preprints.php'>Publications</a>
-                                            <a href="./reserved.php" class="current-page-item">Reserved Area</a>
+                                            <a href='./view_preprints.php' onclick="loading(load);">Publications</a>
+                                            <a href="./reserved.php" class="current-page-item" onclick="loading(load);">Reserved Area</a>
                                         </nav>
                                     </header>
                                 </div>
@@ -157,7 +157,7 @@
                     <center>
                         <div>
                             <br/>
-                            Go back to new insertion: <a style="color:white;" href="<?php echo $ind; ?>" id="bottoni" class="bottoni">Back</a>
+                            Go back to new insertion: <a style="color:white;" href="<?php echo $ind; ?>" id="bottoni" class="bottoni" onclick="loading(load);">Back</a>
                         </div>
                         <?php
                         #lettura preprint caricati
@@ -175,5 +175,10 @@
         <br/>
         <br/>
         <br/>
-    </body>
-</html>
+    <center>
+        <div id="load">
+            <img src="./images/loader.gif" alt="Loading" style="width: 192px; height: 94px;">
+            <div>
+                </center>
+                </body>
+                </html>

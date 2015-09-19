@@ -71,8 +71,8 @@
             $nav = "<header id='header'>
                                     <h1><a href='#' id='logo'>DMI Papers</a></h1>
                                     <nav id='nav'>
-                                        <a href='./view_preprints.php' class='current-page-item'>Publications</a>
-                                        <a href='./reserved.php'>Reserved Area</a>
+                                        <a href='./view_preprints.php' class='current-page-item' onclick='loading(load);'>Publications</a>
+                                        <a href='./reserved.php' onclick='loading(load);'>Reserved Area</a>
                                     </nav>
                                 </header>";
         } else if ($_SESSION['logged_type'] === "user") {
@@ -81,8 +81,8 @@
             $nav = "<header id='header'>
                                     <h1><a href='#' id='logo'>DMI Papers</a></h1>
                                     <nav id='nav'>
-                                        <a href='./view_preprints.php' class='current-page-item'>Publications</a>
-                                        <a href='./reserved.php'>Reserved Area</a>
+                                        <a href='./view_preprints.php' class='current-page-item' onclick='loading(load);'>Publications</a>
+                                        <a href='./reserved.php' onclick='loading(load);'>Reserved Area</a>
                                     </nav>
                                 </header>";
         } else {
@@ -91,8 +91,8 @@
             $nav = "<header id='header'>
                                     <h1><a href='#' id='logo'>DMI Papers</a></h1>
                                     <nav id='nav'>
-                                        <a href='./view_preprints.php' class='current-page-item'>Publications</a>
-                                        <a href='./reserved.php'>Reserved Area</a>
+                                        <a href='./view_preprints.php' class='current-page-item' onclick='loading(load);'>Publications</a>
+                                        <a href='./reserved.php' onclick='loading(load);'>Reserved Area</a>
                                     </nav>
                                 </header>";
         }

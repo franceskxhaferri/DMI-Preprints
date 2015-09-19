@@ -21,8 +21,6 @@
         <!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
         <script type="text/javascript" src="./js/allscript.js">
         </script>
-        <script type="text/javascript" src="./js/allscript.js">
-        </script>
     </head>
     <body>
         <?php
@@ -128,8 +126,8 @@
                                     <header id="header">
                                         <h1><a href="#" id="logo">DMI Papers</a></h1>
                                         <nav id="nav">
-                                            <a href='./view_preprints.php'>Publications</a>
-                                            <a href="./reserved.php" class="current-page-item">Reserved Area</a>
+                                            <a href='./view_preprints.php' onclick="loading(load);">Publications</a>
+                                            <a href="./reserved.php" class="current-page-item" onclick="loading(load);">Reserved Area</a>
                                         </nav>
                                     </header>
                                 </div>
@@ -140,16 +138,16 @@
                         <center>
                             <br/>
                             <br/>
-                            <h2>CHECK ARXIV PAPER</h2>
+                            <h2>CHECK PAPER</h2>
                             <?php
                             if ($_GET['bb3'] == 1) {
                                 echo "
                                 Go to admin panel&nbsp&nbsp&nbsp
-                                <a style='height:17px; color:white;' href='./modp.php' id='bottone_keyword' class='bottoni'>Back</a><br/>";
+                                <a style='height:17px; color:white;' href='./modp.php' id='bottone_keyword' class='bottoni' onclick='loading(load);'>Back</a><br/>";
                             } else {
                                 echo "
                                 Go to arXiv panel&nbsp&nbsp&nbsp
-                                <a style='height:17px; color:white;' href='./arXiv_panel.php' id='bottone_keyword' class='bottoni'>Back</a><br/>";
+                                <a style='height:17px; color:white;' href='./arXiv_panel.php' id='bottone_keyword' class='bottoni' onclick='loading(load);'>Back</a><br/>";
                             }
                             ?>
                         </center>
@@ -158,22 +156,24 @@
                         <?php
                         include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/insert_remove_db.php');
                         include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/arXiv_parsing.php');
+                        include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'mysql/func.php');
                         #importazione variabili globali
                         include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
                         if (sessioneavviata() == True) {
                             echo "<center><br/>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE LIST CAN'T BE CHANGED IN THIS MOMENT!</center><br/>";
                         } else {
-                            echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
+                            echo "<div><hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'></div>";
                             #leggere cartella...
                             #Imposto la directory da leggere
                             $directory = $basedir3;
-                            echo "<form name='f3' action='check_preprints.php' id='f1' method='GET' onsubmit='loading(load);'><center><table>";
+                            echo "<div id='arxivpreprints'><form name='f2' action='check_preprints.php' id='f1' method='GET' onsubmit='loading(load);'><center><table id='table'>";
                             #Apriamo una directory e leggiamone il contenuto.
                             if (is_dir($directory)) {
                                 #Apro l'oggetto directory
                                 if ($directory_handle = opendir($directory)) {
                                     #Scorro l'oggetto fino a quando non è termnato cioè false
-                                    echo "<tr><td><input type='checkbox' name='checkall' onclick='checkedAll(f1);'/></td><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNAME:</td><td>&nbsp&nbsp&nbspRECORD:</td><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspCREATED:</td></tr>";
+                                    echo "<tr id='thhead'><td id='tdh' colspan='4' align='center'>DOWNLOADED FROM ARXIV</td></tr>";
+                                    echo "<tr id='thhead'><td id='tdh'><label><input type='checkbox' name='checkall' onclick='checkedAll(f1);'/>N&deg;:</label></td><td id='tdh' align='center'>FILE:</td><td id='tdh' align='center'>RECORD:</td><td id='tdh' align='center'>FOUNDED:</td></tr>";
                                     $i = 0;
                                     $y = 1;
                                     while (($file = readdir($directory_handle)) !== false) {
@@ -184,16 +184,16 @@
                                             $ids = $file;
                                             $ids = substr($ids, 0, -4);
                                             $ids = str_replace("-", "/", $ids);
-                                            echo "<tr><td colspan='2'><label><input type='checkbox' name='" . $i . "' value='checked'/>$y.&nbsp&nbsp&nbsp<a href=./pdf_downloads/" . $file . " onclick='window.open(this.href);return false' title='" . $file . "'>" . $file . "</a></label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td><td><a href=./manual_edit.php?id=" . $ids . " onclick='window.open(this.href);return false' title='" . $ids . "'>" . $ids . "</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>";
+                                            echo "<tr id='th'><td id='td'><label><input type='checkbox' name='ch" . $i . "' value='checked'/>$y.</label></td><td id='td'><a href=./pdf_downloads/" . $file . " onclick='window.open(this.href);return false' title='" . $file . "'>" . $file . "</a></td><td id='td'><a href=./manual_edit.php?id=" . $ids . " onclick='window.open(this.href);return false' title='" . $ids . "'>" . $ids . "</a></td>";
                                             #recupero data creazione file
                                             $dat = date("Y-m-d H:i", filemtime($basedir3 . $file));
-                                            echo "<td>&nbsp&nbsp&nbsp$dat</td></tr>";
+                                            echo "<td id='td'>$dat</td></tr>";
                                             $i++;
                                             $y++;
                                         }
                                     }
-                                    echo "</table></center><center><br/><input type='submit' name='b2' value='Remove' style='width:70px;' id='bottone_keyword' class='bottoni' onclick='return confirmDelete3()'><input type='submit' name='b3' value='Insert' style='width:70px;' id='bottone_keyword' class='bottoni' onclick='return confirmInsert3()'></center>
-                                <input type='text' name=bb3 value='" . $_GET['bb3'] . "' hidden></form>";
+                                    echo "</table></center><center><br/><input type='submit' name='b2' value='Remove' style='width:100px;' id='bottone_keyword' class='bottoni' onclick='return confirmDelete3()'><input type='submit' name='b3' value='Insert' style='width:100px;' id='bottone_keyword' class='bottoni' onclick='return confirmInsert3()'><br/></center>
+                                <input type='text' name=bb3 value='" . $_GET['bb3'] . "' hidden></form></div>";
                                     #Chiudo la lettura della directory.
                                     closedir($directory_handle);
                                 }
@@ -205,8 +205,7 @@
                                 for ($j = 0; $j < $lunghezza; $j++) {
                                     $percorso = $basedir3 . $array[$j];
                                     $percorso2 = $copia . $array[$j];
-                                    $delete = $_GET[$j];
-                                    if ($delete == "checked") {
+                                    if (isset($_GET["ch" . $j])) {
                                         $z++;
                                         if (is_dir($directory)) {
                                             if ($directory_handle = opendir($directory)) {
@@ -241,8 +240,7 @@
                                 for ($j = 0; $j < $lunghezza; $j++) {
                                     $percorso = $basedir3 . $array[$j];
                                     $percorso2 = $copia . $array[$j];
-                                    $delete = $_GET[$j];
-                                    if ($delete == "checked") {
+                                    if (isset($_GET["ch" . $j])) {
                                         $z++;
                                         if (is_dir($directory)) {
                                             if ($directory_handle = opendir($directory)) {
@@ -263,16 +261,125 @@
                                 }
                                 #controllo se sono stati selezionati preprint da rimuovere
                                 if ($z == 0) {
-                                    echo '<script type="text/javascript">alert("No paper selected!");</script>';
+                                    echo '<script type="text/javascript">alert("No papers selected!");</script>';
                                 } else {
                                     echo '<script type="text/javascript">alert("' . $z . ' papers inserted correctly!");</script>';
                                     #aggiorno la pagina dopo 0 secondi
                                     echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./check_preprints.php">';
                                 }
                             }
+#################################################################################################################################################
+                            #dmi papers
+                            #leggere cartella...
+                            #Imposto la directory da leggere
+                            $directory2 = $basedir;
+                            echo "<div id='dmipreprints'><form name='f3' action='check_preprints.php' id='f2' method='GET' onsubmit='loading(load);'><center><table id='table1'>";
+                            #Apriamo una directory e leggiamone il contenuto.
+                            if (is_dir($directory2)) {
+                                #Apro l'oggetto directory
+                                if ($directory_handle = opendir($directory2)) {
+                                    #Scorro l'oggetto fino a quando non è termnato cioè false
+                                    echo "<tr id='thhead'><td id='tdh' colspan='4' align='center'>SUBMITTED TO DMI</td></tr>";
+                                    echo "<tr id='thhead'><td id='tdh'><label><input type='checkbox' name='checkall' onclick='checkedAll2(f2);'/>N&deg;:</label></td><td id='tdh' align='center'>FILE:</td><td id='tdh' align='center'>RECORD:</td><td id='tdh' align='center'>FOUNDED:</td></tr>";
+                                    $t = 0;
+                                    $y = 1;
+                                    while (($file = readdir($directory_handle)) !== false) {
+                                        #Se l'elemento trovato è diverso da una directory
+                                        #o dagli elementi . e .. lo visualizzo a schermo
+                                        if ((!is_dir($file)) & ($file != ".") & ($file != "..") & ($file != "index.html")) {
+                                            $array2[$t] = $file;
+                                            $ids = $file;
+                                            $ids = substr($ids, 0, -4);
+                                            $ids = str_replace("-", "/", $ids);
+                                            echo "<tr id='th'><td id='td'><label><input type='checkbox' name='ck" . $t . "' value='checked'/>$y.</td><td id='td'><a href=./upload_dmi/" . $file . " onclick='window.open(this.href);return false' title='" . $file . "'>" . $file . "</a></label></td><td id='td'><a href=./manual_edit.php?id=" . $ids . " onclick='window.open(this.href);return false' title='" . $ids . "'>" . $ids . "</a></td>";
+                                            #recupero data creazione file
+                                            $dat = date("Y-m-d H:i", filemtime($basedir . $file));
+                                            echo "<td id='td'>$dat</td></tr>";
+                                            $t++;
+                                            $y++;
+                                        }
+                                    }
+                                    echo "</table></center><center><br/><input type='submit' name='b4' value='Remove' style='width:100px;' id='bottone_keyword' class='bottoni' onclick='return confirmDelete3()'><input type='submit' name='b5' value='Insert' style='width:100px;' id='bottone_keyword' class='bottoni' onclick='return confirmInsert3()'><br/></center>
+                                <input type='text' name=bb3 value='" . $_GET['bb3'] . "' hidden></form></div><div style='clear:both;'></div>";
+                                    #Chiudo la lettura della directory.
+                                    closedir($directory_handle);
+                                }
+                            }
+#################################################################################################################################################
+                            $k = 0;
+                            $lunghezza2 = $t;
+                            #eliminazione pdf, lettura cartella e ...
+                            if (isset($_GET['b4'])) {
+                                for ($j = 0; $j < $lunghezza2; $j++) {
+                                    $percorso = $basedir . $array2[$j];
+                                    $percorso2 = $copia . $array2[$j];
+                                    if (isset($_GET["ck" . $j])) {
+                                        $k++;
+                                        if (is_dir($directory2)) {
+                                            if ($directory_handle = opendir($directory2)) {
+                                                while (($file = readdir($directory_handle)) !== false) {
+                                                    if ((!is_dir($file)) & ($file != ".") & ($file != "..") & ($file != "index.html")) {
+                                                        if ($file == $array2[$j]) {
+                                                            #cancello file...
+                                                            unlink($percorso);
+                                                            unlink($percorso2);
+                                                            #cancello riga database...
+                                                            remove_preprints($array2[$j]);
+                                                        }
+                                                    }
+                                                }
+                                                #Chiudo la lettura della directory.
+                                                closedir($directory_handle);
+                                            }
+                                        }
+                                    }
+                                }
+                                #controllo se sono stati selezionati preprint da rimuovere
+                                if ($k == 0) {
+                                    echo '<script type="text/javascript">alert("No paper selected!");</script>';
+                                } else {
+                                    echo '<script type="text/javascript">alert("' . $k . ' papers removed correctly!");</script>';
+                                    #aggiorno la pagina dopo 0 secondi
+                                    echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./check_preprints.php">';
+                                }
+                            }
+                            #inserimento pdf, lettura cartella e ...
+                            if (isset($_GET['b5'])) {
+                                for ($j = 0; $j < $lunghezza; $j++) {
+                                    $percorso = $basedir . $array2[$j];
+                                    $percorso2 = $copia . $array2[$j];
+                                    if (isset($_GET["ck" . $j])) {
+                                        $k++;
+                                        if (is_dir($directory2)) {
+                                            if ($directory_handle = opendir($directory2)) {
+                                                while (($file = readdir($directory_handle)) !== false) {
+                                                    if ((!is_dir($file)) & ($file != ".") & ($file != "..") & ($file != "index.html")) {
+                                                        if ($file == $array2[$j]) {
+                                                            $idd = substr($file, 0, -4);
+                                                            #inserimento file nel database
+                                                            insertopdf($idd);
+                                                        }
+                                                    }
+                                                }
+                                                #Chiudo la lettura della directory.
+                                                closedir($directory_handle);
+                                            }
+                                        }
+                                    }
+                                }
+                                #controllo se sono stati selezionati preprint da rimuovere
+                                if ($k == 0) {
+                                    echo '<script type="text/javascript">alert("No papers selected!");</script>';
+                                } else {
+                                    echo '<script type="text/javascript">alert("' . $k . ' papers inserted correctly!");</script>';
+                                    #aggiorno la pagina dopo 0 secondi
+                                    echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./check_preprints.php">';
+                                }
+                            }
+#################################################################################################################################################
                             echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
                             #avviso per utente di nessun preprint
-                            if ($i == 0) {
+                            if ($i + $t == 0) {
                                 echo '<script type="text/javascript">alert("No paper to be checked!");</script>';
                             }
                         }
