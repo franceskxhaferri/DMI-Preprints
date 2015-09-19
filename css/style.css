@@ -210,6 +210,47 @@ tr.on {background-color:#D4D4D4}
     background-color: #D9D9D9;
 }
 
+/*
+Questa query aggiunge del CSS per tutti gli schermi con
+una risoluzione inferiore a 760px
+*/
+@media
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px) {
+
+    /* Forza la tabella a non essere più una tabella */
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+
+    /* Nasconde la testata della tabella (senza il dispaly non per una maggiore accessibilità) */
+    thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    tr { border: 1px solid #ccc; }
+
+    td {
+        /* Per comportarsi come una "riga" della tabella */
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%;
+    }
+
+    td:before {
+        /* Per inserire una descrizione ad ogni tabella */
+        position: absolute;
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+    }
+}
+
 #table{
     width: 90%;
     border:1px solid #ccc;
@@ -302,6 +343,19 @@ tr.on {background-color:#D4D4D4}
     border-color: #ccc;
 }
 
+#boxsx{
+    float:left;
+    width: 50%;
+    text-align: right;
+    margin-right: 5px;
+    margin-top: 5px;
+}
+
+boxdx{
+    float: right;
+    width: 50%;
+    margin-left:-50%;
+}
 /* Reusable */
 
 article.blog-post {

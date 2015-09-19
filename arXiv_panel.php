@@ -139,55 +139,47 @@
                             </div>
                         </div>
                     </div>
-                    <div align="center">
+                    <br/><br/>
+                    <div>
+                        <div>
+                            <center><h2>ARXIV PANEL</h2></center>
+                            <div id="boxsx">
+                                Go to admin panel
+                            </div>
+                            <div id="boxdx">
+                                <a style="text-align: center; color:white;" href="./reserved.php" id="bottone_keyword" class="bottoni" onclick="loading(load);">Back</a>
+                            </div>
+                            <div id="boxsx">
+                                The authors list
+                            </div>
+                            <div id="boxdx">
+                                <a style="text-align: center; color:white;" href="./authors_list.php" id="bottone_keyword" class="bottoni" onclick="loading(load);">Authors section</a>
+                            </div>
+                            <div id="boxsx">
+                                Insert a paper
+                            </div>
+                            <div id="boxdx">
+                                <a style="text-align: center; color:white;" href="./manual_insert.php" id="bottone_keyword" class="bottoni" onclick="loading(load);">Enter manually</a>
+                            </div>
+                            <div id="boxsx">
+                                Search for new papers
+                            </div>
+                            <div id="boxdx">
+                                <form name="f8" action="arXiv_panel.php" method="POST" onsubmit="loading(load);">
+                                    <input style="height:19px;" type="submit" name="b8" value="Update from arXiv" id="bottone_keyword" class="bottoni">
+                                </form>
+                            </div>
+                            <div id="boxsx">
+                                Download all from arXiv!
+                            </div>
+                            <div id="boxdx">
+                                <form name="f9" action="arXiv_panel.php" method="POST">
+                                    <input style="height:19px;" type="submit" name="b9" value="Download from arXiv" id="bottone_keyword" class="bottoni" onclick="return confirmDownload()">
+                                </form>
+                            </div>
+                            <div style="clear:both;"></div>
+                        </div>
                         <center>
-
-                            <br/>
-                            <h2>ARXIV PANEL</h2>
-                            <table>
-                                <tr>
-                                    <td align="right">
-                                        Go to admin panel&nbsp&nbsp&nbsp
-                                    </td>
-                                    <td align="center">
-                                        <a style="height:17px; color:white;" href="./reserved.php" id="bottone_keyword" class="bottoni" onclick="loading(load);">Back</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td align="right">
-                                        List of authors that will be searched on arXiv&nbsp&nbsp&nbsp
-                                    </td>
-                                    <td align="center">
-                                        <a style="height:17px; color:white;" href="./authors_list.php" id="bottone_keyword" class="bottoni" onclick="loading(load);">Authors section</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td align="right">
-                                        Insert manually one paper from arXiv&nbsp&nbsp&nbsp</td><td align="center">
-                                        <a style="height:17px; color:white;" href="./manual_insert.php" id="bottone_keyword" class="bottoni" onclick="loading(load);">Enter manually</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td align="right">
-                                        Refresh from arXiv for new papers&nbsp&nbsp&nbsp
-                                    </td>
-                                    <td align="center">
-                                        <form name="f8" action="arXiv_panel.php" method="POST" onsubmit="loading(load);">
-                                            <input type="submit" name="b8" value="Update from arXiv" id="bottone_keyword" class="bottoni">
-                                        </form>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td align="right">
-                                        Download all from arXiv, this overwrites all data!&nbsp&nbsp&nbsp
-                                    </td>
-                                    <td align="center">
-                                        <form name="f9" action="arXiv_panel.php" method="POST">
-                                            <input type="submit" name="b9" value="Download from arXiv" id="bottone_keyword" class="bottoni" onclick="return confirmDownload()">
-                                        </form>
-                                    </td>
-                                </tr>
-                            </table>
                             <hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
                             <?php
                             include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/arXiv_parsing.php');

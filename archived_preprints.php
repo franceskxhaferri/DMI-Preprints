@@ -130,10 +130,10 @@
 		    </div></center>";
         }
         if ($_SESSION['logged_type'] === "mod") {
-            $nav = "<tr><form name='f2' action='archived_preprints.php' method='GET'>
-		<td align='right'>Delete all archived papers from database&nbsp&nbsp&nbsp</td>
-		<td><input type='submit' name='c' value='Remove all' id='bottone_keyword' class='bottoni' onclick='return confirmDelete5()'/></td>
-		</form></tr>";
+            $nav = "<form name='f2' action='archived_preprints.php' method='GET'><div id='boxsx'>
+		Delete all archived papers
+		</div><div id='boxdx'><input type='submit' name='c' value='Remove all' id='bottone_keyword' class='bottoni' onclick='return confirmDelete5()'/>
+		</div></form>";
             $nav2 = "<header id='header'>
                                     <h1><a href='#' id='logo'>DMI Papers</a></h1>
                                     <nav id='nav'>
@@ -168,46 +168,45 @@
                 <div>
                     <br/>
                     <br/>
-                    <h2>ARCHIVED PAPERS</h2>
-                </div>
-                <?php
-                if ($cred == 1) {
-                    echo "
-                        <table>
-                        <tr>
-                        <td align='right'>
-                        Go to admin panel&nbsp&nbsp&nbsp
-                        </td>
-                        <td align='center'>
-                        <a style='height:17px; color:white;' href='./modp.php' id='bottone_keyword' class='bottoni' onclick='loading(load);'>Back</a>
-                        </td>
-                        </tr>";
-                    echo $nav . "</table>";
-                }
-                ?>
-                <div onclick="myFunction()">
-                    <?php
-                    if (sessioneavviata() == True) {
-                        echo "<br/><br/><center>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTION CAN'T BE USED IN THIS MOMENT!</center><br/>";
-                    } else {
-                        if (isset($_GET['c'])) {
-                            #funzione gestione preprint archiviati
-                            leggipreprintarchiviati();
-                        } else {
-                            #funzione gestione preprint archiviati
-                            leggipreprintarchiviati();
-                        }
-                    }
-                    ?>
-                </div>
-            </center>
+                    <h2>ARCHIVED PAPERS</h2></center>
         </div>
-        <br/>
-        <br/>
+        <?php
+        if ($cred == 1) {
+            echo "
+                        <div id='boxsx'>
+                        Go to admin panel
+                        </div>
+                        <div id='boxdx'>
+                        <a style='height:18px; color:white; text-align: center;' href='./modp.php' id='bottone_keyword' class='bottoni' onclick='loading(load);'>Back</a>
+                        </div>";
+            echo $nav . "";
+        }
+        ?>
+        <div style='clear:both;'></div>
     <center>
-        <div id="load">
-            <img src="./images/loader.gif" alt="Loading" style="width: 192px; height: 94px;">
+        <div onclick="myFunction()">
+            <?php
+            if (sessioneavviata() == True) {
+                echo "<br/><br/><center>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTION CAN'T BE USED IN THIS MOMENT!</center><br/>";
+            } else {
+                if (isset($_GET['c'])) {
+                    #funzione gestione preprint archiviati
+                    leggipreprintarchiviati();
+                } else {
+                    #funzione gestione preprint archiviati
+                    leggipreprintarchiviati();
+                }
+            }
+            ?>
         </div>
     </center>
+</div>
+<br/>
+<br/>
+<center>
+    <div id="load">
+        <img src="./images/loader.gif" alt="Loading" style="width: 192px; height: 94px;">
+    </div>
+</center>
 </body>
 </html>

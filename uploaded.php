@@ -156,7 +156,7 @@
                     </div>
                     <center>
                         <div>
-                            <br/>
+                            <br/><br/>
                             Go back to new insertion: <a style="color:white;" href="<?php echo $ind; ?>" id="bottoni" class="bottoni" onclick="loading(load);">Back</a>
                         </div>
                         <?php
