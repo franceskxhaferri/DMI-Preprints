@@ -146,7 +146,7 @@
                                     <input type="checkbox" name="insert" value="1" checked/>
                                     Add author to list or search by name:
                                 </label>
-                                <input type="search" style="width:300px;" id='textbox' class='textbox' autocomplete = "on" required name="txt1" placeholder="name1, name2, name3, name..." autofocus />
+                                <input type="search" style="width:300px; height:17px;" id='textbox' class='textbox' autocomplete = "on" required name="txt1" placeholder="name1, name2, name3, name..." autofocus />
                                 <input type="submit" name="b2" value="Insert/Search" style="width:100px;" id="bottone_keyword" class="bottoni"/>
                             </form>
                         </center>

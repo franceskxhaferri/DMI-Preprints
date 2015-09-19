@@ -247,13 +247,59 @@ tr.on {background-color:#D4D4D4}
 }
 
 #arxivpreprints{
-	float: right;
-	width: 50%;
+    float: right;
+    width: 50%;
 }
 
 #dmipreprints{
-	float: left;
-	width: 50%;
+    float: left;
+    width: 50%;
+}
+#textboxcat{
+    width: 49%; 
+    height: 50px; 
+    overflow: auto;
+    resize: none;
+}
+#textbox{
+    width: 100%; 
+    height: 50px; 
+    overflow: auto;
+    resize: none;
+}
+#textboxabs{
+    width:100%; 
+    height:300px; 
+    overflow: auto;
+    resize: none;
+}
+#divinsert{
+    padding: 1%; 
+    float:left; 
+    width:48%;
+}
+#divinsertcateg{
+    padding:1%;
+    font-weight: bold;
+    width:98%;
+}
+#divpreview{
+    padding: 1%;
+    float: left;
+    width: 48%;
+    height: 170px;
+}
+#divcontpreview{
+    height:100px;
+    overflow: auto;
+    border-top: 1px dashed;
+    border-color: #ccc;
+}
+#divcontpreviewabs{
+    height:300px; 
+    overflow: auto;
+    border-top: 1px dashed;
+    border-color: #ccc;
 }
 
 /* Reusable */
@@ -305,31 +351,18 @@ ul.link-list li:first-child {
 
 .button {
     display: inline-block;
-    padding: 15px 25px 15px 25px;
-    background-color: #007b9d;
-    background-image: -moz-linear-gradient(top, #008dad, #007b9d);
-    background-image: -webkit-linear-gradient(top, #008dad, #007b9d);
-    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#008dad), to(#007b9d));
-    background-image: -ms-linear-gradient(top, #008dad, #007b9d);
-    background-image: -o-linear-gradient(top, #008dad, #007b9d);
-    background-image: linear-gradient(top, #008dad, #007b9d);
-    border-radius: 10px;
-    text-transform: lowercase;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 2px;
+    margin-right: 2px;
+    background-color: #D4D4D4;
     text-decoration: none;
-    color: #fff;
-    font-size: 1.2em;
-    letter-spacing: -1px;
-    border: solid 1px #006e8b;
-    box-shadow: inset 0px 0px 0px 1px #18a8c8;
+    border: solid 1px #bbb;
+    font-size: 12pt;
 }
 
 .button:hover {
-    background-color: #118eb1;
-    background-image: -moz-linear-gradient(top, #1b9fbe, #118eb1);
-    background-image: -webkit-linear-gradient(top, #1b9fbe, #118eb1);
-    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#1b9fbe), to(#118eb1));
-    background-image: -ms-linear-gradient(top, #1b9fbe, #118eb1);
-    background-image: -o-linear-gradient(top, #1b9fbe, #118eb1);
-    background-image: linear-gradient(top, #1b9fbe, #118eb1);
-    box-shadow: inset 0px 0px 0px 1px #3ecceb;
+    background-color: #aaa;
 }

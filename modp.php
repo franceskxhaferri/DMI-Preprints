@@ -168,7 +168,7 @@
                                 <form name="f1" action="modp.php" method="POST" onsubmit="loading(load);">
                                     <input type="submit" name="b1" value="Logout" id="botton_logout" class="bottoni" style="height:17px; color: red;" onclick="return confirmLogout()">
                                     <a style="height:17px; color:white;" href="./uploaded.php?p=1" id="bottone_keyword" class="bottoni" onclick="loading(load);">My uploads</a>
-                                    <a style="height:17px; color:white;" href="./check_preprints.php?bb3=1" id="bottone_keyword" class="bottoni" onclick="loading(load);">Check section</a>
+                                    <a style="height:17px; color:white;" href="./check_preprints.php" id="bottone_keyword" class="bottoni" onclick="loading(load);">Check section</a>
                                     <a style="height:17px; color:white;" href="./arXiv_panel.php" id="bottone_keyword" class="bottoni" onclick="loading(load);">ArXiv panel</a>
                                     <a style="height:17px; color:white;" href="./manual_edit.php" id="bottone_keyword" class="bottoni" onclick="loading(load);">Edit section</a>
                                     <a style="height:17px; color:white;" href="./archived_preprints.php" id="bottone_keyword" class="bottoni" onclick="loading(load);">Archived section</a>
@@ -192,10 +192,8 @@
                             <br/>
                             <input type="reset" name="reset" value="Reset">
                             <br/>
-                            <br/>
                         </center>
-                        <div style="margin-left:1%; margin-right:1%;">
-                            <div style="font-weight: bold;">*category:</div><br/>
+                        <div id="divinsertcateg">*category:<br/>
                             <select name="category" required onchange='Checkcath(this.value);'>
                                 <option value="">--Select Category--</option>
                                 <option value="Computer Science">Computer Science</option>
@@ -207,96 +205,80 @@
                                 <option value="Other">Other:</option>
                             </select>
                             <br/>
-                            <br/>
-                            <div id="cat" hidden><textarea style="width:49%; height:100px;" name="category2" class="textbox" placeholder="example of category: math.NA..."></textarea>
-                                <br/>
-                                <br/>
+                            <div id="cat" hidden>
+                                <textarea id="textboxcat" name="category2" class="textbox" placeholder="example of category: math.NA..."></textarea>
                             </div>
-                            <div style="float:right; width:49%; height:150px; overflow: auto;">
-                                <div style="font-weight: bold;">
-                                    title preview:
-                                </div>
-                                <br/>
-                                <div id="titlediv">
-                                </div>
-                            </div>
+                        </div>
+                        <div id="divinsert">
                             <div style="font-weight: bold;">
                                 *title:
                             </div>
+                            <textarea name="title" id="textbox" class="textbox" required placeholder="example of title: The geometric..." onkeyup="UpdateMathtit(this.value)"></textarea>
                             <br/>
-                            <textarea style="width:49%; height:100px; overflow: auto;" name="title" id="textbox" class="textbox" required placeholder="example of title: The geometric..." onkeyup="UpdateMathtit(this.value)"></textarea>
                             <br/>
-                            <br/>
-                            <div style="float:right; width:49%; height:150px; overflow: auto;">
-                                <div style="font-weight: bold;">
-                                    authors preview:
-                                </div><br/>
-                                <div id="authordiv">
-
-                                </div>
-                            </div>
                             <div style="font-weight: bold;">
                                 *authors:
                             </div>
+                            <textarea name="author" id="textbox" class="textbox" required placeholder="example of author: Mario Rossi, Luca..." onkeyup="UpdateMathaut(this.value)"></textarea>
                             <br/>
-                            <textarea style="width:49%; height:100px; overflow: auto;" name="author" id="textbox" class="textbox" required placeholder="example of author: Mario Rossi, Luca..." onkeyup="UpdateMathaut(this.value)"></textarea>
                             <br/>
-                            <br/>
-                            <div style="float:right; width:49%; height:150px; overflow: auto;">
-                                <div style="font-weight: bold;">
-                                    journal preview:
-                                </div>
-                                <br/>
-                                <div id="journaldiv">
-
-                                </div>
-                            </div>
                             <div style="font-weight: bold;">journal reference:
                             </div>
+                            <textarea name="journal" id="textbox" class="textbox" placeholder="example of Journal: Numer. Linear Algebra..." onkeyup="UpdateMathjou(this.value)"></textarea>
                             <br/>
-                            <textarea style="width:49%; height:100px; overflow: auto;" name="journal" id="textbox" class="textbox" placeholder="example of Journal: Numer. Linear Algebra..." onkeyup="UpdateMathjou(this.value)"></textarea>
                             <br/>
-                            <br/>
-                            <div style="float:right; width:49%; height:150px; overflow: auto;">
-                                <div style="font-weight: bold;">
-                                    comments preview:
-                                </div>
-                                <br/>
-                                <div id="commentsdiv">
-
-                                </div>
-                            </div>
                             <div style="font-weight: bold;">
                                 comments:
                             </div>
+                            <textarea name="comments" id="textbox" class="textbox" placeholder="example of comments: 10 pages..." onkeyup="UpdateMathcom(this.value)"></textarea>
                             <br/>
-                            <textarea style="width:49%; height:100px; overflow: auto;" name="comments" id="textbox" class="textbox" placeholder="example of comments: 10 pages..." onkeyup="UpdateMathcom(this.value)"></textarea>
                             <br/>
-                            <br/>
-                            <div style="float:right; width:49%; height:350px; overflow: auto;">
-                                <div style="font-weight: bold;">
-                                    abstract preview:
-                                </div>
-                                <br/>
-                                <div id="abstractdiv">
-
-                                </div>
-                            </div>
                             <div style="font-weight: bold;">
                                 *abstract:
                             </div>
-                            <br/>
-                            <textarea style="width:49%; height:300px; overflow: auto;" name="abstract" id="textbox" class="textbox" required placeholder="example of abstract: The geometric..." onkeyup="UpdateMathabs(this.value)"></textarea>
+                            <textarea name="abstract" id="textboxabs" class="textbox" required placeholder="example of abstract: The geometric..." onkeyup="UpdateMathabs(this.value)"></textarea>
                             <br/>
                             <br/>
                         </div>
+                        <div id="divpreview">
+                            <div id="divcontpreview">
+                                <div style="font-weight: bold;">
+                                    title preview:
+                                </div>
+                                <div id="titlediv"></div>
+                            </div>
+                            <div id="divcontpreview">
+                                <div style="font-weight: bold;">
+                                    authors preview:
+                                </div>
+                                <div id="authordiv"></div>
+                            </div>
+                            <div id="divcontpreview">
+                                <div style="font-weight: bold;">
+                                    journal preview:
+                                </div>
+                                <div id="journaldiv"></div>
+                            </div>
+                            <div id="divcontpreview">
+                                <div style="font-weight: bold;">
+                                    comments preview:
+                                </div>
+                                <div id="commentsdiv"></div>
+                            </div>
+                            <div id="divcontpreviewabs">
+                                <div style="font-weight: bold;">
+                                    abstract preview:
+                                </div>
+                                <div id="abstractdiv"></div>
+                            </div>
+                        </div>
+                        <div style="clear:both;"></div>
                         <center>
                             <div style="font-weight: bold;">
                                 *PDF:
                                 <br/>
                             </div>
                             <input type="hidden" name="MAX_FILE_SIZE" value="10000000">
-                            <br/>
                             <input type="file" required name="fileToUpload" id="fileToUpload">
                             <br/>
                             <br/>

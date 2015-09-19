@@ -163,7 +163,7 @@
                         Go to arXiv panel&nbsp&nbsp&nbsp
                         <a style="height:17px; color:white;" href="./arXiv_panel.php" id="bottone_keyword" class="bottoni" onclick="return confirmExit()" >Back</a><br/><br/>
                         <a style='color:#007897;' href='http://arxiv.org/' onclick='window.open(this.href);
-                                        return false' title='arXiv'>arXiv.org</a>
+                                return false' title='arXiv'>arXiv.org</a>
                     </center>
                     <hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
                     <?php
@@ -173,9 +173,9 @@
                         ?>
                         <center>
                             <div>
-                                <form name='f2' action='manual_insert.php' method='POST' onsubmit="loading(load);">
+                                <form name='f3' action='manual_insert.php' method='POST' onsubmit="loading(load);">
                                     Get paper informations from arXiv:
-                                    <input type='search' autocomplete = 'on' style='width:175px;' name='id' id='textbox' required class='textbox' placeholder='Insert id(arXiv): 0000.0000' autofocus/> <input type='submit' name='b7' value='Get paper' style='width:70px;' id='bottone_keyword' class='bottoni' ><br/>
+                                    <input type='search' autocomplete = 'on' style='width:175px;' name='id' required class='textbox' placeholder='Insert id(arXiv): 0000.0000' autofocus/> <input type='submit' name='b7' value='Get paper' style='width:70px;' id='bottone_keyword' class='bottoni' ><br/>
                                 </form>
                             </div>
                         </center>
@@ -197,56 +197,97 @@
                         }
                         echo "</div>";
                         if ($id1 == $ris[0] && isset($_POST['b7'])) {
+                            $arcid1 = str_replace("/", "-", $ris[0]);
                             echo "
                 <form name='f1' action='manual_insert.php' method='POST' enctype='multipart/form-data' onclick='myFunction()' onsubmit='loading(load);'>
-                    <div style='margin-left:1%; margin-right:1%;'><div style='float:left; width:100%;'><center><div><br/><h2>paper informations</h2><h1>field with '*' are required</h1><br/><input type='reset' name='reset' value='Reset'><br/><br/></center>
-                    	<div style='font-weight: bold;'>document:</div><br/><div style='float:left; width:49%;'><center><a href=./pdf_downloads/" . $id1 . ".pdf onclick='window.open(this.href);return false' style='color:#007897;' title='" . $ris[0] . "'>PDF</a></center></div>
-			    <br/><br/><div style='font-weight: bold;'>id (not editable):</div><br/>
-                            <textarea readonly style='width:49%;' name='id' id='textbox' class='textbox' placeholder='example of id: 0000.0000v1'>" . $ris[0] . "</textarea><br/><br/>
-                            <div style='font-weight: bold;'>date (not editable):</div><br/>
-                            <textarea readonly style='width:49%;' name='data' id='textbox' class='textbox' placeholder='example of data: 2011-12-30T10:37:35Z'>" . $ris[2] . "</textarea><br/><br/>
-                            <div style='float:right; width:49%;'>
-	    				<div style='font-weight: bold;'>category preview:</div><br/>
-	    				<div id='categorydiv'></div>
-	    			</div>
-                            <div style='font-weight: bold;'>*category:</div><br/>
-                            <textarea style='width:49%;' name='category' id='textbox' class='textbox' required placeholder='example of category: math.NA...' onkeyup='UpdateMathcat(this.value)' maxlength='280'>" . $ris[6] . "</textarea><br/><br/>
-                            <div style='float:right; width:49%;'>
-	    				<div style='font-weight: bold;'>title preview:</div><br/>
-	    				<div id='titlediv'></div>
-	    			</div>
-                            <div style='font-weight: bold;'>*title:</div><br/>
-                            <textarea style='width:49%;' name='title' id='textbox' class='textbox' required placeholder='example of title: The geometric...' autofocus onkeyup='UpdateMathtit(this.value)' maxlength='280'>" . $ris[1] . "</textarea><br/><br/>
-                            <div style='float:right; width:49%;'>
-	    				<div style='font-weight: bold;'>authors preview:</div><br/>
-	    				<div id='authordiv'></div>
-	    			</div>
-                            <div style='font-weight: bold;'>*authors:</div><br/>
-                            <textarea style='width:49%;' name='author' id='textbox' class='textbox' required placeholder='example of author: Mario Rossi, Luca...' onkeyup='UpdateMathaut(this.value)' maxlength='280'>" . $ris[3] . "</textarea><br/><br/>
-                            <div style='float:right; width:49%;'>
-	    				<div style='font-weight: bold;'>journal preview:</div><br/>
-	    				<div id='journaldiv'></div>
-	    			</div>
-                            <div style='font-weight: bold;'>journal reference:</div><br/>
-                            <textarea style='width:49%;' name='journal' id='textbox' class='textbox' placeholder='example of Journal: Numer. Linear Algebra...' onkeyup='UpdateMathjou(this.value)' maxlength='280'>" . $ris[4] . "</textarea><br/><br/>
-                            <div style='float:right; width:49%;'>
-	    				<div style='font-weight: bold;'>comments preview:</div><br/>
-	    				<div id='commentsdiv'></div>
-	    			</div>
-                            <div style='font-weight: bold;'>comments:</div><br/>
-                            <textarea style='width:49%;' name='comments' id='textbox' class='textbox' placeholder='example of comments: 10 pages...' onkeyup='UpdateMathcom(this.value)' maxlength='280'>" . $ris[5] . "</textarea><br/><br/>
-                            <div style='float:right; width:49%;'>
-	    				<div style='font-weight: bold;'>abstract preview:</div><br/>
-	    				<div id='abstractdiv'></div>
-	    			</div>
-                            <div style='font-weight: bold;'>*abstract:</div><br/>
-                            <textarea style='width:49%; height:300px;' name='abstract' id='textbox' class='textbox' required placeholder='example of abstract: The geometric...' onkeyup='UpdateMathabs(this.value)'>" . $ris[7] . "</textarea><br/><br/><center>
-                            <div style='font-weight: bold;'>file to upload:</div>
-                            <input type='hidden' name='MAX_FILE_SIZE' value='10000000'><br/>
-                            <input type='file' name='fileToUpload' id='fileToUpload'><br/><br/><br/>
+                    <center><div><br/><h2>paper informations</h2><h1>field with '*' are required</h1><br/><input type='reset' name='reset' value='Reset'><br/><br/></center>
+                        <div id='divinsertcateg'>
+                        <div style='float:right; width:49%;'><div style='font-weight: bold;'>document:</div><div style='float:right; width:49%;'><a href=./pdf_downloads/" . $arcid1 . ".pdf onclick='window.open(this.href);return false' style='color:#007897;' title='" . $ris[0] . "'>VIEW</a></div></div>
+                        <div style='font-weight: bold;'>id (not editable):</div>
+                                <textarea readonly style='width:49%;' name='id' id='textbox' class='textbox' placeholder='example of id: 0000.0000v1'>" . $ris[0] . "</textarea><br/><br/>
+                                <div style='font-weight: bold;'>date (not editable):</div>
+                                <textarea readonly style='width:49%;' name='data' id='textbox' class='textbox' placeholder='example of data: 2011-12-30T10:37:35Z'>" . $ris[2] . "</textarea>
+                        </div>
+                        <div id='divinsert'>
+                            <div style='font-weight: bold;'>
+                                *category:
+                            </div>
+                            <textarea name='category' id='textbox' class='textbox' required placeholder='example of category: math.NA...' onkeyup='UpdateMathcat(this.value)' >" . $ris[6] . "</textarea>
+                            <br/>
+                            <br/>
+                            <div style='font-weight: bold;'>
+                                *title:
+                            </div>
+                            <textarea name='title' id='textbox' class='textbox' required placeholder='example of title: The geometric...' onkeyup='UpdateMathtit(this.value)'>" . $ris[1] . "</textarea>
+                            <br/>
+                            <br/>
+                            <div style='font-weight: bold;'>
+                                *authors:
+                            </div>
+                            <textarea name='author' id='textbox' class='textbox' required placeholder='example of author: Mario Rossi, Luca...' onkeyup='UpdateMathaut(this.value)'>" . $ris[3] . "</textarea>
+                            <br/>
+                            <br/>
+                            <div style='font-weight: bold;'>journal reference:
+                            </div>
+                            <textarea name='journal' id='textbox' class='textbox' placeholder='example of Journal: Numer. Linear Algebra...' onkeyup='UpdateMathjou(this.value)'>" . $ris[4] . "</textarea>
+                            <br/>
+                            <br/>
+                            <div style='font-weight: bold;'>
+                                comments:
+                            </div>
+                            <textarea name='comments' id='textbox' class='textbox' placeholder='example of comments: 10 pages...' onkeyup='UpdateMathcom(this.value)'>" . $ris[5] . "</textarea>
+                            <br/>
+                            <br/>
+                            <div style='font-weight: bold;'>
+                                *abstract:
+                            </div>
+                            <textarea name='abstract' id='textboxabs' class='textbox' required placeholder='example of abstract: The geometric...' onkeyup='UpdateMathabs(this.value)'>" . $ris[7] . "</textarea>
+                            <br/>
+                            <br/>
+                        </div>
+                        <div id='divpreview'>
+                            <div id='divcontpreview'>
+                                    <div style='font-weight: bold;'>category preview:</div>
+                                    <div id='categorydiv'></div>
+                            </div>
+                            <div id='divcontpreview'>
+                                <div style='font-weight: bold;'>
+                                    title preview:
+                                </div>
+                                <div id='titlediv'></div>
+                            </div>
+                            <div id='divcontpreview'>
+                                <div style='font-weight: bold;'>
+                                    authors preview:
+                                </div>
+                                <div id='authordiv'></div>
+                            </div>
+                            <div id='divcontpreview'>
+                                <div style='font-weight: bold;'>
+                                    journal preview:
+                                </div>
+                                <div id='journaldiv'></div>
+                            </div>
+                            <div id='divcontpreview'>
+                                <div style='font-weight: bold;'>
+                                    comments preview:
+                                </div>
+                                <div id='commentsdiv'></div>
+                            </div>
+                            <div id='divcontpreviewabs'>
+                                <div style='font-weight: bold;'>
+                                    abstract preview:
+                                </div>
+                                <div id='abstractdiv'></div>
+                            </div>
+                        </div>
+                        <div style='clear:both;'></div>                            
+                            <center><div style='font-weight: bold;'>file to upload:</div>
+                            <input type='hidden' name='MAX_FILE_SIZE' value='10000000'>
+                            <input type='file' name='fileToUpload' id='fileToUpload'><br/><br/>
                             <input type='submit' name='b9' value='Remove' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmDelete()'/>
                             <input type='submit' name='b10' value='Insert' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmInsert()'/><br/><br/><br/><br/></center>
-                            </div></div></form>";
+                            </form>";
                             echo "
                             	<script>
 					UpdateMathtit('" . addslashes($ris[1]) . "');
@@ -268,55 +309,89 @@
 				}
 				</script>
 				";
+                            ############################################################################################################
                         } else {
-                            echo "<form name='f2' action='manual_insert.php' method='POST' enctype='multipart/form-data' onclick='myFunction()' onsubmit='loading(load);'>
-                    <div style='margin-left:1%; margin-right:1%;'><div style='float:left; width:100%;'><center><div><br/><h2>paper informations</h2><h1>field with '*' are required</h1><br/><input type='reset' name='reset' value='Reset'/><br/><br/></center>
-                            <div style='font-weight: bold;'>*id:</div><br/>
-                            <textarea style='width:49%;' name='id' id='textbox' class='textbox' required placeholder='example of id: 0000.0000v1' autofocus></textarea><br/><br/>
-                            <div style='font-weight: bold;'>*date:</div><br/>
-                            <textarea style='width:49%;' name='date' id='textbox' class='textbox' required placeholder='example of data: 2011-12-30T10:37:35Z'></textarea><br/><br/>
-                        <div style='float:right; width:49%;'>
-	    				<div style='font-weight: bold;'>category preview:</div><br/>
-	    				<div id='categorydiv'></div>
-	    			</div>
-                            <div style='font-weight: bold;'>*category:</div><br/>
-                            <textarea style='width:49%;' name='category' id='textbox' class='textbox' required placeholder='example of category: math.NA...' onkeyup='UpdateMathcat(this.value)' maxlength='280'>" . $ris[6] . "</textarea><br/><br/>
-                             <div style='float:right; width:49%;'>
-	    				<div style='font-weight: bold;'>title preview:</div><br/>
-	    				<div id='titlediv'></div>
-	    		</div>
-                        <div style='font-weight: bold;'>*title:</div><br/>
-                        <textarea style='width:49%;' name='title' id='textbox' class='textbox' required placeholder='example of title: The geometric...' onkeyup='UpdateMathtit(this.value)' maxlength='280'></textarea><br/><br/>
-                        <div style='float:right; width:49%;'>
-	    				<div style='font-weight: bold;'>authors preview:</div><br/>
-	    				<div id='authordiv'></div>
-	    		</div>
-                        <div style='font-weight: bold;'>*authors:</div><br/>
-                        <textarea style='width:49%;' name='author' id='textbox' class='textbox' required placeholder='example of author: Mario Rossi, Luca...' onkeyup='UpdateMathaut(this.value)' maxlength='280'></textarea><br/><br/>
-                        <div style='float:right; width:49%;'>
-	    				<div style='font-weight: bold;'>journal preview:</div><br/>
-	    				<div id='journaldiv'></div>
-	    		</div>
-                        <div style='font-weight: bold;'>journal reference:</div><br/>
-                        <textarea style='width:49%;' name='journal' id='textbox' class='textbox' placeholder='example of Journal: Numer. Linear Algebra...' onkeyup='UpdateMathjou(this.value)' maxlength='280'></textarea><br/><br/>
-                        <div style='float:right; width:49%;'>
-	    				<div style='font-weight: bold;'>comments preview:</div><br/>
-	    				<div id='commentsdiv'></div>
-	    		</div>
-                        <div style='font-weight: bold;'>comments:</div><br/>
-                        <textarea style='width:49%;' name='comments' id='textbox' class='textbox' placeholder='example of comments: 10 pages...' onkeyup='UpdateMathcom(this.value)' maxlength='280'></textarea><br/><br/>
-                        <div style='float:right; width:49%;'>
-	    				<div style='font-weight: bold;'>abstract preview:</div><br/>
-	    				<div id='abstractdiv'></div>
-	    		</div>
-                        <div style='font-weight: bold;'>*abstract:</div><br/>
-                        <textarea style='width:49%; height:300px;' name='abstract' id='textbox' class='textbox' required placeholder='example of abstract: The geometric...' onkeyup='UpdateMathabs(this.value)'></textarea><br/><br/></div><center>
-                            <div style='font-weight: bold;'>*file to upload:</div>
-                            <input type='hidden' name='MAX_FILE_SIZE' value='10000000'><br/>
-                            <input type='file' required name='fileToUpload' id='fileToUpload'><br/><br/>
-                            <input type='submit' name='b8' value='Insert' style='width:80px;' id='bottone_keyword' class='bottoni' onclick='return confirmInsert()'/><br/><br/></center>
-                            </div></div>
-                            </form><br/><br/>";
+                            echo '<form name="f2" action="manual_insert.php" method="POST" enctype="multipart/form-data" onclick="myFunction()" onsubmit="loading(load);">
+                    <center><div><br/><h2>paper informations</h2><h1>field with "*" are required</h1><br/><input type="reset" name="reset" value="Reset"/><br/></center>
+                        <div id="divinsertcateg">
+                            <div style="font-weight: bold;">*id:</div>
+                            <textarea style="width:49%;" name="id" id="textbox" class="textbox" required placeholder="example of id: 0000.0000v1" autofocus></textarea><br/><br/>
+                            <div style="font-weight: bold;">*date:</div>
+                            <textarea style="width:49%;" name="date" id="textbox" class="textbox" required placeholder="example of data: 2011-12-30T10:37:35Z"></textarea><br/><br/>
+                            <div style="font-weight: bold;">*category:</div>
+                            <textarea style="width:49%;" name="category" id="textbox" class="textbox" required placeholder="example of category: math.NA..." onkeyup="UpdateMathcat(this.value)"></textarea>
+                        </div>
+                        <div id="divinsert">
+                            <div style="font-weight: bold;">
+                                *title:
+                            </div>
+                            <textarea name="title" id="textbox" class="textbox" required placeholder="example of title: The geometric..." onkeyup="UpdateMathtit(this.value)"></textarea>
+                            <br/>
+                            <br/>
+                            <div style="font-weight: bold;">
+                                *authors:
+                            </div>
+                            <textarea name="author" id="textbox" class="textbox" required placeholder="example of author: Mario Rossi, Luca..." onkeyup="UpdateMathaut(this.value)"></textarea>
+                            <br/>
+                            <br/>
+                            <div style="font-weight: bold;">journal reference:
+                            </div>
+                            <textarea name="journal" id="textbox" class="textbox" placeholder="example of Journal: Numer. Linear Algebra..." onkeyup="UpdateMathjou(this.value)"></textarea>
+                            <br/>
+                            <br/>
+                            <div style="font-weight: bold;">
+                                comments:
+                            </div>
+                            <textarea name="comments" id="textbox" class="textbox" placeholder="example of comments: 10 pages..." onkeyup="UpdateMathcom(this.value)"></textarea>
+                            <br/>
+                            <br/>
+                            <div style="font-weight: bold;">
+                                *abstract:
+                            </div>
+                            <textarea name="abstract" id="textboxabs" class="textbox" required placeholder="example of abstract: The geometric..." onkeyup="UpdateMathabs(this.value)"></textarea>
+                            <br/>
+                            <br/>
+                        </div>
+                        <div id="divpreview">
+                            <div id="divcontpreview">
+                                <div style="font-weight: bold;">
+                                    title preview:
+                                </div>
+                                <div id="titlediv"></div>
+                            </div>
+                            <div id="divcontpreview">
+                                <div style="font-weight: bold;">
+                                    authors preview:
+                                </div>
+                                <div id="authordiv"></div>
+                            </div>
+                            <div id="divcontpreview">
+                                <div style="font-weight: bold;">
+                                    journal preview:
+                                </div>
+                                <div id="journaldiv"></div>
+                            </div>
+                            <div id="divcontpreview">
+                                <div style="font-weight: bold;">
+                                    comments preview:
+                                </div>
+                                <div id="commentsdiv"></div>
+                            </div>
+                            <div id="divcontpreviewabs">
+                                <div style="font-weight: bold;">
+                                    abstract preview:
+                                </div>
+                                <div id="abstractdiv"></div>
+                            </div>
+                        </div>
+                        <div style="clear:both;"></div>                            
+                            <center><div style="font-weight: bold;">*file to upload:</div>
+                            <input type="hidden" name="MAX_FILE_SIZE" value="10000000">
+                            <input type="file" required name="fileToUpload" id="fileToUpload"><br/><br/>
+                            <input type="submit" name="b8" value="Insert" style="width:80px;" id="bottone_keyword" class="bottoni" onclick="return confirmInsert()"/><br/><br/></center>
+                            <br/><br/>
+                            </form>';
+                            ############################################################################################################
                         }
                         $target_file = $basedir2 . basename($_FILES["fileToUpload"]["name"]);
                         $type = "document/pdf"; // impostato il tipo per un'pdf
@@ -381,7 +456,7 @@
                             #richiamo della funzione per il versionamento dei preprints
                             version_preprint($info[0]);
                             #richiamo della funzione per inserire le info del preprint all'interno del database
-                            insert_preprints($info);
+                            update_preprints($info);
                             #inserimento del pdf sul database
                             insert_one_pdf2($_POST['id']);
                             #spostamento del file pdf

@@ -139,17 +139,8 @@
                             <br/>
                             <br/>
                             <h2>CHECK PAPER</h2>
-                            <?php
-                            if ($_GET['bb3'] == 1) {
-                                echo "
-                                Go to admin panel&nbsp&nbsp&nbsp
-                                <a style='height:17px; color:white;' href='./modp.php' id='bottone_keyword' class='bottoni' onclick='loading(load);'>Back</a><br/>";
-                            } else {
-                                echo "
-                                Go to arXiv panel&nbsp&nbsp&nbsp
-                                <a style='height:17px; color:white;' href='./arXiv_panel.php' id='bottone_keyword' class='bottoni' onclick='loading(load);'>Back</a><br/>";
-                            }
-                            ?>
+                            Go to admin panel&nbsp&nbsp&nbsp
+                            <a style='height:17px; color:white;' href='./modp.php' id='bottone_keyword' class='bottoni' onclick='loading(load);'>Back</a><br/>
                         </center>
                     </div>
                     <div>

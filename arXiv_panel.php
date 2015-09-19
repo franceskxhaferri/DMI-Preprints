@@ -164,13 +164,7 @@
                                 <tr>
                                     <td align="right">
                                         Insert manually one paper from arXiv&nbsp&nbsp&nbsp</td><td align="center">
-                                        <a style="height:17px; color:white;" href="./manual_insert.php" id="bottone_keyword" class="bottoni" onclick="loading(load);">Insert section</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td align="right">
-                                        Controls the papers recently downloaded&nbsp&nbsp&nbsp</td><td align="center">
-                                        <a style="height:17px; color:white;" href="./check_preprints.php" id="bottone_keyword" class="bottoni" onclick="loading(load);">Check section</a>
+                                        <a style="height:17px; color:white;" href="./manual_insert.php" id="bottone_keyword" class="bottoni" onclick="loading(load);">Enter manually</a>
                                     </td>
                                 </tr>
                                 <tr>

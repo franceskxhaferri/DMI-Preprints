@@ -16,7 +16,7 @@ if (isset($_POST['uid']) && isset($_POST['pw'])) {
         #if (RADIUSAuth($inputUID, $inputPass)) {
             echo "autenticazione OK";
             sec_session_start();
-            if(false){
+            if(true){
             #if ($_POST['uid'] === $mod_uid) {
                 $_SESSION['logged_type'] = "mod";
             } else {
