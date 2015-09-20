@@ -1057,6 +1057,7 @@ function cercapreprint($id) {
         $var[6] = ($row['categoria']);
         $var[7] = ($row['abstract']);
         $var[8] = ($row['uid']);
+        $var[9] = ($row['Filename']);
     }
     mysql_close($db_connection);
     return $var;

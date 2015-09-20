@@ -155,16 +155,16 @@
                     </div>
                     <br/>
                     <center>
-
+                        <br/>
+                        <div>
+                            <?php
+                            print_r("<font style='font-weight: bold;'>Name: </font>");
+                            print_r($_SESSION['nome']);
+                            print_r(" <font style='font-weight: bold;'>Credentials: </font>");
+                            print_r($_SESSION['logged_type']);
+                            ?>
+                        </div>
                         <div id="sticker">
-                            <div style="float:right; margin-right:1%; margin-top:4px;">
-                                <?php
-                                print_r("<font style='font-weight: bold;'>Name: </font>");
-                                print_r($_SESSION['nome']);
-                                print_r(" <font style='font-weight: bold;'>Credentials: </font>");
-                                print_r($_SESSION['logged_type']);
-                                ?>
-                            </div>
                             <div style="float:left; margin-left:1%;">
                                 <form name="f1" action="userp.php" method="POST" onsubmit="loading(load);">
                                     <input style="height:17px; color: red;" type="submit" name="b1" value="Logout" id="bottoni" class="bottoni" onclick="return confirmLogout()">
@@ -203,67 +203,84 @@
                                 <textarea id="textboxcat" name="category2" class="textbox" placeholder="example of category: math.NA..."></textarea>
                             </div>
                         </div>
-                        <div id="divinsert">
-                            <div style="font-weight: bold;">
-                                *title:
+                        <div>
+                            <div id="divinsert">
+                                <div id="divcontinsert">
+                                    *title:<br/>
+                                    <textarea name="title" id="textbox" class="textbox" required placeholder="example of title: The geometric..." onkeyup="UpdateMathtit(this.value)"></textarea>
+                                </div>
                             </div>
-                            <textarea name="title" id="textbox" class="textbox" required placeholder="example of title: The geometric..." onkeyup="UpdateMathtit(this.value)"></textarea>
-                            <br/>
-                            <br/>
-                            <div style="font-weight: bold;">
-                                *authors:
+                            <div id="divpreview">
+                                <div style="font-weight: bold;">
+                                    preview:
+                                </div>
+                                <div id="divcontpreview">
+                                    <div id="titlediv"></div>
+                                </div>
                             </div>
-                            <textarea name="author" id="textbox" class="textbox" required placeholder="example of author: Mario Rossi, Luca..." onkeyup="UpdateMathaut(this.value)"></textarea>
-                            <br/>
-                            <br/>
-                            <div style="font-weight: bold;">journal reference:
-                            </div>
-                            <textarea name="journal" id="textbox" class="textbox" placeholder="example of Journal: Numer. Linear Algebra..." onkeyup="UpdateMathjou(this.value)"></textarea>
-                            <br/>
-                            <br/>
-                            <div style="font-weight: bold;">
-                                comments:
-                            </div>
-                            <textarea name="comments" id="textbox" class="textbox" placeholder="example of comments: 10 pages..." onkeyup="UpdateMathcom(this.value)"></textarea>
-                            <br/>
-                            <br/>
-                            <div style="font-weight: bold;">
-                                *abstract:
-                            </div>
-                            <textarea name="abstract" id="textboxabs" class="textbox" required placeholder="example of abstract: The geometric..." onkeyup="UpdateMathabs(this.value)"></textarea>
-                            <br/>
-                            <br/>
                         </div>
-                        <div id="divpreview">
-                            <div id="divcontpreview">
-                                <div style="font-weight: bold;">
-                                    title preview:
+                        <div>
+                            <div id="divinsert">
+                                <div id="divcontinsert">
+                                    *authors:<br/>
+                                    <textarea name="author" id="textbox" class="textbox" required placeholder="example of author: Mario Rossi, Luca..." onkeyup="UpdateMathaut(this.value)"></textarea>
                                 </div>
-                                <div id="titlediv"></div>
                             </div>
-                            <div id="divcontpreview">
+                            <div id="divpreview">
                                 <div style="font-weight: bold;">
-                                    authors preview:
+                                    preview:
                                 </div>
-                                <div id="authordiv"></div>
+                                <div id="divcontpreview">
+                                    <div id="authordiv"></div>
+                                </div>
                             </div>
-                            <div id="divcontpreview">
-                                <div style="font-weight: bold;">
-                                    journal preview:
+                        </div>
+                        <div>
+                            <div id="divinsert">
+                                <div id="divcontinsert">
+                                    journal reference:<br/>
+                                    <textarea name="journal" id="textbox" class="textbox" placeholder="example of Journal: Numer. Linear Algebra..." onkeyup="UpdateMathjou(this.value)"></textarea>
                                 </div>
-                                <div id="journaldiv"></div>
                             </div>
-                            <div id="divcontpreview">
+                            <div id="divpreview">
                                 <div style="font-weight: bold;">
-                                    comments preview:
+                                    preview:
                                 </div>
-                                <div id="commentsdiv"></div>
+                                <div id="divcontpreview">
+                                    <div id="journaldiv"></div>
+                                </div>
                             </div>
-                            <div id="divcontpreviewabs">
-                                <div style="font-weight: bold;">
-                                    abstract preview:
+                        </div>
+                        <div>
+                            <div id="divinsert">
+                                <div id="divcontinsert">
+                                    comments:<br/>
+                                    <textarea name="comments" id="textbox" class="textbox" placeholder="example of comments: 10 pages..." onkeyup="UpdateMathcom(this.value)"></textarea>
                                 </div>
-                                <div id="abstractdiv"></div>
+                            </div>
+                            <div id="divpreview">
+                                <div style="font-weight: bold;">
+                                    preview:
+                                </div>
+                                <div id="divcontpreview">
+                                    <div id="commentsdiv"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div id="divinsert">
+                                <div id="divcontinsertabs">
+                                    *abstract:<br/>
+                                    <textarea name="abstract" id="textboxabs" class="textbox" required placeholder="example of abstract: The geometric..." onkeyup="UpdateMathabs(this.value)"></textarea>
+                                </div>
+                            </div>
+                            <div id="divpreview">
+                                <div style="font-weight: bold;">
+                                    preview:
+                                </div>
+                                <div id="divcontpreviewabs">
+                                    <div id="abstractdiv"></div>
+                                </div>
                             </div>
                         </div>
                         <div style="clear:both;"></div>
@@ -333,6 +350,13 @@
         </div>
         <br/>
         <br/>
+        <script>
+            UpdateMathtit('Here it will show a preview of what you write on title');
+            UpdateMathjou('Here it will show a preview of what you write on journal reference');
+            UpdateMathcom('Here it will show a preview of what you write on comments');
+            UpdateMathaut('Here it will show a preview of what you write on authors');
+            UpdateMathabs('Here it will show a preview of what you write on abstract');
+        </script>
     <center>
         <div id="load">
             <img src="./images/loader.gif" alt="Loading" style="width: 192px; height: 94px;">

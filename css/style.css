@@ -304,47 +304,55 @@ only screen and (max-width: 760px),
 }
 #textbox{
     width: 100%; 
-    height: 50px; 
+    height: 70px; 
     overflow: auto;
     resize: none;
 }
 #textboxabs{
-    width:100%; 
-    height:300px; 
+    width: 100%; 
+    height: 340px;
     overflow: auto;
     resize: none;
 }
 #divinsert{
     padding: 1%; 
-    float:left; 
-    width:48%;
+    float: left; 
+    width: 48%;
+}
+#divcontinsert{
+    height: 104px;
+    font-weight: bold;
+}
+#divcontinsertabs{
+    height: 369px;
+    font-weight: bold;
 }
 #divinsertcateg{
-    padding:1%;
+    padding: 1%;
     font-weight: bold;
-    width:98%;
+    width: 98%;
 }
 #divpreview{
     padding: 1%;
     float: left;
     width: 48%;
-    height: 170px;
 }
 #divcontpreview{
-    height:100px;
+    height: 80px;
     overflow: auto;
-    border-top: 1px dashed;
+    border: 1px dashed;
     border-color: #ccc;
+    margin-bottom: 3px;
 }
 #divcontpreviewabs{
-    height:300px; 
+    height: 349px; 
     overflow: auto;
-    border-top: 1px dashed;
+    border: 1px dashed;
     border-color: #ccc;
 }
 
 #boxsx{
-    float:left;
+    float: left;
     width: 50%;
     text-align: right;
     margin-right: 5px;
