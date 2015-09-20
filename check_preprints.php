@@ -255,7 +255,7 @@
                                     $percorso2 = $copia . $array[$j];
                                     if (isset($_GET["ch" . $j])) {
                                         $k++;
-                                        if ($j <= $lunghezza) {
+                                        if ($j < $lunghezza) {
                                             $directory2 = $basedir3;
                                             $percorso = $basedir3 . $array[$j];
                                         } else {
@@ -294,11 +294,11 @@
                             #bottone inserisci
                             #inserimento pdf, lettura cartella e ...
                             if (isset($_GET['b2'])) {
-                                for ($j = 0; $j <= $lunghezza2; $j++) {
+                                for ($j = 0; $j < $lunghezza2; $j++) {
                                     $percorso2 = $copia . $array[$j];
                                     if (isset($_GET["ch" . $j])) {
                                         $k++;
-                                        if ($j <= $lunghezza) {
+                                        if ($j < $lunghezza) {
                                             $directory2 = $basedir3;
                                             $percorso = $basedir3 . $array[$j];
                                         } else {
@@ -310,7 +310,7 @@
                                                 while (($file = readdir($directory_handle)) !== false) {
                                                     if ((!is_dir($file)) & ($file != ".") & ($file != "..") & ($file != "index.html")) {
                                                         if ($file == $array[$j]) {
-                                                            if ($j <= $lunghezza) {
+                                                            if ($j < $lunghezza) {
                                                                 $idd = substr($file, 0, -4);
                                                                 #inserimento file nel database
                                                                 insert_one_pdf2($idd);
