@@ -231,36 +231,13 @@ function Checkcath(val) {
         element.style.display = 'none';
 }
 //funzione seleziona tutte checkbox
-checked = false;
-function checkedAll(f1) {
-    var aa = document.getElementById('f1');
-    if (checked == false)
-    {
-        checked = true;
-    }
-    else
-    {
-        checked = false;
-    }
-    for (var i = 0; i < aa.elements.length; i++) {
-        aa.elements[i].checked = checked;
-        evidenziaTr(aa.elements[i]);
-    }
-}
-//funzione seleziona tutte checkbox
-function checkedAll2(f1) {
-    var aa = document.getElementById('f2');
-    if (checked == false)
-    {
-        checked = true;
-    }
-    else
-    {
-        checked = false;
-    }
-    for (var i = 0; i < aa.elements.length; i++) {
-        aa.elements[i].checked = checked;
-        evidenziaTr(aa.elements[i]);
+function toggle(source) {
+    var aInputs = document.getElementsByTagName('input');
+    for (var i = 0; i < aInputs.length; i++) {
+        if (aInputs[i] != source && aInputs[i].className == source.className) {
+            aInputs[i].checked = source.checked;
+            evidenziaTr(aInputs[i]);
+        }
     }
 }
 //evidenzia elementi selezionati

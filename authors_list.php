@@ -169,12 +169,16 @@
                             $nomi = legginomi();
                             #conto lunghezza array
                             $lunghezza = count($nomi);
-                            echo "<form name='f4' action='authors_list.php' id='f1' method='POST' onsubmit='loading(load);'><center><table id='table' style='width:25%;'>";
-                            echo "<tr id='th'><td id='tdh'><label><input type='checkbox' name='checkall' onclick='checkedAll(f1);'/>N&deg;:</label></td><td id='tdh' align='center'>NAME:</td></tr>";
+                            echo "<form name='f1' action='authors_list.php' id='f1' method='POST' onsubmit='loading(load);'><center><table id='table' style='width:25%;'>";
+                            echo "<tr id='th'>"
+                            . "<td id='tdh'><label><input type='checkbox' class='checkall1' name='all1' onChange='toggle(this)'/>N&deg;:</label></td>"
+                            . "<td id='tdh' align='center'>NAME:</td></tr>";
                             #creazione della tabella html dei file all'interno di pdf_downloads
                             $y = 1;
                             for ($i = 0; $i < $lunghezza; $i++) {
-                                echo "<tr id='th'><td id='td'><label><input type='checkbox' name='" . $i . "' value='checked'/>$y.</label></td><td id='td'>" . $nomi[$i] . "</td></tr>";
+                                echo "<tr id='th'>"
+                                . "<td id='td'><label><input type='checkbox' name='" . $i . "' value='checked' class='checkall1'/>$y.</label></td>"
+                                . "<td id='td'>" . $nomi[$i] . "</td></tr>";
                                 $y++;
                             }
                             echo "</table></center><br/><center><input type='submit' style='width:100px;' id='bottone_keyword' class='bottoni' name='b3' value='Remove' onclick='return confirmDelete4()'></center></form>";
