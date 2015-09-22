@@ -165,7 +165,8 @@
                         if (!isset($_GET['id'])) {
                             echo "<center><br/><a style='color:#007897;' href='./view_preprints.php' onclick='window.open(this.href); return false' title='Go to preprints list'>View from inserted papers</a></center>";
                             echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
-                            echo " <center><div><form name='f2' action='manual_edit.php' method='POST' onsubmit='loading(load);'>Insert id of publication: <input type='search' autocomplete = 'on' style='width:200px;' name='id' required class='textbox' placeholder='example of id: 0000.0000v1' autofocus/> <input type='submit' name='bottoni8' value='Get paper' style='width:70px;' id='bottone_keyword' class='bottoni'/><br/>
+                            echo " <center><div><form name='f2' action='manual_edit.php' method='POST' onsubmit='loading(load);'>Insert id of publication: <input type='search' autocomplete = 'on' style='width:200px;' name='id' required class='textbox' placeholder='example of id: 0000.0000v1'/>
+                                <input type='submit' name='bottoni8' value='Get paper' style='width:70px;' id='bottone_keyword' class='bottoni'/><br/>
 		               </form></div></center>
 		               ";
                             $var = False;
@@ -318,22 +319,22 @@
                             </div>
                         </div>
                         <div style='clear:both;'></div>
-
                             <center><div style='font-weight: bold;'>file to upload:</div>
                             <input type='hidden' name='MAX_FILE_SIZE' value='10000000'>
                             <input type='file' name='fileToUpload' id='fileToUpload'><br/><br/>
                            <input type='submit' name='bottoni9' value='Remove' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmDelete()'/>
-                            <input type='submit' name='bottoni10' value='Complete' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmInsert()'/><br/><br/><br/><br/></center>
+                            <input type='submit' name='bottoni10' value='Complete' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmInsert()'/></center>
                             </form>";
-                            echo "
-                            	<script>
-					UpdateMathtit('" . addslashes($ris[1]) . "');
-					UpdateMathjou('" . addslashes($ris[4]) . "');
-					UpdateMathcom('" . addslashes($ris[5]) . "');
-					UpdateMathcat('" . addslashes($ris[6]) . "');
-					UpdateMathaut('" . addslashes($ris[3]) . "');
-					UpdateMathabs('" . addslashes($ris[7]) . "');
-				</script>";
+                            $ris[1] = str_replace("<br />", "", $ris[1]);
+                            $ris[1] = str_replace("\n", "", $ris[1]);
+                            $ris[7] = str_replace("<br />", "", $ris[7]);
+                            $ris[7] = str_replace("\n", "", $ris[7]);
+                            echo "<script type='text/javascript'>UpdateMathcat('" . $ris[6] . "')</script>
+				    <script type='text/javascript'>UpdateMathtit('" . $ris[1] . "')</script>
+				    <script type='text/javascript'>UpdateMathaut('" . $ris[3] . "')</script>
+				    <script type='text/javascript'>UpdateMathjou('" . $ris[4] . "')</script>
+				    <script type='text/javascript'>UpdateMathcom('" . $ris[5] . "')</script>
+				    <script type='text/javascript'>UpdateMathabs('" . $ris[7] . "')</script>";
 #importazione variabili globali
                             include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
                             $target_file = $basedir2 . basename($_FILES["fileToUpload"]["name"]);

@@ -163,6 +163,7 @@
                             print_r($_SESSION['logged_type']);
                             ?>
                         </div>
+                        <hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>
                         <div id="sticker">
                             <div style="margin-left:1%;">
                                 <form name="f1" action="modp.php" method="POST" onsubmit="loading(load);">
@@ -186,7 +187,6 @@
                     <hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
                     <form name="f3" action="modp.php" method="POST" enctype="multipart/form-data" onsubmit="loading(load);">
                         <center>
-                            <br/>
                             <h2>Insert new paper</h2>
                             <h1>field with "*" are required</h1>
                             <br/>
@@ -300,8 +300,7 @@
                             <br/>
                             <br/>
                             <input type="submit" name="b3" value="Insert paper" style='width:80px;' id='bottone_keyword' class='bottoni' onclick="return confirmInsert()">
-                            <br/>
-                            <br/>
+                            <hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>
                         </center>
                     </form>
                     <?php
@@ -353,7 +352,6 @@
             }
             ?>
         </div>
-        <br/>
         <br/>
         <script>
             UpdateMathtit('Here it will show a preview of what you write on title');

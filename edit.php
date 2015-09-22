@@ -203,7 +203,7 @@
 				}
 			</script>
                 <form name='f1' action='edit.php?r=" . $_GET['r'] . "' method='POST' enctype='multipart/form-data' onsubmit='loading(load);'>
-                    <center><br/><h2>Publication informations</h2><h1>field with '*' are required</h1><br/><input type='reset' name='reset' value='Reset'><br/><br/></center>
+                    <center><h2>Publication informations</h2><h1>field with '*' are required</h1><br/><input type='reset' name='reset' value='Reset'><br/><br/></center>
                             <div id='divinsertcateg'>
                             <div style='float:right; width:49%;'>
                                 <div style='font-weight: bold;'>
@@ -325,17 +325,18 @@
                             <input type='file' name='fileToUpload' id='fileToUpload'><br/>
                             <br/><input type='submit' name='b9' value='Remove' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmDelete2()'/>
                             <input type='submit' name='b10' value='Upgrade' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmUpgrade()'/>
-                            <input type='submit' name='b11' value='Update' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmInsert2()'/><br/><br/></center>
+                            <input type='submit' name='b11' value='Update' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmInsert2()'/></center>
                             </form>";
-                        echo "
-                            	<script>
-					UpdateMathtit('" . addslashes($ris[1]) . "');
-					UpdateMathjou('" . addslashes($ris[4]) . "');
-					UpdateMathcom('" . addslashes($ris[5]) . "');
-					UpdateMathcat('" . addslashes($ris[6]) . "');
-					UpdateMathaut('" . addslashes($ris[3]) . "');
-					UpdateMathabs('" . addslashes($ris[7]) . "');
-				</script>";
+                        $ris[1] = str_replace("<br />", "", $ris[1]);
+                        $ris[1] = str_replace("\n", "", $ris[1]);
+                        $ris[7] = str_replace("<br />", "", $ris[7]);
+                        $ris[7] = str_replace("\n", "", $ris[7]);
+                        echo "<script type='text/javascript'>UpdateMathcat('" . $ris[6] . "')</script>
+				    <script type='text/javascript'>UpdateMathtit('" . $ris[1] . "')</script>
+				    <script type='text/javascript'>UpdateMathaut('" . $ris[3] . "')</script>
+				    <script type='text/javascript'>UpdateMathjou('" . $ris[4] . "')</script>
+				    <script type='text/javascript'>UpdateMathcom('" . $ris[5] . "')</script>
+				    <script type='text/javascript'>UpdateMathabs('" . $ris[7] . "')</script>";
                         $target_file = $basedir . basename($_FILES["fileToUpload"]["name"]);
                         #bottone cancella
                         if (isset($_POST['b9'])) {

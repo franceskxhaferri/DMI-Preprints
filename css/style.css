@@ -254,10 +254,17 @@ only screen and (max-width: 760px),
 #table{
     width: 90%;
     border:1px solid #ccc;
+    margin-left: -5%;
 }
 
 #table1{
+    margin-right: -5%;
     width: 90%;
+    border:1px solid #ccc;
+}
+
+#table3{
+    width: 25%;
     border:1px solid #ccc;
 }
 

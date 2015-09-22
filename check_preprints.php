@@ -153,7 +153,7 @@
                         if (sessioneavviata() == True) {
                             echo "<center><br/>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE LIST CAN'T BE CHANGED IN THIS MOMENT!</center><br/>";
                         } else {
-                            echo "<div><hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'></div>";
+                            echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
 ####################################################################################################################################################################
                             #arxiv papers
                             #leggere cartella...
@@ -238,6 +238,7 @@
                                     }
                                     echo "</table></div>"
                                     . "<div style='clear:both;'><br/>"
+                                    . "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>"
                                     . "<input type='submit' name='b1' value='Remove' style='width:100px;' id='bottone_keyword' class='bottoni' onclick='return confirmDelete3()'>"
                                     . "<input type='submit' name='b2' value='Insert' style='width:100px;' id='bottone_keyword' class='bottoni' onclick='return confirmInsert3()'>"
                                     . "</div></center></form>";

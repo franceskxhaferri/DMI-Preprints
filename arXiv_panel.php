@@ -162,6 +162,12 @@
                                 <a style="text-align: center; color:white;" href="./manual_insert.php" id="bottone_keyword" class="bottoni" onclick="loading(load);">Enter manually</a>
                             </div>
                             <div id="boxsx">
+                                approve papers
+                            </div>
+                            <div id="boxdx">
+                                <a style="text-align: center; color:white;" href="./check_preprints.php" id="bottone_keyword" class="bottoni" onclick="loading(load);">Check section</a>
+                            </div>
+                            <div id="boxsx">
                                 Search for new papers
                             </div>
                             <div id="boxdx">

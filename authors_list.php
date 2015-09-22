@@ -169,7 +169,8 @@
                             $nomi = legginomi();
                             #conto lunghezza array
                             $lunghezza = count($nomi);
-                            echo "<form name='f1' action='authors_list.php' id='f1' method='POST' onsubmit='loading(load);'><center><table id='table' style='width:25%;'>";
+                            echo "<form name='f1' action='authors_list.php' id='f1' method='POST' onsubmit='loading(load);'>
+                            <center><table id='table' style='width:25%; margin-left: 0%;'>";
                             echo "<tr id='th'>"
                             . "<td id='tdh'><label><input type='checkbox' class='checkall1' name='all1' onChange='toggle(this)'/>N&deg;:</label></td>"
                             . "<td id='tdh' align='center'>NAME:</td></tr>";
@@ -181,7 +182,8 @@
                                 . "<td id='td'>" . $nomi[$i] . "</td></tr>";
                                 $y++;
                             }
-                            echo "</table></center><br/><center><input type='submit' style='width:100px;' id='bottone_keyword' class='bottoni' name='b3' value='Remove' onclick='return confirmDelete4()'></center></form>";
+                            echo "</table></center><center><hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>"
+                            . "<input type='submit' style='width:100px;' id='bottone_keyword' class='bottoni' name='b3' value='Remove' onclick='return confirmDelete4()'></center></form>";
                             if ($lunghezza == 0) {
                                 #richiamo funzione per corretto update successivo
                                 aggiornanomi();
@@ -253,8 +255,6 @@
                 ?>
             </div>
         </div>
-        <br/>
-        <br/>
     <center>
         <div id="load">
             <img src="./images/loader.gif" alt="Loading" style="width: 192px; height: 94px;">

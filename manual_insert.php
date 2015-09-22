@@ -175,7 +175,7 @@
                             <div>
                                 <form name='f3' action='manual_insert.php' method='POST' onsubmit="loading(load);">
                                     Get paper informations from arXiv:
-                                    <input type='search' autocomplete = 'on' style='width:175px;' name='id' required class='textbox' placeholder='Insert id(arXiv): 0000.0000' autofocus/> <input type='submit' name='b7' value='Get paper' style='width:70px;' id='bottone_keyword' class='bottoni' ><br/>
+                                    <input type='search' autocomplete = 'on' style='width:175px;' name='id' required class='textbox' placeholder='Insert id(arXiv): 0000.0000'/> <input type='submit' name='b7' value='Get paper' style='width:70px;' id='bottone_keyword' class='bottoni' ><br/>
                                 </form>
                             </div>
                         </center>
@@ -197,12 +197,13 @@
                         }
                         echo "</div>";
                         if ($id1 == $ris[0] && isset($_POST['b7'])) {
+                            $arcid1 = str_replace("/", "-", $id1);
                             #inserimento mediante arxiv
                             echo "
                 <form name='f1' action='manual_insert.php' method='POST' enctype='multipart/form-data' onclick='myFunction()' onsubmit='loading(load);'>
-                    <center><div><br/><h2>paper informations</h2><h1>field with '*' are required</h1><br/><input type='reset' name='reset' value='Reset'><br/><br/></center>
+                    <center><div><h2>paper informations</h2><h1>field with '*' are required</h1><br/><input type='reset' name='reset' value='Reset'><br/><br/></center>
                         <div id='divinsertcateg'>
-                        <div style='float:right; width:49%;'><div style='font-weight: bold;'>document:</div><div style='float:right; width:49%;'><a href=./pdf_downloads/" . $ris[9] . " onclick='window.open(this.href);return false' style='color:#007897;' title='" . $ris[9] . "'>VIEW</a></div></div>
+                        <div style='float:right; width:49%;'><div style='font-weight: bold;'>document:</div><div style='float:right; width:49%;'><a href=./pdf_downloads/" . $arcid1 . ".pdf onclick='window.open(this.href);return false' style='color:#007897;' title='" . $arcid1 . ".pdf'>VIEW</a></div></div>
                         <div style='font-weight: bold;'>
                             id(not editable):
                         </div>
@@ -313,16 +314,10 @@
                             <input type='hidden' name='MAX_FILE_SIZE' value='10000000'>
                             <input type='file' name='fileToUpload' id='fileToUpload'><br/><br/>
                             <input type='submit' name='b9' value='Remove' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmDelete()'/>
-                            <input type='submit' name='b10' value='Insert' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmInsert()'/><br/><br/><br/><br/></center>
+                            <input type='submit' name='b10' value='Insert' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmInsert()'/></center>
                             </form>";
                             echo "
                             	<script type='text/javascript'>
-					UpdateMathtit('" . addslashes($ris[1]) . "');
-					UpdateMathjou('" . addslashes($ris[4]) . "');
-					UpdateMathcom('" . addslashes($ris[5]) . "');
-					UpdateMathcat('" . addslashes($ris[6]) . "');
-					UpdateMathaut('" . addslashes($ris[3]) . "');
-					UpdateMathabs('" . addslashes($ris[7]) . "');
                                         function confirmExit(){
                                             var x = confirm('All unsaved changes will be lost, it will be moved to check section, continue?');
                                             if (x) {
@@ -334,11 +329,21 @@
                                         }
 				</script>
 				";
+                            $ris[1] = str_replace("<br />", "", $ris[1]);
+                            $ris[1] = str_replace("\n", "", $ris[1]);
+                            $ris[7] = str_replace("<br />", "", $ris[7]);
+                            $ris[7] = str_replace("\n", "", $ris[7]);
+                            echo "<script type='text/javascript'>UpdateMathcat('" . $ris[6] . "')</script>
+				    <script type='text/javascript'>UpdateMathtit('" . $ris[1] . "')</script>
+				    <script type='text/javascript'>UpdateMathaut('" . $ris[3] . "')</script>
+				    <script type='text/javascript'>UpdateMathjou('" . $ris[4] . "')</script>
+				    <script type='text/javascript'>UpdateMathcom('" . $ris[5] . "')</script>
+				    <script type='text/javascript'>UpdateMathabs('" . $ris[7] . "')</script>";
                             ############################################################################################################
                         } else {
                             #inserimento manuale
                             echo "<form name='f2' action='manual_insert.php' method='POST' enctype='multipart/form-data' onclick='myFunction()' onsubmit='loading(load);'>
-                            <center><div><br/><h2>paper informations</h2><h1>field with '*' are required</h1><br/><input type='reset' name='reset' value='Reset'/><br/></center>
+                            <center><div><h2>paper informations</h2><h1>field with '*' are required</h1><br/><input type='reset' name='reset' value='Reset'/><br/></center>
                         <div id='divinsertcateg'>
                             <div style='font-weight: bold;'>*id:</div>
                             <textarea style='width:49%;' name='id' id='textbox' class='textbox' required placeholder='example of id: 0000.0000v1' autofocus></textarea><br/><br/>
@@ -445,9 +450,16 @@
                             <center><div style='font-weight: bold;'>*file to upload:</div>
                             <input type='hidden' name='MAX_FILE_SIZE' value='10000000'>
                             <input type='file' required name='fileToUpload' id='fileToUpload'><br/><br/>
-                            <input type='submit' name='b8' value='Insert' style='width:80px;' id='bottone_keyword' class='bottoni' onclick='return confirmInsert()'/><br/><br/></center>
-                            <br/><br/>
-                            </form>";
+                            <input type='submit' name='b8' value='Insert' style='width:80px;' id='bottone_keyword' class='bottoni' onclick='return confirmInsert()'/></center>
+                            </form>
+                        <script>
+                            UpdateMathcat('Here it will show a preview of what you write on category');
+			    UpdateMathtit('Here it will show a preview of what you write on title');
+			    UpdateMathjou('Here it will show a preview of what you write on journal reference');
+			    UpdateMathcom('Here it will show a preview of what you write on comments');
+			    UpdateMathaut('Here it will show a preview of what you write on authors');
+			    UpdateMathabs('Here it will show a preview of what you write on abstract');
+			</script>";
                             ############################################################################################################
                         }
                         $target_file = $basedir2 . basename($_FILES["fileToUpload"]["name"]);
@@ -546,6 +558,7 @@
             }
             ?>
         </div>
+        <hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
         <br/>
     <center>
         <div id="load">

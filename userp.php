@@ -180,7 +180,6 @@
                     <hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
                     <form name="f3" action="userp.php" method="POST" enctype="multipart/form-data" onsubmit="loading(load);">
                         <center>
-                            <br/>
                             <h2>Insert new paper</h2>
                             <h1>field with "*" are required</h1>
                             <br/>
