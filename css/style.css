@@ -206,10 +206,6 @@ a:visited{
 
 tr.on {background-color:#D4D4D4}
 
-#nomi:hover{
-    background-color: #D9D9D9;
-}
-
 /*
 Questa query aggiunge del CSS per tutti gli schermi con
 una risoluzione inferiore a 760px
@@ -250,7 +246,7 @@ only screen and (max-width: 760px),
         white-space: nowrap;
     }
 }
-
+/* css tabelle*/
 #table{
     width: 90%;
     border:1px solid #ccc;
@@ -268,19 +264,6 @@ only screen and (max-width: 760px),
     border:1px solid #ccc;
 }
 
-#th{
-    padding:5px;
-    border-left:1px solid #ccc;
-    border-top:1px solid #ccc; 
-}
-
-#thhead{
-    padding:5px;
-    border-left:1px solid #ccc;
-    border-top:1px solid #ccc; 
-    background:#D4D4D4;
-}
-
 #td{
     padding:5px;
     border-left:1px solid #ccc;
@@ -293,7 +276,7 @@ only screen and (max-width: 760px),
     border-top:1px solid #ccc;
     background:#D4D4D4;
 }
-
+/*div di inserimento*/
 #arxivpreprints{
     float: right;
     width: 50%;
@@ -327,11 +310,11 @@ only screen and (max-width: 760px),
     width: 48%;
 }
 #divcontinsert{
-    height: 104px;
+    height: 75px;
     font-weight: bold;
 }
 #divcontinsertabs{
-    height: 369px;
+    height: 370px;
     font-weight: bold;
 }
 #divinsertcateg{
@@ -339,21 +322,22 @@ only screen and (max-width: 760px),
     font-weight: bold;
     width: 98%;
 }
+/*div per la preview*/
 #divpreview{
     padding: 1%;
     float: left;
     width: 48%;
 }
 #divcontpreview{
-    height: 80px;
+    height: 75px;
     overflow: auto;
     border: 1px dashed;
     border-color: #ccc;
-    margin-bottom: 3px;
 }
 #divcontpreviewabs{
-    height: 349px; 
+    height: 340px; 
     overflow: auto;
+    padding: 2px;
     border: 1px dashed;
     border-color: #ccc;
 }
@@ -363,7 +347,7 @@ only screen and (max-width: 760px),
     width: 50%;
     text-align: right;
     margin-right: 5px;
-    margin-top: 5px;
+    margin-top: 3px;
 }
 
 boxdx{
@@ -371,7 +355,6 @@ boxdx{
     width: 50%;
     margin-left:-50%;
 }
-/* Reusable */
 
 article.blog-post {
     position: relative;
@@ -418,20 +401,91 @@ ul.link-list li:first-child {
     border-top: 0;
 }
 
-.button {
+.selector {
+    height: 17pt;
+    font-family: Lucida Grande, Helvetica, Arial, sans-serif;
     display: inline-block;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 10px;
-    padding-right: 10px;
-    margin-left: 2px;
-    margin-right: 2px;
-    background-color: #D4D4D4;
+    background-color: #D0D0D0;
     text-decoration: none;
-    border: solid 1px #bbb;
+    border: solid 1px;
+    border-color: #AAAAAA;
     font-size: 12pt;
+    border-radius: 2px;
+    color:#3C3C3C;
+    box-shadow: 0px 0px 1px #d9d9d9; 
+}
+
+.button {
+    height: 14pt;
+    font-family: Lucida Grande, Helvetica, Arial, sans-serif;
+    display: inline-block;
+    margin: 1px;
+    padding: 2px 2px 2px 2px;
+    background-color: #D0D0D0;
+    text-decoration: none;
+    border: solid 1px;
+    border-color: #AAAAAA;
+    font-size: 10.5pt;
+    border-radius: 2px;
+    color:#3C3C3C;
+    font-weight: bold;
+    box-shadow: 0px 0px 1px #d9d9d9; 
 }
 
 .button:hover {
-    background-color: #aaa;
+    background-color: #C4C4C4;
+    cursor: pointer; 
+}
+
+.button:active {
+    background-color: #6bc1f7;
+}
+
+.buttonlink {
+    height: 14pt;
+    font-family: Lucida Grande, Helvetica, Arial, sans-serif;
+    display: inline-block;
+    margin: 1px;
+    padding: 2px 2px 2px 2px;
+    background-color: #D0D0D0;
+    text-decoration: none;
+    border: solid 1px;
+    border-color: #AAAAAA;
+    font-size: 10.5pt;
+    border-radius: 2px;
+    color:#3C3C3C;
+    text-align: center;
+    width: 110px;
+    font-weight: bold;
+    box-shadow: 0px 0px 1px #d9d9d9; 
+}
+
+.buttonlink:hover {
+    background-color: #C4C4C4;
+    cursor: pointer; 
+}
+
+.buttonlink:active {
+    background-color: #6bc1f7;
+}
+
+.textbox { 
+    border: 1px solid #c4c4c4;
+    font-size: 11pt;
+    padding: 2px 2px 2px 2px; 
+    border-radius: 2px; 
+    -moz-border-radius: 2px; 
+    -webkit-border-radius: 2px; 
+    box-shadow: 0px 0px 1px #d9d9d9; 
+    -moz-box-shadow: 0px 0px 1px #d9d9d9; 
+    -webkit-box-shadow: 0px 0px 1px #d9d9d9;
+    width: 150px;
+} 
+
+.textbox:focus { 
+    outline: none; 
+    border: 1px solid #7bc1f7; 
+    box-shadow: 0px 0px 1px #7bc1f7; 
+    -moz-box-shadow: 0px 0px 1px #7bc1f7; 
+    -webkit-box-shadow: 0px 0px 1px #7bc1f7;
 }

@@ -139,15 +139,15 @@
                             <br/>
                             <h2>AUTHORS LIST</h2>
                             Go to arXiv panel 
-                            <a style="height:17px; color:white;" href="./arXiv_panel.php" id="bottone_keyword" class="bottoni" onclick="loading(load);">Back</a><br>
+                            <a style="color:#3C3C3C;" href="./arXiv_panel.php" id="bottone_keyword" class="button" onclick="loading(load);">Back</a><br>
                             <hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
                             <form name="f2" action="authors_list.php" method="POST">
                                 <label>
                                     <input type="checkbox" name="insert" value="1" checked/>
                                     Add author to list or search by name:
                                 </label>
-                                <input type="search" style="width:300px; height:17px;" id='textbox' class='textbox' autocomplete = "on" required name="txt1" placeholder="name1, name2, name3, name..." autofocus />
-                                <input type="submit" name="b2" value="Insert/Search" style="width:100px;" id="bottone_keyword" class="bottoni"/>
+                                <input type="search" style="width:300px; height: 14pt;" id='textbox' class='textbox' autocomplete = "on" required name="txt1" placeholder="name1, name2, name3, name..." autofocus />
+                                <input type="submit" name="b2" value="Insert/Search" id="bottone_keyword" class="button"/>
                             </form>
                         </center>
                     </div>
@@ -183,7 +183,7 @@
                                 $y++;
                             }
                             echo "</table></center><center><hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>"
-                            . "<input type='submit' style='width:100px;' id='bottone_keyword' class='bottoni' name='b3' value='Remove' onclick='return confirmDelete4()'></center></form>";
+                            . "<input type='submit' id='bottone_keyword' class='button' name='b3' value='Remove' onclick='return confirmDelete4()'></center></form>";
                             if ($lunghezza == 0) {
                                 #richiamo funzione per corretto update successivo
                                 aggiornanomi();

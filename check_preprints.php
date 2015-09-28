@@ -140,7 +140,7 @@
                             <br/>
                             <h2>CHECK PAPER</h2>
                             Go to admin panel&nbsp&nbsp&nbsp
-                            <a style='height:17px; color:white;' href='./modp.php' id='bottone_keyword' class='bottoni' onclick='loading(load);'>Back</a><br/>
+                            <a style='color:#3C3C3C;' href='./modp.php' id='bottone_keyword' class='button' onclick='loading(load);'>Back</a><br/>
                         </center>
                     </div>
                     <div>
@@ -239,8 +239,8 @@
                                     echo "</table></div>"
                                     . "<div style='clear:both;'><br/>"
                                     . "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>"
-                                    . "<input type='submit' name='b1' value='Remove' style='width:100px;' id='bottone_keyword' class='bottoni' onclick='return confirmDelete3()'>"
-                                    . "<input type='submit' name='b2' value='Insert' style='width:100px;' id='bottone_keyword' class='bottoni' onclick='return confirmInsert3()'>"
+                                    . "<input type='submit' name='b1' value='Remove' style='width:70px;' id='bottone_keyword' class='button' onclick='return confirmDelete3()'>"
+                                    . "<input type='submit' name='b2' value='Insert' style='width:70px;' id='bottone_keyword' class='button' onclick='return confirmInsert3()'>"
                                     . "</div></center></form>";
                                     #Chiudo la lettura della directory.
                                     closedir($directory_handle);

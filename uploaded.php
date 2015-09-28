@@ -157,7 +157,7 @@
                     <center>
                         <div>
                             <br/><br/>
-                            Go back to new insertion: <a style="color:white;" href="<?php echo $ind; ?>" id="bottoni" class="bottoni" onclick="loading(load);">Back</a>
+                            Go back to new insertion: <a style="color:#3C3C3C;" href="<?php echo $ind; ?>" id="bottoni" class="button" onclick="loading(load);">Back</a>
                         </div>
                         <?php
                         #lettura preprint caricati

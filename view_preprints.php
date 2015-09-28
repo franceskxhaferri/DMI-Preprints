@@ -13,8 +13,6 @@
         <link rel="stylesheet" href="css/style-desktop.css" />
         </noscript>
         <link rel="stylesheet" href="css/main.css" />
-        <link rel="stylesheet" type="text/css" href="css/tabelle.css">
-        <link rel="stylesheet" type="text/css" href="css/controlli.css">
         <script src="js/targetweb-modal-overlay.js"></script>
         <link href='css/targetweb-modal-overlay.css' rel='stylesheet' type='text/css'>
         <!--[if lte IE 9]><link rel="stylesheet" href="css/ie9.css" /><![endif]-->
@@ -123,31 +121,31 @@
             <form name='f1' action='view_preprints.php' method='GET' onsubmit='loading(load);'>
                 <div style='float:right; width:100%;'>
                     To see <a style='color:#007897;' href='archived_preprints.php' onclick='window.open(this.href);
-                            return false'>archived</a> (old publications) &nbsp&nbsp&nbsp&nbsp
-                    <input type='button' value='Display Options' onclick='javascript:showHide3(adv,adv2,opt)';>&nbsp
-                    <input type='button' value='Search Options' onclick='javascript:showHide4(adv,adv2,opt);'>&nbsp&nbsp&nbsp&nbsp
+                            return false'>archived</a> (old publications)
+                    <input type='button' value='Display Options' onclick='javascript:showHide3(adv,adv2,opt)'; class='button'>
+                    <input type='button' value='Search Options' onclick='javascript:showHide4(adv,adv2,opt);' class='button'>
                     Filter results by
-                    <select name='f'>
+                    <select name='f' class='selector'>
                         <option value='all' selected='selected'>All papers:</option>
                         <option value='author'>Authors:</option>
                         <option value='category'>Category:</option>
                         <option value='year'>Year:</option>
                         <option value='id'>ID:</option>
                     </select>
-                    <input type='search' autocomplete = 'on' style='width:33%;' name='r' placeholder='Author name, id of publication, year of publication, etc.' value='" . $_GET['r'] . "'>
-                        <input type='submit' name='s' value='Send'>
+                    <input type='search' autocomplete = 'on' style='width:33%; height: 19px;' class='textbox' name='r' placeholder='Author name, id of publication, year of publication, etc.' value='" . $_GET['r'] . "'>
+                        <input type='submit' name='s' value='Send' class='button'>
                 </div>
                 <div style='clear:both;'></div>
                 <div id='adv' hidden=''>
                         Reset selections: 
-                        <input type='reset' name='reset' value='Reset'>&nbsp&nbsp
+                        <input type='reset' name='reset' value='Reset' class='button'>&nbsp&nbsp
                         Years restrictions: 
                         until 
-                        <input type='text' name='year1' style='width:35px' placeholder='Last'>
+                        <input type='text' name='year1' style='width:35px' placeholder='Last' class='textbox'>
                         , or from 
-                        <input type='text' name='year2' style='width:35px' placeholder='First'>
+                        <input type='text' name='year2' style='width:35px' placeholder='First' class='textbox'>
                         to 
-                        <input type='text' name='year3' style='width:35px' placeholder='Last'>
+                        <input type='text' name='year3' style='width:35px' placeholder='Last' class='textbox'>
                         &nbsp&nbspResults for page: 
                         <select name='rp'>
                             <option value='5' selected='selected'>5</option>
@@ -158,19 +156,19 @@
                             <option value='50'>50</option>
                         </select>
                         &nbsp&nbspGo to page:
-                        <input type='text' name='p' style='width:25px' placeholder='n&#176;'>
+                        <input type='text' name='p' style='width:25px' placeholder='n&#176;' class='textbox'>
                         <br/>
                         Search on:
-                        <label><input type='checkbox' name='d' value='1'>Archived</label>
-                        <label><input type='checkbox' name='all' value='1'>Record</label>
-                        <label><input type='checkbox' name='h' value='1'>Author</label>
-                        <label><input type='checkbox' name='t' value='1'>Title</label>
-                        <label><input type='checkbox' name='a' value='1'>Abstract</label>
-                        <label><input type='checkbox' name='e' value='1'>Date</label>
-                        <label><input type='checkbox' name='y' value='1'>Category</label>
-                        <label><input type='checkbox' name='c' value='1'>Comments</label>
-                        <label><input type='checkbox' name='j' value='1'>Journal-ref</label>
-                        <label><input type='checkbox' name='i' value='1'>ID</label>
+                        <label><input type='checkbox' name='d' value='1' class='checkbox'>Archived</label>
+                        <label><input type='checkbox' name='all' value='1' class='checkbox'>Record</label>
+                        <label><input type='checkbox' name='h' value='1' class='checkbox'>Author</label>
+                        <label><input type='checkbox' name='t' value='1' class='checkbox'>Title</label>
+                        <label><input type='checkbox' name='a' value='1' class='checkbox'>Abstract</label>
+                        <label><input type='checkbox' name='e' value='1' class='checkbox'>Date</label>
+                        <label><input type='checkbox' name='y' value='1' class='checkbox'>Category</label>
+                        <label><input type='checkbox' name='c' value='1' class='checkbox'>Comments</label>
+                        <label><input type='checkbox' name='j' value='1' class='checkbox'>Journal-ref</label>
+                        <label><input type='checkbox' name='i' value='1' class='checkbox'>ID</label>
                         <br/>
                         Order results by:
                         <label><input type='radio' name='o' value='dated' checked>Date &#8595;</label>
@@ -187,10 +185,10 @@
                             return false' href='http://en.wikipedia.org/wiki/Full_text_search'>info</a>)
                     </font>
                     <br/>
-                        Search: <input type='search' autocomplete = 'on' style='width:50%;' name='ft' placeholder='Insert phrase, name, keyword, etc.' value='" . $_GET['ft'] . "'/>
-                                       <input type='submit' name='go' value='Send'/><br/>
+                        Search: <input type='search' autocomplete = 'on' class='textbox' style='width:60%; height: 19px;' name='ft' placeholder='Insert phrase, name, keyword, etc.' value='" . $_GET['ft'] . "'/>
+                                       <input type='submit' name='go' value='Send' class='button' class='button'/><br/>
                         Reset selections: 
-                        <input type='reset' name='reset' value='Reset'>&nbsp&nbsp
+                        <input type='reset' name='reset' value='Reset' class='button'>&nbsp&nbsp
                         Results for page: 
                         <select name='rp'>
                             <option value='5' selected='selected'>5</option>
@@ -209,11 +207,10 @@
                 </form>
             </div>
             <div hidden id='opt' hidden=''>
-                <h1>Display Options:</h1>
                 Search Bar on all pages:&nbsp
-                <input type='button' value='" . $string3 . "' onclick='javascript:checkCookie6();' style='width:50px;'/>&nbsp
+                <input type='button' value='" . $string3 . "' onclick='javascript:checkCookie6();' class='button'/>&nbsp
                 On page view for PDF:&nbsp
-                <input type='button' value='" . $string . "' onclick='javascript:checkCookie3();' style='width:50px;'/>&nbsp
+                <input type='button' value='" . $string . "' onclick='javascript:checkCookie3();' class='button'/>&nbsp
             </div>
         </div>
         ";

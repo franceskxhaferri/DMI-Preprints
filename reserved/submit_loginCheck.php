@@ -11,10 +11,8 @@ if (isset($_POST['uid']) && isset($_POST['pw'])) {
     #$output_ldap = LDAPAuth($inputUID); //chiamata LDAP
     if(true){
     #if ($output_ldap['count'] == 1) {
-        echo "autorizzazione OK";
         if(true){
         #if (RADIUSAuth($inputUID, $inputPass)) {
-            echo "autenticazione OK";
             sec_session_start();
             if(true){
             #if ($_POST['uid'] === $mod_uid) {

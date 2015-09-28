@@ -132,7 +132,7 @@
         if ($_SESSION['logged_type'] === "mod") {
             $nav = "<form name='f2' action='archived_preprints.php' method='GET'><div id='boxsx'>
 		Delete all archived papers
-		</div><div id='boxdx'><input type='submit' name='c' value='Remove all' id='bottone_keyword' class='bottoni' onclick='return confirmDelete5()'/>
+		</div><div id='boxdx'><input type='submit' name='c' value='Remove all' id='bottone_keyword' class='button' onclick='return confirmDelete5()'/>
 		</div></form>";
             $nav2 = "<header id='header'>
                                     <h1><a href='#' id='logo'>DMI Papers</a></h1>
@@ -177,7 +177,7 @@
                         Go to admin panel
                         </div>
                         <div id='boxdx'>
-                        <a style='height:18px; color:white; text-align: center;' href='./modp.php' id='bottone_keyword' class='bottoni' onclick='loading(load);'>Back</a>
+                        <a style='color:#3C3C3C; text-align: center;' href='./modp.php' id='bottone_keyword' class='button' onclick='loading(load);'>Back</a>
                         </div>";
             echo $nav . "";
         }

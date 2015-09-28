@@ -156,7 +156,7 @@
                             <h2>manual editing</h2>
                         </div>               	
                         Go to admin panel&nbsp&nbsp&nbsp
-                        <a style="height:17px; color:white;" href="./modp.php" id="bottone_keyword" class="bottoni" onclick="return confirmExit()" >Back</a><br/>
+                        <a style="color:#3C3C3C;" href="./modp.php" id="bottone_keyword" class="button" onclick="return confirmExit()" >Back</a><br/>
                     </center>
                     <?php
                     if (sessioneavviata() == True) {
@@ -165,8 +165,9 @@
                         if (!isset($_GET['id'])) {
                             echo "<center><br/><a style='color:#007897;' href='./view_preprints.php' onclick='window.open(this.href); return false' title='Go to preprints list'>View from inserted papers</a></center>";
                             echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
-                            echo " <center><div><form name='f2' action='manual_edit.php' method='POST' onsubmit='loading(load);'>Insert id of publication: <input type='search' autocomplete = 'on' style='width:200px;' name='id' required class='textbox' placeholder='example of id: 0000.0000v1'/>
-                                <input type='submit' name='bottoni8' value='Get paper' style='width:70px;' id='bottone_keyword' class='bottoni'/><br/>
+                            echo " <center><div><form name='f2' action='manual_edit.php' method='POST' onsubmit='loading(load);'>Insert id of publication: 
+                                <input type='search' autocomplete = 'on' style='width:200px; height: 19px;' name='id' required class='textbox' placeholder='example of id: 0000.0000v1'/>
+                                <input type='submit' name='bottoni8' value='Get paper' id='bottone_keyword' class='button'/><br/>
 		               </form></div></center>
 		               ";
                             $var = False;
@@ -322,8 +323,8 @@
                             <center><div style='font-weight: bold;'>file to upload:</div>
                             <input type='hidden' name='MAX_FILE_SIZE' value='10000000'>
                             <input type='file' name='fileToUpload' id='fileToUpload'><br/><br/>
-                           <input type='submit' name='bottoni9' value='Remove' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmDelete()'/>
-                            <input type='submit' name='bottoni10' value='Complete' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmInsert()'/></center>
+                           <input type='submit' name='bottoni9' value='Remove' style='width:70px;' id='bottone_keyword' class='button' onclick='return confirmDelete()'/>
+                            <input type='submit' name='bottoni10' value='Complete' style='width:70px;' id='bottone_keyword' class='button' onclick='return confirmInsert()'/></center>
                             </form>";
                             $ris[1] = str_replace("<br />", "", $ris[1]);
                             $ris[1] = str_replace("\n", "", $ris[1]);

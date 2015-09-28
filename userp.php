@@ -164,14 +164,15 @@
                             print_r($_SESSION['logged_type']);
                             ?>
                         </div>
+                        <hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
                         <div id="sticker">
                             <div style="float:left; margin-left:1%;">
                                 <form name="f1" action="userp.php" method="POST" onsubmit="loading(load);">
-                                    <input style="height:17px; color: red;" type="submit" name="b1" value="Logout" id="bottoni" class="bottoni" onclick="return confirmLogout()">
+                                    <input style="color: red;" type="submit" name="b1" value="Logout" id="bottoni" class="buttonlink" onclick="return confirmLogout()">
                                 </form>
                             </div>
                             <div style="float:left; margin-left:1%;">
-                                <a style="height:17px; color:white;" href="./uploaded.php?p=1" id="bottoni" class="bottoni" onclick="loading(load);">My uploads</a>
+                                <a style="color: #3C3C3C;" href="./uploaded.php?p=1" id="bottoni" class="buttonlink" onclick="loading(load);">My uploads</a>
                             </div>
                             <div style="clear:both;">
                             </div>
@@ -292,7 +293,8 @@
                             <input type="file" required name="fileToUpload" id="fileToUpload">
                             <br/>
                             <br/>
-                            <input type="submit" name="b3" value="Submit paper" style='width:80px;' id='bottone_keyword' class='bottoni' onclick="return confirmInsert()"/><br/><br/>
+                            <input type="submit" name="b3" value="Submit paper" id='bottone_keyword' class='button' onclick="return confirmInsert()"/>
+                            <hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
                         </center>
                     </form>
                     <?php
@@ -347,7 +349,6 @@
             }
             ?>
         </div>
-        <br/>
         <br/>
         <script>
             UpdateMathtit('Here it will show a preview of what you write on title');

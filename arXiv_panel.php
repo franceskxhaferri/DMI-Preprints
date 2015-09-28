@@ -147,32 +147,32 @@
                                 Go to admin panel
                             </div>
                             <div id="boxdx">
-                                <a style="text-align: center; color:white;" href="./reserved.php" id="bottone_keyword" class="bottoni" onclick="loading(load);">Back</a>
+                                <a style="color:#3C3C3C;" href="./reserved.php" id="bottone_keyword" class="buttonlink" onclick="loading(load);">Back</a>
                             </div>
                             <div id="boxsx">
                                 The authors list
                             </div>
                             <div id="boxdx">
-                                <a style="text-align: center; color:white;" href="./authors_list.php" id="bottone_keyword" class="bottoni" onclick="loading(load);">Authors section</a>
+                                <a style="color:#3C3C3C;" href="./authors_list.php" id="bottone_keyword" class="buttonlink" onclick="loading(load);">Authors section</a>
                             </div>
                             <div id="boxsx">
                                 Insert a paper
                             </div>
                             <div id="boxdx">
-                                <a style="text-align: center; color:white;" href="./manual_insert.php" id="bottone_keyword" class="bottoni" onclick="loading(load);">Enter manually</a>
+                                <a style="color:#3C3C3C;" href="./manual_insert.php" id="bottone_keyword" class="buttonlink" onclick="loading(load);">Enter manually</a>
                             </div>
                             <div id="boxsx">
                                 approve papers
                             </div>
                             <div id="boxdx">
-                                <a style="text-align: center; color:white;" href="./check_preprints.php" id="bottone_keyword" class="bottoni" onclick="loading(load);">Check section</a>
+                                <a style="color:#3C3C3C;" href="./check_preprints.php" id="bottone_keyword" class="buttonlink" onclick="loading(load);">Check section</a>
                             </div>
                             <div id="boxsx">
                                 Search for new papers
                             </div>
                             <div id="boxdx">
                                 <form name="f8" action="arXiv_panel.php" method="POST" onsubmit="loading(load);">
-                                    <input style="height:19px;" type="submit" name="b8" value="Update from arXiv" id="bottone_keyword" class="bottoni">
+                                    <input style="width:110px;" type="submit" name="b8" value="Start update" id="bottone_keyword" class="button">
                                 </form>
                             </div>
                             <div id="boxsx">
@@ -180,7 +180,7 @@
                             </div>
                             <div id="boxdx">
                                 <form name="f9" action="arXiv_panel.php" method="POST">
-                                    <input style="height:19px;" type="submit" name="b9" value="Download from arXiv" id="bottone_keyword" class="bottoni" onclick="return confirmDownload()">
+                                    <input style="width:110px;" type="submit" name="b9" value="Overwrite All" id="bottone_keyword" class="button" onclick="return confirmDownload()">
                                 </form>
                             </div>
                             <div style="clear:both;"></div>

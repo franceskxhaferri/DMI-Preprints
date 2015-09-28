@@ -25,6 +25,13 @@ if (isset($_SESSION['logged_type'])) {
     }
 } else {
     //deve fare login
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'reserved/submit_loginForm.php';
+    echo '<div id="left_content">
+          	<input id="input_uid" class="textbox" style="height: 14pt;" placeholder="UID" required>
+          	<input type="password" id="input_pw" class="textbox" style="height: 14pt;" placeholder="PASSWORD" required>
+          <div style="margin: 0 auto"><br/>
+          	<button id="button_login" style="width: 110px;" onclick="chkLogin()" class="button">Login</button>
+          </div>
+	  </div>
+	  <div id="right_content"></div>';
 }
 ?>

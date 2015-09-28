@@ -161,9 +161,9 @@
                     </div>
                     <center>
                         Go to arXiv panel&nbsp&nbsp&nbsp
-                        <a style="height:17px; color:white;" href="./arXiv_panel.php" id="bottone_keyword" class="bottoni" onclick="return confirmExit()" >Back</a><br/><br/>
+                        <a style="color:#3C3C3C;" href="./arXiv_panel.php" id="bottone_keyword" class="button" onclick="return confirmExit()" >Back</a><br/><br/>
                         <a style='color:#007897;' href='http://arxiv.org/' onclick='window.open(this.href);
-                                        return false' title='arXiv'>arXiv.org</a>
+                                return false' title='arXiv'>arXiv.org</a>
                     </center>
                     <hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
                     <?php
@@ -175,7 +175,8 @@
                             <div>
                                 <form name='f3' action='manual_insert.php' method='POST' onsubmit="loading(load);">
                                     Get paper informations from arXiv:
-                                    <input type='search' autocomplete = 'on' style='width:175px;' name='id' required class='textbox' placeholder='Insert id(arXiv): 0000.0000'/> <input type='submit' name='b7' value='Get paper' style='width:70px;' id='bottone_keyword' class='bottoni' ><br/>
+                                    <input type='search' autocomplete = 'on' style='width:200px; height: 19px;' name='id' required class='textbox' placeholder='Insert id(arXiv): 0000.0000'/>
+                                    <input type='submit' name='b7' value='Get paper' id='bottone_keyword' class='button' ><br/>
                                 </form>
                             </div>
                         </center>
@@ -313,8 +314,8 @@
                             <center><div style='font-weight: bold;'>file to upload:</div>
                             <input type='hidden' name='MAX_FILE_SIZE' value='10000000'>
                             <input type='file' name='fileToUpload' id='fileToUpload'><br/><br/>
-                            <input type='submit' name='b9' value='Remove' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmDelete()'/>
-                            <input type='submit' name='b10' value='Insert' style='width:60px;' id='bottone_keyword' class='bottoni' onclick='return confirmInsert()'/></center>
+                            <input type='submit' name='b9' value='Remove' id='bottone_keyword' class='button' onclick='return confirmDelete()'/>
+                            <input type='submit' name='b10' value='Insert' id='bottone_keyword' class='button' onclick='return confirmInsert()'/></center>
                             </form>";
                             echo "
                             	<script type='text/javascript'>
@@ -450,7 +451,7 @@
                             <center><div style='font-weight: bold;'>*file to upload:</div>
                             <input type='hidden' name='MAX_FILE_SIZE' value='10000000'>
                             <input type='file' required name='fileToUpload' id='fileToUpload'><br/><br/>
-                            <input type='submit' name='b8' value='Insert' style='width:80px;' id='bottone_keyword' class='bottoni' onclick='return confirmInsert()'/></center>
+                            <input type='submit' name='b8' value='Insert' id='bottone_keyword' class='button' onclick='return confirmInsert()'/></center>
                             </form>
                         <script>
                             UpdateMathcat('Here it will show a preview of what you write on category');

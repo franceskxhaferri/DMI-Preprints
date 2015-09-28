@@ -167,12 +167,12 @@
                         <div id="sticker">
                             <div style="margin-left:1%;">
                                 <form name="f1" action="modp.php" method="POST" onsubmit="loading(load);">
-                                    <input type="submit" name="b1" value="Logout" id="botton_logout" class="bottoni" style="height:17px; color: red;" onclick="return confirmLogout()">
-                                    <a style="height:17px; color:white;" href="./uploaded.php?p=1" id="bottone_keyword" class="bottoni" onclick="loading(load);">My uploads</a>
-                                    <a style="height:17px; color:white;" href="./check_preprints.php" id="bottone_keyword" class="bottoni" onclick="loading(load);">Check section</a>
-                                    <a style="height:17px; color:white;" href="./arXiv_panel.php" id="bottone_keyword" class="bottoni" onclick="loading(load);">ArXiv panel</a>
-                                    <a style="height:17px; color:white;" href="./manual_edit.php" id="bottone_keyword" class="bottoni" onclick="loading(load);">Edit section</a>
-                                    <a style="height:17px; color:white;" href="./archived_preprints.php" id="bottone_keyword" class="bottoni" onclick="loading(load);">Archived section</a>
+                                    <input style="width:110px; color:red;" type="submit" name="b1" value="Logout" id="botton_logout" class="button" style="color: red;" onclick="return confirmLogout()">
+                                    <a style="color:#3C3C3C;" href="./uploaded.php?p=1" id="bottone_keyword" class="buttonlink" onclick="loading(load);">My uploads</a>
+                                    <a style="color:#3C3C3C;" href="./check_preprints.php" id="bottone_keyword" class="buttonlink" onclick="loading(load);">Check section</a>
+                                    <a style="color:#3C3C3C;" href="./arXiv_panel.php" id="bottone_keyword" class="buttonlink" onclick="loading(load);">ArXiv panel</a>
+                                    <a style="color:#3C3C3C;" href="./manual_edit.php" id="bottone_keyword" class="buttonlink" onclick="loading(load);">Edit section</a>
+                                    <a style="color:#3C3C3C;" href="./archived_preprints.php" id="bottone_keyword" class="buttonlink" onclick="loading(load);">Archived</a>
                                 </form>
                                 <div>
                                     <?php
@@ -299,7 +299,7 @@
                             <input type="file" required name="fileToUpload" id="fileToUpload">
                             <br/>
                             <br/>
-                            <input type="submit" name="b3" value="Insert paper" style='width:80px;' id='bottone_keyword' class='bottoni' onclick="return confirmInsert()">
+                            <input type="submit" name="b3" value="Insert paper" id='bottone_keyword' class='button' onclick="return confirmInsert()">
                             <hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>
                         </center>
                     </form>
