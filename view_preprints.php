@@ -147,7 +147,7 @@
                         to 
                         <input type='text' name='year3' style='width:35px' placeholder='Last' class='textbox'>
                         &nbsp&nbspResults for page: 
-                        <select name='rp'>
+                        <select name='rp' class='selector' style='height:19px;'>
                             <option value='5' selected='selected'>5</option>
                             <option value='10'>10</option>
                             <option value='15'>15</option>
@@ -190,7 +190,7 @@
                         Reset selections: 
                         <input type='reset' name='reset' value='Reset' class='button'>&nbsp&nbsp
                         Results for page: 
-                        <select name='rp'>
+                        <select name='rp' class='selector' style='height:19px;'>
                             <option value='5' selected='selected'>5</option>
                             <option value='10'>10</option>
                             <option value='15'>15</option>
