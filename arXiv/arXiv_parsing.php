@@ -5,19 +5,19 @@
     <body>
         <?php
         #importazione della libreria simplepie versione 1.3.1
-        include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/SimplePie.php');
-        include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/check_nomi_data.php');
-        include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/cURL.php');
-        include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/insert_remove_db.php');
+        include_once './arXiv/SimplePie.php';
+        include_once './arXiv/check_nomi_data.php';
+        include_once './arXiv/cURL.php';
+        include_once './arXiv/insert_remove_db.php';
         define('EOL', "<br />\n");
         $seconds = 86400;
         #tempo massimo di esecuzione di 86400 secondi equivalente a un giorno
         set_time_limit($seconds);
+        
         #funzione per il recupero delle informazioni da arxiv.org
-
         function arxiv_call($nome, $dataultimolancio) {
             #importazione variabili globali
-            include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
+            include './impost_car.php';
             #inizializzo variabile per contare preprints scaricati...
             $k = 0;
             #adattamento stringa nome per chiamata su arXiv...

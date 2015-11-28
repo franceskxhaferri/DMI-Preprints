@@ -59,9 +59,9 @@
     <body>
         <?php
         #importo file per utilizzare funzioni...
-        require_once $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'authorization/sec_sess.php';
-        include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/check_nomi_data.php');
-        include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/insert_remove_db.php');
+        require_once './authorization/sec_sess.php';
+        include_once './arXiv/check_nomi_data.php';
+        include_once './arXiv/insert_remove_db.php';
         sec_session_start();
         if ($_SESSION['logged_type'] === "mod") {
             $t = "Go to arXiv panel";
@@ -186,7 +186,7 @@
                     </font>
                     <br/>
                         Search: <input type='search' autocomplete = 'on' class='textbox' style='width:60%; height: 19px;' name='ft' placeholder='Insert phrase, name, keyword, etc.' value='" . $_GET['ft'] . "'/>
-                                       <input type='submit' name='go' value='Send' class='button' class='button'/><br/>
+                                       <input type='submit' name='go' value='Send' class='button'/><br/>
                         Reset selections: 
                         <input type='reset' name='reset' value='Reset' class='button'>&nbsp&nbsp
                         Results for page: 
@@ -199,7 +199,7 @@
                             <option value='50'>50</option>
                         </select>
                         &nbsp&nbspGo to page:
-                        <input type='text' name='p' style='width:25px' placeholder='n&#176;'>
+                        <input type='text' name='p' style='width:25px' placeholder='n&#176;' class='textbox'>
                         &nbsp&nbsp
                         Search on: 
                         <label><input type='radio' name='st' value='1' checked>Currents</label>

@@ -1,10 +1,11 @@
 <?php
 
+//import connessione database
+require_once './mysql/db_conn.php';
+
 #funzione inserimento informazioni preprint
 
 function insert_pubb($array, $uid) {
-#importazione variabili globali
-    include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
 #adattamento stringhe pericolose per la query...
     $array[1] = addslashes($array[1]);
     $array[2] = addslashes($array[2]);
@@ -13,9 +14,6 @@ function insert_pubb($array, $uid) {
     $array[5] = addslashes($array[5]);
     $array[6] = addslashes($array[6]);
     $array[7] = addslashes($array[7]);
-#connessione al database...
-    $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
-    mysql_select_db($db_monte, $db_connection);
 #generazione chiave
     $generato = rand();
     while (mysql_num_rows(mysql_query("SELECT * FROM PREPRINTS WHERE id_pubblicazione='" . $generato . "v1'")) != 0) {
@@ -33,8 +31,6 @@ function insert_pubb($array, $uid) {
 #funzione inserimento informazioni preprint
 
 function insert_p($array, $uid) {
-#importazione variabili globali
-    include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
 #adattamento stringhe pericolose per la query...
     $array[1] = addslashes($array[1]);
     $array[2] = addslashes($array[2]);
@@ -43,9 +39,7 @@ function insert_p($array, $uid) {
     $array[5] = addslashes($array[5]);
     $array[6] = addslashes($array[6]);
     $array[7] = addslashes($array[7]);
-#connessione al database...
-    $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
-    mysql_select_db($db_monte, $db_connection);
+    //query
     $sql = "INSERT INTO PREPRINTS ( uid, id_pubblicazione, titolo, data_pubblicazione, autori, referenze, commenti, categoria, abstract) "
             . "VALUES ('" . $uid . "','" . $array[0] . "','" . $array[1] . "','" . date("c", time()) . "','" . $array[3] . "','" . $array[4] . "','" . $array[5] . "','" . $array[6] . "','" . $array[7] . "') ON DUPLICATE KEY UPDATE id_pubblicazione = VALUES(id_pubblicazione)";
     $query = mysql_query($sql) or die(mysql_error());
@@ -56,12 +50,10 @@ function insert_p($array, $uid) {
 #funzione che inserisce il pdf caricato all'interno dei database
 
 function insertopdf($id) {
-#importazione variabili globali
-    include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
-#connessione al database...
+//configurazione
+include './impost_car.php';
     $id = str_replace("-", "/", $id);
-    $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
-    mysql_select_db($db_monte, $db_connection);
+    //query
     $sql2 = "SELECT * FROM PREPRINTS WHERE id_pubblicazione='" . $id . "'";
     $query2 = mysql_query($sql2) or die(mysql_error());
     $row = mysql_fetch_array($query2);
@@ -89,11 +81,9 @@ function insertopdf($id) {
 #funzione che inserisce un pdf all'interno dei database
 
 function insertpdf($id, $type) {
-#importazione variabili globali
-    include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
-#connessione al database...
-    $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
-    mysql_select_db($db_monte, $db_connection);
+//configurazione
+include './impost_car.php';
+    //query
     $sql2 = "SELECT * FROM PREPRINTS WHERE id_pubblicazione='" . $id . "'";
     $query2 = mysql_query($sql2) or die(mysql_error());
     $row = mysql_fetch_array($query2);
@@ -120,10 +110,8 @@ function insertpdf($id, $type) {
 #funzione che visualizza lista upload
 
 function leggiupload($uid) {
-#importazione variabili globali
-    include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
-    $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
-    mysql_select_db($db_monte, $db_connection);
+//configurazione
+include './impost_car.php';
     if (!isset($_GET['p'])) {
         $p = 1;
     } else {
@@ -174,7 +162,7 @@ function leggiupload($uid) {
     while ($row = mysql_fetch_array($result)) {
         $i++;
         echo "<h1>" . $i . ".<br/></h1><div align='left' style='width:98%;'>";
-        echo "<p><h1>Id of pubblication:</h1></p><div style='float:right;'><a style='color:#007897;' href=./pdf/" . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a>&nbsp&nbsp&nbsp<a title='Change this preprint' style='color:#007897;' href='./edit.php?id=" . $row['id_pubblicazione'] . "&r=" . $uid . "' onclick='window.open(this.href); return false'>edit</a></div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
+        echo "<p><h1>Id of pubblication:</h1></p><div style='float:right;'><a style='color:#007897;' href=". $copia . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a>&nbsp&nbsp&nbsp<a title='Change this preprint' style='color:#007897;' href='./edit.php?id=" . $row['id_pubblicazione'] . "&r=" . $uid . "' onclick='window.open(this.href); return false'>edit</a></div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
 #echo "<p><h1>Id of pubblication:</h1></p><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
         echo "<p><h1>Title:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . stripslashes($row['titolo']) . "</div>";
         echo "<p><h1>Date of pubblication:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . stripslashes($row['data_pubblicazione']) . "</div>";
@@ -211,7 +199,6 @@ function leggiupload($uid) {
         }
         echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
     }
-
     $x = $limit + 1;
     echo "RESULTS FROM " . $x . " TO " . ($p * 5) . "<br/>";
     mysql_close($db_connection);
@@ -220,11 +207,8 @@ function leggiupload($uid) {
 #funzione che controlla la versione del preprint e lo archivia eventualmente
 
 function version_preprintd($id1) {
-#importazione variabili globali
-    include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
-#connessione al database...
-    $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
-    mysql_select_db($db_monte, $db_connection);
+//configurazione
+include './impost_car.php';
 #elaborazione dell'id...
     $lunghezza = strlen($id1);
     $id = substr($id1, 0, $lunghezza - 1);
@@ -259,11 +243,6 @@ function version_preprintd($id1) {
 #funzione controllo se ci sono preprint da approvare
 
 function check_approve() {
-    #importazione variabili globali
-    include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
-    #connessione al database...
-    $db_connection = mysql_connect($hostname_db, $username_db, $password_db) or trigger_error(mysql_error(), E_USER_ERROR);
-    mysql_select_db($db_monte, $db_connection);
     #verifica se esistono preprints precedenti e li sposto...
     $sql = "SELECT COUNT(*) AS TOTALFOUND FROM PREPRINTS WHERE checked='0'";
     $query = mysql_query($sql) or die(mysql_error());

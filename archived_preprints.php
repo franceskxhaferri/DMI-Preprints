@@ -38,9 +38,9 @@
     <body>
         <?php
         #importo file per utilizzare funzioni...
-        require_once $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'authorization/sec_sess.php';
-        include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/check_nomi_data.php');
-        include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/insert_remove_db.php');
+        require_once './authorization/sec_sess.php';
+        include_once './arXiv/check_nomi_data.php';
+        include_once './arXiv/insert_remove_db.php';
         sec_session_start();
         echo "<div id='gotop' hidden><a id='scrollToTop' title='Go top'><img style='width:25px; height:25px;' src='./images/top.gif'></a></div>";
         if ($_COOKIE['searchbarall'] == "1") {

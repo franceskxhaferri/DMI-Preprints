@@ -24,7 +24,7 @@
     </head>
     <body>
         <?php
-        require_once $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'authorization/sec_sess.php';
+        require_once './authorization/sec_sess.php';
         sec_session_start();
         if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] < 86400)) {
             if ($_SESSION['logged_type'] === "mod") {
@@ -154,7 +154,7 @@
                     <div>
                         <?php
                         #importo file per utilizzare funzioni...
-                        include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/check_nomi_data.php');
+                        include_once './arXiv/check_nomi_data.php';
                         if (sessioneavviata() == True) {
                             echo "<center><br/><br/>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE LIST CAN'T BE CHANGED IN THIS MOMENT!</center><br/>";
                         } else {
@@ -220,7 +220,7 @@
                         }
                     } else {
                         #importo file per utilizzare funzioni...
-                        include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/check_nomi_data.php');
+                        include_once './arXiv/check_nomi_data.php';
                         #visualizzo lista utenti...	
                         $nomi = legginomi();
                         #conto lunghezza array
@@ -237,7 +237,7 @@
                     }
                 } else {
                     #importo file per utilizzare funzioni...
-                    include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/check_nomi_data.php');
+                    include_once './arXiv/check_nomi_data.php';
                     #visualizzo lista utenti...	
                     $nomi = legginomi();
                     #conto lunghezza array

@@ -24,8 +24,8 @@
     </head>
     <body>
         <?php
-        require_once $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'authorization/sec_sess.php';
-        include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/check_nomi_data.php');
+        require_once './authorization/sec_sess.php';
+        include_once './arXiv/check_nomi_data.php';
         sec_session_start();
         if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] < 86400)) {
             if ($_SESSION['logged_type'] === "mod") {
@@ -145,11 +145,11 @@
                     </div>
                     <div>
                         <?php
-                        include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/insert_remove_db.php');
-                        include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/arXiv_parsing.php');
-                        include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'mysql/func.php');
+                        include_once './arXiv/insert_remove_db.php';
+                        include_once './arXiv/arXiv_parsing.php';
+                        include_once './mysql/func.php';
                         #importazione variabili globali
-                        include $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'impost_car.php';
+                        include './impost_car.php';
                         if (sessioneavviata() == True) {
                             echo "<center><br/>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE LIST CAN'T BE CHANGED IN THIS MOMENT!</center><br/>";
                         } else {

@@ -64,7 +64,7 @@
             //TEST DEBUG
             error_reporting(E_ALL);
             ini_set('display_errors', 1);
-            require_once $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'reserved/submit_loginChooser.php';
+            require_once './reserved/submit_loginChooser.php';
             ?>
         </div><br/><br/><br/><br/>
         <div>

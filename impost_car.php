@@ -1,40 +1,27 @@
 <?php
 
 #mysql
-global $hostname_db;
-global $db_monte; //nome del database
-global $username_db; //l'username
-global $password_db; // password
-$hostname_db = "localhost";
-$db_monte = "dmipreprints"; //nome del database
-$username_db = "root"; //l'username
-$password_db = "1234";
+$hostname_db = "localhost"; //indirizzo database
+$db_monte = "dmipreprints"; //nome del database da utilizzare
+$username_db = "root"; //l'username database
+$password_db = "1234"; //password database
 
 #percorsi cartelle
-global $copia;
-global $basedir;
-global $basedir2;
-global $basedir3;
-global $basedir4;
-$copia = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints' . "/pdf/";
-$basedir = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints' . "/upload_dmi/";
-$basedir2 = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints' . "/upload/";
-$basedir3 = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints' . "/pdf_downloads/";
-$basedir4 = $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints' . "/pdf_archived/";
+$copia = "./pdf/"; //cartella dei pdf per i preprint approvati
+$basedir = "./upload_dmi/"; //cartella temporanea per upload pdf nella sezione dmi
+$basedir2 = "./upload/"; //cartella temporanea per upload pdf nella sezione manual insert
+$basedir3 = "./pdf_downloads/"; //cartella temporanea dei pdf per i preprint non approvati
+$basedir4 = "./pdf_archived/"; //cartella dei pdf per i preprint archiviati
 
 #ldap
-global $ldaphost;
-global $ldapport;
-$ldaphost = "localhost";
-$ldapport = "389";
+$ldapoff = true; //attivazione di ldap
+$ldaphost = "localhost"; //indirizzo ldap
+$ldapport = "389"; //porta ldap
 
 #RADIUS
-global $ip_radius_server;
-global $shared_secret;
-$ip_radius_server = "192.168.158.130";
-$shared_secret = "radius_secret";
+$ip_radius_server = "192.168.158.130"; //ip server radius
+$shared_secret = "radius_secret"; //
 
 #mod uid
-global $mod_uid;
-$mod_uid = "rz690001";
+$mod_uid = "rz690001"; //
 ?>

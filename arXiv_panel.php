@@ -30,7 +30,7 @@
     </head>
     <body>
         <?php
-        require_once $_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'authorization/sec_sess.php';
+        require_once './authorization/sec_sess.php';
         sec_session_start();
         if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] < 86400)) {
             if ($_SESSION['logged_type'] === "mod") {
@@ -188,8 +188,8 @@
                         <center>
                             <hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
                             <?php
-                            include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/arXiv_parsing.php');
-                            include_once($_SERVER['DOCUMENT_ROOT'] . '/dmipreprints/' . 'arXiv/check_nomi_data.php');
+                            include_once './arXiv/arXiv_parsing.php';
+                            include_once './arXiv/check_nomi_data.php';
                             if (isset($_POST['b8'])) {
                                 if ($sock = @fsockopen('www.arxiv.org', 80, $num, $error, 5)) {
                                     if (sessioneavviata() == False) {
