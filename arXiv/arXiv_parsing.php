@@ -13,8 +13,9 @@
         $seconds = 86400;
         #tempo massimo di esecuzione di 86400 secondi equivalente a un giorno
         set_time_limit($seconds);
-        
+
         #funzione per il recupero delle informazioni da arxiv.org
+
         function arxiv_call($nome, $dataultimolancio) {
             #importazione variabili globali
             include './impost_car.php';

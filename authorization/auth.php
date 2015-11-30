@@ -1,4 +1,5 @@
 <?php
+
 include './impost_car.php';
 
 function LDAPAuth($UID) {

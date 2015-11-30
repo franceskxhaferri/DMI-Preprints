@@ -21,6 +21,6 @@ if ($_SESSION['nome'] . " (" . $_SESSION['uid'] . ")" != $row['uid']) {
 #chiusura connessione al database
 mysql_close($db_connection);
 #reindirizzamento al pdf
-header('Location:.'.$copia . $row['Filename']);
+header('Location:.' . $copia . $row['Filename']);
 exit;
 ?>

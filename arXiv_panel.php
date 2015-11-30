@@ -36,7 +36,7 @@
             if ($_SESSION['logged_type'] === "mod") {
                 echo "<div id='gotop' hidden><a id='scrollToTop' title='Go top'><img style='width:25px; height:25px;' src='./images/top.gif'></a></div>";
                 if ($_COOKIE['searchbarall'] == "1") {
-                //searchbar bassa
+                    //searchbar bassa
                     require_once './searchbar_bottom.php';
                 }
                 //sessione moderatore

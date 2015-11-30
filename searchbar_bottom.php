@@ -1,6 +1,7 @@
 <?php
+
 #search bar
-                    echo "<center><div id='stickbottom' style='padding:2px;'>
+echo "<center><div id='stickbottom' style='padding:2px;'>
 		    <a href='view_preprints.php?clos=1' title='Close' name='close'><img src='./images/close.gif' style='height:15px; width:15px; float:left;'></a>
 			     <div id='adva' hidden>
 			     <div>

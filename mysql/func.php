@@ -51,7 +51,7 @@ function insert_p($array, $uid) {
 
 function insertopdf($id) {
 //configurazione
-include './impost_car.php';
+    include './impost_car.php';
     $id = str_replace("-", "/", $id);
     //query
     $sql2 = "SELECT * FROM PREPRINTS WHERE id_pubblicazione='" . $id . "'";
@@ -82,7 +82,7 @@ include './impost_car.php';
 
 function insertpdf($id, $type) {
 //configurazione
-include './impost_car.php';
+    include './impost_car.php';
     //query
     $sql2 = "SELECT * FROM PREPRINTS WHERE id_pubblicazione='" . $id . "'";
     $query2 = mysql_query($sql2) or die(mysql_error());
@@ -111,7 +111,7 @@ include './impost_car.php';
 
 function leggiupload($uid) {
 //configurazione
-include './impost_car.php';
+    include './impost_car.php';
     if (!isset($_GET['p'])) {
         $p = 1;
     } else {
@@ -162,7 +162,7 @@ include './impost_car.php';
     while ($row = mysql_fetch_array($result)) {
         $i++;
         echo "<h1>" . $i . ".<br/></h1><div align='left' style='width:98%;'>";
-        echo "<p><h1>Id of pubblication:</h1></p><div style='float:right;'><a style='color:#007897;' href=". $copia . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a>&nbsp&nbsp&nbsp<a title='Change this preprint' style='color:#007897;' href='./edit.php?id=" . $row['id_pubblicazione'] . "&r=" . $uid . "' onclick='window.open(this.href); return false'>edit</a></div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
+        echo "<p><h1>Id of pubblication:</h1></p><div style='float:right;'><a style='color:#007897;' href=" . $copia . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a>&nbsp&nbsp&nbsp<a title='Change this preprint' style='color:#007897;' href='./edit.php?id=" . $row['id_pubblicazione'] . "&r=" . $uid . "' onclick='window.open(this.href); return false'>edit</a></div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
 #echo "<p><h1>Id of pubblication:</h1></p><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
         echo "<p><h1>Title:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . stripslashes($row['titolo']) . "</div>";
         echo "<p><h1>Date of pubblication:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . stripslashes($row['data_pubblicazione']) . "</div>";
@@ -208,7 +208,7 @@ include './impost_car.php';
 
 function version_preprintd($id1) {
 //configurazione
-include './impost_car.php';
+    include './impost_car.php';
 #elaborazione dell'id...
     $lunghezza = strlen($id1);
     $id = substr($id1, 0, $lunghezza - 1);
