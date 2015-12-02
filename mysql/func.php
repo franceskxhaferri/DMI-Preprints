@@ -51,7 +51,7 @@ function insert_p($array, $uid) {
 
 function insertopdf($id) {
 //configurazione
-    include './impost_car.php';
+    include './header.inc.php';
     $id = str_replace("-", "/", $id);
     //query
     $sql2 = "SELECT * FROM PREPRINTS WHERE id_pubblicazione='" . $id . "'";
@@ -82,7 +82,7 @@ function insertopdf($id) {
 
 function insertpdf($id, $type) {
 //configurazione
-    include './impost_car.php';
+    include './header.inc.php';
     //query
     $sql2 = "SELECT * FROM PREPRINTS WHERE id_pubblicazione='" . $id . "'";
     $query2 = mysql_query($sql2) or die(mysql_error());
@@ -111,7 +111,7 @@ function insertpdf($id, $type) {
 
 function leggiupload($uid) {
 //configurazione
-    include './impost_car.php';
+    include './header.inc.php';
     if (!isset($_GET['p'])) {
         $p = 1;
     } else {
@@ -208,7 +208,7 @@ function leggiupload($uid) {
 
 function version_preprintd($id1) {
 //configurazione
-    include './impost_car.php';
+    include './header.inc.php';
 #elaborazione dell'id...
     $lunghezza = strlen($id1);
     $id = substr($id1, 0, $lunghezza - 1);
@@ -256,7 +256,7 @@ function check_approve() {
     mysql_close($db_connection);
 }
 
-#invio mail agli admin quando avviene un nuovo submit
+#invio mail agli admin quando avviene un nuovo submit(non terminata)
 
 function sendmailadmin($uid, $idp) {
     mail("example@msn.com", "New preprint submitted by: " . $uid . " with id: " . $idp, "New preprint submitted by: " . $uid . " with id: " . $idp, "From: webmaster@{$_SERVER['SERVER_NAME']}\r\n" . "Reply-To: webmaster@{$_SERVER['SERVER_NAME']}\r\n" . "X-Mailer: PHP/" . phpversion());

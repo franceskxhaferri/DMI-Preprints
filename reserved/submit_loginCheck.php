@@ -1,7 +1,7 @@
 <?php
 
 require_once '../authorization/sec_sess.php';
-require_once '../impost_car.php';
+require_once '../header.inc.php';
 require_once '../authorization/auth.php';
 if (isset($_POST['uid']) && isset($_POST['pw'])) {
     error_reporting(E_ALL);

@@ -18,7 +18,7 @@
 
         function arxiv_call($nome, $dataultimolancio) {
             #importazione variabili globali
-            include './impost_car.php';
+            include './header.inc.php';
             #inizializzo variabile per contare preprints scaricati...
             $k = 0;
             #adattamento stringa nome per chiamata su arXiv...

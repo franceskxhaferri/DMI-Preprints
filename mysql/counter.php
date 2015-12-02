@@ -2,7 +2,7 @@
 
 #funzione incremento contatore visualizzazioni
 #importazione variabili globali
-include '../impost_car.php';
+include '../header.inc.php';
 require_once '../authorization/sec_sess.php';
 sec_session_start();
 #connessione al database...

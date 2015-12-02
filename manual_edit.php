@@ -41,7 +41,7 @@
         require_once './authorization/sec_sess.php';
         include_once './arXiv/check_nomi_data.php';
         include_once './arXiv/insert_remove_db.php';
-        include './impost_car.php';
+        include './header.inc.php';
         sec_session_start();
         if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] < 86400)) {
             if ($_SESSION['logged_type'] === "mod") {

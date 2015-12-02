@@ -1,6 +1,6 @@
 <?php
 
-include './impost_car.php';
+include './header.inc.php';
 
 function LDAPAuth($UID) {
     global $ldaphost, $ldapport;

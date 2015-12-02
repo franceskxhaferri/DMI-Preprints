@@ -55,7 +55,7 @@ function update_preprints($array) {
 
 function delete_pdf($id) {
 //configurazione
-    include './impost_car.php';
+    include './header.inc.php';
     $sql = "SELECT * FROM PREPRINTS WHERE id_pubblicazione='" . $id . "'";
     $query = mysql_query($sql) or die(mysql_error());
     $row = mysql_fetch_array($query);
@@ -68,7 +68,7 @@ function delete_pdf($id) {
 
 function insert_one_pdf2($id) {
 //configurazione
-    include './impost_car.php';
+    include './header.inc.php';
     $type = "pdf/document";
     $id = str_replace("-", "/", $id);
     $sql2 = "SELECT * FROM PREPRINTS WHERE id_pubblicazione='" . $id . "'";
@@ -100,7 +100,7 @@ function insert_one_pdf2($id) {
 
 function insert_one_pdf($id, $type) {
 //configurazione
-    include './impost_car.php';
+    include './header.inc.php';
     $sql2 = "SELECT * FROM PREPRINTS WHERE id_pubblicazione='" . $id . "'";
     $query2 = mysql_query($sql2) or die(mysql_error());
     $row = mysql_fetch_array($query2);
@@ -140,7 +140,7 @@ function remove_preprints($id) {
 
 function version_preprint($id1) {
 //configurazione
-    include './impost_car.php';
+    include './header.inc.php';
     #elaborazione dell'id...
     $lunghezza = strlen($id1);
     $id = substr($id1, 0, $lunghezza - 1);

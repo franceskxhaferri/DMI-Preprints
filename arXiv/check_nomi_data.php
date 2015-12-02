@@ -60,7 +60,7 @@ function nomiprec($nome) {
 
 function searchfulltext() {
 #importazione variabili globali
-    include './impost_car.php';
+    include './header.inc.php';
     require_once './authorization/sec_sess.php';
     sec_session_start();
     if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] < 86400)) {
@@ -227,7 +227,7 @@ function searchfulltext() {
 
 function searchpreprint() {
 #importazione variabili globali
-    include './impost_car.php';
+    include './header.inc.php';
     require_once './authorization/sec_sess.php';
     sec_session_start();
     if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] < 86400)) {
@@ -602,7 +602,7 @@ function searchpreprint() {
 # funzione filtro e lettura dei preprint
 
 function filtropreprint() {
-    include './impost_car.php';
+    include './header.inc.php';
     require_once './authorization/sec_sess.php';
     sec_session_start();
     if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] < 86400)) {
@@ -819,7 +819,7 @@ function filtropreprint() {
 #funzione lettura dei preprint archiviati
 
 function leggipreprintarchiviati() {
-    include './impost_car.php';
+    include './header.inc.php';
     $risperpag = 5;
     #recupero pagina
     if (isset($_GET['p']) && $_GET['p'] != "") {
@@ -936,7 +936,7 @@ function cancellaselected($id) {
 # funzione cancellazione preprint archiviati
 
 function cancellapreprint() {
-    include './impost_car.php';
+    include './header.inc.php';
     $sql = "SELECT * FROM PREPRINTS_ARCHIVIATI WHERE checked='1'";
     $result = mysql_query($sql) or die(mysql_error());
     while ($row = mysql_fetch_array($result)) {

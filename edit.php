@@ -43,7 +43,7 @@
         include_once './arXiv/insert_remove_db.php';
         include_once './mysql/func.php';
         #importazione variabili globali
-        include './impost_car.php';
+        include './header.inc.php';
         sec_session_start();
         if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] < 86400)) {
             #if ($_SESSION['nome']." (".$_SESSION['uid'].")" == $row['uid'] && $row['uid'] != ""){

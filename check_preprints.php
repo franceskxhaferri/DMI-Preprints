@@ -67,7 +67,7 @@
                         include_once './arXiv/arXiv_parsing.php';
                         include_once './mysql/func.php';
                         #importazione variabili globali
-                        include './impost_car.php';
+                        include './header.inc.php';
                         if (sessioneavviata() == True) {
                             echo "<center><br/>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE LIST CAN'T BE CHANGED IN THIS MOMENT!</center><br/>";
                         } else {
@@ -271,7 +271,7 @@
                 }
                 ?>
             </div>
-        </div>
+        </div><br/>
     <center>
         <div id="load">
             <img src="./images/loader.gif" alt="Loading" style="width: 192px; height: 94px;">
