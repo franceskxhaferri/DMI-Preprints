@@ -60,7 +60,7 @@ function insertopdf($id) {
     if ($handle = opendir($basedir)) {
         $i = 0;
         while ((false !== ($file = readdir($handle)))) {
-            if ($file != '.' && $file != '..' && $file != 'index.html') {
+            if ($file != '.' && $file != '..' && $file != 'index.php') {
                 $idd = substr($file, 0, -4);
                 if ($row['id_pubblicazione'] == $idd) {
                     $sql = "UPDATE PREPRINTS SET Filename='" . $file . "', checked='1' WHERE id_pubblicazione='" . $id . "'";
@@ -91,7 +91,7 @@ function insertpdf($id, $type) {
     if ($handle = opendir($basedir)) {
         $i = 0;
         while ((false !== ($file = readdir($handle)))) {
-            if ($file != '.' && $file != '..' && $file != 'index.html') {
+            if ($file != '.' && $file != '..' && $file != 'index.php') {
                 $sql = "UPDATE PREPRINTS SET Filename= '" . $file . "', checked='1' WHERE id_pubblicazione='" . $id . "'";
                 $query = mysql_query($sql) or die(mysql_error());
                 fclose($var);
