@@ -1,3 +1,76 @@
+//funzione termina login
+function logout() {
+	$("#container_principale").load("reserved/logout.php", function () {
+	    $("#container_principale").load("reserved/submit_loginChooser.php", function () {
+		location.reload(true);
+	    });
+	});
+}
+//funzione controllo login
+function chkLogin() {
+        var uidV = $('#input_uid').val();
+        var pwV = $('#input_pw').val();
+        //array caratteri speciali
+	var chars = ["{", "}", "[","]", "(", ")","*", "$", "€", "%","/", "^", "#","!", "`", "~","+", "=", "?", "&", " ", '"',"'",";", ":", "\\", "|", "@"]; 
+	//controllo campo username
+	for (var i = 0; i < chars.length; i++) {
+		if (uidV.indexOf(chars[i])!=-1) {
+			alert("The uid is not valid!");
+			return false;	
+		}       
+        }
+        $("#left_content").load("reserved/submit_loginCheck.php", {uid: uidV, pw: pwV}, function () {
+                    $("#right_content").load("reserved/submit_loginChooser.php");
+                    location.reload(true);
+        });
+}
+//funzione controllo registrazione
+function chkRegistration() {
+	var email = $('#email').val();
+	var usrn = $('#usrn').val();
+	var pw1 = $('#pw').val();
+	var pw2 = $('#pw2').val();
+	var e = email.length;
+	var m = usrn.length;
+	var n = pw1.length;
+	var n2 = pw2.length;
+	if (e == 0 || m == 0 || n == 0 || n2 == 0) {
+		return false;
+	} else if (m < 4) {
+		alert("The username field must contain at least 4 characters!");
+		return false;
+	} else if (n < 6) {
+		alert("The password field must contain at least 6 characters!");
+		return false;
+	} else if (pw1 != pw2) {
+		alert("Passwords do not match!");
+		return false;
+	} else if (usrn == pw1) {
+		alert("The username and password can not be the same!");
+		return false;
+	}
+	//array caratteri speciali
+	var chars = ["{", "}", "[","]", "(", ")","*", "$", "€", "%","/", "^", "#","!", "`", "~","+", "=", "?", "&", " ", '"',"'",";", ":", "\\", "|"]; 
+	//controllo campo mail
+	for (var i = 0; i < chars.length; i++) {
+		if (email.indexOf(chars[i])!=-1) {
+			alert("The mail is not valid!");
+			return false;	
+		}
+	}
+	//array caratteri speciali username
+	var chars1 = ["{", "}", "[","]", "(", ")","*", "$", "€", "%","/", "^", "#","!", "`", "~","+", "=", "?", "&", " ", '"',"'",";", ":", "\\", "|", "@"];  
+	//controllo campo username
+	for (var i = 0; i < chars1.length; i++) {
+		if (usrn.indexOf(chars1[i])!=-1) {
+			alert("The username is not valid!");
+			return false;	
+		}
+	}
+	//
+	$("#top_content").load("reserved/add_account.php", {mail: email, username: usrn, password: pw1}, function () {
+        });
+}
 //setta i cookie
 function setCookie(cname, cvalue, exdays) {
     var d = new Date();
