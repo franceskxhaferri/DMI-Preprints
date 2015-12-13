@@ -3,8 +3,9 @@
 #funzione inserimento informazioni preprint
 
 function insert_pubb($array, $uid) {
+    include './header.inc.php';
 //import connessione database
-include './mysql/db_conn.php';
+    include './mysql/db_conn.php';
 #adattamento stringhe pericolose per la query...
     $array[1] = addslashes($array[1]);
     $array[2] = addslashes($array[2]);
@@ -30,8 +31,9 @@ include './mysql/db_conn.php';
 #funzione inserimento informazioni preprint
 
 function insert_p($array, $uid) {
+    include './header.inc.php';
 //import connessione database
-include './mysql/db_conn.php';
+    include './mysql/db_conn.php';
 #adattamento stringhe pericolose per la query...
     $array[1] = addslashes($array[1]);
     $array[2] = addslashes($array[2]);
@@ -51,10 +53,9 @@ include './mysql/db_conn.php';
 #funzione che inserisce il pdf caricato all'interno dei database
 
 function insertopdf($id) {
-//import connessione database
-include './mysql/db_conn.php';
-//configurazione
     include './header.inc.php';
+//import connessione database
+    include './mysql/db_conn.php';
     $id = str_replace("-", "/", $id);
     //query
     $sql2 = "SELECT * FROM PREPRINTS WHERE id_pubblicazione='" . $id . "'";
@@ -84,10 +85,9 @@ include './mysql/db_conn.php';
 #funzione che inserisce un pdf all'interno dei database
 
 function insertpdf($id, $type) {
-//import connessione database
-include './mysql/db_conn.php';
-//configurazione
     include './header.inc.php';
+//import connessione database
+    include './mysql/db_conn.php';
     //query
     $sql2 = "SELECT * FROM PREPRINTS WHERE id_pubblicazione='" . $id . "'";
     $query2 = mysqli_query($db_connection, $sql2) or die(mysql_error());
@@ -115,10 +115,9 @@ include './mysql/db_conn.php';
 #funzione che visualizza lista upload
 
 function leggiupload($uid) {
-//import connessione database
-include './mysql/db_conn.php';
-//configurazione
     include './header.inc.php';
+//import connessione database
+    include './mysql/db_conn.php';
     if (!isset($_GET['p'])) {
         $p = 1;
     } else {
@@ -127,7 +126,7 @@ include './mysql/db_conn.php';
     $risperpag = 5;
     $limit = $risperpag * $p - $risperpag;
     $sql = "SELECT * FROM PREPRINTS WHERE uid='" . $uid . "' AND checked='1'";
-    $query = mysqli_query($db_connection, $sql) or die(mysql_error());
+    $querytotale = mysqli_query($db_connection, $sql) or die(mysql_error());
     $ristot = mysqli_num_rows($querytotale);
     echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
     echo "PAPERS UPLOADED: " . $ristot . "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
@@ -215,10 +214,9 @@ include './mysql/db_conn.php';
 #funzione che controlla la versione del preprint e lo archivia eventualmente
 
 function version_preprintd($id1) {
-//import connessione database
-include './mysql/db_conn.php';
-//configurazione
     include './header.inc.php';
+//import connessione database
+    include './mysql/db_conn.php';
 #elaborazione dell'id...
     $lunghezza = strlen($id1);
     $id = substr($id1, 0, $lunghezza - 1);
@@ -228,14 +226,14 @@ include './mysql/db_conn.php';
         $query = mysqli_query($db_connection, $sql) or die(mysql_error());
         $row = mysqli_fetch_row($query);
         if (strcmp($id1, $row['1']) > 0) {
-	#archiviazione preprints precedenti...
+            #archiviazione preprints precedenti...
             $sql2 = "INSERT INTO PREPRINTS_ARCHIVIATI SELECT * FROM PREPRINTS WHERE id_pubblicazione='" . $id . $i . "' ON DUPLICATE KEY UPDATE id_pubblicazione = VALUES(id_pubblicazione)";
-            	$query2 = mysqli_query($db_connection, $sql2) or die(mysql_error());
-		copy($copia . $row[9], $basedir4 . $row[9]);
-		unlink($copia . $row[9]);
-		#rimozione da preprints...
-		$sql2 = "DELETE FROM PREPRINTS WHERE id_pubblicazione='" . $id . $i . "'";
-		$query2 = mysqli_query($db_connection, $sql2) or die(mysql_error());
+            $query2 = mysqli_query($db_connection, $sql2) or die(mysql_error());
+            copy($copia . $row[9], $basedir4 . $row[9]);
+            unlink($copia . $row[9]);
+            #rimozione da preprints...
+            $sql2 = "DELETE FROM PREPRINTS WHERE id_pubblicazione='" . $id . $i . "'";
+            $query2 = mysqli_query($db_connection, $sql2) or die(mysql_error());
         }
     }
 #chiusura connessione al database
@@ -245,19 +243,20 @@ include './mysql/db_conn.php';
 #funzione controllo se ci sono preprint da approvare
 
 function check_approve() {
+    include './header.inc.php';
 //import connessione database
-include './mysql/db_conn.php';
+    include './mysql/db_conn.php';
     #verifica se esistono preprints precedenti e li sposto...
     $sql = "SELECT COUNT(*) AS TOTALFOUND FROM PREPRINTS WHERE checked='0'";
     $query = mysqli_query($db_connection, $sql) or die(mysql_error());
     $row = mysqli_fetch_array($query);
+    #chiusura connessione al database
+    mysqli_close($db_connection);
     if ($row['TOTALFOUND'] > 0) {
         return true;
     } else {
         return false;
     }
-    #chiusura connessione al database
-    mysqli_close($db_connection);
 }
 
 #invio mail agli admin quando avviene un nuovo submit(non terminata)

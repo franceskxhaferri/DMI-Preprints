@@ -48,7 +48,7 @@
         if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] < 86400)) {
             #if ($_SESSION['nome']." (".$_SESSION['uid'].")" == $row['uid'] && $row['uid'] != ""){
             if (($_SESSION['logged_type'] === "mod" or $_SESSION['logged_type'] === "user") &&
-                    ($_SESSION['nome'] . " (" . $_SESSION['uid'] . ")" == $_GET['r']) && $_GET['r'] != " ()") {
+                    ($_SESSION['uid'] == $_GET['r'])) {
                 //sessione moderatore
                 echo "<div id='gotop' hidden><a id='scrollToTop' title='Go top'><img style='width:25px; height:25px;' src='./images/top.gif'></a></div>";
                 if ($_COOKIE['searchbarall'] == "1") {

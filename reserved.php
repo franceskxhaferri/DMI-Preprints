@@ -37,27 +37,25 @@
     <center>
         <div style="width: 45%;">
             <h1>It is the first time you access here?</h1><br/>
-            For access use username and password of the University xxxxxx@unipg.it,
-            for those outside University of Perugia you can register and use the credentials 
+            For access use username and password of the University xxxxxxxx,
+            for those outside University of Perugia you can register and use the email 
             provided during the registration.
-        </div><br/>
-        <div>
-            <?php
-            //TEST DEBUG
-            error_reporting(E_ALL);
-            ini_set('display_errors', 1);
-            require_once './reserved/submit_loginChooser.php';
-            ?>
-        </div><br/><br/><br/><br/>
-        <div>
-            <h1>Register:</h1><br/>
-            <?php
-            //TEST DEBUG
-            error_reporting(E_ALL);
-            ini_set('display_errors', 1);
-            require_once './reserved/add_accountForm.php';
-            ?>
-        </div>
+        </div><br/><br/>
+        <h1>Login:</h1><br/>
+        <?php
+        //TEST DEBUG
+        error_reporting(E_ALL);
+        ini_set('display_errors', 1);
+        require_once './reserved/submit_loginChooser.php';
+        ?>
+        <br/><br/>
+        <h1>Register:</h1><br/>
+        <?php
+        //TEST DEBUG
+        error_reporting(E_ALL);
+        ini_set('display_errors', 1);
+        require_once './reserved/add_accountForm.php';
+        ?>
     </center>
 </body>
 </html>

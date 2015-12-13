@@ -3,8 +3,9 @@
 #funzione per la verifica se ci sono sessioni attive
 
 function sessioneavviata() {
+    include './header.inc.php';
 //import connessione database
-include './mysql/db_conn.php';
+    include './mysql/db_conn.php';
 #importazione variabili globali
     $var = True;
     $a = date("Ymd", time());
@@ -22,8 +23,9 @@ include './mysql/db_conn.php';
 #funzione di avvio della sessione
 
 function avviasessione() {
+    include './header.inc.php';
 //import connessione database
-include './mysql/db_conn.php';
+    include './mysql/db_conn.php';
     $a = date("Ymd", time());
     $sql = "UPDATE sessione SET attivo='1'";
     $result = mysqli_query($db_connection, $sql) or die(mysql_error());
@@ -35,8 +37,9 @@ include './mysql/db_conn.php';
 #funzione per terminare la sessione
 
 function chiudisessione() {
+    include './header.inc.php';
 //import connessione database
-include './mysql/db_conn.php';
+    include './mysql/db_conn.php';
     $sql = "UPDATE sessione SET attivo='0'";
     $result = mysqli_query($db_connection, $sql) or die(mysql_error());
     mysqli_close($db_connection);
@@ -45,8 +48,9 @@ include './mysql/db_conn.php';
 #funzione verifica nuovo nome
 
 function nomiprec($nome) {
+    include './header.inc.php';
 //import connessione database
-include './mysql/db_conn.php';
+    include './mysql/db_conn.php';
     #cerca se il nome se era stato gia cercato...
     $nome = trim($nome);
     $sql = "SELECT * FROM AUTORI_BACKUP WHERE nome='" . $nome . "'";
@@ -64,10 +68,9 @@ include './mysql/db_conn.php';
 #funzione ricerca full text
 
 function searchfulltext() {
-//import connessione database
-include './mysql/db_conn.php';
-#importazione variabili globali
     include './header.inc.php';
+//import connessione database
+    include './mysql/db_conn.php';
     require_once './authorization/sec_sess.php';
     sec_session_start();
     if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] < 86400)) {
@@ -233,10 +236,9 @@ include './mysql/db_conn.php';
 # funzione lettura dei preprint
 
 function searchpreprint() {
-//import connessione database
-include './mysql/db_conn.php';
-#importazione variabili globali
     include './header.inc.php';
+//import connessione database
+    include './mysql/db_conn.php';
     require_once './authorization/sec_sess.php';
     sec_session_start();
     if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] < 86400)) {
@@ -611,10 +613,9 @@ include './mysql/db_conn.php';
 # funzione filtro e lettura dei preprint
 
 function filtropreprint() {
-//import connessione database
-include './mysql/db_conn.php';
-//configurazione
     include './header.inc.php';
+//import connessione database
+    include './mysql/db_conn.php';
     require_once './authorization/sec_sess.php';
     sec_session_start();
     if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] < 86400)) {
@@ -832,10 +833,9 @@ include './mysql/db_conn.php';
 #funzione lettura dei preprint archiviati
 
 function leggipreprintarchiviati() {
-//import connessione database
-include './mysql/db_conn.php';
-//configurazione
     include './header.inc.php';
+//import connessione database
+    include './mysql/db_conn.php';
     $risperpag = 5;
     #recupero pagina
     if (isset($_GET['p']) && $_GET['p'] != "") {
@@ -945,8 +945,8 @@ include './mysql/db_conn.php';
 # funzione cancellazione preprint
 
 function cancellaselected($id) {
-//import connessione database
-include './mysql/db_conn.php';
+    include './header.inc.php';
+    include './mysql/db_conn.php';
     $sql = "DELETE FROM PREPRINTS WHERE id_pubblicazione='" . $id . "'";
     $result = mysqli_query($db_connection, $sql) or die(mysql_error());
     mysqli_close($db_connection);
@@ -955,10 +955,9 @@ include './mysql/db_conn.php';
 # funzione cancellazione preprint archiviati
 
 function cancellapreprint() {
-//import connessione database
-include './mysql/db_conn.php';
-//configurazione
     include './header.inc.php';
+//import connessione database
+    include './mysql/db_conn.php';
     $sql = "SELECT * FROM PREPRINTS_ARCHIVIATI WHERE checked='1'";
     $result = mysqli_query($db_connection, $sql) or die(mysql_error());
     while ($row = mysqli_fetch_array($result)) {
@@ -972,8 +971,9 @@ include './mysql/db_conn.php';
 #funzione che controlla se si sono verificate interruzioni nell'ultimo update
 
 function controllainterruzione() {
+    include './header.inc.php';
 //import connessione database
-include './mysql/db_conn.php';
+    include './mysql/db_conn.php';
     $var = False;
     $sql = "SELECT id FROM temp";
     $result = mysqli_query($db_connection, $sql) or die(mysql_error());
@@ -987,8 +987,9 @@ include './mysql/db_conn.php';
 #funzione che cerca se il preprint è stato già scaricato nell'esecuzione in corso
 
 function preprintscaricati($id) {
+    include './header.inc.php';
 //import connessione database
-include './mysql/db_conn.php';
+    include './mysql/db_conn.php';
     $var = False;
     $sql = "SELECT id FROM temp";
     $result = mysqli_query($db_connection, $sql) or die(mysql_error());
@@ -1004,8 +1005,9 @@ include './mysql/db_conn.php';
 #funzione per l'inserimento dell'id dentro temp
 
 function aggiornapreprintscaricati($id) {
+    include './header.inc.php';
 //import connessione database
-include './mysql/db_conn.php';
+    include './mysql/db_conn.php';
     $sql = "INSERT INTO temp (id) VALUES ('" . $id . "') ON DUPLICATE KEY UPDATE id = VALUES(id)";
     $result = mysqli_query($db_connection, $sql) or die(mysql_error());
     mysqli_close($db_connection);
@@ -1014,8 +1016,9 @@ include './mysql/db_conn.php';
 #funzione per la cancellazione del contenuto temp
 
 function azzerapreprint() {
+    include './header.inc.php';
 //import connessione database
-include './mysql/db_conn.php';
+    include './mysql/db_conn.php';
     $sql = "TRUNCATE TABLE temp";
     $result = mysqli_query($db_connection, $sql) or die(mysql_error());
     mysqli_close($db_connection);
@@ -1024,8 +1027,9 @@ include './mysql/db_conn.php';
 #funzione che cerca se il preprint se è presente
 
 function cercapreprint($id) {
+    include './header.inc.php';
 //import connessione database
-include './mysql/db_conn.php';
+    include './mysql/db_conn.php';
     $id = trim($id);
     $sql = "SELECT * FROM PREPRINTS WHERE id_pubblicazione='" . $id . "'";
     $result = mysqli_query($db_connection, $sql) or die(mysql_error());
@@ -1049,8 +1053,9 @@ include './mysql/db_conn.php';
 #funzione che cerca se il nome è presente
 
 function cercanome($nome) {
+    include './header.inc.php';
 //import connessione database
-include './mysql/db_conn.php';
+    include './mysql/db_conn.php';
     #cerca se il nome se era stato gia cercato...
     $nome = trim($nome);
     $var = False;
@@ -1067,8 +1072,9 @@ include './mysql/db_conn.php';
 #funzione aggiornamento nomi_ultimo_lancio
 
 function aggiornanomi() {
+    include './header.inc.php';
 //import connessione database
-include './mysql/db_conn.php';
+    include './mysql/db_conn.php';
     #leggo i nuovi nomi e li inserisco in array...
     $array = legginomi();
     $sql = "TRUNCATE TABLE AUTORI_BACKUP";
@@ -1085,8 +1091,9 @@ include './mysql/db_conn.php';
 # funzione lettura nomi
 
 function legginomi() {
+    include './header.inc.php';
 //import connessione database
-include './mysql/db_conn.php';
+    include './mysql/db_conn.php';
     $sql = "SELECT nome FROM AUTORI";
     $result = mysqli_query($db_connection, $sql) or die(mysql_error());
     $i = 0;
@@ -1101,8 +1108,9 @@ include './mysql/db_conn.php';
 #funzione scrittura nomi
 
 function scrivinomi($nomi) {
+    include './header.inc.php';
 //import connessione database
-include './mysql/db_conn.php';
+    include './mysql/db_conn.php';
     $sql = "TRUNCATE TABLE AUTORI";
     $result = mysqli_query($db_connection, $sql) or die(mysql_error());
     $nl2 = count($nomi);
@@ -1155,8 +1163,9 @@ function aggiungiutente($nome, $a) {
 #data ultima sessione
 
 function datasessione() {
+    include './header.inc.php';
 //import connessione database
-include './mysql/db_conn.php';
+    include './mysql/db_conn.php';
     $sql = "SELECT data FROM sessione_data";
     $result = mysqli_query($db_connection, $sql) or die(mysql_error());
     $row = mysqli_fetch_array($result);
@@ -1168,8 +1177,9 @@ include './mysql/db_conn.php';
 #ritorno la data come intero
 
 function dataprec() {
+    include './header.inc.php';
 //import connessione database
-include './mysql/db_conn.php';
+    include './mysql/db_conn.php';
     $sql = "SELECT data FROM DATA_ULTIMO_LANCIO";
     $result = mysqli_query($db_connection, $sql) or die(mysql_error());
     $row = mysqli_fetch_array($result);
@@ -1186,8 +1196,9 @@ include './mysql/db_conn.php';
 #ritorno la data come una stringa
 
 function datastring() {
+    include './header.inc.php';
 //import connessione database
-include './mysql/db_conn.php';
+    include './mysql/db_conn.php';
     $sql = "SELECT data FROM DATA_ULTIMO_LANCIO";
     $result = mysqli_query($db_connection, $sql) or die(mysql_error());
     $row = mysqli_fetch_array($result);
@@ -1199,8 +1210,9 @@ include './mysql/db_conn.php';
 #aggiorno data_ultimo_lancio con la data di ultimo lancio
 
 function aggiornadata() {
+    include './header.inc.php';
 //import connessione database
-include './mysql/db_conn.php';
+    include './mysql/db_conn.php';
     $a = date("Y-m-d H:i", time());
     $sql = "SELECT data FROM DATA_ULTIMO_LANCIO";
     $result = mysqli_query($db_connection, $sql) or die(mysql_error());

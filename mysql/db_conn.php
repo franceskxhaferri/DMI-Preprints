@@ -1,7 +1,5 @@
 <?php
 
-//import dei parametri per la connessione
-include './header.inc.php';
 //connessione al database
 //creazione della connessione
 $db_connection = mysqli_connect($hostname_db, $username_db, $password_db, $db_monte);

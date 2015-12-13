@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Creato il: Dic 12, 2015 alle 22:23
+-- Creato il: Dic 13, 2015 alle 14:59
 -- Versione del server: 5.6.27-0ubuntu1
 -- Versione PHP: 5.6.11-1ubuntu3.1
 
@@ -27,7 +27,8 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `ACCOUNTS` (
-  `uid` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `nome` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `cognome` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `data_accesso` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -70,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `DATA_ULTIMO_LANCIO` (
 --
 
 INSERT INTO `DATA_ULTIMO_LANCIO` (`data`) VALUES
-('2015-12-12 19:35');
+('2015-12-13 14:58');
 
 -- --------------------------------------------------------
 
@@ -146,7 +147,7 @@ CREATE TABLE IF NOT EXISTS `sessione_data` (
 --
 
 INSERT INTO `sessione_data` (`data`) VALUES
-('20151212');
+('20151213');
 
 -- --------------------------------------------------------
 
@@ -166,7 +167,7 @@ CREATE TABLE IF NOT EXISTS `temp` (
 -- Indici per le tabelle `ACCOUNTS`
 --
 ALTER TABLE `ACCOUNTS`
-  ADD PRIMARY KEY (`uid`);
+  ADD PRIMARY KEY (`email`);
 
 --
 -- Indici per le tabelle `AUTORI`

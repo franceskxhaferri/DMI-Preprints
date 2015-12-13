@@ -3,8 +3,9 @@
 #funzione che inserisce i preprints all'interno del database
 
 function insert_preprints($array) {
+    include './header.inc.php';
 //import connessione database
-include './mysql/db_conn.php';
+    include './mysql/db_conn.php';
     #adattamento stringhe pericolose per la query...
     $array[1] = addslashes($array[1]);
     $array[2] = addslashes($array[2]);
@@ -23,8 +24,9 @@ include './mysql/db_conn.php';
 #funzione che aggiorna i preprints all'interno del database
 
 function update_preprints($array) {
+    include './header.inc.php';
 //import connessione database
-include './mysql/db_conn.php';
+    include './mysql/db_conn.php';
     #adattamento stringhe pericolose per la query...
     $array[1] = addslashes($array[1]);
     $array[2] = addslashes($array[2]);
@@ -54,10 +56,9 @@ include './mysql/db_conn.php';
 #funzione che cancella il pdf caricato all'interno della cartella
 
 function delete_pdf($id) {
-//import connessione database
-include './mysql/db_conn.php';
-//configurazione
     include './header.inc.php';
+//import connessione database
+    include './mysql/db_conn.php';
     $sql = "SELECT * FROM PREPRINTS WHERE id_pubblicazione='" . $id . "'";
     $query = mysqli_query($db_connection, $sql) or die(mysql_error());
     $row = mysqli_fetch_array($query);
@@ -69,10 +70,9 @@ include './mysql/db_conn.php';
 #funzione che inserisce il pdf selezionato all'interno dei database
 
 function insert_one_pdf2($id) {
-//import connessione database
-include './mysql/db_conn.php';
-//configurazione
     include './header.inc.php';
+//import connessione database
+    include './mysql/db_conn.php';
     $type = "pdf/document";
     $id = str_replace("-", "/", $id);
     $sql2 = "SELECT * FROM PREPRINTS WHERE id_pubblicazione='" . $id . "'";
@@ -103,10 +103,9 @@ include './mysql/db_conn.php';
 #funzione che inserisce il pdf caricato all'interno dei database
 
 function insert_one_pdf($id, $type) {
-//import connessione database
-include './mysql/db_conn.php';
-//configurazione
     include './header.inc.php';
+//import connessione database
+    include './mysql/db_conn.php';
     $sql2 = "SELECT * FROM PREPRINTS WHERE id_pubblicazione='" . $id . "'";
     $query2 = mysqli_query($db_connection, $sql2) or die(mysql_error());
     $row = mysqli_fetch_array($query2);
@@ -132,8 +131,9 @@ include './mysql/db_conn.php';
 #funzione che rimuove i preprints dall'database
 
 function remove_preprints($id) {
+    include './header.inc.php';
 //import connessione database
-include './mysql/db_conn.php';
+    include './mysql/db_conn.php';
     $id = str_replace("-", "/", $id);
     $lunghezza = strlen($id);
     $id = substr($id, 0, $lunghezza - 4);
@@ -146,10 +146,9 @@ include './mysql/db_conn.php';
 #funzione che controlla la versione del preprint e lo archivia eventualmente
 
 function version_preprint($id1) {
-//import connessione database
-include './mysql/db_conn.php';
-//configurazione
     include './header.inc.php';
+//import connessione database
+    include './mysql/db_conn.php';
     #elaborazione dell'id...
     $lunghezza = strlen($id1);
     $id = substr($id1, 0, $lunghezza - 1);
@@ -168,7 +167,7 @@ include './mysql/db_conn.php';
             if (!$query2 = $query = mysqli_query($db_connection, $sql2)) {
                 die(mysql_error());
             } else {
-            	$query = mysqli_query($db_connection, $sql) or die(mysql_error());
+                $query = mysqli_query($db_connection, $sql) or die(mysql_error());
                 $row = mysqli_fetch_array($query);
                 copy($copia . $row['Filename'], $basedir4 . $row['Filename']);
                 unlink($copia . $row['Filename']);
