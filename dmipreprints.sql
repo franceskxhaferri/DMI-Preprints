@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Creato il: Dic 13, 2015 alle 14:59
+-- Creato il: Dic 13, 2015 alle 16:44
 -- Versione del server: 5.6.27-0ubuntu1
 -- Versione PHP: 5.6.11-1ubuntu3.1
 
@@ -31,8 +31,8 @@ CREATE TABLE IF NOT EXISTS `ACCOUNTS` (
   `cognome` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `data_accesso` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `data_registrazione` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `accesso` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `registrazione` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `verificato` int(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
