@@ -50,7 +50,7 @@
         if ($_SESSION['logged_type'] === "mod") {
             $nav = "<form name='f2' action='archived_preprints.php' method='GET'><div id='boxsx'>
 		Delete all archived papers
-		</div><div id='boxdx'><input type='submit' name='c' value='Remove all' id='bottone_keyword' class='button' onclick='return confirmDelete5()'/>
+		</div><div id='boxdx'><input type='submit' name='c' value='Remove' id='bottone_keyword' class='button' onclick='return confirmDelete5()'/>
 		</div></form>";
             $nav2 = "<header id='header'>
                                     <h1><a href='#' id='logo'>DMI Papers</a></h1>

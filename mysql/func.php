@@ -259,6 +259,21 @@ function check_approve() {
     }
 }
 
+#funzione recupero informazioni account
+
+function find_account_info($email) {
+    include './header.inc.php';
+//import connessione database
+    include './mysql/db_conn.php';
+    #verifica se esistono preprints precedenti e li sposto...
+    $sql = "SELECT * FROM ACCOUNTS WHERE email='".$email."'";
+    $query = mysqli_query($db_connection, $sql) or die(mysql_error());
+    $row = mysqli_fetch_array($query);
+    #chiusura connessione al database
+    mysqli_close($db_connection);
+    return $row;
+}
+
 #invio mail agli admin quando avviene un nuovo submit(non terminata)
 
 function sendmailadmin($uid, $idp) {

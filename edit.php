@@ -113,7 +113,7 @@
 				}
 			</script>
                 <form name='f1' action='edit.php?r=" . $_GET['r'] . "' method='POST' enctype='multipart/form-data' onsubmit='loading(load);'>
-                    <center><h2>Publication informations</h2><h1>field with '*' are required</h1><br/><input type='reset' name='reset' value='Reset'><br/><br/></center>
+                    <center><h2>Publication informations</h2><h1>field with '*' are required.</h1><br/><input type='reset' name='reset' value='Reset'><br/><br/></center>
                             <div id='divinsertcateg'>
                             <div style='float:right; width:49%;'>
                                 <div style='font-weight: bold;'>

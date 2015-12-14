@@ -88,10 +88,10 @@
                             <div style="margin-left:1%;">
                                 <form name="f1" action="modp.php" method="POST" onsubmit="loading(load);">
                                     <input style="width:110px; color:red;" type="submit" name="b1" value="Logout" id="botton_logout" class="button" style="color: red;" onclick="return confirmLogout()">
-                                    <a style="color:#3C3C3C;" href="./uploaded.php?p=1" id="bottone_keyword" class="buttonlink" onclick="loading(load);">My uploads</a>
-                                    <a style="color:#3C3C3C;" href="./check_preprints.php" id="bottone_keyword" class="buttonlink" onclick="loading(load);">Check section</a>
-                                    <a style="color:#3C3C3C;" href="./arXiv_panel.php" id="bottone_keyword" class="buttonlink" onclick="loading(load);">ArXiv panel</a>
-                                    <a style="color:#3C3C3C;" href="./manual_edit.php" id="bottone_keyword" class="buttonlink" onclick="loading(load);">Edit section</a>
+                                    <a style="color:#3C3C3C;" href="./uploaded.php?p=1" id="bottone_keyword" class="buttonlink" onclick="loading(load);">Uploads</a>
+                                    <a style="color:#3C3C3C;" href="./check_preprints.php" id="bottone_keyword" class="buttonlink" onclick="loading(load);">Check</a>
+                                    <a style="color:#3C3C3C;" href="./arXiv_panel.php" id="bottone_keyword" class="buttonlink" onclick="loading(load);">ArXiv</a>
+                                    <a style="color:#3C3C3C;" href="./manual_edit.php" id="bottone_keyword" class="buttonlink" onclick="loading(load);">Edit</a>
                                     <a style="color:#3C3C3C;" href="./archived_preprints.php" id="bottone_keyword" class="buttonlink" onclick="loading(load);">Archived</a>
                                 </form>
                                 <div>
@@ -108,7 +108,7 @@
                     <form name="f3" action="modp.php" method="POST" enctype="multipart/form-data" onsubmit="loading(load);">
                         <center>
                             <h2>Insert new paper</h2>
-                            <h1>field with "*" are required</h1>
+                            <h1>field with "*" are required.</h1>
                             <br/>
                             <input type="reset" name="reset" value="Reset">
                             <br/>
@@ -219,7 +219,7 @@
                             <input type="file" required name="fileToUpload" id="fileToUpload">
                             <br/>
                             <br/>
-                            <input type="submit" name="b3" value="Insert paper" id='bottone_keyword' class='button' onclick="return confirmInsert()">
+                            <input type="submit" name="b3" value="Insert" id='bottone_keyword' class='button' onclick="return confirmInsert()">
                             <hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>
                         </center>
                     </form>

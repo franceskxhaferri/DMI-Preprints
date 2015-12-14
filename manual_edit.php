@@ -86,7 +86,7 @@
                             echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
                             echo " <center><div><form name='f2' action='manual_edit.php' method='POST' onsubmit='loading(load);'>Insert id of publication: 
                                 <input type='search' autocomplete = 'on' style='width:200px; height: 19px;' name='id' required class='textbox' placeholder='example of id: 0000.0000v1'/>
-                                <input type='submit' name='bottoni8' value='Get paper' id='bottone_keyword' class='button'/><br/>
+                                <input type='submit' name='bottoni8' value='Get' id='bottone_keyword' class='button'/><br/>
 		               </form></div></center>
 		               ";
                             $var = False;
@@ -125,7 +125,7 @@
                     <center>
                         <div>
                         <br/>
-                            <h2>paper informations</h2><h1>field with '*' are required</h1><br/><input type='reset' name='reset' value='Reset'><br/><br/></center>
+                            <h2>paper informations</h2><h1>field with '*' are required.</h1><br/><input type='reset' name='reset' value='Reset'><br/><br/></center>
                             <div id='divinsertcateg'>
                             <div style='float:right; width:49%;'><div style='font-weight: bold;'>document:</div><div style='float:right; width:49%;'><a href=./pdf/" . $ris[9] . " onclick='window.open(this.href);return false' style='color:#007897;' title='" . $ris[9] . "'>VIEW</a></div></div>
                             <div style='font-weight: bold;'>

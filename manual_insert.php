@@ -94,7 +94,7 @@
                                 <form name='f3' action='manual_insert.php' method='POST' onsubmit="loading(load);">
                                     Get paper informations from arXiv:
                                     <input type='search' autocomplete = 'on' style='width:200px; height: 19px;' name='id' required class='textbox' placeholder='Insert id(arXiv): 0000.0000'/>
-                                    <input type='submit' name='b7' value='Get paper' id='bottone_keyword' class='button' ><br/>
+                                    <input type='submit' name='b7' value='Get' id='bottone_keyword' class='button' ><br/>
                                 </form>
                             </div>
                         </center>
@@ -120,7 +120,7 @@
                             #inserimento mediante arxiv
                             echo "
                 <form name='f1' action='manual_insert.php' method='POST' enctype='multipart/form-data' onclick='myFunction()' onsubmit='loading(load);'>
-                    <center><div><h2>paper informations</h2><h1>field with '*' are required</h1><br/><input type='reset' name='reset' value='Reset'><br/><br/></center>
+                    <center><div><h2>paper informations</h2><h1>field with '*' are required.</h1><br/><input type='reset' name='reset' value='Reset'><br/><br/></center>
                         <div id='divinsertcateg'>
                         <div style='float:right; width:49%;'><div style='font-weight: bold;'>document:</div><div style='float:right; width:49%;'><a href=./pdf_downloads/" . $arcid1 . ".pdf onclick='window.open(this.href);return false' style='color:#007897;' title='" . $arcid1 . ".pdf'>VIEW</a></div></div>
                         <div style='font-weight: bold;'>
