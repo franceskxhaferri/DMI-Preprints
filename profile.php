@@ -38,6 +38,7 @@
     <body>
         <?php
         #importo file per utilizzare funzioni...
+        require_once './graphics/loader.php';
         require_once './authorization/sec_sess.php';
         include_once './arXiv/check_nomi_data.php';
         include_once './mysql/func.php';
@@ -53,7 +54,7 @@
                 }
                 if ($_COOKIE['searchbarall'] == "1") {
                     #search bar
-                    require_once './searchbar_bottom.php';
+                    require_once './graphics/searchbar_bottom.php';
                 }
                 ?>
                 <div onclick="myFunction2()">
@@ -79,37 +80,34 @@
                         </div>
                         <hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
                         <div id="container">
-                        <div style="width: 45%;"><br/>
-                        <h2>Profile information</h2>
-			    <h1>Here you can see and change your account information.</h1>
-			</div><br/>
-                        <?php
-                        //lettura informazioni account
-                        $info = find_account_info($_SESSION['uid']);
-                        //TEST DEBUG
-			error_reporting(E_ALL);
-			ini_set('display_errors', 1);
-			require_once './reserved/edit_accountForm.php';
-                        //TEST DEBUG
-			error_reporting(E_ALL);
-			ini_set('display_errors', 1);
-			require_once './reserved/delete_accountForm.php';
+                            <div style="width: 45%;"><br/>
+                                <h2>Profile information</h2>
+                                <h1>Here you can see and change your account information.</h1>
+                            </div><br/>
+                            <?php
+                            //lettura informazioni account
+                            $info = find_account_info($_SESSION['uid']);
+                            //TEST DEBUG
+                            error_reporting(E_ALL);
+                            ini_set('display_errors', 1);
+                            require_once './reserved/edit_accountForm.php';
+                            //TEST DEBUG
+                            error_reporting(E_ALL);
+                            ini_set('display_errors', 1);
+                            require_once './reserved/delete_accountForm.php';
+                        } else {
+                            echo '<script type="text/javascript">alert("ACCESS DENIED!");</script>';
+                            echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
+                        }
                     } else {
-                        echo '<script type="text/javascript">alert("ACCESS DENIED!");</script>';
                         echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
                     }
-                } else {
-                    echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
-                }
-                ?>
+                    ?>
                 </div>
-        <br/>
-        <br/>
-        <br/>
-        <div id="load">
-            <img src="./images/loader.gif" alt="Loading" style="width: 192px; height: 94px;">
+                <br/>
+                <br/>
+                <br/>
+            </center>
         </div>
-                </center>
-        </div>
-                </body>
-                </html>
+    </body>
+</html>

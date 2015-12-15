@@ -18,26 +18,26 @@ function chkAccountUpdate() {
         alert("All fields are required!");
         return false;
     } else {
-    	if (p0 != 0) {
-	    	 if (p1 == 0 || p2 == 0){
-		 	alert("Insert new password!");
-			return false;
-		 } else {
-		    if (p1 < 6) {
-			alert("The password field must contain at least 6 characters!");
-			return false;
-		    } else if (pw1 != pw2) {
-			alert("Passwords do not match!");
-			return false;
-		    } else if (name == pw1) {
-			alert("The password can not be the name!");
-			return false;
-		    } else if (sname == pw1) {
-			alert("The password can not be the surname!");
-			return false;
-		    }
-		 }
-	 }
+        if (p0 != 0) {
+            if (p1 == 0 || p2 == 0) {
+                alert("Insert new password!");
+                return false;
+            } else {
+                if (p1 < 6) {
+                    alert("The password field must contain at least 6 characters!");
+                    return false;
+                } else if (pw1 != pw2) {
+                    alert("Passwords do not match!");
+                    return false;
+                } else if (name == pw1) {
+                    alert("The password can not be the name!");
+                    return false;
+                } else if (sname == pw1) {
+                    alert("The password can not be the surname!");
+                    return false;
+                }
+            }
+        }
     }
     //array caratteri speciali
     var chars = ["{", "}", "[", "]", "(", ")", "*", "$", "€", "%", "/", "^", "#", "!", "`", "~", "+", "=", "?", "&", " ", '"', "'", ";", ":", "\\", "|"];
@@ -71,9 +71,9 @@ function chkAccountUpdate() {
 function chkAccountDelete() {
     var email = $('#email').val();
     var e = email.length;
-    if(confirm("WARNING: The operation is not reversible, you want to proceed with the deletion?")){
-	    $("#container").load("reserved/delete_account.php", {mail: email}, function () {
-	    });
+    if (confirm("WARNING: The operation is not reversible, you want to proceed with the deletion?")) {
+        $("#container").load("reserved/delete_account.php", {mail: email}, function () {
+        });
     }
 }
 //funzione reset password login
@@ -539,4 +539,8 @@ function confirmDelete4()
 function confirmDelete5()
 {
     return confirm("Remove all archived papers?");
+}
+function confirmDelete6()
+{
+    return confirm("Remove user/s?");
 }

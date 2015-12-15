@@ -43,6 +43,7 @@
         <?php
         #importo file per utilizzare funzioni...
         #importazione variabili globali
+        require_once './graphics/loader.php';
         include './header.inc.php';
         include './authorization/sec_sess.php';
         include './arXiv/check_nomi_data.php';
@@ -54,7 +55,7 @@
                 echo "<div id='gotop' hidden><a id='scrollToTop' title='Go top'><img style='width:25px; height:25px;' src='./images/top.gif'></a></div>";
                 if ($_COOKIE['searchbarall'] == "1") {
                     #search bar
-                    require_once './searchbar_bottom.php';
+                    require_once './graphics/searchbar_bottom.php';
                 }
                 ?>
                 <div onclick="myFunction2()">
@@ -90,14 +91,15 @@
                                     <input style="width:110px; color:red;" type="submit" name="b1" value="Logout" id="botton_logout" class="button" style="color: red;" onclick="return confirmLogout()">
                                     <a style="color:#3C3C3C;" href="./uploaded.php?p=1" id="bottone_keyword" class="buttonlink" onclick="loading(load);">Uploads</a>
                                     <a style="color:#3C3C3C;" href="./check_preprints.php" id="bottone_keyword" class="buttonlink" onclick="loading(load);">Check</a>
-                                    <a style="color:#3C3C3C;" href="./arXiv_panel.php" id="bottone_keyword" class="buttonlink" onclick="loading(load);">ArXiv</a>
                                     <a style="color:#3C3C3C;" href="./manual_edit.php" id="bottone_keyword" class="buttonlink" onclick="loading(load);">Edit</a>
+                                    <a style="color:#3C3C3C;" href="./arXiv_panel.php" id="bottone_keyword" class="buttonlink" onclick="loading(load);">ArXiv</a>
                                     <a style="color:#3C3C3C;" href="./archived_preprints.php" id="bottone_keyword" class="buttonlink" onclick="loading(load);">Archived</a>
+                                    <a style="color:#3C3C3C;" href="./users_list.php" id="bottone_keyword" class="buttonlink" onclick="loading(load);">Users</a>
                                 </form>
                                 <div>
                                     <?php
                                     if (check_approve() == true) {
-                                        print_r(" <font style='color:red; font-style: italic'>There are preprint to be approved!</font>");
+                                        print_r("<font style='color:red; font-style: italic'>There are preprint to be approved!</font>");
                                     }
                                     ?>
                                 </div>
@@ -280,10 +282,5 @@
             UpdateMathaut('Here it will show a preview of what you write on authors');
             UpdateMathabs('Here it will show a preview of what you write on abstract');
         </script>
-    <center>
-        <div id="load">
-            <img src="./images/loader.gif" alt="Loading" style="width: 192px; height: 94px;">
-        </div>
-    </center>
 </body>
 </html>

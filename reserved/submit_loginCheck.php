@@ -17,7 +17,7 @@ if (isset($_POST['uid']) && isset($_POST['pw'])) {
             $_SESSION['nome'] = GetNameAuth($inputUID);
             $_SESSION['uid'] = $inputUID;
             $_SESSION['LAST_ACTIVITY'] = time(); //aggiorna timestamp sessione
-            UpdateLastAuth($inputUID);//aggiorna timestamp database
+            UpdateLastAuth($inputUID); //aggiorna timestamp database
             echo "Successful login!";
             echo '<META HTTP-EQUIV="REFRESH" CONTENT="1; URL=./reserved.php">';
         } else {
@@ -47,11 +47,11 @@ if (isset($_POST['uid']) && isset($_POST['pw'])) {
     } else {
         if (InternalAuth($inputUID, $inputPass)) {
             sec_session_start();
-            $_SESSION['logged_type'] = "user";
+            $_SESSION['logged_type'] = "mod";
             $_SESSION['nome'] = GetNameAuth($inputUID);
             $_SESSION['uid'] = $inputUID;
             $_SESSION['LAST_ACTIVITY'] = time(); //aggiorna timestamp sessione
-            UpdateLastAuth($inputUID);//aggiorna timestamp database
+            UpdateLastAuth($inputUID); //aggiorna timestamp database
             echo "Successful login!";
             echo '<META HTTP-EQUIV="REFRESH" CONTENT="1; URL=./reserved.php">';
         } else {

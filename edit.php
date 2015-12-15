@@ -38,6 +38,7 @@
     <body>
         <?php
         #importo file per utilizzare funzioni...
+        require_once './graphics/loader.php';
         require_once './authorization/sec_sess.php';
         include_once './arXiv/check_nomi_data.php';
         include_once './arXiv/insert_remove_db.php';
@@ -53,7 +54,7 @@
                 echo "<div id='gotop' hidden><a id='scrollToTop' title='Go top'><img style='width:25px; height:25px;' src='./images/top.gif'></a></div>";
                 if ($_COOKIE['searchbarall'] == "1") {
                     #search bar
-                    require_once './searchbar_bottom.php';
+                    require_once './graphics/searchbar_bottom.php';
                 }
                 ?>
                 <div onclick="myFunction2()">
@@ -354,10 +355,5 @@
         </div>
         <br/>
         <br/>
-    <center>
-        <div id="load">
-            <img src="./images/loader.gif" alt="Loading" style="width: 192px; height: 94px;">
-        </div>
-    </center>
 </body>
 </html>

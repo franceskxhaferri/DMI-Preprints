@@ -59,6 +59,7 @@
     <body>
         <?php
         #importo file per utilizzare funzioni...
+        require_once './graphics/loader.php';
         require_once './authorization/sec_sess.php';
         include_once './arXiv/check_nomi_data.php';
         include_once './arXiv/insert_remove_db.php';
@@ -254,11 +255,6 @@
             }
             ?>
         </div><br/>
-    </center>
-    <center>
-        <div id="load">
-            <img src="./images/loader.gif" alt="Loading" style="width: 192px; height: 94px;">
-        </div>
     </center>
 </body>
 </html>

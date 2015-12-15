@@ -42,6 +42,7 @@
     <body>
         <?php
         #importo file per utilizzare funzioni...
+        require_once './graphics/loader.php';
         include './header.inc.php';
         include './authorization/sec_sess.php';
         include './arXiv/check_nomi_data.php';
@@ -53,7 +54,7 @@
                 echo "<div id='gotop' hidden><a id='scrollToTop' title='Go top'><img style='width:25px; height:25px;' src='./images/top.gif'></a></div>";
                 if ($_COOKIE['searchbarall'] == "1") {
                     #search bar
-                    require_once './searchbar_bottom.php';
+                    require_once './graphics/searchbar_bottom.php';
                 }
                 ?>  <div onclick="myFunction2()">
                     <div id="header-wrapper">
@@ -278,10 +279,5 @@
             UpdateMathaut('Here it will show a preview of what you write on authors');
             UpdateMathabs('Here it will show a preview of what you write on abstract');
         </script>
-    <center>
-        <div id="load">
-            <img src="./images/loader.gif" alt="Loading" style="width: 192px; height: 94px;">
-        </div>
-    </center>
 </body>
 </html>
