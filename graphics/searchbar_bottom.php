@@ -10,7 +10,7 @@ echo "<center><div id='stickbottom' style='padding:2px;'>
 			    <font color='#007897'>Full text search: (<a style='color:#007897;' onclick='window.open(this.href);
 				    return false' href='http://en.wikipedia.org/wiki/Full_text_search'>info</a>)</font><br/>
 			    <div style='height:30px;'>
-				Search: <input type='search' autocomplete = 'on' name='ft' placeholder='Insert phrase, name, keyword, etc.' value='" . $_GET['ft'] . "' class='textbox' style='width:50%; height: 19px;'/>
+				Search: <input type='search' autocomplete = 'on' name='ft' placeholder='Insert phrase, name, keyword, etc.' class='textbox' style='width:50%; height: 19px;'/>
 				<input type='submit' name='go' value='Send' class='button'/></div>
 			    <div style='height:20px;'>
 				Reset selections: <input type='reset' name='reset' value='Reset' class='button'>&nbsp&nbsp
@@ -81,7 +81,7 @@ echo "<center><div id='stickbottom' style='padding:2px;'>
 		            <option value='year'>Year:</option>
 		            <option value='id'>ID:</option>
 		        </select>
-		        <input type='search' autocomplete = 'on' name='r' placeholder='Author name, part, etc.' value='" . $_GET['r'] . "' class='textbox' style='width:33%; height: 19px;'/>
+		        <input type='search' autocomplete = 'on' name='r' placeholder='Author name, part, etc.' class='textbox' style='width:33%; height: 19px;'/>
 		    <input type='submit' name='s' value='Send' class='button'/></form>
 		    </div></center>";
 ?>

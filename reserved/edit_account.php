@@ -18,13 +18,17 @@ if (isset($_POST['name']) && isset($_POST['surname']) && isset($_POST['mail']) &
     $name = ucwords($name);
     $sname = trim($sname);
     $sname = ucwords($sname);
-    if (isset($_POST['password']) && $_POST['password'] != "") {
+    if (isset($_POST['password']) && $_POST['password'] != "") {//quando password viene modificata
         //generazione chiave hash password
         $hash = md5($password);
         $passwordold = md5($passwordold);
         if ($passworddat == $passwordold) {
-            if ($_POST['mail'] != $_POST['mailold']) {
+            if ($_POST['mail'] != $_POST['mailold']) {//quando email viene modificata
                 if (!SearchAccount($email)) {
+                    //
+                    $sql = "UPDATE PREPRINTS SET uid='" . $email . "' WHERE uid='" . $emailold . "'";
+                    $query = mysqli_query($db_connection, $sql) or die(mysql_error());
+                    //
                     $sql = "UPDATE ACCOUNTS SET nome='" . $name . "', cognome='" . $sname . "', email='" . $email . "', password='" . $hash . "' WHERE email='" . $emailold . "'";
                     $query = mysqli_query($db_connection, $sql) or die(mysql_error());
                     //chiusura della sessione
@@ -37,7 +41,7 @@ if (isset($_POST['name']) && isset($_POST['surname']) && isset($_POST['mail']) &
                     echo "<br/><br/>Error, inserted email already exist!";
                     echo '<META HTTP-EQUIV="Refresh" Content="2; URL=./profile.php">';
                 }
-            } else {
+            } else {//quando email non viene modificata
                 $sql = "UPDATE ACCOUNTS SET nome='" . $name . "', cognome='" . $sname . "', email='" . $email . "', password='" . $hash . "' WHERE email='" . $email . "'";
                 $query = mysqli_query($db_connection, $sql) or die(mysql_error());
                 echo "<br/><br/>Your account information is successfully updated!";
@@ -47,9 +51,13 @@ if (isset($_POST['name']) && isset($_POST['surname']) && isset($_POST['mail']) &
             echo "<br/><br/>Error, old password incorrect!";
             echo '<META HTTP-EQUIV="Refresh" Content="2; URL=./profile.php">';
         }
-    } else {
-        if ($_POST['mail'] != $_POST['mailold']) {
+    } else {//quando password non viene modificata
+        if ($_POST['mail'] != $_POST['mailold']) {//quando email viene modificata
             if (!SearchAccount($email)) {
+                //
+                $sql = "UPDATE PREPRINTS SET uid='" . $email . "' WHERE uid='" . $emailold . "'";
+                $query = mysqli_query($db_connection, $sql) or die(mysql_error());
+                //
                 $sql = "UPDATE ACCOUNTS SET nome='" . $name . "', cognome='" . $sname . "', email='" . $email . "' WHERE email='" . $emailold . "'";
                 $query = mysqli_query($db_connection, $sql) or die(mysql_error());
                 session_start();
@@ -61,7 +69,7 @@ if (isset($_POST['name']) && isset($_POST['surname']) && isset($_POST['mail']) &
                 echo "<br/><br/>Error, inserted email already exist!";
                 echo '<META HTTP-EQUIV="Refresh" Content="2; URL=./profile.php">';
             }
-        } else {
+        } else {//quando email non viene modificata
             $sql = "UPDATE ACCOUNTS SET nome='" . $name . "', cognome='" . $sname . "', email='" . $email . "' WHERE email='" . $email . "'";
             $query = mysqli_query($db_connection, $sql) or die(mysql_error());
             echo "<br/><br/>Your account information is successfully updated!";

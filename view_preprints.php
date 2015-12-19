@@ -44,7 +44,7 @@
             }
         }
         #disabilita searchbar su altre pagine
-        if ($_GET['clos'] == "1" && $_COOKIE['searchbarall'] == "1") {
+        if ((isset($_GET['clos'])) && $_GET['clos'] == "1" && $_COOKIE['searchbarall'] == "1") {
             echo "<script>javascript:checkCookie7();</script>";
             echo "<meta http-equiv='refresh' content='0'; URL=./view_preprints.php>";
         }
@@ -56,15 +56,10 @@
         }
         ?>
     </head>
-    <body>
-        <?php
-        #importo file per utilizzare funzioni...
-        require_once './graphics/loader.php';
-        require_once './authorization/sec_sess.php';
-        include_once './arXiv/check_nomi_data.php';
-        include_once './arXiv/insert_remove_db.php';
+    <body><?php
+require_once './graphics/header_main_page.php';
         sec_session_start();
-        if ($_SESSION['logged_type'] === "mod") {
+        if (isset($_SESSION['logged_type']) && $_SESSION['logged_type'] === "mod") {
             $t = "Go to arXiv panel";
             $rit = "arXiv_panel.php";
             $nav = "<header id='header'>
@@ -74,7 +69,7 @@
                                         <a href='./reserved.php' onclick='loading(load);'>Reserved Area</a>
                                     </nav>
                                 </header>";
-        } else if ($_SESSION['logged_type'] === "user") {
+        } else if (isset($_SESSION['logged_type']) && $_SESSION['logged_type'] === "user") {
             $t = "Go to reserved area";
             $rit = "reserved.php";
             $nav = "<header id='header'>
@@ -95,9 +90,6 @@
                                     </nav>
                                 </header>";
         }
-        if ($_SESSION['logged_type'] != "mod") {
-            $str1 = "<h1><center>in this section are the papers that have been published on DMI archive and papers published by these <a style='color:#007897;' href='./authors_list.php' onclick='window.open(this.href); return false'>authors</a> on arxiv.org.</center></h1><br/>";
-        }
         ?>
         <div id="header-wrapper">
             <div class="container">
@@ -107,13 +99,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div>
-            <br/><br/>
-            <?php
-            echo $str1;
-            ?>
-        </div>
+        </div><br/><br/>
     <center>
         <?php
         echo "<div id='gotop' hidden><a id='scrollToTop' title='Go top'><img style='width:25px; height:25px;' src='./images/top.gif'></a></div>";
@@ -253,6 +239,7 @@
                     }
                 }
             }
+            require_once './graphics/loader.php';
             ?>
         </div><br/>
     </center>

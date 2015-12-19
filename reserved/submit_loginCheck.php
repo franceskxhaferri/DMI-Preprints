@@ -1,6 +1,7 @@
 <?php
 
 require_once '../header.inc.php';
+require_once '../mysql/db_conn.php';
 require_once '../authorization/sec_sess.php';
 require_once '../authorization/auth.php';
 
@@ -47,7 +48,7 @@ if (isset($_POST['uid']) && isset($_POST['pw'])) {
     } else {
         if (InternalAuth($inputUID, $inputPass)) {
             sec_session_start();
-            $_SESSION['logged_type'] = "user";
+            $_SESSION['logged_type'] = "mod";
             $_SESSION['nome'] = GetNameAuth($inputUID);
             $_SESSION['uid'] = $inputUID;
             $_SESSION['LAST_ACTIVITY'] = time(); //aggiorna timestamp sessione

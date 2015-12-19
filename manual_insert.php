@@ -35,91 +35,79 @@
         <script type="text/javascript" src="./js/allscript.js">
         </script>
     </head>
-    <body>
-        <?php
-        #importo file per utilizzare funzioni...
-        require_once './graphics/loader.php';
-        require_once './authorization/sec_sess.php';
-        include_once './arXiv/check_nomi_data.php';
-        include_once './arXiv/insert_remove_db.php';
-        include_once './arXiv/arXiv_parsing.php';
-        #importazione variabili globali
-        include './header.inc.php';
-        sec_session_start();
-        if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] < 86400)) {
-            if ($_SESSION['logged_type'] === "mod") {
-                //sessione moderatore
-                echo "<div id='gotop' hidden><a id='scrollToTop' title='Go top'><img style='width:25px; height:25px;' src='./images/top.gif'></a></div>";
-                if ($_COOKIE['searchbarall'] == "1") {
-                    #search bar
-                    require_once './graphics/searchbar_bottom.php';
-                }
-                ?>
-                <div onclick="myFunction2()">
-                    <div id="header-wrapper">
-                        <div class="container">
-                            <div class="row">
-                                <div class="12u">
-                                    <header id="header">
-                                        <h1><a href="#" id="logo">DMI Papers</a></h1>
-                                        <nav id="nav">
-                                            <a href='./view_preprints.php' onclick="loading(load);">Publications</a>
-                                            <a href="./reserved.php" class="current-page-item" onclick="loading(load);">Reserved Area</a>
-                                        </nav>
-                                    </header>
-                                </div>
-                            </div>
+    <body><?php
+require_once './graphics/header.php';
+        echo "<div id='gotop' hidden><a id='scrollToTop' title='Go top'><img style='width:25px; height:25px;' src='./images/top.gif'></a></div>";
+        if ($_COOKIE['searchbarall'] == "1") {
+            #search bar
+            require_once './graphics/searchbar_bottom.php';
+        }
+        ?>
+        <div onclick="myFunction2()">
+            <div id="header-wrapper">
+                <div class="container">
+                    <div class="row">
+                        <div class="12u">
+                            <header id="header">
+                                <h1><a href="#" id="logo">DMI Papers</a></h1>
+                                <nav id="nav">
+                                    <a href='./view_preprints.php' onclick="loading(load);">Publications</a>
+                                    <a href="./reserved.php" class="current-page-item" onclick="loading(load);">Reserved Area</a>
+                                </nav>
+                            </header>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div>
+                <center>
+                    <br/>
+                    <br/>
+                    <h2>manual insertion</h2>
+                </center>
+            </div>
+            <center>
+                Go to arXiv panel&nbsp&nbsp&nbsp
+                <a style="color:#3C3C3C;" href="./arXiv_panel.php" id="bottone_keyword" class="button" onclick="return confirmExit()" >Back</a><br/><br/>
+                <a style='color:#007897;' href='http://arxiv.org/' onclick='window.open(this.href);
+                        return false' title='arXiv'>arXiv.org</a>
+            </center>
+            <hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
+            <?php
+            if (sessioneavviata() == True) {
+                echo "<br/><br/><center>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTION CAN'T BE USED IN THIS MOMENT!</center><br/>";
+            } else {
+                ?>
+                <center>
                     <div>
-                        <center>
-                            <br/>
-                            <br/>
-                            <h2>manual insertion</h2>
-                        </center>
+                        <form name='f3' action='manual_insert.php' method='POST' onsubmit="loading(load);">
+                            Get paper informations from arXiv:
+                            <input type='search' autocomplete = 'on' style='width:200px; height: 19px;' name='id' required class='textbox' placeholder='Insert id(arXiv): 0000.0000'/>
+                            <input type='submit' name='b7' value='Get' id='bottone_keyword' class='button' ><br/>
+                        </form>
                     </div>
-                    <center>
-                        Go to arXiv panel&nbsp&nbsp&nbsp
-                        <a style="color:#3C3C3C;" href="./arXiv_panel.php" id="bottone_keyword" class="button" onclick="return confirmExit()" >Back</a><br/><br/>
-                        <a style='color:#007897;' href='http://arxiv.org/' onclick='window.open(this.href);
-                                        return false' title='arXiv'>arXiv.org</a>
-                    </center>
-                    <hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
-                    <?php
-                    if (sessioneavviata() == True) {
-                        echo "<br/><br/><center>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTION CAN'T BE USED IN THIS MOMENT!</center><br/>";
-                    } else {
-                        ?>
-                        <center>
-                            <div>
-                                <form name='f3' action='manual_insert.php' method='POST' onsubmit="loading(load);">
-                                    Get paper informations from arXiv:
-                                    <input type='search' autocomplete = 'on' style='width:200px; height: 19px;' name='id' required class='textbox' placeholder='Insert id(arXiv): 0000.0000'/>
-                                    <input type='submit' name='b7' value='Get' id='bottone_keyword' class='button' ><br/>
-                                </form>
-                            </div>
-                        </center>
-                        <hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>
-                        <?php
-                        if (isset($_POST['b7'])) {
-                            echo "<div hidden>";
-                            $id = trim($_POST['id']);
-                            arxiv_call($id, 0);
-                            for ($i = 1; $i < 11; $i++) {
-                                $id1 = $id . "v" . $i;
-                                $ris = cercapreprint($id1);
-                                if ($id1 == $ris[0]) {
-                                    #azzeramento file temporaneo...
-                                    azzerapreprint();
-                                    break;
-                                }
-                            }
+                </center>
+                <hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>
+                <?php
+                if (isset($_POST['b7'])) {
+                    echo "<div hidden>";
+                    $id = trim($_POST['id']);
+                    arxiv_call($id, 0);
+                    for ($i = 1; $i < 11; $i++) {
+                        $id1 = $id . "v" . $i;
+                        $ris = cercapreprint($id1);
+                        if ($id1 == $ris[0]) {
+                            #azzeramento file temporaneo...
+                            azzerapreprint();
+                            break;
                         }
-                        echo "</div>";
-                        if ($id1 == $ris[0] && isset($_POST['b7'])) {
-                            $arcid1 = str_replace("/", "-", $id1);
-                            #inserimento mediante arxiv
-                            echo "
+                    }
+                }
+                echo "</div>";
+                if ($id1 == $ris[0] && isset($_POST['b7'])) {
+                    $arcid1 = str_replace("/", "-", $id1);
+                    #inserimento mediante arxiv
+                    echo "
                 <form name='f1' action='manual_insert.php' method='POST' enctype='multipart/form-data' onclick='myFunction()' onsubmit='loading(load);'>
                     <center><div><h2>paper informations</h2><h1>field with '*' are required.</h1><br/><input type='reset' name='reset' value='Reset'><br/><br/></center>
                         <div id='divinsertcateg'>
@@ -236,7 +224,7 @@
                             <input type='submit' name='b9' value='Remove' id='bottone_keyword' class='button' onclick='return confirmDelete()'/>
                             <input type='submit' name='b10' value='Insert' id='bottone_keyword' class='button' onclick='return confirmInsert()'/></center>
                             </form>";
-                            echo "
+                    echo "
                             	<script type='text/javascript'>
                                         function confirmExit(){
                                             var x = confirm('All unsaved changes will be lost, it will be moved to check section, continue?');
@@ -249,20 +237,20 @@
                                         }
 				</script>
 				";
-                            $ris[1] = str_replace("<br />", "", $ris[1]);
-                            $ris[1] = str_replace("\n", "", $ris[1]);
-                            $ris[7] = str_replace("<br />", "", $ris[7]);
-                            $ris[7] = str_replace("\n", "", $ris[7]);
-                            echo "<script type='text/javascript'>UpdateMathcat('" . $ris[6] . "')</script>
+                    $ris[1] = str_replace("<br />", "", $ris[1]);
+                    $ris[1] = str_replace("\n", "", $ris[1]);
+                    $ris[7] = str_replace("<br />", "", $ris[7]);
+                    $ris[7] = str_replace("\n", "", $ris[7]);
+                    echo "<script type='text/javascript'>UpdateMathcat('" . $ris[6] . "')</script>
 				    <script type='text/javascript'>UpdateMathtit('" . $ris[1] . "')</script>
 				    <script type='text/javascript'>UpdateMathaut('" . $ris[3] . "')</script>
 				    <script type='text/javascript'>UpdateMathjou('" . $ris[4] . "')</script>
 				    <script type='text/javascript'>UpdateMathcom('" . $ris[5] . "')</script>
 				    <script type='text/javascript'>UpdateMathabs('" . $ris[7] . "')</script>";
-                            ############################################################################################################
-                        } else {
-                            #inserimento manuale
-                            echo "<form name='f2' action='manual_insert.php' method='POST' enctype='multipart/form-data' onclick='myFunction()' onsubmit='loading(load);'>
+                    ############################################################################################################
+                } else {
+                    #inserimento manuale
+                    echo "<form name='f2' action='manual_insert.php' method='POST' enctype='multipart/form-data' onclick='myFunction()' onsubmit='loading(load);'>
                             <center><div><h2>paper informations</h2><h1>field with '*' are required</h1><br/><input type='reset' name='reset' value='Reset'/><br/></center>
                         <div id='divinsertcateg'>
                             <div style='font-weight: bold;'>*id:</div>
@@ -380,105 +368,99 @@
 			    UpdateMathaut('Here it will show a preview of what you write on authors');
 			    UpdateMathabs('Here it will show a preview of what you write on abstract');
 			</script>";
-                            ############################################################################################################
-                        }
-                        $target_file = $basedir2 . basename($_FILES["fileToUpload"]["name"]);
-                        $type = "document/pdf"; // impostato il tipo per un'pdf
-                        #bottone insert manually
-                        if (isset($_POST['b8'])) {
-                            if (empty($_POST['journal'])) {
-                                $info[4] = "No journal ref";
-                            } else {
-                                $info[4] = $_POST['journal'];
-                            }
-                            if (empty($_POST['comments'])) {
-                                $info[5] = "No journal ref";
-                            } else {
-                                $info[5] = $_POST['comments'];
-                            }
-                            $info[0] = $_POST['id'];
-                            $info[1] = $_POST['title'];
-                            $info[2] = $_POST['date'];
-                            $info[3] = $_POST['author'];
-                            $info[6] = $_POST['category'];
-                            $info[7] = $_POST['abstract'];
-                            #richiamo della funzione per il versionamento dei preprints
-                            version_preprint($info[0]);
-                            #richiamo della funzione per inserire le info del preprint all'interno del database
-                            insert_preprints($info);
-                            #upload del file selezionato
-                            if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                                $fileType = $_FILES["fileToUpload"]["type"];
-                                #inserimento file nel database
-                                insert_one_pdf($info[0], $fileType);
-                                echo '<script type="text/javascript">alert("Paper ' . $_POST['id'] . ' inserted correctly!");</script>';
-                            } else {
-                                echo '<script type="text/javascript">alert("Sorry, there was an error uploading your file!");</script>';
-                            }
-                        }
-                        #bottone delete
-                        if (isset($_POST['b9'])) {
-                            #eliminazione del preprint selezionato
-                            unlink($basedir3 . $_POST['id'] . ".pdf");
-                            cancellaselected($_POST['id']);
-                            echo '<script type="text/javascript">alert("Paper ' . $_POST['id'] . ' removed correctly!");</script>';
-                            echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./arXiv_panel.php">';
-                        }
-                        #bottone inserimento
-                        if (isset($_POST['b10'])) {
-                            if (empty($_POST['journal'])) {
-                                $info[4] = "No journal ref";
-                            } else {
-                                $info[4] = $_POST['journal'];
-                            }
-                            if (empty($_POST['comments'])) {
-                                $info[5] = "No journal ref";
-                            } else {
-                                $info[5] = $_POST['comments'];
-                            }
-                            $info[0] = $_POST['id'];
-                            $info[1] = $_POST['title'];
-                            $info[2] = $_POST['data'];
-                            $info[3] = $_POST['author'];
-                            $info[6] = $_POST['category'];
-                            $info[7] = $_POST['abstract'];
-                            #richiamo della funzione per il versionamento dei preprints
-                            version_preprint($info[0]);
-                            #richiamo della funzione per inserire le info del preprint all'interno del database
-                            update_preprints($info);
-                            #inserimento del pdf sul database
-                            insert_one_pdf2($_POST['id']);
-                            #spostamento del file pdf
-                            copy($basedir3 . $_POST['id'] . ".pdf", $copia . $_POST['id'] . ".pdf");
-                            unlink($basedir3 . $_POST['id'] . ".pdf");
-                            if ($_FILES["fileToUpload"]["size"] > 0) {
-                                #caricamento del file scelto
-                                if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                                    $fileType = $_FILES["fileToUpload"]["type"];
-                                    #spostamento pdf
-                                    #inserimento nel database del file
-                                    insert_one_pdf($info[0], $fileType);
-                                    echo '<script type="text/javascript">alert("Paper ' . $_POST['id'] . ' inserted correctly!");</script>';
-                                    echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./arXiv_panel.php">';
-                                } else {
-                                    echo '<script type="text/javascript">alert("Error, file not uploaded!");</script>';
-                                }
-                            } else {
-                                echo '<script type="text/javascript">alert("Paper ' . $_POST['id'] . ' inserted correctly!");</script>';
-                                echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./arXiv_panel.php">';
-                            }
-                        }
-                    }
-                } else {
-                    echo '<script type="text/javascript">alert("ACCESS DENIED!");</script>';
-                    echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
+                    ############################################################################################################
                 }
-            } else {
-                echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
+                $target_file = $basedir2 . basename($_FILES["fileToUpload"]["name"]);
+                $type = "document/pdf"; // impostato il tipo per un'pdf
+                #bottone insert manually
+                if (isset($_POST['b8'])) {
+                    if (empty($_POST['journal'])) {
+                        $info[4] = "No journal ref";
+                    } else {
+                        $info[4] = $_POST['journal'];
+                    }
+                    if (empty($_POST['comments'])) {
+                        $info[5] = "No journal ref";
+                    } else {
+                        $info[5] = $_POST['comments'];
+                    }
+                    $info[0] = $_POST['id'];
+                    $info[1] = $_POST['title'];
+                    $info[2] = $_POST['date'];
+                    $info[3] = $_POST['author'];
+                    $info[6] = $_POST['category'];
+                    $info[7] = $_POST['abstract'];
+                    #richiamo della funzione per il versionamento dei preprints
+                    version_preprint($info[0]);
+                    #richiamo della funzione per inserire le info del preprint all'interno del database
+                    insert_preprints($info);
+                    #upload del file selezionato
+                    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+                        $fileType = $_FILES["fileToUpload"]["type"];
+                        #inserimento file nel database
+                        insert_one_pdf($info[0], $fileType);
+                        echo '<script type="text/javascript">alert("Paper ' . $_POST['id'] . ' inserted correctly!");</script>';
+                    } else {
+                        echo '<script type="text/javascript">alert("Sorry, there was an error uploading your file!");</script>';
+                    }
+                }
+                #bottone delete
+                if (isset($_POST['b9'])) {
+                    #eliminazione del preprint selezionato
+                    unlink($basedir3 . $_POST['id'] . ".pdf");
+                    cancellaselected($_POST['id']);
+                    echo '<script type="text/javascript">alert("Paper ' . $_POST['id'] . ' removed correctly!");</script>';
+                    echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./arXiv_panel.php">';
+                }
+                #bottone inserimento
+                if (isset($_POST['b10'])) {
+                    if (empty($_POST['journal'])) {
+                        $info[4] = "No journal ref";
+                    } else {
+                        $info[4] = $_POST['journal'];
+                    }
+                    if (empty($_POST['comments'])) {
+                        $info[5] = "No journal ref";
+                    } else {
+                        $info[5] = $_POST['comments'];
+                    }
+                    $info[0] = $_POST['id'];
+                    $info[1] = $_POST['title'];
+                    $info[2] = $_POST['data'];
+                    $info[3] = $_POST['author'];
+                    $info[6] = $_POST['category'];
+                    $info[7] = $_POST['abstract'];
+                    #richiamo della funzione per il versionamento dei preprints
+                    version_preprint($info[0]);
+                    #richiamo della funzione per inserire le info del preprint all'interno del database
+                    update_preprints($info);
+                    #inserimento del pdf sul database
+                    insert_one_pdf2($_POST['id']);
+                    #spostamento del file pdf
+                    copy($basedir3 . $_POST['id'] . ".pdf", $copia . $_POST['id'] . ".pdf");
+                    unlink($basedir3 . $_POST['id'] . ".pdf");
+                    if ($_FILES["fileToUpload"]["size"] > 0) {
+                        #caricamento del file scelto
+                        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+                            $fileType = $_FILES["fileToUpload"]["type"];
+                            #spostamento pdf
+                            #inserimento nel database del file
+                            insert_one_pdf($info[0], $fileType);
+                            echo '<script type="text/javascript">alert("Paper ' . $_POST['id'] . ' inserted correctly!");</script>';
+                            echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./arXiv_panel.php">';
+                        } else {
+                            echo '<script type="text/javascript">alert("Error, file not uploaded!");</script>';
+                        }
+                    } else {
+                        echo '<script type="text/javascript">alert("Paper ' . $_POST['id'] . ' inserted correctly!");</script>';
+                        echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./arXiv_panel.php">';
+                    }
+                }
             }
+            require_once './graphics/loader.php';
             ?>
         </div>
         <hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
         <br/>
-</body>
+    </body>
 </html>

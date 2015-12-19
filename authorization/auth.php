@@ -1,9 +1,5 @@
 <?php
 
-include './header.inc.php';
-//import connessione database
-include './mysql/db_conn.php';
-
 function LDAPAuth($UID) {
     global $ldaphost, $ldapport;
     $ldapconn = ldap_connect($ldaphost, $ldapport) or die("errore connessione LDAP server:  $ldaphost");
@@ -35,17 +31,13 @@ function RADIUSAuth($UID, $PASSWORD) {
 }
 
 function InternalAuth($UID, $PASSWORD) {
-    include '../header.inc.php';
-//import connessione database
-    include '../mysql/db_conn.php';
+    global $db_connection;
     $hash = md5($PASSWORD);
     //da inserire nella query: WHERE verificato=yes
     #verifica se esistono preprints precedenti e li sposto...
     $sql = "SELECT COUNT(*) AS TOTALFOUND FROM ACCOUNTS WHERE email='" . $UID . "' AND password='" . $hash . "'";
     $query = mysqli_query($db_connection, $sql) or die(mysql_error());
     $row = mysqli_fetch_array($query);
-    #chiusura connessione al database
-    mysqli_close($db_connection);
     if ($row['TOTALFOUND'] > 0) {
         return true;
     } else {
@@ -54,39 +46,24 @@ function InternalAuth($UID, $PASSWORD) {
 }
 
 function GetNameAuth($UID) {
-    include '../header.inc.php';
-//import connessione database
-    include '../mysql/db_conn.php';
-    #verifica se esistono preprints precedenti e li sposto...
+    global $db_connection;
     $sql = "SELECT nome,cognome FROM ACCOUNTS WHERE email='" . $UID . "'";
     $query = mysqli_query($db_connection, $sql) or die(mysql_error());
     $row = mysqli_fetch_array($query);
-    #chiusura connessione al database
-    mysqli_close($db_connection);
     return $row['nome'] . " " . $row['cognome'];
 }
 
 function UpdateLastAuth($UID) {
-    include '../header.inc.php';
-//import connessione database
-    include '../mysql/db_conn.php';
-    #verifica se esistono preprints precedenti e li sposto...
+    global $db_connection;
     $sql = "UPDATE ACCOUNTS SET accesso='" . date("c", time()) . "' WHERE email='" . $UID . "'";
     $query = mysqli_query($db_connection, $sql) or die(mysql_error());
-    #chiusura connessione al database
-    mysqli_close($db_connection);
 }
 
 function SearchAccount($UID) {
-    include '../header.inc.php';
-//import connessione database
-    include '../mysql/db_conn.php';
-    #verifica se esistono preprints precedenti e li sposto...
+    global $db_connection;
     $sql = "SELECT COUNT(*) AS TOTALFOUND FROM ACCOUNTS WHERE email='" . $UID . "'";
     $query = mysqli_query($db_connection, $sql) or die(mysql_error());
     $row = mysqli_fetch_array($query);
-    #chiusura connessione al database
-    mysqli_close($db_connection);
     if ($row['TOTALFOUND'] > 0) {
         return true;
     } else {
@@ -95,15 +72,11 @@ function SearchAccount($UID) {
 }
 
 function SearchAccountUser($UID) {
-    include './header.inc.php';
-//import connessione database
-    include './mysql/db_conn.php';
+    global $db_connection;
     #verifica se esistono preprints precedenti e li sposto...
     $sql = "SELECT COUNT(*) AS TOTALFOUND FROM ACCOUNTS WHERE email='" . $UID . "'";
     $query = mysqli_query($db_connection, $sql) or die(mysql_error());
     $row = mysqli_fetch_array($query);
-    #chiusura connessione al database
-    mysqli_close($db_connection);
     if ($row['TOTALFOUND'] > 0) {
         return true;
     } else {

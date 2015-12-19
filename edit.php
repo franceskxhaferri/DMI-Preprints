@@ -37,15 +37,7 @@
     </head>
     <body>
         <?php
-        #importo file per utilizzare funzioni...
-        require_once './graphics/loader.php';
-        require_once './authorization/sec_sess.php';
-        include_once './arXiv/check_nomi_data.php';
-        include_once './arXiv/insert_remove_db.php';
-        include_once './mysql/func.php';
-        #importazione variabili globali
-        include './header.inc.php';
-        sec_session_start();
+require_once './graphics/header.php';
         if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] < 86400)) {
             #if ($_SESSION['nome']." (".$_SESSION['uid'].")" == $row['uid'] && $row['uid'] != ""){
             if (($_SESSION['logged_type'] === "mod" or $_SESSION['logged_type'] === "user") &&
@@ -355,5 +347,5 @@
         </div>
         <br/>
         <br/>
-</body>
+    </body>
 </html>

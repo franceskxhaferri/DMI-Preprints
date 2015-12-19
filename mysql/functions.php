@@ -1,5 +1,4 @@
 <?php
-
 #funzione inserimento informazioni preprint
 
 function insert_pubb($array, $uid) {

@@ -35,83 +35,73 @@
         <script type="text/javascript" src="./js/allscript.js">
         </script>
     </head>
-    <body>
-        <?php
-        #importo file per utilizzare funzioni...
-        require_once './graphics/loader.php';
-        require_once './authorization/sec_sess.php';
-        include_once './arXiv/check_nomi_data.php';
-        include_once './arXiv/insert_remove_db.php';
-        include './header.inc.php';
-        sec_session_start();
-        if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] < 86400)) {
-            if ($_SESSION['logged_type'] === "mod") {
-                //sessione moderatore
-                echo "<div id='gotop' hidden><a id='scrollToTop' title='Go top'><img style='width:25px; height:25px;' src='./images/top.gif'></a></div>";
-                if ($_COOKIE['searchbarall'] == "1") {
-                    #search bar
-                    require_once './graphics/searchbar_bottom.php';
-                }
-                ?>
-                <div onclick="myFunction2()">
-                    <div id="header-wrapper">
-                        <div class="container">
-                            <div class="row">
-                                <div class="12u">
-                                    <header id="header">
-                                        <h1><a href="#" id="logo">DMI Papers</a></h1>
-                                        <nav id="nav">
-                                            <a href='./view_preprints.php' onclick="loading(load);">Publications</a>
-                                            <a href="./reserved.php" class="current-page-item" onclick="loading(load);">Reserved Area</a>
-                                        </nav>
-                                    </header>
-                                </div>
-                            </div>
+    <body><?php
+require_once './graphics/header.php';
+        echo "<div id='gotop' hidden><a id='scrollToTop' title='Go top'><img style='width:25px; height:25px;' src='./images/top.gif'></a></div>";
+        if ($_COOKIE['searchbarall'] == "1") {
+            #search bar
+            require_once './graphics/searchbar_bottom.php';
+        }
+        ?>
+        <div onclick="myFunction2()">
+            <div id="header-wrapper">
+                <div class="container">
+                    <div class="row">
+                        <div class="12u">
+                            <header id="header">
+                                <h1><a href="#" id="logo">DMI Papers</a></h1>
+                                <nav id="nav">
+                                    <a href='./view_preprints.php' onclick="loading(load);">Publications</a>
+                                    <a href="./reserved.php" class="current-page-item" onclick="loading(load);">Reserved Area</a>
+                                </nav>
+                            </header>
                         </div>
                     </div>
-                    <center>
-                        <div>
-                            <br/>
-                            <br/>
-                            <h2>manual editing</h2>
-                        </div>               	
-                        Go to admin panel&nbsp&nbsp&nbsp
-                        <a style="color:#3C3C3C;" href="./modp.php" id="bottone_keyword" class="button" onclick="return confirmExit()" >Back</a><br/>
-                    </center>
-                    <?php
-                    if (sessioneavviata() == True) {
-                        echo "<br/><center>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTION CAN'T BE USED IN THIS MOMENT!</center><br/>";
-                    } else {
-                        if (!isset($_GET['id'])) {
-                            echo "<center><br/><a style='color:#007897;' href='./view_preprints.php' onclick='window.open(this.href); return false' title='Go to preprints list'>View from inserted papers</a></center>";
-                            echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
-                            echo " <center><div><form name='f2' action='manual_edit.php' method='POST' onsubmit='loading(load);'>Insert id of publication: 
+                </div>
+            </div>
+            <center>
+                <div>
+                    <br/>
+                    <br/>
+                    <h2>manual editing</h2>
+                </div>               	
+                Go to admin panel&nbsp&nbsp&nbsp
+                <a style="color:#3C3C3C;" href="./modp.php" id="bottone_keyword" class="button" onclick="return confirmExit()" >Back</a><br/>
+            </center>
+            <?php
+            if (sessioneavviata() == True) {
+                echo "<br/><center>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTION CAN'T BE USED IN THIS MOMENT!</center><br/>";
+            } else {
+                if (!isset($_GET['id'])) {
+                    echo "<center><br/><a style='color:#007897;' href='./view_preprints.php' onclick='window.open(this.href); return false' title='Go to preprints list'>View from inserted papers</a></center>";
+                    echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
+                    echo " <center><div><form name='f2' action='manual_edit.php' method='POST' onsubmit='loading(load);'>Insert id of publication: 
                                 <input type='search' autocomplete = 'on' style='width:200px; height: 19px;' name='id' required class='textbox' placeholder='example of id: 0000.0000v1'/>
                                 <input type='submit' name='bottoni8' value='Get' id='bottone_keyword' class='button'/><br/>
 		               </form></div></center>
 		               ";
-                            $var = False;
-                        }
-                        echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
-                        if (isset($_POST['bottoni8']) or isset($_POST['bottoni9']) or isset($_POST['bottoni10']) or isset($_GET['id'])) {
-                            if (empty($_POST['id'])) {
-                                $id = $_GET['id'];
-                            } else {
-                                $id = $_POST['id'];
-                            }
-                            #adattamento stringa
-                            $id = trim($id);
-                            #funzione per recupero informazioni dell'preprint
-                            $ris = cercapreprint($id);
-                            if ($ris[0] == $id) {
-                                #sblocco altri campi
-                                $var = True;
-                            } else {
-                                echo '<script type="text/javascript">alert("ID incorrect!");</script>';
-                            }
-                        }
-                        if ($var == True) {
-                            echo "<script type='text/javascript'>
+                    $var = False;
+                }
+                echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
+                if (isset($_POST['bottoni8']) or isset($_POST['bottoni9']) or isset($_POST['bottoni10']) or isset($_GET['id'])) {
+                    if (empty($_POST['id'])) {
+                        $id = $_GET['id'];
+                    } else {
+                        $id = $_POST['id'];
+                    }
+                    #adattamento stringa
+                    $id = trim($id);
+                    #funzione per recupero informazioni dell'preprint
+                    $ris = cercapreprint($id);
+                    if ($ris[0] == $id) {
+                        #sblocco altri campi
+                        $var = True;
+                    } else {
+                        echo '<script type="text/javascript">alert("ID incorrect!");</script>';
+                    }
+                }
+                if ($var == True) {
+                    echo "<script type='text/javascript'>
 				function confirmExit(){
 				    var x = confirm('All unsaved changes will be lost, continue?');
 				    if (x) {
@@ -246,77 +236,71 @@
                            <input type='submit' name='bottoni9' value='Remove' style='width:70px;' id='bottone_keyword' class='button' onclick='return confirmDelete()'/>
                             <input type='submit' name='bottoni10' value='Complete' style='width:70px;' id='bottone_keyword' class='button' onclick='return confirmInsert()'/></center>
                             </form>";
-                            $ris[1] = str_replace("<br />", "", $ris[1]);
-                            $ris[1] = str_replace("\n", "", $ris[1]);
-                            $ris[7] = str_replace("<br />", "", $ris[7]);
-                            $ris[7] = str_replace("\n", "", $ris[7]);
-                            echo "<script type='text/javascript'>UpdateMathcat('" . $ris[6] . "')</script>
+                    $ris[1] = str_replace("<br />", "", $ris[1]);
+                    $ris[1] = str_replace("\n", "", $ris[1]);
+                    $ris[7] = str_replace("<br />", "", $ris[7]);
+                    $ris[7] = str_replace("\n", "", $ris[7]);
+                    echo "<script type='text/javascript'>UpdateMathcat('" . $ris[6] . "')</script>
 				    <script type='text/javascript'>UpdateMathtit('" . $ris[1] . "')</script>
 				    <script type='text/javascript'>UpdateMathaut('" . $ris[3] . "')</script>
 				    <script type='text/javascript'>UpdateMathjou('" . $ris[4] . "')</script>
 				    <script type='text/javascript'>UpdateMathcom('" . $ris[5] . "')</script>
 				    <script type='text/javascript'>UpdateMathabs('" . $ris[7] . "')</script>";
 #importazione variabili globali
-                            $target_file = $basedir2 . basename($_FILES["fileToUpload"]["name"]);
-                            if (isset($_POST['bottoni9'])) {
-                                $id1 = $_POST['id'];
-                                #eliminazione del preprint selezionato
-                                delete_pdf($id1);
-                                cancellaselected($id1);
-                                echo '<script type="text/javascript">
+                    $target_file = $basedir2 . basename($_FILES["fileToUpload"]["name"]);
+                    if (isset($_POST['bottoni9'])) {
+                        $id1 = $_POST['id'];
+                        #eliminazione del preprint selezionato
+                        delete_pdf($id1);
+                        cancellaselected($id1);
+                        echo '<script type="text/javascript">
                                 alert("Paper ' . $_POST['id'] . ' removed correctly!");
                                 window.close();</script>';
-                            }
-                            if (isset($_POST['bottoni10'])) {
-                                if (empty($_POST['journal'])) {
-                                    $info[4] = "No journal ref";
-                                } else {
-                                    $info[4] = $_POST['journal'];
-                                }
-                                if (empty($_POST['comments'])) {
-                                    $info[5] = "No journal ref";
-                                } else {
-                                    $info[5] = $_POST['comments'];
-                                }
-                                $info[0] = $_POST['id'];
-                                $info[1] = $_POST['title'];
-                                $info[2] = $_POST['data'];
-                                $info[3] = $_POST['author'];
-                                $info[6] = $_POST['category'];
-                                $info[7] = $_POST['abstract'];
-                                #richiamo della funzione per inserire le info del preprint all'interno del database
-                                update_preprints($info);
-                                $check = $_POST['check'];
-                                #controllo se ci sono file da caricare
-                                if ($_FILES["fileToUpload"]["size"] > 0) {
-                                    #caricamento del file scelto
-                                    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                                        $fileType = $_FILES["fileToUpload"]["type"];
-                                        #inserimento nel database del file
-                                        insert_one_pdf($info[0], $fileType);
-                                        echo '<script type="text/javascript">
+                    }
+                    if (isset($_POST['bottoni10'])) {
+                        if (empty($_POST['journal'])) {
+                            $info[4] = "No journal ref";
+                        } else {
+                            $info[4] = $_POST['journal'];
+                        }
+                        if (empty($_POST['comments'])) {
+                            $info[5] = "No journal ref";
+                        } else {
+                            $info[5] = $_POST['comments'];
+                        }
+                        $info[0] = $_POST['id'];
+                        $info[1] = $_POST['title'];
+                        $info[2] = $_POST['data'];
+                        $info[3] = $_POST['author'];
+                        $info[6] = $_POST['category'];
+                        $info[7] = $_POST['abstract'];
+                        #richiamo della funzione per inserire le info del preprint all'interno del database
+                        update_preprints($info);
+                        $check = $_POST['check'];
+                        #controllo se ci sono file da caricare
+                        if ($_FILES["fileToUpload"]["size"] > 0) {
+                            #caricamento del file scelto
+                            if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+                                $fileType = $_FILES["fileToUpload"]["type"];
+                                #inserimento nel database del file
+                                insert_one_pdf($info[0], $fileType);
+                                echo '<script type="text/javascript">
                                         alert("Paper ' . $_POST['id'] . ' updated correctly!");
                                         window.close();</script>';
-                                    } else {
-                                        echo '<script type="text/javascript">alert("Error, file not uploaded!");</script>';
-                                    }
-                                } else {
-                                    echo '<script type="text/javascript">
+                            } else {
+                                echo '<script type="text/javascript">alert("Error, file not uploaded!");</script>';
+                            }
+                        } else {
+                            echo '<script type="text/javascript">
                                     alert("Paper ' . $_POST['id'] . ' updated correctly!");
                                     window.close();</script>';
-                                }
-                            }
-                            echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
                         }
                     }
-                } else {
-                    echo '<script type="text/javascript">alert("ACCESS DENIED!");</script>';
-                    echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
+                    echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
                 }
-            } else {
-                echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
             }
+            require_once './graphics/loader.php';
             ?>
         </div><br/>
-</body>
+    </body>
 </html>

@@ -35,14 +35,8 @@
         <script type="text/javascript" src="./js/allscript.js">
         </script>
     </head>
-    <body>
-        <?php
-        #importo file per utilizzare funzioni...
-        require_once './authorization/sec_sess.php';
-        require_once './graphics/loader.php';
-        include_once './arXiv/check_nomi_data.php';
-        include_once './arXiv/insert_remove_db.php';
-        sec_session_start();
+    <body><?php
+require_once './graphics/header.php';
         echo "<div id='gotop' hidden><a id='scrollToTop' title='Go top'><img style='width:25px; height:25px;' src='./images/top.gif'></a></div>";
         if ($_COOKIE['searchbarall'] == "1") {
             #search bar
@@ -116,6 +110,7 @@
                     leggipreprintarchiviati();
                 }
             }
+            require_once './graphics/loader.php';
             ?>
         </div>
     </center>
