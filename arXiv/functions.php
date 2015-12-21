@@ -830,6 +830,32 @@ function filtropreprint() {
     mysqli_close($db_connection);
 }
 
+# funzione lettura dei preprint recenti
+
+function recentspreprints() {
+    include './header.inc.php';
+//import connessione database
+    include './mysql/db_conn.php';
+    require_once './authorization/sec_sess.php';
+    sec_session_start();
+    $query="SELECT * FROM PREPRINTS ORDER BY data_pubblicazione DESC LIMIT 10";
+        $result = mysqli_query($db_connection, $query) or die(mysql_error());
+    $i = $limit;
+    #recupero e visualizzazione dei campi della ricerca effettuata
+    while ($row = mysqli_fetch_array($result)) {
+    	echo '<div class="boxContainer" align="center">';
+    	echo "<div style='clear:both;'>";
+        echo "<a style='color:#1976D2; font-weight:bold;' href='" . $copia . $row['Filename'] . "' onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>" . ($row['titolo']) . "</a>";
+        echo "<div style='margin-left:1%; margin-right:1%;'>" . ($row['data_pubblicazione']) . "</div>";
+        echo "<div style='margin-left:1%; margin-right:1%;'>" . ($row['autori']) . "</div>";
+        $na = $row['Filename'];
+        $na = substr($na, -3, 3);
+        echo "</div></div></div>";
+    }
+    $x = $limit + 1;
+    mysqli_close($db_connection);
+}
+
 #funzione lettura dei preprint archiviati
 
 function leggipreprintarchiviati() {

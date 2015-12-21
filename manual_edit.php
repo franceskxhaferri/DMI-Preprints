@@ -36,7 +36,7 @@
         </script>
     </head>
     <body><?php
-require_once './graphics/header.php';
+        require_once './graphics/header.php';
         echo "<div id='gotop' hidden><a id='scrollToTop' title='Go top'><img style='width:25px; height:25px;' src='./images/top.gif'></a></div>";
         if ($_COOKIE['searchbarall'] == "1") {
             #search bar
@@ -59,30 +59,26 @@ require_once './graphics/header.php';
                     </div>
                 </div>
             </div>
-            <center>
-                <div>
-                    <br/>
-                    <br/>
-                    <h2>manual editing</h2>
-                </div>               	
-                Go to admin panel&nbsp&nbsp&nbsp
-                <a style="color:#3C3C3C;" href="./modp.php" id="bottone_keyword" class="button" onclick="return confirmExit()" >Back</a><br/>
+            <center><br/><br/>
+                <h2>manual editing</h2>
+                <div class="boxContainer" style="width:80%;">
+                    Go to admin panel&nbsp&nbsp&nbsp
+                    <a style="color:#ffffff; width:70px;" href="./modp.php" id="bottone_keyword" class="button" onclick="return confirmExit()" >Back</a><br/>
+                </div>
             </center>
             <?php
             if (sessioneavviata() == True) {
                 echo "<br/><center>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTION CAN'T BE USED IN THIS MOMENT!</center><br/>";
             } else {
                 if (!isset($_GET['id'])) {
-                    echo "<center><br/><a style='color:#007897;' href='./view_preprints.php' onclick='window.open(this.href); return false' title='Go to preprints list'>View from inserted papers</a></center>";
-                    echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
-                    echo " <center><div><form name='f2' action='manual_edit.php' method='POST' onsubmit='loading(load);'>Insert id of publication: 
+                    echo "<center><div class='boxContainer' style='width:80%;'><a style='color:#007897;' href='./view_preprints.php' onclick='window.open(this.href); return false' title='Go to preprints list'>View from inserted papers</a>";
+                    echo "<form name='f2' action='manual_edit.php' method='POST' onsubmit='loading(load);'><br/>Insert id of publication: 
                                 <input type='search' autocomplete = 'on' style='width:200px; height: 19px;' name='id' required class='textbox' placeholder='example of id: 0000.0000v1'/>
-                                <input type='submit' name='bottoni8' value='Get' id='bottone_keyword' class='button'/><br/>
+                                <input type='submit' name='bottoni8' value='Get' class='button' style='width:70px;'><br/>
 		               </form></div></center>
 		               ";
                     $var = False;
                 }
-                echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
                 if (isset($_POST['bottoni8']) or isset($_POST['bottoni9']) or isset($_POST['bottoni10']) or isset($_GET['id'])) {
                     if (empty($_POST['id'])) {
                         $id = $_GET['id'];
@@ -116,9 +112,11 @@ require_once './graphics/header.php';
                     <center>
                         <div>
                         <br/>
-                            <h2>paper informations</h2><h1>field with '*' are required.</h1><br/><input type='reset' name='reset' value='Reset'><br/><br/></center>
+                            <h2>paper informations</h2><h1>field with '*' are required.</h1><br/>
+                        <div class='boxContainer' style='width:80%;'>
                             <div id='divinsertcateg'>
-                            <div style='float:right; width:49%;'><div style='font-weight: bold;'>document:</div><div style='float:right; width:49%;'><a href=./pdf/" . $ris[9] . " onclick='window.open(this.href);return false' style='color:#007897;' title='" . $ris[9] . "'>VIEW</a></div></div>
+                            <div><div style='font-weight: bold;'>document:</div>
+                            <div><a href=./pdf/" . $ris[9] . " onclick='window.open(this.href);return false' style='color:#007897;' title='" . $ris[9] . "'>VIEW</a><br/><br/></div></div>
                             <div style='font-weight: bold;'>
                                 UID(not editable):
                             </div>
@@ -235,7 +233,7 @@ require_once './graphics/header.php';
                             <input type='file' name='fileToUpload' id='fileToUpload'><br/><br/>
                            <input type='submit' name='bottoni9' value='Remove' style='width:70px;' id='bottone_keyword' class='button' onclick='return confirmDelete()'/>
                             <input type='submit' name='bottoni10' value='Complete' style='width:70px;' id='bottone_keyword' class='button' onclick='return confirmInsert()'/></center>
-                            </form>";
+                            </form></div></center>";
                     $ris[1] = str_replace("<br />", "", $ris[1]);
                     $ris[1] = str_replace("\n", "", $ris[1]);
                     $ris[7] = str_replace("<br />", "", $ris[7]);
@@ -296,7 +294,6 @@ require_once './graphics/header.php';
                                     window.close();</script>';
                         }
                     }
-                    echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
                 }
             }
             require_once './graphics/loader.php';

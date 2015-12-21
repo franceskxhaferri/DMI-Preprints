@@ -52,7 +52,7 @@ require_once './graphics/header.php';
                             <header id="header">
                                 <h1><a href="#" id="logo">DMI Papers</a></h1>
                                 <nav id="nav">
-                                    <a href='./view_preprints.php' onclick="loading(load);">Publications</a>
+                                    <a href='./index.php' onclick="loading(load);">Search</a>
                                     <a href="./reserved.php" class="current-page-item" onclick="loading(load);">Reserved Area</a>
                                 </nav>
                             </header>

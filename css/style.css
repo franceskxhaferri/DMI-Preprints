@@ -22,8 +22,8 @@ body {
 }
 
 h1,h2,h3,h4 {
-    color: #007897;
-    font-weight: normal;
+    color: #1976D2;
+    font-weight: bold;
 }
 
 .refresh { transition: all 0.3s ease-in-out 0s; }
@@ -116,14 +116,6 @@ a:visited{
     box-shadow: 0px 0px 5px #9A9A9A;
 }
 /*opzioni di ricerca avanzate*/
-#adv {
-    border-bottom: 1px dashed #9A9A9A;
-    padding: 3px;
-}
-
-#adv2 {
-    padding-top: 3px;
-}
 
 #opt {
     padding-top: 3px;
@@ -257,19 +249,17 @@ only screen and (max-width: 760px),
 }
 /* css tabelle*/
 #table{
-    width: 90%;
+    width: 100%;
     border:1px solid #ccc;
-    margin-left: -5%;
 }
 
 #table1{
-    margin-right: -5%;
-    width: 90%;
+    width: 100%;
     border:1px solid #ccc;
 }
 
 #table3{
-    width: 25%;
+    width: 100%;
     border:1px solid #ccc;
 }
 
@@ -288,12 +278,14 @@ only screen and (max-width: 760px),
 /*div di inserimento*/
 #arxivpreprints{
     float: right;
-    width: 50%;
+    margin-right: 1%;
+    width: 48%;
 }
 
 #dmipreprints{
     float: left;
-    width: 50%;
+    margin-left: 1%;
+    width: 48%;
 }
 #textboxcat{
     width: 49%; 
@@ -411,17 +403,18 @@ ul.link-list li:first-child {
 }
 
 .selector {
-    height: 17pt;
-    font-family: Lucida Grande, Helvetica, Arial, sans-serif;
-    display: inline-block;
-    background-color: #D0D0D0;
-    text-decoration: none;
-    border: solid 1px;
-    border-color: #AAAAAA;
-    font-size: 12pt;
-    border-radius: 2px;
-    color:#3C3C3C;
-    box-shadow: 0px 0px 1px #d9d9d9; 
+    border: 1px solid #1976D2;
+    background-color: #1976D2;
+    color:white;
+    font-size: 11pt;
+    font-weight: bold;
+    padding: 1px; 
+    border-radius: 2px; 
+    -moz-border-radius: 2px; 
+    -webkit-border-radius: 2px; 
+    box-shadow: 0px 0px 1px #1976D2; 
+    -moz-box-shadow: 0px 0px 1px #1976D2; 
+    -webkit-box-shadow: 0px 0px 1px #1976D2;
 }
 
 .button {
@@ -429,25 +422,60 @@ ul.link-list li:first-child {
     font-family: Lucida Grande, Helvetica, Arial, sans-serif;
     display: inline-block;
     margin: 1px;
-    padding: 2px 2px 2px 2px;
-    background-color: #D0D0D0;
+    padding: 1px;
+    background-color: #1976D2;
     text-decoration: none;
     border: solid 1px;
-    border-color: #AAAAAA;
+    border-color: #1976D2;
     font-size: 10.5pt;
     border-radius: 2px;
-    color:#3C3C3C;
+    color:white;
     font-weight: bold;
-    box-shadow: 0px 0px 1px #d9d9d9; 
+    box-shadow: 0px 0px 1px #1976D2; 
+}
+
+.buttonNav2 {
+    padding-top:10px;
+    padding-bottom:10px;
+    align-items:center;
+    height: 2%;
+    font-family: Lucida Grande, Helvetica, Arial, sans-serif;
+    display: inline-block;
+    background-color: #1976D2;
+    text-decoration: none;
+    border-color: #1976D2;
+    font-size: 12pt;
+    font-weight: bold;
+    box-shadow: 0px 0px 2px #303F9F inset; 
+    width: 33.3%;
+}
+
+.buttonNav2:hover {
+    background-color: #03A9F4;
+    cursor: pointer; 
+}
+
+.buttonNav {
+    padding-top:10px;
+    padding-bottom:10px;
+    align-items:center;
+    height: 2%;
+    font-family: Lucida Grande, Helvetica, Arial, sans-serif;
+    display: inline-block;
+    text-decoration: none;
+    border-color: #1976D2;
+    font-size: 12pt;
+    font-weight: bold;
+    width: 33.3%;
 }
 
 .button:hover {
-    background-color: #C4C4C4;
+    background-color: #03A9F4;
     cursor: pointer; 
 }
 
 .button:active {
-    background-color: #6bc1f7;
+    background-color: #0288D1;
 }
 
 .buttonlink {
@@ -455,27 +483,27 @@ ul.link-list li:first-child {
     font-family: Lucida Grande, Helvetica, Arial, sans-serif;
     display: inline-block;
     margin: 1px;
-    padding: 2px 2px 2px 2px;
-    background-color: #D0D0D0;
+    padding: 1px;
+    background-color: #1976D2;
     text-decoration: none;
     border: solid 1px;
-    border-color: #AAAAAA;
+    border-color: #1976D2;
     font-size: 10.5pt;
     border-radius: 2px;
-    color:#3C3C3C;
+    color:white;
     text-align: center;
-    width: 110px;
+    width: 70px;
     font-weight: bold;
-    box-shadow: 0px 0px 1px #d9d9d9; 
+    box-shadow: 0px 0px 1px #1976D2; 
 }
 
 .buttonlink:hover {
-    background-color: #C4C4C4;
+    background-color: #03A9F4;
     cursor: pointer; 
 }
 
 .buttonlink:active {
-    background-color: #6bc1f7;
+    background-color: #0288D1;
 }
 
 .textbox { 
@@ -485,16 +513,100 @@ ul.link-list li:first-child {
     border-radius: 2px; 
     -moz-border-radius: 2px; 
     -webkit-border-radius: 2px; 
-    box-shadow: 0px 0px 1px #d9d9d9; 
-    -moz-box-shadow: 0px 0px 1px #d9d9d9; 
-    -webkit-box-shadow: 0px 0px 1px #d9d9d9;
+    box-shadow: 0px 0px 1px #3c3c3c; 
+    -moz-box-shadow: 0px 0px 1px #3c3c3c; 
+    -webkit-box-shadow: 0px 0px 1px #3c3c3c;
     width: 150px;
 } 
 
 .textbox:focus { 
     outline: none; 
-    border: 1px solid #7bc1f7; 
-    box-shadow: 0px 0px 1px #7bc1f7; 
-    -moz-box-shadow: 0px 0px 1px #7bc1f7; 
-    -webkit-box-shadow: 0px 0px 1px #7bc1f7;
+    border: 1px solid #1976D2; 
+    box-shadow: 0px 0px 1px #1976D2; 
+    -moz-box-shadow: 0px 0px 1px #1976D2; 
+    -webkit-box-shadow: 0px 0px 1px #1976D2;
 }
+
+.searchbar { 
+    border: 1px solid #c4c4c4;
+    font-size: 10pt;
+    padding: 1px; 
+    border-radius: 2px; 
+    -moz-border-radius: 2px; 
+    -webkit-border-radius: 2px; 
+    box-shadow: 0px 0px 2px #1976D2; 
+    -moz-box-shadow: 0px 0px 2px #1976D2; 
+    -webkit-box-shadow: 0px 0px 2px #1976D2;
+    width:80%;
+    height: 25px;
+    font-size: 13pt;
+} 
+
+.simple{
+    width: 80%;
+}
+
+.adv{
+    width: 80%;
+}
+
+.fulltext{
+    width: 80%;
+}
+
+.searchbar:focus { 
+    outline: none; 
+    border: 1px solid #1976D2; 
+    box-shadow: 0px 0px 2px #1976D2; 
+    -moz-box-shadow: 0px 0px 2px #1976D2; 
+    -webkit-box-shadow: 0px 0px 2px #1976D2;
+}
+
+.searchbox {
+    border: 1px solid #1976D2;
+    font-size: 11pt;
+    border-radius: 1px; 
+    -moz-border-radius: 1px; 
+    -webkit-border-radius: 1px; 
+    box-shadow: 0px 0px 2px #1976D2; 
+    padding-top: 40px;
+    padding-bottom: 30px;
+    padding-left: 5px;
+    padding-right: 5px;
+} 
+
+.searchboxContainer {
+    background-color:#ffffff;
+    width:65%;
+} 
+
+.boxContainer {
+    background-color:#ffffff;
+    border: 1px solid #1976D2;
+    font-size: 11pt;
+    border-radius: 1px; 
+    -moz-border-radius: 1px; 
+    -webkit-border-radius: 1px; 
+    box-shadow: 0px 0px 2px #1976D2; 
+    padding: 20px;
+    margin:2%;
+    width: 65%;
+} 
+
+.searchonbox {
+    float:left;
+    margin-left: 6%;
+    margin-right: 6%;
+} 
+
+.orderbox {
+    float:left;
+    margin-left: 6%;
+    margin-right: 6%;
+} 
+
+.restrictionbox {
+    float:left;
+    margin-left: 6%;
+    margin-right: 6%;
+} 

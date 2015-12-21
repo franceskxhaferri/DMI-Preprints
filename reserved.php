@@ -25,7 +25,7 @@
                         <header id="header">
                             <h1><a href="#" id="logo">DMI Papers</a></h1>
                             <nav id="nav">
-                                <a href="./view_preprints.php">Publications</a>
+                                <a href="./index.php">Publications</a>
                                 <a href="./reserved.php" class="current-page-item">Reserved Area</a>
                             </nav>
                         </header>
@@ -34,28 +34,31 @@
             </div>
         </div>
         <br/><br/>
-    <center>
-        <div style="width: 45%;">
-            <h1>It is the first time you access here?</h1><br/>
+    <center><br/>
+    <h2>It is the first time you access here?</h2>
+        <div class="boxContainer">
             For access use username and password of the University(University of Perugia),
             for those outside University of Perugia you can register and use the email 
             provided during the registration.
-        </div><br/><br/>
-        <h1>Login:</h1><br/>
+            </div>
+            <br/><h2>Login:</h2>
+            <div class="boxContainer">
         <?php
         //TEST DEBUG
         error_reporting(E_ALL);
         ini_set('display_errors', 1);
         require_once './reserved/submit_loginChooser.php';
         ?>
-        <br/><br/>
-        <h1>Register:</h1><br/>
+        </div>
+        <br/><h2>Register:</h2>
+        <div class="boxContainer">
         <?php
         //TEST DEBUG
         error_reporting(E_ALL);
         ini_set('display_errors', 1);
         require_once './reserved/add_accountForm.php';
         ?>
+        </div>
     </center>
 </body>
 </html>

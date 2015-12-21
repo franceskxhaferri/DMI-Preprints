@@ -23,9 +23,9 @@
         </script>
     </head>
     <body>
-    <?php
-require_once './graphics/header.php';
-?>
+        <?php
+        require_once './graphics/header.php';
+        ?>
         <div onclick="myFunction2()">
             <div id="header-wrapper">
                 <div class="container">
@@ -42,15 +42,14 @@ require_once './graphics/header.php';
                     </div>
                 </div>
             </div>
-            <br/>
-            <div>
-                <center>
-                    <br/>
-                    <h2>AUTHORS LIST</h2>
+            <center>
+            <br/><br/>
+            <h2>AUTHORS LIST</h2>
+                <div class="boxContainer">
                     Go to arXiv panel 
-                    <a style="color:#3C3C3C;" href="./arXiv_panel.php" id="bottone_keyword" class="button" onclick="loading(load);">Back</a><br>
-                    <hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
+                    <a style="color:#ffffff; width:70px;" href="./arXiv_panel.php" id="bottone_keyword" class="button" onclick="loading(load);">Back</a><br>
                     <form name="f2" action="authors_list.php" method="POST">
+                        <br/><br/>
                         <label>
                             <input type="checkbox" name="insert" value="1" checked/>
                             Add author to list or search by name:
@@ -58,14 +57,13 @@ require_once './graphics/header.php';
                         <input type="search" style="width:300px; height: 14pt;" id='textbox' class='textbox' autocomplete = "on" required name="txt1" placeholder="name1, name2, name3, name..." autofocus />
                         <input type="submit" name="b2" value="Insert/Search" id="bottone_keyword" class="button"/>
                     </form>
-                </center>
-            </div>
+                </div>
+            </center>
             <div>
                 <?php
                 if (sessioneavviata() == True) {
                     echo "<center><br/><br/>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE LIST CAN'T BE CHANGED IN THIS MOMENT!</center><br/>";
                 } else {
-                    echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
                     if (isset($_POST['b2'])) {
                         $name = $_POST['txt1'];
                         $insert = $_POST['insert'];
@@ -77,7 +75,7 @@ require_once './graphics/header.php';
                     #conto lunghezza array
                     $lunghezza = count($nomi);
                     echo "<form name='f1' action='authors_list.php' id='f1' method='POST' onsubmit='loading(load);'>
-                            <center><table id='table' style='width:25%; margin-left: 0%;'>";
+                            <center><table id='table' class='boxContainer' style='width:25%; margin-left: 0%;'>";
                     echo "<tr id='thhead'><td id='tdh' colspan='2' align='center'>ARXIV AUTHORS</td></tr>";
                     echo "<tr id='th'>"
                     . "<td id='tdh'><label><input type='checkbox' class='checkall1' name='all1' onChange='toggle(this)'/>N&deg;:</label></td>"
@@ -90,8 +88,7 @@ require_once './graphics/header.php';
                         . "<td id='td'>" . $nomi[$i] . "</td></tr>";
                         $y++;
                     }
-                    echo "</table></center><center><hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>"
-                    . "<input type='submit' id='bottone_keyword' class='button' name='b3' value='Remove' onclick='return confirmDelete4()'></center></form>";
+                    echo "</table><input type='submit' style='width:70px;' class='button' name='b3' value='Remove' onclick='return confirmDelete4()'></center></form>";
                     if ($lunghezza == 0) {
                         #richiamo funzione per corretto update successivo
                         aggiornanomi();
@@ -123,7 +120,6 @@ require_once './graphics/header.php';
                             echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./authors_list.php">';
                         }
                     }
-                    echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
                 }
                 require_once './graphics/loader.php';
                 ?>
