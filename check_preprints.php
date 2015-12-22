@@ -60,7 +60,7 @@
                         $directory = $basedir3;
                         echo "<form name='f1' action='check_preprints.php' id='f1' method='GET' onsubmit='loading(load);'>"
                         . "<div id='arxivpreprints'>"
-                        . "<center><table id='table' class='boxContainer'>";
+                        . "<center><table id='table'>";
                         #Apriamo una directory e leggiamone il contenuto.
                         if (is_dir($directory)) {
                             #Apro l'oggetto directory
@@ -104,7 +104,7 @@
                         #Imposto la directory da leggere
                         $directory2 = $basedir;
                         echo "<center><div id='dmipreprints'>"
-                        . "<table id='table1' class='boxContainer'>";
+                        . "<table id='table1'>";
                         #Apriamo una directory e leggiamone il contenuto.
                         if (is_dir($directory2)) {
                             #Apro l'oggetto directory

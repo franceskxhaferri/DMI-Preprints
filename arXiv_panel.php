@@ -29,9 +29,9 @@
         </script>
     </head>
     <body>
-    <?php
-require_once './graphics/header.php';
-?>
+        <?php
+        require_once './graphics/header.php';
+        ?>
         <div onclick="myFunction2()">
             <div id="header-wrapper">
                 <div class="container">

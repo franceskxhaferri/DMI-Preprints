@@ -32,7 +32,7 @@
                     <div class="row">
                         <div class="12u">
                             <header id="header">
-                                <h1><a href="#" id="logo">DMI Papers</a></h1>
+                                <h1 id="logo"><a href="#" >DMI Papers</a></h1>
                                 <nav id="nav">
                                     <a href='./view_preprints.php' onclick="loading(load);">Publications</a>
                                     <a href="./reserved.php" class="current-page-item" onclick="loading(load);">Reserved Area</a>
@@ -43,8 +43,8 @@
                 </div>
             </div>
             <center>
-            <br/><br/>
-            <h2>AUTHORS LIST</h2>
+                <br/><br/>
+                <h2>AUTHORS LIST</h2>
                 <div class="boxContainer">
                     Go to arXiv panel 
                     <a style="color:#ffffff; width:70px;" href="./arXiv_panel.php" id="bottone_keyword" class="button" onclick="loading(load);">Back</a><br>
@@ -75,7 +75,7 @@
                     #conto lunghezza array
                     $lunghezza = count($nomi);
                     echo "<form name='f1' action='authors_list.php' id='f1' method='POST' onsubmit='loading(load);'>
-                            <center><table id='table' class='boxContainer' style='width:25%; margin-left: 0%;'>";
+                            <center><table id='table' style='width:25%;'>";
                     echo "<tr id='thhead'><td id='tdh' colspan='2' align='center'>ARXIV AUTHORS</td></tr>";
                     echo "<tr id='th'>"
                     . "<td id='tdh'><label><input type='checkbox' class='checkall1' name='all1' onChange='toggle(this)'/>N&deg;:</label></td>"

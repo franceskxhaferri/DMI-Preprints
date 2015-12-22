@@ -96,6 +96,10 @@ a:visited{
     margin-bottom: 0 !important;
 }
 
+#logo{
+    margin-top:20px;
+}
+
 /* barra di ricerca*/
 
 /*searchbar integrata nella pagina*/
@@ -186,19 +190,17 @@ a:visited{
 
 /*div caricamento*/
 #load{
-    width:  220px;
-    height: 90px;
     display: none;
     top: 50%;
     left: 50%;
-    margin-left:-110px;
-    margin-top:-45px;
+    border-radius:2px;
+    margin-left:-60px;
+    margin-top:-60px;
     position: fixed;
     z-index: 999999;
-    background-color:#E3E3E3;
-    border: 1px solid;
-    border-color: #9A9A9A;
-    box-shadow: 0px 0px 5px #9A9A9A;
+    background-color:#ffffff;
+    padding: 50px;
+    box-shadow: 0px 0px 10px #9A9A9A;
 }
 
 #th:hover{
@@ -251,16 +253,22 @@ only screen and (max-width: 760px),
 #table{
     width: 100%;
     border:1px solid #ccc;
+    box-shadow: 0px 0px 3px #9A9A9A;
+    margin: 20px;
 }
 
 #table1{
     width: 100%;
     border:1px solid #ccc;
+    box-shadow: 0px 0px 3px #9A9A9A;
+    margin: 20px;
 }
 
 #table3{
     width: 100%;
     border:1px solid #ccc;
+    box-shadow: 0px 0px 3px #9A9A9A;
+    margin: 20px;
 }
 
 #td{
@@ -278,14 +286,14 @@ only screen and (max-width: 760px),
 /*div di inserimento*/
 #arxivpreprints{
     float: right;
-    margin-right: 1%;
-    width: 48%;
+    margin-right: 2%;
+    width: 47%;
 }
 
 #dmipreprints{
     float: left;
-    margin-left: 1%;
-    width: 48%;
+    margin-right: 2%;
+    width: 47%;
 }
 #textboxcat{
     width: 49%; 
@@ -412,9 +420,9 @@ ul.link-list li:first-child {
     border-radius: 2px; 
     -moz-border-radius: 2px; 
     -webkit-border-radius: 2px; 
-    box-shadow: 0px 0px 1px #1976D2; 
-    -moz-box-shadow: 0px 0px 1px #1976D2; 
-    -webkit-box-shadow: 0px 0px 1px #1976D2;
+    box-shadow: 0px 0px 3px #9A9A9A; 
+    -moz-box-shadow: 0px 0px 3px #9A9A9A; 
+    -webkit-box-shadow: 0px 0px 3px #9A9A9A;
 }
 
 .button {
@@ -431,7 +439,7 @@ ul.link-list li:first-child {
     border-radius: 2px;
     color:white;
     font-weight: bold;
-    box-shadow: 0px 0px 1px #1976D2; 
+    box-shadow: 0px 0px 3px #9A9A9A; 
 }
 
 .buttonNav2 {
@@ -466,7 +474,7 @@ ul.link-list li:first-child {
     border-color: #1976D2;
     font-size: 12pt;
     font-weight: bold;
-    width: 33.3%;
+    width: 33.4%;
 }
 
 .button:hover {
@@ -494,7 +502,7 @@ ul.link-list li:first-child {
     text-align: center;
     width: 70px;
     font-weight: bold;
-    box-shadow: 0px 0px 1px #1976D2; 
+    box-shadow: 0px 0px 3px #9A9A9A; 
 }
 
 .buttonlink:hover {
@@ -507,15 +515,12 @@ ul.link-list li:first-child {
 }
 
 .textbox { 
-    border: 1px solid #c4c4c4;
+    border: 1px solid #9A9A9A;
     font-size: 11pt;
     padding: 2px 2px 2px 2px; 
     border-radius: 2px; 
     -moz-border-radius: 2px; 
-    -webkit-border-radius: 2px; 
-    box-shadow: 0px 0px 1px #3c3c3c; 
-    -moz-box-shadow: 0px 0px 1px #3c3c3c; 
-    -webkit-box-shadow: 0px 0px 1px #3c3c3c;
+    -webkit-border-radius: 2px;
     width: 150px;
 } 
 
@@ -533,10 +538,7 @@ ul.link-list li:first-child {
     padding: 1px; 
     border-radius: 2px; 
     -moz-border-radius: 2px; 
-    -webkit-border-radius: 2px; 
-    box-shadow: 0px 0px 2px #1976D2; 
-    -moz-box-shadow: 0px 0px 2px #1976D2; 
-    -webkit-box-shadow: 0px 0px 2px #1976D2;
+    -webkit-border-radius: 2px;
     width:80%;
     height: 25px;
     font-size: 13pt;
@@ -563,12 +565,11 @@ ul.link-list li:first-child {
 }
 
 .searchbox {
-    border: 1px solid #1976D2;
     font-size: 11pt;
-    border-radius: 1px; 
-    -moz-border-radius: 1px; 
-    -webkit-border-radius: 1px; 
-    box-shadow: 0px 0px 2px #1976D2; 
+    border-radius: 2px; 
+    -moz-border-radius: 2px; 
+    -webkit-border-radius: 2px; 
+    box-shadow: 0px 0px 3px #9A9A9A; 
     padding-top: 40px;
     padding-bottom: 30px;
     padding-left: 5px;
@@ -582,15 +583,35 @@ ul.link-list li:first-child {
 
 .boxContainer {
     background-color:#ffffff;
-    border: 1px solid #1976D2;
     font-size: 11pt;
-    border-radius: 1px; 
-    -moz-border-radius: 1px; 
-    -webkit-border-radius: 1px; 
-    box-shadow: 0px 0px 2px #1976D2; 
+    border-radius: 2px; 
+    -moz-border-radius: 2px; 
+    -webkit-border-radius: 2px; 
+    box-shadow: 0px 0px 3px #9A9A9A; 
     padding: 20px;
     margin:2%;
     width: 65%;
+} 
+
+.boxContainerSearch {
+    background-color:#ffffff;
+    font-size: 11pt;
+    border-radius: 2px; 
+    -moz-border-radius: 2px; 
+    -webkit-border-radius: 2px; 
+    box-shadow: 0px 0px 3px #9A9A9A; 
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-top:30px;
+    margin-bottom:20px;
+    margin-left:2%;
+    position:absolute;
+    width:20%;
+    float:left;
+}
+
+.resultsContainer{
+    margin-left:22%;
 } 
 
 .searchonbox {

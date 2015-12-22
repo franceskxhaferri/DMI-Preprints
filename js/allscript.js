@@ -1,3 +1,29 @@
+//funzione disattivazione checkbox
+function DisAllFields(id) {
+    if (id == "all") {
+        if (!document.getElementById("h").disabled) {
+            document.getElementById("h").disabled = true;
+            document.getElementById("t").disabled = true;
+            document.getElementById("a").disabled = true;
+            document.getElementById("e").disabled = true;
+            document.getElementById("y").disabled = true;
+            document.getElementById("c").disabled = true;
+            document.getElementById("j").disabled = true;
+            document.getElementById("i").disabled = true;
+        } else {
+            document.getElementById("h").disabled = false;
+            document.getElementById("t").disabled = false;
+            document.getElementById("a").disabled = false;
+            document.getElementById("e").disabled = false;
+            document.getElementById("y").disabled = false;
+            document.getElementById("c").disabled = false;
+            document.getElementById("j").disabled = false;
+            document.getElementById("i").disabled = false;
+        }
+    }
+}
+
+
 //funzione controllo registrazione
 function chkAccountUpdate() {
     var name = $('#name').val();
