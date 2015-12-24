@@ -41,22 +41,25 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div><br/><br/><br/><br/>
             <center>
                 <br/><br/>
                 <h2>AUTHORS LIST</h2>
-                <div class="boxContainer">
-                    Go to arXiv panel 
-                    <a style="color:#ffffff; width:70px;" href="./arXiv_panel.php" id="bottone_keyword" class="button" onclick="loading(load);">Back</a><br>
-                    <form name="f2" action="authors_list.php" method="POST">
-                        <br/><br/>
-                        <label>
-                            <input type="checkbox" name="insert" value="1" checked/>
-                            Add author to list or search by name:
-                        </label>
-                        <input type="search" style="width:300px; height: 14pt;" id='textbox' class='textbox' autocomplete = "on" required name="txt1" placeholder="name1, name2, name3, name..." autofocus />
-                        <input type="submit" name="b2" value="Insert/Search" id="bottone_keyword" class="button"/>
-                    </form>
+                <div>
+                    <br/>
+                    <a style="color:#ffffff;" href="./arXiv_panel.php" id="bottone_keyword" class="button" onclick="loading(load);">Back</a><br>
+                    <br/>
+                    <div class="boxContainerInsertAuthors">
+                        <form name="f2" action="authors_list.php" method="POST">
+                            <label>
+                                Add author's?
+                                <input type="checkbox" name="insert" value="1" checked/>
+                            </label><br/><br/>
+                            <input type="search" style="width:100%;" class='textbox' autocomplete = "on" required name="txt1" placeholder="name1, name2, name3, name..." autofocus />
+                            <br/><br/>
+                            <input type="submit" name="b2" value="Send" id="bottone_keyword" class="button"/>
+                        </form>
+                    </div>
                 </div>
             </center>
             <div>
@@ -75,8 +78,7 @@
                     #conto lunghezza array
                     $lunghezza = count($nomi);
                     echo "<form name='f1' action='authors_list.php' id='f1' method='POST' onsubmit='loading(load);'>
-                            <center><table id='table' style='width:25%;'>";
-                    echo "<tr id='thhead'><td id='tdh' colspan='2' align='center'>ARXIV AUTHORS</td></tr>";
+                            <center><table id='table' style='width:35%;'>";
                     echo "<tr id='th'>"
                     . "<td id='tdh'><label><input type='checkbox' class='checkall1' name='all1' onChange='toggle(this)'/>N&deg;:</label></td>"
                     . "<td id='tdh' align='center'>NAME:</td></tr>";
@@ -88,7 +90,7 @@
                         . "<td id='td'>" . $nomi[$i] . "</td></tr>";
                         $y++;
                     }
-                    echo "</table><input type='submit' style='width:70px;' class='button' name='b3' value='Remove' onclick='return confirmDelete4()'></center></form>";
+                    echo "</table><input type='submit' class='button' name='b3' value='Remove' onclick='return confirmDelete4()'></center></form>";
                     if ($lunghezza == 0) {
                         #richiamo funzione per corretto update successivo
                         aggiornanomi();

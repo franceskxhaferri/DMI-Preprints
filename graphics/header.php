@@ -1,6 +1,6 @@
 <?php
 #importo file per utilizzare funzioni...
-require_once './header.inc.php';
+require_once './conf.php';
 require_once './mysql/db_conn.php';
 require_once './authorization/sec_sess.php';
 require_once './authorization/auth.php';
@@ -13,7 +13,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] < 
     if ($_SESSION['logged_type'] === "mod" or $_SESSION['logged_type'] === "user") {
     	if ($_COOKIE['searchbarall'] == "1") {
                     #search bar
-                    require_once './graphics/searchbar_bottom.php';
+                    //require_once './graphics/searchbar_bottom.php';
                 }
     } else {
 		echo '<script type="text/javascript">alert("ACCESS DENIED!");</script>';

@@ -40,7 +40,7 @@
                             <header id="header">
                                 <h1><a href="#" id="logo">DMI Papers</a></h1>
                                 <nav id="nav">
-                                    <a href="./index.php" onclick="loading(load);">Search</a>
+                                    <a href="./index.php" onclick="loading(load);">Publications</a>
                                     <a href="./reserved.php" class="current-page-item" class="current-page-item" onclick="loading(load);">Reserved Area</a>
                                 </nav>
                             </header>
@@ -48,7 +48,7 @@
                     </div>
                 </div>
             </div>
-            <br/><br/>
+            <br/><br/><br/><br/><br/><br/>
             <div>
                 <div>
                     <center><h2>ARXIV PANEL</h2></center>
@@ -56,25 +56,25 @@
                         Go to admin panel
                     </div>
                     <div id="boxdx">
-                        <a style="color:#3C3C3C;" href="./reserved.php" id="bottone_keyword" class="buttonlink" onclick="loading(load);">Back</a>
+                        <a style="color:#ffffff;" href="./reserved.php" id="bottone_keyword" class="buttonlink" onclick="loading(load);">Back</a>
                     </div>
                     <div id="boxsx">
                         The authors list
                     </div>
                     <div id="boxdx">
-                        <a style="color:#3C3C3C;" href="./authors_list.php" id="bottone_keyword" class="buttonlink" onclick="loading(load);">View</a>
+                        <a style="color:#ffffff;" href="./authors_list.php" id="bottone_keyword" class="buttonlink" onclick="loading(load);">View</a>
                     </div>
                     <div id="boxsx">
                         Insert a paper
                     </div>
                     <div id="boxdx">
-                        <a style="color:#3C3C3C;" href="./manual_insert.php" id="bottone_keyword" class="buttonlink" onclick="loading(load);">Enter</a>
+                        <a style="color:#ffffff;" href="./manual_insert.php" id="bottone_keyword" class="buttonlink" onclick="loading(load);">Enter</a>
                     </div>
                     <div id="boxsx">
                         approve papers
                     </div>
                     <div id="boxdx">
-                        <a style="color:#3C3C3C;" href="./check_preprints.php" id="bottone_keyword" class="buttonlink" onclick="loading(load);">Check</a>
+                        <a style="color:#ffffff;" href="./check_preprints.php?i=1" id="bottone_keyword" class="buttonlink" onclick="loading(load);">Check</a>
                         <?php
                         //controllo se ci sono preprint da approvare
                         if (check_approve() == true) {
@@ -87,7 +87,7 @@
                     </div>
                     <div id="boxdx">
                         <form name="f8" action="arXiv_panel.php" method="POST" onsubmit="loading(load);">
-                            <input style="width:110px;" type="submit" name="b8" value="Update" id="bottone_keyword" class="button">
+                            <input type="submit" name="b8" value="Update" id="bottone_keyword" class="button">
                         </form>
                     </div>
                     <div id="boxsx">
@@ -95,7 +95,7 @@
                     </div>
                     <div id="boxdx">
                         <form name="f9" action="arXiv_panel.php" method="POST">
-                            <input style="width:110px;" type="submit" name="b9" value="Overwrite" id="bottone_keyword" class="button" onclick="return confirmDownload()">
+                            <input type="submit" name="b9" value="Overwrite" id="bottone_keyword" class="button" onclick="return confirmDownload()">
                         </form>
                     </div>
                     <div style="clear:both;"></div>

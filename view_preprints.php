@@ -32,78 +32,26 @@
         </script>
         <script type="text/javascript" src="./js/allscript.js">
         </script>
-        <?php
-        #controllo cookie pageview
-        if ($_COOKIE['pageview'] == "") {
-            echo "<script>javascript:checkCookie4();</script>";
-        } else {
-            if ($_COOKIE['pageview'] == "0") {
-                $string = "Enable";
-            } else {
-                $string = "Disable";
-            }
-        }
-        #disabilita searchbar su altre pagine
-        if ((isset($_GET['clos'])) && $_GET['clos'] == "1" && $_COOKIE['searchbarall'] == "1") {
-            echo "<script>javascript:checkCookie7();</script>";
-            echo "<meta http-equiv='refresh' content='0'; URL=./view_preprints.php>";
-        }
-        #controllo cookie searchbar all
-        if ($_COOKIE['searchbarall'] == "0" or ! isset($_COOKIE['searchbarall'])) {
-            $string3 = "Enable";
-        } else {
-            $string3 = "Disable";
-        }
-        ?>
     </head>
     <body><?php
         require_once './graphics/header_main_page.php';
-        sec_session_start();
-        if (isset($_SESSION['logged_type']) && $_SESSION['logged_type'] === "mod") {
-            $t = "Go to arXiv panel";
-            $rit = "arXiv_panel.php";
-            $nav = "<header id='header'>
-                                    <h1><a href='#' id='logo'>DMI Papers</a></h1>
-                                    <nav id='nav'>
-                                        <a href='./index.php' class='current-page-item' onclick='loading(load);'>Publications</a>
-                                        <a href='./reserved.php' onclick='loading(load);'>Reserved Area</a>
-                                    </nav>
-                                </header>";
-        } else if (isset($_SESSION['logged_type']) && $_SESSION['logged_type'] === "user") {
-            $t = "Go to reserved area";
-            $rit = "reserved.php";
-            $nav = "<header id='header'>
-                                    <h1><a href='#' id='logo'>DMI Papers</a></h1>
-                                    <nav id='nav'>
-                                        <a href='./index.php' class='current-page-item' onclick='loading(load);'>Publications</a>
-                                        <a href='./reserved.php' onclick='loading(load);'>Reserved Area</a>
-                                    </nav>
-                                </header>";
-        } else {
-            $t = "Go to homepage";
-            $rit = "main.php";
-            $nav = "<header id='header'>
-                                    <h1><a href='#' id='logo'>DMI Papers</a></h1>
-                                    <nav id='nav'>
-                                        <a href='./index.php' class='current-page-item' onclick='loading(load);'>Publications</a>
-                                        <a href='./reserved.php' onclick='loading(load);'>Reserved Area</a>
-                                    </nav>
-                                </header>";
-        }
         ?>
         <div id="header-wrapper">
             <div class="container">
                 <div class="row">
                     <div class="12u">
-                        <?php echo $nav; ?>
+                        <header id='header'>
+                            <h1><a href='#' id='logo'>DMI Papers</a></h1>
+                            <nav id='nav'>
+                                <a href='./index.php' class='current-page-item' onclick='loading(load);'>Publications</a>
+                                <a href='./reserved.php' onclick='loading(load);'>Reserved Area</a>
+                            </nav>
+                        </header>
                     </div>
                 </div>
             </div>
         </div><br/><br/>
-    <center>
-        <?php
-        echo "<div id='gotop' hidden><a id='scrollToTop' title='Go top'><img style='width:25px; height:25px;' src='./images/top.gif'></a></div>";
-        ?><br/>
+    <center><br/>
         <div class="boxContainerSearch">
             <?php
             //fulltext search(risultati per pagina)
@@ -152,51 +100,53 @@
                 $orderradiob .= "<label><input type='radio' name='o' value='" . $key . "' " . $checked . ">" . $value . "</label><br/>";
             }
             if (isset($_GET['go']) && $_GET['go'] != "" or $_GET['fulltext'] == "yes") {//fulltext search
-                $html = "<div class='adv' align='center'>
-        		<h1>Fulltext Search:</h1><br/>
-        		<form name='f2' action='view_preprints.php' method='GET' onsubmit='loading(load);'>
-                            <input type='search' value='" . $_GET['ft'] . "' autocomplete = 'on' class='textbox' name='ft' placeholder='Insert phrase, name, keyword, etc.'>
+                $html = "<form name='f2' action='view_preprints.php' method='GET' onsubmit='loading(load);'>
+        		<div class='adv'>
+                            <h1>Fulltext Search:</h1><br/>
+                            <input type='search' value='" . $_GET['ft'] . "' autocomplete = 'on' class='searchbarLateral' name='ft' placeholder='Insert phrase, etc.'>
                             <input type='submit' name='go' value='Send' class='button'/>
-                            <div align='left' class='restrictionbox' style='width:100%;'><br/>
+                            <div class='restrictionbox'><br/>
 		                    Results for page: 
 		                    <select name='rp'>
 		                        " . $pageopt . "
 		                    </select>
                             </div>
-                            <div align='left' class='searchonbox' style='width:100%;'><br/>
+                            <div class='searchonbox' style='width:100%;'><br/>
 		                    Search on: <br/>
 		                    " . $searchopt . "
                             <br/>
                             </div>
-                        </form></div>
-                        <h1><a href='./view_preprints.php' style='color:#1976D2;'>Need Advanced Search?</a></h1>";
+                        </div></form>
+                        <h1><a href='./view_preprints.php?r=" . $_GET['ft'] . "' style='color:#1976D2;'>Need Advanced Search?</a></h1>";
             } else {//advanced search
-                $html = "<div class='adv' align='center'>
+                $html = "<div class='adv'>
                 <h1>Advanced Search:</h1><br/>
                 <form name='f1' action='view_preprints.php' method='GET' onsubmit='loading(load);'>
-                    <input type='search' value='" . $_GET['r'] . "' autocomplete = 'on' name='r' placeholder='Author name, id of publication, year of publication, etc.' required style='width:140px;' class='textbox'>
+                    <input type='search' value='" . $_GET['r'] . "' autocomplete = 'on' name='r' class='searchbarLateral' placeholder='Author name, etc.' required>
                     <input type='submit' name='s' value='Send' class='button'><br/><br/>
-                    <div align='left' class='restrictionbox'>
-                            Results for page:
-                            <select name='rp'>
-                                " . $pageopt . "
-                            </select><br/><br/>
-                            Years restriction:<br/>
-                            From <input type='text' value='" . $_GET['year2'] . "' name='year2' style='width:35px' placeholder='First' class='textbox'>
-                                to <input type='text' value='" . $_GET['year3'] . "' name='year3' style='width:35px' placeholder='Last' class='textbox'>
+                    <div class='SearchParam'>
+                        <div class='restrictionbox'>
+                                Results for page:
+                                <select name='rp'>
+                                    " . $pageopt . "
+                                </select><br/><br/>
+                                Years restriction:<br/>
+                                From: <input type='text' value='" . $_GET['year2'] . "' name='year2' style='width:35px' placeholder='First' class='textbox'>
+                                To: <input type='text' value='" . $_GET['year3'] . "' name='year3' style='width:35px' placeholder='Last' class='textbox'>
+                            </div>
+                        <div align='left' class='searchonbox'><br/>
+                            Search on:<br/>
+                            " . $searchcheckbox . "
                         </div>
-                    <div align='left' class='searchonbox'><br/>
-                        Search on:<br/>
-                        " . $searchcheckbox . "
-                    </div>
-                    <div align='left' class='orderbox'><br/>
-                        Order results:<br/>
-                        " . $orderradiob . "
-                    </div>
-                    <div style='clear:both;'>
+                        <div align='left' class='orderbox'><br/>
+                            Order results:<br/>
+                            " . $orderradiob . "
+                        </div>
+                        <div style='clear:both;'>
+                        </div>
                     </div>
                 </form><br/>
-                <h1><a href='./view_preprints.php?fulltext=yes' style='color:#1976D2;'>Need Fulltext Search?</a></h1>
+                <h1><a href='./view_preprints.php?fulltext=yes&ft=" . $_GET['r'] . "' style='color:#1976D2;'>Need Fulltext Search?</a></h1>
             </div>";
             }
             echo $html;

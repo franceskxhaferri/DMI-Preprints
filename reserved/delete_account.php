@@ -1,6 +1,6 @@
 <?php
 //cancellazione dell'account registrato
-include '../header.inc.php';
+include '../conf.php';
 include '../mysql/db_conn.php';
 include '../authorization/auth.php';
 error_reporting(E_ALL);

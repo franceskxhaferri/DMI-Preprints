@@ -25,6 +25,11 @@
     <body>
         <?php
         require_once './graphics/header.php';
+        if ($_GET['i'] == "1") {
+            $path = "./arXiv_panel.php";
+        } else {
+            $path = "./modp.php";
+        }
         ?>
         <div onclick="myFunction2()">
             <div id="header-wrapper">
@@ -41,17 +46,17 @@
                         </div>
                     </div>
                 </div>
-            </div><br/><br/>
+            </div><br/><br/><br/><br/><br/><br/>
             <center>
                 <h2>CHECK PAPERS</h2>
-                <div class="boxContainer">
-                    Go to admin panel&nbsp&nbsp&nbsp
-                    <a style='color:#ffffff; width:70px;' href='./modp.php' id='bottone_keyword' class='button' onclick='loading(load);'>Back</a><br/>
+                <div><br/>
+                    <a style='color:#ffffff;' href='<?php echo $path; ?>' id='bottone_keyword' class='button' onclick='loading(load);'>Back</a><br/><br/>
                 </div>
                 <div>
                     <?php
                     if (sessioneavviata() == True) {
                         echo "<center><br/>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE LIST CAN'T BE CHANGED IN THIS MOMENT!</center><br/>";
+                        break;
                     } else {
 ####################################################################################################################################################################
                         #arxiv papers
@@ -60,21 +65,18 @@
                         $directory = $basedir3;
                         echo "<form name='f1' action='check_preprints.php' id='f1' method='GET' onsubmit='loading(load);'>"
                         . "<div id='arxivpreprints'>"
-                        . "<center><table id='table'>";
+                        . "<input type='checkbox' name='i' value='" . $_GET['i'] . "' checked hidden/>"
+                        . "<table id='table'>";
                         #Apriamo una directory e leggiamone il contenuto.
                         if (is_dir($directory)) {
                             #Apro l'oggetto directory
                             if ($directory_handle = opendir($directory)) {
                                 #Scorro l'oggetto fino a quando non è termnato cioè false
-                                echo "<tr id='thhead'>"
-                                . "<td id='tdh' colspan='4' align='center'>DOWNLOADED FROM ARXIV</td>"
-                                . "</tr>";
-                                echo "<tr id='thhead'>"
-                                . "<td id='tdh'><label><input type='checkbox' class='checkall1' value='all1' name='all' onChange='toggle(this)'/>N&deg;:</label></td>"
+                                echo "<tr id='thhead'><td id='tdh' colspan='4' align='center'>DOWNLOADED FROM ARXIV</td></tr>";
+                                echo "<tr id='thhead'><td id='tdh'><label><input type='checkbox' class='checkall1' value='all1' name='all' onChange='toggle(this)'/>N&deg;:</label></td>"
                                 . "<td id='tdh' align='center'>FILE:</td>"
                                 . "<td id='tdh' align='center'>RECORD:</td>"
-                                . "<td id='tdh' align='center'>FOUNDED:</td>"
-                                . "</tr>";
+                                . "<td id='tdh' align='center'>CREATED:</td></tr>";
                                 $i = 0;
                                 $y = 1;
                                 while (($file = readdir($directory_handle)) !== false) {
@@ -103,21 +105,16 @@
                         #dmi papers
                         #Imposto la directory da leggere
                         $directory2 = $basedir;
-                        echo "<center><div id='dmipreprints'>"
-                        . "<table id='table1'>";
+                        echo "<div id='dmipreprints'><table id='table'>";
                         #Apriamo una directory e leggiamone il contenuto.
                         if (is_dir($directory2)) {
                             #Apro l'oggetto directory
                             if ($directory_handle = opendir($directory2)) {
                                 #Scorro l'oggetto fino a quando non è termnato cioè false
-                                echo "<tr id='thhead'>"
-                                . "<td id='tdh' colspan='4' align='center'>SUBMITTED TO DMI</td>"
-                                . "</tr>";
-                                echo "<tr id='thhead'>"
-                                . "<td id='tdh'><label><input type='checkbox' name='all2' class='checkall2' onChange='toggle(this)'/>N&deg;:</label></td>"
+                                echo "<tr id='thhead'><td id='tdh' colspan='4' align='center'>SUBMITTED TO DMI</td></tr>";
+                                echo "<tr id='thhead'><td id='tdh'><label><input type='checkbox' name='all2' class='checkall2' onChange='toggle(this)'/>N&deg;:</label></td>"
                                 . "<td id='tdh' align='center'>FILE:</td><td id='tdh' align='center'>RECORD:</td>"
-                                . "<td id='tdh' align='center'>FOUNDED:</td>"
-                                . "</tr>";
+                                . "<td id='tdh' align='center'>CREATED:</td></tr>";
                                 $y = 1;
                                 while (($file = readdir($directory_handle)) !== false) {
                                     #Se l'elemento trovato è diverso da una directory
@@ -136,10 +133,9 @@
                                     }
                                 }
                                 echo "</table></div>"
-                                . "<div style='clear:both;'><br/>"
-                                . "<input type='submit' name='b1' value='Remove' style='width:70px;' id='bottone_keyword' class='button' onclick='return confirmDelete3()'>"
-                                . "<input type='submit' name='b2' value='Insert' style='width:70px;' id='bottone_keyword' class='button' onclick='return confirmInsert3()'>"
-                                . "</div></center></form>";
+                                . "<input type='submit' name='b1' value='Remove' id='bottone_keyword' class='button' onclick='return confirmDelete3()'>"
+                                . "<input type='submit' name='b2' value='Insert' id='bottone_keyword' class='button' onclick='return confirmInsert3()'>"
+                                . "</div></form>";
                                 #Chiudo la lettura della directory.
                                 closedir($directory_handle);
                             }

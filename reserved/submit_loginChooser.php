@@ -26,11 +26,11 @@ if (isset($_SESSION['logged_type'])) {
 } else {
     //deve fare login
     echo '<div id="left_content">
-          	<input id="input_uid" class="textbox" style="height: 14pt;" placeholder="Enter uid or email" autocomplete = "on" required>
-          	<input type="password" id="input_pw" class="textbox" style="height: 14pt;" placeholder="Enter password" required>
+          	<input id="input_uid" class="textfield" placeholder="Enter UID or email" autocomplete = "on" required>
+          	<input type="password" id="input_pw" class="textfield" placeholder="Enter password" required>
           	<br/><br/>
-          	<button id="button_login" style="width: 110px;" onclick="chkLogin()" class="button">Login</button>
+          	<button id="button_login" onclick="chkLogin()" class="buttonlink">Login</button>
 	  </div>
-	  <div id="right_content"></div>';
+	  <div id="right_content"></div><br/>';
 }
 ?>

@@ -36,7 +36,7 @@
         </script>
     </head>
     <body><?php
-require_once './graphics/header.php';
+        require_once './graphics/header.php';
         echo "<div id='gotop' hidden><a id='scrollToTop' title='Go top'><img style='width:25px; height:25px;' src='./images/top.gif'></a></div>";
         if ($_COOKIE['searchbarall'] == "1") {
             #search bar
@@ -59,35 +59,33 @@ require_once './graphics/header.php';
                     </div>
                 </div>
             </div>
-            <div>
+            <div><br/><br/><br/><br/>
                 <center>
                     <br/>
                     <br/>
                     <h2>manual insertion</h2>
                 </center>
             </div>
-            <center>
-                Go to arXiv panel&nbsp&nbsp&nbsp
-                <a style="color:#3C3C3C;" href="./arXiv_panel.php" id="bottone_keyword" class="button" onclick="return confirmExit()" >Back</a><br/><br/>
+            <center><br/>
+                <a style="color:#ffffff;" href="./arXiv_panel.php" id="bottone_keyword" class="button" onclick="return confirmExit()" >Back</a><br/><br/>
                 <a style='color:#007897;' href='http://arxiv.org/' onclick='window.open(this.href);
                         return false' title='arXiv'>arXiv.org</a>
-            </center>
-            <hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
+            </center><br/>
             <?php
             if (sessioneavviata() == True) {
                 echo "<br/><br/><center>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTION CAN'T BE USED IN THIS MOMENT!</center><br/>";
+                exit(0);
             } else {
                 ?>
                 <center>
                     <div>
                         <form name='f3' action='manual_insert.php' method='POST' onsubmit="loading(load);">
                             Get paper informations from arXiv:
-                            <input type='search' autocomplete = 'on' style='width:200px; height: 19px;' name='id' required class='textbox' placeholder='Insert id(arXiv): 0000.0000'/>
+                            <input type='search' autocomplete = 'on' name='id' required class='textfield' placeholder='Insert id(arXiv): 0000.0000'/>
                             <input type='submit' name='b7' value='Get' id='bottone_keyword' class='button' ><br/>
                         </form>
                     </div>
-                </center>
-                <hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>
+                </center><br/>
                 <?php
                 if (isset($_POST['b7'])) {
                     echo "<div hidden>";
@@ -111,21 +109,21 @@ require_once './graphics/header.php';
                 <form name='f1' action='manual_insert.php' method='POST' enctype='multipart/form-data' onclick='myFunction()' onsubmit='loading(load);'>
                     <center><div><h2>paper informations</h2><h1>field with '*' are required.</h1><br/><input type='reset' name='reset' value='Reset'><br/><br/></center>
                         <div id='divinsertcateg'>
-                        <div style='float:right; width:49%;'><div style='font-weight: bold;'>document:</div><div style='float:right; width:49%;'><a href=./pdf_downloads/" . $arcid1 . ".pdf onclick='window.open(this.href);return false' style='color:#007897;' title='" . $arcid1 . ".pdf'>VIEW</a></div></div>
+                        <div style='float:right; width:49%;'><div style='font-weight: bold;'>document:</div><div style='float:right; width:49%;'><a href='" . $basedir3 . $arcid1 . ".pdf' onclick='window.open(this.href);return false' style='color:#007897;' title='" . $arcid1 . ".pdf'>VIEW</a></div></div>
                         <div style='font-weight: bold;'>
                             id(not editable):
                         </div>
-                            <textarea readonly style='width:49%;' name='id' id='textbox' class='textbox' placeholder='example of id: 0000.0000v1'>" . $ris[0] . "</textarea><br/><br/>
+                            <textarea readonly style='width:49%;' name='id' id='textbox' class='textbox1' placeholder='example of id: 0000.0000v1'>" . $ris[0] . "</textarea><br/><br/>
                         <div style='font-weight: bold;'>
                             date(not editable):
                         </div>
-                            <textarea readonly style='width:49%;' name='data' id='textbox' class='textbox' placeholder='example of data: 2011-12-30T10:37:35Z'>" . $ris[2] . "</textarea>
+                            <textarea readonly style='width:49%;' name='data' id='textbox' class='textbox1' placeholder='example of data: 2011-12-30T10:37:35Z'>" . $ris[2] . "</textarea>
                         </div>
                            <div>
                                <div id='divinsert'>
                                    <div id='divcontinsert'>
                                        *category:<br/>
-                                       <textarea name='category' id='textbox' class='textbox' required placeholder='example of category: math.NA...' onkeyup='UpdateMathcat(this.value)' >" . $ris[6] . "</textarea>
+                                       <textarea name='category' id='textbox' class='textbox1' required placeholder='example of category: math.NA...' onkeyup='UpdateMathcat(this.value)' >" . $ris[6] . "</textarea>
                                    </div>
                                </div>
                                <div id='divpreview'>
@@ -141,7 +139,7 @@ require_once './graphics/header.php';
                                <div id='divinsert'>
                                    <div id='divcontinsert'>
                                        *title:<br/>
-                                       <textarea name='title' id='textbox' class='textbox' required placeholder='example of title: The geometric...' onkeyup='UpdateMathtit(this.value)'>" . $ris[1] . "</textarea>
+                                       <textarea name='title' id='textbox' class='textbox1' required placeholder='example of title: The geometric...' onkeyup='UpdateMathtit(this.value)'>" . $ris[1] . "</textarea>
                                    </div>
                                </div>
                                <div id='divpreview'>
@@ -157,7 +155,7 @@ require_once './graphics/header.php';
                                <div id='divinsert'>
                                    <div id='divcontinsert'>
                                        *authors:<br/>
-                                       <textarea name='author' id='textbox' class='textbox' required placeholder='example of author: Mario Rossi, Luca...' onkeyup='UpdateMathaut(this.value)'>" . $ris[3] . "</textarea>
+                                       <textarea name='author' id='textbox' class='textbox1' required placeholder='example of author: Mario Rossi, Luca...' onkeyup='UpdateMathaut(this.value)'>" . $ris[3] . "</textarea>
                                    </div>
                                </div>
                                <div id='divpreview'>
@@ -172,8 +170,8 @@ require_once './graphics/header.php';
                            <div>
                                <div id='divinsert'>
                                    <div id='divcontinsert'>
-                                       journal reference:<br/>
-                                       <textarea name='journal' id='textbox' class='textbox' placeholder='example of Journal: Numer. Linear Algebra...' onkeyup='UpdateMathjou(this.value)'>" . $ris[4] . "</textarea>
+                                       journal ref:<br/>
+                                       <textarea name='journal' id='textbox' class='textbox1' placeholder='example of Journal: Numer. Linear Algebra...' onkeyup='UpdateMathjou(this.value)'>" . $ris[4] . "</textarea>
                                    </div>
                                </div>
                                <div id='divpreview'>
@@ -189,7 +187,7 @@ require_once './graphics/header.php';
                                <div id='divinsert'>
                                    <div id='divcontinsert'>
                                        comments:<br/>
-                                       <textarea name='comments' id='textbox' class='textbox' placeholder='example of comments: 10 pages...' onkeyup='UpdateMathcom(this.value)'>" . $ris[5] . "</textarea>
+                                       <textarea name='comments' id='textbox' class='textbox1' placeholder='example of comments: 10 pages...' onkeyup='UpdateMathcom(this.value)'>" . $ris[5] . "</textarea>
                                    </div>
                                </div>
                                <div id='divpreview'>
@@ -205,7 +203,7 @@ require_once './graphics/header.php';
                                <div id='divinsert'>
                                    <div id='divcontinsertabs'>
                                        *abstract:<br/>
-                                       <textarea name='abstract' id='textboxabs' class='textbox' required placeholder='example of abstract: The geometric...' onkeyup='UpdateMathabs(this.value)'>" . $ris[7] . "</textarea>
+                                       <textarea name='abstract' id='textboxabs' class='textbox1' required placeholder='example of abstract: The geometric...' onkeyup='UpdateMathabs(this.value)'>" . $ris[7] . "</textarea>
                                    </div>
                                </div>
                                <div id='divpreview'>
@@ -254,15 +252,15 @@ require_once './graphics/header.php';
                             <center><div><h2>paper informations</h2><h1>field with '*' are required</h1><br/><input type='reset' name='reset' value='Reset'/><br/></center>
                         <div id='divinsertcateg'>
                             <div style='font-weight: bold;'>*id:</div>
-                            <textarea style='width:49%;' name='id' id='textbox' class='textbox' required placeholder='example of id: 0000.0000v1' autofocus></textarea><br/><br/>
+                            <textarea style='width:49%;' name='id' id='textbox' class='textbox1' required placeholder='example of id: 0000.0000v1' autofocus></textarea><br/><br/>
                             <div style='font-weight: bold;'>*date:</div>
-                            <textarea style='width:49%;' name='date' id='textbox' class='textbox' required placeholder='example of data: 2011-12-30T10:37:35Z'></textarea>
+                            <textarea style='width:49%;' name='date' id='textbox' class='textbox1' required placeholder='example of data: 2011-12-30T10:37:35Z'></textarea>
                         </div>
                         <div>
                             <div id='divinsert'>
                                 <div id='divcontinsert'>
                                     *category:<br/>
-                                    <textarea name='category' id='textbox' class='textbox' required placeholder='example of category: math.NA...' onkeyup='UpdateMathcat(this.value)' ></textarea>
+                                    <textarea name='category' id='textbox' class='textbox1' required placeholder='example of category: math.NA...' onkeyup='UpdateMathcat(this.value)' ></textarea>
                                 </div>
                             </div>
                             <div id='divpreview'>
@@ -278,7 +276,7 @@ require_once './graphics/header.php';
                             <div id='divinsert'>
                                 <div id='divcontinsert'>
                                     *title:<br/>
-                                    <textarea name='title' id='textbox' class='textbox' required placeholder='example of title: The geometric...' onkeyup='UpdateMathtit(this.value)'></textarea>
+                                    <textarea name='title' id='textbox' class='textbox1' required placeholder='example of title: The geometric...' onkeyup='UpdateMathtit(this.value)'></textarea>
                                 </div>
                             </div>
                             <div id='divpreview'>
@@ -294,7 +292,7 @@ require_once './graphics/header.php';
                             <div id='divinsert'>
                                 <div id='divcontinsert'>
                                     *authors:<br/>
-                                    <textarea name='author' id='textbox' class='textbox' required placeholder='example of author: Mario Rossi, Luca...' onkeyup='UpdateMathaut(this.value)'></textarea>
+                                    <textarea name='author' id='textbox' class='textbox1' required placeholder='example of author: Mario Rossi, Luca...' onkeyup='UpdateMathaut(this.value)'></textarea>
                                 </div>
                             </div>
                             <div id='divpreview'>
@@ -309,8 +307,8 @@ require_once './graphics/header.php';
                         <div>
                             <div id='divinsert'>
                                 <div id='divcontinsert'>
-                                    journal reference:<br/>
-                                    <textarea name='journal' id='textbox' class='textbox' placeholder='example of Journal: Numer. Linear Algebra...' onkeyup='UpdateMathjou(this.value)'></textarea>
+                                    journal ref:<br/>
+                                    <textarea name='journal' id='textbox' class='textbox1' placeholder='example of Journal: Numer. Linear Algebra...' onkeyup='UpdateMathjou(this.value)'></textarea>
                                 </div>
                             </div>
                             <div id='divpreview'>
@@ -326,7 +324,7 @@ require_once './graphics/header.php';
                             <div id='divinsert'>
                                 <div id='divcontinsert'>
                                     comments:<br/>
-                                    <textarea name='comments' id='textbox' class='textbox' placeholder='example of comments: 10 pages...' onkeyup='UpdateMathcom(this.value)'></textarea>
+                                    <textarea name='comments' id='textbox' class='textbox1' placeholder='example of comments: 10 pages...' onkeyup='UpdateMathcom(this.value)'></textarea>
                                 </div>
                             </div>
                             <div id='divpreview'>
@@ -342,7 +340,7 @@ require_once './graphics/header.php';
                             <div id='divinsert'>
                                 <div id='divcontinsertabs'>
                                     *abstract:<br/>
-                                    <textarea name='abstract' id='textboxabs' class='textbox' required placeholder='example of abstract: The geometric...' onkeyup='UpdateMathabs(this.value)'></textarea>
+                                    <textarea name='abstract' id='textboxabs' class='textbox1' required placeholder='example of abstract: The geometric...' onkeyup='UpdateMathabs(this.value)'></textarea>
                                 </div>
                             </div>
                             <div id='divpreview'>

@@ -1,3 +1,9 @@
+//funzione reset password login
+function setOrder() {
+    //
+    document.getElementById("f1").submit();
+}
+
 //funzione disattivazione checkbox
 function DisAllFields(id) {
     if (id == "all") {
@@ -22,7 +28,6 @@ function DisAllFields(id) {
         }
     }
 }
-
 
 //funzione controllo registrazione
 function chkAccountUpdate() {

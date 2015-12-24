@@ -2,7 +2,7 @@
 
 #funzione incremento contatore visualizzazioni
 #importazione variabili globali
-include '../header.inc.php';
+include '../conf.php';
 require_once '../authorization/sec_sess.php';
 sec_session_start();
 #connessione al database...

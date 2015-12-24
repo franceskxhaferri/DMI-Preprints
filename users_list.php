@@ -46,37 +46,45 @@
                     </div>
                 </div>
             </div>
-            <br/><br/>
+            <br/><br/><br/><br/><br/><br/>
             <center>
                 <h2>EXTERNAL USERS</h2>
-                <div class="boxContainer"style="width:80%;">
-                    Go to admin panel 
-                    <a style="color:#ffffff; width:70px;" href="./modp.php" id="bottone_keyword" class="button" onclick="loading(load);">Back</a><br>
+                <div>
+                    <br/>
+                    <a style="color:#ffffff;" href="./modp.php" id="bottone_keyword" class="button" onclick="loading(load);">Back</a><br>
+                    <br/>
                 </div>
                 <div>
                     <div id="container">
                         <?php
                         $order = "registrazione DESC";
-                        echo "<center><div class='boxContainer' style='width:80%;'><form name='f1' action='users_list.php' id='f1' method='GET' onsubmit='loading(load);'>
-<div onchange='chkOrder()'>Order by:";
-//<label><input type='radio' name='o' value='regd'";
-                        $array_opt = array('regd' => array('Registration', 'registrazione DESC', 'desc'), 'regc' => array('Registration', 'registrazione ASC', 'asc'), 'accd' => array('Access', 'accesso DESC', 'desc'), 'accc' => array('Access', 'accesso ASC', 'asc'), 'named' => array('Name', 'nome DESC', 'desc'), 'namec' => array('Name', 'nome ASC', 'asc'), 'snamed' => array('Surname', 'cognome DESC', 'desc'), 'snamec' => array('Surname', 'cognome ASC', 'asc'), 'verd' => array('Verification', 'verificato DESC', 'desc'), 'verc' => array('Verification', 'verificato ASC ASC', 'asc'));
+                        echo "<center><form name='f1' action='users_list.php' id='f1' method='GET' onsubmit='loading(load);'>
+                            <div>
+                            <div align='left' class='boxContainerOrderUsers'>Order by:<br/>";
+                        $array_opt = array('regd' => array('Registration', 'registrazione DESC', 'desc'),
+                            'regc' => array('Registration', 'registrazione ASC', 'asc'),
+                            'accd' => array('Access', 'accesso DESC', 'desc'),
+                            'accc' => array('Access', 'accesso ASC', 'asc'),
+                            'named' => array('Name', 'nome DESC', 'desc'),
+                            'namec' => array('Name', 'nome ASC', 'asc'),
+                            'snamed' => array('Surname', 'cognome DESC', 'desc'),
+                            'snamec' => array('Surname', 'cognome ASC', 'asc'),
+                            'verd' => array('Verification', 'verificato DESC', 'desc'),
+                            'verc' => array('Verification', 'verificato ASC', 'asc'));
                         foreach ($array_opt as $key => $value) {
-                            (($value[2] == 'desc')) ? $freccia = '&#8595;' : $freccia = '&#8593;';
-                            if ($_GET['o'] == $key) {
+                            (($value[2] == 'desc')) ? $freccia = '&#8595;<br/>' : $freccia = '&#8593;<br/>';
+                            if ($_GET['o'] == $key or $_POST['o'] == $key) {
                                 $checked = "checked";
                                 $order = $value[1];
                             } else {
                                 $checked = "";
                             }
-                            $html .= "<label><input type='radio' name='o' value='" . $key . "' " . $checked . ">" . $value[0] . " " . $freccia . "</label>";
+                            $html .= "<label><input type='radio' name='o' onClick='setOrder();' value='" . $key . "' " . $checked . ">" . $value[0] . " " . $freccia . "</label>";
                         }
                         print $html;
-                        echo "<br/><input type='image' class='refresh' src='./images/refresh.png' alt='Submit' style='width:15px; height:15px; margin-top:20px;' title='Update'>"
-                        . "</div></div>";
 #lista utenti registrati
                         $nomi = find_accounts($order);
-                        echo "<table id='table' style='width:80%;' class='boxContainer'>
+                        echo "</div></div><div class='UserListBox'><table id='table'>
 <tr id='thhead'><td id='tdh' colspan='7' align='center'>EXTERNAL MEMBERS</td></tr>";
                         echo "<tr id='th'><td id='tdh'><label><input type='checkbox' class='checkall1' name='all1' onChange='toggle(this)'/>N&deg;:</label></td><td id='tdh' align='center'>NAME:</td><td id='tdh' align='center'>SURNAME:</td><td id='tdh' align='center'>EMAIL:</td><td id='tdh' align='center'>LAST ACCESS:</td><td id='tdh' align='center'>REGISTERED:</td><td id='tdh' align='center'>VERIFIED:</td></tr>";
 #creazione della tabella html dei file all'interno di pdf_downloads
@@ -88,7 +96,7 @@
                             $y++;
                             $i++;
                         }
-                        echo "</table></center><input type='submit' style='width:70px;' class='button' name='b3' value='Remove' onclick='return confirmDelete6()'></center></form>";
+                        echo "</table></div></center><input type='submit' class='button' name='b3' value='Remove' onclick='return confirmDelete6()'></center></form>";
                         if (isset($_GET['b3'])) {
                             $k = 0;
                             for ($j = 0; $j < $i; $j++) {
@@ -109,6 +117,7 @@
                                 echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./users_list.php">';
                             }
                         }
+                        require_once './graphics/loader.php';
                         ?>
                     </div>
                 </div>

@@ -36,19 +36,19 @@
         </script>
     </head>
     <body>
-    <?php
-require_once './graphics/header.php';
+        <?php
+        require_once './graphics/header.php';
 //sessione moderatore
-if ($_SESSION['logged_type'] === "mod") {
-    $ind = "modp.php";
-} else {
-    $ind = "userp.php";
-}
-if ($_COOKIE['searchbarall'] == "1") {
-    #search bar
-    require_once './graphics/searchbar_bottom.php';
-}
-?>
+        if ($_SESSION['logged_type'] === "mod") {
+            $ind = "modp.php";
+        } else {
+            $ind = "userp.php";
+        }
+        if ($_COOKIE['searchbarall'] == "1") {
+            #search bar
+            require_once './graphics/searchbar_bottom.php';
+        }
+        ?>
         <div onclick="myFunction2()">
             <div id="header-wrapper">
                 <div class="container">
@@ -65,10 +65,11 @@ if ($_COOKIE['searchbarall'] == "1") {
                     </div>
                 </div>
             </div>
-            <center>
+            <center><br/><br/><br/><br/><br/><br/><h2>My Uploads</h2>
                 <div>
-                    <br/><br/>
-                    Go back to new insertion: <a style="color:#3C3C3C;" href="<?php echo $ind; ?>" id="bottoni" class="button" onclick="loading(load);">Back</a>
+                    <br/>
+                    <a style="color:#ffffff;" href="<?php echo $ind; ?>" id="bottoni" class="button" onclick="loading(load);">Back</a>
+                    <br/><br/>  
                 </div>
                 <?php
                 #lettura preprint caricati

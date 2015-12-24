@@ -3,7 +3,7 @@
 #funzione che inserisce i preprints all'interno del database
 
 function insert_preprints($array) {
-    include './header.inc.php';
+    include './conf.php';
 //import connessione database
     include './mysql/db_conn.php';
     #adattamento stringhe pericolose per la query...
@@ -24,7 +24,7 @@ function insert_preprints($array) {
 #funzione che aggiorna i preprints all'interno del database
 
 function update_preprints($array) {
-    include './header.inc.php';
+    include './conf.php';
 //import connessione database
     include './mysql/db_conn.php';
     #adattamento stringhe pericolose per la query...
@@ -36,18 +36,7 @@ function update_preprints($array) {
     $array[6] = addslashes($array[6]);
     $array[7] = addslashes($array[7]);
     //query
-    $sql = "UPDATE
-    	PREPRINTS 
-    SET
-     titolo= '" . $array[1] . "', 
-     data_pubblicazione='" . $array[2] . "',
-     autori='" . $array[3] . "',
-     referenze='" . $array[4] . "',
-     commenti='" . $array[5] . "',
-     categoria='" . $array[6] . "',
-     abstract='" . $array[7] . "'
-    WHERE 
-     id_pubblicazione='" . $array[0] . "'";
+    $sql = "UPDATE PREPRINTS SET titolo= '" . $array[1] . "', data_pubblicazione='" . $array[2] . "', autori='" . $array[3] . "', referenze='" . $array[4] . "', commenti='" . $array[5] . "', categoria='" . $array[6] . "', abstract='" . $array[7] . "' WHERE id_pubblicazione='" . $array[0] . "'";
     $query = mysqli_query($db_connection, $sql) or die(mysql_error());
     #chiusura connessione al database
     mysqli_close($db_connection);
@@ -56,7 +45,7 @@ function update_preprints($array) {
 #funzione che cancella il pdf caricato all'interno della cartella
 
 function delete_pdf($id) {
-    include './header.inc.php';
+    include './conf.php';
 //import connessione database
     include './mysql/db_conn.php';
     $sql = "SELECT * FROM PREPRINTS WHERE id_pubblicazione='" . $id . "'";
@@ -70,7 +59,7 @@ function delete_pdf($id) {
 #funzione che inserisce il pdf selezionato all'interno dei database
 
 function insert_one_pdf2($id) {
-    include './header.inc.php';
+    include './conf.php';
 //import connessione database
     include './mysql/db_conn.php';
     $type = "pdf/document";
@@ -103,7 +92,7 @@ function insert_one_pdf2($id) {
 #funzione che inserisce il pdf caricato all'interno dei database
 
 function insert_one_pdf($id, $type) {
-    include './header.inc.php';
+    include './conf.php';
 //import connessione database
     include './mysql/db_conn.php';
     $sql2 = "SELECT * FROM PREPRINTS WHERE id_pubblicazione='" . $id . "'";
@@ -131,7 +120,7 @@ function insert_one_pdf($id, $type) {
 #funzione che rimuove i preprints dall'database
 
 function remove_preprints($id) {
-    include './header.inc.php';
+    include './conf.php';
 //import connessione database
     include './mysql/db_conn.php';
     $id = str_replace("-", "/", $id);
@@ -146,7 +135,7 @@ function remove_preprints($id) {
 #funzione che controlla la versione del preprint e lo archivia eventualmente
 
 function version_preprint($id1) {
-    include './header.inc.php';
+    include './conf.php';
 //import connessione database
     include './mysql/db_conn.php';
     #elaborazione dell'id...

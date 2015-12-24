@@ -101,9 +101,6 @@
             </div>
         </div><br/><br/>
     <center>
-        <?php
-        echo "<div id='gotop' hidden><a id='scrollToTop' title='Go top'><img style='width:25px; height:25px;' src='./images/top.gif'></a></div>";
-        ?>
         <br/>
     </div><br/><br/><br/><br/>
     <div class="searchboxContainer" align="center">
@@ -115,9 +112,9 @@
                         <div><a href="./index.php?fulltext=yes" style="color:#ffffff; float:left;" class="buttonNav2" >Fulltext Search</a></div>';
                 $html = "<div class='adv' align='center'>
                     <input type='search' value='" . $_GET['r'] . "' autocomplete = 'on' class='searchbar' name='r' placeholder='Author name, id of publication, year of publication, etc.' required>
-                    <input type='submit' name='s' value='Send' class='button' style='width:60px; height: 25px;'><br/><br/>
-                        <div align='left' class='restrictionbox'>
-                            Reset form selections:<br/>
+                    <input type='submit' name='s' value='Send' class='button'>
+                        <div align='left' class='restrictionboxHome'>
+                            Reset selections:<br/>
 	                    <input type='reset' name='reset' value='Reset'><br/><br/><br/>
                             Years restriction:<br/>
                             From <input type='text' name='year2' style='width:35px' placeholder='First' class='textbox'> to <input type='text' name='year3' style='width:35px' placeholder='Last' class='textbox'>
@@ -130,9 +127,9 @@
                                 <option value='20'>20</option>
                                 <option value='25'>25</option>
                                 <option value='50'>50</option>
-                            </select>
+                            </select><br/>
                         </div>
-                        <div align='left' class='searchonbox'>
+                        <div align='left' class='searchonboxHome'>
                             Search on:<br/>
                             <label><input type='checkbox' name='d' value='1' id='d' class='checkbox'>Archived</label><br/>
                             <label><input type='checkbox' name='all' value='1' id='all' class='checkbox' onChange='DisAllFields(this.id);'>Full Record</label><br/>
@@ -145,7 +142,7 @@
                             <label><input type='checkbox' name='j' value='1' id='j' class='checkbox'>Journal Ref</label><br/>
                             <label><input type='checkbox' name='i' value='1' id='i' class='checkbox'>Identifier(ID)</label><br/>
                         </div>
-                        <div align='left' class='orderbox'>
+                        <div align='left' class='orderboxHome'>
                             Order results:<br/>
                             <label><input type='radio' name='o' value='dated' checked>Publication Date &#8595;</label><br/>
                             <label><input type='radio' name='o' value='datec'>Publication Date &#8593;</label><br/>
@@ -160,37 +157,38 @@
                 . '<div><a href="./index.php?advanced=yes" style="color:#ffffff; float:left;" class="buttonNav2" >Advanced Search</a></div>'
                 . '<div><a href="./index.php?fulltext=yes" style="color:#3C3C3C; float:left;" class="buttonNav" >Fulltext Search</a></div>';
                 $html = "<div class='fulltext' align='center'>
-                        <form name='f2' action='view_preprints.php' method='GET' onsubmit='loading(load);'>
-                            <input type='search' value='" . $_GET['ft'] . "' autocomplete = 'on' class='searchbar' name='ft' placeholder='Insert phrase, name, keyword, etc.'/>
-                            <input type='submit' name='go' value='Send' style='width:60px; height: 25px;' class='button'/><br/><br/>
-                             <div align='left' class='restrictionbox'>
-		                    Reset form selections:<br/>
-		                    <input type='reset' name='reset' value='Reset'><br/><br/>
-                            </div>
-                            <div align='left' class='restrictionbox'>
-		                    Results for page:<br/>
-		                    <select name='rp'>
-		                        <option value='5' selected='selected'>5</option>
-		                        <option value='10'>10</option>
-		                        <option value='15'>15</option>
-		                        <option value='20'>20</option>
-		                        <option value='25'>25</option>
-		                        <option value='50'>50</option>
-		                    </select><br/><br/>
-                            </div>
-                            <div align='left' class='searchonbox'>
-		                    Search on: <br/>
-		                    <label><input type='radio' name='st' value='1' checked>Currents</label><br/>
-		                    <label><input type='radio' name='st' value='0'>Archived</label><br/>
-                            </div>
-                        </form><div style='clear:both;'></div></div>
+                            <form name='f2' action='view_preprints.php' method='GET' onsubmit='loading(load);'>
+                                <input type='search' value='" . $_GET['ft'] . "' autocomplete = 'on' class='searchbar' name='ft' placeholder='Insert phrase, name, keyword, etc.'/>
+                                <input type='submit' name='go' value='Send' class='button'/><br/>
+                                 <div align='left' class='restrictionboxHome'>
+                                        Reset selections:<br/>
+                                        <input type='reset' name='reset' value='Reset'>
+                                </div>
+                                <div align='left' class='restrictionboxHome'>
+                                        Results for page:<br/>
+                                        <select name='rp'>
+                                            <option value='5' selected='selected'>5</option>
+                                            <option value='10'>10</option>
+                                            <option value='15'>15</option>
+                                            <option value='20'>20</option>
+                                            <option value='25'>25</option>
+                                            <option value='50'>50</option>
+                                        </select>
+                                </div>
+                                <div align='left' class='searchonboxHome'>
+                                        Search on: <br/>
+                                        <label><input type='radio' name='st' value='1' checked>Currents</label><br/>
+                                        <label><input type='radio' name='st' value='0'>Archived</label>
+                                </div>
+                            </form><div style='clear:both;'></div>
+                        </div>
                     </div>";
             } else {
                 echo '<div><a href="./index.php" style="color:#3C3C3C; float:left;" class="buttonNav" >Simple Search</a></div>'
                 . '<div><a href="./index.php?advanced=yes" style="color:#ffffff; float:left;" class="buttonNav2" >Advanced Search</a></div>'
                 . '<div><a href="./index.php?fulltext=yes" style="color:#ffffff; float:left;" class="buttonNav2" >Fulltext Search</a></div>';
                 $html = "<div class='simple'>
-                    <select name='f' class='selector' style='height: 25px;'>
+                    <select name='f' class='selector'>
                         <option value='all' selected='selected'>All papers:</option>
                         <option value='author'>Authors:</option>
                         <option value='category'>Category:</option>
@@ -198,8 +196,8 @@
                         <option value='id'>ID:</option>
                     </select>
                     <input type='radio' name='o' value='dated' checked hidden>
-                    <input style='width:65%;' type='search' autocomplete = 'on' class='searchbar' name='r' placeholder='Author name, year of publication, etc.' required>
-                    <input type='submit' name='s' value='Send' class='button' style='width:60px; height: 25px;'>
+                    <input type='search' autocomplete = 'on' class='SimpleSearchBar' name='r' placeholder='Author name, year of publication, etc.' required>
+                    <input type='submit' name='s' value='Send' class='button'>
                 </div>";
             }
             ?>
