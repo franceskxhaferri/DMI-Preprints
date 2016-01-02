@@ -51,7 +51,7 @@
                         <a style="color:#ffffff;" href="./arXiv_panel.php" id="bottone_keyword" class="button" onclick="loading(load);">Back</a><br>
                         <br/>
                         <div class="boxContainerInsertAuthors">
-                            <form name="f2" action="authors_list.php" method="POST" onsubmit="loadingRight(loadRight);">
+                            <form name="f2" action="authors_list.php" method="GET" onsubmit="loadingRight(loadRight);">
                                 <label>
                                     Add author's?
                                     <input type="checkbox" name="insert" value="1" checked/>
@@ -68,9 +68,9 @@
                     if (sessioneavviata() == True) {
                         echo "<center><br/><br/>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE LIST CAN'T BE CHANGED IN THIS MOMENT!</center><br/>";
                     } else {
-                        if (isset($_POST['b2'])) {
-                            $name = $_POST['txt1'];
-                            $insert = $_POST['insert'];
+                        if (isset($_GET['b2'])) {
+                            $name = $_GET['txt1'];
+                            $insert = $_GET['insert'];
                             #funzione inserimento nuovi autori
                             aggiungiutente($name, $insert);
                         }

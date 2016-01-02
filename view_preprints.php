@@ -118,7 +118,7 @@
                             <br/>
                             </div>
                         </div></form>
-                        <h1><a href='./view_preprints.php?r=" . $_GET['ft'] . "' style='color:#1976D2;'>Need Advanced Search?</a></h1>";
+                        <h1><a href='./view_preprints.php?r=" . $_GET['ft'] . "&s=Send&all=1&o=dated' style='color:#1976D2;' onclick='loading(load);'>Need Advanced Search?</a></h1>";
                 } else {//advanced search
                     $html = "<div class='adv'>
                 <h1>Advanced Search:</h1><br/>
@@ -147,7 +147,7 @@
                         </div>
                     </div>
                 </form><br/>
-                <h1><a href='./view_preprints.php?fulltext=yes&ft=" . $_GET['r'] . "' style='color:#1976D2;'>Need Fulltext Search?</a></h1>
+                <h1><a href='./view_preprints.php?fulltext=yes&ft=" . $_GET['r'] . "&go=Send&st=1' style='color:#1976D2;' onclick='loading(load);'>Need Fulltext Search?</a></h1>
             </div>";
                 }
                 echo $html;

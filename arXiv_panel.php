@@ -87,24 +87,20 @@
                             Search for new papers
                         </div>
                         <div id="boxdx">
-                            <form name="f8" action="arXiv_panel.php" method="POST" onsubmit="loading(load);">
-                                <input type="submit" name="b8" value="Update" id="bottone_keyword" class="button">
-                            </form>
+                            <a style="color:#ffffff;" href="./arXiv_panel.php?b8=update" id="bottone_keyword" class="buttonlink" onclick="loading(load);">Update</a>
                         </div>
                         <div id="boxsx">
                             Download all from arXiv!
                         </div>
                         <div id="boxdx">
-                            <form name="f9" action="arXiv_panel.php" method="POST">
-                                <input type="submit" name="b9" value="Overwrite" id="bottone_keyword" class="button" onclick="return confirmDownload()">
-                            </form>
+                            <a style="color:#ffffff;" href="./arXiv_panel.php?b9=overwrite" id="bottone_keyword" class="buttonlink" onclick="return confirmDownload()">Overwrite</a>
                         </div>
                         <div style="clear:both;"></div>
                     </div>
                     <center>
                         <hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
                         <?php
-                        if (isset($_POST['b8'])) {
+                        if (isset($_GET['b8'])) {
                             if ($sock = @fsockopen('www.arxiv.org', 80, $num, $error, 5)) {
                                 if (sessioneavviata() == False) {
                                     #avvio della sessione
@@ -151,7 +147,7 @@
                                 }
                             }
                         }
-                        if (isset($_POST['b9'])) {
+                        if (isset($_GET['b9'])) {
                             if ($sock = @fsockopen('www.arxiv.org', 80, $num, $error, 5)) {
                                 if (sessioneavviata() == False) {
                                     #avvio della sessione

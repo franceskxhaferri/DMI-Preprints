@@ -82,10 +82,11 @@ ul.big-image-list img {
 
 #header nav {
     position: absolute;
-    border-radius:5px;
-    right: 64px;
+    right: 40px;
     line-height: 64px;
-    font-size: 1em;
+    font-weight: bold;
+    overflow: hidden;
+    font-size: 1.0em;
 }
 
 #header nav a {
