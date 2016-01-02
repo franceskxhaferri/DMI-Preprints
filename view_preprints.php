@@ -50,57 +50,58 @@
                     </div>
                 </div>
             </div>
-        </div><br/><br/>
-    <center><br/>
-        <div class="boxContainerSearch">
-            <?php
-            //fulltext search(risultati per pagina)
-            $array_opt = ['5', '10', '15', '20', '25', '50'];
-            foreach ($array_opt as $key) {//paginazione
-                //(($value[2] == 'desc')) ? $freccia = '&#8595;' : $freccia = '&#8593;';
-                if ($_GET['rp'] == $key) {
-                    $checked = "selected='selected'";
+        </div><br/>
+    <center>
+        <div id="firstContainer">
+            <div class="boxContainerSearch">
+                <?php
+                //fulltext search(risultati per pagina)
+                $array_opt = ['5', '10', '15', '20', '25', '50'];
+                foreach ($array_opt as $key) {//paginazione
+                    //(($value[2] == 'desc')) ? $freccia = '&#8595;' : $freccia = '&#8593;';
+                    if ($_GET['rp'] == $key) {
+                        $checked = "selected='selected'";
+                    } else {
+                        $checked = "";
+                    }
+                    $pageopt .= "<option value=" . $key . " " . $checked . ">" . $key . "</option>";
+                }
+                //dove eseguire la ricerca
+                if ($_GET['st'] == "0") {
+                    $searchopt = "<label><input type='radio' name='st' value='1'>Currents</label><br/>"
+                            . "<label><input type='radio' name='st' value='0' checked>Archived</label><br/>";
                 } else {
-                    $checked = "";
+                    $searchopt = "<label><input type='radio' name='st' value='1' checked>Currents</label><br/>"
+                            . "<label><input type='radio' name='st' value='0'>Archived</label><br/>";
                 }
-                $pageopt .= "<option value=" . $key . " " . $checked . ">" . $key . "</option>";
-            }
-            //dove eseguire la ricerca
-            if ($_GET['st'] == "0") {
-                $searchopt = "<label><input type='radio' name='st' value='1'>Currents</label><br/>"
-                        . "<label><input type='radio' name='st' value='0' checked>Archived</label><br/>";
-            } else {
-                $searchopt = "<label><input type='radio' name='st' value='1' checked>Currents</label><br/>"
-                        . "<label><input type='radio' name='st' value='0'>Archived</label><br/>";
-            }
-            //advanced search(checkboxs)
-            $array_search = array('d' => 'Archived', 'all' => 'Full Record', 'h' => 'Author(s)', 't' => 'Title', 'a' => 'Abstract', 'e' => 'Date',
-                'y' => 'Category', 'c' => 'Comments', 'j' => 'Journal Ref', 'i' => 'Identifier(ID)');
-            foreach ($array_search as $key => $value) {//search on
-                if ($_GET[$key] == "1") {
-                    $checked = "checked";
-                } else {
-                    $checked = "";
+                //advanced search(checkboxs)
+                $array_search = array('d' => 'Archived', 'all' => 'Full Record', 'h' => 'Author(s)', 't' => 'Title', 'a' => 'Abstract', 'e' => 'Date',
+                    'y' => 'Category', 'c' => 'Comments', 'j' => 'Journal Ref', 'i' => 'Identifier(ID)');
+                foreach ($array_search as $key => $value) {//search on
+                    if ($_GET[$key] == "1") {
+                        $checked = "checked";
+                    } else {
+                        $checked = "";
+                    }
+                    if (($_GET['all'] == "1") && ($key == "h")) {
+                        $disable = "disabled";
+                    }
+                    $searchcheckbox .= "<label><input type='checkbox' onChange='DisAllFields(this.id)' id='" . $key . "' name='" . $key . "' value='1' class='checkbox' " . $checked . " " . $disable . ">" . $value . "</label><br/>";
                 }
-                if (($_GET['all'] == "1") && ($key == "h")) {
-                    $disable = "disabled";
+                //ordine dei risultati
+                $array_order = array('dated' => 'Publication Date &#8595;', 'datec' => 'Publication Date &#8593;',
+                    'idd' => 'Identifier(ID) &#8595;', 'idc' => 'Identifier(ID) &#8593;',
+                    'named' => 'Author Name &#8595;', 'namec' => 'Author Name &#8593;');
+                foreach ($array_order as $key => $value) {
+                    if ($_GET['o'] == $key) {
+                        $checked = "checked";
+                    } else {
+                        $checked = "";
+                    }
+                    $orderradiob .= "<label><input type='radio' name='o' value='" . $key . "' " . $checked . ">" . $value . "</label><br/>";
                 }
-                $searchcheckbox .= "<label><input type='checkbox' onChange='DisAllFields(this.id)' id='" . $key . "' name='" . $key . "' value='1' class='checkbox' " . $checked . " " . $disable . ">" . $value . "</label><br/>";
-            }
-            //ordine dei risultati
-            $array_order = array('dated' => 'Publication Date &#8595;', 'datec' => 'Publication Date &#8593;',
-                'idd' => 'Identifier(ID) &#8595;', 'idc' => 'Identifier(ID) &#8593;',
-                'named' => 'Author Name &#8595;', 'namec' => 'Author Name &#8593;');
-            foreach ($array_order as $key => $value) {
-                if ($_GET['o'] == $key) {
-                    $checked = "checked";
-                } else {
-                    $checked = "";
-                }
-                $orderradiob .= "<label><input type='radio' name='o' value='" . $key . "' " . $checked . ">" . $value . "</label><br/>";
-            }
-            if (isset($_GET['go']) && $_GET['go'] != "" or $_GET['fulltext'] == "yes") {//fulltext search
-                $html = "<form name='f2' action='view_preprints.php' method='GET' onsubmit='loading(load);'>
+                if (isset($_GET['go']) && $_GET['go'] != "" or $_GET['fulltext'] == "yes") {//fulltext search
+                    $html = "<form name='f2' action='view_preprints.php' method='GET' onsubmit='loadingRight(loadRight);'>
         		<div class='adv'>
                             <h1>Fulltext Search:</h1><br/>
                             <input type='search' value='" . $_GET['ft'] . "' autocomplete = 'on' class='searchbarLateral' name='ft' placeholder='Insert phrase, etc.'>
@@ -118,10 +119,10 @@
                             </div>
                         </div></form>
                         <h1><a href='./view_preprints.php?r=" . $_GET['ft'] . "' style='color:#1976D2;'>Need Advanced Search?</a></h1>";
-            } else {//advanced search
-                $html = "<div class='adv'>
+                } else {//advanced search
+                    $html = "<div class='adv'>
                 <h1>Advanced Search:</h1><br/>
-                <form name='f1' action='view_preprints.php' method='GET' onsubmit='loading(load);'>
+                <form name='f1' action='view_preprints.php' method='GET' onsubmit='loadingRight(loadRight);'>
                     <input type='search' value='" . $_GET['r'] . "' autocomplete = 'on' name='r' class='searchbarLateral' placeholder='Author name, etc.' required>
                     <input type='submit' name='s' value='Send' class='button'><br/><br/>
                     <div class='SearchParam'>
@@ -148,30 +149,33 @@
                 </form><br/>
                 <h1><a href='./view_preprints.php?fulltext=yes&ft=" . $_GET['r'] . "' style='color:#1976D2;'>Need Fulltext Search?</a></h1>
             </div>";
-            }
-            echo $html;
-            ?>
-        </div><br/><br/>
-        <div class="resultsContainer" onclick="myFunction()">
-            <?php
-#ricerca full text
-            if (isset($_GET['go']) && $_GET['go'] != "") {
-                searchfulltext();
-            }
-#ricerca normale
-            if (isset($_GET['s']) && $_GET['s'] != "") {
-                if ($_GET['f'] == "all" or $_GET['f'] == "author" or $_GET['f'] == "category"
-                        or $_GET['f'] == "year" or $_GET['f'] == "id") {
-                    filtropreprint();
-                } else if ($_GET['all'] == "1" or $_GET['h'] == "1" or $_GET['t'] == "1" or $_GET['a'] == "1" or $_GET['e'] == "1" or $_GET['y'] == "1" or $_GET['c'] == "1" or $_GET['j'] == "1" or $_GET['i'] == "1" or $_GET['d'] == "1") {
-                    searchpreprint();
-                } else {
-                    echo "SELECT THE FIELD WHERE RUN THE SEARCH!";
                 }
-            }
-            require_once './graphics/loader.php';
-            ?>
-        </div><br/>
+                echo $html;
+                ?></div>
+            <div class="resultsContainer" id="secondContainer" onclick="myFunction()">
+                <?php
+#ricerca full text
+                if (isset($_GET['go']) && $_GET['go'] != "") {
+                    searchfulltext();
+                }
+#ricerca normale
+                if (isset($_GET['s']) && $_GET['s'] != "") {
+                    if ($_GET['f'] == "all" or $_GET['f'] == "author" or $_GET['f'] == "category"
+                            or $_GET['f'] == "year" or $_GET['f'] == "id") {
+                        filtropreprint();
+                    } else if ($_GET['all'] == "1" or $_GET['h'] == "1" or $_GET['t'] == "1" or $_GET['a'] == "1" or $_GET['e'] == "1" or $_GET['y'] == "1" or $_GET['c'] == "1" or $_GET['j'] == "1" or $_GET['i'] == "1" or $_GET['d'] == "1") {
+                        searchpreprint();
+                    } else {
+                        echo "SELECT THE FIELD WHERE RUN THE SEARCH!";
+                    }
+                }
+                ?>
+            </div><br/>
+        </div>
+        <?php
+        require_once './graphics/loaderRight.php';
+        require_once './graphics/loader.php';
+        ?>
     </center>
 </body>
 </html>

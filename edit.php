@@ -47,7 +47,7 @@
                             <header id="header">
                                 <h1><a href="#" id="logo">DMI Papers</a></h1>
                                 <nav id="nav">
-                                    <a href='./view_preprints.php' onclick="loading(load);">Publications</a>
+                                    <a href='./index.php' onclick="loading(load);">Publications</a>
                                     <a href="./reserved.php" class="current-page-item" onclick="loading(load);">Reserved Area</a>
                                 </nav>
                             </header>
@@ -55,35 +55,36 @@
                     </div>
                 </div>
             </div>
-            <center>
-                <div>
-                    <br/><br/><br/><br/><br/>
-                    <h2>manual editing</h2>
-                </div>
-                <form name="f1" action="uploaded.php" method="GET">
-                    <input type="submit" name="b1" value="Back" id='bottone_keyword' class='button' onclick="return confirmExit()">
-                </form><br/><br/><br/>
-            </center>
-            <?php
-            if (isset($_POST['b8']) or isset($_POST['b9']) or isset($_POST['b11']) or isset($_POST['b10']) or isset($_GET['id'])) {
-                if (empty($_POST['id'])) {
-                    $id = $_GET['id'];
-                } else {
-                    $id = $_POST['id'];
+            <br/>
+            <div id="firstContainer">
+                <center>
+                    <div>
+                        <h2>manual editing</h2>
+                    </div>
+                    <form name="f1" action="uploaded.php" method="GET">
+                        <input type="submit" name="b1" value="Back" id='bottone_keyword' class='button' onclick="return confirmExit()">
+                    </form><br/><br/><br/>
+                </center>
+                <?php
+                if (isset($_POST['b8']) or isset($_POST['b9']) or isset($_POST['b11']) or isset($_POST['b10']) or isset($_GET['id'])) {
+                    if (empty($_POST['id'])) {
+                        $id = $_GET['id'];
+                    } else {
+                        $id = $_POST['id'];
+                    }
+                    #adattamento stringa
+                    $id = trim($id);
+                    #funzione per recupero informazioni dell'preprint
+                    $ris = cercapreprint($id);
+                    if ($ris[0] == $id) {
+                        #sblocco altri campi
+                        $var = True;
+                    } else {
+                        echo '<script type="text/javascript">alert("ID incorrect!");</script>';
+                    }
                 }
-                #adattamento stringa
-                $id = trim($id);
-                #funzione per recupero informazioni dell'preprint
-                $ris = cercapreprint($id);
-                if ($ris[0] == $id) {
-                    #sblocco altri campi
-                    $var = True;
-                } else {
-                    echo '<script type="text/javascript">alert("ID incorrect!");</script>';
-                }
-            }
-            if ($var == True) {
-                echo "<script type='text/javascript'>
+                if ($var == True) {
+                    echo "<script type='text/javascript'>
 				function confirmExit()
 				{
 				   return confirm('All unsaved changes will be lost, continue?');
@@ -97,7 +98,7 @@
                                     document:
                                 </div>
                                 <div style='float:right; width:49%;'>
-                                    <a href=./pdf/" . $ris[9] . " onclick='window.open(this.href);return false' style='color:#007897;' title='" . $ris[9] . "'>VIEW</a>
+                                    <a href=./pdf/" . $ris[9] . " onclick='window.open(this.href);return false' style='color:#1976D2;' title='" . $ris[9] . "'>VIEW</a>
                                 </div>
                             </div>
                                 <div style='font-weight: bold;'>
@@ -210,118 +211,120 @@
                             <center><div style='font-weight: bold;'>file to upload:</div>
                             <input type='hidden' name='MAX_FILE_SIZE' value='10000000'>
                             <input type='file' name='fileToUpload' id='fileToUpload'><br/>
-                            <br/><input type='submit' name='b9' value='Remove' style='width:60px;' id='bottone_keyword' class='button' onclick='return confirmDelete2()'/>
-                            <input type='submit' name='b10' value='Upgrade' style='width:60px;' id='bottone_keyword' class='button' onclick='return confirmUpgrade()'/>
-                            <input type='submit' name='b11' value='Update' style='width:60px;' id='bottone_keyword' class='button' onclick='return confirmInsert2()'/></center>
+                            <br/><input type='submit' name='b9' value='Remove' id='bottone_keyword' class='button' onclick='return confirmDelete2()'/>
+                            <input type='submit' name='b10' value='Upgrade' id='bottone_keyword' class='button' onclick='return confirmUpgrade()'/>
+                            <input type='submit' name='b11' value='Update' id='bottone_keyword' class='button' onclick='return confirmInsert2()'/></center>
                             </form>";
-                $ris[1] = str_replace("<br />", "", $ris[1]);
-                $ris[1] = str_replace("\n", "", $ris[1]);
-                $ris[7] = str_replace("<br />", "", $ris[7]);
-                $ris[7] = str_replace("\n", "", $ris[7]);
-                echo "<script type='text/javascript'>UpdateMathcat('" . $ris[6] . "')</script>
+                    $ris[1] = str_replace("<br />", "", $ris[1]);
+                    $ris[1] = str_replace("\n", "", $ris[1]);
+                    $ris[7] = str_replace("<br />", "", $ris[7]);
+                    $ris[7] = str_replace("\n", "", $ris[7]);
+                    echo "<script type='text/javascript'>UpdateMathcat('" . $ris[6] . "')</script>
 				    <script type='text/javascript'>UpdateMathtit('" . $ris[1] . "')</script>
 				    <script type='text/javascript'>UpdateMathaut('" . $ris[3] . "')</script>
 				    <script type='text/javascript'>UpdateMathjou('" . $ris[4] . "')</script>
 				    <script type='text/javascript'>UpdateMathcom('" . $ris[5] . "')</script>
 				    <script type='text/javascript'>UpdateMathabs('" . $ris[7] . "')</script>";
-                $target_file = $basedir . basename($_FILES["fileToUpload"]["name"]);
-                #bottone cancella
-                if (isset($_POST['b9'])) {
-                    $id1 = $_POST['id'];
-                    #eliminazione del preprint selezionato
-                    delete_pdf($id1);
-                    cancellaselected($id1);
-                    echo '<script type="text/javascript">
+                    $target_file = $basedir . basename($_FILES["fileToUpload"]["name"]);
+                    #bottone cancella
+                    if (isset($_POST['b9'])) {
+                        $id1 = $_POST['id'];
+                        #eliminazione del preprint selezionato
+                        delete_pdf($id1);
+                        cancellaselected($id1);
+                        echo '<script type="text/javascript">
                             alert("Publication ' . $_POST['id'] . ' removed correctly!");
                             window.close();</script>';
-                    echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./uploaded.php">';
-                }
-                #bottone upgrade
-                if (isset($_POST['b10'])) {
-                    if (empty($_POST['journal'])) {
-                        $info[4] = "No journal ref";
-                    } else {
-                        $info[4] = $_POST['journal'];
+                        echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./uploaded.php">';
                     }
-                    if (empty($_POST['comments'])) {
-                        $info[5] = "No journal ref";
-                    } else {
-                        $info[5] = $_POST['comments'];
-                    }
-                    $rest = substr($_POST['id'], 0, -1);
-                    $len = strlen($_POST['id']);
-                    $ver = substr($_POST['id'], $len - 1, $len);
-                    $ver++;
-                    $info[0] = $rest . $ver;
-                    $info[1] = $_POST['title'];
-                    $info[2] = $_POST['data'];
-                    $info[3] = $_POST['author'];
-                    $info[6] = $_POST['category'];
-                    $info[7] = $_POST['abstract'];
-                    if ($_FILES["fileToUpload"]["size"] > 0) {
-                        #caricamento del file scelto
-                        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                            $fileType = $_FILES["fileToUpload"]["type"];
-                            #richiamo della funzione per il versionamento dei preprints
-                            version_preprintd($info[0]);
-                            #richiamo della funzione per inserire le info del preprint all'interno del database
-                            insert_p($info, $_GET['r']);
-                            rename($basedir . $_FILES["fileToUpload"]["name"], $basedir . $info[0] . ".pdf");
-                            #spostamento pdf
-                            #inserimento nel database del file
-                            insertpdf($info[0], $fileType);
-                            echo '<script type="text/javascript">
+                    #bottone upgrade
+                    if (isset($_POST['b10'])) {
+                        if (empty($_POST['journal'])) {
+                            $info[4] = "No journal ref";
+                        } else {
+                            $info[4] = $_POST['journal'];
+                        }
+                        if (empty($_POST['comments'])) {
+                            $info[5] = "No journal ref";
+                        } else {
+                            $info[5] = $_POST['comments'];
+                        }
+                        $rest = substr($_POST['id'], 0, -1);
+                        $len = strlen($_POST['id']);
+                        $ver = substr($_POST['id'], $len - 1, $len);
+                        $ver++;
+                        $info[0] = $rest . $ver;
+                        $info[1] = $_POST['title'];
+                        $info[2] = $_POST['data'];
+                        $info[3] = $_POST['author'];
+                        $info[6] = $_POST['category'];
+                        $info[7] = $_POST['abstract'];
+                        if ($_FILES["fileToUpload"]["size"] > 0) {
+                            #caricamento del file scelto
+                            if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+                                $fileType = $_FILES["fileToUpload"]["type"];
+                                #richiamo della funzione per il versionamento dei preprints
+                                version_preprintd($info[0]);
+                                #richiamo della funzione per inserire le info del preprint all'interno del database
+                                insert_p($info, $_GET['r']);
+                                rename($basedir . $_FILES["fileToUpload"]["name"], $basedir . $info[0] . ".pdf");
+                                #spostamento pdf
+                                #inserimento nel database del file
+                                insertpdf($info[0], $fileType);
+                                echo '<script type="text/javascript">
                                     alert("Publication ' . $_POST['id'] . ' upgrated to ' . $info[0] . ' correctly!");
                                     window.close();</script>';
+                            } else {
+                                echo '<script type="text/javascript">alert("Error, file not uploaded!");</script>';
+                            }
                         } else {
-                            echo '<script type="text/javascript">alert("Error, file not uploaded!");</script>';
+                            echo '<script type="text/javascript">alert("Select file to upload!");</script>';
                         }
-                    } else {
-                        echo '<script type="text/javascript">alert("Select file to upload!");</script>';
                     }
-                }
-                #bottone aggiorna info
-                if (isset($_POST['b11'])) {
-                    if (empty($_POST['journal'])) {
-                        $info[4] = "No journal ref";
-                    } else {
-                        $info[4] = $_POST['journal'];
-                    }
-                    if (empty($_POST['comments'])) {
-                        $info[5] = "No journal ref";
-                    } else {
-                        $info[5] = $_POST['comments'];
-                    }
-                    $info[0] = $_POST['id'];
-                    $info[1] = $_POST['title'];
-                    $info[2] = $_POST['data'];
-                    $info[3] = $_POST['author'];
-                    $info[6] = $_POST['category'];
-                    $info[7] = $_POST['abstract'];
-                    #richiamo della funzione per inserire le info del preprint all'interno del database
-                    update_preprints($info);
-                    $check = $_POST['check'];
-                    #controllo se ci sono file da caricare
-                    if ($_FILES["fileToUpload"]["size"] > 0) {
-                        #caricamento del file scelto
-                        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                            $fileType = $_FILES["fileToUpload"]["type"];
-                            #inserimento nel database del file
-                            insert_one_pdf($info[0], $fileType);
-                            echo '<script type="text/javascript">alert("Publication ' . $_POST['id'] . ' updated correctly!");
+                    #bottone aggiorna info
+                    if (isset($_POST['b11'])) {
+                        if (empty($_POST['journal'])) {
+                            $info[4] = "No journal ref";
+                        } else {
+                            $info[4] = $_POST['journal'];
+                        }
+                        if (empty($_POST['comments'])) {
+                            $info[5] = "No journal ref";
+                        } else {
+                            $info[5] = $_POST['comments'];
+                        }
+                        $info[0] = $_POST['id'];
+                        $info[1] = $_POST['title'];
+                        $info[2] = $_POST['data'];
+                        $info[3] = $_POST['author'];
+                        $info[6] = $_POST['category'];
+                        $info[7] = $_POST['abstract'];
+                        #richiamo della funzione per inserire le info del preprint all'interno del database
+                        update_preprints($info);
+                        $check = $_POST['check'];
+                        #controllo se ci sono file da caricare
+                        if ($_FILES["fileToUpload"]["size"] > 0) {
+                            #caricamento del file scelto
+                            if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+                                $fileType = $_FILES["fileToUpload"]["type"];
+                                #inserimento nel database del file
+                                insert_one_pdf($info[0], $fileType);
+                                echo '<script type="text/javascript">alert("Publication ' . $_POST['id'] . ' updated correctly!");
                                     window.close();</script>';
+                            } else {
+                                echo '<script type="text/javascript">alert("Error, file not uploaded!");</script>';
+                            }
                         } else {
-                            echo '<script type="text/javascript">alert("Error, file not uploaded!");</script>';
-                        }
-                    } else {
-                        echo '<script type="text/javascript">alert("Publication ' . $_POST['id'] . ' updated correctly!");
+                            echo '<script type="text/javascript">alert("Publication ' . $_POST['id'] . ' updated correctly!");
                                 window.close();</script>';
+                        }
                     }
                 }
-            }
-            ?>
+                ?>
+            </div>
+            <br/>
+            <br/>
         </div>
-        <br/>
-        <br/>
+        <?php require_once './graphics/loader.php'; ?>
     </body>
 </html>

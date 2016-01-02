@@ -33,32 +33,34 @@
                 </div>
             </div>
         </div>
-        <br/><br/>
-    <center><br/><br/><br/><br/>
-        <h2>It is the first time you access here?</h2>
-        <div class="boxContainer">
-            For access use username and password of the University(University of Perugia),
-            for those outside University of Perugia you can register and use the email 
-            provided during the registration.
+        <br/>
+        <div id="firstContainer">
+            <center>
+                <h2>It is the first time you access here?</h2>
+                <div style="width:60%;">
+                    For access use username and password of the University(University of Perugia),
+                    for those outside University of Perugia you can register and use the email 
+                    provided during the registration.
+                </div><br/><br/>
+                <br/><h2>Login:</h2>
+                <div>
+                    <?php
+                    //TEST DEBUG
+                    error_reporting(E_ALL);
+                    ini_set('display_errors', 1);
+                    require_once './reserved/submit_loginChooser.php';
+                    ?>
+                </div><br/><br/>
+                <br/><h2>Register:</h2>
+                <div>
+                    <?php
+                    //TEST DEBUG
+                    error_reporting(E_ALL);
+                    ini_set('display_errors', 1);
+                    require_once './reserved/add_accountForm.php';
+                    ?>
+                </div><br/>
+            </center>
         </div>
-        <br/><h2>Login:</h2>
-        <div>
-            <?php
-            //TEST DEBUG
-            error_reporting(E_ALL);
-            ini_set('display_errors', 1);
-            require_once './reserved/submit_loginChooser.php';
-            ?>
-        </div><br/><br/>
-        <br/><h2>Register:</h2>
-        <div>
-            <?php
-            //TEST DEBUG
-            error_reporting(E_ALL);
-            ini_set('display_errors', 1);
-            require_once './reserved/add_accountForm.php';
-            ?>
-        </div><br/>
-    </center>
-</body>
+    </body>
 </html>

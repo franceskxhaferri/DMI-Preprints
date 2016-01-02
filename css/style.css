@@ -97,7 +97,7 @@ a:visited{
 }
 
 #logo{
-    margin-top:20px;
+    margin-top: 40px;
 }
 
 /* barra di ricerca*/
@@ -186,21 +186,6 @@ a:visited{
 #utildiv{
     width: 100%;
     border-bottom: 1px solid #ccc;
-}
-
-/*div caricamento*/
-#load{
-    display: none;
-    top: 50%;
-    left: 50%;
-    border-radius:3px;
-    margin-left:-95px;
-    margin-top:-90px;
-    position: fixed;
-    z-index: 999999;
-    background-color:#ffffff;
-    padding: 60px;
-    box-shadow: 0px 0px 10px #9A9A9A;
 }
 
 #th:hover{
@@ -681,7 +666,6 @@ ul.link-list li:first-child {
     box-shadow: 0px 0px 3px #9A9A9A; 
     padding-top: 20px;
     padding-bottom: 20px;
-    margin-top:30px;
     margin-bottom:20px;
     margin-left:2%;
     position:absolute;
@@ -789,4 +773,60 @@ ul.link-list li:first-child {
 .UserListBox{
     width:80%;
     margin-left:190px;
+}
+
+#firstContainer{
+    margin-top: 70px;
+}
+
+#secondContainer{
+}
+
+#loadRight {
+    display: none;
+    top: 50%;
+    left: 60%;
+    border-radius:3px;
+    margin-top:-20px;
+    position: fixed;
+    z-index: 999999;
+    fill: transparent;
+    stroke: #1976D2;
+    stroke-width: 5;
+    animation: dash 2s ease infinite,rotate 2s linear infinite;
+}
+
+#load {
+    display: none;
+    top: 50%;
+    left: 50%;
+    border-radius:3px;
+    margin-left:-20px;
+    margin-top:-20px;
+    position: fixed;
+    z-index: 999999;
+    fill: transparent;
+    stroke: #1976D2;
+    stroke-width: 5;
+    animation: dash 2s ease infinite,rotate 2s linear infinite;
+}
+
+@keyframes dash {
+    0% {
+        stroke-dasharray: 1,95;
+        stroke-dashoffset: 0;
+    }
+    50% {
+        stroke-dasharray: 85,95;
+        stroke-dashoffset: -25;
+    }
+    100% {
+        stroke-dasharray: 85,95;
+        stroke-dashoffset: -93;
+    }
+}
+
+@keyframes rotate {
+    0% {transform: rotate(0deg); }
+    100% {transform: rotate(360deg); }
 }

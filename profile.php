@@ -36,8 +36,7 @@
         </script>
     </head>
     <body><?php
-require_once './graphics/header.php';
-        echo "<div id='gotop' hidden><a id='scrollToTop' title='Go top'><img style='width:25px; height:25px;' src='./images/top.gif'></a></div>";
+        require_once './graphics/header.php';
         if ($_SESSION['logged_type'] === "mod") {
             $ind = "modp.php";
         } else {
@@ -56,7 +55,7 @@ require_once './graphics/header.php';
                             <header id="header">
                                 <h1><a href="#" id="logo">DMI Papers</a></h1>
                                 <nav id="nav">
-                                    <a href='./view_preprints.php' onclick="loading(load);">Publications</a>
+                                    <a href='./index.php' onclick="loading(load);">Publications</a>
                                     <a href="./reserved.php" class="current-page-item" onclick="loading(load);">Reserved Area</a>
                                 </nav>
                             </header>
@@ -64,35 +63,38 @@ require_once './graphics/header.php';
                     </div>
                 </div>
             </div>
-            <center>
-                <div>
-                    <br/><br/>
-                    Go back to new insertion: <a style="color:#3C3C3C;" href="<?php echo $ind; ?>" id="bottoni" class="button" onclick="loading(load);">Back</a>
-                </div>
-                <hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
-                <div id="container">
-                    <div style="width: 45%;"><br/>
-                        <h2>Profile information</h2>
-                        <h1>Here you can see and change your account information.</h1>
-                    </div><br/>
-                    <?php
-                    //lettura informazioni account
-                    $info = find_account_info($_SESSION['uid']);
-                    //TEST DEBUG
-                    error_reporting(E_ALL);
-                    ini_set('display_errors', 1);
-                    require_once './reserved/edit_accountForm.php';
-                    //TEST DEBUG
-                    error_reporting(E_ALL);
-                    ini_set('display_errors', 1);
-                    require_once './reserved/delete_accountForm.php';
-                    require_once './graphics/loader.php';
-                    ?>
-                </div>
-                <br/>
-                <br/>
-                <br/>
-            </center>
+            <br/>
+            <div id="firstContainer">
+                <center>
+                    <div>
+                        <br/><br/>
+                        Go back to new insertion: <a style="color:#ffffff;" href="<?php echo $ind; ?>" id="bottoni" class="button" onclick="loading(load);">Back</a>
+                    </div>
+                    <hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
+                    <div id="container">
+                        <div style="width: 45%;"><br/>
+                            <h2>Profile information</h2>
+                            <h1>Here you can see and change your account information.</h1>
+                        </div><br/>
+                        <?php
+                        //lettura informazioni account
+                        $info = find_account_info($_SESSION['uid']);
+                        //TEST DEBUG
+                        error_reporting(E_ALL);
+                        ini_set('display_errors', 1);
+                        require_once './reserved/edit_accountForm.php';
+                        //TEST DEBUG
+                        error_reporting(E_ALL);
+                        ini_set('display_errors', 1);
+                        require_once './reserved/delete_accountForm.php';
+                        ?>
+                    </div>
+                    <br/>
+                    <br/>
+                    <br/>
+                </center>
+            </div>
         </div>
+        <?php require_once './graphics/loader.php'; ?>
     </body>
 </html>

@@ -48,7 +48,7 @@
             $nav2 = "<header id='header'>
                                     <h1><a href='#' id='logo'>DMI Papers</a></h1>
                                     <nav id='nav'>
-                                        <a href='./view_preprints.php' onclick='loading(load);'>Publications</a>
+                                        <a href='./index.php' onclick='loading(load);'>Publications</a>
                                         <a href='./reserved.php' class='current-page-item' onclick='loading(load);'>Reserved Area</a>
                                     </nav>
                                 </header>";
@@ -59,7 +59,7 @@
             $nav2 = "<header id='header'>
                                     <h1><a href='#' id='logo'>DMI Papers</a></h1>
                                     <nav id='nav'>
-                                        <a href='./view_preprints.php' class='current-page-item' onclick='loading(load);'>Publications</a>
+                                        <a href='./index.php' class='current-page-item' onclick='loading(load);'>Publications</a>
                                         <a href='./reserved.php' onclick='loading(load);'>Reserved Area</a>
                                     </nav>
                                 </header>";
@@ -74,42 +74,41 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <center><br/><br/><br/><br/>
-                <div>
-                    <br/>
-                    <br/>
-                    <h2>ARCHIVED PAPERS</h2>
-                </div>
-                <?php
-                if ($cred == 1) {
-                    echo "<a style='color:#ffffff; text-align: center;' href='./modp.php' id='bottone_keyword' class='button' onclick='loading(load);'>Back</a>
-                  </center><br/><br/>";
-                }
-                ?>
-                <div style='clear:both;'></div>
+            </div><br/>
+            <div id="firstContainer">
                 <center>
-                    <div onclick="myFunction()">
-                        <?php
-                        if (sessioneavviata() == True) {
-                            echo "<br/><br/><center>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTION CAN'T BE USED IN THIS MOMENT!</center><br/>";
-                            break;
-                        } else {
-                            if (isset($_GET['c'])) {
-                                #funzione gestione preprint archiviati
-                                leggipreprintarchiviati();
+                    <h2>ARCHIVED PAPERS</h2>
+                    <br/>
+                    <?php
+                    if ($cred == 1) {
+                        echo "<a style='color:#ffffff; text-align: center;' href='./modp.php' id='bottone_keyword' class='button' onclick='loading(load);'>Back</a>
+                  </center><br/><br/>";
+                    }
+                    ?>
+                    <div style='clear:both;'></div>
+                    <center>
+                        <div onclick="myFunction()">
+                            <?php
+                            if (sessioneavviata() == True) {
+                                echo "<br/><br/><center>SORRY ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTION CAN'T BE USED IN THIS MOMENT!</center><br/>";
+                                break;
                             } else {
-                                #funzione gestione preprint archiviati
-                                leggipreprintarchiviati();
+                                if (isset($_GET['c'])) {
+                                    #funzione gestione preprint archiviati
+                                    leggipreprintarchiviati();
+                                } else {
+                                    #funzione gestione preprint archiviati
+                                    leggipreprintarchiviati();
+                                }
                             }
-                        }
-                        echo "<br/><br/><br/>" . $nav;
-                        require_once './graphics/loader.php';
-                        ?>
-                    </div>
-                </center>
+                            echo "<br/><br/><br/>" . $nav;
+                            ?>
+                        </div>
+                    </center>
+            </div>
+            <br/>
+            <br/> 
         </div>
-        <br/>
-        <br/> 
+        <?php require_once './graphics/loader.php'; ?>
     </body>
 </html>

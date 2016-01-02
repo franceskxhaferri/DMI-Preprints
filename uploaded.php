@@ -57,7 +57,7 @@
                             <header id="header">
                                 <h1><a href="#" id="logo">DMI Papers</a></h1>
                                 <nav id="nav">
-                                    <a href='./view_preprints.php' onclick="loading(load);">Publications</a>
+                                    <a href='./index.php' onclick="loading(load);">Publications</a>
                                     <a href="./reserved.php" class="current-page-item" onclick="loading(load);">Reserved Area</a>
                                 </nav>
                             </header>
@@ -65,21 +65,25 @@
                     </div>
                 </div>
             </div>
-            <center><br/><br/><br/><br/><br/><br/><h2>My Uploads</h2>
-                <div>
-                    <br/>
-                    <a style="color:#ffffff;" href="<?php echo $ind; ?>" id="bottoni" class="button" onclick="loading(load);">Back</a>
-                    <br/><br/>  
-                </div>
-                <?php
-                #lettura preprint caricati
-                leggiupload($_SESSION['uid']);
-                require_once './graphics/loader.php';
-                ?>
-            </center>
+            <br/>
+            <div id="firstContainer">
+                <center>
+                    <h2>My Uploads</h2>
+                    <div>
+                        <br/>
+                        <a style="color:#ffffff;" href="<?php echo $ind; ?>" id="bottoni" class="button" onclick="loading(load);">Back</a>
+                        <br/><br/>  
+                    </div>
+                    <?php
+                    #lettura preprint caricati
+                    leggiupload($_SESSION['uid']);
+                    ?>
+                </center>
+            </div>
+            <br/>
+            <br/>
+            <br/>
         </div>
-        <br/>
-        <br/>
-        <br/>
+        <?php require_once './graphics/loader.php'; ?>
     </body>
 </html>
