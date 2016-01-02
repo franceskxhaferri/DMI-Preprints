@@ -37,14 +37,7 @@
     </head>
     <body><?php
         require_once './graphics/header.php';
-        if ($_COOKIE['searchbarall'] == "1") {
-            #search bar
-            require_once './graphics/searchbar_bottom.php';
-        }
-        if ($_SESSION['logged_type'] === "mod") {
-            $nav = "<form name='f2' action='archived_preprints.php' method='GET'>
-                <input type='submit' name='c' value='Remove All' id='bottone_keyword' class='button' onclick='return confirmDelete5()'/>
-		</form>";
+            $nav = "<a style='color:#ffffff; text-align: center;' href='./archived_preprints.php?c=remove' id='bottone_keyword' class='button' onclick='loading(load);'>Remove All</a>";
             $nav2 = "<header id='header'>
                                     <h1><a href='#' id='logo'>DMI Papers</a></h1>
                                     <nav id='nav'>
@@ -53,17 +46,6 @@
                                     </nav>
                                 </header>";
             $rit = "modp.php";
-            $cred = 1;
-        } else {
-            $nav = "";
-            $nav2 = "<header id='header'>
-                                    <h1><a href='#' id='logo'>DMI Papers</a></h1>
-                                    <nav id='nav'>
-                                        <a href='./index.php' class='current-page-item' onclick='loading(load);'>Publications</a>
-                                        <a href='./reserved.php' onclick='loading(load);'>Reserved Area</a>
-                                    </nav>
-                                </header>";
-        }
         ?>
         <div onclick="myFunction2()">
             <div id="header-wrapper">
@@ -79,12 +61,8 @@
                 <center>
                     <h2>ARCHIVED PAPERS</h2>
                     <br/>
-                    <?php
-                    if ($cred == 1) {
-                        echo "<a style='color:#ffffff; text-align: center;' href='./modp.php' id='bottone_keyword' class='button' onclick='loading(load);'>Back</a>
-                  </center><br/><br/>";
-                    }
-                    ?>
+                    <a style='color:#ffffff; text-align: center;' href='./modp.php' id='bottone_keyword' class='button' onclick='loading(load);'>Back</a>
+                  </center><br/><br/>
                     <div style='clear:both;'></div>
                     <center>
                         <div onclick="myFunction()">

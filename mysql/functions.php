@@ -951,7 +951,7 @@ function leggipreprintarchiviati() {
         echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
     }
     #verifica se i preprint devono essere rimossi definitivamente
-    if ($_GET['c'] != "Remove All") {
+    if ($_GET['c'] != "remove") {
         $sql = "SELECT * FROM PREPRINTS_ARCHIVIATI WHERE checked='1' ORDER BY data_pubblicazione DESC LIMIT " . $limit . "," . $risperpag . "";
         $result = mysqli_query($db_connection, $sql) or die(mysql_error());
         $i = $limit;

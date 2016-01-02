@@ -350,10 +350,7 @@ only screen and (max-width: 760px),
     margin-top: 3px;
 }
 
-boxdx{
-    float: right;
-    width: 50%;
-    margin-left:-50%;
+#boxdx{
 }
 
 article.blog-post {

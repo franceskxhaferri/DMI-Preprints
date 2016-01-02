@@ -221,6 +221,17 @@ article.blog-post h2 {
     border-bottom: 0;
 }
 
+#boxsx{
+    float: left;
+    width: 100%;
+    text-align: center;
+}
+
+#boxdx{
+    text-align: center;
+    width: 100%;
+}
+
 .selector {
     border: 1px solid #1976D2;
     background-color: #1976D2;
@@ -502,3 +513,18 @@ article.blog-post h2 {
     margin: 10px;
     width: 160px;
 } 
+
+#loadRight {
+    display: none;
+    top: 50%;
+    left: 50%;
+    border-radius:3px;
+    margin-left: -20px;
+    margin-top:-20px;
+    position: absolute;
+    z-index: 999999;
+    fill: transparent;
+    stroke: #1976D2;
+    stroke-width: 5;
+    animation: dash 2s ease infinite,rotate 2s linear infinite;
+}
