@@ -348,9 +348,9 @@ function searchfulltext() {
     $querytotale = mysqli_query($db_connection, $query) or die(mysql_error());
     $ristot = mysqli_num_rows($querytotale);
     if ($ristot != 0) {
-        echo "Founded " . $ristot . " results:<br/><br/>";
+        echo "Found " . $ristot . " results:<br/><br/>";
     } else {
-        echo "Founded " . $ristot . " results:<br/><br/>";
+        echo "Found " . $ristot . " results:<br/><br/>";
         break;
     }
     $npag = ceil($ristot / $risperpag);

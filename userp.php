@@ -71,11 +71,10 @@
                         print_r($_SESSION['logged_type']);
                         ?>
                     </div>
-                    <hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
                     <div>
                         <div style="float:left; margin-left:1%;">
                             <form name="f1" action="userp.php" method="POST" onsubmit="loading(load);">
-                                <input style="color: red;" type="submit" name="b1" value="Logout" id="bottoni" class="buttonlink" onclick="return confirmLogout()">
+                                <input style="color: red;" type="submit" name="b1" value="Logout" id="bottoni" class="button" onclick="return confirmLogout()">
                             </form>
                         </div>
                         <?php
@@ -92,7 +91,6 @@
                         </div>
                     </div>
                 </center>
-                <hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
                 <form name="f3" action="userp.php" method="POST" enctype="multipart/form-data" onsubmit="loading(load);">
                     <center>
                         <h2>Insert new paper</h2>
@@ -208,7 +206,6 @@
                         <br/>
                         <br/>
                         <input type="submit" name="b3" value="Submit" id='bottone_keyword' class='button' onclick="return confirmInsert()"/>
-                        <hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
                     </center>
                 </form>
                 <?php

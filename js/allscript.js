@@ -1,6 +1,5 @@
-//funzione reset password login
+//funzione ordinamento
 function setOrder() {
-    //
     loadingRight(loadRight);
     document.getElementById("f1").submit();
 }
@@ -513,20 +512,13 @@ window.onload = function () {
 }
 //visualizza schermata di caricamento
 function loading(id) {
-    if (id.style.display != 'block') {
-        id.style.display = 'block';
-    } else {
-        id.style.display = 'none';
-    }
+    id.style.display = 'block';
     var t = document.getElementById('firstContainer');
     t.style.display = 'none';
     try {
         var t1 = document.getElementById('form');
         t1.style.display = 'none';
-    } catch (err) {
-
-    }
-
+    } catch (err) {}
 }
 //visualizza schermata di caricamento
 function loadingRight(id) {
