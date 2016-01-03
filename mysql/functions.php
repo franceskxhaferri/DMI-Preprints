@@ -885,7 +885,7 @@ function recentspreprints() {
     include './mysql/db_conn.php';
     require_once './authorization/sec_sess.php';
     sec_session_start();
-    $query = "SELECT * FROM PREPRINTS ORDER BY data_pubblicazione DESC LIMIT 10";
+    $query = "SELECT * FROM PREPRINTS WHERE checked=1 ORDER BY data_pubblicazione DESC LIMIT 10";
     $result = mysqli_query($db_connection, $query) or die(mysql_error());
     $i = $limit;
     #recupero e visualizzazione dei campi della ricerca effettuata
