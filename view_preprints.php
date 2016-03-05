@@ -1,47 +1,58 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>DMI Papers</title>
-        <!--<script src="js/jquery.min.js"></script>-->
-        <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
-        <script src="js/config.js"></script>
-        <script src="js/skel.min.js"></script>
-        <script src="js/skel-panels.min.js"></script>
-        <noscript>
-        <link rel="stylesheet" href="css/skel-noscript.css" />
-        <link rel="stylesheet" href="css/style.css" />
-        <link rel="stylesheet" href="css/style-desktop.css" />
-        </noscript>
-        <link rel="stylesheet" href="css/main.css" />
-        <script src="js/targetweb-modal-overlay.js"></script>
-        <link href='css/targetweb-modal-overlay.css' rel='stylesheet' type='text/css'>
-        <!--[if lte IE 9]><link rel="stylesheet" href="css/ie9.css" /><![endif]-->
-        <!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
-        <script src="http://cdn.jsdelivr.net/webshim/1.12.4/extras/modernizr-custom.js"></script>
-        <script src="http://cdn.jsdelivr.net/webshim/1.12.4/polyfiller.js"></script>
-        <script>
-            webshims.setOptions('waitReady', false);
-            webshims.setOptions('forms-ext', {types: 'date'});
-            webshims.polyfill('forms forms-ext');
-        </script>
+    <?php
+    echo "
+<head>
+<title>DMI Preprints</title>
+<!--<script src=\"js/jquery.min.js\"></script>-->
+<script type=\"text/javascript\" src=\"js/jquery-1.11.1.min.js\"></script>
+<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js\"></script>
+<script src=\"js/config.js\"></script>
+<script src=\"js/skel.min.js\"></script>
+<script src=\"js/skel-panels.min.js\"></script>
+<noscript>
+<link rel=\"stylesheet\" href=\"css/skel-noscript.css\" />
+<link rel=\"stylesheet\" href=\"css/style.css\" />
+<link rel=\"stylesheet\" href=\"css/style-desktop.css\" />
+</noscript>
+<script src=\"js/targetweb-modal-overlay.js\"></script>
+<link href='css/targetweb-modal-overlay.css' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+<!--[if lte IE 9]><link rel=\"stylesheet\" href=\"css/ie9.css\" /><![endif]-->
+<!--[if lte IE 8]><script src=\"js/html5shiv.js\"></script><![endif]-->
+<script src=\"http://cdn.jsdelivr.net/webshim/1.12.4/extras/modernizr-custom.js\"></script>
+<script src=\"http://cdn.jsdelivr.net/webshim/1.12.4/polyfiller.js\"></script>
+<script>
+    webshims.setOptions('waitReady', false);
+    webshims.setOptions('forms-ext', {types: 'date'});
+    webshims.polyfill('forms forms-ext');
+</script>
+<script type=\"text/javascript\" src=\"./js/allscript.js\">
+</script>
+</head> ";
+//importo file per utilizzare funzioni...
+    require_once './conf.php';
+    require_once './mysql/db_conn.php';
+    require_once './mysql/functions.php';
+    require_once './authorization/sec_sess.php';
+    require_once './authorization/auth.php';
+    require_once './arXiv/arXiv_parsing.php';
+    require_once './arXiv/functions.php';
+//
+    ?>
+    <body>
         <script type="text/x-mathjax-config">
             MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
         </script>
         <script type="text/javascript"
                 src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
         </script>
-        <script type="text/javascript" src="./js/allscript.js">
-        </script>
-    </head>
-    <body><?php
-        require_once './graphics/header_main_page.php';
-        ?>
         <div id="header-wrapper">
             <div class="container">
                 <div class="row">
                     <div class="12u">
                         <header id='header'>
-                            <h1><a href='#' id='logo'>DMI Papers</a></h1>
+                            <h1><a href='#' id='logo'>DMI Preprints</a></h1>
                             <nav id='nav'>
                                 <a href='./index.php' class='current-page-item' onclick='loading(load);'>Publications</a>
                                 <a href='./reserved.php' onclick='loading(load);'>Reserved Area</a>
@@ -75,8 +86,8 @@
                             . "<label><input type='radio' name='st' value='0'>Archived</label><br/>";
                 }
                 //advanced search(checkboxs)
-                $array_search = array('d' => 'Archived', 'all' => 'Full Record', 'h' => 'Author(s)', 't' => 'Title', 'a' => 'Abstract', 'e' => 'Date',
-                    'y' => 'Category', 'c' => 'Comments', 'j' => 'Journal Ref', 'i' => 'Identifier(ID)');
+                $array_search = array('d' => 'Archived', 'all' => 'Full Record', 'h' => 'Authors', 't' => 'Title', 'a' => 'Abstract', 'e' => 'Date',
+                    'y' => 'Category', 'c' => 'Comments', 'j' => 'Journal Ref', 'i' => 'Identifier');
                 foreach ($array_search as $key => $value) {//search on
                     if ($_GET[$key] == "1") {
                         $checked = "checked";
@@ -90,7 +101,7 @@
                 }
                 //ordine dei risultati
                 $array_order = array('dated' => 'Publication Date &#8595;', 'datec' => 'Publication Date &#8593;',
-                    'idd' => 'Identifier(ID) &#8595;', 'idc' => 'Identifier(ID) &#8593;',
+                    'idd' => 'Identifier &#8595;', 'idc' => 'Identifier &#8593;',
                     'named' => 'Author Name &#8595;', 'namec' => 'Author Name &#8593;');
                 foreach ($array_order as $key => $value) {
                     if ($_GET['o'] == $key) {
@@ -152,7 +163,7 @@
                 }
                 echo $html;
                 ?></div>
-            <div class="resultsContainer" id="secondContainer" onclick="myFunction()">
+            <div class="resultsContainer" id="secondContainer">
                 <?php
 #ricerca full text
                 if (isset($_GET['go']) && $_GET['go'] != "") {

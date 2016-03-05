@@ -417,14 +417,18 @@ article.blog-post h2 {
 .searchboxContainer {
     background-color:#ffffff;
     width:80%;
+}
+
+#left_content{
+	margin: 0 auto;
 } 
 
 #input_uid{
-    margin:10px;
+	margin: 20px;
 }
 
 #input_pw{
-    margin:10px;
+	margin: 20px;
 }
 
 .boxContainerSearch {
@@ -503,6 +507,11 @@ article.blog-post h2 {
     margin: 10px;
     width: 140px;
 } 
+
+.searchCountainerBox{
+    width: 150px;
+    margin: 0 auto;
+}
 
 .orderbox {
     margin: 10px;

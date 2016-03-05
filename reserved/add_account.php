@@ -16,16 +16,21 @@ if (isset($_POST['name']) && isset($_POST['surname']) && isset($_POST['mail']) &
         $name = ucwords($name);
         $sname = trim($sname);
         $sname = ucwords($sname);
-        //generazione chiave hash password
-        $hash = md5($password);
-        $sql = "INSERT INTO ACCOUNTS (nome, cognome, email, password) VALUES ('" . $name . "','" . $sname . "','" . $email . "','" . $hash . "') ON DUPLICATE KEY UPDATE email = VALUES(email)";
-        $query = mysqli_query($db_connection, $sql) or die(mysql_error());
-        //chiusura connessione al database
-        mysqli_close($db_connection);
-        //token di attivazione dell'account
-        //$token = md5($email);
-        //invio della mail di attivazione
-        echo "Your account is successfully created! (Use your email to login)";
+        //
+        if(ControllaDatiRegistrazione($email, $name, $sname, $password)){
+			//generazione chiave hash password
+			$hash = md5($password);
+			$sql = "INSERT INTO ACCOUNTS (nome, cognome, email, password) VALUES ('" . $name . "','" . $sname . "','" . $email . "','" . $hash . "') ON DUPLICATE KEY UPDATE email = VALUES(email)";
+			$query = mysqli_query($db_connection, $sql) or die(mysql_error());
+			//chiusura connessione al database
+			mysqli_close($db_connection);
+			//token di attivazione dell'account
+			//$token = md5($email);
+			//invio della mail di attivazione
+			echo "Your account is successfully created! (Use your email to login)";
+		} else {
+			echo "Error, data not correct!";
+		}
     } else {
         echo "Account already exist!";
     }

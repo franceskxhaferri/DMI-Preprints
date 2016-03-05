@@ -1,44 +1,16 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>DMI Papers</title>
-        <!--<script src="js/jquery.min.js"></script>-->
-        <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
-        <script src="js/config.js"></script>
-        <script src="js/skel.min.js"></script>
-        <script src="js/skel-panels.min.js"></script>
-        <noscript>
-        <link rel="stylesheet" href="css/skel-noscript.css" />
-        <link rel="stylesheet" href="css/style.css" />
-        <link rel="stylesheet" href="css/style-desktop.css" />
-        </noscript>
-        <link rel="stylesheet" href="css/main.css" />
-        <link rel="stylesheet" type="text/css" href="css/tabelle.css">
-        <link rel="stylesheet" type="text/css" href="css/controlli.css">
-        <script src="js/targetweb-modal-overlay.js"></script>
-        <link href='css/targetweb-modal-overlay.css' rel='stylesheet' type='text/css'>
-        <!--[if lte IE 9]><link rel="stylesheet" href="css/ie9.css" /><![endif]-->
-        <!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
-        <script type="text/javascript" src="./js/allscript.js">
-        </script>	
-        <script type="text/x-mathjax-config">
-            MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
-        </script>
-        <script type="text/javascript"
-                src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-        </script>
-    </head>
+    <?php
+    require_once './graphics/header.php';
+    ?>
     <body>
-        <?php
-        require_once './graphics/header.php';
-        ?>
-        <div onclick="myFunction2()">
+        <div>
             <div id="header-wrapper">
                 <div class="container">
                     <div class="row">
                         <div class="12u">
                             <header id="header">
-                                <h1><a href="#" id="logo">DMI Papers</a></h1>
+                                <h1><a href="#" id="logo">DMI Preprints</a></h1>
                                 <nav id="nav">
                                     <a href="./index.php" onclick="loading(load);">Publications</a>
                                     <a href="./reserved.php" class="current-page-item" class="current-page-item" onclick="loading(load);">Reserved Area</a>
@@ -72,7 +44,7 @@
                             <a style="color:#ffffff;" href="./manual_insert.php" id="bottone_keyword" class="buttonlink" onclick="loading(load);">Enter</a>
                         </div>
                         <div id="boxsx">
-                            approve papers
+                            Approve papers
                         </div>
                         <div id="boxdx">
                             <a style="color:#ffffff;" href="./check_preprints.php?i=1" id="bottone_keyword" class="buttonlink" onclick="loading(load);">Check</a>
@@ -100,6 +72,7 @@
                     <center>
                         <hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;">
                         <?php
+                        //pulsante aggiorna(cerca se ci sono preprint nuovi)
                         if (isset($_GET['b8'])) {
                             if ($sock = @fsockopen('www.arxiv.org', 80, $num, $error, 5)) {
                                 if (sessioneavviata() == False) {
@@ -141,12 +114,12 @@
                                         }
                                     }
                                 } else {
-                                    echo '<script type="text/javascript">alert("UPDATE SESSION IS ALREADY STARTED FROM OTHER ADMIN!");</script>';
                                     $risul = true;
                                     #sessione già avviata
                                 }
                             }
                         }
+                        //pulsante download(riscarica tutti i preprint)
                         if (isset($_GET['b9'])) {
                             if ($sock = @fsockopen('www.arxiv.org', 80, $num, $error, 5)) {
                                 if (sessioneavviata() == False) {
@@ -187,16 +160,15 @@
                                         }
                                     }
                                 } else {
-                                    echo '<script type="text/javascript">alert("DOWNLOAD SESSION IS ALREADY STARTED FROM OTHER ADMIN!");</script>';
                                     $risul = true;
                                 }
                             }
                         }
-                        #server arxiv down o server interno non connesso
+                        #server arxiv down o server interno non connesso ad internet
                         if (!$sock = @fsockopen('www.arxiv.org', 80, $num, $error, 5)) {
-                            echo '<script type="text/javascript">alert("INTERNAL SERVER OFFLINE OR ARVIX IS DOWN IN THIS MOMENT!");</script>';
                             echo 'INTERNAL SERVER OFFLINE OR ARVIX IS DOWN IN THIS MOMENT!<br/><br/>';
                         }
+                        //controllo se ci sono sessioni attive
                         if (sessioneavviata() == True) {
                             echo "WARNING ONE DOWNLOAD/UPDATE SESSION IS RUNNING AT THIS TIME! THE SECTIONS HAS BEEN BLOCKED!";
                         } else {
@@ -243,7 +215,6 @@
                                             }
                                         }
                                     } else {
-                                        echo '<script type="text/javascript">alert("UPDATE SESSION IS ALREADY STARTED FROM OTHER ADMIN!");</script>';
                                         $risul = true;
                                         #sessione già avviata
                                     }

@@ -1,51 +1,22 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>DMI Papers</title>
-        <!--<script src="js/jquery.min.js"></script>-->
-        <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
-        <script src="js/config.js"></script>
-        <script src="js/skel.min.js"></script>
-        <script src="js/skel-panels.min.js"></script>
-        <noscript>
-        <link rel="stylesheet" href="css/skel-noscript.css" />
-        <link rel="stylesheet" href="css/style.css" />
-        <link rel="stylesheet" href="css/style-desktop.css" />
-        </noscript>
-        <link rel="stylesheet" href="css/main.css" />
-        <link rel="stylesheet" type="text/css" href="css/tabelle.css">
-        <link rel="stylesheet" type="text/css" href="css/controlli.css">
-        <script src="js/targetweb-modal-overlay.js"></script>
-        <link href='css/targetweb-modal-overlay.css' rel='stylesheet' type='text/css'>
-        <!--[if lte IE 9]><link rel="stylesheet" href="css/ie9.css" /><![endif]-->
-        <!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
-        <script src="http://cdn.jsdelivr.net/webshim/1.12.4/extras/modernizr-custom.js"></script>
-        <script src="http://cdn.jsdelivr.net/webshim/1.12.4/polyfiller.js"></script>
-        <script>
-            webshims.setOptions('waitReady', false);
-            webshims.setOptions('forms-ext', {types: 'date'});
-            webshims.polyfill('forms forms-ext');
-        </script>
+    <?php
+    require_once './graphics/header.php';
+    ?>
+    <body>
         <script type="text/x-mathjax-config">
             MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
         </script>
         <script type="text/javascript"
                 src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
         </script>
-        <script type="text/javascript" src="./js/allscript.js">
-        </script>
-    </head>
-    <body>
-        <?php
-        require_once './graphics/header.php';
-        ?>
-        <div onclick="myFunction2()">
+        <div>
             <div id="header-wrapper">
                 <div class="container">
                     <div class="row">
                         <div class="12u">
                             <header id="header">
-                                <h1><a href="#" id="logo">DMI Papers</a></h1>
+                                <h1><a href="#" id="logo">DMI Preprints</a></h1>
                                 <nav id="nav">
                                     <a href='./index.php' onclick="loading(load);">Publications</a>
                                     <a href="./reserved.php" class="current-page-item" onclick="loading(load);">Reserved Area</a>
@@ -58,9 +29,6 @@
             <br/>
             <div id="firstContainer">
                 <center>
-                    <div>
-                        <h2>manual editing</h2>
-                    </div>
                     <form name="f1" action="uploaded.php" method="GET">
                         <input type="submit" name="b1" value="Back" id='bottone_keyword' class='button' onclick="return confirmExit()">
                     </form><br/><br/><br/>
@@ -91,14 +59,14 @@
 				}
 			</script>
                 <form name='f1' action='edit.php?r=" . $_GET['r'] . "' method='POST' enctype='multipart/form-data' onsubmit='loading(load);'>
-                    <center><h2>Publication informations</h2><h1>field with '*' are required.</h1><br/><input type='reset' name='reset' value='Reset'><br/><br/></center>
+                    <center><h2>manual editing</h2><h1>field with '*' are required.</h1><br/><input type='reset' name='reset' value='Reset'><br/><br/></center>
                             <div id='divinsertcateg'>
                             <div style='float:right; width:49%;'>
                                 <div style='font-weight: bold;'>
                                     document:
                                 </div>
                                 <div style='float:right; width:49%;'>
-                                    <a href=./pdf/" . $ris[9] . " onclick='window.open(this.href);return false' style='color:#1976D2;' title='" . $ris[9] . "'>VIEW</a>
+                                    <a href=./pdf/" . $ris[9] . " target='_blank' style='color:#1976D2;' title='" . $ris[9] . "'>VIEW</a>
                                 </div>
                             </div>
                                 <div style='font-weight: bold;'>

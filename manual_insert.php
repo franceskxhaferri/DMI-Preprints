@@ -1,50 +1,22 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>DMI Papers</title>
-        <!--<script src="js/jquery.min.js"></script>-->
-        <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
-        <script src="js/config.js"></script>
-        <script src="js/skel.min.js"></script>
-        <script src="js/skel-panels.min.js"></script>
-        <noscript>
-        <link rel="stylesheet" href="css/skel-noscript.css" />
-        <link rel="stylesheet" href="css/style.css" />
-        <link rel="stylesheet" href="css/style-desktop.css" />
-        </noscript>
-        <link rel="stylesheet" href="css/main.css" />
-        <link rel="stylesheet" type="text/css" href="css/tabelle.css">
-        <link rel="stylesheet" type="text/css" href="css/controlli.css">
-        <script src="js/targetweb-modal-overlay.js"></script>
-        <link href='css/targetweb-modal-overlay.css' rel='stylesheet' type='text/css'>
-        <!--[if lte IE 9]><link rel="stylesheet" href="css/ie9.css" /><![endif]-->
-        <!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
-        <script src="http://cdn.jsdelivr.net/webshim/1.12.4/extras/modernizr-custom.js"></script>
-        <script src="http://cdn.jsdelivr.net/webshim/1.12.4/polyfiller.js"></script>
-        <script>
-            webshims.setOptions('waitReady', false);
-            webshims.setOptions('forms-ext', {types: 'date'});
-            webshims.polyfill('forms forms-ext');
-        </script>
+    <?php
+    require_once './graphics/header.php';
+    ?>
+    <body>
         <script type="text/x-mathjax-config">
             MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
         </script>
         <script type="text/javascript"
                 src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
         </script>
-        <script type="text/javascript" src="./js/allscript.js">
-        </script>
-    </head>
-    <body><?php
-        require_once './graphics/header.php';
-        ?>
-        <div onclick="myFunction2()">
+        <div>
             <div id="header-wrapper">
                 <div class="container">
                     <div class="row">
                         <div class="12u">
                             <header id="header">
-                                <h1><a href="#" id="logo">DMI Papers</a></h1>
+                                <h1><a href="#" id="logo">DMI Preprints</a></h1>
                                 <nav id="nav">
                                     <a href='./index.php' onclick="loading(load);">Publications</a>
                                     <a href="./reserved.php" class="current-page-item" onclick="loading(load);">Reserved Area</a>
@@ -55,13 +27,9 @@
                 </div>
             </div><br/>
             <div id="firstContainer">
-                <center>
-                    <h2>manual insertion</h2>
-                </center>
                 <center><br/>
-                    <a style="color:#ffffff;" href="./arXiv_panel.php" id="bottone_keyword" class="button" onclick="return confirmExit()" >Back</a><br/><br/>
-                    <a style='color:#1976D2;' href='http://arxiv.org/' onclick='window.open(this.href);
-                            return false' title='arXiv'>arXiv.org</a>
+                    <a style="color:#ffffff;" href="./arXiv_panel.php" id="bottone_keyword" class="button" onclick="return confirmExit()" >Back</a><br/><br/><br/>
+                    <a style='color:#1976D2;' href='http://arxiv.org/' target='_blank' title='arXiv'>arXiv.org</a>
                 </center><br/>
                 <?php
                 if (sessioneavviata() == True) {
@@ -73,8 +41,8 @@
                         <div>
                             <form name='f3' action='manual_insert.php' method='POST' onsubmit="loading(load);">
                                 Get paper informations from arXiv:
-                                <input type='search' autocomplete = 'on' name='id' required class='textfield' placeholder='Insert id(arXiv): 0000.0000'/>
-                                <input type='submit' name='b7' value='Get' id='bottone_keyword' class='button' ><br/>
+                                <input type='search' autocomplete = 'on' name='id' required class='textfield' placeholder='Insert arXiv id: 0000.0000'/>
+                                <input type='submit' name='b7' value='Get info' id='bottone_keyword' class='button' ><br/>
                             </form>
                         </div>
                     </center><br/>
@@ -82,6 +50,7 @@
                     if (isset($_POST['b7'])) {
                         echo "<div hidden>";
                         $id = trim($_POST['id']);
+                        $nontrovato = false;
                         arxiv_call($id, 0);
                         for ($i = 1; $i < 11; $i++) {
                             $id1 = $id . "v" . $i;
@@ -89,19 +58,25 @@
                             if ($id1 == $ris[0]) {
                                 #azzeramento file temporaneo...
                                 azzerapreprint();
+                                $nontrovato = false;
                                 break;
+                            } else {
+                                $nontrovato = true;
                             }
                         }
                     }
                     echo "</div>";
+                    if ($nontrovato) {
+                        echo "<center>" . $_POST['id'] . " not found, the id should be of this type: 1234.5678</center><br/><br/>";
+                    }
                     if ($id1 == $ris[0] && isset($_POST['b7'])) {
                         $arcid1 = str_replace("/", "-", $id1);
                         #inserimento mediante arxiv
                         echo "
                 <form name='f1' action='manual_insert.php' method='POST' enctype='multipart/form-data' onclick='myFunction()' onsubmit='loading(load);'>
-                    <center><div><h2>paper informations</h2><h1>field with '*' are required.</h1><br/><input type='reset' name='reset' value='Reset'><br/><br/></center>
+                    <center><div><h2>manual insertion</h2><h1>field with '*' are required.</h1><br/><input type='reset' name='reset' value='Reset'><br/><br/></center>
                         <div id='divinsertcateg'>
-                        <div style='float:right; width:49%;'><div style='font-weight: bold;'>document:</div><div style='float:right; width:49%;'><a href='" . $basedir3 . $arcid1 . ".pdf' onclick='window.open(this.href);return false' style='color:#1976D2;' title='" . $arcid1 . ".pdf'>VIEW</a></div></div>
+                        <div style='float:right; width:49%;'><div style='font-weight: bold;'>document:</div><div style='float:right; width:49%;'><a href='" . $basedir3 . $arcid1 . ".pdf' target='_blank' style='color:#1976D2;' title='" . $arcid1 . ".pdf'>VIEW</a></div></div>
                         <div style='font-weight: bold;'>
                             id(not editable):
                         </div>
@@ -241,7 +216,7 @@
                     } else {
                         #inserimento manuale
                         echo "<form name='f2' action='manual_insert.php' method='POST' enctype='multipart/form-data' onclick='myFunction()' onsubmit='loading(load);' id='form'>
-                            <center><div><h2>paper informations</h2><h1>field with '*' are required</h1><br/><input type='reset' name='reset' value='Reset'/><br/></center>
+                            <center><div><h2>manual insertion</h2><h1>field with '*' are required</h1><br/><input type='reset' name='reset' value='Reset'/><br/></center>
                         <div id='divinsertcateg'>
                             <div style='font-weight: bold;'>*id:</div>
                             <textarea style='width:49%;' name='id' id='textbox' class='textbox1' required placeholder='example of id: 0000.0000v1' autofocus></textarea><br/><br/>

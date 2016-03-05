@@ -13,12 +13,12 @@ if (isset($_SESSION['logged_type'])) {
     if ($_SESSION['logged_type'] === "user") {
         //sessione utente
         header('Location:./userp.php');
-        exit;
+        exit();
     } else {
         if ($_SESSION['logged_type'] === "mod") {
             //sessione moderatore
             header('Location:./modp.php');
-            exit;
+            exit();
         } else {
             echo 'errore login chooser';
         }
@@ -26,7 +26,7 @@ if (isset($_SESSION['logged_type'])) {
 } else {
     //deve fare login
     echo '<div id="left_content">
-          	<input id="input_uid" class="textfield" placeholder="Enter UID or email" autocomplete = "on" required>
+          	<input type="text" id="input_uid" class="textfield" placeholder="Enter UID or email" autocomplete = "on" required>
           	<input type="password" id="input_pw" class="textfield" placeholder="Enter password" required>
           	<br/><br/>
           	<button id="button_login" onclick="chkLogin()" class="buttonlink">Login</button>

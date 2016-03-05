@@ -1,54 +1,22 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>DMI Papers</title>
-        <!--<script src="js/jquery.min.js"></script>-->
-        <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
-        <script src="js/config.js"></script>
-        <script src="js/skel.min.js"></script>
-        <script src="js/skel-panels.min.js"></script>
-        <noscript>
-        <link rel="stylesheet" href="css/skel-noscript.css" />
-        <link rel="stylesheet" href="css/style.css" />
-        <link rel="stylesheet" href="css/style-desktop.css" />
-        </noscript>
-        <link rel="stylesheet" href="css/main.css" />
-        <link rel="stylesheet" type="text/css" href="css/tabelle.css">
-        <link rel="stylesheet" type="text/css" href="css/controlli.css">
-        <script src="js/targetweb-modal-overlay.js"></script>
-        <link href='css/targetweb-modal-overlay.css' rel='stylesheet' type='text/css'>
-        <!--[if lte IE 9]><link rel="stylesheet" href="css/ie9.css" /><![endif]-->
-        <!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
-        <script src="http://cdn.jsdelivr.net/webshim/1.12.4/extras/modernizr-custom.js"></script>
-        <script src="http://cdn.jsdelivr.net/webshim/1.12.4/polyfiller.js"></script>
-        <script>
-            webshims.setOptions('waitReady', false);
-            webshims.setOptions('forms-ext', {types: 'date'});
-            webshims.polyfill('forms forms-ext');
-        </script>
+    <?php
+    require_once './graphics/header.php';
+    ?>
+    <body>
         <script type="text/x-mathjax-config">
             MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
         </script>
         <script type="text/javascript"
                 src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
         </script>
-        <script type="text/javascript" src="./js/allscript.js">
-        </script>
-    </head>
-    <body><?php
-        require_once './graphics/header.php';
-        if ($_COOKIE['searchbarall'] == "1") {
-            #search bar
-            require_once './graphics/searchbar_bottom.php';
-        }
-        ?>
-        <div onclick="myFunction2()">
+        <div>
             <div id="header-wrapper">
                 <div class="container">
                     <div class="row">
                         <div class="12u">
                             <header id="header">
-                                <h1><a href="#" id="logo">DMI Papers</a></h1>
+                                <h1><a href="#" id="logo">DMI Preprints</a></h1>
                                 <nav id="nav">
                                     <a href='./index.php' onclick="loading(load);">Publications</a>
                                     <a href="./reserved.php" class="current-page-item" onclick="loading(load);">Reserved Area</a>
@@ -61,11 +29,10 @@
             <br/>
             <div id="firstContainer">
                 <center>
-                    <h2>manual editing</h2>
                     <div>
                         <br/>
-                        <a style="color:#ffffff;" href="./modp.php" id="bottone_keyword" class="button" onclick="return confirmExit()" >Back</a><br/>
-                        <br/><br/>
+                        <a style="color:#ffffff;" href="./modp.php" id="bottone_keyword" class="button" onclick="return confirmExit()" >Back</a><br/><br/><br/>
+                        <h2>manual editing</h2>
                     </div>
                 </center>
                 <?php
@@ -74,7 +41,7 @@
                     break;
                 } else {
                     if (!isset($_GET['id'])) {
-                        echo "<center><div><a style='color:#1976D2;' href='./view_preprints.php' onclick='window.open(this.href); return false' title='Go to preprints list'>Do you need to find ID?</a>";
+                        echo "<center><div><a style='color:#1976D2;' href='./view_preprints.php' target='_blank' title='Go to preprints list'>Do you need to find ID?</a>";
                         echo "<form name='f2' action='manual_edit.php' method='POST' onsubmit='loading(load);'><br/>
                         <input type='search' autocomplete = 'on' name='id' required class='textfield' placeholder='Insert publication ID'/>
                                 <input type='submit' name='bottoni8' value='Get' class='button' ><br/>
@@ -114,13 +81,12 @@
                 <form name='f1' action='manual_edit.php' method='POST' enctype='multipart/form-data' onsubmit='loading(load);'>
                     <center>
                         <div>
-                        <br/><br/>
-                            <h2>paper informations</h2><h1>field with '*' are required.</h1><br/>
+                        <h1>field with '*' are required.</h1><br/>
                         </div></center>
                             <div id='divinsertcateg'>
                             <center>
                                 <div><font style='font-weight: bold;'>document:</font>
-                                <div><br/><a href='" . $copia . $ris[9] . "' onclick='window.open(this.href);return false' style='color:#1976D2;' title='" . $ris[9] . "'>VIEW</a><br/><br/></div></div>
+                                <div><br/><a href='" . $copia . $ris[9] . "' target='_blank' style='color:#1976D2;' title='" . $ris[9] . "'>VIEW</a><br/><br/></div></div>
                             </center>
                             <div style='font-weight: bold;'>
                                 UID(not editable):

@@ -15,7 +15,7 @@ msm/*
 body {
     font-size: 12pt;
     background-color: #E7E7E7;
-    font-family: Lucida Grande, Helvetica, Arial, sans-serif;
+    font-family: Roboto, Lucida Grande, Helvetica, Arial, sans-serif;
     color: #3C3C3C;
     line-height: 1.2em;
     text-align: justify;
@@ -40,7 +40,6 @@ h1,h2 {
 
 h2 {
     font-size: 1.6em;
-    letter-spacing: -1px;
     margin-bottom: 1em;
     text-transform: lowercase;
 }
@@ -198,8 +197,7 @@ tr.on {background-color:#D4D4D4}
 Questa query aggiunge del CSS per tutti gli schermi con
 una risoluzione inferiore a 760px
 */
-@media
-only screen and (max-width: 760px),
+@media only screen and (max-width: 760px),
 (min-device-width: 768px) and (max-device-width: 1024px) {
 
     /* Forza la tabella a non essere più una tabella */
@@ -235,7 +233,7 @@ only screen and (max-width: 760px),
     }
 }
 /* css tabelle*/
-#table{
+#table {
     width: 100%;
     border:1px solid #ccc;
     box-shadow: 0px 0px 3px #9A9A9A;
@@ -518,16 +516,25 @@ ul.link-list li:first-child {
     -webkit-box-shadow: 0px 0px 2px #1976D2;
 }
 
+/*codice css specifico per chrome e safari */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    .textbox1 {
+        font-size: 11pt;
+        padding: 2px 2px 2px 2px; 
+        border-color: #ffffff;
+        border-radius: 2px;
+        box-shadow: 0px 0px 3px #9A9A9A;
+        width: 150px;
+    }
+}
+
 .textbox1 {
     font-size: 11pt;
     padding: 2px 2px 2px 2px; 
-    border-radius: 2px; 
     -moz-border-radius: 2px; 
-    -webkit-border-radius: 2px;
+    box-shadow: 0px 0px 3px #9F9F9F;
     width: 150px;
-    border-color: #ffffff;
-    box-shadow: 0px 0px 3px #9A9A9A;
-} 
+}
 
 .textbox1:focus { 
     outline: none;
@@ -652,7 +659,7 @@ ul.link-list li:first-child {
     padding: 20px;
     margin:2%;
     width: 80%;
-} 
+}
 
 .boxContainerSearch {
     background-color:#ffffff;
@@ -694,7 +701,6 @@ ul.link-list li:first-child {
     -webkit-border-radius: 2px;
     box-shadow: 0px 0px 3px #9A9A9A; 
     padding: 20px;
-
     float:left;
 }
 
@@ -728,31 +734,31 @@ ul.link-list li:first-child {
     margin-left:22%;
 } 
 
+.searchCountainerBox{
+    width: 630px;
+    padding-top: 20px;
+    margin: 0 auto;
+}
+
 .searchonboxHome {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    padding: 10px;
-    width: 150px;
+    margin: 0 auto;
     float: left;
-    margin-left: 6%;
+    padding: 5px;
+    width: 200px;
 } 
 
 .orderboxHome {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    padding: 10px;
-    width: 150px;
+    margin: 0 auto;
     float: left;
-    margin-left: 6%;
+    padding: 5px;
+    width: 200px;
 } 
 
 .restrictionboxHome {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    padding: 10px;
-    width: 150px;
-    float: left;
-    margin-left: 6%;
+    margin: 0 auto;
+    float:left;
+    padding: 5px;
+    width: 200px;
 } 
 
 .searchonbox {
@@ -806,6 +812,24 @@ ul.link-list li:first-child {
     stroke: #1976D2;
     stroke-width: 5;
     animation: dash 2s ease infinite,rotate 2s linear infinite;
+}
+
+
+.titolo {
+    font-weight:bold;
+    color:#1976D2;
+}
+
+.ImageOpt{
+    width: 20px;
+    height: 20px;
+    float: right;
+    padding: 5px;
+}
+
+.boxID{
+    float: left;
+    padding: 5px;
 }
 
 @keyframes dash {

@@ -35,7 +35,7 @@ function InternalAuth($UID, $PASSWORD) {
     $hash = md5($PASSWORD);
     //da inserire nella query: WHERE verificato=yes
     #verifica se esistono preprints precedenti e li sposto...
-    $sql = "SELECT COUNT(*) AS TOTALFOUND FROM ACCOUNTS WHERE email='" . $UID . "' AND password='" . $hash . "'";
+    $sql = "SELECT COUNT(*) AS TOTALFOUND FROM ACCOUNTS WHERE email='" . addslashes($UID) . "' AND password='" . $hash . "'";
     $query = mysqli_query($db_connection, $sql) or die(mysql_error());
     $row = mysqli_fetch_array($query);
     if ($row['TOTALFOUND'] > 0) {
@@ -55,7 +55,7 @@ function GetNameAuth($UID) {
 
 function UpdateLastAuth($UID) {
     global $db_connection;
-    $sql = "UPDATE ACCOUNTS SET accesso='" . date("c", time()) . "' WHERE email='" . $UID . "'";
+    $sql = "UPDATE ACCOUNTS SET `accesso`='" . date("c", time()) . "' WHERE `email`='" . $UID . "'";
     $query = mysqli_query($db_connection, $sql) or die(mysql_error());
 }
 
@@ -82,6 +82,26 @@ function SearchAccountUser($UID) {
     } else {
         return false;
     }
+}
+
+//funzione controllo correttezza dati inseriti per la registrazione
+function ControllaDatiRegistrazione($email, $name, $sname, $password) {
+	// se la stringa è vuota sicuramente non è una mail
+	if(empty($email)) {
+		return false;
+	} else if(empty($name)) {
+		return false;
+	} else if(empty($sname)) {
+		return false;
+	} else if(empty($password)) {
+		return false;
+	} else if (!filter_var(trim($email), FILTER_VALIDATE_EMAIL)) {
+		return false;
+	} else if(strlen($password) < 6) {
+		return false;
+	} else {
+	    return true;
+	}
 }
 
 ?>

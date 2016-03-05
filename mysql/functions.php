@@ -1,10 +1,9 @@
 <?php
+
 #funzione inserimento informazioni preprint
 
 function insert_pubb($array, $uid) {
-    include './conf.php';
-//import connessione database
-    include './mysql/db_conn.php';
+    global $db_connection;
 #adattamento stringhe pericolose per la query...
     $array[1] = addslashes($array[1]);
     $array[2] = addslashes($array[2]);
@@ -15,24 +14,21 @@ function insert_pubb($array, $uid) {
     $array[7] = addslashes($array[7]);
 #generazione chiave
     $generato = rand();
-    while (mysqli_num_rows(mysqli_query($db_connection, "SELECT * FROM PREPRINTS WHERE id_pubblicazione='" . $generato . "v1'") or die(mysql_error())) != 0) {
+    while (mysqli_num_rows(mysqli_query($db_connection, "SELECT * FROM PREPRINTS WHERE id_pubblicazione='" . $generato . "v1'") or die(mysqli_error())) != 0) {
         $generato = rand();
     }
     $generato = $generato . "v1";
     $sql = "INSERT INTO PREPRINTS ( uid, id_pubblicazione, titolo, data_pubblicazione, autori, referenze, commenti, categoria, abstract) "
             . "VALUES ('" . $uid . "','" . $generato . "','" . $array[1] . "','" . date("c", time()) . "','" . $array[3] . "','" . $array[4] . "','" . $array[5] . "','" . $array[6] . "','" . $array[7] . "') ON DUPLICATE KEY UPDATE id_pubblicazione = VALUES(id_pubblicazione)";
-    $query = mysqli_query($db_connection, $sql) or die(mysql_error());
+    $query = mysqli_query($db_connection, $sql) or die(mysqli_error());
 #chiusura connessione al database
-    mysqli_close($db_connection);
     return $generato;
 }
 
 #funzione inserimento informazioni preprint
 
 function insert_p($array, $uid) {
-    include './conf.php';
-//import connessione database
-    include './mysql/db_conn.php';
+    global $db_connection;
 #adattamento stringhe pericolose per la query...
     $array[1] = addslashes($array[1]);
     $array[2] = addslashes($array[2]);
@@ -44,21 +40,17 @@ function insert_p($array, $uid) {
     //query
     $sql = "INSERT INTO PREPRINTS ( uid, id_pubblicazione, titolo, data_pubblicazione, autori, referenze, commenti, categoria, abstract) "
             . "VALUES ('" . $uid . "','" . $array[0] . "','" . $array[1] . "','" . date("c", time()) . "','" . $array[3] . "','" . $array[4] . "','" . $array[5] . "','" . $array[6] . "','" . $array[7] . "') ON DUPLICATE KEY UPDATE id_pubblicazione = VALUES(id_pubblicazione)";
-    $query = mysqli_query($db_connection, $sql) or die(mysql_error());
-#chiusura connessione al database
-    mysqli_close($db_connection);
+    $query = mysqli_query($db_connection, $sql) or die(mysqli_error());
 }
 
 #funzione che inserisce il pdf caricato all'interno dei database
 
 function insertopdf($id) {
-    include './conf.php';
-//import connessione database
-    include './mysql/db_conn.php';
+    global $db_connection, $copia, $basedir;
     $id = str_replace("-", "/", $id);
     //query
     $sql2 = "SELECT * FROM PREPRINTS WHERE id_pubblicazione='" . $id . "'";
-    $query2 = mysqli_query($db_connection, $sql2) or die(mysql_error());
+    $query2 = mysqli_query($db_connection, $sql2) or die(mysqli_error());
     $row = mysqli_fetch_array($query2);
     if ($handle = opendir($basedir)) {
         $i = 0;
@@ -67,7 +59,7 @@ function insertopdf($id) {
                 $idd = substr($file, 0, -4);
                 if ($row['id_pubblicazione'] == $idd) {
                     $sql = "UPDATE PREPRINTS SET Filename='" . $file . "', checked='1' WHERE id_pubblicazione='" . $id . "'";
-                    $query = mysqli_query($db_connection, $sql) or die(mysql_error());
+                    $query = mysqli_query($db_connection, $sql) or die(mysqli_error());
                     $i++;
                     copy($basedir . $file, $copia . $file);
                     unlink($basedir . $file);
@@ -77,19 +69,15 @@ function insertopdf($id) {
 #chiusura della directory...
         closedir($handle);
     }
-#chiusura connessione al database
-    mysqli_close($db_connection);
 }
 
 #funzione che inserisce un pdf all'interno dei database
 
 function insertpdf($id, $type) {
-    include './conf.php';
-//import connessione database
-    include './mysql/db_conn.php';
+    global $db_connection, $copia, $basedir;
     //query
     $sql2 = "SELECT * FROM PREPRINTS WHERE id_pubblicazione='" . $id . "'";
-    $query2 = mysqli_query($db_connection, $sql2) or die(mysql_error());
+    $query2 = mysqli_query($db_connection, $sql2) or die(mysqli_error());
     $row = mysqli_fetch_array($query2);
     unlink($copia . $row['Filename']);
     if ($handle = opendir($basedir)) {
@@ -97,7 +85,7 @@ function insertpdf($id, $type) {
         while ((false !== ($file = readdir($handle)))) {
             if ($file != '.' && $file != '..' && $file != 'index.php') {
                 $sql = "UPDATE PREPRINTS SET Filename= '" . $file . "', checked='1' WHERE id_pubblicazione='" . $id . "'";
-                $query = mysqli_query($db_connection, $sql) or die(mysql_error());
+                $query = mysqli_query($db_connection, $sql) or die(mysqli_error());
                 fclose($var);
                 $i++;
                 copy($basedir . $file, $copia . $file);
@@ -107,16 +95,12 @@ function insertpdf($id, $type) {
 #chiusura della directory...
         closedir($handle);
     }
-#chiusura connessione al database
-    mysqli_close($db_connection);
 }
 
 #funzione che visualizza lista upload
 
 function leggiupload($uid) {
-    include './conf.php';
-//import connessione database
-    include './mysql/db_conn.php';
+    global $db_connection, $copia;
     if (!isset($_GET['p'])) {
         $p = 1;
     } else {
@@ -125,10 +109,11 @@ function leggiupload($uid) {
     $risperpag = 5;
     $limit = $risperpag * $p - $risperpag;
     $sql = "SELECT * FROM PREPRINTS WHERE uid='" . $uid . "' AND checked='1'";
-    $querytotale = mysqli_query($db_connection, $sql) or die(mysql_error());
+    $querytotale = mysqli_query($db_connection, $sql) or die(mysqli_error());
     $ristot = mysqli_num_rows($querytotale);
-    echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
-    echo "PAPERS UPLOADED: " . $ristot . "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
+    if ($ristot == 0) {
+        echo "<br/>No papers uploaded.";
+    }
     $npag = ceil($ristot / $risperpag);
 #impostazione della navigazione per pagine
     if ($ristot != 0) {
@@ -159,26 +144,36 @@ function leggiupload($uid) {
             }
             echo '<a style="color:#007897; text-decoration: none;" title="Last page" href="uploaded.php?p=' . $npag . '&r=' . $uid . '"> &#8658 </a>';
         }
-        echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
     }
     $sql = "SELECT * FROM PREPRINTS WHERE uid='" . $uid . "' AND checked='1' ORDER BY data_pubblicazione DESC LIMIT " . $limit . "," . $risperpag . "";
-    $result = mysqli_query($db_connection, $sql) or die(mysql_error());
+    $result = mysqli_query($db_connection, $sql) or die(mysqli_error());
     $i = $limit;
-#recupero info e visualizzazione
+#recupero e visualizzazione dei campi della ricerca effettuata
     while ($row = mysqli_fetch_array($result)) {
-        $i++;
-        echo "<h1>" . $i . ".<br/></h1><div align='left' style='width:98%;'>";
-        echo "<p><h1>Id of pubblication:</h1></p><div style='float:right;'><a style='color:#007897;' href=" . $copia . $row['Filename'] . " onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a>&nbsp&nbsp&nbsp<a title='Change this preprint' style='color:#007897;' href='./edit.php?id=" . $row['id_pubblicazione'] . "&r=" . $uid . "' onclick='window.open(this.href); return false'>edit</a></div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
-#echo "<p><h1>Id of pubblication:</h1></p><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
-        echo "<p><h1>Title:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . stripslashes($row['titolo']) . "</div>";
-        echo "<p><h1>Date of pubblication:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . stripslashes($row['data_pubblicazione']) . "</div>";
-        echo "<p><h1>Authors:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . stripslashes($row['autori']) . "</div>";
-        echo "<p><h1>Journal reference:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . stripslashes($row['referenze']) . "</div>";
-        echo "<p><h1>Comments:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . stripslashes($row['commenti']) . "</div>";
-        echo "<p><h1>Category:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . stripslashes($row['categoria']) . "</div>";
-        echo "<p><h1>Abstract:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . stripslashes($row['abstract']) . "</div>";
-
-        echo "</div><hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
+        echo '<div class="boxContainer" align="center">'
+        . "<div id='TopBox" . $index . "' style='cursor: pointer;'>";
+        echo "<div class='titolo'>" . ($row['titolo']) . "</div>";
+        echo "<div>" . ($row['data_pubblicazione']) . "</div>";
+        echo "<div>" . ($row['autori']) . "</div></div>";
+        echo "<div id='BottomBox" . $index . "' hidden><br/>"
+        . "<div>" . ($row['categoria']) . "</div><br/>"
+        . "<div>" . ($row['commenti']) . "</div><br/>"
+        . "<div style='text-align: left; width: 75%;'>" . ($row['abstract']) . "</div><br/>"
+        . "<div>" . ($row['referenze']) . "</div>"
+        . "<br/><div class='boxID'>ID: " . ($row['id_pubblicazione']) . "</div>";
+        if ($_SESSION['logged_type'] === "mod") {
+            echo "<div><a target=\"blank\" href='./manual_edit.php?id=" . $row['id_pubblicazione'] . "' title='Edit'><img class='ImageOpt' src='./images/ic_image_edit.png'></a></div>";
+        } else if ($_SESSION['uid'] === $row['uid'] && $row['uid'] != "") {
+            echo "<div><a target=\"blank\" href='./edit.php?id=" . $row['id_pubblicazione'] . "&r=" . $row['uid'] . "' title='Edit'><img class='ImageOpt' src='./images/ic_image_edit.png'></a></div>";
+        }
+        echo "<div><a href='" . $copia . $row['Filename'] . "' target=\"_blank\" title='" . $row['id_pubblicazione'] . "'>"
+        . "<img class='ImageOpt' src='./images/ic_editor_insert_drive_file.png'></a></div><div style='clear:both;'></div>";
+        echo "</div></div><script>"
+        . "$(TopBox" . $index . ").click(function(){
+                $(BottomBox" . $index . ").toggle(400);
+        });"
+        . "</script>";
+        $index++;
     }
 #visualizzazione della navigazione per pagine
     if ($ristot != 0) {
@@ -203,54 +198,43 @@ function leggiupload($uid) {
             }
             echo '<a style="color:#007897; text-decoration: none;" title="Last page" href="uploaded.php?p=' . $npag . '&r=' . $uid . '"> &#8658 </a>';
         }
-        echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
     }
     $x = $limit + 1;
-    echo "RESULTS FROM " . $x . " TO " . ($p * 5) . "<br/>";
-    mysqli_close($db_connection);
 }
 
 #funzione che controlla la versione del preprint e lo archivia eventualmente
 
 function version_preprintd($id1) {
-    include './conf.php';
-//import connessione database
-    include './mysql/db_conn.php';
+    global $db_connection, $copia, $basedir4;
 #elaborazione dell'id...
     $lunghezza = strlen($id1);
     $id = substr($id1, 0, $lunghezza - 1);
 #verifica se esistono preprints precedenti e li sposto...
     for ($i = 0; $i <= 20; $i++) {
         $sql = "SELECT * FROM PREPRINTS WHERE id_pubblicazione='" . $id . $i . "'";
-        $query = mysqli_query($db_connection, $sql) or die(mysql_error());
+        $query = mysqli_query($db_connection, $sql) or die(mysqli_error());
         $row = mysqli_fetch_row($query);
         if (strcmp($id1, $row['1']) > 0) {
             #archiviazione preprints precedenti...
             $sql2 = "INSERT INTO PREPRINTS_ARCHIVIATI SELECT * FROM PREPRINTS WHERE id_pubblicazione='" . $id . $i . "' ON DUPLICATE KEY UPDATE id_pubblicazione = VALUES(id_pubblicazione)";
-            $query2 = mysqli_query($db_connection, $sql2) or die(mysql_error());
+            $query2 = mysqli_query($db_connection, $sql2) or die(mysqli_error());
             copy($copia . $row[9], $basedir4 . $row[9]);
             unlink($copia . $row[9]);
             #rimozione da preprints...
             $sql2 = "DELETE FROM PREPRINTS WHERE id_pubblicazione='" . $id . $i . "'";
-            $query2 = mysqli_query($db_connection, $sql2) or die(mysql_error());
+            $query2 = mysqli_query($db_connection, $sql2) or die(mysqli_error());
         }
     }
-#chiusura connessione al database
-    mysqli_close($db_connection);
 }
 
 #funzione controllo se ci sono preprint da approvare
 
 function check_approve() {
-    include './conf.php';
-//import connessione database
-    include './mysql/db_conn.php';
+    global $db_connection;
     #verifica se esistono preprints precedenti e li sposto...
     $sql = "SELECT COUNT(*) AS TOTALFOUND FROM PREPRINTS WHERE checked='0'";
-    $query = mysqli_query($db_connection, $sql) or die(mysql_error());
+    $query = mysqli_query($db_connection, $sql) or die(mysqli_error());
     $row = mysqli_fetch_array($query);
-    #chiusura connessione al database
-    mysqli_close($db_connection);
     if ($row['TOTALFOUND'] > 0) {
         return true;
     } else {
@@ -261,59 +245,46 @@ function check_approve() {
 #funzione recupero informazioni degli account
 
 function find_accounts($ord) {
-    include './conf.php';
-//import connessione database
-    include './mysql/db_conn.php';
+    global $db_connection;
     #verifica se esistono preprints precedenti e li sposto...
     $sql = "SELECT * FROM ACCOUNTS ORDER BY " . $ord;
-    $query = mysqli_query($db_connection, $sql) or die(mysql_error());
-    #chiusura connessione al database
-    mysqli_close($db_connection);
+    $query = mysqli_query($db_connection, $sql) or die(mysqli_error());
     return $query;
 }
 
 #funzione recupero informazioni degli account
 
 function remove_accounts($accounts) {
-    include './conf.php';
-//import connessione database
-    include './mysql/db_conn.php';
+    global $db_connection;
     $k = count($accounts);
     for ($i = 0; $i < $k; $i++) {
         $sql = "DELETE FROM ACCOUNTS WHERE email='" . $accounts[$i] . "'";
-        $query = mysqli_query($db_connection, $sql) or die(mysql_error());
+        $query = mysqli_query($db_connection, $sql) or die(mysqli_error());
     }
-    //chiusura connessione al database
-    mysqli_close($db_connection);
 }
 
 #funzione recupero informazioni account
 
 function find_account_info($email) {
-    include './conf.php';
-//import connessione database
-    include './mysql/db_conn.php';
+    global $db_connection;
     #verifica se esistono preprints precedenti e li sposto...
     $sql = "SELECT * FROM ACCOUNTS WHERE email='" . $email . "'";
-    $query = mysqli_query($db_connection, $sql) or die(mysql_error());
+    $query = mysqli_query($db_connection, $sql) or die(mysqli_error());
     $row = mysqli_fetch_array($query);
-    #chiusura connessione al database
-    mysqli_close($db_connection);
     return $row;
 }
 
 #invio mail agli admin quando avviene un nuovo submit(non terminata)
 
 function sendmailadmin($uid, $idp) {
+    global $db_connection;
     mail("example@msn.com", "New preprint submitted by: " . $uid . " with id: " . $idp, "New preprint submitted by: " . $uid . " with id: " . $idp, "From: webmaster@{$_SERVER['SERVER_NAME']}\r\n" . "Reply-To: webmaster@{$_SERVER['SERVER_NAME']}\r\n" . "X-Mailer: PHP/" . phpversion());
 }
 
 #funzione ricerca full text
 
 function searchfulltext() {
-    include './conf.php';
-//import connessione database
-    include './mysql/db_conn.php';
+    global $db_connection, $copia, $basedir4;
     require_once './authorization/sec_sess.php';
     sec_session_start();
     if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] < 86400)) {
@@ -345,7 +316,7 @@ function searchfulltext() {
     #limite risultati
     $limit = $risperpag * $p - $risperpag;
     #query di ricerca
-    $querytotale = mysqli_query($db_connection, $query) or die(mysql_error());
+    $querytotale = mysqli_query($db_connection, $query) or die(mysqli_error());
     $ristot = mysqli_num_rows($querytotale);
     if ($ristot != 0) {
         echo "Found " . $ristot . " results:<br/><br/>";
@@ -355,7 +326,7 @@ function searchfulltext() {
     }
     $npag = ceil($ristot / $risperpag);
     $query = $query . " LIMIT " . $limit . "," . $risperpag . "";
-    $result = mysqli_query($db_connection, $query) or die(mysql_error());
+    $result = mysqli_query($db_connection, $query) or die(mysqli_error());
     #impostazione della paginazione dei risultati
     if ($ristot != 0) {
         if ($p != 1) {
@@ -387,13 +358,53 @@ function searchfulltext() {
         }
     }
     $i = $limit;
+    $index = 0;
     #recupero e visualizzazione dei campi della ricerca effettuata
     while ($row = mysqli_fetch_array($result)) {
-        echo '<div class="boxContainer" align="center" style="width:85%;">';
-        echo "<a style='color:#1976D2; font-weight:bold;' href='" . $copia . $row['Filename'] . "' onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>" . ($row['titolo']) . "</a>";
+        echo '<div class="boxContainer" align="center">'
+        . "<div id='TopBox" . $index . "' style='cursor: pointer;'>";
+        echo "<div class='titolo'>" . ($row['titolo']) . "</div>";
         echo "<div>" . ($row['data_pubblicazione']) . "</div>";
-        echo "<div>" . ($row['autori']) . "</div>";
-        echo "</div>";
+        echo "<div>" . ($row['autori']) . "</div></div>";
+        echo "<div id='BottomBox" . $index . "' hidden><br/>"
+        . "<div>" . ($row['categoria']) . "</div><br/>"
+        . "<div>" . ($row['commenti']) . "</div><br/>"
+        . "<div style='text-align: left; width: 75%;'>" . ($row['abstract']) . "</div><br/>"
+        . "<div>" . ($row['referenze']) . "</div>"
+        . "<br/><div class='boxID'>ID: " . ($row['id_pubblicazione']) . "</div>";
+        if ($_SESSION['logged_type'] === "mod") {
+            if (file_exists($copia . $row['Filename'])) {
+                echo "<div><a target=\"blank\" href='./manual_edit.php?id=" . $row['id_pubblicazione'] . "' title='Edit'><img class='ImageOpt' src='./images/ic_image_edit.png'></a></div>";
+                echo "<div><a href='" . $copia . $row['Filename'] . "' target=\"_blank\" title='" . $row['id_pubblicazione'] . "'>"
+                . "<img class='ImageOpt' src='./images/ic_editor_insert_drive_file.png'></a></div><div style='clear:both;'></div>";
+            } else {
+                echo "<div><a href='" . $basedir4 . $row['Filename'] . "' target=\"_blank\" title='" . $row['id_pubblicazione'] . "'>"
+                . "<img class='ImageOpt' src='./images/ic_editor_insert_drive_file.png'></a></div><div style='clear:both;'></div>";
+            }
+        } else if ($_SESSION['uid'] === $row['uid'] && $row['uid'] != "") {
+            if (file_exists($copia . $row['Filename'])) {
+                echo "<div><a target=\"blank\" href='./edit.php?id=" . $row['id_pubblicazione'] . "&r=" . $row['uid'] . "' title='Edit'><img class='ImageOpt' src='./images/ic_image_edit.png'></a></div>";
+                echo "<div><a href='" . $copia . $row['Filename'] . "' target=\"_blank\" title='" . $row['id_pubblicazione'] . "'>"
+                . "<img class='ImageOpt' src='./images/ic_editor_insert_drive_file.png'></a></div><div style='clear:both;'></div>";
+            } else {
+                echo "<div><a href='" . $basedir4 . $row['Filename'] . "' target=\"_blank\" title='" . $row['id_pubblicazione'] . "'>"
+                . "<img class='ImageOpt' src='./images/ic_editor_insert_drive_file.png'></a></div><div style='clear:both;'></div>";
+            }
+        } else {
+            if (file_exists($copia . $row['Filename'])) {
+                echo "<div><a href='" . $copia . $row['Filename'] . "' target=\"_blank\" title='" . $row['id_pubblicazione'] . "'>"
+                . "<img class='ImageOpt' src='./images/ic_editor_insert_drive_file.png'></a></div><div style='clear:both;'></div>";
+            } else {
+                echo "<div><a href='" . $basedir4 . $row['Filename'] . "' target=\"_blank\" title='" . $row['id_pubblicazione'] . "'>"
+                . "<img class='ImageOpt' src='./images/ic_editor_insert_drive_file.png'></a></div><div style='clear:both;'></div>";
+            }
+        }
+        echo "</div></div><script>"
+        . "$(TopBox" . $index . ").click(function(){
+                $(BottomBox" . $index . ").toggle(400);
+        });"
+        . "</script>";
+        $index++;
     }
     #impostazioni della navigazione per pagine
     if ($ristot != 0) {
@@ -426,15 +437,12 @@ function searchfulltext() {
         }
     }
     $x = $limit + 1;
-    mysqli_close($db_connection);
 }
 
 # funzione lettura dei preprint
 
 function searchpreprint() {
-    include './conf.php';
-//import connessione database
-    include './mysql/db_conn.php';
+    global $db_connection, $copia, $basedir4;
     require_once './authorization/sec_sess.php';
     sec_session_start();
     if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] < 86400)) {
@@ -636,7 +644,7 @@ function searchpreprint() {
     #limite risultati
     $limit = $risperpag * $p - $risperpag;
     #query di ricerca
-    $querytotale = mysqli_query($db_connection, $query) or die(mysql_error());
+    $querytotale = mysqli_query($db_connection, $query) or die(mysqli_error());
     $ristot = mysqli_num_rows($querytotale);
     if ($cat != "all records") {
         echo "Found " . $ristot . " results:";
@@ -645,7 +653,7 @@ function searchpreprint() {
     }
     $npag = ceil($ristot / $risperpag);
     $query = $query . " ORDER BY " . $order . " LIMIT " . $limit . "," . $risperpag . "";
-    $result = mysqli_query($db_connection, $query) or die(mysql_error());
+    $result = mysqli_query($db_connection, $query) or die(mysqli_error());
     #impostazione della paginazione dei risultati
     if ($ristot != 0) {
         echo "<br/><br/>";
@@ -679,16 +687,55 @@ function searchpreprint() {
         echo "<br/>";
     }
     $i = $limit;
+    $index = 0;
     #recupero e visualizzazione dei campi della ricerca effettuata
     while ($row = mysqli_fetch_array($result)) {
-        echo '<div class="boxContainer" align="center">';
-        echo "<a style='color:#1976D2; font-weight:bold;' href='" . $copia . $row['Filename'] . "' onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>" . ($row['titolo']) . "</a>";
+        echo '<div class="boxContainer" align="center">'
+        . "<div id='TopBox" . $index . "' style='cursor: pointer;'>";
+        echo "<div class='titolo'>" . ($row['titolo']) . "</div>";
         echo "<div>" . ($row['data_pubblicazione']) . "</div>";
-        echo "<div>" . ($row['autori']) . "</div>";
-        echo "</div>";
+        echo "<div>" . ($row['autori']) . "</div></div>";
+        echo "<div id='BottomBox" . $index . "' hidden><br/>"
+        . "<div>" . ($row['categoria']) . "</div><br/>"
+        . "<div>" . ($row['commenti']) . "</div><br/>"
+        . "<div style='text-align: left; width: 75%;'>" . ($row['abstract']) . "</div><br/>"
+        . "<div>" . ($row['referenze']) . "</div>"
+        . "<br/><div class='boxID'>ID: " . ($row['id_pubblicazione']) . "</div>";
+        if ($_SESSION['logged_type'] === "mod") {
+            if (file_exists($copia . $row['Filename'])) {
+                echo "<div><a target=\"blank\" href='./manual_edit.php?id=" . $row['id_pubblicazione'] . "' title='Edit'><img class='ImageOpt' src='./images/ic_image_edit.png'></a></div>";
+                echo "<div><a href='" . $copia . $row['Filename'] . "' target=\"_blank\" title='" . $row['id_pubblicazione'] . "'>"
+                . "<img class='ImageOpt' src='./images/ic_editor_insert_drive_file.png'></a></div><div style='clear:both;'></div>";
+            } else {
+                echo "<div><a href='" . $basedir4 . $row['Filename'] . "' target=\"_blank\" title='" . $row['id_pubblicazione'] . "'>"
+                . "<img class='ImageOpt' src='./images/ic_editor_insert_drive_file.png'></a></div><div style='clear:both;'></div>";
+            }
+        } else if ($_SESSION['uid'] === $row['uid'] && $row['uid'] != "") {
+            if (file_exists($copia . $row['Filename'])) {
+                echo "<div><a target=\"blank\" href='./edit.php?id=" . $row['id_pubblicazione'] . "&r=" . $row['uid'] . "' title='Edit'><img class='ImageOpt' src='./images/ic_image_edit.png'></a></div>";
+                echo "<div><a href='" . $copia . $row['Filename'] . "' target=\"_blank\" title='" . $row['id_pubblicazione'] . "'>"
+                . "<img class='ImageOpt' src='./images/ic_editor_insert_drive_file.png'></a></div><div style='clear:both;'></div>";
+            } else {
+                echo "<div><a href='" . $basedir4 . $row['Filename'] . "' target=\"_blank\" title='" . $row['id_pubblicazione'] . "'>"
+                . "<img class='ImageOpt' src='./images/ic_editor_insert_drive_file.png'></a></div><div style='clear:both;'></div>";
+            }
+        } else {
+            if (file_exists($copia . $row['Filename'])) {
+                echo "<div><a href='" . $copia . $row['Filename'] . "' target=\"_blank\" title='" . $row['id_pubblicazione'] . "'>"
+                . "<img class='ImageOpt' src='./images/ic_editor_insert_drive_file.png'></a></div><div style='clear:both;'></div>";
+            } else {
+                echo "<div><a href='" . $basedir4 . $row['Filename'] . "' target=\"_blank\" title='" . $row['id_pubblicazione'] . "'>"
+                . "<img class='ImageOpt' src='./images/ic_editor_insert_drive_file.png'></a></div><div style='clear:both;'></div>";
+            }
+        }
+        echo "</div></div><script>"
+        . "$(TopBox" . $index . ").click(function(){
+                $(BottomBox" . $index . ").toggle(400);
+        });"
+        . "</script>";
+        $index++;
     }
     #impostazioni della navigazione per pagine
-
     if ($ristot != 0) {
         if ($p != 1) {
             $t1 = $p - 1;
@@ -719,15 +766,12 @@ function searchpreprint() {
         }
     }
     $x = $limit + 1;
-    mysqli_close($db_connection);
 }
 
 # funzione filtro e lettura dei preprint
 
 function filtropreprint() {
-    include './conf.php';
-//import connessione database
-    include './mysql/db_conn.php';
+    global $db_connection, $copia, $basedir4;
     require_once './authorization/sec_sess.php';
     sec_session_start();
     if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] < 86400)) {
@@ -766,17 +810,17 @@ function filtropreprint() {
     #query di ricerca
     if (isset($argom)) {
         $sql = "SELECT * FROM PREPRINTS WHERE " . $argom . " LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1'";
-        $querytotale = mysqli_query($db_connection, $sql) or die(mysql_error());
+        $querytotale = mysqli_query($db_connection, $sql) or die(mysqli_error());
         $ristot = mysqli_num_rows($querytotale);
         if ($ristot != 0) {
             echo "Found " . $ristot . " results:<br/><br/>";
         } else {
             echo "Found " . $ristot . " results:<br/><br/>";
-            break;
+            exit();
         }
         $npag = ceil($ristot / $risperpag);
         $sql = "SELECT * FROM PREPRINTS WHERE " . $argom . " LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' ORDER BY " . $order . " LIMIT " . $limit . "," . $risperpag . "";
-        $result = mysqli_query($db_connection, $sql) or die(mysql_error());
+        $result = mysqli_query($db_connection, $sql) or die(mysqli_error());
     } else {
         #senza filtro
         $query = " 
@@ -788,7 +832,7 @@ function filtropreprint() {
     	SELECT * FROM PREPRINTS WHERE commenti LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
     	SELECT * FROM PREPRINTS WHERE categoria LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1' UNION
     	SELECT * FROM PREPRINTS WHERE abstract LIKE '%" . addslashes($_GET['r']) . "%' AND checked='1'";
-        $querytotale = mysqli_query($db_connection, $query) or die(mysql_error());
+        $querytotale = mysqli_query($db_connection, $query) or die(mysqli_error());
         $ristot = mysqli_num_rows($querytotale);
         $npag = ceil($ristot / $risperpag);
         if (isset($_GET['o']) && $_GET['o'] != "") {
@@ -802,7 +846,7 @@ function filtropreprint() {
             echo "Found " . $ristot . " results:<br/><br/>";
         }
         $npag = ceil($ristot / $risperpag);
-        $result = mysqli_query($db_connection, $query) or die(mysql_error());
+        $result = mysqli_query($db_connection, $query) or die(mysqli_error());
     }
     #impostazione della paginazione dei risultati
     if ($ristot != 0) {
@@ -835,13 +879,53 @@ function filtropreprint() {
         }
     }
     $i = $limit;
+    $index = 0;
     #recupero e visualizzazione dei campi della ricerca effettuata
     while ($row = mysqli_fetch_array($result)) {
-        echo '<div class="boxContainer" align="center">';
-        echo "<a style='color:#1976D2; font-weight:bold;' href='" . $copia . $row['Filename'] . "' onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>" . ($row['titolo']) . "</a>";
+        echo '<div class="boxContainer" align="center">'
+        . "<div id='TopBox" . $index . "' style='cursor: pointer;'>";
+        echo "<div class='titolo'>" . ($row['titolo']) . "</div>";
         echo "<div>" . ($row['data_pubblicazione']) . "</div>";
-        echo "<div>" . ($row['autori']) . "</div>";
-        echo "</div>";
+        echo "<div>" . ($row['autori']) . "</div></div>";
+        echo "<div id='BottomBox" . $index . "' hidden><br/>"
+        . "<div>" . ($row['categoria']) . "</div><br/>"
+        . "<div>" . ($row['commenti']) . "</div><br/>"
+        . "<div style='text-align: left; width: 75%;'>" . ($row['abstract']) . "</div><br/>"
+        . "<div>" . ($row['referenze']) . "</div>"
+        . "<br/><div class='boxID'>ID: " . ($row['id_pubblicazione']) . "</div>";
+        if ($_SESSION['logged_type'] === "mod") {
+            if (file_exists($copia . $row['Filename'])) {
+                echo "<div><a target=\"blank\" href='./manual_edit.php?id=" . $row['id_pubblicazione'] . "' title='Edit'><img class='ImageOpt' src='./images/ic_image_edit.png'></a></div>";
+                echo "<div><a href='" . $copia . $row['Filename'] . "' target=\"_blank\" title='" . $row['id_pubblicazione'] . "'>"
+                . "<img class='ImageOpt' src='./images/ic_editor_insert_drive_file.png'></a></div><div style='clear:both;'></div>";
+            } else {
+                echo "<div><a href='" . $basedir4 . $row['Filename'] . "' target=\"_blank\" title='" . $row['id_pubblicazione'] . "'>"
+                . "<img class='ImageOpt' src='./images/ic_editor_insert_drive_file.png'></a></div><div style='clear:both;'></div>";
+            }
+        } else if ($_SESSION['uid'] === $row['uid'] && $row['uid'] != "") {
+            if (file_exists($copia . $row['Filename'])) {
+                echo "<div><a target=\"blank\" href='./edit.php?id=" . $row['id_pubblicazione'] . "&r=" . $row['uid'] . "' title='Edit'><img class='ImageOpt' src='./images/ic_image_edit.png'></a></div>";
+                echo "<div><a href='" . $copia . $row['Filename'] . "' target=\"_blank\" title='" . $row['id_pubblicazione'] . "'>"
+                . "<img class='ImageOpt' src='./images/ic_editor_insert_drive_file.png'></a></div><div style='clear:both;'></div>";
+            } else {
+                echo "<div><a href='" . $basedir4 . $row['Filename'] . "' target=\"_blank\" title='" . $row['id_pubblicazione'] . "'>"
+                . "<img class='ImageOpt' src='./images/ic_editor_insert_drive_file.png'></a></div><div style='clear:both;'></div>";
+            }
+        } else {
+            if (file_exists($copia . $row['Filename'])) {
+                echo "<div><a href='" . $copia . $row['Filename'] . "' target=\"_blank\" title='" . $row['id_pubblicazione'] . "'>"
+                . "<img class='ImageOpt' src='./images/ic_editor_insert_drive_file.png'></a></div><div style='clear:both;'></div>";
+            } else {
+                echo "<div><a href='" . $basedir4 . $row['Filename'] . "' target=\"_blank\" title='" . $row['id_pubblicazione'] . "'>"
+                . "<img class='ImageOpt' src='./images/ic_editor_insert_drive_file.png'></a></div><div style='clear:both;'></div>";
+            }
+        }
+        echo "</div></div><script>"
+        . "$(TopBox" . $index . ").click(function(){
+                $(BottomBox" . $index . ").toggle(400);
+        });"
+        . "</script>";
+        $index++;
     }
     #impostazioni della navigazione per pagine
     if ($ristot != 0) {
@@ -874,38 +958,52 @@ function filtropreprint() {
         }
     }
     $x = $limit + 1;
-    mysqli_close($db_connection);
 }
 
 # funzione lettura dei preprint recenti
 
 function recentspreprints() {
-    include './conf.php';
-//import connessione database
-    include './mysql/db_conn.php';
+    global $db_connection, $copia;
     require_once './authorization/sec_sess.php';
     sec_session_start();
     $query = "SELECT * FROM PREPRINTS WHERE checked=1 ORDER BY data_pubblicazione DESC LIMIT 10";
-    $result = mysqli_query($db_connection, $query) or die(mysql_error());
+    $result = mysqli_query($db_connection, $query) or die(mysqli_error());
     $i = $limit;
+    $index = 0;
     #recupero e visualizzazione dei campi della ricerca effettuata
     while ($row = mysqli_fetch_array($result)) {
-        echo '<div class="boxContainer" align="center">';
-        echo "<a style='color:#1976D2; font-weight:bold;' href='" . $copia . $row['Filename'] . "' onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>" . ($row['titolo']) . "</a>";
+        echo '<div class="boxContainer" align="center">'
+        . "<div id='TopBox" . $index . "' style='cursor: pointer;'>";
+        echo "<div class='titolo'>" . ($row['titolo']) . "</div>";
         echo "<div>" . ($row['data_pubblicazione']) . "</div>";
-        echo "<div>" . ($row['autori']) . "</div>";
-        echo "</div>";
+        echo "<div>" . ($row['autori']) . "</div></div>";
+        echo "<div id='BottomBox" . $index . "' hidden><br/>"
+        . "<div>" . ($row['categoria']) . "</div><br/>"
+        . "<div>" . ($row['commenti']) . "</div><br/>"
+        . "<div style='text-align: left; width: 75%;'>" . ($row['abstract']) . "</div><br/>"
+        . "<div>" . ($row['referenze']) . "</div>"
+        . "<br/><div class='boxID'>ID: " . ($row['id_pubblicazione']) . "</div>";
+        if ($_SESSION['logged_type'] === "mod") {
+            echo "<div><a target=\"blank\" href='./manual_edit.php?id=" . $row['id_pubblicazione'] . "' title='Edit'><img class='ImageOpt' src='./images/ic_image_edit.png'></a></div>";
+        } else if ($_SESSION['uid'] === $row['uid'] && $row['uid'] != "") {
+            echo "<div><a target=\"blank\" href='./edit.php?id=" . $row['id_pubblicazione'] . "&r=" . $row['uid'] . "' title='Edit'><img class='ImageOpt' src='./images/ic_image_edit.png'></a></div>";
+        }
+        echo "<div><a href='" . $copia . $row['Filename'] . "' target=\"_blank\" title='" . $row['id_pubblicazione'] . "'>"
+        . "<img class='ImageOpt' src='./images/ic_editor_insert_drive_file.png'></a></div><div style='clear:both;'></div>";
+        echo "</div></div><script>"
+        . "$(TopBox" . $index . ").click(function(){
+                $(BottomBox" . $index . ").toggle(400);
+        });"
+        . "</script>";
+        $index++;
     }
     $x = $limit + 1;
-    mysqli_close($db_connection);
 }
 
 #funzione lettura dei preprint archiviati
 
 function leggipreprintarchiviati() {
-    include './conf.php';
-//import connessione database
-    include './mysql/db_conn.php';
+    global $db_connection, $basedir4;
     $risperpag = 5;
     #recupero pagina
     if (isset($_GET['p']) && $_GET['p'] != "") {
@@ -915,9 +1013,11 @@ function leggipreprintarchiviati() {
     }
     $limit = $risperpag * $p - $risperpag;
     $sql = "SELECT * FROM PREPRINTS_ARCHIVIATI";
-    $querytotale = mysqli_query($db_connection, $sql) or die(mysql_error());
+    $querytotale = mysqli_query($db_connection, $sql) or die(mysqli_error());
     $ristot = mysqli_num_rows($querytotale);
-    echo "ELEMENTS ARCHIVED: " . $ristot . "<br/><br/>";
+    if ($ristot == 0) {
+        echo "<br/>No papers archived.";
+    }
     $npag = ceil($ristot / $risperpag);
     #impostazione della navigazione per pagine
     if ($ristot != 0) {
@@ -948,27 +1048,35 @@ function leggipreprintarchiviati() {
             }
             echo '<a style="color:#007897; text-decoration: none;" title="Last page" href="archived_preprints.php?p=' . $npag . '&r=' . $_GET['r'] . '"> &#8658 </a>';
         }
-        echo "<hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
     }
     #verifica se i preprint devono essere rimossi definitivamente
     if ($_GET['c'] != "remove") {
         $sql = "SELECT * FROM PREPRINTS_ARCHIVIATI WHERE checked='1' ORDER BY data_pubblicazione DESC LIMIT " . $limit . "," . $risperpag . "";
-        $result = mysqli_query($db_connection, $sql) or die(mysql_error());
+        $result = mysqli_query($db_connection, $sql) or die(mysqli_error());
         $i = $limit;
-        #recupero info e visualizzazione
+        $index = 0;
+        #recupero e visualizzazione dei campi della ricerca effettuata
         while ($row = mysqli_fetch_array($result)) {
-            $i++;
-            echo "<h1>" . $i . ".<br/></h1><div align='left' style='width:98%;'>";
-            echo "<p><h1>Id of publication:</h1></p><div style='float:right;'><a style='color:#007897;' href='" . $basedir4 . $row['Filename'] . "' onclick='window.open(this.href);return false' title='" . $row['id_pubblicazione'] . "'>view</a></div><div style='margin-left:1%;'>" . $row['id_pubblicazione'] . "</div>";
-            echo "<p><h1>Title:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . ($row['titolo']) . "</div>";
-            echo "<p><h1>Date of pubblication:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . ($row['data_pubblicazione']) . "</div>";
-            echo "<p><h1>Authors:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . ($row['autori']) . "</div>";
-            echo "<p><h1>Journal reference:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . ($row['referenze']) . "</div>";
-            echo "<p><h1>Comments:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . ($row['commenti']) . "</div>";
-            echo "<p><h1>Category:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . ($row['categoria']) . "</div>";
-            echo "<p><h1>Abstract:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . ($row['abstract']) . "</div>";
-            echo "<p><h1>Views:</h1></p><div style='margin-left:1%; margin-right:1%;'>" . number_format(($row['counter']), 0, ',', '.') . "</div>";
-            echo "</div><hr style='display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;'>";
+            echo '<div class="boxContainer" align="center">'
+            . "<div id='TopBox" . $index . "' style='cursor: pointer;'>";
+            echo "<div class='titolo'>" . ($row['titolo']) . "</div>";
+            echo "<div>" . ($row['data_pubblicazione']) . "</div>";
+            echo "<div>" . ($row['autori']) . "</div></div>";
+            echo "<div id='BottomBox" . $index . "' hidden><br/>"
+            . "<div>" . ($row['categoria']) . "</div><br/>"
+            . "<div>" . ($row['commenti']) . "</div><br/>"
+            . "<div style='text-align: left; width: 75%;'>" . ($row['abstract']) . "</div><br/>"
+            . "<div>" . ($row['referenze']) . "</div>"
+            . "<br/><div class='boxID'>ID: " . ($row['id_pubblicazione']) . "</div>";
+            echo "<div><a href='" . $basedir4 . $row['Filename'] . "' target=\"_blank\" title='" . $row['id_pubblicazione'] . "'>"
+            . "<img class='ImageOpt' src='./images/ic_editor_insert_drive_file.png'></a></div><div style='clear:both;'></div>";
+            echo "</div></div><script>"
+            . "$(TopBox" . $index . ").click(function(){
+                $(BottomBox" . $index . ").toggle(400);
+
+        });"
+            . "</script>";
+            $index++;
         }
         #visualizzazione della navigazione per pagine
         if ($ristot != 0) {
@@ -1006,6 +1114,6 @@ function leggipreprintarchiviati() {
         }
     }
     $x = $limit + 1;
-    mysqli_close($db_connection);
 }
+
 ?>
