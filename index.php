@@ -157,7 +157,7 @@
                     . '<div><a href="./index.php?fulltext=yes" style="color:#ffffff; float:left;" class="buttonNav2" >Fulltext Search</a></div>';
                     $html = "<div class='simple'>
                     <select name='f' class='selector'>
-                        <option value='all' selected='selected'>All papers:</option>
+                        <option value='all' selected='selected'>All preprints:</option>
                         <option value='author'>Authors:</option>
                         <option value='category'>Category:</option>
                         <option value='year'>Year:</option>

@@ -38,13 +38,13 @@
                             <a style="color:#ffffff;" href="./authors_list.php" id="bottone_keyword" class="buttonlink" onclick="loading(load);">View</a>
                         </div>
                         <div id="boxsx">
-                            Insert a paper
+                            Insert one preprint
                         </div>
                         <div id="boxdx">
                             <a style="color:#ffffff;" href="./manual_insert.php" id="bottone_keyword" class="buttonlink" onclick="loading(load);">Enter</a>
                         </div>
                         <div id="boxsx">
-                            Approve papers
+                            Approve preprints
                         </div>
                         <div id="boxdx">
                             <a style="color:#ffffff;" href="./check_preprints.php?i=1" id="bottone_keyword" class="buttonlink" onclick="loading(load);">Check</a>
@@ -56,7 +56,7 @@
                             ?>
                         </div>
                         <div id="boxsx">
-                            Search for new papers
+                            Search for new preprints
                         </div>
                         <div id="boxdx">
                             <a style="color:#ffffff;" href="./arXiv_panel.php?b8=update" id="bottone_keyword" class="buttonlink" onclick="loading(load);">Update</a>

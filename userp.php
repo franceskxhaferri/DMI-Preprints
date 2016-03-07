@@ -60,7 +60,7 @@
                 </center>
                 <form name="f3" action="userp.php" method="POST" enctype="multipart/form-data" onsubmit="loading(load);">
                     <center>
-                        <h2>Insert new paper</h2>
+                        <h2>Insert new preprint</h2>
                         <h1>field with "*" are required.</h1>
                         <br/>
                         <input type="reset" name="reset" value="Reset">

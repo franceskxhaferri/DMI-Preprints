@@ -53,7 +53,7 @@
                 ?>
             </div>
             <br/><br/>
-            <h2>Insert new paper</h2>
+            <h2>Insert new preprint</h2>
             <h1>field with "*" are required.</h1>
             <br/>
         </div>

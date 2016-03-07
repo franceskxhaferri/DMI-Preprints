@@ -40,7 +40,7 @@
                     <center>
                         <div>
                             <form name='f3' action='manual_insert.php' method='POST' onsubmit="loading(load);">
-                                Get paper informations from arXiv:
+                                Get preprint from arXiv:
                                 <input type='search' autocomplete = 'on' name='id' required class='textfield' placeholder='Insert arXiv id: 0000.0000'/>
                                 <input type='submit' name='b7' value='Get info' id='bottone_keyword' class='button' ><br/>
                             </form>

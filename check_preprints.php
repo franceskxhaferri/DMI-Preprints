@@ -30,7 +30,7 @@
                 <center>
                     <div><br/>
                         <a style='color:#ffffff;' href='<?php echo $path; ?>' id='bottone_keyword' class='button' onclick='loading(load);'>Back</a><br/><br/><br/>
-                        <h2>CHECK PAPERS</h2>
+                        <h2>CHECK PREPRINTS</h2>
                     </div>
                     <div>
                         <?php

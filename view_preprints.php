@@ -177,7 +177,7 @@
                     } else if ($_GET['all'] == "1" or $_GET['h'] == "1" or $_GET['t'] == "1" or $_GET['a'] == "1" or $_GET['e'] == "1" or $_GET['y'] == "1" or $_GET['c'] == "1" or $_GET['j'] == "1" or $_GET['i'] == "1" or $_GET['d'] == "1") {
                         searchpreprint();
                     } else {
-                        echo "SELECT THE FIELD WHERE RUN THE SEARCH!";
+                        echo "Select the field where run the search!";
                     }
                 }
                 ?>

@@ -31,7 +31,7 @@
             <div id="firstContainer">
                 <center>
                     <br/>
-                    <a style='color:#ffffff; text-align: center;' href='./modp.php' id='bottone_keyword' class='button' onclick='loading(load);'>Back</a><a style='color:#ffffff; text-align: center;' href='./archived_preprints.php?c=remove' id='bottone_keyword' class='button' onclick='loading(load);'>Remove All</a><br/><br/><br/><h2>ARCHIVED PAPERS</h2>
+                    <a style='color:#ffffff; text-align: center;' href='./modp.php' id='bottone_keyword' class='button' onclick='loading(load);'>Back</a><a style='color:#ffffff; text-align: center;' href='./archived_preprints.php?c=remove' id='bottone_keyword' class='button' onclick='loading(load);'>Remove All</a><br/><br/><br/><h2>ARCHIVED PREPRINTS</h2>
                     <div>
                         <?php
                         if (sessioneavviata() == True) {
