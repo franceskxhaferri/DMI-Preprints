@@ -94,10 +94,10 @@
                             #inserisco i nomi eliminati all'interno di una stringa per poi visualizzarla all'utente
                             $nomieliminati = implode(", ", $array2);
                             if ($nomieliminati == "") {
-                                echo '<script type="text/javascript">alert("No author selected!");</script>';
+                                echo '<script type="text/javascript">setTimeout(function(){alert("No author selected!")}, 500);</script>';
                             } else {
-                                echo '<script type="text/javascript">alert("' . $nomieliminati . ' deleted from list!");</script>';
-                                echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./authors_list.php">';
+                                echo '<script type="text/javascript">setTimeout(function(){alert("' . $nomieliminati . ' deleted from list!")}, 500);</script>';
+                                echo '<META HTTP-EQUIV="Refresh" Content="1; URL=./authors_list.php">';
                             }
                         }
                     }

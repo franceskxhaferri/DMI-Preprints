@@ -155,11 +155,11 @@
                                 }
                                 #controllo se sono stati selezionati preprint da rimuovere
                                 if ($k == 0) {
-                                    echo '<script type="text/javascript">alert("No paper selected!");</script>';
+                                    echo '<script type="text/javascript">setTimeout(function(){alert("No preprint selected!")}, 500);</script>';
                                 } else {
-                                    echo '<script type="text/javascript">alert("' . $k . ' papers removed correctly!");</script>';
+                                    echo '<script type="text/javascript">setTimeout(function(){alert("' . $k . ' preprint removed correctly!")}, 500);</script>';
                                     #aggiorno la pagina dopo 0 secondi
-                                    echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./check_preprints.php">';
+                                    echo '<META HTTP-EQUIV="Refresh" Content="1; URL=./check_preprints.php">';
                                 }
                             }
 ####################################################################################################################################################################
@@ -201,11 +201,11 @@
                                 }
                                 #controllo se sono stati selezionati preprint da rimuovere
                                 if ($k == 0) {
-                                    echo '<script type="text/javascript">alert("No papers selected!");</script>';
+                                    echo '<script type="text/javascript">setTimeout(function(){alert("No preprint selected!")}, 500);</script>';
                                 } else {
-                                    echo '<script type="text/javascript">alert("' . $k . ' papers inserted correctly!");</script>';
+                                    echo '<script type="text/javascript">setTimeout(function(){alert("' . $k . ' preprint inserted correctly!")}, 500);</script>';
                                     #aggiorno la pagina dopo 0 secondi
-                                    echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./check_preprints.php">';
+                                    echo '<META HTTP-EQUIV="Refresh" Content="1; URL=./check_preprints.php">';
                                 }
                             }
                         }

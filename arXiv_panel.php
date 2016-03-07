@@ -88,7 +88,7 @@
                                     $nl = count($array);
                                     if ($nl == 0) {
                                         chiudisessione();
-                                        echo '<script type="text/javascript">alert("No authors inside list!");</script>';
+                                        echo '<script type="text/javascript">setTimeout(function(){alert("No author inside list!")}, 500);</script>';
                                     } else {
                                         #inizializzo variabile per contare preprints scaricati...
                                         for ($i = 0; $i < $nl; $i++) {
@@ -134,7 +134,7 @@
                                     if ($nl == 0) {
                                         chiudisessione();
                                         #nessun autore
-                                        echo '<script type="text/javascript">alert("No authors inside list!");</script>';
+                                        echo '<script type="text/javascript">setTimeout(function(){alert("No author inside list!")}, 500);</script>';
                                     } else {
                                         #inizializzo variabile per contare preprints scaricati...
                                         for ($i = 0; $i < $nl; $i++) {
@@ -174,7 +174,7 @@
                         } else {
                             #controllo se ci sono state interruzioni
                             if (controllainterruzione() == True) {
-                                echo '<script type="text/javascript">alert("The last update was not stopped properly, was performed a new update!");</script>';
+                                echo '<script type="text/javascript">setTimeout(function(){alert("The last update was not stopped properly, was performed a new update!")}, 500);</script>';
                                 if ($sock = @fsockopen('www.arxiv.org', 80, $num, $error, 5)) {
                                     if (sessioneavviata() == False) {
                                         #avvio della sessione
@@ -189,7 +189,7 @@
                                         $nl = count($array);
                                         if ($nl == 0) {
                                             chiudisessione();
-                                            echo '<script type="text/javascript">alert("No authors inside list!");</script>';
+                                            echo '<script type="text/javascript">setTimeout(function(){alert("No author inside list!")}, 500);</script>';
                                         } else {
                                             #inizializzo variabile per contare preprints scaricati...
                                             for ($i = 0; $i < $nl; $i++) {
@@ -225,10 +225,10 @@
                             echo "LAST UPDATE: " . $data;
                             #update o download completato correttamente
                             if ($dc1) {
-                                echo '<script type="text/javascript">alert("Update complete!");</script>';
+                                echo '<script type="text/javascript">setTimeout(function(){alert("Update complete!")}, 500);</script>';
                             }
                             if ($dc2) {
-                                echo '<script type="text/javascript">alert("Download complete!");</script>';
+                                echo '<script type="text/javascript">setTimeout(function(){alert("Download complete!")}, 500);</script>';
                             }
                         }
                         ?>

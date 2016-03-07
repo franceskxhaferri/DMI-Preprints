@@ -1027,7 +1027,7 @@ ul.link-list li:first-child {
 
 @-moz-keyframes dropHeader {
     0% {
-        -moz-transform: translateY(60px);
+        -moz-transform: translateY(30px);
     }
     100% {
         -moz-transform: translateY(0);
@@ -1035,7 +1035,7 @@ ul.link-list li:first-child {
 }
 @-webkit-keyframes dropHeader {
     0% {
-        -webkit-transform: translateY(60px);
+        -webkit-transform: translateY(30px);
     }
     100% {
         -webkit-transform: translateY(0);
@@ -1043,7 +1043,7 @@ ul.link-list li:first-child {
 }
 @keyframes dropHeader {
     0% {
-        transform: translateY(60px);
+        transform: translateY(30px);
     }
     100% {
         transform: translateY(0);
@@ -1051,16 +1051,16 @@ ul.link-list li:first-child {
 }
 
 @-moz-keyframes bumpin {
-    0% { -moz-transform: scale(0,0); }
+    0% { -moz-transform: scale(1,0); }
     100%   { -moz-transform: scale(1,1); }
 
 }
 @-webkit-keyframes bumpin {
-    0% { -webkit-transform: scale(0,0); }
+    0% { -webkit-transform: scale(1,0); }
     100%   { -webkit-transform: scale(1,1); }
 }
 @keyframes bumpin {
-    0% { transform: scale(0,0); }
+    0% { transform: scale(1,0); }
     100%   { transform: scale(1,1); }
 }
 
