@@ -106,6 +106,23 @@ function chkAccountDelete() {
     }
 }
 //funzione reset password login
+function chkInsertReset() {
+    var pw1 = $('#pw1').val();
+    var pw2 = $('#pw2').val();
+    var token = $('#tk').val();
+    var p1 = pw1.length;
+    if (pw1 != pw2) {
+        alert("Passwords do not match!");
+        return false;
+    } else if (p1 < 6) {
+        alert("The password field must contain at least 6 characters!");
+        return false;
+    }
+    //
+    $("#top_content").load("reserved/insert_new_password.php", {password1: pw1, password2: pw2, tk: token}, function () {
+    });
+}
+//funzione reset password login
 function chkReset() {
     var email = $('#email').val();
     var e = email.length;

@@ -209,6 +209,7 @@
         }
     }
     require_once './graphics/loader.php';
+    require_once './graphics/footer.php';
     ?>
 </div>
 <br/>

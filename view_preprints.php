@@ -186,6 +186,7 @@
         <?php
         require_once './graphics/loaderRight.php';
         require_once './graphics/loader.php';
+        require_once './graphics/footer.php';
         ?>
     </center>
 </body>

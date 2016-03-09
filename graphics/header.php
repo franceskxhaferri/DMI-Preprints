@@ -1,4 +1,5 @@
 <?php
+
 echo "
 <head>
 <title>DMI Preprints</title>
@@ -40,6 +41,7 @@ require_once './arXiv/functions.php';
 sec_session_start();
 if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] < 86400)) {
     if ($_SESSION['logged_type'] === "mod" or $_SESSION['logged_type'] === "user") {
+        
     } else {
         echo '<script type="text/javascript">alert("ACCESS DENIED!");</script>';
         echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
@@ -49,5 +51,4 @@ if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] < 
     echo '<META HTTP-EQUIV="Refresh" Content="0; URL=./reserved.php">';
     exit(0);
 }
-
 ?>

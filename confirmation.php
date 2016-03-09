@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html>
     <?php
-    include './conf.php';
-    include './mysql/db_conn.php';
-    include './mysql/functions.php';
-    include './authorization/auth.php';
     echo "
 <head>
 <title>DMI Preprints</title>
@@ -31,16 +27,11 @@
     webshims.setOptions('forms-ext', {types: 'date'});
     webshims.polyfill('forms forms-ext');
 </script>
-<script type=\"text/x-mathjax-config\">
-    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
-</script>
-<script type=\"text/javascript\"
-        src=\"http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\">
-</script>
-
-<script type=\"text/javascript\" src=\"./js/allscript.js\">
-</script>
 </head> ";
+//
+    require_once './conf.php';
+    require_once './mysql/db_conn.php';
+    require_once './authorization/auth.php';
     ?>
     <body>
         <div id="header-wrapper">
@@ -60,16 +51,14 @@
         </div>
         <br/><br/>
     <center>
-        <div id="firstContainer">
+        <div id="firstContainer"><br/><br/><br/><br/>
             <?php
-            require_once './graphics/loader.php';
-            //controllo token
-            if ($_GET['token'] != "" && get_token_password_account($_GET['token'])) {
-                require_once './reserved/insert_new_passForm.php';
-                //require_once './graphics/footer.php';
-            } else {
-                require_once './reserved/reset_passForm.php';
+            //
+            if ($_GET['token'] != "" && confirm_account($_GET['token'])) {
+                echo "The account has been confirmed, you can now sign in using your email address.";
             }
+            require_once './graphics/loader.php';
+            require_once './graphics/footer.php';
             ?>
     </center>
 </center>

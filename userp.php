@@ -229,6 +229,9 @@
                 UpdateMathabs('Here it will show a preview of what you write on abstract');
             </script>
         </div>
-        <?php require_once './graphics/loader.php'; ?>
+        <?php
+        require_once './graphics/loader.php';
+        require_once './graphics/footer.php';
+        ?>
     </body>
 </html>

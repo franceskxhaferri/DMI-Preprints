@@ -20,7 +20,7 @@ if (isset($_SESSION['logged_type'])) {
             header('Location:./modp.php');
             exit();
         } else {
-            echo 'errore login chooser';
+            echo 'Credentials not alowed!';
         }
     }
 } else {

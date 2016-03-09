@@ -75,6 +75,7 @@
                     error_reporting(E_ALL);
                     ini_set('display_errors', 1);
                     require_once './reserved/add_accountForm.php';
+                    //require_once './graphics/footer.php';
                     ?>
                 </div><br/>
             </center>

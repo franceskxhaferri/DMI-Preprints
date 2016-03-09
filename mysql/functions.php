@@ -250,7 +250,7 @@ function find_accounts($ord) {
     return $query;
 }
 
-#funzione recupero informazioni degli account
+#funzione eliminazione informazioni account
 
 function remove_accounts($accounts) {
     global $db_connection;
@@ -270,13 +270,6 @@ function find_account_info($email) {
     $query = mysqli_query($db_connection, $sql) or die(mysqli_error());
     $row = mysqli_fetch_array($query);
     return $row;
-}
-
-#invio mail agli admin quando avviene un nuovo submit(non terminata)
-
-function sendmailadmin($uid, $idp) {
-    global $db_connection;
-    mail("example@msn.com", "New preprint submitted by: " . $uid . " with id: " . $idp, "New preprint submitted by: " . $uid . " with id: " . $idp, "From: webmaster@{$_SERVER['SERVER_NAME']}\r\n" . "Reply-To: webmaster@{$_SERVER['SERVER_NAME']}\r\n" . "X-Mailer: PHP/" . phpversion());
 }
 
 #funzione ricerca full text
@@ -1112,6 +1105,208 @@ function leggipreprintarchiviati() {
         }
     }
     $x = $limit + 1;
+}
+
+//invio mail di conferma quando avviene la registrazione
+
+function sendConfirmMail($email, $name) {
+    global $base_url, $send_mail_host, $send_mail_port, $send_mail_auth, $send_mail_user, $send_mail_pw;
+    //generazione del token
+    $token = md5($email);
+    //invio della mail di conferma
+    //libreria Pear Mail
+    require_once "../Mail-1.3.0/Mail.php";
+    require_once "../Mail-1.3.0/mime.php";
+    $from = $send_mail;
+    $to = $email;
+    $subject = 'DMI Preprints - Confirm Registration';
+    $text = "To confirm your account use this link: http://localhost/confirmation.php?token=" . $token;
+    $html = "<html><head></head><body>Dear " . $name . ",<br/>To confirm your account click <a href='" . $base_url . "confirmation.php?token=" . $token . "'>here</a>.<br/><br/><br/>Note: Please do not reply this email it has been send automatically.</body></html>";
+    $crlf = "\n";
+    $headers = array(
+        'From' => $from,
+        'To' => $to,
+        'Subject' => $subject
+    );
+    $smtp = Mail::factory('smtp', array(
+                'host' => $send_mail_host,
+                'port' => $send_mail_port,
+                'auth' => $send_mail_auth,
+                'username' => $send_mail_user,
+                'password' => $send_mail_pw
+    ));
+    $mime_params = array(
+        'text_encoding' => '7bit',
+        'text_charset' => 'UTF-8',
+        'html_charset' => 'UTF-8',
+        'head_charset' => 'UTF-8'
+    );
+    //creazione del messaggio Mime
+    $mime = new Mail_mime($crlf);
+    //impostazione della pagina html
+    $mime->setTXTBody($text);
+    $mime->setHTMLBody($html);
+    $body = $mime->get();
+    $headers = $mime->headers($headers);
+    $mail = $smtp->send($to, $headers, $body);
+    if (PEAR::isError($mail)) {
+        echo('<p>' . $mail->getMessage() . '</p>');
+        return false;
+    } else {
+        //echo('<p>Message successfully sent!</p>');
+        return true;
+    }
+}
+
+//invio mail di reset per la password
+
+function sendResetMail($email) {
+    global $base_url, $send_mail_host, $send_mail_port, $send_mail_auth, $send_mail_user, $send_mail_pw;
+    //generazione del token
+    $a = time();
+    $b = date('d M y', $a);
+    $token = md5($email . $b);
+    //invio della mail di conferma
+    //libreria Pear Mail
+    require_once "../Mail-1.3.0/Mail.php";
+    require_once "../Mail-1.3.0/mime.php";
+    $from = $send_mail;
+    $to = $email;
+    $subject = 'DMI Preprints - Reset Password';
+    $text = "To reset the password of your account use this link: http://localhost/recovery_account.php?token=" . $token;
+    $html = "<html><head></head><body>To reset the password of your account click <a href='" . $base_url . "recovery_account.php?token=" . $token . "'>here</a>.<br/><br/><br/>Note: Please do not reply this email it has been send automatically.</body></html>";
+    $crlf = "\n";
+    $headers = array(
+        'From' => $from,
+        'To' => $to,
+        'Subject' => $subject
+    );
+    $smtp = Mail::factory('smtp', array(
+                'host' => $send_mail_host,
+                'port' => $send_mail_port,
+                'auth' => $send_mail_auth,
+                'username' => $send_mail_user,
+                'password' => $send_mail_pw
+    ));
+    $mime_params = array(
+        'text_encoding' => '7bit',
+        'text_charset' => 'UTF-8',
+        'html_charset' => 'UTF-8',
+        'head_charset' => 'UTF-8'
+    );
+    //creazione del messaggio Mime
+    $mime = new Mail_mime($crlf);
+    //impostazione della pagina html
+    $mime->setTXTBody($text);
+    $mime->setHTMLBody($html);
+    $body = $mime->get();
+    $headers = $mime->headers($headers);
+    $mail = $smtp->send($to, $headers, $body);
+    if (PEAR::isError($mail)) {
+        echo('<p>' . $mail->getMessage() . '</p>');
+        return false;
+    } else {
+        //echo('<p>Message successfully sent!</p>');
+        return true;
+    }
+}
+
+//invio mail avviso modifica password
+
+function sendPassConfirmMail($email) {
+    global $base_url, $send_mail_host, $send_mail_port, $send_mail_auth, $send_mail_user, $send_mail_pw;
+    //invio della mail di conferma
+    //libreria Pear Mail
+    require_once "../Mail-1.3.0/Mail.php";
+    require_once "../Mail-1.3.0/mime.php";
+    $from = $send_mail;
+    $to = $email;
+    $subject = 'DMI Preprints - Password Changed';
+    $text = "The password of your account has been changed on " . date("c", time()) . ".";
+    $html = "<html><head></head><body>The password of your account has been changed on date " . date("c", time()) . ".<br/><br/><br/>Note: Please do not reply this email it has been send automatically.</body></html>";
+    $crlf = "\n";
+    $headers = array(
+        'From' => $from,
+        'To' => $to,
+        'Subject' => $subject
+    );
+    $smtp = Mail::factory('smtp', array(
+                'host' => $send_mail_host,
+                'port' => $send_mail_port,
+                'auth' => $send_mail_auth,
+                'username' => $send_mail_user,
+                'password' => $send_mail_pw
+    ));
+    $mime_params = array(
+        'text_encoding' => '7bit',
+        'text_charset' => 'UTF-8',
+        'html_charset' => 'UTF-8',
+        'head_charset' => 'UTF-8'
+    );
+    //creazione del messaggio Mime
+    $mime = new Mail_mime($crlf);
+    //impostazione della pagina html
+    $mime->setTXTBody($text);
+    $mime->setHTMLBody($html);
+    $body = $mime->get();
+    $headers = $mime->headers($headers);
+    $mail = $smtp->send($to, $headers, $body);
+    if (PEAR::isError($mail)) {
+        echo('<p>' . $mail->getMessage() . '</p>');
+        return false;
+    } else {
+        //echo('<p>Message successfully sent!</p>');
+        return true;
+    }
+}
+
+//invio mail avviso modifica email
+
+function sendEmailChanged($emailOld, $email) {
+    global $base_url, $send_mail_host, $send_mail_port, $send_mail_auth, $send_mail_user, $send_mail_pw;
+    //invio della mail di conferma
+    //libreria Pear Mail
+    require_once "../Mail-1.3.0/Mail.php";
+    require_once "../Mail-1.3.0/mime.php";
+    $from = $send_mail;
+    $to = $emailOld;
+    $subject = 'DMI Preprints - Email Changed';
+    $text = "The email address associated on your account has been changed from " . $emailOld . " with " . $email . " on " . date("c", time()) . ".";
+    $html = "<html><head></head><body>The email address associated on your account has been changed from " . $emailOld . " to " . $email . " on date " . date("c", time()) . ", for future access you need to use " . $email . ", the preprint you have published previously will be automatically associated to the new account.<br/><br/><br/>Note: Please do not reply this email it has been send automatically.</body></html>";
+    $crlf = "\n";
+    $headers = array(
+        'From' => $from,
+        'To' => $to,
+        'Subject' => $subject
+    );
+    $smtp = Mail::factory('smtp', array(
+                'host' => $send_mail_host,
+                'port' => $send_mail_port,
+                'auth' => $send_mail_auth,
+                'username' => $send_mail_user,
+                'password' => $send_mail_pw
+    ));
+    $mime_params = array(
+        'text_encoding' => '7bit',
+        'text_charset' => 'UTF-8',
+        'html_charset' => 'UTF-8',
+        'head_charset' => 'UTF-8'
+    );
+    //creazione del messaggio Mime
+    $mime = new Mail_mime($crlf);
+    //impostazione della pagina html
+    $mime->setTXTBody($text);
+    $mime->setHTMLBody($html);
+    $body = $mime->get();
+    $headers = $mime->headers($headers);
+    $mail = $smtp->send($to, $headers, $body);
+    if (PEAR::isError($mail)) {
+        echo('<p>' . $mail->getMessage() . '</p>');
+        return false;
+    } else {
+        //echo('<p>Message successfully sent!</p>');
+        return true;
+    }
 }
 
 ?>

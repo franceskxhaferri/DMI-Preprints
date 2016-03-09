@@ -84,10 +84,14 @@
                         <h1>field with '*' are required.</h1><br/>
                         </div></center>
                             <div id='divinsertcateg'>
-                            <center>
-                                <div><font style='font-weight: bold;'>document:</font>
-                                <div><br/><a href='" . $copia . $ris[9] . "' target='_blank' style='color:#1976D2;' title='" . $ris[9] . "'>VIEW</a><br/><br/></div></div>
-                            </center>
+                            <div style='float:right; width:49%;'>
+                                <div style='font-weight: bold;'>
+                                    document:
+                                </div>
+                                <div style='float:right; width:49%;'>
+                                    <a href=./pdf/" . $ris[9] . " target='_blank' style='color:#1976D2;' title='" . $ris[9] . "'>VIEW</a>
+                                </div>
+                            </div>
                             <div style='font-weight: bold;'>
                                 UID(not editable):
                             </div>
@@ -270,6 +274,9 @@
                 ?>
             </div><br/>
         </div>
-        <?php require_once './graphics/loader.php'; ?>
+        <?php
+        require_once './graphics/loader.php';
+        require_once './graphics/footer.php';
+        ?>
     </body>
 </html>

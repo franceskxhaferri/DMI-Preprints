@@ -426,6 +426,9 @@
             </div>
             <br/>
         </div>
-        <?php require_once './graphics/loader.php'; ?>
+        <?php
+        require_once './graphics/loader.php';
+        require_once './graphics/footer.php';
+        ?>
     </body>
 </html>

@@ -35,8 +35,8 @@ function InternalAuth($UID, $PASSWORD) {
     $hash = md5($PASSWORD);
     //da inserire nella query: WHERE verificato=yes
     #verifica se esistono preprints precedenti e li sposto...
-    $sql = "SELECT COUNT(*) AS TOTALFOUND FROM ACCOUNTS WHERE email='" . addslashes($UID) . "' AND password='" . $hash . "'";
-    $query = mysqli_query($db_connection, $sql) or die(mysql_error());
+    $sql = "SELECT COUNT(*) AS TOTALFOUND FROM ACCOUNTS WHERE email='" . addslashes($UID) . "' AND password='" . $hash . "' AND verificato='yes'";
+    $query = mysqli_query($db_connection, $sql) or die(mysqli_error());
     $row = mysqli_fetch_array($query);
     if ($row['TOTALFOUND'] > 0) {
         return true;
@@ -45,10 +45,55 @@ function InternalAuth($UID, $PASSWORD) {
     }
 }
 
+function confirm_account($token) {
+    global $db_connection;
+    //query di aggiornamento
+    $sql = "UPDATE ACCOUNTS SET verificato='yes' WHERE MD5(email)='" . $token . "'";
+    $query = mysqli_query($db_connection, $sql) or die(mysqli_error());
+    return true;
+}
+
+function get_token_password_account($token) {
+    global $db_connection;
+    $a = time();
+    $b = date('d M y', $a);
+    //query
+    $sql = "SELECT COUNT(*) AS TOTALFOUND FROM ACCOUNTS WHERE MD5(CONCAT(email,'" . $b . "'))='" . $token . "'";
+    $query = mysqli_query($db_connection, $sql) or die(mysqli_error());
+    $row = mysqli_fetch_array($query);
+    if ($row['TOTALFOUND'] > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function get_email_from_token($token) {
+    global $db_connection;
+    //token
+    $a = time();
+    $b = date('d M y', $a);
+    //query
+    $sql = "SELECT * FROM ACCOUNTS WHERE MD5(CONCAT(email,'" . $b . "'))='" . $token . "'";
+    $query = mysqli_query($db_connection, $sql) or die(mysqli_error());
+    $row = mysqli_fetch_array($query);
+    return $row['email'];
+}
+
+function reset_password_account($password, $token) {
+    global $db_connection;
+    $a = time();
+    $b = date('d M y', $a);
+    //query di aggiornamento
+    $sql = "UPDATE ACCOUNTS SET password='" . $password . "' WHERE MD5(CONCAT(email,'" . $b . "'))='" . $token . "'";
+    $query = mysqli_query($db_connection, $sql) or die(mysqli_error());
+    return true;
+}
+
 function GetNameAuth($UID) {
     global $db_connection;
     $sql = "SELECT nome,cognome FROM ACCOUNTS WHERE email='" . $UID . "'";
-    $query = mysqli_query($db_connection, $sql) or die(mysql_error());
+    $query = mysqli_query($db_connection, $sql) or die(mysqli_error());
     $row = mysqli_fetch_array($query);
     return $row['nome'] . " " . $row['cognome'];
 }
@@ -56,13 +101,13 @@ function GetNameAuth($UID) {
 function UpdateLastAuth($UID) {
     global $db_connection;
     $sql = "UPDATE ACCOUNTS SET `accesso`='" . date("c", time()) . "' WHERE `email`='" . $UID . "'";
-    $query = mysqli_query($db_connection, $sql) or die(mysql_error());
+    $query = mysqli_query($db_connection, $sql) or die(mysqli_error());
 }
 
 function SearchAccount($UID) {
     global $db_connection;
     $sql = "SELECT COUNT(*) AS TOTALFOUND FROM ACCOUNTS WHERE email='" . $UID . "'";
-    $query = mysqli_query($db_connection, $sql) or die(mysql_error());
+    $query = mysqli_query($db_connection, $sql) or die(mysqli_error());
     $row = mysqli_fetch_array($query);
     if ($row['TOTALFOUND'] > 0) {
         return true;
@@ -75,7 +120,7 @@ function SearchAccountUser($UID) {
     global $db_connection;
     #verifica se esistono preprints precedenti e li sposto...
     $sql = "SELECT COUNT(*) AS TOTALFOUND FROM ACCOUNTS WHERE email='" . $UID . "'";
-    $query = mysqli_query($db_connection, $sql) or die(mysql_error());
+    $query = mysqli_query($db_connection, $sql) or die(mysqli_error());
     $row = mysqli_fetch_array($query);
     if ($row['TOTALFOUND'] > 0) {
         return true;
@@ -86,22 +131,22 @@ function SearchAccountUser($UID) {
 
 //funzione controllo correttezza dati inseriti per la registrazione
 function ControllaDatiRegistrazione($email, $name, $sname, $password) {
-	// se la stringa è vuota sicuramente non è una mail
-	if(empty($email)) {
-		return false;
-	} else if(empty($name)) {
-		return false;
-	} else if(empty($sname)) {
-		return false;
-	} else if(empty($password)) {
-		return false;
-	} else if (!filter_var(trim($email), FILTER_VALIDATE_EMAIL)) {
-		return false;
-	} else if(strlen($password) < 6) {
-		return false;
-	} else {
-	    return true;
-	}
+    // se la stringa è vuota sicuramente non è una mail
+    if (empty($email)) {
+        return false;
+    } else if (empty($name)) {
+        return false;
+    } else if (empty($sname)) {
+        return false;
+    } else if (empty($password)) {
+        return false;
+    } else if (!filter_var(trim($email), FILTER_VALIDATE_EMAIL)) {
+        return false;
+    } else if (strlen($password) < 6) {
+        return false;
+    } else {
+        return true;
+    }
 }
 
 ?>
