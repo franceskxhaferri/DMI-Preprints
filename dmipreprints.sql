@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generato il: Mar 05, 2016 alle 16:58
+-- Generato il: Mar 09, 2016 alle 21:23
 -- Versione del server: 5.5.47-0ubuntu0.14.04.1
 -- Versione PHP: 5.5.9-1ubuntu4.14
 
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `ACCOUNTS` (
   `registrazione` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `verificato` varchar(3) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'no',
   PRIMARY KEY (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `ACCOUNTS` (
 CREATE TABLE IF NOT EXISTS `AUTORI` (
   `nome` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`nome`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `AUTORI` (
 CREATE TABLE IF NOT EXISTS `AUTORI_BACKUP` (
   `nome` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`nome`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -68,14 +68,14 @@ CREATE TABLE IF NOT EXISTS `AUTORI_BACKUP` (
 CREATE TABLE IF NOT EXISTS `DATA_ULTIMO_LANCIO` (
   `data` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`data`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dump dei dati per la tabella `DATA_ULTIMO_LANCIO`
 --
 
 INSERT INTO `DATA_ULTIMO_LANCIO` (`data`) VALUES
-('2016-03-05 16:55');
+('2016-03-09 21:19');
 
 -- --------------------------------------------------------
 
@@ -132,7 +132,7 @@ CREATE TABLE IF NOT EXISTS `PREPRINTS_ARCHIVIATI` (
 CREATE TABLE IF NOT EXISTS `sessione` (
   `attivo` varchar(1) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`attivo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dump dei dati per la tabella `sessione`
@@ -150,14 +150,14 @@ INSERT INTO `sessione` (`attivo`) VALUES
 CREATE TABLE IF NOT EXISTS `sessione_data` (
   `data` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`data`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dump dei dati per la tabella `sessione_data`
 --
 
 INSERT INTO `sessione_data` (`data`) VALUES
-('20160305');
+('20160309');
 
 -- --------------------------------------------------------
 
@@ -168,7 +168,7 @@ INSERT INTO `sessione_data` (`data`) VALUES
 CREATE TABLE IF NOT EXISTS `temp` (
   `id` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
