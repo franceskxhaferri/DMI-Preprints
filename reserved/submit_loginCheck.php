@@ -8,7 +8,6 @@ require_once '../authorization/auth.php';
 if (isset($_POST['uid']) && isset($_POST['pw'])) {
   //error_reporting(E_ALL);
   //ini_set('display_errors', 1);
-  //global $mod_uid;
   $inputUID = $_POST['uid'];
   $inputPass = $_POST['pw']; //la password di ateneo può contenere car speciali
   //controllo i dati per il login
@@ -16,7 +15,13 @@ if (isset($_POST['uid']) && isset($_POST['pw'])) {
   if (!$ldapoff) {
     if (InternalAuth($inputUID, $inputPass)) {
       sec_session_start();
-      $_SESSION['logged_type'] = "user";
+      //$_SESSION['logged_type'] = "user";
+      if (SearchMods($_POST['uid'])) {
+        $_SESSION['logged_type'] = "mod";
+      } else {
+        $_SESSION['logged_type'] = "user";
+      }
+      //
       $_SESSION['nome'] = GetNameAuth($inputUID);
       $_SESSION['uid'] = $inputUID;
       $_SESSION['LAST_ACTIVITY'] = time(); //aggiorna timestamp sessione
@@ -27,7 +32,7 @@ if (isset($_POST['uid']) && isset($_POST['pw'])) {
       if ($output_ldap['count'] == 1) {
         if (RADIUSAuth($inputUID, $inputPass)) {
           sec_session_start();
-          if ($_POST['uid'] === $mod_uid) {
+          if (SearchMods($_POST['uid'])) {
             $_SESSION['logged_type'] = "mod";
           } else {
             $_SESSION['logged_type'] = "user";
@@ -45,7 +50,12 @@ if (isset($_POST['uid']) && isset($_POST['pw'])) {
   } else {
     if (InternalAuth($inputUID, $inputPass)) {
       sec_session_start();
-      $_SESSION['logged_type'] = "mod";
+      ////$_SESSION['logged_type'] = "user";
+      if (SearchMods($_POST['uid'])) {
+        $_SESSION['logged_type'] = "mod";
+      } else {
+        $_SESSION['logged_type'] = "user";
+      }
       $_SESSION['nome'] = GetNameAuth($inputUID);
       $_SESSION['uid'] = $inputUID;
       $_SESSION['LAST_ACTIVITY'] = time(); //aggiorna timestamp sessione

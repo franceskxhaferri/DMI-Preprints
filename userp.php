@@ -29,7 +29,6 @@ require_once './graphics/header.php';
     <br/>
     <div id="firstContainer">
       <center>
-        <br/>
         <div>
           <?php
           print_r("<font style='font-weight: bold;'>USER: </font>");
@@ -39,22 +38,24 @@ require_once './graphics/header.php';
           ?>
         </div>
         <div>
-          <div style="float:left; margin-left:1%;">
+          <div>
             <form name="f1" action="userp.php" method="POST" onsubmit="loading(load);">
-              <input style="color: red;" type="submit" name="b1" value="Logout" id="bottoni" class="button" onclick="return confirmLogout()">
+              <div style="float:left; margin-left:1%;">
+                <input style="color: red;" type="submit" name="b1" value="Logout" id="botton_logout" class="button" onclick="return confirmLogout()">
+              </div>
+              <?php
+              if (SearchAccountUser($_SESSION['uid'])) {
+                echo '<div style="float:left; margin-left:1%;">
+                <a style="color: #ffffff;" href="./profile.php" id="bottone_keyword" class="buttonlink" onclick="loading(load);">Profile</a>
+                </div>';
+              }
+              ?>
+              <div style="float:left; margin-left:1%;">
+                <a style="color: #ffffff;" href="./uploaded.php?p=1" id="bottone_keyword" class="buttonlink" onclick="loading(load);">Uploads</a>
+              </div>
+              <div style="clear:both;">
+              </div>
             </form>
-          </div>
-          <?php
-          if (SearchAccountUser($_SESSION['uid'])) {
-            echo '<div style="float:left; margin-left:1%;">
-            <a style="color: #ffffff;" href="./profile.php" id="bottoni" class="buttonlink" onclick="loading(load);">Profile</a>
-            </div>';
-          }
-          ?>
-          <div style="float:left; margin-left:1%;">
-            <a style="color: #ffffff;" href="./uploaded.php?p=1" id="bottoni" class="buttonlink" onclick="loading(load);">Uploads</a>
-          </div>
-          <div style="clear:both;">
           </div>
         </div>
       </center>

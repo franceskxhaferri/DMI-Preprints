@@ -2,7 +2,6 @@
 
 require_once './authorization/sec_sess.php';
 sec_session_start();
-
 if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 86400)) {
   //scadenza temporale sessione dopo 24 ore
   echo 'sessione scaduta';

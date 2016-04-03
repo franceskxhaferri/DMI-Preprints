@@ -52,6 +52,19 @@ function InternalAuth($UID, $PASSWORD) {
   }
 }
 
+function SearchMods($UID) {
+  global $db_connection;
+  //query
+  $sql = "SELECT COUNT(*) AS TOTALFOUND FROM ADMINISTRATORS WHERE uid='" . addslashes($UID) . "'";
+  $query = mysqli_query($db_connection, $sql) or die(mysqli_error());
+  $row = mysqli_fetch_array($query);
+  if ($row['TOTALFOUND'] > 0) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 function confirm_account($token) {
   global $db_connection;
   //query di aggiornamento

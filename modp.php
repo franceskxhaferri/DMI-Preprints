@@ -39,11 +39,17 @@ require_once './graphics/header.php';
         ?>
         <form name="f1" action="modp.php" method="POST" onsubmit="loading(load);"><br/>
           <input style="color:red;" type="submit" name="b1" value="Logout" id="botton_logout" class="button" onclick="return confirmLogout()">
+          <?php
+          if (SearchAccountUser($_SESSION['uid'])) {
+            echo '<a style="color: #ffffff;" href="./profile.php" id="bottone_keyword" class="buttonlink" onclick="loading(load);">Profile</a>';
+          }
+          ?>
           <a style="color:#ffffff;" href="./uploaded.php?p=1" id="bottone_keyword" class="buttonlink" onclick="loading(load);">Uploads</a>
           <a style="color:#ffffff;" href="./check_preprints.php" id="bottone_keyword" class="buttonlink" onclick="loading(load);">Check</a>
           <a style="color:#ffffff;" href="./manual_edit.php" id="bottone_keyword" class="buttonlink" onclick="loading(load);">Edit</a>
           <a style="color:#ffffff;" href="./arXiv_panel.php" id="bottone_keyword" class="buttonlink" onclick="loading(load);">ArXiv</a>
           <a style="color:#ffffff;" href="./archived_preprints.php" id="bottone_keyword" class="buttonlink" onclick="loading(load);">Archived</a>
+          <a style="color:#ffffff;" href="./mods_list.php" id="bottone_keyword" class="buttonlink" onclick="loading(load);">Admins</a>
           <a style="color:#ffffff;" href="./users_list.php?o=regd" id="bottone_keyword" class="buttonlink" onclick="loading(load);">Users</a>
         </form>
         <?php
@@ -212,7 +218,7 @@ require_once './graphics/header.php';
     require_once './graphics/footer.php';
     ?>
   </div>
-  <br/>
+  <br/><br/>
   <script>
   UpdateMathtit('Here it will show a preview of what you write on title');
   UpdateMathjou('Here it will show a preview of what you write on journal reference');

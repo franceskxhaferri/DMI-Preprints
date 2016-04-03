@@ -4,6 +4,87 @@
 require_once "Mail.php";
 require_once "Mail/mime.php";
 
+#funzione inserimento nuovo utente
+
+function aggiungiutenteAdmin($nome, $a) {
+  #leggo i nuovi nomi e li inserisco in array...
+  $array = legginomiAdmin();
+  while (strpos($nome, "  ") !== FALSE) {
+    echo '<script type="text/javascript">alert("NAME NOT VALID! DETECTED CONSECUTIVE SPACE INSIDE FIELD NAME!");</script>';
+    return;
+  }
+  $array2 = explode(",", $nome);
+  $nl = count($array2);
+  $l = count($array);
+  for ($i = 0; $i < $nl; $i++) {
+    $temp = $array2[$i];
+    $temp = trim($temp);
+    #verifico se il nome è già presente...
+    $array[$l] = $temp;
+    $l++;
+    $ris = cercanomeAdmin($temp);
+    if ($ris == False) {
+      if ($a == 1) {
+        #aggiorno i nomi se ci sono nomi da aggiungere...
+        scrivinomiAdmin($array);
+        echo '<script type="text/javascript">alert("' . $temp . ' inserted!");</script>';
+      } else {
+        echo '<script type="text/javascript">alert("' . $temp . ' not found!");</script>';
+      }
+    } else {
+      if ($a == 1) {
+        echo '<script type="text/javascript">alert("' . $temp . ' exists!");</script>';
+      } else {
+        echo '<script type="text/javascript">alert("' . $temp . ' found!");</script>';
+      }
+    }
+  }
+}
+
+#funzione che cerca se il nome è presente
+
+function cercanomeAdmin($nome) {
+  global $db_connection;
+  #cerca se il nome se era stato gia cercato...
+  $nome = trim($nome);
+  $var = False;
+  $sql = "SELECT * FROM ADMINISTRATORS WHERE uid='" . $nome . "'";
+  $result = mysqli_query($db_connection, $sql) or die(mysqli_error());
+  $row = mysqli_fetch_array($result);
+  if ($row['uid'] == $nome) {
+    $var = True;
+  }
+  return $var;
+}
+
+# funzione lettura nomi admins
+
+function legginomiAdmin() {
+  global $db_connection;
+  $sql = "SELECT uid FROM ADMINISTRATORS";
+  $result = mysqli_query($db_connection, $sql) or die(mysqli_error());
+  $i = 0;
+  while ($row = mysqli_fetch_array($result)) {
+    $array[$i] = $row['uid'];
+    $i++;
+  }
+  return $array;
+}
+
+#funzione scrittura nomi admins
+
+function scrivinomiAdmin($nomi) {
+  global $db_connection;
+  $sql = "TRUNCATE TABLE ADMINISTRATORS";
+  $result = mysqli_query($db_connection, $sql) or die(mysqli_error());
+  $nl2 = count($nomi);
+  #aggiorno i nomi...
+  for ($i = 0; $i < $nl2; $i++) {
+    $sql = "INSERT INTO ADMINISTRATORS (uid) VALUES ('" . $nomi[$i] . "') ON DUPLICATE KEY UPDATE uid = VALUES(uid)";
+    $query = mysqli_query($db_connection, $sql) or die(mysqli_error());
+  }
+}
+
 #funzione inserimento informazioni preprint
 
 function insert_pubb($array, $uid) {
@@ -125,28 +206,28 @@ function leggiupload($uid) {
       $t1 = $p - 1;
       $t2 = $p - 2;
       $t3 = $p - 3;
-      echo '<a style="color:#007897; text-decoration: none;" title="First page" href="uploaded.php?p=1&r=' . $uid . '"> &#8656 </a>';
+      echo '<a style="color:#1976D2; text-decoration: none;" title="First page" href="uploaded.php?p=1&r=' . $uid . '"> &#8656 </a>';
       if ($p >= 3 && $t3 > 0) {
-        echo '<a style="color:#007897; text-decoration: none;" href="uploaded.php?p=' . ($p - 3) . '&r=' . $uid . '"> ' . " " . $t3 . " " . ' </a>';
+        echo '<a style="color:#1976D2; text-decoration: none;" href="uploaded.php?p=' . ($p - 3) . '&r=' . $uid . '"> ' . " " . $t3 . " " . ' </a>';
       }
       if ($p >= 2 && $t2 > 0) {
-        echo '<a style="color:#007897; text-decoration: none;" href="uploaded.php?p=' . ($p - 2) . '&r=' . $uid . '"> ' . " " . $t2 . " " . ' </a>';
+        echo '<a style="color:#1976D2; text-decoration: none;" href="uploaded.php?p=' . ($p - 2) . '&r=' . $uid . '"> ' . " " . $t2 . " " . ' </a>';
       }
-      echo '<a style="color:#007897; text-decoration: none;" href="uploaded.php?p=' . ($p - 1) . '&r=' . $uid . '"> ' . " " . $t1 . " " . ' </a>';
+      echo '<a style="color:#1976D2; text-decoration: none;" href="uploaded.php?p=' . ($p - 1) . '&r=' . $uid . '"> ' . " " . $t1 . " " . ' </a>';
     }
     echo " " . $p . " ";
     if ($p != $npag) {
       $t4 = $p + 1;
       $t5 = $p + 2;
       $t6 = $p + 3;
-      echo '<a style="color:#007897; text-decoration: none;" href="uploaded.php?p=' . ($p + 1) . '&r=' . $uid . '"> ' . " " . $t4 . " " . ' </a>';
+      echo '<a style="color:#1976D2; text-decoration: none;" href="uploaded.php?p=' . ($p + 1) . '&r=' . $uid . '"> ' . " " . $t4 . " " . ' </a>';
       if ($p < $npag && $t5 <= $npag) {
-        echo '<a style="color:#007897; text-decoration: none;" href="uploaded.php?p=' . ($p + 2) . '&r=' . $uid . '"> ' . " " . $t5 . " " . ' </a>';
+        echo '<a style="color:#1976D2; text-decoration: none;" href="uploaded.php?p=' . ($p + 2) . '&r=' . $uid . '"> ' . " " . $t5 . " " . ' </a>';
       }
       if ($p < $npag && $t6 <= $npag) {
-        echo '<a style="color:#007897; text-decoration: none;" href="uploaded.php?p=' . ($p + 3) . '&r=' . $uid . '"> ' . " " . $t6 . " " . ' </a>';
+        echo '<a style="color:#1976D2; text-decoration: none;" href="uploaded.php?p=' . ($p + 3) . '&r=' . $uid . '"> ' . " " . $t6 . " " . ' </a>';
       }
-      echo '<a style="color:#007897; text-decoration: none;" title="Last page" href="uploaded.php?p=' . $npag . '&r=' . $uid . '"> &#8658 </a>';
+      echo '<a style="color:#1976D2; text-decoration: none;" title="Last page" href="uploaded.php?p=' . $npag . '&r=' . $uid . '"> &#8658 </a>';
     }
   }
   $sql = "SELECT * FROM PREPRINTS WHERE uid='" . $uid . "' AND checked='1' ORDER BY data_pubblicazione DESC LIMIT " . $limit . "," . $risperpag . "";
@@ -180,25 +261,25 @@ function leggiupload($uid) {
   #visualizzazione della navigazione per pagine
   if ($ristot != 0) {
     if ($p != 1) {
-      echo '<a style="color:#007897; text-decoration: none;" title="First page" href="uploaded.php?p=1&r=' . $uid . '"> &#8656 </a>';
+      echo '<a style="color:#1976D2; text-decoration: none;" title="First page" href="uploaded.php?p=1&r=' . $uid . '"> &#8656 </a>';
       if ($p >= 3 && $t3 > 0) {
-        echo '<a style="color:#007897; text-decoration: none;" href="uploaded.php?p=' . ($p - 3) . '&r=' . $uid . '"> ' . " " . $t3 . " " . ' </a>';
+        echo '<a style="color:#1976D2; text-decoration: none;" href="uploaded.php?p=' . ($p - 3) . '&r=' . $uid . '"> ' . " " . $t3 . " " . ' </a>';
       }
       if ($p >= 2 && $t2 > 0) {
-        echo '<a style="color:#007897; text-decoration: none;" href="uploaded.php?p=' . ($p - 2) . '&r=' . $uid . '"> ' . " " . $t2 . " " . ' </a>';
+        echo '<a style="color:#1976D2; text-decoration: none;" href="uploaded.php?p=' . ($p - 2) . '&r=' . $uid . '"> ' . " " . $t2 . " " . ' </a>';
       }
-      echo '<a style="color:#007897; text-decoration: none;" href="uploaded.php?p=' . ($p - 1) . '&r=' . $uid . '"> ' . " " . $t1 . " " . ' </a>';
+      echo '<a style="color:#1976D2; text-decoration: none;" href="uploaded.php?p=' . ($p - 1) . '&r=' . $uid . '"> ' . " " . $t1 . " " . ' </a>';
     }
     echo " " . $p . " ";
     if ($p != $npag) {
-      echo '<a style="color:#007897; text-decoration: none;" href="uploaded.php?p=' . ($p + 1) . '&r=' . $uid . '"> ' . " " . $t4 . " " . ' </a>';
+      echo '<a style="color:#1976D2; text-decoration: none;" href="uploaded.php?p=' . ($p + 1) . '&r=' . $uid . '"> ' . " " . $t4 . " " . ' </a>';
       if ($p < $npag && $t5 <= $npag) {
-        echo '<a style="color:#007897; text-decoration: none;" href="uploaded.php?p=' . ($p + 2) . '&r=' . $uid . '"> ' . " " . $t5 . " " . ' </a>';
+        echo '<a style="color:#1976D2; text-decoration: none;" href="uploaded.php?p=' . ($p + 2) . '&r=' . $uid . '"> ' . " " . $t5 . " " . ' </a>';
       }
       if ($p < $npag && $t6 <= $npag) {
-        echo '<a style="color:#007897; text-decoration: none;" href="uploaded.php?p=' . ($p + 3) . '&r=' . $uid . '"> ' . " " . $t6 . " " . ' </a>';
+        echo '<a style="color:#1976D2; text-decoration: none;" href="uploaded.php?p=' . ($p + 3) . '&r=' . $uid . '"> ' . " " . $t6 . " " . ' </a>';
       }
-      echo '<a style="color:#007897; text-decoration: none;" title="Last page" href="uploaded.php?p=' . $npag . '&r=' . $uid . '"> &#8658 </a>';
+      echo '<a style="color:#1976D2; text-decoration: none;" title="Last page" href="uploaded.php?p=' . $npag . '&r=' . $uid . '"> &#8658 </a>';
     }
   }
   $x = $limit + 1;
